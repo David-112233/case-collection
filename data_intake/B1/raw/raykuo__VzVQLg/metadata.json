@@ -1,0 +1,63 @@
+{
+  "source_id": "codepen:raykuo/vzvqlg",
+  "author": "raykuo",
+  "pen_id": "VzVQLg",
+  "url": "https://codepen.io/raykuo/pen/VzVQLg",
+  "acquisition": "cdpn_fullpage",
+  "acquisition_url": "https://cdpn.io/raykuo/fullpage/VzVQLg",
+  "retrieved_at": "2026-10-03T15:30:46+00:00",
+  "license": "MIT (CodePen public pen default)",
+  "candidate_target_tier": "T1",
+  "candidate_found_via": "websearch-2026-10-03",
+  "fetch_status": "ok",
+  "title": "Pure CSS 3D isometric Wave animation",
+  "canonical_url": "https://codepen.io/raykuo/pen/VzVQLg",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "4c48283ce9c55ab04e3ae929c72a69dd15438502ff4947f310171d287565e4c0",
+  "source_html_sha256": "7aad4fd1e583a4b887e5e1f5518c7f30df94b9508e3b37bffb157d3e05189494",
+  "analysis": {
+    "js": {
+      "has_js": false,
+      "inline_js_chars": 0,
+      "external_scripts": [],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 2,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": true,
+      "clip_path": false,
+      "css_counter": false,
+      "media_query": false
+    },
+    "external_stylesheets": [
+      "https://public.codepenassets.com/css/normalize-5.0.0.min.css"
+    ],
+    "css_imports": [
+      "https://fonts.googleapis.com/css?family=Open+Sans:300"
+    ],
+    "css_chars": 2571,
+    "element_count": 46,
+    "html_chars": 5628
+  }
+}

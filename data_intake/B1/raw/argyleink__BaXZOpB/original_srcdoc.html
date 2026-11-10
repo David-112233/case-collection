@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>Snap on snap!</title>
+
+    <link rel="canonical" href="https://codepen.io/argyleink/pen/BaXZOpB">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  
+  
+<style>
+@import "https://open-props/shadows.min.css" layer(design.system);
+
+@keyframes slide-in {
+  from {
+    transform: translateX(-100cqi) scale(.75);
+  }
+}
+
+.scroll-stack {
+  container-type: inline-size;
+  inline-size: 100cqi;
+
+  display: grid;
+  grid-auto-flow: column;
+
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior: contain;
+
+  gap: 1rem;
+  padding-inline: 1rem;
+  scroll-padding-inline: 1rem;
+  padding-block: 30px 60px;
+
+  /* the before and afters have unsnappable elements that create bouncy edges to the scroll */
+  &::before,
+  &::after {
+    content: '';
+    display: block;
+  }
+
+  &::before {
+    order: 0;
+    inline-size: 25cqi;
+  }
+
+  &::after {
+    order: 11;
+    inline-size: 80cqi;
+  }
+
+  /* 
+    snap on the item, which is untransformed
+    also order is changed so last item is on top
+  */
+  .item {
+    scroll-snap-align: start;
+
+    &:nth-child(1) { order: 10; z-index: 1; }
+    &:nth-child(2) { order: 9; z-index: 2; }
+    &:nth-child(3) { order: 8; z-index: 3; }
+    &:nth-child(4) { order: 7; z-index: 4; }
+    &:nth-child(5) { order: 6; z-index: 5; }
+    &:nth-child(6) { order: 5; z-index: 6; }
+    &:nth-child(7) { order: 4; z-index: 7; }
+    &:nth-child(8) { order: 3; z-index: 8; }
+    &:nth-child(9) { order: 2; z-index: 9; }
+  }
+
+  /* 
+    magic is here, a child of the snapped item 
+    animates items as they cross the viewport view()
+    range is set to create the effect
+  */
+  figure {
+    @supports (animation-timeline: view()) {
+      @media (prefers-reduced-motion: no-preference) {
+        animation: slide-in linear both;
+        animation-timeline: view(x);
+        animation-range: cover -75cqi contain 20cqi;
+      }
+    }
+
+    flex-shrink: 0;
+    block-size: 80cqb;
+    aspect-ratio: 9/16;
+    background: light-dark(#ccc, #444);
+    box-shadow: var(--shadow-5);
+    border-radius: 20px;
+    overflow: clip;
+
+    display: flex;
+
+    @container (width < 480px) {
+      block-size: 50cqb;
+    }
+
+    > img {
+      inline-size: 100%;
+      block-size: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
+@layer support {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+  }
+
+  html {
+    block-size: 100%;
+    color-scheme: dark light;
+  }
+
+  body {
+    min-block-size: 100%;
+    font-family: system-ui, sans-serif;
+
+    display: grid;
+    place-items: center;
+  }
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <div class="scroll-stack" id="demo">
+  <div class="item"><figure>
+    <img src="https://assets.codepen.io/2585/1.jpg">
+  </figure></div>
+  <div class="item"><figure>
+    <img src="https://assets.codepen.io/2585/2.avif">
+  </figure></div>
+  <div class="item"><figure>
+    <img src="https://assets.codepen.io/2585/3.avif">
+  </figure></div>
+  <div class="item"><figure>
+    <img src="https://assets.codepen.io/2585/4.avif">
+  </figure></div>
+  <div class="item"><figure>
+    <img src="https://assets.codepen.io/2585/5.avif">
+  </figure></div>
+  <div class="item"><figure>
+    <img src="https://assets.codepen.io/2585/6.avif">
+  </figure></div>
+  <div class="item"><figure>
+    <img src="https://assets.codepen.io/2585/7.avif">
+  </figure></div>
+  <div class="item"><figure>
+    <img src="https://assets.codepen.io/2585/8.avif">
+  </figure></div>
+  <div class="item"><figure>
+    <img src="https://assets.codepen.io/2585/9.avif">
+  </figure></div>
+</div>
+  
+    <script id="rendered-js" >
+const snap = new Audio('https://assets.codepen.io/2585/snap.mp3');
+
+demo.onscrollsnapchange = () => {
+  snap.play();
+};
+
+
+
+demo.onclick = event => {
+  let target = event.target.closest('.item');
+
+  if (target) {
+    demo.scrollTo({
+      left: target.offsetLeft,
+      behavior: 'smooth' });
+
+  }
+};
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>

@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>Pure CSS 3D isometric Pixel Art - Mario wave animation</title>
+
+    <link rel="canonical" href="https://codepen.io/raykuo/pen/qXQLbm">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://public.codepenassets.com/css/normalize-5.0.0.min.css">
+
+  
+  
+<style>
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300');
+
+:root {
+  --anime-duration: 4s;
+  --block-size: 30px;
+  --block-spacing: 3px;
+  --color-hat-primary: #c70022;
+  --color-hat-primary-face: #b80022;
+  --color-hat-primary-side: #a60022;
+  --color-hat-secondary: #eeeeee;
+  --color-hat-secondary-face: #e0e0e0;
+  --color-hat-secondary-side: #dddddd;
+  --color-hair: #967570;
+  --color-hair-face: #867570;
+  --color-hair-side: #767570;
+  --color-eye: #101f26;
+  --color-eye-side: #001f26;
+  --color-eye-face: #001010;
+  --color-skin: #dfd3c5;
+  --color-skin-face: #cfd3c5;
+  --color-skin-side: #c0c3c5;
+  --color-beard: #5f403e;
+  --color-beard-face: #4f403e;
+  --color-beard-side: #3f403e;
+  --color-shirt: #be001f;
+  --color-shirt-face: #ae001f;
+  --color-shirt-side: #ae001f;
+  --color-bib: #007bb7;
+  --color-bib-face: #006bb7;
+  --color-bib-side: #005ab7;
+  --color-button: #f2e04f;
+  --color-button-face: #e2e04f;
+  --color-button-side: #c2e04f;
+  --color-shoe: #a85426;
+  --color-shoe-face: #a14226;
+  --color-shoe-side: #a13226;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #10ae3f;
+  font-family: 'Open Sans', sans-serif;
+  letter-spacing: 2px;
+}
+
+h1 {
+  top: 0;
+  margin-bottom: 60px;
+  color: #FFF;
+  font-size: 48px;
+  font-weight: 300;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+h1 > span {
+  font-size: 24px;
+}
+
+small {
+  color: white;
+}
+
+.canvas {
+  position: relative;
+  width: calc(var(--block-size) * 11);
+  transform: rotateX(35deg) rotateZ(40deg);
+  transform-style: preserve-3d;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  transform-style: preserve-3d;
+}
+
+.block {
+  position: relative;
+  width: var(--block-size);
+  height: var(--block-size);
+  margin: var(--block-spacing);
+  transform-style: preserve-3d;
+  -webkit-animation-name: wave;
+          animation-name: wave;
+  -webkit-animation-delay: calc(var(--index, 1) * .03s );
+          animation-delay: calc(var(--index, 1) * .03s );
+  -webkit-animation-duration: var(--anime-duration);
+          animation-duration: var(--anime-duration);
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-timing-function: cubic-bezier(1,-0.65,.18,1.52);
+          animation-timing-function: cubic-bezier(1,-0.65,.18,1.52);
+  will-change: transform;
+}
+
+@-webkit-keyframes wave {
+  50% {
+    transform: translateZ(60px);
+  }
+}
+
+@keyframes wave {
+  50% {
+    transform: translateZ(60px);
+  }
+}
+
+.block:before,
+.block:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform-origin: 100% 100%;
+  background-color: inherit;
+}
+
+.block:before {
+  transform: rotateX(90deg);
+}
+
+.block:after {
+  transform: rotateY(-90deg);
+}
+
+.block--hat-primary {
+  background-color: var(--color-hat-primary);
+}
+.block--hat-primary:before {
+  background-color: var(--color-hat-primary-side);
+}
+
+.block--hat-primary:after {
+  background-color: var(--color-hat-primary-face);
+}
+
+.block--hat-secondary {
+  background-color: var(--color-hat-secondary);
+}
+
+.block--hat-secondary:before {
+  background-color: var(--color-hat-secondary-side);
+}
+
+.block--hat-secondary:after {
+  background-color: var(--color-hat-secondary-face);
+}
+
+.block--hair {
+  background-color: var(--color-hair);
+}
+
+.block--hair:before {
+  background-color: var(--color-hair-side);
+}
+
+.block--hair:after {
+  background-color: var(--color-hair-face);
+}
+
+.block--skin {
+  background-color: var(--color-skin);
+}
+
+.block--skin:before {
+  background-color: var(--color-skin-side);
+}
+
+.block--skin:after {
+  background-color: var(--color-skin-face);
+}
+
+.block--eye {
+  background-color: var(--color-eye);
+}
+
+.block--eye:before {
+  background-color: var(--color-eye-side);
+}
+
+.block--eye:after {
+  background-color: var(--color-eye-face);
+}
+
+.block--beard {
+  background-color: var(--color-beard);
+}
+
+.block--beard:before {
+  background-color: var(--color-beard-side);
+}
+
+.block--beard:after {
+  background-color: var(--color-beard-face);
+}
+
+.block--shirt {
+  background-color: var(--color-shirt);
+}
+
+.block--shirt:before {
+  background-color: var(--color-shirt-side);
+}
+
+.block--shirt:after {
+  background-color: var(--color-shirt-face);
+}
+
+.block--bib {
+  background-color: var(--color-bib);
+}
+
+.block--bib:before {
+  background-color: var(--color-bib-side);
+}
+
+.block--bib:after {
+  background-color: var(--color-bib-face);
+}
+
+.block--button {
+  background-color: var(--color-button);
+}
+
+.block--button:before {
+  background-color: var(--color-button-side);
+}
+
+.block--button:after {
+  background-color: var(--color-button-face);
+}
+
+.block--shoe {
+  background-color: var(--color-shoe);
+}
+
+.block--shoe:before {
+  background-color: var(--color-shoe-side);
+}
+
+.block--shoe:after {
+  background-color: var(--color-shoe-face);
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  <h1>Pure CSS 3D Pixel art<br/><span>with css custom properties for easy tuning</span></h1>
+<div class="canvas">
+  <div class="row">
+    <div class="block block--hat-primary" style="--index:16"></div>
+    <div class="block block--hat-primary" style="--index:15"></div>
+    <div class="block block--hat-primary" style="--index:14"></div>
+    <div class="block block--hat-primary" style="--index:13"></div>
+    <div class="block block--hat-primary" style="--index:12"></div>
+  </div>
+  <div class="row">
+    <div class="block block--hat-primary" style="--index:17"></div>
+    <div class="block block--hat-primary" style="--index:16"></div>
+    <div class="block block--hat-secondary" style="--index:15"></div>
+    <div class="block block--hat-secondary" style="--index:14"></div>
+    <div class="block block--hat-secondary" style="--index:13"></div>
+    <div class="block block--hat-primary" style="--index:12"></div>
+    <div class="block block--hat-primary" style="--index:11"></div>
+  </div>
+  <div class="row">
+    <div class="block block--hat-primary" style="--index:15"></div>
+    <div class="block block--hat-primary" style="--index:14"></div>
+    <div class="block block--hat-primary" style="--index:13"></div>
+    <div class="block block--hat-primary" style="--index:12"></div>
+    <div class="block block--hat-primary" style="--index:11"></div>
+    <div class="block block--hat-primary" style="--index:10"></div>
+    <div class="block block--hat-primary" style="--index:9"></div>
+  </div>
+  <div class="row">
+    <div class="block block--hair" style="--index:14"></div>
+    <div class="block block--skin" style="--index:13"></div>
+    <div class="block block--eye" style="--index:12"></div>
+    <div class="block block--skin" style="--index:11"></div>
+    <div class="block block--eye" style="--index:10"></div>
+    <div class="block block--skin" style="--index:9"></div>
+    <div class="block block--hair" style="--index:8"></div>
+  </div>
+  <div class="row">
+    <div class="block block--skin" style="--index:13"></div>
+    <div class="block block--skin" style="--index:12"></div>
+    <div class="block block--beard" style="--index:11"></div>
+    <div class="block block--beard" style="--index:10"></div>
+    <div class="block block--beard" style="--index:9"></div>
+    <div class="block block--skin" style="--index:8"></div>
+    <div class="block block--skin" style="--index:7"></div>
+  </div>
+  <div class="row">
+    <div class="block block--skin" style="--index:10"></div>
+    <div class="block block--skin" style="--index:9"></div>
+    <div class="block block--skin" style="--index:8"></div>
+    <div class="block block--skin" style="--index:7"></div>
+    <div class="block block--skin" style="--index:6"></div>
+  </div>
+  <div class="row">
+    <div class="block block--skin" style="--index:13"></div>
+    <div class="block block--shirt" style="--index:12"></div>
+    <div class="block block--bib" style="--index:11"></div>
+    <div class="block block--shirt" style="--index:10"></div>
+    <div class="block block--shirt" style="--index:9"></div>
+    <div class="block block--shirt" style="--index:8"></div>
+    <div class="block block--bib" style="--index:7"></div>
+    <div class="block block--shirt" style="--index:6"></div>
+    <div class="block block--skin" style="--index:5"></div>
+  </div>
+  <div class="row">
+    <div class="block block--skin" style="--index:12"></div>
+    <div class="block block--shirt" style="--index:11"></div>
+    <div class="block block--button" style="--index:10"></div>
+    <div class="block block--bib" style="--index:9"></div>
+    <div class="block block--bib" style="--index:8"></div>
+    <div class="block block--bib" style="--index:7"></div>
+    <div class="block block--button" style="--index:6"></div>
+    <div class="block block--shirt" style="--index:5"></div>
+    <div class="block block--skin" style="--index:4"></div>
+  </div>
+  <div class="row">
+    <div class="block block--bib" style="--index:7"></div>
+    <div class="block block--bib" style="--index:6"></div>
+    <div class="block block--bib" style="--index:5"></div>
+    <div class="block block--bib" style="--index:4"></div>
+    <div class="block block--bib" style="--index:3"></div>
+  </div>
+  <div class="row">
+    <div class="block block--bib" style="--index:6"></div>
+    <div class="block block--bib" style="--index:5"></div>
+    <div class="block block--bib" style="--index:4"></div>
+    <div class="block block--bib" style="--index:3"></div>
+    <div class="block block--bib" style="--index:2"></div>
+  </div>
+  <div class="row">
+    <div class="block block--shoe" style="--index:4"></div>
+    <div class="block block--shoe" style="--index:3"></div>
+    <div class="block"></div>
+    <div class="block block--shoe" style="--index:2"></div>
+    <div class="block block--shoe" style="--index:1"></div>
+  </div>
+</div><small>Artwork credit to www.tibo.work/work/mini-heroes/</small>
+  
+  
+  
+</body>
+
+</html>

@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>Exploded isometric via CSS 3D transforms</title>
+
+    <link rel="canonical" href="https://codepen.io/scootman/pen/wrNdYP">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  
+  
+<style>
+@font-face {
+  font-family: "barlow";
+  src: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/436544/Barlow-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "barlow";
+  src: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/436544/Barlow-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+}
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: barlow, sans-serif;
+  color: #242428;
+  background-color: #ececee;
+}
+
+a, a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+svg {
+  fill: currentColor;
+}
+
+.svg-defs {
+  position: absolute;
+  height: 0;
+  width: 0;
+}
+
+aside, .secondary {
+  color: #94949e;
+}
+
+.dark-ui {
+  color: white;
+}
+.dark-ui:not(.no-bgd) {
+  background-color: #242428;
+}
+.dark-ui.glazed-bgd {
+  background-color: rgba(29, 29, 32, 0.97);
+  -webkit-backdrop-filter: saturate(1.5) blur(7px);
+}
+
+.graphic-bgd {
+  text-shadow: 0px 0px 3px rgba(255, 255, 255, 0.5);
+}
+.graphic-bgd .secondary {
+  color: rgba(36, 36, 40, 0.75);
+}
+.graphic-bgd .dark-ui, .graphic-bgd.dark-ui, dark-ui .graphic-bgd {
+  text-shadow: 0px 0px 3px rgba(36, 36, 40, 0.5);
+}
+.graphic-bgd .dark-ui .secondary, .graphic-bgd.dark-ui .secondary, dark-ui .graphic-bgd .secondary {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.page-layer {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  min-width: 375px;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.page-layer > * {
+  display: flex;
+  flex-shrink: 0;
+}
+.page-layer > .site {
+  flex: 0 0 50px;
+}
+.page-layer > main {
+  flex: 1 0 auto;
+}
+.page-layer > .sticky {
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  z-index: 100;
+  -webkit-backdrop-filter: saturate(1.5) blur(6px);
+}
+
+.page-trunk {
+  flex: 0 1 1200px;
+  padding: 0 32px;
+  margin: 0 auto;
+  box-sizing: content-box;
+}
+@media (max-width: 768px) {
+  .page-trunk {
+    padding: 0 16px;
+  }
+}
+
+.page-margin {
+  flex: 1 0px;
+}
+
+.flex-layout {
+  display: flex;
+  flex-wrap: wrap;
+}
+.flex-layout.vertical {
+  flex-direction: column;
+  height: 100%;
+  flex-wrap: nowrap;
+}
+.flex-layout.vertical > * {
+  flex-basis: auto !important;
+}
+.flex-layout:not(.tiles):not(.vertical) {
+  margin: 0 -0.5em;
+}
+.flex-layout:not(.tiles):not(.vertical) > * {
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  flex: 0 100%;
+}
+.flex-layout:not(.tiles):not(.vertical) > *.compact {
+  flex: 0 auto;
+}
+.flex-layout.tiles {
+  margin: -12px;
+}
+.flex-layout.tiles > * {
+  margin: 12px;
+  flex: 1 0px;
+  min-width: 256px;
+}
+.flex-layout.tiles .tile-filler {
+  height: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  pointer-events: none;
+}
+.page-trunk > .flex-layout:not(.vertical), .flex-layout.sections {
+  margin: 0 -16px;
+}
+.page-trunk > .flex-layout:not(.vertical) > *, .flex-layout.sections > * {
+  padding-left: 16px;
+  padding-right: 16px;
+  flex: 0 100%;
+}
+
+.bookend {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+.bookend > * {
+  flex: 0 auto !important;
+}
+
+article {
+  background: #f7f7f8;
+}
+article .dark-ui {
+  background: rgba(5, 5, 5, 0.5);
+}
+
+.progress-basic, .progress-project {
+  font-size: 14.5px;
+  line-height: 1em;
+  cursor: default;
+}
+.progress-basic {
+  margin-top: 2px;
+  border-top: 6px solid currentColor;
+  border-image: linear-gradient(to right, #0aa0c2, #0ac2bf) 1;
+  border-bottom-width: 0;
+  border-left-width: 0;
+  border-right-width: 0;
+  position: relative;
+  display: flex;
+  color: #0ab3c2;
+}
+.progress-basic::after {
+  content: "";
+  display: block;
+  margin-top: -6px;
+  flex: 1 0px;
+  height: 6px;
+  background-color: #c9c9cf;
+  z-index: 1;
+}
+.dark-ui .progress-basic::after {
+  background-color: #55555e;
+}
+.progress-basic::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: -2px;
+  right: -2px;
+  z-index: 3;
+  height: 10px;
+  border: 2px white solid;
+  border-radius: 4px;
+}
+.dark-ui .progress-basic::before {
+  border-color: #0c0c0d;
+}
+.progress-basic .progress {
+  padding-top: 7px;
+  text-align: right;
+  position: relative;
+  animation: progress-basic-bar-build 0.6666666667s ease-in-out, progress-label-opacity 0.125s ease-in-out 0.6666666667s backwards;
+}
+.progress-basic .progress::after {
+  width: 3px;
+  right: -1px;
+  content: "";
+  position: absolute;
+  top: -7px;
+  height: 8px;
+  max-width: 100%;
+  border: 1px solid #c9c9cf;
+  border-radius: 0 3px 3px 0;
+  border-left-width: 0;
+  z-index: 2;
+}
+.dark-ui .progress-basic .progress::after {
+  border-color: #55555e;
+}
+.progress-project {
+  padding: calc(1em + 6px) 0;
+  position: relative;
+}
+.progress-project:hover .label::before, .progress-project:hover .label::after {
+  opacity: 1 !important;
+}
+.inactive .progress-project .bar, .progress-project.inactive .bar {
+  background-image: none;
+}
+.inactive .progress-project .phase, .progress-project.inactive .phase {
+  background-image: linear-gradient(#94949e, #94949e);
+}
+.inactive .progress-project .phase:hover, .progress-project.inactive .phase:hover {
+  background-image: none;
+}
+.inactive .progress-project .current-state, .progress-project.inactive .current-state {
+  color: #94949e !important;
+  text-align: left;
+}
+.inactive .progress-project .current-state::before, .progress-project.inactive .current-state::before {
+  display: none;
+}
+.progress-project .dates {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  color: #bcbcc2;
+  display: flex;
+  justify-content: space-between;
+}
+.dark-ui .progress-project .dates {
+  color: #61616b;
+}
+.progress-project .dates .start {
+  color: #94949e;
+  flex: 1 auto;
+  position: relative;
+}
+.progress-project .dates .start::before {
+  content: "";
+  position: absolute;
+  height: 6px;
+  width: 2px;
+  bottom: -7px;
+  border-left: 2px solid currentColor;
+  border-top: 2px solid transparent;
+  opacity: 0;
+  transition: opacity 0.125s ease-in-out;
+}
+.progress-project .dates .finish {
+  flex: 0 auto;
+  position: relative;
+}
+.progress-project .dates .finish::before {
+  content: "";
+  position: absolute;
+  height: 6px;
+  width: 2px;
+  bottom: -7px;
+  right: 0;
+  border-right: 2px solid currentColor;
+  border-top: 2px solid transparent;
+  opacity: 0;
+  transition: opacity 0.125s ease-in-out;
+}
+.progress-project .durations {
+  position: absolute;
+  top: 0;
+  left: 50px;
+  right: 50px;
+  color: #bcbcc2;
+  display: flex;
+  justify-content: center;
+}
+.dark-ui .progress-project .durations {
+  color: #61616b;
+}
+.progress-project .durations * + *::after {
+  content: "/";
+  padding: 0 3px 0;
+  color: #bcbcc2;
+}
+.dark-ui .progress-project .durations * + *::after {
+  color: #61616b;
+}
+.progress-project .durations .to-date {
+  position: relative;
+  order: 1;
+  color: #94949e;
+  display: flex;
+  align-items: center;
+}
+.progress-project .durations .to-date::before {
+  content: "";
+  position: absolute;
+  height: 7px;
+  width: 4px;
+  left: -8px;
+  top: calc((1em / 2) - 3px);
+  border-left: 4px solid currentColor;
+  border-bottom: 3.5px solid transparent;
+  border-top: 3.5px solid transparent;
+  opacity: 0;
+  transition: opacity 0.125s ease-in-out;
+}
+.progress-project .durations .to-completion {
+  position: relative;
+  order: 2;
+}
+.progress-project .durations .to-completion::before {
+  content: "";
+  position: absolute;
+  height: 7px;
+  width: 4px;
+  right: -15px;
+  top: calc((1em / 2) - 3px);
+  border-left: 4px solid currentColor;
+  border-bottom: 3.5px solid transparent;
+  border-top: 3.5px solid transparent;
+  opacity: 0;
+  transition: opacity 0.125s ease-in-out;
+}
+.progress-project .durations .to-completion::after {
+  content: "";
+  position: absolute;
+  height: 7px;
+  width: 4px;
+  right: -8px;
+  top: calc((1em / 2) - 3px);
+  border-right: 4px solid currentColor;
+  border-bottom: 3.5px solid transparent;
+  border-top: 3.5px solid transparent;
+  opacity: 0;
+  transition: opacity 0.125s ease-in-out;
+}
+.progress-project .bar {
+  height: 10px;
+  position: relative;
+  background-image: linear-gradient(to right, #0aa0c2, #0ac2bf);
+  background-color: #94949e;
+  background-clip: content-box;
+  padding: 1px 0px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+.progress-project .bar::after {
+  content: "";
+  position: absolute;
+  left: -2px;
+  right: -2px;
+  top: 0;
+  bottom: 0;
+  border-radius: 4px;
+  border: 2px solid white;
+  z-index: 2;
+  pointer-events: none;
+}
+.dark-ui .progress-project .bar::after {
+  border-color: #0c0c0d;
+}
+.progress-project .bar .phase {
+  color: #0ab3c2;
+  box-sizing: content-box;
+  height: 100%;
+  padding: 2px 0;
+  position: relative;
+  background-color: currentColor;
+  background-clip: content-box;
+}
+.progress-project .bar .phase:hover ~ .current-state {
+  opacity: 0;
+}
+.progress-project .bar .phase:not(.last)::after {
+  content: "";
+  position: absolute;
+  right: -1px;
+  width: 2px;
+  height: 2px;
+  top: calc(50% - 1px);
+  z-index: 1;
+  border-radius: 0.5px;
+  background-color: white;
+}
+.dark-ui .progress-project .bar .phase:not(.last)::after {
+  background-color: #0c0c0d;
+}
+.progress-project .bar .phase::before {
+  content: attr(data-phase);
+  pointer-events: none;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  top: 100%;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  white-space: nowrap;
+  text-align: center;
+  left: 0;
+  right: 0;
+  line-height: 18px;
+  opacity: 0;
+  transition: opacity 0.125s ease-in-out;
+}
+.progress-project .bar .phase:first-child::before {
+  justify-content: flex-start;
+}
+.progress-project .bar .phase.last::before {
+  justify-content: flex-end;
+}
+.progress-project .bar .phase:hover::before {
+  opacity: 1;
+}
+.progress-project .bar .remaining {
+  position: absolute;
+  top: 1px;
+  bottom: 1px;
+  left: 0;
+  right: 0;
+  padding-left: 50%;
+  animation: progress-bar-build 0.6666666667s ease-in-out;
+  background-clip: content-box;
+  color: #c9c9cf;
+  background-color: currentColor;
+  overflow: hidden;
+  pointer-events: none;
+}
+.dark-ui .progress-project .bar .remaining {
+  color: #55555e;
+}
+.progress-project .bar .remaining::before {
+  content: "";
+  position: absolute;
+  margin-left: -2px;
+  width: 3px;
+  top: 0px;
+  bottom: 0px;
+  border-top: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  border-right: 1px solid currentColor;
+  border-radius: 0 3px 3px 0;
+}
+.progress-project .phase-1 {
+  color: orange !important;
+}
+.progress-project .phase-2 {
+  color: #FF6D00 !important;
+}
+.progress-project .phase-3 {
+  color: red !important;
+}
+.progress-project .phase-4 {
+  color: #b84dcb !important;
+}
+.progress-project .phase-5 {
+  color: darkblue !important;
+}
+.progress-project .current-state {
+  color: #0ab3c2;
+  left: 0;
+  bottom: calc(-1em - 5px);
+  position: absolute;
+  text-align: right;
+  white-space: nowrap;
+  animation: progress-label-opacity 0.125s ease-in-out 0.6666666667s backwards;
+}
+.progress-project .current-state::before {
+  content: "";
+  position: absolute;
+  height: 5px;
+  left: 0;
+  top: -5px;
+  right: 0;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid transparent;
+  opacity: 0;
+  transition: opacity 0.125s ease-in-out;
+}
+
+@keyframes progress-bar-build {
+  0% {
+    padding-left: 0;
+  }
+  100% {
+    padding-left: 0 !important;
+  }
+}
+@keyframes progress-basic-bar-build {
+  0% {
+    max-width: 0;
+  }
+  100% {
+    max-width: 100%;
+  }
+}
+@keyframes progress-label-opacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+[data-tooltip-text]:not([data-tooltip-text=""]) {
+  position: relative;
+}
+[data-tooltip-text]:not([data-tooltip-text=""])::after {
+  content: attr(data-tooltip-text);
+  position: absolute;
+  box-sizing: border-box;
+  z-index: 1070;
+  padding: 8px 10px;
+  font-size: 14.5px;
+  line-height: 15px;
+  color: white;
+  text-shadow: 0px 0px 3px rgba(36, 36, 40, 0.5);
+  white-space: nowrap;
+  pointer-events: none;
+  background-color: rgba(19, 19, 21, 0.85);
+  border-radius: 3px;
+  opacity: 0;
+  transition: all 0.08s ease;
+}
+.dark-ui [data-tooltip-text]:not([data-tooltip-text=""])::after {
+  color: #242428;
+  text-shadow: 0px 0px 3px rgba(255, 255, 255, 0.5);
+  background-color: rgba(234, 234, 236, 0.85);
+}
+[data-tooltip-text]:not([data-tooltip-text=""]):hover::after {
+  opacity: 1;
+}
+[data-tooltip-text]:not([data-tooltip-text=""]):not([data-tooltip-instant]):hover::after {
+  transition-delay: 0.25s;
+}
+[data-tooltip-text]:not([data-tooltip-text=""])::before {
+  content: "";
+  box-sizing: content-box;
+  width: 0;
+  height: 0;
+  position: absolute;
+  transform: scale(0);
+  z-index: 1070;
+  color: rgba(19, 19, 21, 0.85);
+  opacity: 0;
+  transition: all 0.08s ease;
+}
+.dark-ui [data-tooltip-text]:not([data-tooltip-text=""])::before {
+  color: rgba(234, 234, 236, 0.85);
+}
+[data-tooltip-text]:not([data-tooltip-text=""]):hover::before {
+  transform: scale(1);
+  opacity: 1;
+}
+[data-tooltip-text]:not([data-tooltip-text=""]):not([data-tooltip-instant]):hover::before {
+  transition-delay: 0.25s;
+}
+[data-tooltip-text]:not([data-tooltip-text=""])::before {
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  top: -9px;
+  margin: 0 0 0 -6px;
+  border: 6px solid transparent;
+  border-top-color: currentColor;
+  border-bottom: none;
+  transform-origin: center top;
+}
+[data-tooltip-text]:not([data-tooltip-text=""])[data-tooltip-pos~=bottom]::before {
+  left: 50%;
+  right: auto;
+  bottom: -9px;
+  top: auto;
+  margin: 0 0 0 -6px;
+  border: 6px solid transparent;
+  border-bottom-color: currentColor;
+  border-top: none;
+  transform-origin: center bottom;
+}
+[data-tooltip-text]:not([data-tooltip-text=""])[data-tooltip-pos~=top][data-tooltip-pos~=align-left]::after {
+  left: 50%;
+  right: auto;
+  top: auto;
+  bottom: 100%;
+  margin: 0 0 9px -16px;
+  transform: scale(0);
+  transform-origin: left bottom;
+  -webkit-backdrop-filter: blur(1.5px);
+}
+[data-tooltip-text]:not([data-tooltip-text=""])[data-tooltip-pos~=top][data-tooltip-pos~=align-left]:hover::after {
+  transform: scale(1);
+}
+[data-tooltip-text]:not([data-tooltip-text=""])[data-tooltip-pos~=top][data-tooltip-pos~=align-right]::after {
+  left: auto;
+  right: 50%;
+  top: auto;
+  bottom: 100%;
+  margin: 0 -16px 9px 0;
+  transform: scale(0);
+  transform-origin: right bottom;
+  -webkit-backdrop-filter: blur(1.5px);
+}
+[data-tooltip-text]:not([data-tooltip-text=""])[data-tooltip-pos~=top][data-tooltip-pos~=align-right]:hover::after {
+  transform: scale(1);
+}
+[data-tooltip-text]:not([data-tooltip-text=""])::after {
+  right: 50%;
+  left: auto;
+  top: auto;
+  bottom: 100%;
+  margin: 0 0 9px 0;
+  transform: translateX(50%) scale(0);
+  transform-origin: center bottom;
+}
+[data-tooltip-text]:not([data-tooltip-text=""]):hover::after {
+  transform: translateX(50%) scale(1);
+}
+[data-tooltip-text]:not([data-tooltip-text=""])[data-tooltip-pos~=bottom][data-tooltip-pos~=align-left]::after {
+  left: 50%;
+  right: auto;
+  top: 100%;
+  bottom: auto;
+  margin: 9px 0 0 -16px;
+  transform: scale(0);
+  transform-origin: left top;
+  -webkit-backdrop-filter: blur(1.5px);
+}
+[data-tooltip-text]:not([data-tooltip-text=""])[data-tooltip-pos~=bottom][data-tooltip-pos~=align-left]:hover::after {
+  transform: scale(1);
+}
+[data-tooltip-text]:not([data-tooltip-text=""])[data-tooltip-pos~=bottom][data-tooltip-pos~=align-center]::after, [data-tooltip-text]:not([data-tooltip-text=""])[data-tooltip-pos~=bottom]::after {
+  left: auto;
+  right: 50%;
+  top: 100%;
+  bottom: auto;
+  margin: 9px 0 0 0;
+  transform: translateX(50%) scale(0);
+  transform-origin: center top;
+  -webkit-backdrop-filter: none;
+}
+[data-tooltip-text]:not([data-tooltip-text=""])[data-tooltip-pos~=bottom][data-tooltip-pos~=align-center]:hover::after, [data-tooltip-text]:not([data-tooltip-text=""])[data-tooltip-pos~=bottom]:hover::after {
+  transform: translateX(50%) scale(1);
+}
+[data-tooltip-text]:not([data-tooltip-text=""])[data-tooltip-pos~=bottom][data-tooltip-pos~=align-right]::after {
+  left: auto;
+  right: 50%;
+  top: 100%;
+  bottom: auto;
+  margin: 9px -16px 0 0;
+  transform: scale(0);
+  transform-origin: right top;
+  -webkit-backdrop-filter: blur(1.5px);
+}
+[data-tooltip-text]:not([data-tooltip-text=""])[data-tooltip-pos~=bottom][data-tooltip-pos~=align-right]:hover::after {
+  transform: scale(1);
+}
+[data-tooltip-text]:not([data-tooltip-text=""])[data-tooltip-pos~=middle][data-tooltip-pos~=align-left]::after {
+  left: 100%;
+  right: auto;
+  top: calc(50% - 1em/2);
+  bottom: auto;
+  margin: -8px 0 0 9px;
+  transform: scale(0);
+  transform-origin: left center;
+  -webkit-backdrop-filter: blur(1.5px);
+}
+[data-tooltip-text]:not([data-tooltip-text=""])[data-tooltip-pos~=middle][data-tooltip-pos~=align-left]:hover::after {
+  transform: scale(1);
+}
+[data-tooltip-text]:not([data-tooltip-text=""])[data-tooltip-pos~=middle][data-tooltip-pos~=align-left]::before {
+  left: auto;
+  right: -9px;
+  top: 50%;
+  bottom: auto;
+  margin: -6px 0 0 0;
+  border: 6px solid transparent;
+  border-right-color: currentColor;
+  border-left: none;
+  transform-origin: right center;
+}
+[data-tooltip-text]:not([data-tooltip-text=""])[data-tooltip-pos~=middle][data-tooltip-pos~=align-right]::after {
+  left: auto;
+  right: 100%;
+  top: calc(50% - 1em/2);
+  bottom: auto;
+  margin: -8px 9px 0 0;
+  transform: scale(0);
+  transform-origin: right center;
+  -webkit-backdrop-filter: blur(1.5px);
+}
+[data-tooltip-text]:not([data-tooltip-text=""])[data-tooltip-pos~=middle][data-tooltip-pos~=align-right]:hover::after {
+  transform: scale(1);
+}
+[data-tooltip-text]:not([data-tooltip-text=""])[data-tooltip-pos~=middle][data-tooltip-pos~=align-right]::before {
+  left: -9px;
+  right: auto;
+  top: 50%;
+  bottom: auto;
+  margin: -6px 0 0 0;
+  border: 6px solid transparent;
+  border-left-color: currentColor;
+  border-right: none;
+  transform-origin: left center;
+}
+
+.action-bar {
+  display: flex;
+  margin: 0 -0.66665em;
+}
+.action-bar.med {
+  font-size: 24px;
+}
+.action-bar.lrg {
+  font-size: 32px;
+}
+.action-bar > .action-group {
+  margin: 0 0.33335em;
+}
+
+.action-group {
+  margin: 0 -0.3333em;
+  display: flex;
+  flex: 0 auto;
+  border-radius: 3px;
+  transition: all 0.125s ease-in-out;
+}
+.action-group:hover {
+  background-color: #f7f7f8;
+}
+.dark-ui .action-group:hover {
+  background-color: rgba(5, 5, 5, 0.5);
+}
+.action-group > * {
+  padding: 0.3333em;
+  display: block;
+  height: 1em;
+  width: 1em;
+  box-sizing: content-box;
+  color: #a1a1aa;
+  transition: all 0.125s ease-in-out;
+}
+.dark-ui .action-group > * {
+  color: gray;
+}
+.action-group > *:hover {
+  color: inherit;
+}
+.action-group.med {
+  font-size: 24px;
+}
+.action-group.lrg {
+  font-size: 32px;
+}
+.action-group svg {
+  height: 100%;
+  width: 100%;
+}
+
+.control-bar {
+  display: flex;
+  margin: 0 -0.75em;
+}
+.control-bar.med {
+  font-size: 24px;
+}
+.control-bar.lrg {
+  font-size: 32px;
+}
+.control-bar > .control-group {
+  margin: 0 0.375em;
+}
+
+.control-group {
+  margin: -0.375em;
+  position: relative;
+  display: flex;
+  cursor: pointer;
+  border: calc(1em / 16) solid transparent;
+  border-radius: 3px;
+  transition: all 0.125s ease-in-out;
+}
+.control-group:hover {
+  border-color: #f7f7f8;
+}
+.dark-ui .control-group:hover {
+  border-color: rgba(5, 5, 5, 0.5);
+}
+.control-group:hover .active {
+  background-color: #f7f7f8;
+}
+.dark-ui .control-group:hover .active {
+  background-color: rgba(5, 5, 5, 0.5);
+}
+.control-group > * {
+  padding: calc(0.375em - (1em / 16)) 0.375em;
+  box-sizing: content-box;
+  min-width: 1em;
+  height: 1em;
+  text-align: center;
+  color: #a1a1aa;
+  transition: all 0.125s ease-in-out;
+}
+.dark-ui .control-group > * {
+  color: gray;
+}
+.control-group > *.active, .control-group > *:hover {
+  color: inherit;
+}
+.control-group > *:first-child {
+  padding-left: calc(0.375em - (1em / 16));
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+.control-group > *:last-child {
+  padding-right: calc(0.375em - (1em / 16));
+  border-top-right-radius: calc(3px - (1em / 16));
+  border-bottom-right-radius: calc(3px - (1em / 16));
+}
+.control-group svg {
+  width: 1em;
+  height: 1em;
+}
+
+input[id^=toggle], .control-toggle {
+  display: none;
+}
+input[id^=toggle] + label, .control-toggle + label {
+  margin: -0.375em;
+  position: relative;
+  display: flex;
+  width: 3.5em;
+  height: 1.75em;
+  cursor: pointer;
+  border: calc(1em / 16) solid transparent;
+  border-radius: 3px;
+  transition: all 0.125s ease-in-out;
+}
+input[id^=toggle] + label:hover, .control-toggle + label:hover {
+  border-color: #f7f7f8;
+}
+.dark-ui input[id^=toggle] + label:hover, .dark-ui .control-toggle + label:hover {
+  border-color: rgba(5, 5, 5, 0.5);
+}
+input[id^=toggle] + label.med, .control-toggle + label.med {
+  font-size: 24px;
+}
+input[id^=toggle] + label.lrg, .control-toggle + label.lrg {
+  font-size: 32px;
+}
+input[id^=toggle] + label > *, .control-toggle + label > * {
+  padding: calc(0.375em - (1em / 16)) 0.375em;
+  box-sizing: content-box;
+  min-width: 1em;
+  height: 1em;
+  text-align: center;
+  transition: all 0.125s ease-in-out;
+}
+input[id^=toggle] + label > *:first-child, .control-toggle + label > *:first-child {
+  padding-left: calc(0.375em - (1em / 16));
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+input[id^=toggle] + label > *:last-child, .control-toggle + label > *:last-child {
+  padding-right: calc(0.375em - (1em / 16));
+  border-top-right-radius: calc(3px - (1em / 16));
+  border-bottom-right-radius: calc(3px - (1em / 16));
+}
+input[id^=toggle] + label svg, .control-toggle + label svg {
+  width: 1em;
+  height: 1em;
+}
+input[id^=toggle]:checked + label > * + *, input[id^=toggle]:not(:checked) + label > *:first-child, .control-toggle:checked + label > * + *, .control-toggle:not(:checked) + label > *:first-child {
+  color: #a1a1aa;
+}
+.dark-ui input[id^=toggle]:checked + label > * + *, .dark-ui input[id^=toggle]:not(:checked) + label > *:first-child, .dark-ui .control-toggle:checked + label > * + *, .dark-ui .control-toggle:not(:checked) + label > *:first-child {
+  color: gray;
+}
+input[id^=toggle]:checked + label:hover > *:first-child, input[id^=toggle]:not(:checked) + label:hover > * + *, .control-toggle:checked + label:hover > *:first-child, .control-toggle:not(:checked) + label:hover > * + * {
+  background-color: #f7f7f8;
+}
+.dark-ui input[id^=toggle]:checked + label:hover > *:first-child, .dark-ui input[id^=toggle]:not(:checked) + label:hover > * + *, .dark-ui .control-toggle:checked + label:hover > *:first-child, .dark-ui .control-toggle:not(:checked) + label:hover > * + * {
+  background-color: rgba(5, 5, 5, 0.5);
+}
+
+main {
+  align-items: center;
+}
+
+.exploder {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: -16px 0;
+  padding: 0 106px;
+  flex: 0 100%;
+}
+.exploder .component {
+  margin: 16px 106px;
+  flex: 0 0 360px;
+  position: relative;
+}
+.exploder .component label {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  opacity: 0;
+  transition: opacity 0.125s ease-in-out;
+}
+.exploder .component:hover label {
+  opacity: 1;
+}
+.exploder .component:hover input:checked + label {
+  transition-delay: 0.65s;
+}
+.exploder .graphics {
+  position: relative;
+  display: flex;
+}
+.exploder .viewport {
+  height: 360px;
+  flex: 1 0px;
+  order: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.exploder .viewport > * {
+  transition: transform 0.5s ease-in-out;
+}
+.exploder input:checked ~ .graphics .viewport:hover > *, .exploder input:checked + label:hover + .graphics .viewport > * {
+  transform: rotateX(60deg) rotateZ(-45deg) scale(1.25) translateZ(-96px);
+}
+.exploder input:checked ~ .graphics .viewport:hover > * .bar, .exploder input:checked + label:hover + .graphics .viewport > * .bar {
+  transition-delay: 0.25s;
+  box-shadow: -40px 40px 40px rgba(0, 0, 0, 0.2);
+}
+.dark-ui .exploder input:checked ~ .graphics .viewport:hover > * .bar, .dark-ui .exploder input:checked + label:hover + .graphics .viewport > * .bar {
+  box-shadow: -40px 40px 40px rgba(0, 0, 0, 0.7);
+}
+.exploder input:checked ~ .graphics .viewport:hover > * .bar::after, .exploder input:checked + label:hover + .graphics .viewport > * .bar::after {
+  transform: translateZ(196px);
+}
+.exploder input:checked ~ .graphics .viewport:hover > * .remaining, .exploder input:checked + label:hover + .graphics .viewport > * .remaining {
+  transform: translateZ(128px);
+  transform-style: preserve-3d;
+  overflow: visible;
+}
+.exploder input:checked ~ .graphics .viewport:hover > * .remaining::before, .exploder input:checked + label:hover + .graphics .viewport > * .remaining::before {
+  transform: translateZ(24px);
+}
+.exploder input:checked ~ .graphics .viewport:hover > * .phase, .exploder input:checked ~ .graphics .viewport:hover > * .current-state, .exploder input:checked + label:hover + .graphics .viewport > * .phase, .exploder input:checked + label:hover + .graphics .viewport > * .current-state {
+  transform: translateZ(64px);
+  transform-style: preserve-3d;
+}
+.exploder input:checked ~ .graphics .viewport:hover > * .phase::after, .exploder input:checked + label:hover + .graphics .viewport > * .phase::after {
+  transform: translateZ(24px);
+  box-shadow: 0px 0px 5px black;
+}
+.dark-ui .exploder input:checked ~ .graphics .viewport:hover > * .phase::after, .dark-ui .exploder input:checked + label:hover + .graphics .viewport > * .phase::after {
+  box-shadow: 0px 0px 5px white;
+}
+.exploder .annotation {
+  opacity: 0;
+  flex: 0 0px;
+  position: relative;
+  font-size: 14px;
+  color: #94949e;
+  transition: all 0.35s ease-in-out;
+  pointer-events: none;
+}
+.exploder .annotation.left {
+  order: 1;
+}
+.exploder .annotation.left .note {
+  left: -196px;
+  justify-content: flex-end;
+  text-align: right;
+}
+.exploder .annotation.left .note::before {
+  right: 0;
+  left: 188px;
+}
+.exploder .annotation.right {
+  order: 3;
+}
+.exploder .annotation.right .note {
+  right: -196px;
+}
+.exploder input:checked ~ .graphics .viewport:hover ~ .annotation, .exploder input:checked + label:hover + .graphics .annotation {
+  opacity: 1;
+  transition-delay: 0.65s;
+}
+.exploder .note {
+  position: absolute;
+  box-sizing: content-box;
+  display: flex;
+  width: 180px;
+  height: 1em;
+  margin-top: -0.6em;
+  line-height: 1.2em;
+  z-index: 99;
+}
+.exploder .note.upward {
+  align-items: flex-end;
+}
+.exploder .note.upward::before {
+  bottom: 0;
+}
+.exploder .note::before {
+  content: "";
+  box-sizing: content-box;
+  position: absolute;
+  padding: 0.6em 0 calc(.6em - 1px);
+  height: 1px;
+  background-clip: content-box;
+  background-color: currentColor;
+  left: 0;
+  right: 188px;
+}
+
+.progress-project {
+  width: 100%;
+  transition: transform 0.5s ease-in-out;
+  transform-style: preserve-3d;
+}
+.progress-project .phase, .progress-project .remaining, .progress-project .current-state {
+  transition: transform 0.5s ease-in-out;
+}
+.progress-project .bar {
+  transition: all 0.25s ease-in-out;
+  background-image: none;
+}
+.progress-project .phase::after, .progress-project .bar::after {
+  transition: all 0.5s ease-in-out;
+}
+
+header {
+  padding: 20px 24px 32px;
+}
+
+footer {
+  padding: 32px 24px 20px;
+  font-size: 14px;
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  <div class="page-layer">
+  <header class="bookend">
+    <a data-tooltip-pos="bottom" data-tooltip-text="A side project" href="https://codepen.io/collection/ABpRqv/" target="_blank">mui · Minimalist User Interface </a><input checked="" id="toggle-ui" type="checkbox" /><label data-tooltip-pos="bottom align-right" data-tooltip-text="Default UI / Dark UI" for="toggle-ui">
+      <div>
+        <svg class="icon-light"></svg>
+      </div>
+      <div>
+        <svg class="icon-dark"></svg>
+      </div>
+    </label>
+  </header>
+  <main>
+    <div class="exploder">
+      <div class="component">
+        <input checked="" id="toggle-projection" type="checkbox" /><label data-tooltip-pos="top align-left" data-tooltip-text="Explode on hover / Lock normal view" for="toggle-projection">
+          <div>
+            <svg class="icon-iso"></svg>
+          </div>
+          <div>
+            <svg class="icon-ortho-lock"></svg>
+          </div>
+        </label>
+        <div class="graphics">
+          <div class="viewport">
+            <div class="progress-project">
+              <div class="dates">
+                <div class="start label">
+                  Jan 2016
+                </div>
+                <div class="finish label">
+                  Oct 2018
+                </div>
+              </div>
+              <div class="durations">
+                <div class="to-completion label">
+                  144 wks
+                </div>
+                <div class="to-date label">
+                  wk 104
+                </div>
+              </div>
+              <div class="bar">
+                <div class="phase phase-1" data-phase="Phase 1" style="width: 10%" title="More phase info"></div>
+                <div class="phase phase-2" data-phase="Phase 2" style="width: 25%" title="More phase info"></div>
+                <div class="phase phase-3" data-phase="Phase 3" style="width: 30%" title="More phase info"></div>
+                <div class="phase phase-4" data-phase="Phase 4" style="width: 30%" title="More phase info"></div>
+                <div class="remaining" style="padding-left:72%"></div>
+                <div class="current-state label phase-4" style="width:72%">
+                  Phase 4 
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="annotation left">
+            <div class="note upward" style="bottom:188px;padding-right:36px">
+              Theme aware masking border. Psuedo element of .bar below. Mask used on oversized rectangular elements to prevent undesirable anti-aliasing of multiple overlapping elements below
+            </div>
+            <div class="note upward" style="bottom:101px;padding-right:60px">
+              Theme aware phase end dots. Psuedo elements of phases. Key to visualising phase durations in future
+            </div>
+            <div class="note upward" style="bottom:6px;padding-right:32px">
+              Base elements with graphic augmentation on hover (intersecting borders used to make arrows and ticks)
+            </div>
+          </div>
+          <div class="annotation right">
+            <div class="note upward" style="bottom:279px;padding-left:30px">
+              Absolutely positioned progress remaining element. Left padding via inline style reveals colored progress elements below
+            </div>
+            <div class="note" style="top:99px;padding-left:118px">
+              Curved border psuedo element to simulate border-radius on elements below
+            </div>
+            <div class="note" style="top:156px;padding-left:62px">
+              Optional phases laid out as flex items of bar element below. Hover triggers psuedo element phase label (using data attribute for content). Hover also hides sibling current phase/state label
+            </div>
+            <div class="note" style="bottom:64px;padding-left:180px">
+              box-shadow. Nothing to do with timeline component — just looks nice for isometric
+            </div>
+          </div>
+        </div>
+        <p class="title">
+          Progress bar kit <span class="secondary">· Project timeline component</span>
+        </p>
+      </div>
+    </div>
+  </main>
+  <footer class="bookend">
+    <span></span><span class="secondary"><a href="https://codepen.io/scootman/pen/yzRqzV" target="_blank">Complete Progress bar kit </a></span>
+  </footer>
+</div>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/436544/svg-injector.min.js'></script>
+    <script id="rendered-js" >
+// UI theme toggle (adds .dark-ui class to .page-layer). 
+// View projection toggle doesn't use JS - it relies on the :checked psuedo class
+
+$('#toggle-ui').click(function () {
+  $('.page-layer').toggleClass("dark-ui");
+});
+
+// SVGInjector2 for insertion of SVG icon assets
+
+(function (window, document) {
+  // Options
+  var injectorOptions = {
+    evalScripts: 'once',
+    spritesheetURL: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/436544/mui-assets.svg',
+    spriteClassIdName: 'icon-' };
+
+  // Setup the injector
+  var injector = new SVGInjector(injectorOptions);
+  // inject single svg
+  injector.inject(document.querySelectorAll('svg[data-src]'));
+  // inject svgs from spritesheets
+  injector.inject(document.querySelectorAll('svg[class^=icon-]'));
+})(window, document);
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>css-only scrollspy table of contents</title>
+
+    <link rel="canonical" href="https://codepen.io/kevinpowell/pen/GgKrzNL">
+  
+  
+  
+  
+<style>
+html {
+  color-scheme: dark;
+  font-family: system-ui;
+}
+
+body {
+  font-size: 1.5rem;
+  margin-block-end: 3rem;
+}
+
+.article-previews {
+  display: grid;
+  align-items: start;
+  grid-template-columns: 1fr 300px;
+
+  timeline-scope: --one, --two, --three, --four, --five, --six, --seven, --eight,
+    --nine, --ten;
+}
+
+article {
+  height: 70vb;
+  padding: 1rem;
+  border: 1px solid;
+  border-radius: 1rem;
+  view-timeline-name: var(--vt-name);
+}
+
+.articles {
+  display: grid;
+  gap: 3rem;
+}
+
+.toc {
+  display: grid;
+  list-style: "";
+  position: sticky;
+  top: 100px;
+}
+.toc > li {
+  --scroll-indicator-gap: 10px;
+
+  position: relative;
+  padding-block: 1rem;
+  padding-inline-start: var(--scroll-indicator-gap);
+  /*   line-height: 1; */
+}
+.toc > li::before {
+  content: "";
+  width: 3px;
+  height: 100%;
+  background: white;
+  position: absolute;
+  top: 0;
+  left: calc(var(--scroll-indicator-gap) * -1);
+  transform: scaleY(0);
+  transform-origin: top;
+
+  animation: i-spy linear;
+  animation-timeline: var(--vt);
+}
+
+@keyframes i-spy {
+  entry 40% {
+    transform-origin: top;
+    transform: scaleY(0);
+  }
+
+  entry 60% {
+    transform-origin: top;
+    transform: scaleY(1);
+  }
+
+  exit 80% {
+    transform-origin: bottom;
+    transform: scaleY(1);
+  }
+
+  exit 100% {
+    transform-origin: bottom;
+    transform: scaleY(0);
+  }
+}
+
+@keyframes particle-enter {
+  from {
+    translate: 0cqi 0cqi;
+    rotate: 0turn;
+  }
+}
+
+@keyframes particle-scroll {
+  to {
+    translate: 0cqi 0cqi;
+    rotate: 0turn;
+  }
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  <main>
+  <section>
+    <h1>Advanced CSS Scroll-driven animations</h1>
+    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nostrum alias et atque doloribus rem doloremque aliquid, consequuntur magni magnam expedita veniam ipsa repellat fugiat praesentium eligendi porro corporis aliquam sunt.</p>
+    <p>Temporibus ducimus reiciendis esse ex numquam. Maiores quidem ipsam eveniet magni aliquam, consectetur eius commodi nihil quae dignissimos voluptatum nemo assumenda magnam et ex laboriosam, repudiandae at nulla accusamus saepe?</p>
+    <p>At fuga autem vitae, modi neque dolorem quo ullam tempore ea, repellat, perferendis laudantium possimus laborum blanditiis architecto error id? Minima non sunt eum. Rem eligendi tenetur accusamus eius in!</p>
+    <p>Deserunt deleniti cumque unde minima animi, ducimus fuga itaque voluptatum asperiores accusantium fugit et sit sunt dolorem vitae quidem a. Qui quis deleniti pariatur consequatur nulla sunt voluptates deserunt ad.</p>
+    <p>Exercitationem ipsa amet in iusto? Impedit debitis ex quidem quas dolorem accusantium quisquam magni dolor unde, vero, voluptates tenetur non quae ad! Deleniti amet eos beatae sint qui sunt id?</p>
+  </section>
+
+  <section class="article-previews">
+    <ul class="articles">
+      <li>
+        <article style="--vt-name: --one">
+          <h2>Getting started</h2>
+          <p></p>
+        </article>
+      </li>
+      <li>
+        <article style="--vt-name: --two">
+          <h2>Nihil, vero odit!</h2>
+        </article>
+      </li>
+      <li>
+        <article style="--vt-name: --three">
+          <h2>Harum, eligendi deserunt.</h2>
+        </article>
+      </li>
+      <li>
+        <article style="--vt-name: --four">
+          <h2>Omnis, possimus esse.</h2>
+        </article>
+      </li>
+      <li>
+        <article style="--vt-name: --five">
+          <h2>Doloremque, iusto inventore!</h2>
+        </article>
+      </li>
+      <li>
+        <article style="--vt-name: --six">
+          <h2>Natus, laborum magni!</h2>
+        </article>
+      </li>
+      <li>
+        <article style="--vt-name: --seven">
+          <h2>Velit, ullam porro?</h2>
+        </article>
+      </li>
+      <li>
+        <article style="--vt-name: --eight">
+          <h2>Deleniti, consectetur qui!</h2>
+        </article>
+      </li>
+      <li>
+        <article style="--vt-name: --nine">
+          <h2>Quia, dolorem in.</h2>
+        </article>
+      </li>
+      <li>
+        <article style="--vt-name: --ten">
+          <h2>Beatae, asperiores fugiat.</h2>
+        </article>
+      </li>
+    </ul>
+
+    <ul class="toc">
+      <li style="--vt: --one"><a href="">Lorem.</a></li>
+      <li style="--vt: --two"><a href="">Esse!</a></li>
+      <li style="--vt: --three"><a href="">Consequuntur?</a></li>
+      <li style="--vt: --four"><a href="">In.</a></li>
+      <li style="--vt: --five"><a href="">Quia.</a></li>
+      <li style="--vt: --six"><a href="">Assumenda.</a></li>
+      <li style="--vt: --seven"><a href="">Ipsam.</a></li>
+      <li style="--vt: --eight"><a href="">Qui?</a></li>
+      <li style="--vt: --nine"><a href="">In.</a></li>
+      <li style="--vt: --ten"><a href="">Voluptatem!</a></li>
+    </ul>
+  </section>
+</main>
+  
+  
+  
+</body>
+
+</html>

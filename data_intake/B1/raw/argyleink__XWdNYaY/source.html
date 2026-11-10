@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>Counter with Scroll Timeline and Snap Points</title>
+
+    <link rel="canonical" href="https://codepen.io/argyleink/pen/XWdNYaY">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  
+  
+<style>
+/* note: this uses the old spec */
+/* updated version here! https://codepen.io/argyleink/pen/oNyJWRa */
+
+main {
+  max-block-size: 100vh;
+  overflow-y: scroll;
+  -ms-scroll-snap-type: y mandatory;
+      scroll-snap-type: y mandatory;
+}
+
+section {
+  block-size: 100vh;
+  inline-size: 100%;
+/*   scroll-snap-stop: always; */
+  scroll-snap-align: start;
+  display: grid;
+  place-content: center;
+  position: relative;
+}
+
+section:nth-of-type(odd) {
+  background: black;
+  color: white;
+}
+
+h1 {
+  font-variant-numeric: tabular-nums;
+  font-size: 25vmin;
+  font-weight: 300;
+  display: flex;
+  align-items: center;
+  gap: .5ch;
+}
+
+.slash {
+  font-family: Roboto, monospace;
+  font-weight: 400;
+}
+
+.stuck {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  pointer-events: none;
+  -webkit-clip-path: polygon(0% 0%,100% 0%,100% 100%,0% 100%);
+          clip-path: polygon(0% 0%,100% 0%,100% 100%,0% 100%);
+} 
+
+.stuck > h1 {
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  will-change: transform;
+  place-content: center;
+  grid-auto-flow: column;
+}
+
+[invisible] {
+  visibility: hidden;
+}
+
+body {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: system-ui, sans-serif;
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  <main>
+  <section>
+    <h1>
+      <span>1</span>
+      <span invisible class="slash">/</span>
+      <span invisible>4</span>
+    </h1>
+    <div class="stuck">
+      <h1>
+        <span invisible>1</span>
+        <span class="slash">/</span>
+        <span>4</span> 
+      </h1>
+    </div> 
+  </section>
+  <section>
+    <h1>
+      <span>2</span>
+      <span invisible class="slash">/</span>
+      <span invisible>4</span>
+    </h1>
+    <div class="stuck">
+      <h1>
+        <span invisible>1</span>
+        <span class="slash">/</span>
+        <span>4</span>
+      </h1>
+    </div> 
+  </section>
+  <section>
+    <h1>
+      <span>3</span>
+      <span invisible class="slash">/</span>
+      <span invisible>4</span>
+    </h1>
+    <div class="stuck">
+      <h1>
+        <span invisible>1</span>
+        <span class="slash">/</span>
+        <span>4</span>
+      </h1>
+    </div> 
+  </section>
+  <section>
+    <h1>
+      <span>4</span>
+      <span invisible class="slash">/</span>
+      <span invisible>4</span>
+    </h1>
+    <div class="stuck">
+      <h1>
+        <span invisible>1</span>
+        <span class="slash">/</span>
+        <span>4</span>
+      </h1>
+    </div> 
+  </section>
+  <section>
+    <h1>
+      <span>1</span>
+      <span invisible class="slash">/</span>
+      <span invisible>4</span>
+    </h1>
+    <div class="stuck">
+      <h1>
+        <span invisible>1</span>
+        <span class="slash">/</span>
+        <span>4</span>
+      </h1>
+    </div> 
+  </section>
+</main>
+  
+    <script id="rendered-js" type="module">
+import 'https://argyleink.github.io/scroll-timeline/dist/scroll-timeline.js';
+
+const counter = document.querySelector('main');
+const slashes = document.querySelectorAll('.slash');
+
+slashes.forEach(slash => {
+  slash.animate({
+    transform: ['rotateZ(0)', 'rotateZ(4turn)'] },
+  {
+    duration: 1000,
+    fill: 'both',
+    timeline: new ScrollTimeline({
+      scrollSource: counter,
+      fill: 'both' }) });
+
+
+});
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>

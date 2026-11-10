@@ -1,0 +1,61 @@
+{
+  "source_id": "codepen:bramus/xxvgzol",
+  "author": "bramus",
+  "pen_id": "xxvgzoL",
+  "url": "https://codepen.io/bramus/pen/xxvgzoL",
+  "acquisition": "cdpn_fullpage",
+  "acquisition_url": "https://cdpn.io/bramus/fullpage/xxvgzoL",
+  "retrieved_at": "2026-10-03T15:29:19+00:00",
+  "license": "MIT (CodePen public pen default)",
+  "candidate_target_tier": "T4",
+  "candidate_found_via": "websearch-2026-10-03",
+  "fetch_status": "ok",
+  "title": "Scroll-driven animated card stack with scroll snap events (Vanilla)",
+  "canonical_url": "https://codepen.io/bramus/pen/xxvgzoL",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "15b82e76cb92e3c0f3e46d7e0591382285346003312dd9090feabd7f0eeb3925",
+  "source_html_sha256": "00b85b9a245bae304f07d4dffdf3b75d3cbe6de55d208867ceb159cc306c3d70",
+  "analysis": {
+    "js": {
+      "has_js": true,
+      "inline_js_chars": 1270,
+      "external_scripts": [
+        "https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"
+      ],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": true
+    },
+    "css": {
+      "has_animation_timeline": true,
+      "has_animation_range": true,
+      "has_view_timeline": true,
+      "has_scroll_timeline": true,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 5,
+      "scroll_snap": true,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": true,
+      "checked_selector": true,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": true,
+      "clip_path": false,
+      "css_counter": false,
+      "media_query": true
+    },
+    "external_stylesheets": [],
+    "css_imports": [],
+    "css_chars": 8862,
+    "element_count": 46,
+    "html_chars": 14003
+  }
+}

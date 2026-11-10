@@ -1,0 +1,57 @@
+key,target,title,js_chars,ext_js,css_chars,elements,keyframes,hover,ext_css,features
+airen__yabVzR,T1,Isometric Layout With CSS 3D Transforms,0,0,3901,74,4,3,1,transform_3d media_query
+alba_alba__KKpLLRP,T4,Smooth Snap Scroll without Scrollbar,0,0,2202,23,0,2,1,scroll_snap
+alchatti__NOdzLO,T3,Responsive Photo Gallery  Grid with Lightbox and - No Script,34,1,3231,164,0,5,0,target_selector media_query
+amithjayapraban__BaxNMXK,T4,Scroll snap,0,0,261,9,0,0,0,scroll_snap
+argyleink__BaXZOpB,T4,Snap on snap!,320,1,2326,29,1,0,1,scroll_snap container_query media_query has_animation_timeline
+argyleink__JjqVzxq,T4,scroll-state(snapped) triggered captions - CSS container que,0,0,2094,44,0,0,3,scroll_snap scroll_state_query container_query has_selector checked_selector media_query
+argyleink__PoMJvXN,T4,Scrollable Visual Affordances with Scroll State Queries,0,0,5400,90,0,0,0,scroll_state_query container_query at_property media_query
+argyleink__XWdNYaY,T5,Counter with Scroll Timeline and Snap Points,435,1,1234,52,0,0,0,scroll_snap clip_path
+bramus__xxvgzoL,T4,Scroll-driven animated card stack with scroll snap events (V,1270,1,8862,46,5,0,0,scroll_snap has_selector checked_selector transform_3d media_query has_animation_timeline
+cb2307__XYxyeY,T1,Netflix Clone,0,2,4104,162,0,5,0,media_query
+davorsuljic__vYgqKWe,T4,CSS Only - Smooth Scrolling Sticky ScrollSpy Navigation,0,0,3416,80,0,1,0,
+dorelidan__OOvjZW,T4,CSS-only mobile UI concept v. 2,0,0,7215,65,0,0,0,checked_selector
+ecemgo__GRPBYpb,T1,Responsive Landing Page & Multiple Modals,829,3,7373,131,1,5,1,media_query
+Event_Horizon__XWMyOEy,T4,Scroll Snap + Parallax - CSS Only,0,0,1985,32,0,0,1,scroll_snap transform_3d
+giana__BabdgjB,T5,CSS scroll-driven scroll-snapping animations,0,1,4310,105,6,0,1,scroll_snap has_selector checked_selector has_animation_timeline
+Guilh__OVEZgN,T4,Horizontal CSS Scroll Snap Points,0,0,221,5,0,0,0,scroll_snap
+havardob__KKgEJep,T4,Shrinking header on scroll without Javascript,31,1,2663,29,0,2,2,media_query
+hexagoncircle__LYMweej,T5,Sticky page header shadow on scroll [CSS scroll-driven anima,240,1,1913,17,1,0,1,has_animation_timeline
+huijing__wOXzNx,T1,HTML periodical table (built with CSS grid),351,1,3149,1151,0,0,2,target_selector media_query
+jakob-e__yOapOm,T1,CSS Grid Poster,0,0,13156,91,2,2,0,css_counter media_query
+jenning__jOVvRmz,T4,Pure CSS scroll-snap carousel,30,1,2331,28,1,0,2,scroll_snap
+jh3y__PovoorJ,T4,CSS Scroll-Driven Image Carousel,6648,1,7400,19,4,1,2,scroll_snap transform_3d has_animation_timeline
+jh3y__wBBOdNv,T4,CSS @container scroll-state() faux PiP video 🧑‍🍳,1796,1,11069,53,2,1,2,scroll_state_query container_query has_selector has_animation_timeline
+jh3y__ZEqNVxx,T4,CSS Scroll Driven Animation Cover Flow [Infinite Edition 🚀],2867,1,4863,19,6,1,1,scroll_snap has_selector checked_selector transform_3d has_animation_timeline
+jinox__zYqjWMQ,T1,CSS Only - Circular Percentage Chart,38,1,6693,22,8,0,2,
+Jo-Mardis__wvNvjaq,T4,CSS Only Nav Indicator with Scroll Driven Animation && Ancho,0,0,6926,61,14,1,1,scroll_snap anchor_positioning has_animation_timeline
+joaosousa__vyMZBw,T3,Zoom image gallery - Lightbox - CSS only,0,0,3107,168,1,2,1,target_selector transform_3d media_query
+kevinpowell__GgKrzNL,T5,css-only scrollspy table of contents,0,0,1507,62,3,0,0,has_animation_timeline
+letsbleachthis__zewKYE,T1,"Knitwear Landing Page (CSS Grid, Flexbox, AOS Scrolling Anim",98,2,10910,85,0,5,2,media_query
+Lumore__LYLroJG,T4,Scroll snap carousel (css only),0,0,982,11,0,0,1,scroll_snap
+mattfrankjames__LxByjJ,T1,Newspaper layout with Grid,0,0,3056,90,0,0,1,
+mobalti__YzBWgpW,T5,Hero Section Sticky Slides with Scroll-driven Animations - O,0,0,3097,33,3,1,4,scroll_snap media_query has_animation_timeline
+mothesawy__abmKKKZ,T1,Hills | Pure HTML and CSS animated illustration,153,1,36236,983,10,0,0,
+mrdanielschwarz__yyyeWep,T4,::scroll-marker demo (pagination),0,0,1629,9,0,0,0,scroll_marker anchor_positioning target_selector css_counter
+mukhtards__bWOVPX,T1,CSS Grid Magazine Style Layout,0,0,2279,83,0,0,1,media_query
+mvaneijgen__vLgvJq,T4,Vertical scroll-snap fullpage CSS only,0,1,170,4,0,0,1,scroll_snap
+omerko96__wvXgQZK,T1,Spotify Clone with HTML & CSS,0,1,4609,213,0,11,0,
+paulnoble__gOVPedz,T4,Scroll-driven animated card stack with scroll snap events.,506,1,18013,43,22,0,0,scroll_snap has_selector checked_selector transform_3d media_query has_animation_timeline
+raykuo__qXQLbm,T1,Pure CSS 3D isometric Pixel Art - Mario wave animation,0,0,4931,87,2,0,2,transform_3d
+raykuo__VzVQLg,T1,Pure CSS 3D isometric Wave animation,0,0,2571,46,2,0,2,transform_3d
+scootman__wrNdYP,T1,Exploded isometric via CSS 3D transforms,800,3,26890,52,3,64,0,checked_selector transform_3d media_query
+SENSENEL__mdVgZgZ,T4,Simple pure CSS Image Gallery Lightbox and Carousel,177,1,1702,35,0,0,0,scroll_snap
+smashingmag__raeooxY,T4,"Sticky headers with scroll-state query, checking if the stic",0,0,4366,37,0,1,1,scroll_state_query container_query media_query
+StijnDeWitt__LryNxa,T4,Pure CSS drop shadow on scroll,0,0,2060,26,0,0,0,media_query
+una__dPYXKVe,T4,spec demo: scroll-target-group,0,0,446,12,0,0,0,target_selector
+una__myJOjQx,T4,Trip Overview Carousel with scroll-state queries - DARK and ,44,1,5247,64,0,2,2,scroll_snap scroll_state_query scroll_marker container_query anchor_positioning target_selector css_counter
+utilitybend__XWLQPOe,T4,"Sticky headers with scroll-state query, checking if the stic",0,0,4366,37,0,1,1,scroll_state_query container_query media_query
+utilitybend__ZYOKRXV,T4,CSS Scroll-state: Is it scrollable?,0,0,2871,70,0,0,1,scroll_state_query container_query
+violetgaze__QjXaVJ,T3,CSS Only Lightbox with buttons,42,1,1852,40,0,1,0,target_selector
+web-dot-dev__azoGpGg,T4,StickyDesperado State Query,0,0,1377,34,0,0,0,scroll_state_query container_query
+web-dot-dev__GgKdryj,T4,Sticky State Queries - Nav Shadow On Stuck,0,0,2793,25,1,0,1,scroll_state_query container_query media_query has_animation_timeline
+web-dot-dev__OPLZWBj,T4,Scrollable Visual Affordances with Scroll State Queries,0,0,5351,90,0,0,0,scroll_state_query container_query at_property media_query
+web-dot-dev__pvzVRaK,T4,Sticky Slide State Query (experimental),0,0,1120,34,0,0,1,scroll_state_query container_query
+xdesro__dVxpgN,T1,Pure CSS Isometric Towers,152,2,14476,139,0,0,3,transform_3d
+yonsankm__Baddvrp,T4,Scroll snap carousel (css only),0,0,982,4,0,0,1,scroll_snap
+zumwalt__AaRLJK,T1,Vignette - Pure CSS Illustration,0,0,6331,45,3,0,2,

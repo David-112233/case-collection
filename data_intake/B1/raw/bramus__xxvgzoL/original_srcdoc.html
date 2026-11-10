@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>Scroll-driven animated card stack with scroll snap events (Vanilla)</title>
+
+    <link rel="canonical" href="https://codepen.io/bramus/pen/xxvgzoL">
+  
+  
+  
+  
+<style>
+/*
+
+This CodePen is a reworked version of https://codepen.io/paulnoble/pen/gOVPedz.
+
+Differences:
+- No Sass
+- Reuses the same active and inactive keyframes on all cards, powered by View-Timeline + animation-range
+- Reworked snapChange logic to use event.snapTargetInline, falling back to IntersectionObserver if no support
+
+See https://x.com/bramus/status/1843564964637995386 or https://front-end.social/@bramus/113270818264746037 for details
+
+*/
+
+@layer scroll-driven-animations {	
+	html {
+		timeline-scope: --scroll-timeline, --si-1, --si-2, --si-3, --si-4, --si-5;
+	}
+
+	@layer background-colors {
+		@keyframes background-colors {
+			0% {
+				background-color: #471703;
+			}
+			25% {
+				background-color: #282624;
+			}
+			50% {
+				background-color: #212e14;
+			}
+			75% {
+				background-color: #184152;
+			}
+			100% {
+				background-color: #162432;
+			}
+		}
+
+		.scroller {
+			scroll-timeline: --scroll-timeline x;
+		}
+		
+		body, .card::before {
+			animation: background-colors linear both;
+			animation-timeline: --scroll-timeline;
+		}
+	}
+	
+	@layer cards {
+
+		/* The cards are linked to the scroll-item entering/exiting the scrollport, so we create a view-timelime for each scroll-item */
+		.scroller {
+			.scroll-item {
+				&:nth-child(1) { view-timeline: --si-1 x; }
+				&:nth-child(2) { view-timeline: --si-2 x; }
+				&:nth-child(3) { view-timeline: --si-3 x; }
+				&:nth-child(4) { view-timeline: --si-4 x; }
+				&:nth-child(5) { view-timeline: --si-5 x; }
+			}
+		}
+		
+		/* Fade out the card images when not at the center */
+		@layer card-image {
+			@keyframes opacity {
+				0% {
+					opacity: 0.1111111111;
+				}
+				25% {
+					opacity: 0.3333333333;
+				}
+				50% {
+					opacity: 1;
+				}
+				75% {
+					opacity: 0.3333333333;
+				}
+				100% {
+					opacity: 0.1111111111;
+				}
+			}
+
+			.card-stack {
+				.card {
+					img {
+						animation: opacity linear both;
+						animation-range: cover -100% cover 200%;
+					}
+
+					&:nth-child(1) img { animation-timeline: --si-1; }
+					&:nth-child(2) img { animation-timeline: --si-2; }
+					&:nth-child(3) img { animation-timeline: --si-3; }
+					&:nth-child(4) img { animation-timeline: --si-4; }
+					&:nth-child(5) img { animation-timeline: --si-5; }
+				}
+			}
+		}
+		
+		/* Fan out inactive the cards */
+		@layer card-3d {
+			@keyframes card--inactive {
+				0% {
+					transform: translateX(19%) rotateY(0) rotateZ(8deg) rotateX(0) translateZ(-180px);
+				}
+				37.5% {
+					transform: translateX(11%) rotateY(0) rotateZ(6deg) rotateX(0) translateZ(-160px);
+				}
+				50% {
+					transform: translateX(0) rotateY(0) rotateZ(0) rotateX(0) translateZ(0);
+				}
+				62.5% {
+					transform: translateX(-11%) rotateY(0) rotateZ(-6deg) rotateX(0) translateZ(-160px);
+				}
+				100% {
+					transform: translateX(-19%) rotateY(0) rotateZ(-8deg) rotateX(0) translateZ(-180px);
+				}
+			}
+			.card-stack {
+				.card {
+					animation: card--inactive linear both;
+					animation-range: cover -100% cover 200%;
+
+					&:nth-child(1) { animation-timeline: --si-1; }
+					&:nth-child(2) { animation-timeline: --si-2; }
+					&:nth-child(3) { animation-timeline: --si-3; }
+					&:nth-child(4) { animation-timeline: --si-4; }
+					&:nth-child(5) { animation-timeline: --si-5; }
+				}
+			}
+
+			/* The active card needs to move in 3D */
+			@keyframes card--active {
+				0% {
+					transform: translateX(19%) rotateY(0) rotateZ(8deg) rotateX(0) translateZ(-180px);
+				}
+				25% {
+					transform: translateX(11%) rotateY(0) rotateZ(6deg) rotateX(0) translateZ(-160px);
+				}
+				37.5% {
+					transform: translateX(116%) rotateY(24deg) rotateZ(0) rotateX(2deg) translateZ(-156px);
+				}
+				50% {
+					transform: translateX(0) rotateY(0) rotateZ(0) rotateX(0) translateZ(0);
+				}
+				62.5% {
+					transform: translateX(-116%) rotateY(-24deg) rotateZ(0) rotateX(2deg) translateZ(-156px);
+				}
+				75% {
+					transform: translateX(-11%) rotateY(0) rotateZ(-6deg) rotateX(0) translateZ(-160px);
+				}
+				100% {
+					transform: translateX(-19%) rotateY(0) rotateZ(-8deg) rotateX(0) translateZ(-180px);
+				}
+			}
+			main[data-active-index="0"] .card:nth-child(1),
+			main[data-active-index="1"] .card:nth-child(2),
+			main[data-active-index="2"] .card:nth-child(3),
+			main[data-active-index="3"] .card:nth-child(4),
+			main[data-active-index="4"] .card:nth-child(5) {
+				animation-name: card--active;
+				animation-range: cover;
+			}
+			
+			/* When dragging the active card, 3D-rotate the entire stack */
+			@keyframes card-stack {
+				25% {
+					transform: rotateY(0deg);
+				}
+				37.5% {
+					transform: rotateY(24deg) translateZ(24deg);
+				}
+				37.5% {
+					transform: rotateY(24deg);
+				}
+				50% {
+					transform: rotateY(0deg);
+				}
+				62.5% {
+					transform: rotateY(24deg) translateZ(24deg);
+				}
+				62.5% {
+					transform: rotateY(-24deg);
+				}
+				75% {
+					transform: rotateY(0deg);
+				}
+			}
+			
+			.card-stack {
+				animation: card-stack linear forwards;
+				animation-range: cover;
+			}
+			
+			[data-active-index="0"] .card-stack { animation-timeline: --si-1; }
+			[data-active-index="1"] .card-stack { animation-timeline: --si-2; }
+			[data-active-index="2"] .card-stack { animation-timeline: --si-3; }
+			[data-active-index="3"] .card-stack { animation-timeline: --si-4; }
+			[data-active-index="4"] .card-stack { animation-timeline: --si-5; }
+		}
+	}
+	
+}
+
+
+@layer layout {
+	:root {
+		font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+		line-height: 1.5;
+		font-weight: 400;
+		--dim-card-width: 300px;
+		--dim-card-height: 400px;
+		--dim-card-border-radius: 16px;
+		--box-shadow-card: 0 1px 12px rgba(0, 0, 0, 0.4);
+	}
+	
+	html {
+		overscroll-behavior-x: none;
+		overflow: auto; /* Fix for https://issues.chromium.org/issues/324559811 */
+	}
+
+	::-webkit-scrollbar {
+		display: none;
+	}
+
+	* {
+		box-sizing: border-box;
+	}
+
+	body,
+	html {
+		margin: 0;
+		padding: 0;
+	}
+
+	body {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: #ddd;
+		height: 100vh;
+		min-height: 800px;
+	}
+
+	main {
+		width: 800px;
+		height: 600px;
+		perspective: 1000px;
+		transform-style: preserve-3d;
+	}
+
+	.scroller {
+		width: 100%;
+		height: 100%;
+		overflow: auto;
+		white-space: nowrap;
+		display: flex;
+		scroll-snap-type: x mandatory;
+	}
+
+	.scroll-item {
+		flex: 0 0 100%;
+		height: 100%;
+		scroll-snap-align: start;
+	}
+
+	[data-debug="true"] .scroll-item {
+		outline: 1px dashed magenta;
+	}
+
+	.card-stack {
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		transform-style: preserve-3d;
+		pointer-events: none;
+	}
+
+	.card {
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		margin: auto;
+		width: var(--dim-card-width);
+		height: var(--dim-card-height);
+		border-radius: var(--dim-card-border-radius);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transform-style: preserve-3d;
+		overflow: hidden;
+		background-color: rgba(255, 255, 255, 0.8);
+		box-shadow: var(--box-shadow-card);
+	}
+
+	.card img {
+		position: absolute;
+		object-fit: cover;
+		width: 100%;
+		z-index: 1;
+		height: 100%;
+	}
+
+	.card::before {
+		position: absolute;
+		top: -4px;
+		bottom: -4px;
+		right: -4px;
+		left: -4px;
+		content: "";
+	}
+}
+
+@layer warning {
+	.warning {
+		position: absolute;
+		bottom: 24px;
+		left: 0;
+		right: 0;
+		text-align: center;
+		white-space: nowrap;
+		opacity: 0;
+		transition: 300ms opacity;
+
+		span {
+			display: inline-flex;
+			font-size: 12px;
+			align-items: center;
+			color: white;
+			padding: 6px 12px;
+			border-radius: 14px;
+			font-weight: 500;
+			background-color: rgba(0, 0, 0, 0.66);
+		}
+	}
+
+	.warning.show {
+		opacity: 1;
+	}
+
+	.explainer {
+		position: absolute;
+		right: 12px;
+		top: 12px;
+		background-color: transparent;
+		width: 300px;
+		color: white;
+		padding: 24px;
+		padding-right: 40px;
+		display: none;
+		z-index: 9;
+	}
+
+	.explainer input, .explainer div {
+		position: absolute;
+		top: 8px;
+		right: 8px;
+		appearance: none;
+		width: 30px;
+		height: 30px;
+	}
+
+	.explainer div {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		pointer-events: none;
+		border-radius: 50%;
+	}
+
+	.explainer div svg {
+		width: 24px;
+		opacity: 0.5;
+	}
+
+	.explainer:has(input:checked) div::before {
+		content: '×';
+		font-size: 20px;
+	}
+	.explainer:has(input:checked) div svg {
+		opacity: 0;
+	}
+
+	.explainer p {
+		display: none;
+	}
+
+	.explainer:has(input:checked) p {
+		display: block;
+	}
+
+	.explainer:has(input:checked) {
+		background-color: black;
+	}
+
+	.explainer a {
+		color: inherit;
+		font-family: inherit;
+	}
+
+	.explainer p {
+		font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+		font-size: 12px;
+		line-height: 18px;
+	}
+
+	.explainer p ~ p {
+		margin-top: 1em;
+	}
+
+	@media (min-width: 768px) {
+		.explainer {
+			display: block;
+		}
+
+		.device {
+			border-radius: 40px;
+			box-shadow: 0 0 0 6px rgb(20, 20, 20);
+		}
+	}
+
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <main data-active-index="0" data-debug="false">
+  <div class="card-stack">
+    <div class="card"><img src="https://assets.codepen.io/89905/card-stack-demo-05.jpg" /></div>
+    <div class="card"><img src="https://assets.codepen.io/89905/card-stack-demo-04.jpg" /></div>
+    <div class="card"><img src="https://assets.codepen.io/89905/card-stack-demo-06.jpg" /></div>
+    <div class="card"><img src="https://assets.codepen.io/89905/card-stack-demo-07.jpg" /></div>
+    <div class="card"><img src="https://assets.codepen.io/89905/card-stack-demo-08.jpg" /></div>
+  </div>
+  <div class="scroller">
+    <div class="scroll-item"></div>
+    <div class="scroll-item"></div>
+    <div class="scroll-item"></div>
+    <div class="scroll-item"></div>
+    <div class="scroll-item"></div>
+  </div>
+</main>
+
+<!-- Everything below this line is for the demo only -->
+<div class="warning">
+  <span>Mouse drag not supported. Use responsive mode or a touch pad to scroll horizontally.<br>Got a mousewheel? Hold shift while scrolling to scroll horizontally.</span>
+</div>
+
+<div class="explainer">
+  <input type="checkbox"></input>
+  <div>
+    <svg id="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><defs><style>.cls-1{fill:none;}</style></defs><title>help</title><path d="M16,2A14,14,0,1,0,30,16,14,14,0,0,0,16,2Zm0,26A12,12,0,1,1,28,16,12,12,0,0,1,16,28Z" fill="white"/><circle cx="16" cy="23.5" r="1.5" fill="white"/><path d="M17,8H15.5A4.49,4.49,0,0,0,11,12.5V13h2v-.5A2.5,2.5,0,0,1,15.5,10H17a2.5,2.5,0,0,1,0,5H15v4.5h2V17a4.5,4.5,0,0,0,0-9Z" fill="white"/></svg>
+  </div>
+  <p>Adapated from <a href="https://x.com/paul_uiux" target="_top">@paul_uiux</a>’s <a href="https://codepen.io/paulnoble/pen/gOVPedz" target="_top">CodePen demo</a>, which was inspired by the original <a href="https://x.com/nasm423/status/1795133452016054401" target="_top">Nate Smith</a> demo</p>
+  <p>
+    Demo of CSS <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timeline/scroll#browser_compatibility" target="_top">scroll()</a> function with <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-snap-type" target="_top">scroll-snap</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timeline" target="_top">animation-timeline</a>, and <a href="https://developer.chrome.com/blog/scroll-snap-events" target="_top">scroll snap events</a>.
+  </p>
+  <p>
+    Requires Chrome 129+. Try in Chrome on Android or in Chrome Desktop responsive mode (use <a href="https://codepen.io/bramus/debug/xxvgzoL" target="_top">debug view</a>) or with a trackpad for best scrolling experience.
+  </p>
+  <p><a href="https://x.com/bramus" target="_top">@bramus</a></p>
+</div>
+
+<!-- Warn pointer down -->
+<script>
+ const warn = () => {
+   document.querySelector('.warning').classList.toggle('show');
+   setTimeout(() => document.querySelector('.warning').classList.toggle('show'), 3000);
+ };
+  document.querySelector('main').addEventListener('mousedown', warn);
+</script>
+  
+    <script id="rendered-js" >
+const $main = document.querySelector("main");
+const $scroller = document.querySelector(".scroller");
+const $scrollItems = document.querySelectorAll(".scroll-item");
+
+$scroller.addEventListener("scrollsnapchange", event => {
+  $main.dataset.activeIndex = Array.from($scrollItems).indexOf(event.snapTargetInline);
+});
+
+// snapChange fallback for browsers with no support
+if (typeof SnapEvent === "undefined") {
+  const observer = new IntersectionObserver((entries, showOnScroll) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+      } else {
+        entry.target.classList.remove('show');
+      }
+
+      const snappedElement = document.querySelector(".show");
+      if (snappedElement) {
+        $main.dataset.activeIndex = Array.from($scrollItems).indexOf(snappedElement);
+      }
+
+    });
+  }, {
+    root: $scroller,
+    rootMargin: '0px',
+    threshold: 1 });
+
+
+  $scrollItems.forEach($scrollItem => observer.observe($scrollItem));
+}
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>

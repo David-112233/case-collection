@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>CSS-only mobile UI concept v. 2</title>
+
+    <link rel="canonical" href="https://codepen.io/dorelidan/pen/OOvjZW">
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,500,300' rel='stylesheet' type='text/css'>
+<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+  
+  
+  
+<style>
+body, html {
+  height: 100%;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  font-family: "Roboto", "Helvetica Neue", "Helvetica", "Arial", "sans-serif";
+  color: #333;
+}
+
+a {
+  color: #333;
+}
+
+p {
+  font-size: 12px;
+  line-height: 18px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 40px;
+}
+
+section {
+  margin-bottom: 40px;
+}
+
+h2 {
+  font-size: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-weight: 300;
+  margin-bottom: 10px;
+}
+
+li {
+  list-style: none;
+}
+
+.phone {
+  margin: 0 auto;
+  width: 395px;
+  height: 667px;
+  padding: 50px 0 80px;
+  background: #ccc;
+  border-radius: 25px;
+  position: relative;
+}
+.phone__screen {
+  margin: 0 auto;
+  height: 667px;
+  background: #fff;
+  position: relative;
+  overflow: hidden;
+  background: #f2f2f2;
+  width: 375px;
+}
+.phone:after, .phone:before {
+  position: absolute;
+  background: #999;
+  content: "";
+  display: block;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+.phone:after {
+  top: 20px;
+  height: 8px;
+  width: 60px;
+  border-radius: 4px;
+}
+.phone:before {
+  width: 40px;
+  height: 40px;
+  bottom: 20px;
+  border-radius: 100%;
+}
+
+.content {
+  position: relative;
+  z-index: 3;
+  height: 667px;
+  padding: 54px 0 20px;
+  box-sizing: border-box;
+  box-shadow: -3px 0 5px rgba(0, 0, 0, 0.1);
+  background: #f2f2f2;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 4;
+}
+
+.nav {
+  width: 0;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 12px;
+  line-height: 20px;
+  z-index: 2;
+  transition: width 0s linear 0.3s;
+}
+.nav a {
+  display: block;
+  padding: 12px 20px 12px;
+}
+.nav li:first-child {
+  margin-top: 44px;
+}
+.nav ul {
+  width: 220px;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  position: absolute;
+  left: 0;
+  top: 0;
+  /* transform: translate3d(-220px, 0, 0); */
+  background: #fff;
+}
+
+.content, .header {
+  transition: transform 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+  transform: translate3d(0px, 0, 0);
+  backface-visiblity: hidden;
+}
+
+#show-nav:checked + .phone__screen .nav ul, #show-nav:checked + .phone__screen .header, #show-nav:checked + .phone__screen .content {
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.content div {
+  position: relative;
+}
+
+.trigger {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  padding: 17px 12px;
+  display: block;
+  z-index: 10;
+  background: transparent;
+}
+.trigger a {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+.trigger a:first-child {
+  display: block;
+}
+.trigger i {
+  display: block;
+  height: 2px;
+  width: 20px;
+  background: #fff;
+  margin: 3px 0 4px;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.title {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-weight: 300;
+  font-size: 16px;
+  height: 54px;
+  line-height: 54px;
+  /* text-transform: uppercase; */
+  letter-spacing: 0.01em;
+  background: #03a9f4;
+  color: #fff;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
+}
+
+.place {
+  width: 160px;
+  height: 160px;
+  background: #fff;
+  line-height: 160px;
+  text-align: center;
+}
+
+#show-nav:checked + .phone__screen #nav {
+  transition: width 0s linear 0s;
+  width: 220px;
+}
+#show-nav:checked + .phone__screen #nav ul {
+  transform: none;
+}
+#show-nav:checked + .phone__screen .header, #show-nav:checked + .phone__screen .content {
+  transform: translate3d(220px, 0, 0);
+}
+#show-nav:checked + .phone__screen .header .content__closer, #show-nav:checked + .phone__screen .content .content__closer {
+  display: block;
+}
+#show-nav:checked + .phone__screen .header .trigger__closer {
+  display: block;
+}
+#show-nav:checked + .phone__screen .header i:first-child {
+  transform: translate3d(0, 6px, 0) rotate(45deg);
+}
+#show-nav:checked + .phone__screen .header i:first-child + i {
+  opacity: 0;
+}
+#show-nav:checked + .phone__screen .header i:first-child + i + i {
+  transform: translate3d(0, -6px, 0) rotate(-45deg);
+}
+
+.horizontal-nav {
+  font-size: 12px;
+  line-height: 20px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+.horizontal-nav__items {
+  white-space: nowrap;
+}
+.horizontal-nav--submenu {
+  background: #90CAF9;
+  margin-top: 0;
+}
+.horizontal-nav li {
+  display: inline-block;
+  margin-left: 20px;
+}
+.horizontal-nav li + li {
+  margin-left: 0;
+}
+.horizontal-nav li:last-child {
+  margin-right: 20px;
+}
+.horizontal-nav a {
+  display: inline-block;
+  padding: 16px 16px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.toggle {
+  width: 50px;
+  height: 30px;
+  margin: 10px 0;
+  background: #fff;
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2) inset; */
+  display: inline-block;
+  vertical-align: top;
+  border-radius: 15px;
+  overflow: hidden;
+  position: relative;
+  transition: background 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.toggle:after {
+  content: "";
+  width: 22px;
+  position: relative;
+  z-index: 2;
+  height: 22px;
+  margin: 4px;
+  background: #fff;
+  border-radius: 100%;
+  display: block;
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform: translate3d(20px, 0, 0);
+}
+.toggle__label {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 0;
+  transition: opacity 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), height 0s linear 0.3s;
+  opacity: 0;
+  cursor: pointer;
+}
+
+input[type=radio],
+input[type=checkbox] {
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+label {
+  cursor: pointer;
+}
+
+#show-mobile:checked + input + .phone .toggle__label--off {
+  opacity: 1;
+  height: 100%;
+  transition: opacity 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), height 0s linear 0s;
+}
+#show-mobile:checked + input + .phone .toggle {
+  background: #8BC34A;
+}
+
+#hide-mobile:checked + .phone {
+  background: transparent;
+  padding: 0;
+  width: 100%;
+  max-width: 375px;
+  height: 100%;
+  /*  .phone__screen {
+      width: auto;
+      max-width: 375px;
+    }*/
+}
+#hide-mobile:checked + .phone .toggle__label--on {
+  opacity: 1;
+  height: 100%;
+  transition: opacity 0.3s ease, height 0s linear 0s;
+}
+#hide-mobile:checked + .phone .toggle {
+  background: #ccc;
+}
+#hide-mobile:checked + .phone .toggle:after {
+  transform: translate3d(0px, 0, 0);
+}
+#hide-mobile:checked + .phone .phone__screen, #hide-mobile:checked + .phone .content {
+  height: 100%;
+  max-height: 667px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+#hide-mobile:checked + .phone:before {
+  opacity: 0;
+}
+
+.toggle-ui {
+  padding: 0 20px;
+  background: #fff;
+  font-size: 12px;
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+.toggle-ui dd {
+  width: 50px;
+  float: right;
+  margin: 3px 0;
+}
+.toggle-ui dt {
+  padding: 14px 0;
+  width: 150px;
+  float: left;
+}
+.toggle-ui small {
+  color: #999;
+}
+
+/*.phone, .phone__screen, .phone:before {
+disabling the transtion, doesn't run very smooth
+  transition: all 0.3s $ease-out;
+}
+*/
+.phone__screen {
+  width: 375px;
+  margin: 0 auto;
+}
+
+.content__closer,
+.trigger__closer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  z-index: 12;
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <input type="radio" id="show-mobile" name="mobile" checked>
+<input type="radio" id="hide-mobile" name="mobile">
+<div class="phone">
+  <input type="checkbox" id="show-nav" name="show-nav">
+  <div class="phone__screen">
+    <nav id="nav" class="nav">
+      <ul>
+        <li><a href="#content">Home</a></li>
+        <li><a href="#content">About</a></li>
+        <li><a href="#content">Sign in</a></li>
+        <li><a href="#content">Contact</a></li>
+      </ul>
+    </nav>
+    <header class="header">
+      <label for="show-nav" class="trigger">
+        <div>
+          <i></i><i></i><i></i>
+        </div>
+      </label>
+      <h1 class="title">CSS-only Mobile UI Concept</h1>
+    </header>
+    <div class="content" id="content">
+      <div class="horizontal-nav horizontal-nav--submenu">
+        <ul class="horizontal-nav__items">
+          <li><a href="#1">Subnav item 1</a></li>
+          <li><a href="#2">Subnav item 2</a></li>
+          <li><a href="#3">Subnav item 3</a></li>
+          <li><a href="#4">Long Subnav item 4</a></li>
+          <li><a href="#5">Long Subnav item 5</a></li>
+        </ul>
+      </div>
+      
+      <div>
+   
+        <dl class="toggle-ui">
+          <dt>
+          Show phone mockup
+          <br>
+          <small>(Hide it on mobile phones)</small>
+          </dt>
+          <dd>
+          <span class="toggle">
+            <label class="toggle__label toggle__label--on" for="show-mobile"><span></span></label>
+            <label class="toggle__label toggle__label--off" for="hide-mobile"><span></span></label>
+          </span>
+          </dd>
+        </dl>
+   
+        
+    
+        <h2>Info</h2>
+        <p>The 'screen' width matches that of the iPhone 6. While this is all CSS-only I would rather rely on JS for toggling the nav in a production build.</p>
+         
+       
+        <h2>A gallery</h2>
+        
+        <div class="horizontal-nav">
+          <ul class="horizontal-nav__items">
+            <li><div class="place">1</div></li>
+            <li><div class="place">2</div></li>
+            <li><div class="place">3</div></li>
+            <li><div class="place">4</div></li>
+          </ul>
+        </div>
+
+        <p>You can freely change the size of the elements!</p>
+
+        <h2>Heading</h2>
+        <p>Lumbersexual tilde salvia, umami banjo fingerstache photo booth cred slow-carb cardigan quinoa keffiyeh High Life before they sold out art party. Freegan Bushwick Thundercats hoodie retro.</p>
+        
+        <h2>Heading 2</h2>
+        <p>Lumbersexual tilde salvia, umami banjo fingerstache photo booth cred slow-carb cardigan quinoa keffiyeh High Life before they sold out art party. Freegan Bushwick Thundercats hoodie retro.</p>
+        
+        <label class="content__closer" for="show-nav"></label>
+        
+      </div>
+
+    </div>
+  </div>
+</div>
+  
+  
+  
+</body>
+
+</html>

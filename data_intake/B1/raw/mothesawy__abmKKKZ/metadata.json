@@ -1,0 +1,61 @@
+{
+  "source_id": "codepen:mothesawy/abmkkkz",
+  "author": "mothesawy",
+  "pen_id": "abmKKKZ",
+  "url": "https://codepen.io/mothesawy/pen/abmKKKZ",
+  "acquisition": "cdpn_fullpage",
+  "acquisition_url": "https://cdpn.io/mothesawy/fullpage/abmKKKZ",
+  "retrieved_at": "2026-10-03T15:29:37+00:00",
+  "license": "MIT (CodePen public pen default)",
+  "candidate_target_tier": "T1",
+  "candidate_found_via": "websearch-2026-10-03",
+  "fetch_status": "ok",
+  "title": "Hills | Pure HTML and CSS animated illustration",
+  "canonical_url": "https://codepen.io/mothesawy/pen/abmKKKZ",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "c40d7bef6bf883549535e44103ff8f197fac34cd00160b283045bf48a9ba1556",
+  "source_html_sha256": "6339514f2f9b7f7ed3b422268199912f24988e9fc0081d0ad9dcdec39eec1ac2",
+  "analysis": {
+    "js": {
+      "has_js": true,
+      "inline_js_chars": 153,
+      "external_scripts": [
+        "https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"
+      ],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 10,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": false,
+      "clip_path": false,
+      "css_counter": false,
+      "media_query": false
+    },
+    "external_stylesheets": [],
+    "css_imports": [],
+    "css_chars": 36236,
+    "element_count": 983,
+    "html_chars": 100371
+  }
+}

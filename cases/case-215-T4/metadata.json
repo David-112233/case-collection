@@ -1,0 +1,33 @@
+{
+  "case_id": "case-215-T4",
+  "batch_id": "DATA-002-B1",
+  "source_id": "codepen:utilitybend/zyokrxv",
+  "title": "CSS Scroll-state: Is it scrollable?",
+  "author": "utilitybend",
+  "url": "https://codepen.io/utilitybend/pen/ZYOKRXV",
+  "license": "MIT (CodePen public pen default)",
+  "acquisition": "cdpn_fullpage",
+  "acquisition_url": "https://cdpn.io/utilitybend/fullpage/ZYOKRXV",
+  "retrieved_at": "2026-10-18T06:10:57+00:00",
+  "original_srcdoc_sha256": "940cd58aef05aa2f65d46aee8b21e2689ee5e69232b44aaca96d695b9b0f5ee1",
+  "source_original_sha256": "21ba7109fe1229755813363f7f6ec012983e50216a2eb1bd4e0b19889d06be31",
+  "source_html_sha256": "21ba7109fe1229755813363f7f6ec012983e50216a2eb1bd4e0b19889d06be31",
+  "provenance": "original_minus_nonfunctional_js",
+  "js_policy": "remove",
+  "js_changes": "removed: nothing functional (no scripts present)",
+  "external_dependencies": {
+    "stylesheets": [],
+    "css_imports": [
+      "https://fonts.googleapis.com/css2?family=Rokkitt:wght@700&family=Lora:wght@400"
+    ],
+    "note": "Reference material only; input.json/ground_truth.html must not load external resources."
+  },
+  "intake_date": "2026-10-18",
+  "decisions": [
+    "DEC-031",
+    "DEC-032",
+    "DEC-033",
+    "DEC-034",
+    "DEC-035"
+  ]
+}

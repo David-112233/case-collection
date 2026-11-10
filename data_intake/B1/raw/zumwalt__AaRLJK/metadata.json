@@ -1,0 +1,63 @@
+{
+  "source_id": "codepen:zumwalt/aarljk",
+  "author": "zumwalt",
+  "pen_id": "AaRLJK",
+  "url": "https://codepen.io/zumwalt/pen/AaRLJK",
+  "acquisition": "cdpn_fullpage",
+  "acquisition_url": "https://cdpn.io/zumwalt/fullpage/AaRLJK",
+  "retrieved_at": "2026-10-03T15:29:31+00:00",
+  "license": "MIT (CodePen public pen default)",
+  "candidate_target_tier": "T1",
+  "candidate_found_via": "websearch-2026-10-03",
+  "fetch_status": "ok",
+  "title": "Vignette - Pure CSS Illustration",
+  "canonical_url": "https://codepen.io/zumwalt/pen/AaRLJK",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "e15120390d191ad4165dffab4335683b682cb4275912d0366866624cf520fe31",
+  "source_html_sha256": "918facf119c3eb85f44ebd1bc7fba43b552100bc63f70bf563194408c372a09f",
+  "analysis": {
+    "js": {
+      "has_js": false,
+      "inline_js_chars": 0,
+      "external_scripts": [],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 3,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": false,
+      "clip_path": false,
+      "css_counter": false,
+      "media_query": false
+    },
+    "external_stylesheets": [
+      "https://public.codepenassets.com/css/normalize-5.0.0.min.css"
+    ],
+    "css_imports": [
+      "http://weloveiconfonts.com/api/?family=entypo"
+    ],
+    "css_chars": 6331,
+    "element_count": 45,
+    "html_chars": 8492
+  }
+}

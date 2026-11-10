@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>Pure CSS 3D isometric Wave animation</title>
+
+    <link rel="canonical" href="https://codepen.io/raykuo/pen/VzVQLg">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://public.codepenassets.com/css/normalize-5.0.0.min.css">
+
+  
+  
+<style>
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300');
+
+:root {
+  --body-bg: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+  --box-color-top: #B4CED9;
+  --box-color-face: #5697BF;
+  --box-color-side: #566D8C;
+  --box-width: 50px;
+  --box-height: 15px;
+  --box-depth: 50px;
+  --box-spacing: 0px;
+  --animation-duration: 3s;
+  --animation-delay: .1s;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+  background-image: var(--body-bg);
+}
+
+h1 {
+  top: 0;
+  margin-bottom: 180px;
+  color: #FFF;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 48px;
+  font-weight: 300;
+  letter-spacing: 2px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+h1 > span {
+  font-size: 24px;
+}
+
+.canvas {
+  position: relative;
+  transform: rotateX(45deg) rotateZ(45deg);
+  transform-style: preserve-3d;
+  font-size: 0;
+}
+
+.group {
+  display: inline-block;
+  margin-right: var(--box-spacing);
+  transform-style: preserve-3d;
+}
+
+.box {
+  position: relative;
+  width: var(--box-width);
+  height: var(--box-depth);
+  background-color: var(--box-color-top);
+  transform-style: preserve-3d;
+  margin-bottom: var(--box-spacing);
+  -webkit-animation-name: wave;
+          animation-name: wave;
+  -webkit-animation-delay: calc(var(--scale, 1) * var(--animation-delay));
+          animation-delay: calc(var(--scale, 1) * var(--animation-delay));
+  -webkit-animation-duration: var(--animation-duration);
+          animation-duration: var(--animation-duration);
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-timing-function: cubic-bezier(.74,.14,.18,.91);
+          animation-timing-function: cubic-bezier(.74,.14,.18,.91);
+}
+
+.box:before,
+.box:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  transform-origin: 100% 100%;
+}
+
+.box:before {
+  width: 100%;
+  height: calc(var(--box-height) * var(--scale, 1));
+  background-color: var(--box-color-side);
+  transform: rotateX(90deg) translateZ(calc(var(--box-height) * var(--scale, 1) - var(--box-depth)));
+}
+
+.box:after {
+  width: calc(var(--box-height) * var(--scale, 1));
+  height: 100%;
+  background-color: var(--box-color-face);
+  transform: rotateY(-90deg) translateZ(calc(var(--box-height) * var(--scale, 1) - var(--box-width)));
+}
+
+@-webkit-keyframes wave {
+  50% {
+    transform: translateZ(calc(var(--scale, 1) * var(--box-height)));
+  }
+}
+
+@keyframes wave {
+  50% {
+    transform: translateZ(calc(var(--scale, 1) * var(--box-height)));
+  }
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  <h1>Pure CSS 3D Wave animation<br/><span>with css custom properties for easy tuning</span></h1>
+<div class="canvas">
+  <div class="group">
+    <div class="box" style="--scale:12"></div>
+    <div class="box" style="--scale:11"></div>
+    <div class="box" style="--scale:10"></div>
+    <div class="box" style="--scale:9"></div>
+    <div class="box" style="--scale:8"></div>
+    <div class="box" style="--scale:7"></div>
+  </div>
+  <div class="group">
+    <div class="box" style="--scale:11"></div>
+    <div class="box" style="--scale:10"></div>
+    <div class="box" style="--scale:9"></div>
+    <div class="box" style="--scale:8"></div>
+    <div class="box" style="--scale:7"></div>
+    <div class="box" style="--scale:6"></div>
+  </div>
+  <div class="group">
+    <div class="box" style="--scale:10"></div>
+    <div class="box" style="--scale:9"></div>
+    <div class="box" style="--scale:8"></div>
+    <div class="box" style="--scale:7"></div>
+    <div class="box" style="--scale:6"></div>
+    <div class="box" style="--scale:5"></div>
+  </div>
+  <div class="group">
+    <div class="box" style="--scale:9"></div>
+    <div class="box" style="--scale:8"></div>
+    <div class="box" style="--scale:7"></div>
+    <div class="box" style="--scale:6"></div>
+    <div class="box" style="--scale:5"></div>
+    <div class="box" style="--scale:4"></div>
+  </div>
+  <div class="group">
+    <div class="box" style="--scale:8"></div>
+    <div class="box" style="--scale:7"></div>
+    <div class="box" style="--scale:6"></div>
+    <div class="box" style="--scale:5"></div>
+    <div class="box" style="--scale:4"></div>
+    <div class="box" style="--scale:3"></div>
+  </div>
+  <div class="group">
+    <div class="box" style="--scale:7"></div>
+    <div class="box" style="--scale:6"></div>
+    <div class="box" style="--scale:5"></div>
+    <div class="box" style="--scale:4"></div>
+    <div class="box" style="--scale:3"></div>
+    <div class="box" style="--scale:2"></div>
+  </div>
+</div>
+  
+  
+  
+</body>
+
+</html>

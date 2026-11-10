@@ -1,0 +1,31 @@
+{
+  "case_id": "case-213-T1",
+  "batch_id": "DATA-002-B1",
+  "source_id": "codepen:thebabydino/godpzek",
+  "title": "Pure CSS infographic: angled",
+  "author": "thebabydino",
+  "url": "https://codepen.io/thebabydino/pen/gOdPzEK",
+  "license": "MIT (CodePen public pen default)",
+  "acquisition": "cdpn_fullpage",
+  "acquisition_url": "https://cdpn.io/thebabydino/fullpage/gOdPzEK",
+  "retrieved_at": "2026-10-03T15:32:07+00:00",
+  "original_srcdoc_sha256": "647f079a8efa47829ab3d477680fe31aa5d187e60ef9587ab9027f601c2d13ce",
+  "source_original_sha256": "0a942099f3418739bee11aed83b2499adc64866c41e5686fa584b95a05c4af03",
+  "source_html_sha256": "99835a8294a26d61bd5e17f8a6ed8301f10cf0e7054e0b6b61e417ca980c2b91",
+  "provenance": "original_minus_nonfunctional_js",
+  "js_policy": "remove",
+  "js_changes": "removed: CodePen loop-guard script and a comment-only pen script",
+  "external_dependencies": {
+    "stylesheets": [],
+    "css_imports": [],
+    "note": "Reference material only; input.json/ground_truth.html must not load external resources."
+  },
+  "intake_date": "2026-10-18",
+  "decisions": [
+    "DEC-031",
+    "DEC-032",
+    "DEC-033",
+    "DEC-034",
+    "DEC-035"
+  ]
+}
