@@ -1,0 +1,11 @@
+{
+  "case_id": "case-141",
+  "business_background": "一个以疫情主题为包装的浏览器小游戏落地页与游戏界面，包含主菜单、玩法说明、作者介绍、正式游戏区和结束画面，用于展示纯前端互动原型。",
+  "functional_requirements": "默认主菜单依次显示三行“CoronaVirus”“Invaders”“Let's save the world together!”；操作项依次为“Save the World”“How to Play”“Performance”“Who Am I”“Quit”，Quit为不退出、不跳转的占位操作。说明文字为“Let's beat this on together and on the way spend time doing good.”，配2个装饰病毒。\n正式游戏有20个同款卡通病毒目标，每个单击一次消灭。分数为“Score:”及“已击中数量/20”；倒计时带“⏲️”图标，数字为99到00的两位格式，并有时间进度条。结束画面标题“Game Over”，提供“Who Am I”和“Back to Main Menu”。\n两张弹窗均有角落关闭控件“x”和“Close”按钮。作者弹窗标题“Who Am I ?”，正文“II’m Elad Shechter, a Web Developer specializing in CSS & HTML design and architecture.”及“You can see more of my stuff on my website eladsc.dev and follow me on twitter.com/eladsc.”；eladsc.dev、twitter.com/eladsc为链接文本；头像占位图替代文字“Elad Shechter”。玩法弹窗标题“How to Play ?”，正文“Use the cursor (\"🧼\" = soap icon) to kill the Corona Virus.”及“Click each Coronavirus once to eliminate it.”。\nPerformance默认显示“High 🖥️”，每次点击在“Low 📱”与“High 🖥️”间切换。",
+  "layout_constraints": "单屏游戏海报占满视口，无页面滚动；深蓝到蓝色渐变背景叠加数个半透明径向高光。主菜单覆盖全屏深色半透明遮罩。\n标题白色粗体大写、大字号、多层立体阴影并有透视倾斜感；Invaders比CoronaVirus更大，副标题明显更小。菜单操作区约360px宽并适配窄屏，文本居中；按钮高40px、约20px胶囊圆角、深色半透明底、白字、2px半透明浅色描边、约20px粗体字，项间距约10px；说明浅灰色。\n弹窗白底，宽约360px并保留视口边距，内边距约20px、最小高约380px、10px深色边框及约10px圆角；正文约18px、行高约1.3，标题约22px粗体居中；x为较大手写风格，Close沿用菜单按钮风格；头像140×140。\n分数徽章横排、斜切感与圆角、约40px粗体白字及白色描边，左侧Score:红底、右侧计数蓝底。倒计时约40px白字带深色投影；进度条约150×10px、细边框、白色底轨。视口宽度不超过500px时，倒计时和进度条靠近屏幕下边缘。\n20个病毒分布在整个视口活动区域内，基准约100×100，深色圆主体、12根环绕刺状触角、2只白眼黑瞳。结束层为全视口深色半透明遮罩，标题、按钮沿用主菜单风格。",
+  "motion_constraints": "两个装饰病毒持续上下浮动。主菜单五项及两弹窗Close在悬停或键盘聚焦时出现循环闪烁的外侧霓虹光晕，两种触发均解除后恢复。\n开始游戏后，20个病毒错峰出现，沿各自不同路径在屏幕内持续移动并旋转、缩放。触角反复轻微伸缩摆动、瞳孔来回移动、眼皮周期性闭合眨眼；低性能档只停止这三种局部动效，场景切换和路径移动保留，切回高档恢复局部动效。\n命中病毒迅速变红并淡出消失，其消灭状态保留至本局结束，其他未命中病毒不受影响。分数累计，每个目标至多计一次。\n倒计时自动逐值递减，进度条同步逐渐增长至接近满格，临近结束由蓝变红；约100秒后自动显示结束画面。\n打开或关闭弹窗不改变其下方场景。Save the World进入游戏；结束后Back to Main Menu返回主菜单，再次开始时20个目标、分数、倒计时和进度恢复新局初态，不继承上局弹窗。",
+  "forbidden": [
+    "JavaScript 脚本及行内事件处理属性",
+    "外部未经声明的第三方外部脚本或 CSS 库"
+  ]
+}

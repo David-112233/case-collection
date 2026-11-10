@@ -8,7 +8,7 @@
 |---|---|---|
 | 1 | [项目背景](../docs/PROJECT_BACKGROUND.md) | 明白基准测什么、为什么只要难题、什么作品能改成案例 |
 | 2 | 本页 | 步骤、标准、协作规则 |
-| 3 | [examples/](../examples/) | 看 4 个已入库案例的题目和分类理由，知道成品长什么样 |
+| 3 | [examples/](../examples/) | 看 9 个已入库案例的题目和难点说明（先读其中的 README），知道成品长什么样 |
 | 4 | [B1/screening.csv](B1/screening.csv) | 看 265 条历史判断的写法，尤其是 7 条 accept 和被用户否掉的 U1、U2 |
 | 5 | [existing_cases_catalog.csv](existing_cases_catalog.csv) | 库内 220 例的题材，避免重复 |
 
