@@ -1,0 +1,8 @@
+{
+  "case_id": "case-201",
+  "business_background": "一个 Android 手机主屏幕概念原型，展示资讯、主屏页面、应用快捷方式、Dock 和搜索入口；仅作 HTML/CSS 原型，不涉及后端逻辑。",
+  "functional_requirements": "手机内包含 News 资讯页和主屏页。资讯标题为“News”，10 条卡片的主标题/说明依次为：1.“Morning Brief”/“Top stories for your commute”；2.“Weather Update”/“Sunny intervals expected today”；3.“Tech”/“New device rumors continue”；4.“Business”/“Markets open mixed this morning”；5.“Sports”/“Highlights from last night”；6.“Local”/“Transit schedules adjusted downtown”；7.“Travel”/“Weekend getaway ideas nearby”；8.“Health”/“Simple habits for better sleep”；9.“Culture”/“Exhibits and events this week”；10.“Saved for Later”/“Articles picked just for you”。主屏从上到下包含无文字状态栏、主内容页组、底部功能区。主内容依次有三页：时钟页显示“7:20”和“Monday, Sept 12”；应用页含5个图标；更多应用页含15个图标。底部有5个图标的Dock、默认提示“Ask Google..”的搜索输入项及Android手势横条。应用及Dock图标均为无文字的纯占位，不含真实品牌或图片。",
+  "layout_constraints": "手机在视口居中，背景为冷灰蓝渐变，左上角发散高光。手机呈9:16竖屏比例，宽≤420px、高≤视口高度80%，小视口下随可用空间收窄；黑色外边框、22px圆角、明显悬浮阴影，内容不超出圆角轮廓。资讯和主屏各为整屏面板，主内容三页等宽。资讯页浅灰，标题较粗；卡片等高纵向连续堆叠，每条约92px，相隔1px，首卡上边、末卡下边圆角。卡片文字分主标题和说明两行，字号分别约14px、12px，说明为次级灰色。状态栏约24px高，背景比主屏略深，带淡分隔线。时钟页留白较多，时间约48px、细字重、紧凑行高；日期约14px、次级灰色。应用图标按规则网格排列，15图标页为多行；Dock五列均分。所有图标为正圆，浅到深的灰色渐变、淡描边、内高光。搜索项为中浅灰胶囊，纵向/横向内边距约12px/16px，提示文字灰色。手势横条为功能区最末端的短黑色圆角横线。整体以#f2f4f7、#d9dde3、#e6e9ee、#cdd3dc浅灰层次为主，正文深灰。",
+  "motion_constraints": "横向滚动可在资讯与主屏之间往返，停止后整屏停稳，不停在两页之间。主屏内容区横向滚动可逐页往返三页，停止后单页完整停稳；翻动内页时状态栏、Dock、搜索项和手势横条保持原位，内页到边界后继续横滚不误切到资讯页。资讯列表可独立纵向滚动查看全部10条，News标题始终可见，手机位置及外层当前面板不随列表纵滚改变。",
+  "forbidden": []
+}

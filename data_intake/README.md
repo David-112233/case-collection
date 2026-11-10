@@ -8,7 +8,7 @@
 |---|---|---|
 | 1 | [项目背景](../docs/PROJECT_BACKGROUND.md) | 明白基准测什么、为什么只要难题、什么作品能改成案例 |
 | 2 | 本页 | 步骤、标准、协作规则 |
-| 3 | [examples/](../examples/) | 看 9 个已入库案例的题目和难点说明（先读其中的 README），知道成品长什么样 |
+| 3 | [examples/](../examples/) | 看 13 个已入库案例的题目和难点说明（先读其中的 README），知道成品长什么样 |
 | 4 | [B1/screening.csv](B1/screening.csv) | 看 265 条历史判断的写法，尤其是 7 条 accept 和被用户否掉的 U1、U2 |
 | 5 | [existing_cases_catalog.csv](existing_cases_catalog.csv) | 库内 220 例的题材，避免重复 |
 
@@ -75,7 +75,8 @@ git commit -m "认领：dot 第01轮" && git push origin main          # 4 立�
 - 已判断 265 个候选：建议入库 7、暂留 24（T2 7、T3 6、T5 11）、拒收 234。通过率约 3%，所以要多找候选。
 - `B1/raw/` 里还留着 24 份暂留候选的源码，不必重抓。
 - 库内现有数量（名义值，部分旧案例不合格）：T1 11、T2 43、T3 55、T4 12、T5 49、T6 50。目标各 75，共 450；T4 不设硬目标。
-- **优先级：T1 和 T4 最缺；其次 T5、T6、T2、T3。** 不为凑数降低标准。
+- **档位优先级：T1 和 T4 最缺；其次 T5、T6、T2、T3。** 不为凑数降低标准。
+- **题材优先级：多收网页类，其次 CSS 动画类，少收小游戏类。** 详见第 6.7 节。
 
 ## 4. 环境准备
 
@@ -103,7 +104,8 @@ url,target_tier,found_via
 https://codepen.io/作者/pen/ID,T4,websearch-2026-11-10
 ```
 
-- 搜索词用“档位 × 难度机制”组合，例如 `codepen scroll-state container query table`、`codepen pure css isometric city`、`codepen css only game checkbox`、`codepen animation-timeline view() landing page`。
+- 搜索词用“档位 × 难度机制”组合，例如 `codepen scroll-state container query table`、`codepen pure css isometric city`、`codepen animation-timeline view() landing page`、`codepen css only dashboard layout :has()`、`codepen pure css character walk cycle animation`。
+- 搜索重心放在完整页面和应用界面（落地页、仪表盘、应用原型、专题长页、信息图）以及多部件协调的 CSS 动画上；小游戏类不必专门去搜。
 - **不要**加 “no JavaScript”“pure CSS only” 这类限定词，含 JS 的作品也可能改造后收入。
 - 其他线索：GitHub 上的 awesome 列表（css-art、pure-css、css-only 主题）里的 CodePen 链接；常产出难题的作者，如 argyleink、jh3y、bramus、una、thebabydino、utilitybend、giana、hexagoncircle、amit_sheen。
 - 写完后按第 1.5 节认领并推送。已判断过、已入库、对方已认领的链接会在认领时自动跳过。
@@ -226,6 +228,20 @@ python data_intake/B1/decide.py una__myJOjQx accept T4 H2,H4,H6,H8 - "横向吸�
 | R02 | 与其他候选重复 |
 | T2/T3/T5/T6 | 合格但属于后续批次，`decision` 记 `hold` |
 | U1/U2 | 用户在检查点未选，只由用户侧填写 |
+
+### 6.7 题材偏好
+
+用户希望这个基准更像“前端网页”的测试，而不是小游戏合集。同样达到阈值的候选，按下面的顺序取舍：
+
+| 顺序 | 题材 | 说明 |
+|---|---|---|
+| 多收 | **网页类** | 完整页面或应用界面：产品落地页、应用原型、仪表盘、看板、专题长页、信息图、行程或相册这类内容页 |
+| 其次 | **CSS 动画类** | 多个部件按精确时序协同运动的场景或角色动画 |
+| 少收 | **小游戏类** | 靠大量点击推进、规则复杂的纯 CSS 游戏（扫雷、棋类、闯关等） |
+
+- 小游戏不是不收，只是少收：**每轮建议入库的清单里，小游戏类最多 1 例**，而且要是库里没有的玩法。
+- 在 `decide.py` 的备注开头标明题材：`[网页]`、`[动画]`、`[游戏]`，方便用户按题材挑选。
+- 题材偏好不改变阈值。网页类也必须够难，普通的登录页、定价表、营销落地页照样拒收。各类样例见 [examples/](../examples/)。
 
 ## 7. 交付
 

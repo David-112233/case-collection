@@ -1,8 +1,0 @@
-{
-  "case_id": "case-115",
-  "business_background": "一个用于展示和体验 Conway's Game of Life 的交互式演示页面，包含规则说明、初始状态配置和代际演化展示。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。",
-  "functional_requirements": "页面有两个双态控制开关：说明开关文案为“Show Rules & Info”/“Hide Rules & Info”，配置/运行开关文案为“Configure Generation 0”/“>>> Run Simulation >>>”。说明面板包含主标题链接“Conway's Game of Life”、说明“Simulate 60 generations in 100% CSS and HTML - no JavaScript!”、署名链接“Made by Jane 💜 (follow me on Twitter!)”、小标题“Rules”和四项规则原文：“Any live cell with fewer than two live neighbors dies, as if by underpopulation.”；“Any live cell with two or three live neighbors lives on to the next generation.”；“Any live cell with more than three live neighbors dies, as if by overpopulation.”；“Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.”。棋盘为20×20共400格；配置态每格可独立勾选活死，运行态显示第1至60代的格位生死和当前代数。第0代默认活格以左上角(0,0)起、行列零基计数：第2行第2–4列；第3行第1–3列；第6行第14–16列；第7行第15列；第8行第5、15列；第9行第6、14–16列；第10行第4–6列；第11行第14–16列；第12行第14–16列；第14行第14–16列；第15行第15列；第16行第15列；第17行第14–16列。共33格，其余367格未勾选。",
-  "layout_constraints": "黑色整屏背景，主要内容居中。两个开关始终位于视口边缘，金色平行四边形按钮、白色发光描边文字，字号随视口在约12–18px间适配。展开的说明面板覆盖视口中部，四周约10%视口边距，近黑半透明背景、约2rem内边距，超出内容可在面板内滚动。正文与列表字号约14–22px、行高约1.45；标题与小标题间段落分明；四项规则以“💜”代替圆点。正方形棋盘边长约70vmin，400格等大；底色近黑，深灰网格线及外轮廓。配置格之间留少量空隙，未选中格深色半透明，选中格亮粉色并带红色霓虹光。运行时活格为亮粉色发光方块，死格为明显较弱的小点，状态符号占位接近格子尺寸九成。天蓝色大字号代数数字位于视口一角。棋盘与文字随视口缩放，小屏仍完整显示棋盘和控制按钮。",
-  "motion_constraints": "每次启动运行，都从当前编辑的第0代按四条Conway规则逐代演化至第60代；只计棋盘内八邻域，边界不环绕。运行按固定节奏自动依次播放第1至60代，随后从第1代循环；代数数字始终与当前显示代际一致。配置/运行开关双向切换可编辑第0代和自动播放状态，文案指向下一步操作。返回配置时显示代数0并保留最近编辑的400格配置；再次运行从该配置的第1代重新开始，不从上次中途代数续播。说明开关即时展开/收起面板，文案与显隐相符；打开再关闭说明不改变编辑配置。",
-  "forbidden": []
-}
