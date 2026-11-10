@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>CSS Exploration App Concept</title>
+
+    <link rel="canonical" href="https://codepen.io/davidkpiano/pen/NGYjZv">
+  
+  <link rel="stylesheet" href="https://public.codepenassets.com/css/normalize-5.0.0.min.css">
+
+  
+  
+<style>
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700,300);
+html {
+  font-size: 2vh;
+}
+
+.exp-gallery > img, .exp-facts > .exp-dots, .exp-facts, .exp-image > img, .exp-image, .exp-card.-info > *, .exp-card, .exp-details, .exp-location, .exp-main, .exp-header, .exp-footer {
+  transition: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+#explore {
+  height: 96vh;
+  width: 54vh;
+  background: linear-gradient(#7d8393, #414757);
+  overflow: hidden;
+  box-shadow: 0 1vh 2vh rgba(0, 0, 0, 0.4);
+}
+
+@keyframes inactive-location-top {
+  100% {
+    transform: translateY(-100%);
+  }
+}
+[id^=golden]:target ~ #explore .exp-location:not([data-location=golden]) {
+  transform: translateY(-24vh);
+  opacity: 0;
+  z-index: -1;
+}
+[id^=golden]:target ~ #explore .exp-location:not([data-location=golden]) *, [id^=golden]:target ~ #explore .exp-location:not([data-location=golden]) * > * {
+  transition-delay: 5s !important;
+}
+
+[id^=alamo]:target ~ #explore .exp-location:not([data-location=alamo]) {
+  transform: translateY(24vh);
+  opacity: 0;
+  z-index: -1;
+}
+[id^=alamo]:target ~ #explore .exp-location:not([data-location=alamo]) *, [id^=alamo]:target ~ #explore .exp-location:not([data-location=alamo]) * > * {
+  transition-delay: 5s !important;
+}
+
+.route {
+  display: none;
+}
+
+.route:target ~ #explore {
+  transform: translateY(0);
+}
+.route:target ~ #explore .exp-header {
+  transform: translateY(-120%);
+}
+.route:target ~ #explore .exp-footer {
+  transform: translateY(100%);
+}
+.route:target ~ #explore .exp-main {
+  transform: translateY(0);
+}
+.route:target ~ #explore .exp-location {
+  transform: scale(1) translateY(0);
+}
+.route:target ~ #explore .exp-location > .exp-image {
+  transform: scale(1);
+  pointer-events: auto;
+}
+.route:target ~ #explore .exp-location > .exp-details {
+  opacity: 1;
+  transform: translateX(0) translateY(32.4vh);
+}
+.route:target ~ #explore .exp-location .exp-card.-title {
+  transform: scale(1);
+  pointer-events: none;
+  cursor: default;
+}
+.route:target ~ #explore .exp-location .exp-card.-info {
+  transform: translateX(27vh);
+  transition-delay: 0.125s;
+}
+.route:target ~ #explore .exp-location .exp-card.-info > * {
+  transform: translateY(0);
+  opacity: 1;
+  transition-delay: 0.5s;
+}
+.route:target ~ #explore .exp-location > .exp-facts {
+  transform: translateY(0);
+  opacity: 1;
+  transition-delay: 1s;
+}
+.route:target ~ #explore .exp-location .exp-dots {
+  transform: translateY(0);
+  opacity: 1;
+  transition-delay: 1s;
+}
+
+[id*=explore-details]:target ~ #explore .exp-location .exp-gallery > img {
+  transition-delay: 0;
+}
+
+#golden-explore-gallery:target ~ #explore .exp-location > .exp-image {
+  transform: translateY(32.4vh) scaleY(1.5);
+}
+#golden-explore-gallery:target ~ #explore .exp-location > .exp-image > img {
+  transform: scaleY(0.75);
+}
+#golden-explore-gallery:target ~ #explore .exp-location > .exp-image, #golden-explore-gallery:target ~ #explore .exp-location > .exp-image > img {
+  transition-delay: 0.5s;
+  transition-duration: 0.75s;
+}
+#golden-explore-gallery:target ~ #explore .exp-location .exp-card.-title {
+  animation: gallery-title 1.5s cubic-bezier(0.645, 0.045, 0.355, 1) both;
+}
+#golden-explore-gallery:target ~ #explore .exp-location .exp-card.-info {
+  opacity: 0;
+  transform: translateY(3rem) translateX(100%);
+}
+#golden-explore-gallery:target ~ #explore .exp-location .exp-facts {
+  opacity: 0;
+  transform: translateY(3rem);
+  transition-delay: 0s;
+}
+#golden-explore-gallery:target ~ #explore .exp-location .exp-gallery:hover > img {
+  transition-delay: 0s !important;
+}
+#golden-explore-gallery:target ~ #explore .exp-location .exp-gallery > img {
+  opacity: 0.4;
+  transform: translateY(0);
+}
+#golden-explore-gallery:target ~ #explore .exp-location .exp-gallery > img:nth-child(1) {
+  transition-delay: 1.125s;
+}
+#golden-explore-gallery:target ~ #explore .exp-location .exp-gallery > img:nth-child(2) {
+  transition-delay: 1.25s;
+}
+#golden-explore-gallery:target ~ #explore .exp-location .exp-gallery > img:nth-child(3) {
+  transition-delay: 1.375s;
+}
+#golden-explore-gallery:target ~ #explore .exp-location .exp-gallery > img:nth-child(4) {
+  transition-delay: 1.5s;
+}
+#golden-explore-gallery:target ~ #explore .exp-location .exp-gallery > img.-active, #golden-explore-gallery:target ~ #explore .exp-location .exp-gallery > img:hover {
+  opacity: 1;
+}
+#golden-explore-gallery:target ~ #explore .exp-location .exp-gallery > img:hover {
+  transition-delay: 0s;
+}
+
+@keyframes gallery-title {
+  33% {
+    opacity: 0;
+    transform: translateY(3rem);
+  }
+  66% {
+    animation-timing-funtion: step-end;
+    background-color: transparent;
+  }
+  67% {
+    animation-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+    background-color: transparent;
+    transform: translateY(-59.4vh);
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    background-color: transparent;
+    transform: translateY(-32.4vh);
+  }
+}
+.exp-header, .exp-footer {
+  transition-duration: 0.25s;
+  transition-delay: 0.25s;
+  height: 9vh;
+  z-index: 2;
+  font-size: 120%;
+  color: white;
+  font-weight: 700;
+}
+
+.exp-header {
+  background-color: #5d6373;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  line-height: 9vh;
+  padding-left: 1.5rem;
+}
+
+.exp-footer {
+  width: 100%;
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.exp-dots {
+  flex-basis: 5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  height: 9vh;
+}
+
+.exp-dot {
+  height: 1rem;
+  width: 1rem;
+  border-radius: 50%;
+  border-style: solid;
+  border-width: 0.25rem;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+.exp-dot.-active {
+  background-color: white;
+  border-color: white;
+}
+
+.exp-menu {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 9vh;
+  width: 9vh;
+  background-color: #454b5b;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.4);
+}
+.exp-menu:before {
+  content: "";
+  width: 1.3rem;
+  height: 0.25vh;
+  position: absolute;
+  background-color: white;
+  top: calc(9vh / 2 - 0.5rem);
+  left: calc(9vh / 2 - 0.75rem);
+  box-shadow: 0.25rem 0.5rem 0 white, 0 1rem 0 white;
+}
+
+.exp-footer {
+  background-color: #252a37;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+}
+
+.exp-main {
+  height: calc(100% - 18vh);
+  transform: translateY(9vh);
+  position: absolute;
+  width: 100%;
+}
+
+.exp-location {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 96vh;
+  width: 100%;
+  transform-origin: 50% 50%;
+}
+.exp-location > .exp-details {
+  opacity: 0.8;
+}
+.exp-location > .exp-image {
+  pointer-events: none;
+  transform: translateY(calc(3.3vh));
+}
+.exp-location:nth-child(1) {
+  transform: scale(0.9);
+}
+.exp-location:nth-child(1) > .exp-details {
+  transform: translateY(calc(6vh)) translateX(0);
+}
+.exp-location:nth-child(1) .exp-card.-title {
+  background-color: #7b71be;
+  transform-origin: left 50%;
+}
+.exp-location:nth-child(2) {
+  transform: scale(0.9) translateY(39vh);
+}
+.exp-location:nth-child(2) > .exp-details {
+  transform: translateY(calc(6vh)) translateX(calc(27vh));
+}
+.exp-location:nth-child(2) .exp-card.-title {
+  background-color: #39A0ED;
+  transform-origin: right 50%;
+}
+
+.exp-details {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.exp-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 27vh;
+  height: 27vh;
+  padding: 2rem;
+  text-decoration: none;
+}
+.exp-card.-title {
+  z-index: 2;
+  color: white;
+  transform: scale(1.3);
+}
+.exp-card.-info {
+  background-color: white;
+}
+.exp-card.-info > * {
+  transform: translateY(1rem);
+  opacity: 0;
+}
+.exp-card.-info > .subheading {
+  color: #999;
+}
+
+.exp-image {
+  width: 100%;
+  height: 32.4vh;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.exp-image > img {
+  width: 100%;
+}
+
+.exp-facts {
+  position: absolute;
+  left: 0;
+  padding: 2rem;
+  height: calc(96vh - 32.4vh - 27vh);
+  top: 59.4vh;
+  opacity: 0;
+  transform: translateY(1rem);
+  color: white;
+  background-color: transparent;
+}
+.exp-facts > .heading {
+  font-size: 100%;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.exp-facts > .paragraph {
+  font-size: 120%;
+  font-weight: 300;
+  line-height: 1.5;
+}
+.exp-facts > .exp-dots {
+  width: 5rem;
+  position: absolute;
+  bottom: 0;
+  left: calc(50% - 2.5rem);
+  transform: translateY(100%);
+  opacity: 0;
+}
+
+.exp-gallery {
+  height: auto;
+  width: 54vh;
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 2rem 1rem;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+.exp-gallery > img {
+  height: 13.5vh;
+  width: 13.5vh;
+  display: inline-block;
+  margin-left: 1rem;
+  transform: translateY(100%);
+  opacity: 0;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.4);
+}
+
+.heading {
+  font-size: 200%;
+  font-weight: 400;
+}
+.heading:first-child {
+  margin-top: 0;
+}
+.heading.-h2 {
+  margin-bottom: 0.5rem;
+}
+
+.subheading {
+  font-size: 100%;
+  font-weight: 300;
+}
+
+.route:target ~ #explore .exp-location > .exp-image[href]:before, .exp-card.-title:before {
+  content: "";
+  width: 3rem;
+  height: 3rem;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  border: 0.5rem solid white;
+  border-radius: 50%;
+  z-index: 2;
+  opacity: 0;
+  animation: pulse 1.5s 3s infinite;
+  pointer-events: none;
+}
+
+.route:target ~ #explore .exp-location .exp-card.-title, #golden-explore-gallery:target ~ #explore .exp-location > .exp-image {
+  cursor: default;
+}
+.route:target ~ #explore .exp-location .exp-card.-title:before, #golden-explore-gallery:target ~ #explore .exp-location > .exp-image:before {
+  display: none;
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(0.5);
+    opacity: 0;
+    animation-timing-function: ease-in;
+  }
+  25% {
+    transform: scale(1);
+    opacity: 1;
+    animation-timing-function: ease-out;
+  }
+  50%, to {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+}
+.meta {
+  flex-basis: calc(80% - 54vh);
+  font-size: 1.2rem;
+  font-weight: 300;
+}
+.meta p, .meta a {
+  color: rgba(255, 255, 255, 0.7);
+}
+.meta h1 {
+  font-size: 3rem;
+  line-height: 1.2;
+  font-weight: 300;
+  color: white;
+}
+.meta p {
+  line-height: 1.4;
+}
+.meta a:hover {
+  color: rgba(255, 255, 255, 0.7);
+}
+@media (max-width: 750px) {
+  .meta {
+    display: none;
+  }
+}
+
+body {
+  display: flex;
+  padding: 0 calc(50% - 450px) !important;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  font-family: Lato, sans-serif;
+  background: linear-gradient(#98a2ad, #88909b);
+  overflow: hidden;
+  background-position: center center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+*, *:before, *:after {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  box-sizing: border-box;
+  position: relative;
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <div class="route" id="golden-explore-details"></div>
+<div class="route" id="golden-explore-gallery"></div>
+<div class="route" id="alamo-explore-details"></div>
+<div id="explore">
+  <header class="exp-header">
+    <span>Top Attractions</span>
+    <div class="exp-menu"></div>
+  </header>
+  <main class="exp-main">
+    <div class="exp-location" data-location="alamo">
+      <div class="exp-image">
+        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/181794/Screen_Shot_2015-10-25_at_10.51.48_PM.png" alt="" />
+      </div>
+      <div class="exp-details">
+        <a href="#alamo-explore-details" class="exp-card -title">
+          <h1 class="heading -h1">Alamo Square</h1>
+          <div class="subheading">San Francisco, CA</div>
+        </a>
+        <div class="exp-card -info">
+          <h1 class="heading -h2">1984</h1>
+          <div class="subheading">Created</div>
+          <h1 class="heading -h2">5,617</h1>
+          <div class="subheading">Population</div>
+        </div>
+      </div>
+      <div class="exp-facts">
+        <div class="heading">Facts</div>
+        <p class="paragraph">The Alamo Square neighborhood is characterized by Victorian architecture that was left largely untouched by the urban renewal projects in other parts of the Western Addition.</p>
+        <div class="exp-dots">
+          <div class="exp-dot -active"></div>
+          <div class="exp-dot"></div>
+          <div class="exp-dot"></div>
+        </div>
+      </div>
+    </div>
+    <div class="exp-location" data-location="golden">
+      <a href="#golden-explore-gallery" class="exp-image">
+        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/181794/Screen_Shot_2015-10-25_at_4.26.33_PM.png" alt="" />
+      </a>
+      <div class="exp-details">
+        <a href="#golden-explore-details" class="exp-card -title">
+          <h1 class="heading -h1">Golden Gate</h1>
+          <div class="subheading">San Francisco, CA</div>
+        </a>
+        <div class="exp-card -info">
+          <h1 class="heading -h2">1937</h1>
+          <div class="subheading">Opened</div>
+          <h1 class="heading -h2">8,980'</h1>
+          <div class="subheading">Total Length</div>
+        </div>
+      </div>
+      <div class="exp-facts">
+        <div class="heading">Facts</div>
+        <p class="paragraph">Business was so good, the city constructed the Oakland Bay Bridge and the Golden Gate Bridge during the Great Depression.</p>
+        <div class="exp-dots">
+          <div class="exp-dot -active"></div>
+          <div class="exp-dot"></div>
+          <div class="exp-dot"></div>
+        </div>
+      </div>
+      <div class="exp-gallery">
+        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/181794/Screen_Shot_2015-10-25_at_10.03.34_PM.png" alt="" class="-active" />
+        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/181794/Screen_Shot_2015-10-25_at_10.04.25_PM.png" alt="" />
+        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/181794/Screen_Shot_2015-10-25_at_10.05.30_PM.png" alt="" />
+        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/181794/Screen_Shot_2015-10-25_at_10.04.00_PM.png" alt="" />
+      </div>
+    </div>
+  </main>
+  <footer class="exp-footer">
+    <div>All Cities</div>
+    <div class="exp-dots">
+      <div class="exp-dot -active"></div>
+      <div class="exp-dot"></div>
+      <div class="exp-dot"></div>
+    </div>
+    <div>Next</div>
+  </footer>
+</div>
+<div class="meta">
+  <h1>CSS-only Exploration App Concept</h1>
+  <p>
+    Dribbble Rework<br />
+    Original Shot by <a href="https://dribbble.com/shots/2311820-Exploring" target="_blank">Dejan Markovic</a>
+  </p>
+  <p>
+    Click the pulsating tiles and photo to see the effect.<br>
+    You can also go <strong>back</strong> in your browser to navigate between scenes.
+  </p>
+  <p>
+    Works best in Chrome and Safari. Works <em>okay</em> in Firefox. <br>
+    It also works on mobile devices.
+  </p>
+</div>
+  
+    <script id="rendered-js" >
+//   ¯\_(ツ)_/¯  //
+// @davidkpiano //
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>

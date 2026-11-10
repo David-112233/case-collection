@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>Responsive infographic with CSS variables and flexbox tricks</title>
+
+    <link rel="canonical" href="https://codepen.io/thebabydino/pen/YvejYj">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css?family=Roboto:100" rel="stylesheet">
+<script>const ID='7Oj3zgrHUHw'</script>
+  
+  
+  
+<style>
+#btn--yp {
+  box-sizing: content-box;
+  position: fixed;
+  z-index: 9;
+  bottom: 1em;
+  right: 1em;
+  border: solid 1em transparent;
+  width: 4.625em;
+  height: 3.25em;
+  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/2017/icon-yp.svg) 50%/cover content-box;
+  font: 16px/1.25 trebuchet ms, sans-serif;
+  text-indent: 200vw;
+  text-shadow: none;
+  filter: grayscale(1) drop-shadow(0 0 1px #e8e0e0);
+  transition: 0.5s;
+  white-space: nowrap;
+}
+#btn--yp:before {
+  box-sizing: inherit;
+  position: absolute;
+  left: 0;
+  bottom: 100%;
+  margin: 1em -0.5em;
+  padding: 0.5em;
+  width: 100%;
+  border-radius: 5px;
+  background: #e8e0e0;
+  color: #000;
+  text-align: center;
+  text-decoration: none;
+  text-indent: 0vw;
+  white-space: normal;
+  animation: float 1s ease-in-out infinite alternate;
+  content: attr(data-txt);
+}
+#btn--yp:hover, #btn--yp:focus {
+  outline: none;
+  filter: grayscale(0) drop-shadow(0 0 1px crimson);
+}
+
+@keyframes float {
+  to {
+    transform: translateY(0.75em);
+  }
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow-x: hidden;
+  min-height: 100vh;
+  background: linear-gradient(90deg, #c7d2d8, #e5edf0);
+  counter-reset: p;
+}
+
+p {
+  --wide: 0;
+  --s: calc(1 - 2*var(--j));
+  display: flex;
+  flex-direction: var(--fdf, var(--narr, column));
+  align-items: center;
+  position: relative;
+  z-index: calc(-1*var(--i));
+  margin-left: calc(var(--wide)*(var(--p) - var(--i) - 2.5*var(--j) + 1)*6.5vw);
+  padding: 0.75em calc(var(--wide)*3em + (1 - var(--wide))*2vw);
+  width: 35em;
+  max-width: calc(var(--wide)*75% + (1 - var(--wide))*100%);
+  color: #fff;
+  font: 600 1em/1.25 roboto, sans-serif;
+  counter-increment: p;
+}
+@media (min-width: 640px) {
+  p {
+    --wide: 1 ;
+  }
+}
+@media (min-width: 320px) {
+  p {
+    --narr: 0 ;
+  }
+}
+p:before {
+  --m: calc(1 - var(--narr, 1));
+  order: calc(var(--m)*var(--j));
+  padding: 0 calc(var(--m)*(1 - var(--j))*1rem) 0 calc(var(--m)*var(--j)*1rem);
+  font-size: 5em;
+  content: counter(p, decimal-leading-zero);
+}
+p:after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: -0.75em;
+  left: 0;
+  z-index: -1;
+  padding-bottom: 0.75em;
+  transform: skewx(calc(var(--wide)*-22.5deg));
+  background: linear-gradient(calc(var(--s)*-90deg), var(--slist)) content-box, radial-gradient(rgba(0, 0, 0, 0.35), transparent 70%) calc(var(--j)*100%) 100%/65% 1.5em no-repeat;
+  content: "";
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <style>:root { --j: 0; --p: 1.5 }
+  p:nth-child(2n) { --j: 1 }
+</style>
+<p style="--i: 0; --slist: #b2dc33,#9cd400">Cake muffin donut chocolate cake jelly sesame snaps wafer tart pie sweet roll muffin chupa chups. Brownie ice cream gingerbread cookie lemon drops. Liquorice marzipan macaroon sugar plum apple pie soufflé topping dessert.</p>
+<p style="--i: 1; --slist: #f1ce02,#fba502">Cake cookie lemon drops muffin sugar plum. Liquorice pudding sugar plum topping macaroon pie chocolate. Dessert gingerbread jelly cake soufflé chocolate cake. Apple pie chocolate bar topping donut powder muffin cake tart.</p>
+<p style="--i: 2; --slist: #ff79ac,#fd4c90">Cake muffin donut chocolate cake jelly sesame snaps wafer tart pie sweet roll muffin chupa chups. Brownie ice cream gingerbread cookie lemon drops. Liquorice marzipan macaroon sugar plum apple pie soufflé topping dessert.</p>
+<p style="--i: 3; --slist: #bcb6ff,#9d96f6">Cake cookie lemon drops muffin sugar plum. Liquorice pudding sugar plum topping macaroon pie chocolate. Dessert gingerbread jelly cake soufflé chocolate cake. Apple pie chocolate bar topping donut powder muffin cake tart.</p>
+  <script src='https://codepen.io/thebabydino/pen/evPbxv.js'></script>
+  
+  
+</body>
+
+</html>

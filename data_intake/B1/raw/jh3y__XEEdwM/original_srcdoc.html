@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>Mail app w/ Vue + GSAP ✉️😎 #CodePenChallenge</title>
+
+    <link rel="canonical" href="https://codepen.io/jh3y/pen/XEEdwM">
+  
+  <link rel="stylesheet" href="https://public.codepenassets.com/css/normalize-5.0.0.min.css">
+
+  
+  
+<style>
+@import url("https://fonts.googleapis.com/css?family=Lato:300,400");
+:root {
+  --accent: #a7dde9;
+}
+* {
+  box-sizing: border-box;
+  outline: 0;
+}
+html,
+body {
+  align-items: center;
+  background: linear-gradient(45deg, #f39c12, #913d88);
+  color: #707070;
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+  font-family: 'Lato', sans-serif;
+  justify-content: center;
+  margin: 0;
+  overflow: auto;
+  padding: 0;
+  width: 100vw;
+  min-height: 100vh;
+}
+label {
+  color: #707070;
+}
+input,
+label {
+  cursor: pointer;
+}
+input[type="color"] {
+  height: 40px;
+  width: 40px;
+  border: 0;
+  margin-right: 10px;
+}
+form {
+  width: 100%;
+  padding: 0 10px 10px;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+form input,
+form textarea {
+  border-radius: 4px;
+  border: 0;
+  margin-bottom: 4px;
+  padding: 4px 12px;
+  font-family: 'Lato', sans-serif;
+  width: 100%;
+  line-height: 30px;
+}
+form input::-moz-placeholder, form textarea::-moz-placeholder {
+  color: #c3c3c3;
+}
+form input::placeholder,
+form textarea::placeholder {
+  color: #c3c3c3;
+}
+form textarea {
+  flex: 1;
+  resize: none;
+}
+button {
+  background-color: var(--accent);
+  cursor: pointer;
+  border: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.blanket {
+  background-color: #a7dde9;
+  z-index: 10;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.blanket:after {
+  box-sizing: border-box;
+  content: '';
+  height: 50px;
+  width: 50px;
+  border: 5px solid #fff;
+  border-radius: 100%;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -25px;
+  margin-top: -25px;
+  animation: rotate 0.5s infinite linear;
+}
+.mail-screen-content {
+  padding-left: 10px;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  position: relative;
+}
+.icon {
+  fill: #ecf0f1;
+  position: absolute;
+  height: 24px;
+  width: 24px;
+}
+.icon:hover {
+  fill: #e7eced;
+}
+#app {
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  background-color: var(--accent);
+  overflow: hidden;
+}
+@media (min-width: 768px) {
+  #app {
+    height: 480px;
+    width: 320px;
+  }
+}
+.mail-inbox {
+  height: 100%;
+  background-color: #ecf0f1;
+}
+.mail-settings {
+  height: 100%;
+  width: 100%;
+  background-color: #ecf0f1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+}
+.mail-settings__setting {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.mail-close {
+  position: absolute;
+  left: 0;
+  height: 50px;
+  width: 50px;
+}
+.mail-header__title {
+  margin: 0;
+  padding: 0;
+  line-height: 50px;
+  font-size: 1.2rem;
+  color: #ecf0f1;
+  flex: 1;
+  text-align: left;
+  padding-left: 54px;
+}
+.mail-messages,
+.fake-messages {
+  background: #ecf0f1;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  overflow: auto;
+  position: absolute;
+  top: 50px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding-bottom: 50px;
+}
+.fake-messages {
+  bottom: auto;
+  z-index: 2;
+  top: auto;
+  padding: 0;
+}
+/**
+  * Mail messages should animate on first load
+*/
+.mail-messages--load .mail-message {
+  opacity: 0;
+  animation: fadeIn 0.15s ease 0s;
+  animation-fill-mode: forwards;
+}
+.mail-messages--load li:nth-child(1) button {
+  animation-delay: 0.1s;
+}
+.mail-messages--load li:nth-child(2) button {
+  animation-delay: 0.2s;
+}
+.mail-messages--load li:nth-child(3) button {
+  animation-delay: 0.3s;
+}
+.mail-messages--load li:nth-child(4) button {
+  animation-delay: 0.4s;
+}
+.mail-messages--load li:nth-child(5) button {
+  animation-delay: 0.5s;
+}
+.mail-messages--load li:nth-child(6) button {
+  animation-delay: 0.6s;
+}
+.mail-messages--load li:nth-child(7) button {
+  animation-delay: 0.7s;
+}
+.mail-messages--load li:nth-child(8) button {
+  animation-delay: 0.8s;
+}
+.mail-messages--load li:nth-child(9) button {
+  animation-delay: 0.9s;
+}
+.mail-messages--load li:nth-child(10) button {
+  animation-delay: 1s;
+}
+.mail-messages--load li:nth-child(11) button {
+  animation-delay: 1.1s;
+}
+.mail-messages--load li:nth-child(12) button {
+  animation-delay: 1.2s;
+}
+.mail-messages--load li:nth-child(13) button {
+  animation-delay: 1.3s;
+}
+.mail-messages--load li:nth-child(14) button {
+  animation-delay: 1.4s;
+}
+.mail-messages--load li:nth-child(15) button {
+  animation-delay: 1.5s;
+}
+.mail-screen-header {
+  background-color: var(--accent);
+  position: relative;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  overflow: hidden;
+  width: 100%;
+}
+.mail-screen-header button:first-child {
+  position: absolute;
+  left: 0;
+}
+.mail-screen-header--fake {
+  z-index: 3;
+}
+/**
+  * Message styling
+*/
+.mail-message--focus .mail-message__info {
+  height: 60px;
+  padding-right: 0;
+}
+.mail-message--focus .mail-message__info .mail-message__subject {
+  white-space: pre-wrap;
+}
+.mail-container {
+  background: #ecf0f1;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.mail-container__header {
+  position: absolute;
+  top: 0;
+}
+.mail-container__message-header {
+  padding: 10px 0 10px 10px;
+  top: 0;
+}
+.mail-container__message-header .mail-message__avatar {
+  height: 50px;
+  width: 50px;
+}
+.mail-container__message-header .mail-message__subject {
+  overflow: visible;
+  white-space: initial;
+  overflow: initial;
+  font-weight: bolder;
+  font-size: 1.25rem;
+}
+.mail-container__message-header .mail-message__sender {
+  font-size: 0.75rem;
+}
+.mail-container__message-header .mail-message__timestamp {
+  transform: translateY(-20px);
+}
+button.mail-message {
+  padding: 0;
+  padding-left: 10px;
+}
+button.mail-message:hover {
+  background-color: #e7eced;
+}
+.mail-message {
+  background-color: #ecf0f1;
+  height: 60px;
+  width: 100%;
+}
+.mail-message__action {
+  height: 50px;
+  width: 50px;
+}
+.mail-message--opening,
+.mail-message--open {
+  position: absolute;
+  z-index: 3;
+  border: 0;
+}
+.mail-message__header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  min-height: 60px;
+  position: absolute;
+  width: 100%;
+  padding-left: 10px;
+  background: #ecf0f1;
+  top: 50px;
+}
+.mail-message__content {
+  overflow: auto;
+}
+.mail-message__message {
+  color: #7e7e7e;
+  font-weight: 300;
+  padding: 0 10px 50px 10px;
+  opacity: 0;
+  overflow: auto;
+  position: absolute;
+  top: 100%;
+}
+.mail-message__avatar {
+  height: 34px;
+  width: 34px;
+  background-color: var(--accent);
+  border-radius: 100%;
+  overflow: hidden;
+}
+.mail-message__info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1;
+  padding-left: 10px;
+  min-height: 60px;
+  justify-content: center;
+  padding-right: 60px;
+  position: relative;
+  overflow: hidden;
+}
+.mail-message__timestamp {
+  height: 50px;
+  width: 50px;
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #707070;
+}
+.mail-message__sender {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #707070;
+}
+.mail-message__subject {
+  font-size: 0.75rem;
+  font-weight: 300;
+  color: #7e7e7e;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 100%;
+  text-align: left;
+}
+.mail-compose-button {
+  height: 44px;
+  width: 44px;
+  background-color: var(--accent);
+  border-radius: 100%;
+  border: 0;
+  cursor: pointer;
+  bottom: 10px;
+  right: 10px;
+  position: absolute;
+  z-index: 2;
+  box-shadow: 0 2px 2px #c3c3c3;
+}
+.mail-composer {
+  height: 44px;
+  width: 44px;
+  border-radius: 100%;
+  border: none;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  transform-origin: bottom right;
+  background-color: var(--accent);
+  display: flex;
+  flex-direction: column;
+  z-index: 4;
+}
+.mail-open {
+  height: 50px;
+  width: 50px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -25px;
+  margin-top: -25px;
+  border-radius: 100%;
+  border: 5px solid #ecf0f1;
+  animation: pulse 4s infinite ease;
+  background-color: var(--accent);
+}
+.mail-open .icon:hover {
+  fill: #ecf0f1;
+}
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0px 2px 2px #000;
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0px 4px 4px #000;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <div id="app">
+  <div class="blanket" v-if="!loaded"></div>
+  <button class="mail-open" v-on:click="openInbox" v-if="!messages.length"><div class="icon icon--mail">
+<svg width="100%" viewBox="0 0 24 24">
+  <path d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z" />
+</svg>
+</div>
+  </button>
+  <div class="mail-inbox" v-if="messages.length">
+    <header class="mail-screen-header">
+      <button class="mail-close" v-on:click="closeInbox"><svg class='icon icon--back' preserveAspectRatio="xMinYMin" height="24" width="24" viewBox="0 0 24 24">
+    <path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z"></path>
+</svg>
+      </button>
+      <h1 class="mail-header__title">Inbox</h1>
+      <button class="mail-message__action" v-on:click="openSettings"><svg preserveAspectRatio="xMinYMin" class="icon icon--gear" height="24" width="24" viewBox="0 0 24 24">
+    <path d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.67 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z" />
+</svg>
+      </button>
+    </header>
+    <div class="mail-settings" v-if="openingSettings || settingsOpen">
+      <header class="mail-screen-header">
+        <button class="mail-close" v-on:click="closeSettings"><svg preserveAspectRation="xMinYMin" class="icon icon--close" height="24" width="24" viewBox="0 0 24 24">
+    <path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
+</svg>
+        </button>
+        <h1 class="mail-header__title">Settings</h1>
+      </header>
+      <div class="mail-screen-content">
+        <div class="mail-settings__setting">
+          <input type="color" id="theme" :value="theme" v-on:change="updateTheme"/>
+          <label for="theme">Theme</label>
+        </div>
+      </div>
+    </div>
+    <div class="mail-container" ref="mailContainer" v-if="activeMessage" v-bind:class="{'mail-message--opening': activeMessage &amp;&amp; !messageOpen, 'mail-message--open': messageOpen}">
+      <header class="mail-screen-header mail-screen-header--fake" ref="fakeHeader">
+        <button class="mail-close" v-on:click="closeInbox"><svg class='icon icon--back' preserveAspectRatio="xMinYMin" height="24" width="24" viewBox="0 0 24 24">
+    <path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z"></path>
+</svg>
+        </button>
+        <h1 class="mail-header__title">Inbox</h1>
+        <button class="mail-message__action" v-on:click="openSettings"><svg preserveAspectRatio="xMinYMin" class="icon icon--gear" height="24" width="24" viewBox="0 0 24 24">
+    <path d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.67 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z" />
+</svg>
+        </button>
+      </header>
+      <ul class="fake-messages fake-messages--top" ref="fakeTop" v-if="activeMessage &amp;&amp; !messageOpen" v-bind:style="{bottom: fakeOnePos}">
+        <li class="mail-message" v-for="(message, idx) in messages.slice(activeMessageIndex - 8 &gt; 0 ? activeMessageIndex - 8 : 0, activeMessageIndex)">
+          <button class="mail-message"><img class="mail-message__avatar" :src="message.from.avatar"/>
+            <div class="mail-message__info">
+              <div class="mail-message__sender">{{message.from.name}}</div>
+              <div class="mail-message__subject">{{message.subject}}</div>
+              <div class="mail-message__timestamp">{{message.received}}</div>
+            </div>
+          </button>
+        </li>
+      </ul>
+      <ul class="fake-messages fake-messages--bottom" ref="fakeBottom" v-if="activeMessage &amp;&amp; !messageOpen" v-bind:style="{top: fakeTwoPos}">
+        <li class="mail-message" v-for="(message, idx) in messages.slice(activeMessageIndex + 1, activeMessageIndex + 9 &lt; messages.length ? activeMessageIndex + 9 : messages.length)">
+          <button class="mail-message"><img class="mail-message__avatar" :src="message.from.avatar"/>
+            <div class="mail-message__info">
+              <div class="mail-message__sender">{{message.from.name}}</div>
+              <div class="mail-message__subject">{{message.subject}}</div>
+              <div class="mail-message__timestamp">{{message.received}}</div>
+            </div>
+          </button>
+        </li>
+      </ul>
+      <header class="mail-screen-header mail-container__header">
+        <button class="mail-message__action" v-on:click="closeMessage"><svg class='icon icon--back' preserveAspectRatio="xMinYMin" height="24" width="24" viewBox="0 0 24 24">
+    <path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z"></path>
+</svg>
+        </button>
+        <button class="mail-message__action"><svg preserveAspectRatio="xMinYMin" class='icon icon--reply' height="24" width="24"  viewBox="0 0 24 24">
+  <path d="M9,22A1,1 0 0,1 8,21V18H4A2,2 0 0,1 2,16V4C2,2.89 2.9,2 4,2H20A2,2 0 0,1 22,4V16A2,2 0 0,1 20,18H13.9L10.2,21.71C10,21.9 9.75,22 9.5,22V22H9Z"></path>
+</svg>
+        </button>
+        <button class="mail-message__action"><svg preserveAspectRatio="xMinYMin" class='icon icon--star' height="24" width="24"  viewBox="0 0 24 24">
+  <path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"></path>
+</svg>
+        </button>
+        <button class="mail-message__action"><svg preserveAspectRatio="xMinYMin" class="icon icon--trash" height="24" width="24"  viewBox="0 0 24 24">
+    <path d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z" />
+</svg>
+        </button>
+        <button class="mail-message__action"><svg preserveAspectRatio="xMinYMin" class='icon icon--warning' height="24" width="24"  viewBox="0 0 24 24">
+  <path d="M13,14H11V10H13M13,18H11V16H13M1,21H23L12,2L1,21Z"></path>
+</svg>
+        </button>
+      </header>
+      <div class="mail-message__header mail-container__message-header" ref="mailHeader" v-bind:style="{top: messageTop + 'px'}"><img class="mail-message__avatar" ref="mailAvatar" :src="activeMessage.from.avatar"/>
+        <div class="mail-message__info">
+          <div class="mail-message__sender" ref="mailSender">{{activeMessage.from.name}}</div>
+          <div class="mail-message__subject" ref="mailSubject">{{activeMessage.subject}}</div>
+          <div class="mail-message__timestamp" ref="mailTimestamp">{{activeMessage.received}}</div>
+        </div>
+      </div>
+      <article class="mail-message__message" ref="mailContent">{{activeMessage.message}}</article>
+    </div>
+    <ul class="mail-messages mail-messages--main" v-bind:class="{'mail-messages--load': !mailOpened}">
+      <li v-for="(message, idx) in messages">
+        <button class="mail-message" :id="'message--' + idx" v-on:click="openMessage(message, idx)"><img class="mail-message__avatar" :src="message.from.avatar"/>
+          <div class="mail-message__info">
+            <div class="mail-message__sender">{{message.from.name}}</div>
+            <div class="mail-message__subject">{{message.subject}}</div>
+            <div class="mail-message__timestamp">{{message.received}}</div>
+          </div>
+        </button>
+      </li>
+    </ul>
+    <button class="mail-compose-button" v-on:click="openComposer" v-if="!composerOpen"><svg class='icon icon--compose' preserveAspectRatio="xMinYMin" height="24" width="24" viewBox="0 0 24 24">
+  <path d="M20.71,4.04C21.1,3.65 21.1,3 20.71,2.63L18.37,0.29C18,-0.1 17.35,-0.1 16.96,0.29L15,2.25L18.75,6M17.75,7L14,3.25L4,13.25V17H7.75L17.75,7Z"></path>
+</svg>
+    </button>
+    <div class="mail-composer" v-if="openingComposer || composerOpen">
+      <header class="mail-screen-header">
+        <button class="mail-message__action" v-on:click="closeComposer"><svg preserveAspectRation="xMinYMin" class="icon icon--close" height="24" width="24" viewBox="0 0 24 24">
+    <path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
+</svg>
+        </button>
+        <h1 class="mail-header__title mail-composer__title">Compose</h1>
+        <button class="mail-message__action"><svg preserveAspectRatio="xMinYMin" class='icon icon--paperclip' height="24" width="24"  viewBox="0 0 24 24">
+    <path d="M7.5,18A5.5,5.5 0 0,1 2,12.5A5.5,5.5 0 0,1 7.5,7H18A4,4 0 0,1 22,11A4,4 0 0,1 18,15H9.5A2.5,2.5 0 0,1 7,12.5A2.5,2.5 0 0,1 9.5,10H17V11.5H9.5A1,1 0 0,0 8.5,12.5A1,1 0 0,0 9.5,13.5H18A2.5,2.5 0 0,0 20.5,11A2.5,2.5 0 0,0 18,8.5H7.5A4,4 0 0,0 3.5,12.5A4,4 0 0,0 7.5,16.5H17V18H7.5Z" />
+</svg>
+        </button>
+        <button class="mail-message__action"><svg preserveAspectRatio="xMinYMin" class='icon icon--send' height="24" width="24"  viewBox="0 0 24 24">
+    <path d="M2,21L23,12L2,3V10L17,12L2,14V21Z" />
+</svg>
+        </button>
+      </header>
+      <form class="mail-screen-content">
+        <input type="text" placeholder="To"/>
+        <input type="text" placeholder="Subject"/>
+        <textarea type="text" placeholder="Compose"></textarea>
+      </form>
+    </div>
+  </div>
+</div>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17-beta.0/vue.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/Faker/3.1.0/faker.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.js'></script>
+    <script id="rendered-js" >
+const ANIMATION_DURATION = 0.25;
+const CLASSES = {
+  COMPOSER: 'mail-composer',
+  HEADER: 'mail-screen-header',
+  SETTINGS: 'mail-settings' };
+
+let messages = [];
+for (let i = 0; i < 15; i++) {if (window.CP.shouldStopExecution(0)) break;
+  messages.push({
+    from: {
+      avatar: faker.image.avatar(),
+      name: faker.name.findName() },
+
+    received: moment(faker.date.recent()),
+    subject: faker.company.bs(),
+    message: faker.lorem.paragraphs(Math.floor(Math.random() * 10 + 2)) });
+
+}window.CP.exitedLoop(0);
+messages = messages.sort((a, b) => a.received.diff(b.received)).reverse();
+
+for (let message of messages) {
+  if (message.received.isAfter(moment().subtract(5, 'hours'))) {
+    message.received = message.received.format('HH:mm');
+  } else {
+    message.received = message.received.format('D MMM');
+  }
+}
+
+const app = new Vue({
+  el: '#app',
+  data: {
+    theme: '#a7dde9',
+    openingComposer: false,
+    closingComposer: false,
+    composerOpen: false,
+    messageOpen: false,
+    activeMessage: undefined,
+    activeMessageIndex: undefined,
+    fakeOnePos: undefined,
+    fakeTwoPos: undefined,
+    messageTop: undefined,
+    mailOpened: false,
+    openingSettings: false,
+    closingSettings: false,
+    settingsOpen: false,
+    loaded: false,
+    messages: [] },
+
+  mounted: function () {
+    this.loaded = true;
+  },
+  methods: {
+    openComposer: function () {
+      this.openingComposer = !this.openingComposer;
+      this.$nextTick(() => {
+        const composer = document.querySelector(`.${CLASSES.COMPOSER}`);
+        const composerTl = new TimelineMax({
+          onComplete: () => {
+            this.openingComposer = false;
+            this.composerOpen = true;
+            this.mailOpened = true;
+          } });
+
+        composerTl.add(
+        TweenMax.to(composer, ANIMATION_DURATION, {
+          right: 0,
+          bottom: 0,
+          height: '100%',
+          width: '100%',
+          borderRadius: 0 }));
+
+
+      });
+    },
+    closeComposer: function () {
+      this.closingComposer = !this.closingComposer;
+      const composer = document.querySelector(`.${CLASSES.COMPOSER}`);
+      const composerTl = new TimelineMax({
+        onComplete: () => {
+          this.composerOpen = false;
+          this.closingComposer = false;
+        } });
+
+      composerTl.add(
+      TweenMax.to(composer, ANIMATION_DURATION, {
+        bottom: 10,
+        right: 10,
+        height: 44,
+        width: 44,
+        borderRadius: '100%' }));
+
+
+    },
+    openInbox: function () {
+      this.messages = messages;
+    },
+    closeInbox: function () {
+      this.messages = [];
+      this.mailOpened = false;
+    },
+    closeMessage: function () {
+      TweenMax.to(this.$refs.mailContainer, ANIMATION_DURATION, {
+        onComplete: () => {
+          this.activeMessage = null;
+          this.activeMessageIndex = null;
+          this.messageOpen = false;
+        },
+        x: '-100%' });
+
+    },
+    openMessage: function (message, idx) {
+      const el = document.getElementById(`message--${idx}`);
+      const list = document.querySelector('.mail-messages--main');
+      const header = document.querySelector(`.${CLASSES.HEADER}`);
+      this.mailOpened = true;
+      this.activeMessage = message;
+      this.activeMessageIndex = idx;
+      this.fakeTwoPos =
+      el.offsetTop + el.offsetHeight + header.offsetHeight - list.scrollTop;
+      this.messageTop = el.offsetTop + header.offsetHeight - list.scrollTop;
+      this.fakeOnePos = list.offsetHeight - el.offsetTop + list.scrollTop;
+      this.$nextTick(() => {
+        const el = document.querySelector('.mail-message--opening');
+        const {
+          fakeTop,
+          fakeBottom,
+          fakeHeader,
+          mailHeader,
+          mailAvatar,
+          mailSubject,
+          mailSender,
+          mailTimestamp,
+          mailContainer,
+          mailContent } =
+        this.$refs;
+        const fakeHeaderPos = fakeHeader.getBoundingClientRect();
+        const mailHeaderPos = mailHeader.getBoundingClientRect();
+        const mailContainerPos = mailContainer.getBoundingClientRect();
+        const openTl = new TimelineMax({
+          onComplete: () => {
+            this.messageOpen = true;
+          } });
+
+        openTl
+        // Move fakes out of the way
+        .to(fakeHeader, ANIMATION_DURATION, { y: `-${this.messageTop}px` }, 0).
+        to(fakeTop, ANIMATION_DURATION, { bottom: '100%' }, 0).
+        to(fakeBottom, ANIMATION_DURATION, { top: '100%' }, 0)
+        // Move header to top and change sizing
+        .to(
+        mailHeader,
+        ANIMATION_DURATION,
+        { y: `-${this.messageTop - fakeHeaderPos.height}`, paddingTop: 10 },
+        0).
+
+        from(
+        mailAvatar,
+        ANIMATION_DURATION,
+        { height: '34px', width: '34px' },
+        0).
+
+        from(
+        mailTimestamp,
+        ANIMATION_DURATION,
+        { fontSize: '0.75rem', y: 0 },
+        0).
+
+        from(
+        mailSubject,
+        ANIMATION_DURATION,
+        {
+          overflow: 'hidden',
+          fontSize: '0.75rem',
+          fontWeight: '400',
+          color: '#7e7e7e' },
+
+        0).
+
+        from(mailSender, ANIMATION_DURATION, { fontSize: '1rem' }, 0)
+        // Animate in the article
+        .to(
+        mailContent,
+        ANIMATION_DURATION,
+        {
+          height: `${mailContainerPos.height - (
+          mailHeaderPos.height + fakeHeaderPos.height)}px`,
+          opacity: 1,
+          y: `-${mailContainerPos.height - (
+          mailHeaderPos.height + fakeHeaderPos.height)}px` },
+
+        0);
+
+      });
+    },
+    openSettings: function () {
+      this.openingSettings = !this.openingSettings;
+      this.$nextTick(() => {
+        const el = document.querySelector(`.${CLASSES.SETTINGS}`);
+        TweenMax.from(el, ANIMATION_DURATION, {
+          onComplete: () => {
+            this.openingSettings = false;
+            this.settingsOpen = true;
+          },
+          x: '100%' });
+
+      });
+    },
+    closeSettings: function () {
+      const el = document.querySelector(`.${CLASSES.SETTINGS}`);
+      TweenMax.to(el, ANIMATION_DURATION, {
+        onComplete: () => {
+          this.openeingSettings = false;
+          this.settingsOpen = false;
+        },
+        x: '100%' });
+
+    },
+    updateTheme: function (e) {
+      this.theme = e.target.value;
+      document.documentElement.style.setProperty('--accent', e.target.value);
+    } } });
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>

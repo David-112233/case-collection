@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>Pure CSS Isometric Room </title>
+
+    <link rel="canonical" href="https://codepen.io/cj_superstar/pen/QWvprML">
+  
+  
+  
+  
+<style>
+body {
+  background-color: #888;
+  animation: change-background-color 50s linear 0s infinite normal;
+}
+
+.isometric-room-container {
+  width: 212px;
+  height: 212px;
+  position: relative;
+  margin: auto;
+}
+
+.window {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  margin: auto;
+}
+
+.window-frame, .flower-pot, .sky {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  margin: auto;
+}
+
+.window-frame-top-side, .window-frame-top-front, .window-frame-left-side, .window-frame-left-front, .window-frame-right-side, .window-frame-right-front, .window-frame-bottom-front, .glass, .window-ledge-bottom, .window-ledge-side {
+  position: absolute;
+} 
+
+.window-frame-top-side {
+  width: 70px;
+  height: 6.5px;
+  background-color: #8c560a;
+  transform: skew(50deg, -30deg);
+  z-index: 9;
+  margin: 162px 0 0 11px;
+}
+
+.window-frame-top-front {
+  width: 70px;
+  height: 9px;
+  background-color: #8c560a;
+  transform: skew(0, -30deg);
+  z-index: 9;
+  margin: 168px 0 0 15px;
+}
+
+.window-frame-left-side {
+  width: 9px;
+  height: 76px;
+  background-color: #8c560a;
+  transform: skew(0, 30deg);
+  z-index: 9;
+  margin: 184.5px 0 0 7px;
+}
+
+.window-frame-left-front {
+  width: 9px;
+  height: 70px;
+  background-color: #8c560a;
+  transform: skew(0, -30deg);
+  z-index: 9;
+  margin: 184.5px 0 0 15px;
+}
+
+.window-frame-right-side {
+  width: 3px;
+  height: 70px;
+  background-color: #8c560a;
+  transform: skew(0, 30deg);
+  z-index: 9;
+  margin: 155px 0 0 73px;
+}
+
+.window-frame-right-front {
+  width: 9px;
+  height: 70px;
+  background-color: #8c560a;
+  transform: skew(0, -30deg);
+  z-index: 9;
+  margin: 155px 0 0 76px;
+}
+
+.window-frame-bottom-front {
+  width: 70px;
+  height: 9px;
+  background-color: #8c560a;
+  transform: skew(0, -30deg);
+  z-index: 9;
+  margin: 235px 0 0 15px;
+}
+
+.window-ledge-bottom {
+  height: 10px;
+  width: 58px;
+  background-color: #f7efd7;
+  transform: skew(50deg, -30deg);
+  z-index: 5;
+  margin: 224px 0 0 20px;
+  animation: change_window_ledge_color 50s linear 0s infinite normal;
+}
+
+.glass {
+  width: 65px;
+  height: 65px;
+  background-color: #f7efd7;
+  transform: skew(0, -30deg);
+  opacity: 0.3;
+  z-index: 8;
+  margin: 170px 0 0 20px;
+}
+
+.window-ledge-side {
+  height: 50px;
+  width: 11px;
+  background-color: #f7efd7;
+  transform: skew(0, 40deg);
+  z-index: 5;
+  margin: 165px 0 0 70px;
+  animation: change_window_ledge_color 50s linear 0s infinite normal;
+}
+
+.pot-front, .pot-side, .pot-top, .plant-bed, .plant-stalk-1, .plant-stalk-2, .plant-flower-1, .plant-flower-2, .plant-flower-middle-1, .plant-flower-middle-2 {
+  position: absolute;
+}
+
+.pot-front {
+  height: 7.5px;
+  width: 25px;
+  background-color: #e6714e;
+  transform: skew(0, -30deg);
+  z-index: 6;
+  margin: 122.5px 0 0 42.5px;
+}
+
+.pot-side {
+  height: 7.5px;
+  width: 7.5px;
+  background-color: #e6714e;
+  transform: skew(0, 30deg);
+  z-index: 6;
+  margin: 127.5px 0 0 35px;
+}
+
+.pot-top {
+  height: 4.5px;
+  width: 24.5px;
+  background-color: #e6714e;
+  transform: skew(65deg, -30deg);
+  z-index: 6;
+  margin: 118.75px 0 0 39.2px;
+}
+
+.plant-bed {
+  height: 3px;
+  width: 22.5px;
+  background-color: brown;
+  transform: skew(65deg, -30deg);
+  border-radius: 1px;
+  z-index: 6;
+  margin: 119.5px 0 0 39.5px;
+}
+
+.plant-stalk-1 {
+  height: 10px;
+  width: 2px;
+  background: linear-gradient(to right, darkgreen, green, darkgreen);
+  border-radius: 1px;
+  z-index: 7;
+  margin: 114px 0 0 45px;
+}
+
+.plant-stalk-2 {
+  height: 12.5px;
+  width: 2px;
+  background: linear-gradient(to right, darkgreen, green, darkgreen);
+  border-radius: 1px;
+  z-index: 7;
+  margin: 106px 0 0 55px;
+}
+
+.plant-flower-1 {
+  height: 7.5px;
+  width: 7.5px;
+  background-color: #f5f2e1;
+  border-radius: 5px;
+  filter: blur(0.125px);
+  z-index: 8;
+  margin: 108px 0 0 42px; 
+}
+
+.plant-flower-2 {
+  height: 7.5px;
+  width: 7.5px;
+  background-color: #f5f2e1;
+  transform: skew(0, -30deg);
+  border-radius: 5px;
+  filter: blur(0.125px);
+  z-index: 8;
+  margin: 100px 0 0 52.5px;
+}
+
+.plant-flower-middle-1 {
+  height: 3px;
+  width: 3px;
+  background-color: orange;
+  border-radius: 1.25px;
+  z-index: 9;
+  margin: 110.5px 0 0 44px;
+}
+
+.plant-flower-middle-2 {
+  height: 3px;
+  width: 3px;
+  background-color: orange;
+  transform: skew(0, -30deg);
+  border-radius: 1.25px;
+  z-index: 9;
+  margin: 102px 0 0 54.5px;
+}
+
+.grass, .grass-hill-1, .grass-hill-2, .day-or-night-sky, .sun-or-moon, .shine, .cloud-1, .cloud-2, .cloud-3, .cloud-4, .star-1, .star-2, .star-3, .star-4, .star-5, .star-6 {
+  position: absolute;
+}
+
+.grass {
+  width: 50px;
+  height: 25px;
+  background-color: green;
+  transform: skew(0, -30deg);
+  z-index: 3;
+  margin: 0 0 0 20px;
+}
+
+.grass-hill-1 {
+  width: 20px;
+  height: 20px;
+  background-color: green;
+  transform: skew(0, -30deg);
+  border-radius: 10px;
+  z-index: 3;
+  margin: -10px 0 0 45px;
+}
+
+.grass-hill-2 {
+  width: 30px;
+  height: 30px;
+  background-color: green;
+  transform: skew(0, -30deg);
+  border-radius: 15px;
+  z-index: 3;
+  margin: -5px 0 0 25px;
+}
+
+.day-or-night-sky {
+  width: 50px;
+  height: 25px;
+  background-color: lightblue;
+  transform: skew(0, -30deg);
+  margin: -25px 0 0 20px;
+  animation: change-background-color 50s linear 0s infinite normal;
+}
+
+.sun-or-moon {
+  width: 10px;
+  height: 10px;
+  background-color: orange;
+  transform: skew(0, -30deg);
+  border-radius: 5px;
+  z-index: 2;
+  margin: -17.5px 0 0 60px;
+  animation: sun_to_moon 50s linear 0s infinite normal;
+}
+
+.cloud-1, .cloud-2, .cloud-3, .cloud-4 {
+  width: 10px;
+  height: 5px;
+  background-color: #ddd;
+  transform: skew(0, -30deg);
+  border-radius: 2.5px;
+  opacity: 0.9;
+  z-index: 3;
+  animation: cloud_color 50s linear 0s infinite normal;
+}
+
+.cloud-1 {
+  margin: -5px 0 0 25px;
+}
+
+.cloud-2 {
+  margin: -17.5px 0 0 35px;
+}
+
+.cloud-3 {
+  margin: -17.5px 0 0 45px;
+}
+
+.cloud-4 {
+  margin: -27.5px 0 0 57.5px;
+}
+
+.star-1, .star-2, .star-3, .star-4, .star-5, .star-6 {
+  width: 2px;
+  height: 2px;
+  background-color: lightblue;
+  transform: skew(0, -30deg);
+  border-radius: 1.5px;
+  opacity: 0.9;
+  z-index: 1;
+  animation: star_color 50s linear 0s infinite normal;
+}
+
+.star-1 {
+  margin: -25px 0 0 50px;
+}
+
+.star-2 {
+  margin: -20px 0 0 60px;
+}
+
+.star-3 {
+  margin: -15px 0 0 55px;
+}
+
+.star-4 {
+  margin: -18px 0 0 35px;
+}
+
+.star-5 {
+  margin: -10px 0 0 25px;
+}
+
+.star-6 {
+  margin: 5px 0 0 25px;
+}
+
+.desk {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  margin: auto;
+}
+
+.desk-top, desk-leg-1, desk-leg-2, desk-leg-3, desk-leg-4 {
+  position: relative;
+}
+
+.desk-top {
+  background-color: #333;
+  width: 70px;
+  height: 25px;
+  margin: 210px -80px auto auto;
+  transform: skew(-50deg, 30deg);
+  border-radius: 5px;
+  box-shadow: 1px 1px #333;
+  z-index: 3;
+}
+
+.desk-leg-1 {
+  height: 30px;
+  width: 6px;
+  background: linear-gradient(to right, #333, #222);
+  border-radius: 1.5px;
+  margin: 4px 0 0 179px;
+  z-index: 2;
+}
+
+.desk-leg-2 {
+  height: 30px;
+  width: 6px;
+  background: linear-gradient(to right, #333, #222);
+  border-radius: 1.5px;
+  margin: -20px 0 0 162px;
+  z-index: 2;
+}
+
+.desk-leg-3 {
+  height: 30px;
+  width: 6px;
+  background: linear-gradient(to right, #333, #222);
+  border-radius: 1.5px;
+  margin: -62px 0 0 102px;
+  z-index: 2;
+}
+
+.stool {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  margin: auto;
+}
+
+.stool-base, .stool-arm-holder, .stool-main-arm, .stool-seat {
+  position: relative;
+}
+
+.stool-base {
+  width: 17.5px;
+  height: 15px;
+  background: radial-gradient(gray, #eee);
+  transform: skew(-50deg, 30deg);
+  border-radius: 10px 15px 10px 15px;
+  box-shadow: 1px 1px #ddd;
+  z-index: 2;
+  margin: 265px 0 0 105px;
+}
+
+.stool-arm-holder {
+  width: 5px;
+  height: 15px;
+  background: linear-gradient(to right, gray, #eee, gray);
+  border-radius: 1px;
+  z-index: 3;
+  margin: -22.5px 0 0 111px;
+}
+
+.stool-main-arm {
+  width: 3.5px;
+  height: 15px;
+  background: linear-gradient(to right, #eee, gray, #eee);
+  border-radius: 1px;
+  z-index: 2;
+  margin: -25px 0 0 111.5px;
+}
+
+.stool-seat {
+  width: 15px;
+  height: 12.5px;
+  background-color: orange;
+  transform: skew(-50deg, 30deg);
+  border-radius: 7.5px;
+  box-shadow: 1px 1px #ffb964;
+  z-index: 4;
+  margin: -24px 0 0 106px;
+}
+
+.rug {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  margin: auto;
+} 
+
+.computer {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  margin: auto;
+}
+
+.computer-box, .computer-screen, .keyboard-and-mouse {
+  position: relative;
+  margin: auto;
+} 
+
+.computer-box-side, .computer-box-top, .computer-box-front, .computer-box-panel, .computer-fan-1, .computer-fan-1-middle, .computer-fan-2, .computer-fan-2-middle, .computer-fan-3, .computer-fan-3-middle, .computer-stand-1, .computer-stand-2, .computer-stand-3 {
+  position: absolute;
+}
+
+.computer-box-side {
+  width: 20px;
+  height: 25px;
+  background-color: #ccc;
+  transform: skew(0, -40deg);
+  margin: 265px 0 0 185px;
+  z-index: 2;
+}
+
+.computer-box-top {
+  width: 15px;
+  height: 17px;
+  background-color: #ccc;
+  transform: skew(-50deg, 30deg);
+  margin: 252.5px 0 0 180px;
+  z-index: 2;
+}
+
+.computer-box-front {
+  width: 15px;
+  height: 25px;
+  background-color: #ccc;
+  transform: skew(0, 30deg);
+  margin: 269px 0 0 170px;
+  z-index: 2;
+}
+
+.computer-stand-1 {
+  width: 2.5px;
+  height: 2.5px;
+  background-color: #444;
+  transform: skew(-50deg, 30deg);
+  border-radius: 2.5px;
+  box-shadow: 1px 1px #111;
+  z-index: 1;
+  margin: 281.5px 0 0 201px;
+}
+
+.computer-stand-2 {
+  width: 2.5px;
+  height: 2.5px;
+  background-color: #444;
+  transform: skew(-50deg, 30deg);
+  border-radius: 2.5px;
+  box-shadow: 1px 1px #111;
+  z-index: 1;
+  margin: 295.5px 0 0 184px;
+}
+
+.computer-stand-3 {
+  width: 2.5px;
+  height: 2.5px;
+  background-color: #444;
+  transform: skew(-50deg, 30deg);
+  border-radius: 2.5px;
+  box-shadow: 1px 1px #111;
+  z-index: 1;
+  margin: 288px 0 0 171px;
+}
+
+.computer-box-panel {
+  width: 10px;
+  height: 20px;
+  background-color: #000;
+  transform: skew(0, 30deg);
+  border-radius: 2.5px;
+  margin: 271px 0 0 172px;
+  z-index: 2;
+}
+
+.computer-fan-1 {
+  width: 5px;
+  height: 5px;
+  background-color: red;
+  transform: skew(0, 30deg);
+  border-radius: 2.5px;
+  z-index: 3;
+  margin: 273px 0 0 174.5px;
+  animation: change_color 10s linear 0s infinite normal;
+}
+
+.computer-fan-1-middle {
+  width: 2px;
+  height: 2px;
+  background-color: #000;
+  transform: skew(0, 30deg);
+  border-radius: 1px;
+  z-index: 4;
+  margin: 274.5px 0 0 176px;
+}
+
+.computer-fan-2 {
+  width: 5px;
+  height: 5px;
+  background-color: red;
+  transform: skew(0, 30deg);
+  border-radius: 2.5px;
+  z-index: 3;
+  margin: 279px 0 0 174.5px;
+  animation: change_color 10s linear 0.2s infinite normal;
+}
+
+.computer-fan-2-middle {
+  width: 2px;
+  height: 2px;
+  background-color: #000;
+  transform: skew(0, 30deg);
+  border-radius: 1px;
+  z-index: 4;
+  margin: 280.5px 0 0 176px;
+}
+
+.computer-fan-3 {
+  width: 5px;
+  height: 5px;
+  background-color: red;
+  transform: skew(0, 30deg);
+  border-radius: 2.5px;
+  z-index: 3;
+  margin: 285px 0 0 174.5px;
+  animation: change_color 10s linear 0.4s infinite normal;
+}
+
+.computer-fan-3-middle {
+  width: 2px;
+  height: 2px;
+  background-color: #000;
+  transform: skew(0, 30deg);
+  border-radius: 1px;
+  z-index: 4;
+  margin: 286.5px 0 0 176px;
+}
+
+.screen-text-long-1, .screen-text-long-2, .screen-text-small-1, .screen-text-small-2, .screen, .screen-case-front, .screen-case-side, .screen-case-top, .screen-stand-front, .screen-stand-side, .screen-base {
+  position: absolute;
+}
+
+.screen-text-long-1 {
+  width: 25px;
+  height: 5px;
+  background-color: limegreen;
+  transform: skew(0, 30deg);
+  border-radius: 2.5px;
+  z-index: 8;
+  margin: 188.5px 0 0 142.5px;
+  animation: screen_flicker 0.025s linear 0s infinite normal;
+}
+
+.screen-text-long-2 {
+  width: 25px;
+  height: 5px;
+  background-color: limegreen;
+  transform: skew(0, 30deg);
+  border-radius: 2.5px;
+  z-index: 8;
+  margin: 192.5px 0 0 132.5px;
+  animation: screen_flicker 0.025s linear 0s infinite normal;
+}
+
+.screen-text-small-1 {
+  width: 7.5px;
+  height: 5px;
+  background-color: limegreen;
+  transform: skew(0, 30deg);
+  border-radius: 2.5px;
+  z-index: 8;
+  margin: 178px 0 0 132.5px;
+  animation: screen_flicker 0.025s linear 0s infinite normal;
+}
+
+.screen-text-small-2 {
+  width: 7.5px;
+  height: 5px;
+  background-color: limegreen;
+  transform: skew(0, 30deg);
+  border-radius: 2.5px;
+  z-index: 8;
+  margin: 203px 0 0 160px;
+  animation: screen_flicker 0.025s linear 0s infinite normal;
+}
+
+.screen {
+  width: 40px;
+  height: 25px;
+  background-color: #000;
+  transform: skew(0, 30deg);
+  border-radius: 2.5px;
+  margin: 182px 0 0 130px;
+  z-index: 7;
+}
+
+.screen-case-front {
+  width: 50px;
+  height: 35px;
+  background-color: #ccc;
+  transform: skew(0, 30deg);
+  margin: 175px 0 0 125px;
+  z-index: 6;
+}
+
+.screen-case-top {
+  width: 50px;
+  height: 4px;
+  background-color: #ccc;
+  transform: skew(-50deg, 30deg);
+  margin: 171.5px 0 0 127px;
+  z-index: 6; 
+}
+
+.screen-case-side {
+  width: 5px;
+  height: 35px;
+  background-color: #ccc;
+  transform: skew(0, -30deg);
+  margin: 187.5px 0 0 175px;
+  z-index: 6;
+}
+
+.screen-stand-front {
+  width: 3px;
+  height: 25px;
+  background: linear-gradient(to left, gray, white);
+  transform: skew(0, 30deg);
+  margin: 191px 0 0 150px;
+  z-index: 5;
+}
+
+.screen-stand-side {
+  width: 3px;
+  height: 25px;
+  background: linear-gradient(to right, gray, white);
+  transform: skew(0, -30deg);
+  margin: 191px 0 0 153px;
+  z-index: 5;
+}
+
+.screen-base {
+  width: 15px;
+  height: 10px;
+  background-color: #ccc;
+  transform: skew(-50deg, 30deg);
+  border-radius: 10px;
+  margin: 210px 0 0 145px;
+  box-shadow: 1px 1px #bbb;
+  z-index: 4;
+}
+
+.mouse, .mouse-wheel, .keyboard, .key-1, .key-2, .key-3, .key-4, .key-5, .key-6, .space-key {
+  position: absolute;
+}
+
+.mouse {
+  height: 10px;
+  width: 7.5px;
+  background-color: #ccc;
+  transform: skew(-50deg, 30deg);
+  border-radius: 5px;
+  box-shadow: 1px 1px #bbb;
+  margin: 233px 0 0 155px;
+  z-index: 5;
+}
+
+.mouse-wheel {
+  height: 3px;
+  width: 2.5px;
+  background-color: #444;
+  transform: skew(-50deg, 30deg);
+  border-radius: 1.5px;
+  margin: 235px 0 0 159px;
+  z-index: 5;
+}
+
+.keyboard {
+  width: 35px;
+  height: 7.5px;
+  background-color: #ccc;
+  transform: skew(-50deg, 30deg);
+  border-radius: 2.5px;
+  box-shadow: 1px 1px #bbb;
+  margin: 220px 0 0 116px;
+  z-index: 5;
+}
+
+.key-1, .key-2, .key-3, .key-4, .key-5, .key-6 {
+  height: 2.5px;
+  width: 2.5px;
+  background-color: #444;
+  box-shadow: 0.5px 0.5px #555;
+  transform: skew(-50deg, 30deg);
+  border-radius: 2.5px;
+  z-index: 5;
+}
+
+.key-1 {
+  margin: 214px 0 0 121px;
+}
+
+.key-2 {
+  margin: 216.75px 0 0 126px;
+}
+
+.key-3 {
+  margin: 219.75px 0 0 131px;
+}
+
+.key-4 {
+  margin: 222.5px 0 0 136px;
+}
+
+.key-5 {
+  margin: 225.75px 0 0 141px;
+}
+
+.key-6 {
+  margin: 228.75px 0 0 146px;
+}
+
+.space-key {
+  height: 1.5px;
+  width: 30px;
+  background-color: #444;
+  transform: skew(-50deg, 30deg);
+  border-radius: 2.5px;
+  box-shadow: 0.5px 0.5px #555;
+  margin: 225px 0 0 116px;
+  z-index: 5;
+}
+
+.main-rug {
+  width: 60px;
+  height: 30px;
+  background-color: orangered;
+  transform: skew(-53deg, 33deg);
+  margin: 280px 0 0 60px;
+  border-radius: 2.5px;
+}
+
+.floor {
+  width: 71%;
+  height: 71%;
+  z-index: -10;
+  background-color: pink;
+  transform: rotate(45deg);
+  margin: 204px 31px auto 31px;
+  border-radius: 0 0 100px 0;
+}
+
+.room-walls, .floor {
+  position: absolute;
+}
+
+.room-walls {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.wall-1 {
+  background-color: #a78acf;
+  height: 100px;
+  width: 150px;
+  margin: 150px 0 auto auto;
+  transform: skew(0deg, -30deg);
+  border-radius: 10px 0 0 0;
+}
+
+.wall-2 {
+  background-color: #a78acf;
+  height: 100px;
+  width: 150px;
+  margin: 150px auto auto 0;
+  transform: skew(0deg, 30deg);
+  border-radius: 0 10px 0 0;
+}
+
+@keyframes change_color {
+  0% {
+    background-color: red;
+  }
+  
+  25% {
+    background-color: green;
+  }
+  
+  50% {
+    background-color: blue;
+  }
+  
+  75% {
+    background-color: purple;
+  }
+  
+  100% {
+    background-color: red;
+  }
+}
+
+@keyframes screen_flicker {
+  0% {
+    background-color: limegreen;
+  }
+  
+  25% {
+    background-color: limegreen;
+  }
+  
+  50% {
+    background-color: darkgreen;
+  }
+  
+  75% {
+    background-color: limegreen;
+  }
+  
+  100% {
+    background-color: limegreen;
+  }
+} 
+
+@keyframes change-background-color {
+  0% {
+    background-color: lightblue;
+  }
+  
+  40% {
+    background-color: lightblue;
+  }
+  
+  45% {
+    background-color: #f0a651;
+  }
+  
+  50% {
+    background-color: #0e0947;
+  }
+  
+  90% {
+    background-color: #0e0947;
+  }
+  
+  95% {
+    background-color: #f0a651;
+  }
+  
+  100% {
+    background-color: lightblue;
+  }
+}
+
+@keyframes cloud_color {
+  0% {
+    background-color: #ddd;
+  }
+  
+  40% {
+    background-color: #ddd;
+  }
+  
+  45% {
+    background-color: #ffb152;
+  }
+  
+  50% {
+    background-color: #3f3578;
+  }
+  
+  90% {
+    background-color: #3f3578;
+  }
+  
+  95% {
+    background-color: #ffb152;
+  }
+  
+  100% {
+    background-color: #ddd;
+  }
+}
+
+@keyframes star_color {
+  0% {
+    background-color: lightblue;
+  }
+  
+  40% {
+    background-color: lightblue;
+  }
+  
+  45% {
+    background-color: #f0a651;
+  }
+  
+  50% {
+    background-color: #fff;
+  }
+  
+  90% {
+    background-color: #fff;
+  }
+  
+  95% {
+    background-color: #f0a651;
+  }
+  
+  100% {
+    background-color: lightblue;
+  }
+}
+
+@keyframes sun_to_moon {
+  0% {
+    margin: -17.5px 0 0 60px;
+    background-color: orange;
+  }
+  
+  25% {
+    margin: -22.5px 0 0 45px;
+    background-color: orange;
+  }
+  
+  35% {
+    margin: -17.5px 0 0 35px;
+    background-color: orange;
+  }
+  
+  45% {
+    margin: 12.5px 0 0 20px;
+    background-color: orange;
+  }
+  
+  50% {
+    margin: -10px 0 0 60px;
+    background-color: white;
+  }
+  
+  55% {
+    margin: -17.5px 0 0 60px;
+    background-color: white;
+  }
+  
+  75% {
+    margin: -22.5px 0 0 45px;
+    background-color: white;
+  }
+  
+  85% {
+    margin: -17.5px 0 0 35px;
+    background-color: white;
+  }
+  
+  90% {
+    margin: 12.5px 0 0 20px;
+    background-color: white;
+  }
+  
+  95% {
+    margin: -10px 0 0 60px;
+    background-color: orange;
+  }
+  
+  100% {
+    margin: -17.5px 0 0 60px;
+    background-color: orange;
+  }
+}
+
+@keyframes change_window_ledge_color {
+  0% {
+    background-color: #f7efd7;
+  }
+  
+  40% {
+    background-color: #f7efd7;
+  }
+  
+  45% {
+    background-color: #e8c86f;
+  }
+  
+  50% {
+    background-color: #605aa6;
+  }
+  
+  90% {
+    background-color: #605aa6;
+  }
+  
+  95% {
+    background-color: #e8c86f;
+  }
+  
+  100% {
+    background-color: #f7efd7;
+  }
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <div class="isometric-room-container">
+  <div class="room-walls">
+    <div class="wall-1"></div>
+    <div class="wall-2"></div>
+  </div>
+  
+  <div class="window">
+    <div class="window-frame">
+      <div class="window-frame-top-side"></div>
+      <div class="window-frame-top-front"></div>
+      <div class="window-frame-left-side"></div>
+      <div class="window-frame-left-front"></div>
+      <div class="window-frame-right-side"></div>
+      <div class="window-frame-right-front"></div>
+      <div class="window-frame-bottom-front"></div>
+      <div class="glass"></div>
+      <div class="window-ledge-bottom"></div>
+      <div class="window-ledge-side"></div>
+    </div>
+    
+    <div class="flower-pot">
+      <div class="pot-front"></div>
+      <div class="pot-side"></div>
+      <div class="pot-top"></div>
+      <div class="plant-bed"></div>
+      <div class="plant-stalk-1"></div>
+      <div class="plant-stalk-2"></div>
+      <div class="plant-flower-1"></div>
+      <div class="plant-flower-2"></div>
+      <div class="plant-flower-middle-1"></div>
+      <div class="plant-flower-middle-2"></div>
+    </div>
+    
+    <div class="sky">
+      <div class="grass"></div>
+      <div class="grass-hill-1"></div>
+      <div class="grass-hill-2"></div>
+      <div class="day-or-night-sky"></div>
+      <div class="sun-or-moon"></div>
+      <div class="cloud-1"></div>
+      <div class="cloud-2"></div>
+      <div class="cloud-3"></div>
+      <div class="cloud-4"></div>
+      <div class="star-1"></div>
+      <div class="star-2"></div>
+      <div class="star-3"></div>
+      <div class="star-4"></div>
+      <div class="star-5"></div>
+      <div class="star-6"></div>
+    </div>
+  </div>
+  
+  <div class="desk">
+    <div class="desk-top"></div>
+    <div class="desk-leg-1"></div>
+    <div class="desk-leg-2"></div>
+    <div class="desk-leg-3"></div>
+  </div>
+  
+  <div class="stool">
+    <div class="stool-base"></div>
+    <div class="stool-arm-holder"></div>
+    <div class="stool-main-arm"></div>
+    <div class="stool-seat"></div>
+  </div>
+  
+  <div class="rug">
+    <div class="main-rug"></div>
+  </div>
+  
+  <div class="computer">
+    <div class="computer-box">
+      <div class="computer-box-side"></div>
+      <div class="computer-box-top"></div>
+      <div class="computer-box-front"></div>
+      <div class="computer-stand-1"></div>
+      <div class="computer-stand-2"></div>
+      <div class="computer-stand-3"></div>
+      <div class="computer-box-panel"></div>
+      <div class="computer-fan-1"></div>
+      <div class="computer-fan-1-middle"></div>
+      <div class="computer-fan-2"></div>
+      <div class="computer-fan-2-middle"></div>
+      <div class="computer-fan-3"></div>
+      <div class="computer-fan-3-middle"></div>
+    </div>
+    
+    <div class="computer-screen">
+      <div class="screen-text-long-1"></div>
+      <div class="screen-text-long-2"></div>
+      <div class="screen-text-small-1"></div>
+      <div class="screen-text-small-2"></div>
+      <div class="screen"></div>
+      <div class="screen-case-front"></div>
+      <div class="screen-case-side"></div>
+      <div class="screen-case-top"></div>
+      <div class="screen-stand-front"></div>
+      <div class="screen-stand-side"></div>
+      <div class="screen-base"></div>
+    </div>
+    
+    <div class="keyboard-and-mouse">
+      <div class="mouse"></div>
+      <div class="mouse-wheel"></div>
+      <div class="keyboard"></div>
+      <div class="key-1"></div>
+      <div class="key-2"></div>
+      <div class="key-3"></div>
+      <div class="key-4"></div>
+      <div class="key-5"></div>
+      <div class="key-6"></div>
+      <div class="space-key"></div>
+    </div>
+  </div>
+  
+  <div class="floor"></div>
+</div>
+  
+  
+  
+</body>
+
+</html>
