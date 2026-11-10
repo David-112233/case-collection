@@ -1,0 +1,10 @@
+{
+  "case_id": "case-213",
+  "business_background": "一个甜品品牌的“招牌甜品”信息图展示页，用四条彩色斜角色带依次介绍四款甜品。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。",
+  "functional_requirements": "主标题“INFOGRAPHIC”，说明框“Four signature desserts, one stripe each.”，下方为4条甜品信息，按顺序为：\n01｜🏠｜GINGERBREAD｜Cake muffin donut chocolate cake apple tart pie muffin.\n02｜🔔｜BROWNIE｜Cake muffin plum. Orange topping macaroon chocolate. A warm brownie with orange peel, toasted almonds and a rich chocolate centre, served with vanilla cream and a small spoonful of plum compote.\n03｜👱｜ICE CREAM｜Cake muffin donut chocolate cake apple tart pie muffin.\n04｜⚙️｜LAVA CAKE｜Cake muffin plum. Orange topping macaroon chocolate.",
+  "layout_constraints": "【整体】背景#212121，默认文字#ededed，无衬线通用字体。基准字号为视口宽度的2.25%，最小16px、最大24px。主标题、说明框、信息图自上而下水平居中，间距为1个基准字号。视口≥720px时页面四周留0.5个基准字号；<720px不留。\n【主标题】字重100（无对应字形时取最细可用字形），字号为基准字号3倍，<400px为2倍。\n【说明框】仅含指定句子，内边距0.5个基准字号，字号1.25倍基准字号；黑色投影向右下偏移2px、模糊5px，无可见边框。\n【信息图】宽度取43.75个基准字号与可用宽度中的较小值，底部留24px；黑色投影向右下偏移2px、模糊2.5px，沿实际色带轮廓分布。每条为横向彩色色带，上下内边距各1.25个基准字号，文字#121212。相邻条向上叠压12px，第2—4条顶部有前一条投下的暗影。各条高度按自己的内容需要变化，短条不被拉高到最长条同高。\n【色带】深/浅色依次为#f94144/#fc9c9e、#f8961e/#fbbe74、#90be6d/#bfd9ab、#5c7b99/#a6b7c9。图标侧前100px为纯深色，向另一端渐变为浅色。\n≥720px：奇数条左指、偶数条左右镜像。尖角位于端部垂直中点，到上下肩点水平距离50px；另一端回缩100px并竖直截断。上下边缘由肩点向截断端分别内收12px，构成逐渐收窄的斜角纸条。\n<720px：各条横跨全宽，无尖角或回缩；奇数条左端全高竖直，右端上下各内收12px，偶数条左右镜像。\n【内容】标题在描述上方，常规字重、字号1.25倍基准字号；描述字号等于基准字号。序号字号为基准字号4倍，图标2.5倍，<400px分别为2.5倍、1.75倍。图标为接近#101010的单色深色剪影。\n≥540px：序号在整个信息图的水平中线排成一列；奇数条文字在左、图标在右，偶数条镜像。≥720px时文字距尖角侧外沿100px，图标距回缩截断边12px；540—719px时两者距各自外侧12px。\n400—539px：序号与图标并排靠图标侧，奇数条为文字、序号、图标，偶数条镜像。\n<400px：每条三行，首行标题、末行描述均占满行且四周内边距4px；中行左右等宽，奇数条序号居左半正中、图标贴右外侧，偶数条镜像。",
+  "motion_constraints": "",
+  "forbidden": [
+    "禁止用图片、SVG（含内嵌标记）或截图呈现色带、序号、图标。"
+  ]
+}

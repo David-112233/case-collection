@@ -8,17 +8,32 @@ decide.py KEY DECISION TIER HITS REASON "EVIDENCE" ["NOTES"] [JS_POLICY]
           C1 (DEC-036: common technique, or answer retrievable online), R02 (duplicate of another candidate),
           J1 (JS core, no CSS equivalent), X1 (unusable source / external dependency), T* (other tier, keep for later batch)
   JS_POLICY: none | remove | replace | reject
+
+With the environment variable COLLECT_AGENT=<name> the row goes to screening_<name>.csv instead, and the pen
+must be claimed by <name> in claims.csv (see claim.py). Without it the legacy screening.csv is used.
 """
 import csv
+import os
 import sys
 from datetime import date
 from pathlib import Path
 
-PATH = Path(__file__).resolve().parent / "screening.csv"
+ROOT = Path(__file__).resolve().parent
+AGENT = os.environ.get("COLLECT_AGENT", "").strip()
+PATH = ROOT / (f"screening_{AGENT}.csv" if AGENT else "screening.csv")
 FIELDS = ["key", "url", "decision", "tier", "hits", "reason", "js_policy", "evidence", "notes", "decided_on"]
 
 args = sys.argv[1:]
 key, decision, tier, hits, reason, evidence = args[:6]
+if AGENT:
+    owner = None
+    if (ROOT / "claims.csv").exists():
+        for claimed in csv.DictReader((ROOT / "claims.csv").open(encoding="utf-8-sig", newline="")):
+            if (claimed.get("key") or "").lower() == key.lower():
+                owner = claimed["agent"]
+                break
+    if owner != AGENT:
+        sys.exit(f"refused: {key} is {'claimed by ' + owner if owner else 'not claimed'}; claim it first (claim.py)")
 notes = args[6] if len(args) > 6 else ""
 js_policy = args[7] if len(args) > 7 else "none"
 assert decision in {"accept", "reject", "hold"}, decision

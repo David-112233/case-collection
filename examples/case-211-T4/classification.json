@@ -1,0 +1,14 @@
+{
+  "case_id": "case-211-T4",
+  "tier": "T4",
+  "difficulty_features": [
+    "H2",
+    "H4",
+    "H8"
+  ],
+  "evidence": "外层横向卡片轮播内嵌竖向图片轮播(双层snap)；吸附项经scroll-state驱动anchor定位的标题/图注显隐(H2)；::scroll-marker(旗帜内容)/anchor position-area(H4)；双轴snap+scroll-state+anchor+marker组合(H8)",
+  "classifier": "Claude (claude-opus-5-5), manual source reading + browser render; no API",
+  "screening_notes": "检查点A用户确认收录；主题CSS被拦截，配色需在input中自定；外部图片需占位",
+  "user_confirmation": "checkpoint A, 2026-10-18",
+  "rules": "difficulty_model_v2_1 T1-T6; DEC-033 thresholds as amended by DEC-035"
+}

@@ -2,18 +2,65 @@
 
 更新：2026-11-10。整理者：Claude。本页把 DATA-001/DATA-002 已确认的做法写成一份可独立执行的说明；决策原文见 [DECISIONS](../project_state/DECISIONS.md) 的 DEC-031—036，方案原文见 [B1 工作方案](../project_state/handoffs/DATA-001-workplan-B1-20261002.md)。
 
+## 0. 先读这些
+
+| 顺序 | 文件 | 读它是为了 |
+|---|---|---|
+| 1 | [项目背景](../docs/PROJECT_BACKGROUND.md) | 明白基准测什么、为什么只要难题、什么作品能改成案例 |
+| 2 | 本页 | 步骤、标准、协作规则 |
+| 3 | [examples/](../examples/) | 看 4 个已入库案例的题目和分类理由，知道成品长什么样 |
+| 4 | [B1/screening.csv](B1/screening.csv) | 看 265 条历史判断的写法，尤其是 7 条 accept 和被用户否掉的 U1、U2 |
+| 5 | [existing_cases_catalog.csv](existing_cases_catalog.csv) | 库内 220 例的题材，避免重复 |
+
+需要查原文时再看：[任务定义 v5.2](../docs/TASK_DEFINITION_v5_2_synced.md)、[类型与难度模型 v2.1](../docs/difficulty_model_v2_1.md)、[扩量方案](../project_state/handoffs/DATA-001-expansion-plan-20260928.md)。
+
 ## 1. 一句话任务
 
 从 CodePen 公开作品里找出**技术罕见、对模型难**的纯 CSS（或可改成纯 CSS）作品，抓取源码，逐个判断并写出理由，最后交一份“建议入库”清单给用户挑选。
+
+## 1.5 两个采集者的协作规则
+
+本仓库由 dot 和 duet 两个智能体同时采集。规则只有一条主线：**先认领，后处理；谁先认领归谁。**
+
+**公共登记表是 [B1/claims.csv](B1/claims.csv)。** 一行一个作品，只追加、不修改、不删除。同一个作品出现多行时，靠前的那行有效。
+
+每一轮按这个顺序做：
+
+```bash
+git pull --rebase origin main                                   # 1 先同步
+# 2 把本轮找到的链接写进自己的候选文件 data_intake/B1/candidates_dot_01.csv
+python data_intake/B1/claim.py dot data_intake/B1/candidates_dot_01.csv    # 3 认领
+git add data_intake/B1/claims.csv data_intake/B1/candidates_dot_01.csv
+git commit -m "认领：dot 第01轮" && git push origin main          # 4 立刻推到 main
+```
+
+- 第 3 步会自动跳过三类作品：对方已认领的、历史上已判断过的、已在库内的。
+- 第 4 步推送被拒，说明对方刚推过。执行 `git pull --rebase origin main` 后再推即可，登记表会自动合并。然后运行 `python data_intake/B1/claim.py --check`，它会列出两边撞车的作品和归属，排在后面的一方放弃。
+- **认领推送成功之后才能开始抓取和判断。** 只处理归自己的作品。
+
+各写各的文件，互不触碰：
+
+| 内容 | dot 写 | duet 写 |
+|---|---|---|
+| 候选链接 | `B1/candidates_dot_NN.csv` | `B1/candidates_duet_NN.csv` |
+| 筛选判断 | `B1/screening_dot.csv` | `B1/screening_duet.csv` |
+| 源码 | `B1/raw/` 下自己认领的作品目录 | 同左 |
+| 工作分支 | `collect/dot-日期-NN` | `collect/duet-日期-NN` |
+
+- 旧的 `B1/screening.csv` 和 `B1/candidates*.csv`（不带名字的）是历史记录，两人都只读不写。
+- 默认搜索分工，减少撞车：**dot 主找 T1、T2、T6；duet 主找 T4、T5、T3。** 这只是搜索方向。顺手发现对方方向的好作品照样可以认领，谁先登记归谁。
+- 不重判对方的作品。对对方的结论有不同看法时，写在自己的 PR 说明里，由用户裁决，不要改对方的文件。
+- `B1/raw/` 里历史留下的 24 份暂留候选（`screening.csv` 中的 hold）不属于任何一方，用户指派后再处理。
+- 只有“认领”这一种提交可以直接推 `main`。其他成果一律走自己的分支和 PR。
 
 ## 2. 整条路径与云端范围
 
 | 步 | 内容 | 产出 | 云端做吗 |
 |---|---|---|---|
-| 1 发现 | 网页搜索，收集 CodePen 链接 | `B1/candidates_N.csv` | 做 |
+| 1 发现并认领 | 网页搜索，收集 CodePen 链接，登记到公共表 | `B1/candidates_<名字>_NN.csv`、`B1/claims.csv` | 做 |
 | 2 获取 | 经 cdpn.io 抓编译后的 HTML+CSS | `B1/raw/{作者}__{ID}/` | 做 |
 | 3 汇总 | 生成一张源码规模与特性表 | `B1/triage.csv` | 做 |
-| 4 筛选 | 读源码、看渲染，定档位、难度特征、JS 处理、去留 | `B1/screening.csv` | 做 |
+| 4 筛选 | 读源码、看渲染，定档位、难度特征、JS 处理、去留 | `B1/screening_<名字>.csv` | 做 |
 | **检查点 A** | **用户从“建议入库”里挑选** | — | **停在这里** |
 | 5 入库 | 分配案例编号，写来源与分类文件 | `cases/case-NNN-TX/` | 不做 |
 | 6 写 input | 依据源码实际效果写 `input.json` | 案例目录 | 不做 |
@@ -49,7 +96,7 @@ export PYTHONUTF8=1
 
 ### 第 1 步：发现候选
 
-用网页搜索找链接，写入新文件 `data_intake/B1/candidates_5.csv`（之后递增），三列：
+用网页搜索找链接，写入自己的新文件 `data_intake/B1/candidates_<名字>_01.csv`（之后递增），三列：
 
 ```csv
 url,target_tier,found_via
@@ -59,12 +106,15 @@ https://codepen.io/作者/pen/ID,T4,websearch-2026-11-10
 - 搜索词用“档位 × 难度机制”组合，例如 `codepen scroll-state container query table`、`codepen pure css isometric city`、`codepen css only game checkbox`、`codepen animation-timeline view() landing page`。
 - **不要**加 “no JavaScript”“pure CSS only” 这类限定词，含 JS 的作品也可能改造后收入。
 - 其他线索：GitHub 上的 awesome 列表（css-art、pure-css、css-only 主题）里的 CodePen 链接；常产出难题的作者，如 argyleink、jh3y、bramus、una、thebabydino、utilitybend、giana、hexagoncircle、amit_sheen。
-- 已判断过的链接都在 `B1/screening.csv`，重复提交会被第 2 步自动跳过，但尽量在发现时就避开。
+- 写完后按第 1.5 节认领并推送。已判断过、已入库、对方已认领的链接会在认领时自动跳过。
 
 ### 第 2 步：获取源码
 
+只抓归自己的作品：
+
 ```bash
-python scripts/codepen_collection/fetch_cdpn.py --candidates data_intake/B1/candidates_5.csv --out data_intake/B1/raw
+python data_intake/B1/claim.py --owned dot > /tmp/owned_dot.csv
+python scripts/codepen_collection/fetch_cdpn.py --candidates /tmp/owned_dot.csv --out data_intake/B1/raw
 ```
 
 - 脚本请求 `https://cdpn.io/{作者}/fullpage/{ID}`，默认每 2 秒一次，不要调快。
@@ -79,7 +129,7 @@ python scripts/codepen_collection/fetch_cdpn.py --candidates data_intake/B1/cand
 python data_intake/B1/triage.py
 ```
 
-输出 `B1/triage.csv`：每个候选的 JS 字符数、CSS 字符数、元素数、keyframes 数、命中的 CSS 特性。用它先排掉明显太小的作品（元素很少、CSS 很短的单组件）。这张表每次按 `raw/` 现有内容整张重写，仓库里现存的那份是 10 月的旧快照，被覆盖属正常。
+输出 `B1/triage.csv`：每个候选的 JS 字符数、CSS 字符数、元素数、keyframes 数、命中的 CSS 特性。用它先排掉明显太小的作品（元素很少、CSS 很短的单组件）。这张表每次按 `raw/` 现有内容整张重写，是本地辅助文件，不入库、不提交。
 
 ### 第 4 步：逐个筛选
 
@@ -90,9 +140,10 @@ python data_intake/B1/peek.py 作者__ID            # 压缩后的 CSS 与正文
 python data_intake/B1/shot.py data_intake/B1/raw/作者__ID/source.html /tmp/shots/作者__ID --widths=1280,375
 ```
 
-判断完用 `decide.py` 记一行（同一个 key 再记一次会覆盖旧行）：
+判断完用 `decide.py` 记一行（同一个 key 再记一次会覆盖旧行）。先设好自己的名字，记录会写进 `screening_<名字>.csv`；不是自己认领的作品会被拒绝：
 
 ```bash
+export COLLECT_AGENT=dot
 python data_intake/B1/decide.py KEY DECISION TIER HITS REASON "证据" "备注" JS_POLICY
 python data_intake/B1/decide.py una__myJOjQx accept T4 H2,H4,H6,H8 - "横向吸附日卡片；scroll-state(snapped)联动当前卡片；counter生成天数编号" "外部图标字体需替换" none
 ```
@@ -178,8 +229,8 @@ python data_intake/B1/decide.py una__myJOjQx accept T4 H2,H4,H6,H8 - "横向吸�
 
 ## 7. 交付
 
-- 在本仓库的新分支上提交，开 Pull Request，不要直接推 `main`。
-- 改动只应出现在：`data_intake/B1/candidates_N.csv`、`data_intake/B1/raw/`、`data_intake/B1/triage.csv`、`data_intake/B1/screening.csv`。
+- 认领按第 1.5 节直接推 `main`；筛选成果在自己的分支 `collect/<名字>-日期-NN` 上提交，开 Pull Request。
+- PR 里的改动只应出现在：`data_intake/B1/screening_<名字>.csv`、`data_intake/B1/raw/` 下自己认领的作品目录、`data_intake/B1/raw/fetch_log.jsonl`。
 - PR 说明里写清：新增候选数、抓取成功与失败数、各原因码数量、建议入库清单（链接、档位、命中特征、为什么难）、没做完的部分。
 - 宁可少报。每轮建议入库控制在 10 例以内，方便用户逐个看。
 

@@ -1,0 +1,13 @@
+{
+  "case_id": "case-213-T1",
+  "tier": "T1",
+  "difficulty_features": [
+    "H5",
+    "H6"
+  ],
+  "evidence": "斜切(clip-path)卡片锯齿交替排列，奇偶项由单变量切换方向(H5)；counter自动编号(H6)；5个断点靠自定义属性开关切换布局",
+  "classifier": "Claude (claude-opus-5-5), manual source reading + browser render; no API",
+  "screening_notes": "检查点A用户确认收录；外部字体名改通用回退",
+  "user_confirmation": "checkpoint A, 2026-10-18",
+  "rules": "difficulty_model_v2_1 T1-T6; DEC-033 thresholds as amended by DEC-035"
+}

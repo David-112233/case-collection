@@ -1,0 +1,15 @@
+{
+  "case_id": "case-214-T4",
+  "tier": "T4",
+  "difficulty_features": [
+    "H2",
+    "H4",
+    "H6",
+    "H8"
+  ],
+  "evidence": "两周行程页：横向吸附日卡片，::scroll-button/::scroll-marker以counter生成天数编号，scroll-state(snapped)联动当前卡片，anchor定位按钮与指示点，周次切换",
+  "classifier": "Claude (claude-opus-5-5), manual source reading + browser render; no API",
+  "screening_notes": "用户第二批确认收录；待用户挑选；Material Symbols外部图标字体需替换；作者注明计数器有TODO",
+  "user_confirmation": "batch 2 selection, 2026-10-18",
+  "rules": "difficulty_model_v2_1 T1-T6; DEC-033 thresholds as amended by DEC-035"
+}

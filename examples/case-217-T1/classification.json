@@ -1,0 +1,12 @@
+{
+  "case_id": "case-217-T1",
+  "tier": "T1",
+  "difficulty_features": [
+    "H5"
+  ],
+  "evidence": "137元素静态3D等距塔楼场景：preserve-3d多面体拼装、整体rotateX/rotateY视角",
+  "classifier": "Claude (claude-opus-5-5), manual source reading + browser render; no API",
+  "screening_notes": "用户第二批确认收录；符合DEC-035强H5，待用户挑选",
+  "user_confirmation": "batch 2 selection, 2026-10-18",
+  "rules": "difficulty_model_v2_1 T1-T6; DEC-033 thresholds as amended by DEC-035"
+}
