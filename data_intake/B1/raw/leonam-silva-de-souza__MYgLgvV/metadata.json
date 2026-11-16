@@ -1,0 +1,68 @@
+{
+  "source_id": "codepen:leonam-silva-de-souza/myglgvv",
+  "author": "leonam-silva-de-souza",
+  "pen_id": "MYgLgvV",
+  "url": "https://codepen.io/leonam-silva-de-souza/pen/MYgLgvV",
+  "acquisition": "cdpn_fullpage",
+  "acquisition_url": "https://cdpn.io/leonam-silva-de-souza/fullpage/MYgLgvV",
+  "retrieved_at": "2026-11-16T13:20:30+00:00",
+  "license": "MIT (CodePen public pen default)",
+  "candidate_target_tier": "T1",
+  "candidate_found_via": "websearch-2026-11-16-traditional-layout",
+  "fetch_status": "ok",
+  "title": "GameX - Gaming Website Landing Page",
+  "canonical_url": "https://codepen.io/leonam-silva-de-souza/pen/MYgLgvV",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "948be97359455692edb51484d9a723a026a4bc698021ad2273bf7ad8a7641cae",
+  "source_html_sha256": "9f456bbb8f15ad71f43cde600b992db7cfb10a78fd991c0343eb154f75c92733",
+  "analysis": {
+    "js": {
+      "has_js": true,
+      "inline_js_chars": 921,
+      "external_scripts": [
+        "https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js",
+        "https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js",
+        "https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js",
+        "script.js"
+      ],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 0,
+      "scroll_snap": true,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": false,
+      "clip_path": true,
+      "css_counter": false,
+      "media_query": true
+    },
+    "external_stylesheets": [
+      "style.css"
+    ],
+    "css_imports": [
+      "https://fonts.googleapis.com/css2?family=Sonsie+One&display=swap"
+    ],
+    "css_chars": 26158,
+    "element_count": 335,
+    "html_chars": 54244
+  }
+}

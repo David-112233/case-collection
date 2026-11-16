@@ -1,0 +1,61 @@
+{
+  "source_id": "codepen:yakraj/qwyyyrq",
+  "author": "Yakraj",
+  "pen_id": "QWyyYRQ",
+  "url": "https://codepen.io/Yakraj/pen/QWyyYRQ",
+  "acquisition": "cdpn_fullpage",
+  "acquisition_url": "https://cdpn.io/Yakraj/fullpage/QWyyYRQ",
+  "retrieved_at": "2026-11-16T13:29:26+00:00",
+  "license": "MIT (CodePen public pen default)",
+  "candidate_target_tier": "T1",
+  "candidate_found_via": "websearch-2026-11-16-complex-spatial",
+  "fetch_status": "ok",
+  "title": "CSS Castle",
+  "canonical_url": "https://codepen.io/Yakraj/pen/QWyyYRQ",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "d23d63dd12bf495ed5d9cdadd81e6a206d601581b73245d10d8c01f7c4fa3dd2",
+  "source_html_sha256": "f23495ae636cfa037bbbf2715c65a4eea708b1973c7ac9defc9b16a6cb68a625",
+  "analysis": {
+    "js": {
+      "has_js": false,
+      "inline_js_chars": 0,
+      "external_scripts": [],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 44,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": false,
+      "clip_path": false,
+      "css_counter": false,
+      "media_query": false
+    },
+    "external_stylesheets": [
+      "style.css"
+    ],
+    "css_imports": [],
+    "css_chars": 26715,
+    "element_count": 161,
+    "html_chars": 33755
+  }
+}
