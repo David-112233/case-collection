@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>7 Fantastic Landing Pages Design Ideas</title>
+
+    <link rel="canonical" href="https://codepen.io/alessiomarcone/pen/JjyBzwm">
+      <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+   
+  
+  
+  
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@700&family=Questrial&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  text-rendering: optimizeLegibility;
+  background-color: #fff;
+  height: 100%;
+  font-family: "Space Grotesk", sans-serif;
+  scroll-behavior: smooth;
+  background-color: #f7f7f7;
+}
+
+.btn-primary {
+  background-color: #f9322e;
+  margin-bottom: 1rem;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 7px;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  -ms-border-radius: 7px;
+  -o-border-radius: 7px;
+}
+.btn-primary:hover {
+  background-color: #ab2927;
+}
+
+h1 {
+  color: #1b252b;
+  font-size: 45px;
+  font-weight: 800;
+  line-height: 140%;
+  margin-bottom: 2rem;
+}
+h1 span {
+  color: #f9322e;
+}
+
+p {
+  color: #858b8d;
+  font-size: 19px;
+  font-weight: 300;
+  letter-spacing: 0.3px;
+  line-height: 200%;
+  margin-bottom: 2.2rem;
+}
+
+.icon {
+  margin-bottom: 2rem;
+  width: 80px;
+  height: auto;
+}
+.icon svg {
+  width: 40px;
+  height: auto;
+}
+.icon path {
+  fill: #f9322e;
+}
+
+.img-wrapper {
+  overflow: hidden;
+  border-radius: 14px;
+  -webkit-border-radius: 14px;
+  -moz-border-radius: 14px;
+  -ms-border-radius: 14px;
+  -o-border-radius: 14px;
+  aspect-ratio: 1/1;
+}
+
+section {
+  height: 100vh;
+  padding: 4rem 0;
+  margin-bottom: 2rem;
+  background-color: #fff;
+  border-bottom: 2px solid #1b252b;
+  border-top: 2px solid #1b252b;
+  overflow: hidden;
+}
+section#standard .content-wrapper {
+  padding-right: 8rem;
+}
+section#standard .content-wrapper h1 {
+  color: #1b252b;
+  margin-bottom: 2rem;
+}
+section#standard .content-wrapper h1 span {
+  color: #f9322e;
+}
+section#standard .content-wrapper p {
+  color: #858b8d;
+  margin-bottom: 2rem;
+}
+section#centered {
+  position: relative;
+}
+section#centered::after {
+  content: "";
+  background: white;
+  background: -moz-linear-gradient(0deg, white 0%, rgba(255, 255, 255, 0) 100%);
+  background: -webkit-linear-gradient(0deg, white 0%, rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(0deg, white 0%, rgba(255, 255, 255, 0) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endColorstr="#ffffff",GradientType=1);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 180px;
+  width: 100%;
+}
+section#centered .icon {
+  margin: auto;
+  margin-bottom: 2rem;
+}
+section#centered .img-wrapper {
+  margin-top: 2rem;
+  position: relative;
+}
+section#backgroundImage {
+  background-image: url("https://images.unsplash.com/photo-1517935706615-2717063c2225?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80");
+  background-size: cover;
+  position: relative;
+  background-position: center;
+}
+section#backgroundImage::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #1b252b;
+  opacity: 0.851;
+  z-index: 0;
+}
+section#backgroundImage .content-wrapper {
+  position: relative;
+  z-index: 2;
+}
+section#backgroundImage .content-wrapper .icon {
+  margin: auto;
+  margin-bottom: 2rem;
+}
+section#backgroundImage .content-wrapper .img-wrapper {
+  margin-top: 2rem;
+  position: relative;
+}
+section#backgroundRight {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+section#backgroundRight .img-wrapper {
+  height: 100vh;
+  border-radius: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  -o-border-radius: 0;
+}
+section#hugeHeadline {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+section#hugeHeadline h1 {
+  font-size: 5rem;
+}
+section#hugeHeadline .img-wrapper {
+  height: 100vh;
+  border-radius: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  -o-border-radius: 0;
+}
+section#hugeHeadline button {
+  background-color: #1b252b;
+  transition: all 0.3s ease-out;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+}
+section#hugeHeadline button:hover {
+  background-color: #283c48;
+}
+section#fullMinimalism .icon {
+  margin: auto;
+  margin-bottom: 2rem;
+}
+section#fullMinimalism .icon path {
+  fill: #1b252b;
+}
+section#fullMinimalism .content-wrapper h1 span {
+  color: #1b252b;
+}
+section#fullMinimalism .content-wrapper button {
+  background-color: #1b252b;
+  color: #fff;
+}
+section#fullMinimalism .content-wrapper button:hover {
+  background-color: #283c48;
+}
+section#brutalism {
+  background-color: #4dd8ff;
+}
+section#brutalism h1 {
+  font-size: 7rem;
+  line-height: 8rem;
+  margin-bottom: 3rem;
+  font-family: "Questrial", sans-serif;
+  color: #fff;
+}
+section#brutalism h1 span {
+  color: #0001fe;
+}
+section#brutalism h1 .bg-image {
+  background: url("https://images.unsplash.com/photo-1517935706615-2717063c2225?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80");
+  background-position: center;
+  background-size: auto;
+  background-repeat: no-repeat;
+  color: #de466c;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+section#brutalism button {
+  background-color: #0001fe;
+  color: #fff;
+  padding: 20px 70px;
+  border-radius: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  -o-border-radius: 0;
+  transition: all 0.3s ease-out;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+}
+section#brutalism button:hover {
+  background-color: #0d0db0;
+}
+section#brutalism .icon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 80px;
+  height: auto;
+}
+section#brutalism .icon svg {
+  width: 80px;
+  height: auto;
+}
+section#brutalism .icon path {
+  fill: #fff;
+}
+
+footer {
+  background-color: #1b252b;
+  padding: 4rem 0;
+  text-align: center;
+}
+footer p {
+  color: #fff;
+}
+footer a {
+  color: #f9322e;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 2px;
+  transition: all 0.3s ease-out;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+}
+footer a:hover {
+  color: #ab2927;
+}
+footer .contact-list {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+footer .contact-list li {
+  padding: 0 3rem;
+}
+footer .contact-list li a {
+  color: #fff;
+  opacity: 1;
+  transition: all 0.3s ease-out;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  font-size: 16px;
+}
+footer .contact-list li a:hover {
+  opacity: 0.81;
+}
+footer .contact-list li a ion-icon {
+  font-size: 24px;
+}
+
+.dark h1 {
+  color: #fff;
+}
+.dark h1 span {
+  color: #fff;
+}
+.dark p {
+  font-size: 17px;
+  line-height: 200%;
+  color: #b8bdbe;
+  margin-bottom: 2.2rem;
+}
+.dark .icon path {
+  fill: #fff;
+}
+.dark .btn-primary {
+  color: #1b252b;
+  background-color: #fff;
+  transition: all 0.3s ease-out;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+}
+.dark .btn-primary:hover {
+  background-color: #e3e3e3;
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <body>
+    <main>
+
+      <!-- Standard Landing Page -->
+      <section id="standard">
+        <div class="container h-100 d-flex align-items-center">
+          <div class="row h-100 d-flex align-items-center">
+            <div class="col-lg-6 offset-lg-1">
+              <div class="content-wrapper">
+                <div class="icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="346.304" height="346.304" viewBox="0 0 346.304 346.304">
+                    <path id="Tracciato_1" 
+                          data-name="Tracciato 1" 
+                          d="M2128.625-1436.29l-150.2,4.888a1.284,1.284,0,0,1-.919-2.22l109.664-102.752a9.3,9.3,0,0,0,.824-12.874,9.093,9.093,0,0,0-13.443-.191l-102.967,109.9a1.284,1.284,0,0,1-2.22-.919l4.9-150.517a9.09,9.09,0,0,0-9.086-9.386,9.089,9.089,0,0,0-9.085,9.386l4.9,150.517a1.284,1.284,0,0,1-2.22.919l-102.751-109.664a9.3,9.3,0,0,0-12.875-.824,9.092,9.092,0,0,0-.191,13.443l109.895,102.967a1.284,1.284,0,0,1-.92,2.22l-150.2-4.888a9.3,9.3,0,0,0-9.686,8.521,9.092,9.092,0,0,0,9.37,9.641l150.516-4.9a1.284,1.284,0,0,1,.92,2.22l-109.664,102.751a9.3,9.3,0,0,0-.824,12.875,9.091,9.091,0,0,0,13.442.191l102.968-109.9a1.284,1.284,0,0,1,2.22.92l-4.9,150.516a9.09,9.09,0,0,0,9.085,9.387,9.091,9.091,0,0,0,9.086-9.387l-4.9-150.516a1.284,1.284,0,0,1,2.22-.92l102.967,109.9a9.091,9.091,0,0,0,13.442-.191,9.294,9.294,0,0,0-.823-12.874l-109.664-102.752a1.284,1.284,0,0,1,.919-2.22l150.517,4.9a9.092,9.092,0,0,0,9.37-9.641A9.3,9.3,0,0,0,2128.625-1436.29Z" transform="translate(-1792.024 1600.366)"/>
+                  </svg>                  
+                </div>
+                  <h1>
+                    Best places to spend
+                    a Friday night out in <span>Toronto</span>
+                  </h1>
+                  <p>
+                    Wanna party? We got you! Partou tells you when and where the loudest party is art. Grap your friends, dress up and let's go!
+                  </p>
+                  <button class="btn btn-primary">
+                    Get started
+                  </button>
+
+              </div>
+            </div>
+            <div class="col-lg-5">
+              <div class="img-wrapper">
+                <img src="https://images.unsplash.com/photo-1517935706615-2717063c2225?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80" class="img-fluid" alt="Toronto Skyline">
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End Standard Landing Page -->
+      
+      <!-- Centered Landing Page  -->
+      <section id="centered">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-6 offset-lg-3">
+              <div class="content-wrapper text-center">
+                <div class="icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="346.304" height="346.304" viewBox="0 0 346.304 346.304">
+                    <path id="Tracciato_1" 
+                          data-name="Tracciato 1" 
+                          d="M2128.625-1436.29l-150.2,4.888a1.284,1.284,0,0,1-.919-2.22l109.664-102.752a9.3,9.3,0,0,0,.824-12.874,9.093,9.093,0,0,0-13.443-.191l-102.967,109.9a1.284,1.284,0,0,1-2.22-.919l4.9-150.517a9.09,9.09,0,0,0-9.086-9.386,9.089,9.089,0,0,0-9.085,9.386l4.9,150.517a1.284,1.284,0,0,1-2.22.919l-102.751-109.664a9.3,9.3,0,0,0-12.875-.824,9.092,9.092,0,0,0-.191,13.443l109.895,102.967a1.284,1.284,0,0,1-.92,2.22l-150.2-4.888a9.3,9.3,0,0,0-9.686,8.521,9.092,9.092,0,0,0,9.37,9.641l150.516-4.9a1.284,1.284,0,0,1,.92,2.22l-109.664,102.751a9.3,9.3,0,0,0-.824,12.875,9.091,9.091,0,0,0,13.442.191l102.968-109.9a1.284,1.284,0,0,1,2.22.92l-4.9,150.516a9.09,9.09,0,0,0,9.085,9.387,9.091,9.091,0,0,0,9.086-9.387l-4.9-150.516a1.284,1.284,0,0,1,2.22-.92l102.967,109.9a9.091,9.091,0,0,0,13.442-.191,9.294,9.294,0,0,0-.823-12.874l-109.664-102.752a1.284,1.284,0,0,1,.919-2.22l150.517,4.9a9.092,9.092,0,0,0,9.37-9.641A9.3,9.3,0,0,0,2128.625-1436.29Z" transform="translate(-1792.024 1600.366)"/>
+                  </svg>                  
+                </div>
+                  <h1>
+                    Best places to spend<br>
+                    a Friday night out in <span>Toronto</span>
+                  </h1>
+                  <p>
+                    Wanna party? We got you! Partou tells you when and where the loudest party is art. Grap your friends, dress up and let's go!
+                  </p>
+                  <button class="btn btn-primary">
+                    Get started
+                  </button>
+
+              </div>
+            </div>
+            <div class="col-lg-8 offset-lg-2">
+              <div class="img-wrapper w-100">
+                <img src="https://images.unsplash.com/photo-1517935706615-2717063c2225?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80" class="img-fluid" alt="Toronto Skyline">
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End Centered Landing Page  -->
+      
+      <!-- Landing Page with Background Image -->
+      <section id="backgroundImage">
+        <div class="container h-100 align-items-center">
+          <div class="row h-100 align-items-center">
+            <div class="col-lg-6 offset-lg-3">
+              <div class="content-wrapper text-center dark">
+                <div class="icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="346.304" height="346.304" viewBox="0 0 346.304 346.304">
+                    <path id="Tracciato_1" 
+                          data-name="Tracciato 1" 
+                          d="M2128.625-1436.29l-150.2,4.888a1.284,1.284,0,0,1-.919-2.22l109.664-102.752a9.3,9.3,0,0,0,.824-12.874,9.093,9.093,0,0,0-13.443-.191l-102.967,109.9a1.284,1.284,0,0,1-2.22-.919l4.9-150.517a9.09,9.09,0,0,0-9.086-9.386,9.089,9.089,0,0,0-9.085,9.386l4.9,150.517a1.284,1.284,0,0,1-2.22.919l-102.751-109.664a9.3,9.3,0,0,0-12.875-.824,9.092,9.092,0,0,0-.191,13.443l109.895,102.967a1.284,1.284,0,0,1-.92,2.22l-150.2-4.888a9.3,9.3,0,0,0-9.686,8.521,9.092,9.092,0,0,0,9.37,9.641l150.516-4.9a1.284,1.284,0,0,1,.92,2.22l-109.664,102.751a9.3,9.3,0,0,0-.824,12.875,9.091,9.091,0,0,0,13.442.191l102.968-109.9a1.284,1.284,0,0,1,2.22.92l-4.9,150.516a9.09,9.09,0,0,0,9.085,9.387,9.091,9.091,0,0,0,9.086-9.387l-4.9-150.516a1.284,1.284,0,0,1,2.22-.92l102.967,109.9a9.091,9.091,0,0,0,13.442-.191,9.294,9.294,0,0,0-.823-12.874l-109.664-102.752a1.284,1.284,0,0,1,.919-2.22l150.517,4.9a9.092,9.092,0,0,0,9.37-9.641A9.3,9.3,0,0,0,2128.625-1436.29Z" transform="translate(-1792.024 1600.366)"/>
+                  </svg>                  
+                </div>
+                  <h1>
+                    Best places to spend<br>
+                    a Friday night out in <span>Toronto</span>
+                  </h1>
+                  <p>
+                    Wanna party? We got you! Partou tells you when and where the loudest party is art. Grap your friends, dress up and let's go!
+                  </p>
+                  <button class="btn btn-primary">
+                    Get started
+                  </button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End Landing Page with Background Image -->
+  
+      <!-- Landing Page with Backround in right -->
+      <section id="backgroundRight">
+        <div class="container-fluid h-100 d-flex align-items-center">
+          <div class="row h-100 d-flex align-items-center">
+            <div class="col-lg-6 offset-lg-1">
+              <div class="content-wrapper">
+                <div class="icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="346.304" height="346.304" viewBox="0 0 346.304 346.304">
+                    <path id="Tracciato_1" 
+                          data-name="Tracciato 1" 
+                          d="M2128.625-1436.29l-150.2,4.888a1.284,1.284,0,0,1-.919-2.22l109.664-102.752a9.3,9.3,0,0,0,.824-12.874,9.093,9.093,0,0,0-13.443-.191l-102.967,109.9a1.284,1.284,0,0,1-2.22-.919l4.9-150.517a9.09,9.09,0,0,0-9.086-9.386,9.089,9.089,0,0,0-9.085,9.386l4.9,150.517a1.284,1.284,0,0,1-2.22.919l-102.751-109.664a9.3,9.3,0,0,0-12.875-.824,9.092,9.092,0,0,0-.191,13.443l109.895,102.967a1.284,1.284,0,0,1-.92,2.22l-150.2-4.888a9.3,9.3,0,0,0-9.686,8.521,9.092,9.092,0,0,0,9.37,9.641l150.516-4.9a1.284,1.284,0,0,1,.92,2.22l-109.664,102.751a9.3,9.3,0,0,0-.824,12.875,9.091,9.091,0,0,0,13.442.191l102.968-109.9a1.284,1.284,0,0,1,2.22.92l-4.9,150.516a9.09,9.09,0,0,0,9.085,9.387,9.091,9.091,0,0,0,9.086-9.387l-4.9-150.516a1.284,1.284,0,0,1,2.22-.92l102.967,109.9a9.091,9.091,0,0,0,13.442-.191,9.294,9.294,0,0,0-.823-12.874l-109.664-102.752a1.284,1.284,0,0,1,.919-2.22l150.517,4.9a9.092,9.092,0,0,0,9.37-9.641A9.3,9.3,0,0,0,2128.625-1436.29Z" transform="translate(-1792.024 1600.366)"/>
+                  </svg>                  
+                </div>
+                  <h1>
+                    Best places to spend<br>
+                    a Friday night out in <span>Toronto</span>
+                  </h1>
+                  <p>
+                    Wanna party? We got you! Partou tells you when and where the loudest party is art. Grap your friends, dress up and let's go!
+                  </p>
+                  <button class="btn btn-primary">
+                    Get started
+                  </button>
+
+              </div>
+            </div>
+            <div class="col-lg-5">
+              <div class="img-wrapper">
+                <img src="https://images.unsplash.com/photo-1517935706615-2717063c2225?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80" class="img-fluid" alt="Toronto Skyline">
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End Landing Page with Backround in right -->
+      
+      <!-- Huge Headline Landing Page -->
+      <section id="hugeHeadline">
+        <div class="container-fluid h-100 d-flex align-items-center">
+          <div class="row h-100 d-flex align-items-center">
+            <div class="col-lg-6 offset-lg-1">
+              <div class="content-wrapper">
+                  <h1>
+                    Freelance UI/UX
+                    Designer based in Lublin, Poland
+                  </h1>
+                  <p>
+                    I want to help you design a product<br /> 
+                    that will change the world
+                  </p>
+                  <button class="btn btn-primary">
+                    Contact me
+                  </button>
+
+              </div>
+            </div>
+            <div class="col-lg-5">
+              <div class="img-wrapper">
+                <img src="https://images.unsplash.com/photo-1488371934083-edb7857977df?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=680&q=80" class="img-fluid" alt="Toronto Skyline">
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End Huge Headline Landing Page -->
+      
+      <!-- Full Minimalism Landing Page -->
+      <section id="fullMinimalism">
+        <div class="container h-100 align-items-center">
+          <div class="row h-100 align-items-center">
+            <div class="col-lg-6 offset-lg-3">
+              <div class="content-wrapper text-center">
+                <div class="icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="346.304" height="346.304" viewBox="0 0 346.304 346.304">
+                    <path id="Tracciato_1" 
+                          data-name="Tracciato 1" 
+                          d="M2128.625-1436.29l-150.2,4.888a1.284,1.284,0,0,1-.919-2.22l109.664-102.752a9.3,9.3,0,0,0,.824-12.874,9.093,9.093,0,0,0-13.443-.191l-102.967,109.9a1.284,1.284,0,0,1-2.22-.919l4.9-150.517a9.09,9.09,0,0,0-9.086-9.386,9.089,9.089,0,0,0-9.085,9.386l4.9,150.517a1.284,1.284,0,0,1-2.22.919l-102.751-109.664a9.3,9.3,0,0,0-12.875-.824,9.092,9.092,0,0,0-.191,13.443l109.895,102.967a1.284,1.284,0,0,1-.92,2.22l-150.2-4.888a9.3,9.3,0,0,0-9.686,8.521,9.092,9.092,0,0,0,9.37,9.641l150.516-4.9a1.284,1.284,0,0,1,.92,2.22l-109.664,102.751a9.3,9.3,0,0,0-.824,12.875,9.091,9.091,0,0,0,13.442.191l102.968-109.9a1.284,1.284,0,0,1,2.22.92l-4.9,150.516a9.09,9.09,0,0,0,9.085,9.387,9.091,9.091,0,0,0,9.086-9.387l-4.9-150.516a1.284,1.284,0,0,1,2.22-.92l102.967,109.9a9.091,9.091,0,0,0,13.442-.191,9.294,9.294,0,0,0-.823-12.874l-109.664-102.752a1.284,1.284,0,0,1,.919-2.22l150.517,4.9a9.092,9.092,0,0,0,9.37-9.641A9.3,9.3,0,0,0,2128.625-1436.29Z" transform="translate(-1792.024 1600.366)"/>
+                  </svg>                  
+                </div>
+                  <h1>
+                    Best places to spend<br>
+                    a Friday night out in <span>Toronto</span>
+                  </h1>
+                  <p>
+                    Wanna party? We got you! Partou tells you when and where the loudest party is art. Grap your friends, dress up and let's go!
+                  </p>
+                  <button class="btn btn-primary">
+                    Get started
+                  </button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End Full Minimalism Landing Page -->
+      
+      <!-- Brutalism Landing Page  -->
+      <section id="brutalism">
+        <div class="container-fluid px-5 h-100 align-items-center position-relative">
+          
+          <div class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="346.304" height="346.304" viewBox="0 0 346.304 346.304">
+              <path id="Tracciato_1" 
+                    data-name="Tracciato 1" 
+                    d="M2128.625-1436.29l-150.2,4.888a1.284,1.284,0,0,1-.919-2.22l109.664-102.752a9.3,9.3,0,0,0,.824-12.874,9.093,9.093,0,0,0-13.443-.191l-102.967,109.9a1.284,1.284,0,0,1-2.22-.919l4.9-150.517a9.09,9.09,0,0,0-9.086-9.386,9.089,9.089,0,0,0-9.085,9.386l4.9,150.517a1.284,1.284,0,0,1-2.22.919l-102.751-109.664a9.3,9.3,0,0,0-12.875-.824,9.092,9.092,0,0,0-.191,13.443l109.895,102.967a1.284,1.284,0,0,1-.92,2.22l-150.2-4.888a9.3,9.3,0,0,0-9.686,8.521,9.092,9.092,0,0,0,9.37,9.641l150.516-4.9a1.284,1.284,0,0,1,.92,2.22l-109.664,102.751a9.3,9.3,0,0,0-.824,12.875,9.091,9.091,0,0,0,13.442.191l102.968-109.9a1.284,1.284,0,0,1,2.22.92l-4.9,150.516a9.09,9.09,0,0,0,9.085,9.387,9.091,9.091,0,0,0,9.086-9.387l-4.9-150.516a1.284,1.284,0,0,1,2.22-.92l102.967,109.9a9.091,9.091,0,0,0,13.442-.191,9.294,9.294,0,0,0-.823-12.874l-109.664-102.752a1.284,1.284,0,0,1,.919-2.22l150.517,4.9a9.092,9.092,0,0,0,9.37-9.641A9.3,9.3,0,0,0,2128.625-1436.29Z" transform="translate(-1792.024 1600.366)"/>
+            </svg>                  
+          </div>
+
+          <div class="row h-100 align-items-center">
+            <div class="col-12">
+              <div class="content-wrapper">
+                  <h1>
+                    Best places to<br />
+                    spend a <span>Friday night<br> out</span>
+                    in <span class="bg-image">Toronto.</span>
+                  </h1>
+                  <button class="btn btn-primary">
+                    Get started
+                  </button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End Brutalism Landing Page  -->
+
+      <!-- Footer Section -->
+      <footer class="bg-dark dark">
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <p>
+                Insipred by 
+                <a href="https://www.instagram.com/p/CWDrmEevCfY/" target="_blank">
+                  @ultimateuiux post
+                </a><br>
+                Feel free tu reuse this landing pages design and adapt it to your needs!
+              </p>
+            </div>
+            <div class="col-12 d-flex justify-content-center">
+              <ul class="contact-list">
+                <li>
+                  <a href="mailto:alessiomarcone525@gmail.com">
+                    <ion-icon name="mail"></ion-icon>
+                  </a>
+                </li>
+
+                <li>
+                  <a href="https://www.linkedin.com/in/alessio-marcone/" target="_blank">
+                    <ion-icon name="logo-linkedin"></ion-icon>
+                  </a>
+                </li>
+
+                <li>
+                  <a href="https://codepen.io/alessiomarcone" target="_blank">
+                    <ion-icon name="logo-codepen"></ion-icon>
+                  </a>
+                </li>
+
+              </ul>
+            </div>
+          </div>
+        </div>
+      </footer>
+      <!-- END Footer Section -->
+
+    </main>
+
+  <!-- Icons -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  
+  <!-- Bootstrap -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+  </body>
+  
+  
+  
+</body>
+
+</html>

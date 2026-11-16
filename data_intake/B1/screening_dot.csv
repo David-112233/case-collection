@@ -52,7 +52,6 @@ abhndv__LgeNom,https://codepen.io/abhndv/pen/LgeNom,hold,-,-,PENDING,preserve,�
 TurkAysenur__NWRqoyL,https://codepen.io/TurkAysenur/pen/NWRqoyL,reject,-,-,DYN,preserve,fly 5.8s与turn 2s无限动画、计数入场，持续动作超出本轮低帧重点。,[网页] 按2026-11-16新口径；保留JS/图片/链接原样；hold不等于合格。动态/布局为本轮排除原因而非旧纯CSS门槛。,2026-11-16
 TurkAysenur__LYRKpWe,https://codepen.io/TurkAysenur/pen/LYRKpWe,reject,-,-,DYN,preserve,鼠标悬停启动视频播放，点击切换视频源与播放流程；不是仅稳定传统页面。,[网页] 按2026-11-16新口径；保留JS/图片/链接原样；hold不等于合格。动态/布局为本轮排除原因而非旧纯CSS门槛。,2026-11-16
 leonam-silva-de-souza__eYqyKoG,https://codepen.io/leonam-silva-de-souza/pen/eYqyKoG,hold,-,-,PENDING,preserve,已获取源码；尚未完成足以判定难度与动态成本的逐项审核，不声称合格。,[网页] 按2026-11-16新口径；保留JS/图片/链接原样；hold不等于合格。动态/布局为本轮排除原因而非旧纯CSS门槛。,2026-11-16
-leonam-silva-de-souza__MYgLgvV,https://codepen.io/leonam-silva-de-souza/pen/MYgLgvV,hold,-,-,PENDING,preserve,已获取源码；尚未完成足以判定难度与动态成本的逐项审核，不声称合格。,[网页] 按2026-11-16新口径；保留JS/图片/链接原样；hold不等于合格。动态/布局为本轮排除原因而非旧纯CSS门槛。,2026-11-16
 yashfalke77__zYpvOBo,https://codepen.io/yashfalke77/pen/zYpvOBo,reject,-,-,DYN,preserve,多段入场、卡片翻转及autoplay loop背景视频；原样持续视频增加时间取证成本。,[网页] 按2026-11-16新口径；保留JS/图片/链接原样；hold不等于合格。动态/布局为本轮排除原因而非旧纯CSS门槛。,2026-11-16
 oliviale__GRpvNBa,https://codepen.io/oliviale/pen/GRpvNBa,hold,-,-,PENDING,preserve,已获取源码；尚未完成足以判定难度与动态成本的逐项审核，不声称合格。,[网页] 按2026-11-16新口径；保留JS/图片/链接原样；hold不等于合格。动态/布局为本轮排除原因而非旧纯CSS门槛。,2026-11-16
 andybarefoot__KQWGZv,https://codepen.io/andybarefoot/pen/KQWGZv,reject,-,-,LAY,preserve,视觉为单列折叠条带及四个文字，非完整网页，关系明显少于213。,[网页] 按2026-11-16新口径；保留JS/图片/链接原样；hold不等于合格。动态/布局为本轮排除原因而非旧纯CSS门槛。,2026-11-16
@@ -86,3 +85,14 @@ andybarefoot__MERBPx,https://codepen.io/andybarefoot/pen/MERBPx,hold,-,-,PENDING
 andybarefoot__wrXvLj,https://codepen.io/andybarefoot/pen/wrXvLj,reject,-,-,LAY,preserve,大部分元素为空网格遮罩，共用一张背景图，关系重复，不凭元素数认定困难。,[场景] 按2026-11-16新口径；保留JS/图片/链接原样；hold不等于合格。动态/布局为本轮排除原因而非旧纯CSS门槛。,2026-11-16
 andybarefoot__ypPgod,https://codepen.io/andybarefoot/pen/ypPgod,reject,-,-,LAY,preserve,633标签主要为重复图卡，奇偶斜切与6n三面周期复用，异构物体关系有限。,[场景] 按2026-11-16新口径；保留JS/图片/链接原样；hold不等于合格。动态/布局为本轮排除原因而非旧纯CSS门槛。,2026-11-16
 andybarefoot__GMyREX,https://codepen.io/andybarefoot/pen/GMyREX,reject,-,-,LAY,preserve,重复透视卡及按行奇偶样式，图文接缝精确但未证明整体超中等。,[场景] 按2026-11-16新口径；保留JS/图片/链接原样；hold不等于合格。动态/布局为本轮排除原因而非旧纯CSS门槛。,2026-11-16
+abcretrograde__mKOEbK,https://codepen.io/abcretrograde/pen/mKOEbK,reject,-,-,LAY,preserve,多旅行卡片/照片但主要为规整矩形卡布局，关系不足以超213。,[网页] 2026-11-16新口径；源码原样保留，图片未加载非拒收依据。,2026-11-16
+michellebarker__gOYqmJQ,https://codepen.io/michellebarker/pen/gOYqmJQ,hold,-,-,PENDING,preserve,10列非均匀网格、命名行交叠照片、旋转纸条和跨行涂料层；只有3照片3纸条，难度待比较；浏览器照片未加载不据此排除。,[网页] 2026-11-16新口径；源码原样保留，图片未加载非拒收依据。,2026-11-16
+ed-demircioglu__RwvBKLe,https://codepen.io/ed-demircioglu/pen/RwvBKLe,reject,-,-,LAY,preserve,简单链接页；源码体积主要来自data URI，不代表排版关系复杂。,[网页] 2026-11-16新口径；源码原样保留，图片未加载非拒收依据。,2026-11-16
+alessiomarcone__JjyBzwm,https://codepen.io/alessiomarcone/pen/JjyBzwm,reject,-,-,LAY,preserve,7个独立简单hero示例，数量叠加不形成复杂整体排版关系。,[网页] 2026-11-16新口径；源码原样保留，图片未加载非拒收依据。,2026-11-16
+DaveSeidman__rNGgYWg,https://codepen.io/DaveSeidman/pen/rNGgYWg,reject,-,-,LAY,preserve,文章整体斜切及反向纠正文字，异构几何关系有限。,[网页] 2026-11-16新口径；源码原样保留，图片未加载非拒收依据。,2026-11-16
+aoge__pevRRy,https://codepen.io/aoge/pen/pevRRy,hold,-,-,PENDING,preserve,4张层叠封面及阴影、目录/阅读状态；包含60/300px滚动阈值与阅读转场，需界定覆盖成本，不能直接当低状态静态。,[网页] 2026-11-16新口径；源码原样保留，图片未加载非拒收依据。,2026-11-16
+dandenney__vEEbLJe,https://codepen.io/dandenney/pen/vEEbLJe,reject,-,-,LAY,preserve,互锁凹角图文有价值但对象少，另3图标9秒无限轮换，未达本轮困难目标。,[网页] 2026-11-16新口径；源码原样保留，图片未加载非拒收依据。,2026-11-16
+GemmaCroad__bNeEKKq,https://codepen.io/GemmaCroad/pen/bNeEKKq,reject,-,-,LAY,preserve,灰度规则编辑长文，异构几何/重叠关系不足，不能以长文体量算困难。,[网页] 2026-11-16新口径；源码原样保留，图片未加载非拒收依据。,2026-11-16
+oliviale__GPXozx,https://codepen.io/oliviale/pen/GPXozx,reject,-,-,LAY,preserve,三列食谱和内滚动，关系主要规则分栏，复杂度证据弱。,[网页] 2026-11-16新口径；源码原样保留，图片未加载非拒收依据。,2026-11-16
+chanco__zNgxQo,https://codepen.io/chanco/pen/zNgxQo,reject,-,-,LAY,preserve,三栏V形海报构图，点击随机mojs爆发，静态关系未证明超213。,[网页] 2026-11-16新口径；源码原样保留，图片未加载非拒收依据。,2026-11-16
+leonam-silva-de-souza__MYgLgvV,https://codepen.io/leonam-silva-de-souza/pen/MYgLgvV,hold,-,-,PENDING,preserve,多节传统落地页、4套polygon裁切、赛事/装备/团队异构布局；首屏及下方人物错位叠合已见，全部长页未看；JS仅菜单/返回顶部，gallery离散吸附无持续动画。,[网页] 评分成本为静态长页/少数状态，不等同连续滚动动画；继续核对难于213依据。,2026-11-16

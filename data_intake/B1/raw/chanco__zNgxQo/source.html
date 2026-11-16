@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>Magazine Layout (Wired)</title>
+
+    <link rel="canonical" href="https://codepen.io/chanco/pen/zNgxQo">
+  <script src="https://use.fontawesome.com/3094d96be0.js"></script>
+
+  
+  
+  
+<style>
+body {
+  color: #FFFFFF;
+  font-family: "Montserrat", sans-serif;
+  height: 100vh;
+  user-select: none;
+  background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+}
+
+#container {
+  background: #000000;
+  width: 69.54vh;
+  height: 90vh;
+  top: 5vh;
+  position: relative;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+#layout {
+  width: 80%;
+  height: 100%;
+  margin: 0 auto;
+  display: -webkit-flex;
+  /* Safari */
+  display: flex;
+}
+
+.episode1 {
+  flex: 3;
+  height: 100%;
+  position: relative;
+}
+.episode1 .script {
+  border-right: 1px solid #9E9E9E;
+  height: 90%;
+  top: 10%;
+  position: relative;
+  width: 100%;
+}
+.episode1 .script .blerb {
+  text-align: right;
+  width: 97%;
+  font-size: 0.6vh;
+  position: absolute;
+}
+
+.episode2 {
+  flex: 1;
+  height: 100%;
+  position: relative;
+}
+.episode2 .script {
+  border-right: 1px solid #9E9E9E;
+  height: 65%;
+  top: 20%;
+  position: relative;
+  width: 100%;
+}
+.episode2 .blerb {
+  text-align: left;
+  width: 80%;
+  top: 35%;
+  margin: 0 auto;
+  font-size: 0.8vh;
+  position: relative;
+}
+.episode2 .credit {
+  text-align: left;
+  width: 80%;
+  top: 53%;
+  color: #9E9E9E;
+  margin: 0 auto;
+  font-size: 0.8vh;
+  position: relative;
+}
+
+.episode3 {
+  flex: 2;
+  height: 100%;
+}
+.episode3 .script {
+  height: 65%;
+  top: 20%;
+  position: relative;
+  width: 50%;
+}
+
+.eye {
+  width: 80%;
+  height: 30%;
+  top: 30%;
+  margin: 0 auto;
+  position: relative;
+  background: #ffe13f;
+}
+
+.v {
+  position: relative;
+  color: #ffe13f;
+  top: 33%;
+  text-align: right;
+  width: 65%;
+  float: right;
+  height: 21.6%;
+}
+.v span {
+  margin: 5px;
+  font-size: 10em;
+  font-weight: 900;
+}
+
+.lucky {
+  position: absolute;
+  color: #ffe13f;
+  top: 27%;
+  text-align: right;
+  width: 100%;
+  font-size: 1.3vh;
+}
+.lucky span {
+  margin: 5px;
+  font-weight: 900;
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  <html>
+ <body>
+    <div id="container">
+     <div id="layout">  
+        <div class="episode1">
+          <div class="script">
+            <div class="blerb">
+              <p>HOW</br><b>J.J </br>ABRAMS</b></br>WENT</br>
+              FROM</br>
+              AWESTRUCK</br>
+              SUPERFAN</br>
+              TO </br>
+              JEDI </br>
+              MASTER </br>
+              IN </br>
+              HIS </br>
+              QUEST </br>
+              TO </br>
+              CREATE </br>
+              STAR </br>
+              WARS: </br>
+              THE </br>
+              FORCE </br>
+              AWAKENS</br>
+             </p>
+            </div>
+           <div class="lucky"> 
+             <span> L U C K Y</span> 
+            </div>
+            <div class="v">
+              <svg width="100%" height="100%" viewBox="0 0 349 352" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:figma="http://www.figma.com/figma/ns">
+              <g id="Canvas" transform="translate(280 158)" figma:type="canvas">
+              <g id="V" style="mix-blend-mode:normal;" figma:type="vector">
+              <use xlink:href="#path0_fill" transform="translate(-280 -158)" fill="#FFE13F" style="mix-blend-mode:normal;"/>
+              </g>
+              </g>
+              <defs>
+              <path id="path0_fill" d="M 174.5 224.092L 264.013 0L 349 0L 207.69 352L 141.31 352L 0 0L 84.987 0L 174.5 224.092Z"/>
+              </defs>
+              </svg>
+             </div>
+            </div>
+          </div>
+        <div class="episode2">
+         <div class="script"> 
+          <div class="eye">
+          </div>
+           <div class="blerb">
+             <p>
+               AN</br>INTERVIEW</br>BY</br><b>SCOTT</br> DADICH</b></br>
+             </p>
+           </div>
+           <div class="credit">
+              <p>
+                <i class="fa fa-camera" aria-hidden="true"></i></br>
+                DAN</br>WINTERS
+             </p>
+            </div>
+           </div>
+          </div>
+        <div class="episode3">
+         <div class="script"> 
+            <div class="eye">
+              </div>
+           </div>
+          </div>
+       </div>
+</body>
+</html>
+  <script src='https://cdn.jsdelivr.net/mojs/0.265.6/mo.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+    <script id="rendered-js" >
+var arr = [];
+
+document.getElementById("container").addEventListener('click', function (e) {
+  let coords = { x: e.pageX, y: e.pageY };
+  let rad = Math.floor(Math.random() * (12 - 2 + 1)) + 2;
+
+  let burst = new mojs.Burst({
+    left: 0, top: 0,
+    radius: { 0: rad + 10 },
+    angle: 45,
+    count: 10,
+    children: {
+      shape: 'line',
+      radius: 'rand(-25, 25)',
+      scale: 1,
+      stroke: { '#FFFFFF': '#ffe13f' },
+      strokeDasharray: '100%',
+      strokeDashoffset: { '-100%': '100%' },
+      duration: 700,
+      delay: 200,
+      easing: 'quad.out' } });
+
+
+  let shape = new mojs.Shape({
+    left: 0, top: 0,
+    stroke: '#E0E0E0',
+    strokeWidth: { [2 * rad]: 0 },
+    fill: '#E0E0E0',
+    scale: { 0: 1 },
+    radius: rad,
+    duration: 500,
+    delay: 600,
+    easing: 'elastic.out' });
+
+
+  arr.push(coords, burst);
+
+
+  burst.tune(coords);
+  burst.replay();
+  shape.tune(coords);
+  shape.replay();
+
+  // timeline.replay();
+});
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>
