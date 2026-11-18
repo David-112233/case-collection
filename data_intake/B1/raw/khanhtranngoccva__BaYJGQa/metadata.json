@@ -1,0 +1,68 @@
+{
+  "source_id": "codepen:khanhtranngoccva/bayjgqa",
+  "author": "khanhtranngoccva",
+  "pen_id": "BaYJGQa",
+  "url": "https://codepen.io/khanhtranngoccva/pen/BaYJGQa",
+  "acquisition": "cloud_browser_cdpn_srcdoc",
+  "acquisition_url": "https://cdpn.io/khanhtranngoccva/fullpage/BaYJGQa",
+  "retrieved_at": "2026-11-18",
+  "title": "Full Stack 3D CSS Synthesizer!",
+  "fetch_status": "ok",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "5c0743a67cf4fe43164d1e167a7d76f6fefceb5e07f4a1176f710f5451ce78e1",
+  "source_html_sha256": "9c61209d020b223f366888f7e32f90c6906f3cb2d3136285c0c30fb6fc5f9c2f",
+  "analysis": {
+    "js": {
+      "has_js": true,
+      "inline_js_chars": 322801,
+      "external_scripts": [
+        "https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js",
+        "https://kit.fontawesome.com/bac08de2ab.js",
+        "js/index.js"
+      ],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 5,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": true,
+      "clip_path": false,
+      "css_counter": false,
+      "media_query": false
+    },
+    "external_stylesheets": [
+      "css/DimensionCSS.css",
+      "css/newStyles.css"
+    ],
+    "css_imports": [],
+    "css_chars": 22903,
+    "element_count": 398,
+    "html_chars": 374909
+  },
+  "review": {
+    "status": "推荐审核",
+    "evidence": "透视键盘黑键跨于白键之上，琴键顶面与侧面形成实体厚度及交替遮挡；默认画面正常，保留原JS及MIDI相关外链，未测试音频、MIDI或按钮交互。",
+    "visual_verified": true,
+    "formal_admission": false
+  }
+}
