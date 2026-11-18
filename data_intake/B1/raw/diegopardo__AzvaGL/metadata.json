@@ -1,0 +1,66 @@
+{
+  "source_id": "codepen:diegopardo/azvagl",
+  "author": "diegopardo",
+  "pen_id": "AzvaGL",
+  "url": "https://codepen.io/diegopardo/pen/AzvaGL",
+  "acquisition": "cloud_browser_cdpn_srcdoc",
+  "acquisition_url": "https://cdpn.io/diegopardo/fullpage/AzvaGL",
+  "retrieved_at": "2026-11-18",
+  "title": "CSS3 3D screen mock-up",
+  "fetch_status": "ok",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "f08995bae2603bd5f58d770566a06b999ebfc3c72579abbf1820cf540db87df6",
+  "source_html_sha256": "d8e305554a80f560098209ba87ddf4f9f9f0431ad8b22cff06c487c45d5d34b6",
+  "analysis": {
+    "js": {
+      "has_js": true,
+      "inline_js_chars": 234,
+      "external_scripts": [
+        "https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js",
+        "https://public.codepenassets.com/js/prefixfree-1.0.7.min.js"
+      ],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 0,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": true,
+      "clip_path": false,
+      "css_counter": false,
+      "media_query": false
+    },
+    "external_stylesheets": [
+      "https://public.codepenassets.com/css/normalize-5.0.0.min.css"
+    ],
+    "css_imports": [],
+    "css_chars": 1799,
+    "element_count": 5,
+    "html_chars": 3484
+  },
+  "review": {
+    "status": "不优先推荐",
+    "evidence": "倾斜屏幕外壳、边框厚度与反光可见，但默认屏幕内容为黑色，主体结构较简单且交错较弱。",
+    "visual_verified": true,
+    "formal_admission": false
+  }
+}
