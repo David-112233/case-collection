@@ -1,0 +1,4 @@
+key,url,decision,tier,hits,reason,js_policy,evidence,notes,decided_on
+inzrb__nwRxjg,https://codepen.io/inzrb/pen/nwRxjg,accept,unclassified,spatial_layers,await_user_review,original_preserved,红色文章卡标题条压在正文前，左右折纸带交错展开，折角和投影形成层次。外部封面图片当前加载失败但CSS折叠结构可见；保留原外链不擅自补图。,推荐审核；未正式入库，未评分。,2026-11-18
+RaduBratan__MWyKrRZ,https://codepen.io/RaduBratan/pen/MWyKrRZ,accept,unclassified,spatial_layers,await_user_review,original_preserved,磁带盒体侧面厚度、窗口内双卷轴、底部凸台与地面投影构成多层前后遮挡；CSS preserve-3d和多面旋转建模。保留原JS；仅验证默认视觉，未验证交互旋转。,推荐审核；未正式入库，未评分。,2026-11-18
+MadeByArne__bGWwRoX,https://codepen.io/MadeByArne/pen/bGWwRoX,hold,unclassified,spatial_layers,await_user_review,original_preserved,磁带外框、标签窗、卷轴、带芯和底部斜面有嵌套遮挡，旁边标签盒投影可见。整体为正视平面构图，空间深度弱于213/224/227，不为凑数优先推荐。,备选；未正式入库，未评分。,2026-11-18
