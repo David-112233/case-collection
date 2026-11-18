@@ -1,0 +1,49 @@
+{
+  "checked_at": "2026-11-18T23:13:23Z",
+  "archive_status": "pending: read-only filesystem; originals read via browser iframe srcdoc but not transferred into repository",
+  "scope": "Default cloud Chromium viewport 1331x894 only. No controls tested. Main claims and historic screening/catalog checked before claim.",
+  "candidates": [
+    {
+      "key": "Rome-1__PwqrmMo",
+      "preview": "https://cdpn.io/Rome-1/fullpage/PwqrmMo",
+      "original_srcdoc_sha256": "74a5d6da3734822c1a599ba490c1978d34f9c7f45f2033db5b9aad6b05e76be8",
+      "bytes": 43684,
+      "evidence": "默认仅见说明文字与暗色空白；控制台明确 THREE.WebGLRenderer Error creating WebGL context，故未核实3D桌面实际效果。"
+    },
+    {
+      "key": "kevinleclair1__XJgQrr",
+      "preview": "https://cdpn.io/kevinleclair1/fullpage/XJgQrr",
+      "original_srcdoc_sha256": "09a466f6b9314d8a42ebe4b8dba68b937759ee0729538dc0e6cb4ebdf07286ad",
+      "bytes": 2613,
+      "evidence": "默认五环交错清晰；源码以多个重叠环和z-index实现局部前后交替，纯CSS静态，但复杂度明显低于参考案例。"
+    },
+    {
+      "key": "grangegrange__DZGYNj",
+      "preview": "https://cdpn.io/grangegrange/fullpage/DZGYNj",
+      "original_srcdoc_sha256": "08fff9cb80600d2ae4cc1ffbc95c4a897fe79cfffdcb655989e02e87ec1a1e74",
+      "bytes": 21259,
+      "evidence": "默认可见四个灰色齿轮和内凹盒框；源码有厂商前缀旋转关键帧，属于紧凑加载动画式构图，遮挡与层次较少。"
+    },
+    {
+      "key": "jh3y__abBedme",
+      "preview": "https://cdpn.io/jh3y/fullpage/abBedme",
+      "original_srcdoc_sha256": "a13717b636ea31f40e0aa1844ed77ad66223636d957ab0702ed2c43b2808c2cf",
+      "bytes": 13487,
+      "evidence": "默认可见底座立柱及前后网罩、扇叶轴心的多层3D结构；radio one默认选中，CSS驱动转叶/摇头，非静态。"
+    },
+    {
+      "key": "alvaromontoro__zxvqodP",
+      "preview": "https://cdpn.io/alvaromontoro/fullpage/zxvqodP",
+      "original_srcdoc_sha256": "9e6294dc6af647e97d8ffeab7bebe5bbd20618abc9684ce33bf5601611919d8a",
+      "bytes": 18368,
+      "evidence": "默认Animate未勾选；四个办公隔间围中心交错，隔板遮挡电脑与桌板，抽屉厚度、键盘和地面投影可见；CSS preserve-3d，只有平台console shim，无业务JS。"
+    },
+    {
+      "key": "krautgti__QWQwdeb",
+      "preview": "https://cdpn.io/krautgti/fullpage/QWQwdeb",
+      "original_srcdoc_sha256": "6294e3b6a84a14950629d739045a22cafd2a8c4373fed0f64e73f8c8b3e847bc",
+      "bytes": 60828,
+      "evidence": "默认房间桌椅墙窗层次完整；源码class结构、605876植物和音频资源与已认领jh3y/XWdQBRx高度相似，疑似衍生，不作为全新强推荐；嵌入显示器默认灰色。"
+    }
+  ]
+}
