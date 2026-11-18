@@ -1,0 +1,66 @@
+{
+  "source_id": "codepen:jh3y/nwdnmbj",
+  "author": "jh3y",
+  "pen_id": "NWdNMBJ",
+  "url": "https://codepen.io/jh3y/pen/NWdNMBJ",
+  "acquisition": "cloud_browser_cdpn_srcdoc",
+  "acquisition_url": "https://cdpn.io/jh3y/fullpage/NWdNMBJ",
+  "retrieved_at": "2026-11-18",
+  "title": "3D CSS Plane 😎 (Tap to Toggle + Mouse Move Parallax)",
+  "fetch_status": "ok",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "0a827fcb676f2dd740d71b1f7b399822f6faf50b27d9c4814d586c8ee55a9456",
+  "source_html_sha256": "bb6d4566977f6ab27742516880910c3b2b73eb887efdf79dee88e0c7610cd6d4",
+  "analysis": {
+    "js": {
+      "has_js": true,
+      "inline_js_chars": 517,
+      "external_scripts": [
+        "https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js",
+        "https://unpkg.co/gsap@3/dist/gsap.min.js"
+      ],
+      "inline_event_handlers": 0,
+      "has_gsap": true,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 8,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": true,
+      "clip_path": false,
+      "css_counter": false,
+      "media_query": true
+    },
+    "external_stylesheets": [
+      "https://public.codepenassets.com/css/normalize-5.0.0.min.css"
+    ],
+    "css_imports": [],
+    "css_chars": 17013,
+    "element_count": 211,
+    "html_chars": 28913
+  },
+  "review": {
+    "status": "推荐审核",
+    "evidence": "双翼上下叠置，支柱贯穿翼面，机身与螺旋桨交错，背景方块云形成纵深。保留原始动画及GSAP依赖；仅默认视觉核实，不宣称点击与视差完整通过。",
+    "visual_verified": true,
+    "formal_admission": false
+  }
+}
