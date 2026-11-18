@@ -1,0 +1,66 @@
+{
+  "source_id": "codepen:ricardoolivaalonso/nwjebpe",
+  "author": "ricardoolivaalonso",
+  "pen_id": "NWJeBPE",
+  "url": "https://codepen.io/ricardoolivaalonso/pen/NWJeBPE",
+  "acquisition": "cloud_browser_cdpn_srcdoc",
+  "acquisition_url": "https://cdpn.io/ricardoolivaalonso/fullpage/NWJeBPE",
+  "retrieved_at": "2026-11-18",
+  "title": "3D Office - ThreeJS",
+  "fetch_status": "ok",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "6f3fcd608f5235694556f51a541b325777020d8225d18764b22be785850f9caf",
+  "source_html_sha256": "380e7091d6c9882d7591fcc2b4357daa90337f3aee055eb2f8a82ab137537687",
+  "analysis": {
+    "js": {
+      "has_js": true,
+      "inline_js_chars": 12964,
+      "external_scripts": [
+        "https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js",
+        "https://cdnjs.cloudflare.com/ajax/libs/three.js/r124/three.min.js",
+        "https://unpkg.com/three@0.126.0/examples/js/loaders/GLTFLoader.js",
+        "https://unpkg.com/three@0.126.0/examples/js/controls/OrbitControls.js"
+      ],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 0,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": false,
+      "clip_path": false,
+      "css_counter": false,
+      "media_query": true
+    },
+    "external_stylesheets": [],
+    "css_imports": [],
+    "css_chars": 1454,
+    "element_count": 10,
+    "html_chars": 16371
+  },
+  "review": {
+    "status": "备选",
+    "evidence": "办公室完整空间中柜体、书本、桌椅、吊灯、墙面及地板遮挡关系丰富。ThreeJS/GLTF外部模型依赖；场景已可见但Loading字样残留，不能宣称完全加载成功。",
+    "visual_verified": true,
+    "formal_admission": false
+  }
+}
