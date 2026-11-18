@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>Pure CSS Cassette Tape and Cassette Box with A/B Sides Label</title>
+
+    <link rel="canonical" href="https://codepen.io/MadeByArne/pen/bGWwRoX">
+  
+  
+  
+  
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Gochi+Hand&display=swap");
+html {
+  font-size: 20px;
+}
+
+body {
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "Gochi Hand", -apple-system, system-ui, sans-serif;
+}
+
+.wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 30px;
+  max-width: calc(1100px + 30px);
+  margin: 60px auto;
+}
+
+.grid-1c {
+  display: grid;
+  grid-template-columns: repeat(1, auto);
+}
+
+.grid-2c {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+}
+
+.grid-3c {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+}
+
+.cassette {
+  width: calc(100% - 40px);
+  width: 550px;
+  height: 360px;
+  border-radius: 9px;
+  background: #fcfcfc;
+  border: 1px solid #0a0a0a;
+  position: relative;
+}
+.cassette #mix {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  width: 90%;
+  transform: translateX(-50%);
+  border-bottom: 1px dashed #636363;
+  font-size: 1.5rem;
+  line-height: 1;
+  text-align: center;
+}
+.cassette .label {
+  width: calc(100% - 60px);
+  height: 64%;
+  position: relative;
+  margin: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 9px 9px 0 0;
+  border: 1px solid #0a0a0a;
+  outline: 1px solid transparent;
+  background: linear-gradient(#fcfcfc 46%, #2b2c31 46%, #2b2c31 calc(46% + 1px), #fcfcfc calc(46% + 2px), #fcfcfc calc(46% + 7px), #2b2c31 calc(46% + 7px), #2b2c31 calc(46% + 10px), #fcfcfc calc(46% + 10px), #fcfcfc calc(46% + 15px), #2b2c31 calc(46% + 15px), #2b2c31 calc(46% + 20px), #fcfcfc calc(46% + 20px), #fcfcfc calc(46% + 24px), #2b2c31 calc(46% + 24px), #2b2c31 calc(46% + 31px), #fcfcfc calc(46% + 31px), #fcfcfc calc(46% + 33px), #2b2c31 calc(46% + 33px));
+}
+.cassette .label .reels {
+  position: relative;
+  margin-top: 20px;
+  border-radius: 50px;
+  background: #fcfcfc;
+  border: 1px solid #0a0a0a;
+  z-index: 99;
+  align-items: center;
+  justify-content: center;
+  grid-gap: 30px;
+  padding: 20px 24px;
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+.cassette .label .reels .reelHole {
+  width: 12vw;
+  height: 12vw;
+  max-width: 60px;
+  max-height: 60px;
+  border: 3px solid #636363;
+  border-radius: 50%;
+  position: relative;
+  box-shadow: 0 0 0 3px #b0b0b0;
+  background: #fcfcfc;
+}
+.cassette .label .reels .reelHole span {
+  display: block;
+  position: absolute;
+  top: calc(50% - 2px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 5px;
+  border: solid #636363;
+  border-width: 0 6px;
+}
+.cassette .label .reels .reelHole span:nth-of-type(2) {
+  transform: translateX(-50%) rotate(60deg);
+}
+.cassette .label .reels .reelHole span:nth-of-type(3) {
+  transform: translateX(-50%) rotate(-60deg);
+}
+.cassette .label .reels .window {
+  background: #e3e3e3;
+  width: 120px;
+  height: 60px;
+  border: 2px solid #636363;
+  overflow: hidden;
+  position: relative;
+}
+.cassette .label .reels .window::after {
+  display: block;
+  position: absolute;
+  background: linear-gradient(transparent 0, transparent 3%, rgba(255, 255, 255, 0.1) 9%, rgba(255, 255, 255, 0.1) 13%, transparent 15%, rgba(255, 255, 255, 0.1) 18%, rgba(255, 255, 255, 0.1) 34%, transparent 34%, transparent 34%, rgba(255, 255, 255, 0.1) 44%, rgba(255, 255, 255, 0.1) 70%, transparent 90%);
+  content: "";
+  width: 100%;
+  height: 100%;
+}
+.cassette .label .reels .window .spool {
+  position: absolute;
+  top: -30%;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  display: block;
+}
+.cassette .label .reels .window .spool:first-of-type {
+  left: -70%;
+  box-shadow: 0 0 0 70px #636363, 0 0 0 72px #636363;
+}
+.cassette .label .reels .window .spool:last-of-type {
+  right: -80%;
+  box-shadow: 0 0 0 7px #636363, 0 0 0 9px #636363;
+}
+.cassette .head {
+  width: 60%;
+  height: 23%;
+  position: absolute;
+  margin-left: 20%;
+  bottom: -3px;
+}
+.cassette .head::before, .cassette .head::after {
+  display: block;
+  content: "";
+  width: 70%;
+  height: 100%;
+  position: absolute;
+  background: #fcfcfc;
+  border: 1px solid #0a0a0a;
+}
+.cassette .head::before {
+  transform: skew(-15deg);
+  left: -8%;
+  border-right: none;
+  border-radius: 9px 0 0 9px;
+}
+.cassette .head::after {
+  transform: skew(15deg);
+  right: -8%;
+  border-left: none;
+  border-radius: 0 9px 9px 0;
+}
+.cassette .screw {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+}
+.cassette .screw::before {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  left: 0;
+  border-radius: 5px;
+  background: #636363;
+  background: linear-gradient(to bottom, #515151 1%, #342c32 100%);
+  box-shadow: 0 1px 1px 0 rgba(181, 181, 181, 0.8);
+}
+.cassette .screw:nth-child(1) {
+  top: 6px;
+  left: 6px;
+}
+.cassette .screw:nth-child(2) {
+  top: 6px;
+  right: 6px;
+}
+.cassette .screw:nth-child(3) {
+  bottom: 6px;
+  right: 6px;
+}
+.cassette .screw:nth-child(4) {
+  bottom: 6px;
+  left: 6px;
+}
+.cassette .hole {
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid #0a0a0a;
+  z-index: 3;
+}
+.cassette .hole:nth-child(1) {
+  bottom: 12px;
+  left: 10%;
+}
+.cassette .hole:nth-child(2) {
+  bottom: 24px;
+  left: 30%;
+}
+.cassette .hole:nth-child(3) {
+  bottom: 24px;
+  right: 30%;
+}
+.cassette .hole:nth-child(4) {
+  bottom: 12px;
+  right: 10%;
+}
+
+.cassetteCase {
+  position: relative;
+  width: 550px;
+  outline: 3px solid #fcfcfc;
+  outline-offset: -4px;
+  border: 1px solid #e3e3e3;
+  box-shadow: 1px 3px 3px rgba(92, 92, 92, 0.1), 1px 12px 4px rgba(219, 219, 219, 0.1), 15px 15px 15px rgba(117, 117, 117, 0.1);
+  background-image: repeating-linear-gradient(#fcfcfc 0, #fcfcfc 20px, #b0b0b0 20px, #fcfcfc 21px, #fcfcfc 30px);
+  line-height: 30px;
+  padding: 14px;
+  z-index: 99;
+}
+.cassetteCase::after {
+  content: "";
+  width: 100%;
+  height: 46px;
+  background: #fcfcfc;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-bottom: 3px solid #0a0a0a;
+  z-index: -1;
+}
+.cassetteCase .side {
+  background: #0a0a0a;
+  font-family: -apple-system, system-ui, sans-serif;
+  color: #fcfcfc;
+  font-size: 1rem;
+  line-height: 1;
+  padding: 1px 4px 3px;
+}
+.cassetteCase p {
+  font-size: 1.5rem;
+  line-height: 1;
+  margin: 0;
+}
+.cassetteCase ol li {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.cassetteCase [class*=grid-] {
+  grid-gap: 12px;
+}
+.cassetteCase .grid-2c {
+  align-items: center;
+}
+.cassetteCase .grid-2c:not(:last-child) {
+  grid-template-columns: auto 1fr;
+}
+.cassetteCase .grid-3c {
+  grid-template-columns: 1fr auto 1fr;
+}
+.cassetteCase .grid-3c > div:nth-child(4),
+.cassetteCase .grid-3c > div:nth-child(6) {
+  padding-top: 30px;
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  <!-- Created originally for sava.io -->
+<div class="wrap">
+  <div class="cassette">
+    <div class="screw"></div>
+    <div class="screw"></div>
+    <div class="screw"></div>
+    <div class="screw"></div>
+    <div class="label">
+      <div id="mix">Cassette tape &amp; label box</div>
+      <div class="reels">
+        <div class="reelHole">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="window">
+          <div class="spool"></div>
+          <div class="spool"></div>
+        </div>
+        <div class="reelHole">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+    <div class="head">
+      <div class="hole"></div>
+      <div class="hole"></div>
+      <div class="hole"></div>
+      <div class="hole"></div>
+    </div>
+  </div>
+
+  <div class="cassetteCase">
+    <div class="grid-3c">
+      <div class="grid-2c">
+        <span class="side">A</span>
+        <p>Side A</p>
+      </div>
+      <div></div>
+      <div class="grid-2c">
+        <span class="side">B</span>
+        <p>Side B</p>
+      </div>
+      <div>
+        Demo &mdash;<br />I'm not good at lorem ipsum
+      </div>
+      <div>
+        &middot;<br />&middot;<br />&middot;<br />&middot;<br />&middot;<br />&middot;<br />&middot;<br />&middot;<br />&middot;<br />&middot;
+      </div>
+      <div>
+        Any text &mdash; Not just song names
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+  
+  
+  
+</body>
+
+</html>
