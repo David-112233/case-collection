@@ -1,0 +1,61 @@
+{
+  "source_id": "codepen:ak-407/mygkome",
+  "author": "Ak-407",
+  "pen_id": "MYgKoME",
+  "url": "https://codepen.io/Ak-407/pen/MYgKoME",
+  "acquisition": "cloud_browser_cdpn_srcdoc",
+  "acquisition_url": "https://cdpn.io/Ak-407/fullpage/MYgKoME",
+  "retrieved_at": "2026-11-18",
+  "title": "Folding card animation",
+  "fetch_status": "ok",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "fe2a8b617711d43ede1f996e398e365dc74e23f75577d9b2f1095b742b09fd9d",
+  "source_html_sha256": "07fe2864572f637319011ef562ae89461d1fe8a8394989e3a7a649a3616bc50e",
+  "analysis": {
+    "js": {
+      "has_js": false,
+      "inline_js_chars": 0,
+      "external_scripts": [],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 0,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": true,
+      "clip_path": true,
+      "css_counter": false,
+      "media_query": false
+    },
+    "external_stylesheets": [],
+    "css_imports": [],
+    "css_chars": 3479,
+    "element_count": 37,
+    "html_chars": 6504
+  },
+  "review": {
+    "status": "不优先",
+    "evidence": "三张卡片及偏移斜线背板有层叠，但默认结构简单；折叠交互未核实，不以标题动画宣传代替效果证据。",
+    "visual_verified": true,
+    "formal_admission": false
+  }
+}
