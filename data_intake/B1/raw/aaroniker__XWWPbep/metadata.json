@@ -1,0 +1,63 @@
+{
+  "source_id": "codepen:aaroniker/xwwpbep",
+  "author": "aaroniker",
+  "pen_id": "XWWPbep",
+  "url": "https://codepen.io/aaroniker/pen/XWWPbep",
+  "acquisition": "cloud_browser_cdpn_srcdoc",
+  "acquisition_url": "https://cdpn.io/aaroniker/fullpage/XWWPbep",
+  "retrieved_at": "2026-11-18",
+  "title": "CSS Typewriter 📄",
+  "fetch_status": "ok",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "9a1f4ecad4661bd3107152c515c90a6d2e542b5ed470c95b17a1f3a4434f70ff",
+  "source_html_sha256": "ca289a4dd709fb95a63bf9573ff35acdb2d8b1ba47da6446886bce1c190b05b6",
+  "analysis": {
+    "js": {
+      "has_js": false,
+      "inline_js_chars": 0,
+      "external_scripts": [],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 4,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": true,
+      "clip_path": false,
+      "css_counter": false,
+      "media_query": false
+    },
+    "external_stylesheets": [
+      "https://public.codepenassets.com/css/reset-2.0.min.css"
+    ],
+    "css_imports": [],
+    "css_chars": 6776,
+    "element_count": 7,
+    "html_chars": 8154
+  },
+  "review": {
+    "status": "不优先",
+    "evidence": "蓝色打字机小图标含滚筒与机身前后遮挡，源码含纸张与键盘动画；默认视觉已核实但构成简单，空间复杂度明显低于目标参考，不为凑数量推荐。",
+    "visual_verified": true,
+    "formal_admission": false
+  }
+}
