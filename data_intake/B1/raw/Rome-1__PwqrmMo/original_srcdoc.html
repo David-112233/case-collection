@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>Interactive 3D Office Desk in Three.js</title>
+
+    <link rel="canonical" href="https://codepen.io/Rome-1/pen/PwqrmMo">
+  
+  
+  
+  
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive 3D Desk Scene</title>
+    <style>
+        body { margin: 0; overflow: hidden; background-color: #1a1a1a; font-family: 'Inter', sans-serif; }
+        body.modal-open { overflow: hidden; }
+        canvas { display: block; }
+        .info {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: white;
+            padding: 10px;
+            background: rgba(0,0,0,0.5);
+            border-radius: 8px;
+            font-size: 14px;
+            z-index: 10;
+        }
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+        .modal {
+            background: #f4f4f4;
+            padding: 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 650px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: relative;
+            display: none;
+        }
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #888;
+        }
+        .modal h2 { margin-top: 0; color: #333; }
+        .modal h3 { color: #555; border-bottom: 1px solid #ddd; padding-bottom: 5px; }
+
+        /* Project Modal */
+        .task-list { padding-left: 0; list-style: none; }
+        .task-list li { margin-bottom: 12px; }
+        .progress-bar { width: 100%; background-color: #e0e0e0; border-radius: 10px; overflow: hidden; }
+        .progress-bar div { height: 10px; border-radius: 10px; background-color: #4CAF50; transition: width 0.5s ease-in-out; }
+        
+        /* Code Modal */
+        #code-modal .code-block { background: #1e1e1e; color: #d4d4d4; padding: 20px; border-radius: 8px; font-family: 'Courier New', monospace; white-space: pre-wrap; }
+        .code-block .keyword { color: #569cd6; } .code-block .comment { color: #6a9955; } .code-block .string { color: #ce9178; } .code-block .function { color: #dcdcaa; }
+
+        /* Todo Modal */
+        #todo-modal ul { list-style: none; padding: 0; }
+        #todo-modal li { background: #fff; margin-bottom: 10px; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); cursor: pointer; transition: all 0.2s; }
+        #todo-modal li.done { text-decoration: line-through; color: #aaa; background: #f9f9f9; }
+
+        /* Photo Gallery Modal */
+        #photo-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; }
+        .photo-item { text-align: center; }
+        .photo-item img { width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .photo-item figcaption { font-size: 14px; color: #666; margin-top: 5px; }
+
+        /* Calendar Modal */
+        #calendar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        #calendar-header button { background: #ddd; color: #333; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px; }
+        #calendar-month-year { font-size: 1.2em; font-weight: bold; }
+        #calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; text-align: center; }
+        #calendar-grid div { padding: 10px; background: #fff; border-radius: 4px; cursor: pointer; transition: background-color 0.2s; }
+        #calendar-grid div:hover { background-color: #f0f0f0; }
+        #calendar-grid .day-header { font-weight: bold; background: none; cursor: default; }
+        #calendar-grid .not-month { color: #ccc; background: #f9f9f9; cursor: default; }
+        #calendar-grid .today { background-color: #a3c2e8; font-weight: bold; }
+        #calendar-grid .event { background-color: #f9f59f; }
+
+        /* Email & Timesheet Modals */
+        #email-modal input, #email-modal textarea { width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        .modal button { background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; float: right; transition: background-color 0.2s; }
+        .modal button:hover { background-color: #45a049; }
+        #timesheet-modal table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        #timesheet-modal th, #timesheet-modal td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        #timesheet-modal th { background-color: #f2f2f2; }
+        #timesheet-modal tfoot { font-weight: bold; }
+
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="info">
+        <strong>Interactive 3D Scene</strong><br>
+        - Scroll down to reveal drawers<br>
+        - Click on objects to interact
+    </div>
+
+    <!-- Modals -->
+    <div id="modal-container" class="modal-overlay">
+        <div id="project-modal" class="modal">
+            <span class="modal-close">&times;</span>
+            <h2 id="project-title"></h2>
+            <p id="project-description"></p>
+            <h3>Tasks</h3>
+            <ul id="project-tasks" class="task-list"></ul>
+        </div>
+        <div id="code-modal" class="modal">
+            <span class="modal-close">&times;</span>
+            <h2>Code Editor</h2>
+            <div class="code-block" id="code-content"></div>
+        </div>
+        <div id="todo-modal" class="modal">
+            <span class="modal-close">&times;</span>
+            <h2 id="todo-title"></h2>
+            <ul id="todo-list"></ul>
+        </div>
+        <div id="camera-modal" class="modal">
+            <span class="modal-close">&times;</span>
+            <h2>Photo Gallery</h2>
+            <div id="photo-gallery"></div>
+        </div>
+        <div id="calendar-modal" class="modal">
+            <span class="modal-close">&times;</span>
+            <div id="calendar-header">
+                <button id="prev-month-btn">&lt;</button>
+                <h2 id="calendar-month-year"></h2>
+                <button id="next-month-btn">&gt;</button>
+            </div>
+            <div id="calendar-grid"></div>
+        </div>
+        <div id="email-modal" class="modal">
+            <span class="modal-close">&times;</span>
+            <h2>New Message</h2>
+            <input type="text" placeholder="To: team@example.com">
+            <input type="text" placeholder="Subject: Project Update">
+            <textarea rows="8" placeholder="Hi Team, ..."></textarea>
+            <button id="send-email-btn">Send</button>
+        </div>
+        <div id="timesheet-modal" class="modal">
+            <span class="modal-close">&times;</span>
+            <h2>Jane Doe</h2>
+            <h3>Timesheet - Week of July 1st</h3>
+            <table id="timesheet-table">
+                <thead><tr><th>Day</th><th>Hours</th></tr></thead>
+                <tbody></tbody>
+                <tfoot><tr><td>Total</td><td id="timesheet-total"></td></tr></tfoot>
+            </table>
+            <button id="sign-out-btn">Sign Out</button>
+        </div>
+    </div>
+
+
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js",
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.164.1/examples/jsm/"
+            }
+        }
+    </script>
+
+    <script type="module">
+        import * as THREE from 'three';
+
+        let scene, camera, renderer, raycaster, mouse;
+        let cameraTargetY = 3;
+        let cameraTargetX = 0;
+        const cameraStopsY = [3, -5, -13, -21];
+        const cameraStopsX = [0, 3, 3, 3];
+        let currentStopIndex = 0;
+        let isScrolling = false;
+        let interactiveObjects = [];
+        let currentCalendarDate = new Date(2025, 6, 3); // July 3, 2025
+
+        // --- Initialization ---
+        function init() {
+            scene = new THREE.Scene();
+            const aspect = window.innerWidth / window.innerHeight;
+            camera = new THREE.PerspectiveCamera(60, aspect, 0.1, 1000);
+            camera.position.set(cameraTargetX, cameraTargetY, 7);
+            camera.lookAt(cameraTargetX, cameraTargetY, 0);
+
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            document.body.appendChild(renderer.domElement);
+            
+            raycaster = new THREE.Raycaster();
+            mouse = new THREE.Vector2();
+
+            createLights();
+            createFloor();
+            createDesk();
+            createWall();
+            createMonitor();
+            createKeyboard();
+            createMouse();
+            createCameraObject();
+            createStickyNotes();
+            createCalendar();
+            createMailStack();
+            createNameCard();
+            createDrawers();
+
+            window.addEventListener('resize', onWindowResize, false);
+            window.addEventListener('wheel', onMouseWheel, { passive: false });
+            window.addEventListener('click', onClick, false);
+            setupModals();
+        }
+
+        // --- Lighting & Scene Objects ---
+        function createLights() {
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+            scene.add(ambientLight);
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 2.0);
+            directionalLight.position.set(-8, 12, 8);
+            directionalLight.castShadow = true;
+            directionalLight.shadow.mapSize.width = 4096;
+            directionalLight.shadow.mapSize.height = 4096;
+            directionalLight.shadow.camera.near = 0.5;
+            directionalLight.shadow.camera.far = 50;
+            directionalLight.shadow.camera.left = -20;
+            directionalLight.shadow.camera.right = 20;
+            directionalLight.shadow.camera.top = 20;
+            directionalLight.shadow.camera.bottom = -20;
+            scene.add(directionalLight);
+        }
+
+        function createFloor() {
+            const floorGeometry = new THREE.PlaneGeometry(100, 100);
+            const woodTexture = createWoodTexture();
+            woodTexture.wrapS = woodTexture.wrapT = THREE.RepeatWrapping;
+            woodTexture.repeat.set(25, 25);
+            const floorMaterial = new THREE.MeshStandardMaterial({ map: woodTexture, roughness: 0.8, metalness: 0 });
+            const floor = new THREE.Mesh(floorGeometry, floorMaterial);
+            floor.rotation.x = -Math.PI / 2;
+            floor.position.y = -25; // Lower the floor to keep it in view
+            floor.receiveShadow = true;
+            scene.add(floor);
+        }
+        
+        function createDesk() {
+            const deskMaterial = new THREE.MeshStandardMaterial({ color: 0x6B4226, roughness: 0.7, metalness: 0.1 });
+            const deskGeometry = new THREE.BoxGeometry(15, 0.2, 6);
+            const desk = new THREE.Mesh(deskGeometry, deskMaterial);
+            desk.position.y = 0;
+            desk.receiveShadow = true;
+            desk.castShadow = true;
+            scene.add(desk);
+        }
+
+        function createWall() {
+            const wallMaterial = new THREE.MeshStandardMaterial({ color: 0xf0eada, roughness: 0.9 });
+            const wallGeometry = new THREE.PlaneGeometry(100, 100);
+            const wall = new THREE.Mesh(wallGeometry, wallMaterial);
+            wall.position.z = -3.5;
+            wall.position.y = 10;
+            wall.receiveShadow = true;
+            scene.add(wall);
+        }
+        
+        function createDrawers() {
+            const drawerHeight = 7;
+            const drawerSpacing = drawerHeight + 1;
+            createSingleDrawer(-5, drawerHeight, "Project Alpha", "drawer_alpha");
+            createSingleDrawer(-5 - drawerSpacing, drawerHeight, "Q3 Financials", "drawer_q3");
+            createSingleDrawer(-5 - (drawerSpacing * 2), drawerHeight, "Marketing Campaign", "drawer_marketing");
+        }
+
+        function createSingleDrawer(yPos, height, labelText, name) {
+            const drawerGroup = new THREE.Group();
+            drawerGroup.name = name;
+            const drawerMaterial = new THREE.MeshStandardMaterial({ color: 0x5a3820, roughness: 0.6 });
+            const handleMaterial = new THREE.MeshStandardMaterial({ color: 0x444444, roughness: 0.3, metalness: 0.8 });
+            const drawerWidth = 6;
+            const drawerDepth = 2;
+            const wallThickness = 0.1;
+            const drawerFrontGeometry = new THREE.BoxGeometry(drawerWidth, height, wallThickness);
+            const drawerFront = new THREE.Mesh(drawerFrontGeometry, drawerMaterial);
+            drawerFront.position.z = drawerDepth / 2 - wallThickness / 2;
+            drawerFront.castShadow = true;
+            drawerFront.receiveShadow = true;
+            drawerGroup.add(drawerFront);
+            const drawerBack = drawerFront.clone();
+            drawerBack.position.z = -drawerDepth / 2 + wallThickness / 2;
+            drawerGroup.add(drawerBack);
+            const drawerBottomGeometry = new THREE.BoxGeometry(drawerWidth, wallThickness, drawerDepth);
+            const drawerBottom = new THREE.Mesh(drawerBottomGeometry, drawerMaterial);
+            drawerBottom.position.y = -height/2 + wallThickness/2;
+            drawerGroup.add(drawerBottom);
+            const drawerSideGeometry = new THREE.BoxGeometry(wallThickness, height, drawerDepth);
+            const leftSide = new THREE.Mesh(drawerSideGeometry, drawerMaterial);
+            leftSide.position.x = -drawerWidth/2 + wallThickness/2;
+            drawerGroup.add(leftSide);
+            const rightSide = leftSide.clone();
+            rightSide.position.x = drawerWidth/2 - wallThickness/2;
+            drawerGroup.add(rightSide);
+            const handleGeometry = new THREE.CylinderGeometry(0.1, 0.1, 1.5, 16);
+            const handle = new THREE.Mesh(handleGeometry, handleMaterial);
+            handle.rotation.z = Math.PI / 2;
+            handle.position.z = drawerDepth / 2 + 0.1;
+            drawerGroup.add(handle);
+            const labelWidth = 2.5;
+            const labelHeight = 0.6;
+            const labelX = drawerWidth / 2 - labelWidth / 2 - 0.2;
+            const labelY = height / 2 - labelHeight / 2 - 0.2;
+            const label = createTexturedPlane(labelWidth, labelHeight, '#f5e6d3', labelText, labelX, labelY, drawerDepth / 2 + 0.01);
+            drawerGroup.add(label);
+            drawerGroup.position.y = yPos;
+            drawerGroup.position.x = 3;
+            scene.add(drawerGroup);
+            interactiveObjects.push(drawerGroup);
+        }
+
+        function createMonitor() {
+            const monitorGroup = new THREE.Group();
+            monitorGroup.name = "monitor";
+            const screenMaterial = new THREE.MeshStandardMaterial({ color: 0x0a0a0a, roughness: 0.2, metalness: 0.1 });
+            const screenFrameGeometry = new THREE.BoxGeometry(5, 3, 0.2);
+            const screenFrame = new THREE.Mesh(screenFrameGeometry, screenMaterial);
+            screenFrame.castShadow = true;
+            const codeTexture = createCodeTexture();
+            const screenDisplayMaterial = new THREE.MeshBasicMaterial({ map: codeTexture });
+            const screenDisplayGeometry = new THREE.PlaneGeometry(4.8, 2.8);
+            const screenDisplay = new THREE.Mesh(screenDisplayGeometry, screenDisplayMaterial);
+            screenDisplay.position.z = 0.11;
+            screenFrame.add(screenDisplay);
+            monitorGroup.add(screenFrame);
+            const standMaterial = new THREE.MeshStandardMaterial({ color: 0x222222, roughness: 0.3, metalness: 0.5 });
+            const standGeometry = new THREE.BoxGeometry(0.5, 1.5, 0.5);
+            const stand = new THREE.Mesh(standGeometry, standMaterial);
+            stand.position.y = -2.2;
+            stand.castShadow = true;
+            monitorGroup.add(stand);
+            const baseGeometry = new THREE.BoxGeometry(2, 0.2, 2);
+            const base = new THREE.Mesh(baseGeometry, standMaterial);
+            base.position.y = -3;
+            base.castShadow = true;
+            monitorGroup.add(base);
+            monitorGroup.position.set(0, 3.1, -1.5);
+            scene.add(monitorGroup);
+            interactiveObjects.push(monitorGroup);
+        }
+        
+        function createCameraObject() {
+            const cameraGroup = new THREE.Group();
+            cameraGroup.name = "camera";
+            const material = new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.3, metalness: 0.2 });
+            const bodyGeometry = new THREE.BoxGeometry(1.2, 0.8, 0.5);
+            const body = new THREE.Mesh(bodyGeometry, material);
+            body.castShadow = true;
+            cameraGroup.add(body);
+            const lensMaterial = new THREE.MeshStandardMaterial({ color: 0x222222, roughness: 0.1, metalness: 0.5 });
+            const lensGeometry = new THREE.CylinderGeometry(0.4, 0.4, 0.7, 32);
+            const lens = new THREE.Mesh(lensGeometry, lensMaterial);
+            lens.rotation.x = Math.PI / 2;
+            lens.position.z = 0.6;
+            lens.castShadow = true;
+            cameraGroup.add(lens);
+            const glassMaterial = new THREE.MeshStandardMaterial({ color: 0x87ceeb, roughness: 0, transparent: true, opacity: 0.3 });
+            const glassGeometry = new THREE.CircleGeometry(0.35, 32);
+            const glass = new THREE.Mesh(glassGeometry, glassMaterial);
+            glass.position.z = 0.96;
+            cameraGroup.add(glass);
+            cameraGroup.position.set(-3.5, 0.5, 0.5);
+            cameraGroup.rotation.y = Math.PI / 6;
+            scene.add(cameraGroup);
+            interactiveObjects.push(cameraGroup);
+        }
+
+        function createStickyNotes() {
+            const noteData = [
+                { x: -5, y: 5.5, z: -3.05, color: '#f9f59f', text: 'Call John\nre: Q3 report', name: 'note_john' },
+                { x: -3.8, y: 5.5, z: -3.05, color: '#a3e8a3', text: 'Team Meeting\n4:30 PM', name: 'note_meeting' },
+                { x: -5, y: 4.5, z: -3.05, color: '#f9c59f', text: 'Finish report\nby EOD!', name: 'note_report' },
+                { x: -3.8, y: 4.5, z: -3.05, color: '#a3c2e8', text: 'Groceries:\n- Milk\n- Bread', name: 'note_groceries' }
+            ];
+            noteData.forEach(data => {
+                const note = createTexturedPlane(0.8, 0.8, data.color, data.text, data.x, data.y, data.z);
+                note.name = data.name;
+                scene.add(note);
+                interactiveObjects.push(note);
+            });
+        }
+        
+        function createCalendar() {
+            const calendarPlane = createTexturedPlane(3.5, 2.5, '#ffffff', '', 4.5, 5, -3.05, createCalendarTexture);
+            calendarPlane.name = "calendar";
+            scene.add(calendarPlane);
+            interactiveObjects.push(calendarPlane);
+        }
+        
+        function createMailStack() {
+            const mailGroup = new THREE.Group();
+            mailGroup.name = "mail_stack";
+            
+            const geometry = new THREE.BoxGeometry(2, 0.02, 1);
+            const topMaterial = new THREE.MeshStandardMaterial({ map: createEnvelopeTexture(), roughness: 0.9 });
+            const otherMaterial = new THREE.MeshStandardMaterial({ color: '#ffffff', roughness: 0.9 });
+
+            for(let i=0; i<5; i++) {
+                const isTop = i === 4;
+                const envelope = new THREE.Mesh(geometry, isTop ? topMaterial : otherMaterial);
+                envelope.position.y = i * 0.03;
+                envelope.castShadow = true;
+                mailGroup.add(envelope);
+            }
+            mailGroup.position.set(0, 0.1, 0);
+            mailGroup.rotation.y = Math.PI / 12;
+            scene.add(mailGroup);
+            interactiveObjects.push(mailGroup);
+        }
+
+        function createNameCard() {
+            const nameCard = createTexturedPlane(1.2, 0.7, '#fafafa', 'Jane Doe', 0, 0, 0, createNameCardTexture);
+            nameCard.name = "name_card";
+            nameCard.position.set(4, 0.11, 1.5); // Lifted slightly to prevent z-fighting
+            nameCard.rotation.x = -Math.PI / 2;
+            scene.add(nameCard);
+            interactiveObjects.push(nameCard);
+        }
+
+        function createCodeTexture() {
+            const canvas = document.createElement('canvas');
+            canvas.width = 1024; canvas.height = 512;
+            const context = canvas.getContext('2d');
+            context.fillStyle = '#1e1e1e'; context.fillRect(0, 0, canvas.width, canvas.height);
+            context.font = '24px "Courier New", monospace';
+            const codeLines = ['// Simple Three.js Scene','const scene = new THREE.Scene();','const camera = new THREE.PerspectiveCamera(75, ...);','const renderer = new THREE.WebGLRenderer();',' ','function createCube() {','  const geometry = new THREE.BoxGeometry(1, 1, 1);','  const material = new THREE.MeshStandardMaterial({','    color: 0x00ff00,','  });','  const cube = new THREE.Mesh(geometry, material);','  scene.add(cube);','}','','function animate() {','  requestAnimationFrame(animate);','  renderer.render(scene, camera);','}'];
+            let y = 40;
+            codeLines.forEach(line => { context.fillStyle = '#d4d4d4'; context.fillText(line, 30, y); y += 30; });
+            return new THREE.CanvasTexture(canvas);
+        }
+
+        function createKeyboard() {
+            const keyboardGroup = new THREE.Group();
+            const baseMaterial = new THREE.MeshStandardMaterial({ color: 0x1a1a1a, roughness: 0.4 });
+            const baseGeometry = new THREE.BoxGeometry(4.5, 0.15, 1.5);
+            const base = new THREE.Mesh(baseGeometry, baseMaterial);
+            base.castShadow = true;
+            keyboardGroup.add(base);
+            const keyMaterial = new THREE.MeshStandardMaterial({ color: 0x333333, roughness: 0.5 });
+            const keyGeometry = new THREE.BoxGeometry(0.2, 0.1, 0.2);
+            const numKeysX = 15; const numKeysZ = 5; const spacingX = 0.25; const spacingZ = 0.25;
+            for (let i = 0; i < numKeysX; i++) {
+                for (let j = 0; j < numKeysZ; j++) {
+                    const key = new THREE.Mesh(keyGeometry, keyMaterial);
+                    key.position.set((i - numKeysX / 2 + 0.5) * spacingX, 0.1, (j - numKeysZ / 2 + 0.5) * spacingZ);
+                    key.castShadow = true;
+                    keyboardGroup.add(key);
+                }
+            }
+            keyboardGroup.position.set(0, 0.18, 1);
+            scene.add(keyboardGroup);
+        }
+        
+        function createMouse() {
+            const mouseMaterial = new THREE.MeshStandardMaterial({ color: 0x1a1a1a, roughness: 0.4 });
+            const mouseGeometry = new THREE.BoxGeometry(0.5, 0.2, 0.8);
+            const mouse = new THREE.Mesh(mouseGeometry, mouseMaterial);
+            mouse.position.set(2.8, 0.2, 0.8);
+            mouse.castShadow = true;
+            scene.add(mouse);
+        }
+
+        function createWoodTexture() {
+            const canvas = document.createElement('canvas');
+            canvas.width = 512; canvas.height = 512;
+            const context = canvas.getContext('2d');
+            context.fillStyle = '#8B5A2B'; context.fillRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < 100; i++) {
+                const x1 = Math.random() * canvas.width; const y1 = 0;
+                const x2 = Math.random() * canvas.width; const y2 = canvas.height;
+                const lightness = Math.floor(Math.random() * 20 + 20);
+                context.strokeStyle = `hsl(30, 50%, ${lightness}%)`;
+                context.lineWidth = Math.random() * 2 + 0.5;
+                context.beginPath(); context.moveTo(x1, y1);
+                context.bezierCurveTo(x1 + (Math.random() - 0.5) * 100, canvas.height * 0.33, x2 + (Math.random() - 0.5) * 100, canvas.height * 0.66, x2, y2);
+                context.stroke();
+            }
+            return new THREE.CanvasTexture(canvas);
+        }
+        
+        function createTexturedPlane(width, height, color, text, x, y, z, textureFn = null) {
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+            canvas.width = 256; canvas.height = 128;
+            if (textureFn) {
+                textureFn(context, canvas.width, canvas.height);
+            } else {
+                context.fillStyle = color;
+                context.fillRect(0, 0, canvas.width, canvas.height);
+                context.font = 'bold 24px "Inter", sans-serif';
+                context.fillStyle = '#333';
+                context.textAlign = 'center';
+                context.textBaseline = 'middle';
+                const lines = text.split('\n');
+                lines.forEach((line, index) => {
+                    context.fillText(line, canvas.width / 2, canvas.height / 2 + (index * 28) - (lines.length-1)*14);
+                });
+            }
+            const texture = new THREE.CanvasTexture(canvas);
+            const material = new THREE.MeshStandardMaterial({ map: texture, roughness: 0.8, transparent: true });
+            const geometry = new THREE.PlaneGeometry(width, height);
+            const plane = new THREE.Mesh(geometry, material);
+            plane.position.set(x, y, z);
+            plane.castShadow = true;
+            return plane;
+        }
+
+        function createCalendarTexture(context, width, height) {
+            context.fillStyle = '#ffffff'; context.fillRect(0, 0, width, height);
+            context.fillStyle = '#e0e0e0'; context.fillRect(0, 0, width, 25);
+            context.font = 'bold 16px "Inter", sans-serif'; context.fillStyle = '#333'; context.textAlign = 'center';
+            context.fillText('JULY 2025', width/2, 18);
+            const days = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+            context.font = 'bold 11px "Inter", sans-serif';
+            days.forEach((day, i) => { context.fillText(day, (i + 0.5) * (width / 7), 40); });
+            context.strokeStyle = '#cccccc'; context.lineWidth = 0.5;
+            for (let i = 0; i < 7; i++) { for(let j = 0; j < 5; j++) { context.strokeRect(i * (width/7), 45 + j * 16, width/7, 16); } }
+            context.font = '10px "Inter", sans-serif'; context.fillStyle = '#555';
+            let date = 1;
+            for (let row = 0; row < 5; row++) {
+                for (let col = 2; col < 7; col++) {
+                    if(date > 31) continue;
+                    context.fillText(date.toString(), col * (width/7) + 8, 58 + row * 16);
+                    if(date === 17) { context.strokeStyle = '#d9534f'; context.lineWidth = 1; context.strokeRect(col * (width/7) + 2, 47 + row * 16, 12, 12); }
+                    date++;
+                     if(row === 4 && col > 3) continue;
+                }
+                 for (let col = 0; col < 7; col++) {
+                    if(date > 31) continue;
+                    context.fillText(date.toString(), col * (width/7) + 8, 58 + row * 16);
+                    date++;
+                 }
+            }
+        }
+        
+        function createEnvelopeTexture() {
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+            canvas.width = 512; canvas.height = 256;
+            context.fillStyle = '#f7f3e9'; context.fillRect(0, 0, canvas.width, canvas.height);
+            context.fillStyle = '#a3c2e8'; context.fillRect(canvas.width - 90, 20, 60, 70);
+            context.strokeStyle = '#6a9955'; context.lineWidth = 4; context.strokeRect(canvas.width - 88, 22, 56, 66);
+            context.font = '32px "Cedarville Cursive", cursive'; context.fillStyle = '#333';
+            const street = "456 Oak Ave"; const city = "Anytown, USA 54321";
+            context.fillText("Mr. John Appleseed", 50, 80);
+            context.fillText(street, 50, 130);
+            context.fillText(city, 50, 180);
+            return new THREE.CanvasTexture(canvas);
+        }
+
+        function createNameCardTexture(context, width, height) {
+            context.fillStyle = '#fafafa'; context.fillRect(0, 0, width, height);
+            context.font = 'bold 32px "Inter", sans-serif';
+            context.fillStyle = '#222';
+            context.textAlign = 'center';
+            context.textBaseline = 'middle';
+            context.fillText("Jane Doe", width/2, height/2 - 10);
+            context.font = '18px "Inter", sans-serif';
+            context.fillStyle = '#555';
+            context.fillText("Project Manager", width/2, height/2 + 20);
+        }
+
+        // --- Interactivity & Modals ---
+        
+        function setupModals() {
+            const modalContainer = document.getElementById('modal-container');
+            const closeButtons = document.querySelectorAll('.modal-close');
+            
+            const closeModal = () => {
+                modalContainer.style.display = 'none';
+                document.body.classList.remove('modal-open');
+            };
+
+            closeButtons.forEach(btn => {
+                btn.onclick = (e) => {
+                    e.stopPropagation();
+                    closeModal();
+                };
+            });
+            modalContainer.onclick = (e) => {
+                if (e.target === modalContainer) {
+                    e.stopPropagation();
+                    closeModal();
+                }
+            };
+
+            document.getElementById('send-email-btn').onclick = (e) => {
+                e.target.innerText = 'Sent!';
+                setTimeout(() => { e.target.innerText = 'Send'; closeModal(); }, 1000);
+            };
+            document.getElementById('sign-out-btn').onclick = (e) => {
+                e.target.innerText = 'Signed Out!';
+                setTimeout(() => { e.target.innerText = 'Sign Out'; closeModal(); }, 1000);
+            };
+
+            document.getElementById('prev-month-btn').onclick = () => {
+                currentCalendarDate.setMonth(currentCalendarDate.getMonth() - 1);
+                populateCalendar(currentCalendarDate);
+            };
+            document.getElementById('next-month-btn').onclick = () => {
+                currentCalendarDate.setMonth(currentCalendarDate.getMonth() + 1);
+                populateCalendar(currentCalendarDate);
+            };
+        }
+
+        function highlightSyntax(code) {
+            return code
+                .replace(/(const|let|function|if|return)/g, '<span class="keyword">$1</span>')
+                .replace(/(\/\/.+)/g, '<span class="comment">$1</span>')
+                .replace(/('.*?')/g, '<span class="string">$1</span>')
+                .replace(/([a-zA-Z0-9_]+)\(/g, '<span class="function">$1</span>(');
+        }
+
+        function populateCalendar(date) {
+            const grid = document.getElementById('calendar-grid');
+            const monthYearEl = document.getElementById('calendar-month-year');
+            grid.innerHTML = '';
+
+            const month = date.getMonth();
+            const year = date.getFullYear();
+
+            monthYearEl.innerText = `${date.toLocaleString('default', { month: 'long' })} ${year}`;
+
+            const firstDayOfMonth = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+            ['S','M','T','W','T','F','S'].forEach(day => grid.insertAdjacentHTML('beforeend', `<div class="day-header">${day}</div>`));
+            
+            for(let i=0; i < firstDayOfMonth; i++) {
+                grid.insertAdjacentHTML('beforeend', `<div class="not-month"></div>`);
+            }
+
+            for(let i=1; i <= daysInMonth; i++) {
+                let classes = '';
+                const today = new Date();
+                if (i === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
+                    classes += ' today';
+                }
+                if (month === 6 && year === 2025 && i === 17) { // July 17th, 2025 event
+                    classes += ' event';
+                }
+                grid.insertAdjacentHTML('beforeend', `<div class="${classes}">${i}</div>`);
+            }
+        }
+
+        function showModal(modalId, data) {
+            const modalContainer = document.getElementById('modal-container');
+            modalContainer.style.display = 'flex';
+            document.body.classList.add('modal-open');
+            
+            document.querySelectorAll('.modal').forEach(m => m.style.display = 'none');
+            const modal = document.getElementById(modalId);
+            modal.style.display = 'block';
+
+            if (modalId === 'calendar-modal') {
+                populateCalendar(currentCalendarDate);
+            }
+
+            if (data) {
+                if (modalId === 'project-modal') {
+                    document.getElementById('project-title').innerText = data.title;
+                    document.getElementById('project-description').innerText = data.description;
+                    const taskList = document.getElementById('project-tasks');
+                    taskList.innerHTML = '';
+                    data.tasks.forEach(task => {
+                        const li = document.createElement('li');
+                        li.innerHTML = `${task.name} <div class="progress-bar"><div style="width: ${task.progress}%;"></div></div>`;
+                        taskList.appendChild(li);
+                    });
+                } else if (modalId === 'code-modal') {
+                    document.getElementById('code-content').innerHTML = highlightSyntax(data.code);
+                } else if (modalId === 'todo-modal') {
+                    document.getElementById('todo-title').innerText = data.title;
+                    const list = document.getElementById('todo-list');
+                    list.innerHTML = '';
+                    data.items.forEach(item => {
+                        const li = document.createElement('li');
+                        li.innerText = item.text;
+                        if (item.done) li.classList.add('done');
+                        li.onclick = () => {
+                            item.done = !item.done;
+                            li.classList.toggle('done');
+                        };
+                        list.appendChild(li);
+                    });
+                } else if (modalId === 'camera-modal') {
+                    const gallery = document.getElementById('photo-gallery');
+                    gallery.innerHTML = '';
+                    data.photos.forEach(photo => {
+                        gallery.insertAdjacentHTML('beforeend', `<figure class="photo-item"><img src="${photo.src}" alt="${photo.caption}"><figcaption>${photo.caption}</figcaption></figure>`);
+                    });
+                } else if (modalId === 'timesheet-modal') {
+                    const tableBody = document.querySelector('#timesheet-table tbody');
+                    tableBody.innerHTML = '';
+                    let totalHours = 0;
+                    data.days.forEach(day => {
+                        tableBody.insertAdjacentHTML('beforeend', `<tr><td>${day.day}</td><td>${day.hours.toFixed(2)}</td></tr>`);
+                        totalHours += day.hours;
+                    });
+                    document.getElementById('timesheet-total').innerText = totalHours.toFixed(2);
+                }
+            }
+        }
+
+        function onClick(event) {
+            if (document.getElementById('modal-container').style.display === 'flex') return;
+
+            mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+            mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
+            raycaster.setFromCamera(mouse, camera);
+            const intersects = raycaster.intersectObjects(interactiveObjects, true);
+
+            if (intersects.length > 0) {
+                let clickedObject = intersects[0].object;
+                while(clickedObject.parent && !clickedObject.name) {
+                    clickedObject = clickedObject.parent;
+                }
+                const name = clickedObject.name;
+
+                if (name.startsWith('drawer_')) {
+                    const projectData = {
+                        drawer_alpha: { title: 'Project Alpha', description: 'AI-driven data analysis platform.', tasks: [{name: 'Backend API', progress: 80}, {name: 'Frontend UI', progress: 60}, {name: 'Database Schema', progress: 95}] },
+                        drawer_q3: { title: 'Q3 Financials', description: 'Comprehensive review of third-quarter performance.', tasks: [{name: 'Data Collection', progress: 100}, {name: 'Analysis', progress: 75}, {name: 'Report Generation', progress: 50}] },
+                        drawer_marketing: { title: 'Marketing Campaign', description: 'Increase brand awareness by 20%.', tasks: [{name: 'Ad Creatives', progress: 90}, {name: 'Social Media Scheduling', progress: 80}, {name: 'Performance Tracking', progress: 30}] }
+                    };
+                    showModal('project-modal', projectData[name]);
+                } else if (name === 'monitor') {
+                     showModal('code-modal', { code: document.querySelector('#code-content-source').innerText });
+                } else if (name.startsWith('note_')) {
+                    const todoData = {
+                        note_john: { title: 'Follow Up: John', items: [{text: 'Finalize Q3 report data', done: true}, {text: 'Schedule follow-up meeting', done: false}, {text: 'Email summary to stakeholders', done: false}] },
+                        note_meeting: { title: 'Team Meeting Prep', items: [{text: 'Prepare presentation slides', done: true}, {text: 'Review agenda points', done: true}, {text: 'Confirm attendees', done: false}] },
+                        note_report: { title: 'Report Finalization', items: [{text: 'Proofread final draft', done: false}, {text: 'Generate PDF version', done: false}, {text: 'Submit to management by 5 PM', done: false}] },
+                        note_groceries: { title: 'Grocery List', items: [{text: 'Milk (2%)', done: true}, {text: 'Whole wheat bread', done: false}, {text: 'Eggs', done: true}, {text: 'Apples', done: false}] }
+                    };
+                    showModal('todo-modal', todoData[name]);
+                } else if (name === 'camera') {
+                    showModal('camera-modal', { photos: [
+                        {src: 'https://placehold.co/400x300/a3c2e8/ffffff?text=Beach+Sunset', caption: 'Beach Sunset, CA'},
+                        {src: 'https://placehold.co/400x300/f9c59f/ffffff?text=Mountain+Peak', caption: 'Mountain Peak, CO'},
+                        {src: 'https://placehold.co/400x300/a3e8a3/ffffff?text=Cityscape', caption: 'Downtown at Night'},
+                        {src: 'https://placehold.co/400x300/f9f59f/ffffff?text=Forest+Trail', caption: 'Forest Trail, OR'}
+                    ]});
+                } else if (name === 'calendar') {
+                    showModal('calendar-modal');
+                } else if (name === 'mail_stack') {
+                    showModal('email-modal');
+                } else if (name === 'name_card') {
+                    showModal('timesheet-modal', { days: [
+                        {day: 'Monday', hours: 8.0}, {day: 'Tuesday', hours: 7.5}, {day: 'Wednesday', hours: 8.25}, {day: 'Thursday', hours: 8.0}, {day: 'Friday', hours: 7.75}
+                    ]});
+                }
+            }
+        }
+
+        // --- Event Handlers & Animation Loop ---
+        function onMouseWheel(event) {
+            if (document.getElementById('modal-container').style.display === 'flex') return;
+            event.preventDefault();
+            if (isScrolling) return;
+            const delta = Math.sign(event.deltaY);
+            if (delta > 0) { if (currentStopIndex < cameraStopsY.length - 1) currentStopIndex++; } 
+            else { if (currentStopIndex > 0) currentStopIndex--; }
+            cameraTargetY = cameraStopsY[currentStopIndex];
+            cameraTargetX = cameraStopsX[currentStopIndex];
+            isScrolling = true;
+            setTimeout(() => { isScrolling = false; }, 800);
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            const lerpFactor = 0.08;
+            camera.position.y += (cameraTargetY - camera.position.y) * lerpFactor;
+            camera.position.x += (cameraTargetX - camera.position.x) * lerpFactor;
+            camera.lookAt(camera.position.x, camera.position.y, 0);
+            renderer.render(scene, camera);
+        }
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        // --- Start ---
+        const fontLink = document.createElement('link');
+        fontLink.href = 'https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap';
+        fontLink.rel = 'stylesheet';
+        document.head.appendChild(fontLink);
+        
+        fontLink.onload = () => {
+            init();
+            animate();
+        };
+
+    </script>
+
+    <!-- Hidden data source for code modal -->
+    <pre id="code-content-source" style="display:none;">
+// Simple Three.js Scene
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer();
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
+
+const geometry = new THREE.BoxGeometry(1, 1, 1);
+const material = new THREE.MeshStandardMaterial({
+    color: '0x00ff00',
+    roughness: 0.5,
+    metalness: 0.8
+});
+const cube = new THREE.Mesh(geometry, material);
+scene.add(cube);
+
+const light = new THREE.DirectionalLight('0xffffff', 1);
+light.position.set(5, 10, 7.5);
+scene.add(light);
+
+camera.position.z = 5;
+
+function animate() {
+    requestAnimationFrame(animate);
+    cube.rotation.x += 0.01;
+    cube.rotation.y += 0.01;
+    renderer.render(scene, camera);
+}
+
+animate();
+    </pre>
+</body>
+</html>
+  
+  
+  
+</body>
+
+</html>
