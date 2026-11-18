@@ -1,0 +1,61 @@
+{
+  "source_id": "codepen:glennphilp/dblzow",
+  "author": "glennphilp",
+  "pen_id": "DBLzOW",
+  "url": "https://codepen.io/glennphilp/pen/DBLzOW",
+  "acquisition": "cloud_browser_cdpn_srcdoc",
+  "acquisition_url": "https://cdpn.io/glennphilp/fullpage/DBLzOW",
+  "retrieved_at": "2026-11-18",
+  "title": "Paper Cut-Out Effect w/CSS",
+  "fetch_status": "ok",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "bce7bba53ca059f893b83ec07f78f4c2345dbc5fabdd0cd2cf9e94f8dc6bbb15",
+  "source_html_sha256": "33a3aef20518ca48a32a92afb4c538b74cfff2538f6fd48d13ba79cc8272de59",
+  "analysis": {
+    "js": {
+      "has_js": false,
+      "inline_js_chars": 0,
+      "external_scripts": [],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 0,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": true,
+      "clip_path": false,
+      "css_counter": false,
+      "media_query": false
+    },
+    "external_stylesheets": [],
+    "css_imports": [],
+    "css_chars": 1953,
+    "element_count": 7,
+    "html_chars": 3100
+  },
+  "review": {
+    "status": "不优先",
+    "evidence": "GLENN文字伪元素叠色、倾斜及阴影模拟剪纸；关系较单一，难度不应因视觉效果而夸大。",
+    "visual_verified": true,
+    "formal_admission": false
+  }
+}
