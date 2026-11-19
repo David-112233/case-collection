@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>Rotating Wedding Rings - CSS only</title>
+
+    <link rel="canonical" href="https://codepen.io/Arthega/pen/vYvggxj">
+  
+  
+  
+  
+<style>
+:root {
+    --ring-rotation: 5s;
+    --ring-light: #777;
+    --ring-dark: #333;
+    --ring-l-light: #efab72;
+    --ring-l-dark: #d68745; /* #d68745*/
+    --ring-3d: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 1%, rgba(0, 0, 0, 0.5) 5%, rgba(0, 0, 0, 0) 15%, rgba(255, 255, 255, 0.9), rgba(0, 0, 0, 0) 85%, rgba(0, 0, 0, 0.5) 95%, rgba(0, 0, 0, 0.7) 99%);
+    --ring-inner-3d: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(0, 0, 0, 0.1) 40%, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1) 80%, rgba(255, 255, 255, 0.8)), linear-gradient(to bottom, rgba(0, 0, 0, 0) 5%, rgba(0, 0, 0, 0.5) 30%, rgba(0, 0, 0, 0.5) 70%, rgba(0, 0, 0, 0) 95%);
+    --ring-inner-3d-flip: linear-gradient(to top, rgba(255, 255, 255, 0.8), rgba(0, 0, 0, 0.1) 40%, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1) 80%, rgba(255, 255, 255, 0.8)), linear-gradient(to bottom, rgba(0, 0, 0, 0) 5%, rgba(0, 0, 0, 0.5) 30%, rgba(0, 0, 0, 0.5) 70%, rgba(0, 0, 0, 0) 95%);
+    --ring-l-3d: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 1%, rgba(0, 0, 0, 0.4) 3%, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0) 70%, rgba(0, 0, 0, 0.4) 97%, rgba(0, 0, 0, 0.7) 99%);
+    --ring-l-inner-3d: linear-gradient(to top, rgba(255, 255, 255, 0.8), rgba(0, 0, 0, 0.1) 40%, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1) 80%, rgba(255, 255, 255, 0.8));
+    --ring-l-inner-3d-flip: linear-gradient(to top, rgba(255, 255, 255, 0.8), rgba(0, 0, 0, 0.1) 40%, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1) 80%, rgba(255, 255, 255, 0.8));
+    --ring-l-rotation: 4.5s;
+}
+
+.rotate {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    animation-name: x-spin;
+    animation-duration: var(--ring-rotation);
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    transform-origin: top left;
+}
+
+@keyframes x-spin {
+    0% {
+        transform: rotateX(0deg);
+    }
+    50% {
+        transform: rotateX(180deg);
+    }
+    100% {
+        transform: rotateX(360deg);
+    }
+}
+
+.ring {
+    transform-style: preserve-3d;
+}
+
+.ring {
+    transform-style: preserve-3d;
+}
+
+.segment {
+    position: absolute;
+    top: -50px;
+    left: 46.5%;
+    width: 6.5%;
+    height: 100px;
+}
+
+.segment svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+.ring .segment.upperHalf {
+    animation-name: upperHalfRing;
+    animation-duration: var(--ring-rotation);
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+.ring .segment.lowerHalf {
+    animation-name: lowerHalfRing;
+    animation-duration: var(--ring-rotation);
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes lowerHalfRing {
+    0% {
+        background: var(--ring-3d);
+        background-color: var(--ring-light);
+    }
+    25% {
+        background: var(--ring-3d);
+        background-color: var(--ring-light);
+    }
+    26% {
+        background: var(--ring-inner-3d);
+        background-color: var(--ring-dark);
+    }
+    75% {
+        background: var(--ring-inner-3d);
+        background-color: var(--ring-dark);
+    }
+    76% {
+        background: var(--ring-3d);
+        background-color: var(--ring-light);
+    }
+    100% {
+        background: var(--ring-3d);
+        background-color: var(--ring-light);
+    }
+}
+
+@keyframes upperHalfRing {
+    0% {
+        background: var(--ring-inner-3d-flip);
+        background-color: var(--ring-dark);
+    }
+    25% {
+        background: var(--ring-inner-3d-flip);
+        background-color: var(--ring-dark);
+    }
+    26% {
+        background: var(--ring-3d);
+        background-color: var(--ring-light);
+    }
+    75% {
+        background: var(--ring-3d);
+        background-color: var(--ring-light);
+    }
+    76% {
+        background: var(--ring-inner-3d);
+        background-color: var(--ring-dark);
+    }
+    100% {
+        background: var(--ring-inner-3d);
+        background-color: var(--ring-dark);
+    }
+}
+
+.segment::before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.darken8::before,
+.darken22::before {
+    background: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.8));
+}
+
+.darken9::before,
+.darken23::before {
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5));
+}
+
+.darken10::before,
+.darken24::before {
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3));
+}
+
+.darken11::before,
+.darken25::before {
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.0));
+}
+
+.darken3::before,
+.darken17::before {
+    background: linear-gradient(to left, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.0));
+}
+
+.darken4::before,
+.darken18::before {
+    background: linear-gradient(to left, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3));
+}
+
+.darken5::before,
+.darken19::before {
+    background: linear-gradient(to left, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5));
+}
+
+.darken6::before,
+.darken20::before {
+    background: linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.8));
+}
+
+.segment25::before {
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.3)), linear-gradient(to right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.0));
+}
+
+.segment15::before {
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.3));
+}
+
+.segment16::before,
+.segment26::before {
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.3));
+}
+
+.segment27::before {
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0));
+}
+
+.segment17::before {
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0)), linear-gradient(to left, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.0));
+}
+
+.segment::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 0;
+}
+
+.ringWrapper {
+  position:relative; left:-100px;
+    width: 600px;
+    height: 400px;
+    transform: scale(0.8);
+}
+
+.ringWidth {
+    position: absolute;
+    left: 50%;
+    width: 57%;
+    height: 86%;
+    background: radial-gradient(rgba(0, 0, 0, 0) 60%, #fff 67%, #333 70%, rgba(0, 0, 0, 0) 75%) -55px -30px / 120% 120%, radial-gradient(rgba(0, 0, 0, 0) 60%, #fff 67%, #333 70%, rgba(0, 0, 0, 0) 75%) -5px -45px / 120% 120%, radial-gradient(rgba(0, 0, 0, 0) 60%, #666 62%, #666 67%, #333 70%, rgba(0, 0, 0, 0) 75%);
+    background-repeat: no-repeat;
+    box-sizing: border-box;
+    border-radius: 50%;
+    animation-name: ringWidth;
+    animation-duration: var(--ring-rotation);
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    transform-origin: center center;
+    z-index: 1;
+}
+
+@keyframes ringWidth {
+    0% {
+        transform: translate(-50.5%, -50%) scaleY(0);
+        top: 63%;
+    }
+    5%, 55% {
+        transform: translate(-50.5%, -50%) scaleY(0.3);
+        top: 61.5%;
+    }
+    10%, 60% {
+        transform: translate(-50.5%, -50%) scaleY(0.58);
+        top: 60%;
+    }
+    15%, 65% {
+        transform: translate(-50.5%, -50%) scaleY(0.82);
+        top: 57%;
+    }
+    20%, 70% {
+        transform: translate(-50.5%, -50%) scaleY(0.95);
+        top: 54%;
+    }
+    25%, 75% {
+        transform: translate(-50.5%, -50%) scaleY(1);
+        top: 50%;
+    }
+    30%, 80% {
+        transform: translate(-50.5%, -50%) scaleY(0.95);
+        top: 46.5%;
+    }
+    35%, 85% {
+        transform: translate(-50.5%, -50%) scaleY(0.8);
+        top: 43%;
+    }
+    40%, 90% {
+        transform: translate(-50.5%, -50%) scaleY(0.58);
+        top: 40%;
+    }
+    45%, 95% {
+        transform: translate(-50.5%, -50%) scaleY(0.3);
+        top: 38.5%;
+    }
+    50%, 100% {
+        transform: translate(-50.5%, -50%) scaleY(0);
+        top: 37%;
+    }
+    49% {
+        z-index: 1;
+    }
+    50% {
+        z-index: 0;
+    }
+    51% {
+        top: 63%;
+        z-index: 0;
+    }
+    52% {
+        z-index: 1;
+    }
+}
+
+.emboss {
+    width: 100%;
+    transform: scaleX(-1);
+    font-size: 8px;
+    color: #999;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    text-shadow: 1px 1px #000;
+    padding-left: 10px;
+}
+
+.ring-l .segment.upperHalf {
+    animation-name: upperHalfRingLisa;
+    animation-duration: var(--ring-l-rotation);
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+.ring-l .segment.lowerHalf {
+    animation-name: lowerHalfRingLisa;
+    animation-duration: var(--ring-l-rotation);
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+.ring-l .segment {
+    height: 70px;
+}
+
+@keyframes lowerHalfRingLisa {
+    0% {
+        background: var(--ring-l-3d);
+        background-color: var(--ring-l-light);
+    }
+    25% {
+        background: var(--ring-l-3d);
+        background-color: var(--ring-l-light);
+    }
+    26% {
+        background: var(--ring-l-inner-3d);
+        background-color: var(--ring-l-dark);
+    }
+    75% {
+        background: var(--ring-l-inner-3d);
+        background-color: var(--ring-l-dark);
+    }
+    76% {
+        background: var(--ring-l-3d);
+        background-color: var(--ring-l-light);
+    }
+    100% {
+        background: var(--ring-l-3d);
+        background-color: var(--ring-l-light);
+    }
+}
+
+@keyframes upperHalfRingLisa {
+    0% {
+        background: var(--ring-l-inner-3d-flip);
+        background-color: var(--ring-l-dark);
+    }
+    25% {
+        background: var(--ring-l-inner-3d-flip);
+        background-color: var(--ring-l-dark);
+    }
+    26% {
+        background: var(--ring-l-3d);
+        background-color: var(--ring-l-light);
+    }
+    75% {
+        background: var(--ring-l-3d);
+        background-color: var(--ring-l-light);
+    }
+    76% {
+        background: var(--ring-l-inner-3d);
+        background-color: var(--ring-l-dark);
+    }
+    100% {
+        background: var(--ring-l-inner-3d);
+        background-color: var(--ring-l-dark);
+    }
+}
+
+.ring-l .ring {
+    position: relative;
+    top: 15px;
+}
+
+.ring-l .ringWidth {
+    animation-name: ringWidthLisa;
+    animation-duration: var(--ring-l-rotation);
+    width: 53%;
+    height: 83%;
+    background: radial-gradient(rgba(0, 0, 0, 0) 64%, rgba(255, 255, 255, 1) 67%, rgba(0, 0, 0, 0.8) 70%, rgba(0, 0, 0, 0) 75%) -55px -30px / 120% 120%, radial-gradient(rgba(0, 0, 0, 0) 64%, rgba(255, 255, 255, 1) 69%, rgba(0, 0, 0, 0.5) 70%, rgba(0, 0, 0, 0) 75%) -5px -45px / 120% 120%, radial-gradient(rgba(0, 0, 0, 0) 63%, #efab72 64%, #ffdabb 67%, #d68745 71%, rgba(0, 0, 0, 0) 75%);
+    background-repeat: no-repeat;
+}
+
+@keyframes ringWidthLisa {
+    0% {
+        transform: translate(-50.5%, -50%) scaleY(0);
+        top: 59%;
+    }
+    5%, 55% {
+        transform: translate(-50.5%, -50%) scaleY(0.3);
+        top: 58.5%;
+    }
+    10%, 60% {
+        transform: translate(-50.5%, -50%) scaleY(0.57);
+        top: 57%;
+    }
+    15%, 65% {
+        transform: translate(-50.5%, -50%) scaleY(0.78);
+        top: 55.3%;
+    }
+    20%, 70% {
+        transform: translate(-50.5%, -50%) scaleY(0.92);
+        top: 52.5%;
+    }
+    25%, 75% {
+        transform: translate(-50.5%, -50%) scaleY(0.96);
+        top: 50%;
+    }
+    30%, 80% {
+        transform: translate(-50.5%, -50%) scaleY(0.92);
+        top: 48%;
+    }
+    35%, 85% {
+        transform: translate(-50.5%, -50%) scaleY(0.79);
+        top: 44.7%;
+    }
+    40%, 90% {
+        transform: translate(-50.5%, -50%) scaleY(0.57);
+        top: 43%;
+    }
+    45%, 95% {
+        transform: translate(-50.5%, -50%) scaleY(0.3);
+        top: 41.5%;
+    }
+    50%, 100% {
+        transform: translate(-50.5%, -50%) scaleY(0);
+        top: 41%;
+    }
+    49% {
+        z-index: 1;
+    }
+    50% {
+        z-index: 0;
+    }
+    51% {
+        top: 59%;
+        z-index: 0;
+    }
+    52% {
+        z-index: 1;
+    }
+}
+
+.ring-l .ring:nth-of-type(1) .segment14::before {
+    background: radial-gradient(rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 60%) 15px 47px / 5px 5px, radial-gradient(rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 60%) 30px 40px / 5px 5px, radial-gradient(rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 60%) 28px 10px / 5px 5px, radial-gradient(#fff 20%, #c0c0c0 42%, rgba(0, 0, 0, 0.5) 49%, rgba(0, 0, 0, 0) 50%) 7px 12px / 16px 16px, radial-gradient(#bbb, #ddd 40%, rgba(0, 0, 0, 0.5) 40%, rgba(0, 0, 0, 0) 50%) 4px 18px / 10px 10px, radial-gradient(#bbb, #ddd 40%, rgba(0, 0, 0, 0.5) 40%, rgba(0, 0, 0, 0) 50%) 10px 21px / 10px 10px, radial-gradient(#ddd, #ddd 40%, rgba(0, 0, 0, 0.5) 40%, rgba(0, 0, 0, 0) 50%) 16px 18px / 10px 10px, radial-gradient(#aaa, #fff 40%, rgba(0, 0, 0, 0.5) 40%, rgba(0, 0, 0, 0) 50%) 16px 11px / 10px 10px, radial-gradient(#aaa, #fff 40%, rgba(0, 0, 0, 0.5) 40%, rgba(0, 0, 0, 0) 50%) 10px 9px / 10px 10px, radial-gradient(#aaa, #fff 40%, rgba(0, 0, 0, 0.5) 40%, rgba(0, 0, 0, 0) 50%) 5px 11px / 10px 10px, radial-gradient(#fff, #999, #fff 42%, rgba(0, 0, 0, 0.5) 49%, rgba(0, 0, 0, 0) 55%, rgba(255, 255, 255, 0.5) 58%, rgba(0, 0, 0, 0) 62%) 0 5px / 30px 30px;
+    background-repeat: no-repeat;
+}
+
+.ring-l .ring:nth-of-type(1) .segment16::before {
+    background: radial-gradient(rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 60%) 0 45px / 5px 5px, radial-gradient(rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 60%) 6px 15px / 5px 5px, radial-gradient(#fff 20%, #d0d0d0 42%, rgba(0, 0, 0, 0.3) 49%, rgba(0, 0, 0, 0) 50%) 17px 22px / 16px 16px, radial-gradient(#bbb, #ddd 40%, rgba(0, 0, 0, 0.3) 40%, rgba(0, 0, 0, 0) 50%) 14px 28px / 10px 10px, radial-gradient(#bbb, #ddd 40%, rgba(0, 0, 0, 0.3) 40%, rgba(0, 0, 0, 0) 50%) 20px 31px / 10px 10px, radial-gradient(#ddd, #ddd 40%, rgba(0, 0, 0, 0.3) 40%, rgba(0, 0, 0, 0) 50%) 26px 28px / 10px 10px, radial-gradient(#aaa, #fff 40%, rgba(0, 0, 0, 0.3) 40%, rgba(0, 0, 0, 0) 50%) 26px 21px / 10px 10px, radial-gradient(#aaa, #fff 40%, rgba(0, 0, 0, 0.3) 40%, rgba(0, 0, 0, 0) 50%) 20px 19px / 10px 10px, radial-gradient(#aaa, #fff 40%, rgba(0, 0, 0, 0.3) 40%, rgba(0, 0, 0, 0) 50%) 15px 21px / 10px 10px, radial-gradient(#fff, #999, #fff 42%, rgba(0, 0, 0, 0.2) 49%, rgba(0, 0, 0, 0) 55%, rgba(255, 255, 255, 0.2) 58%, rgba(0, 0, 0, 0) 62%) 10px 15px / 30px 30px, linear-gradient(to right, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.3));
+    background-repeat: no-repeat;
+}
+
+.ring-l .ring:nth-of-type(1) .segment15::before {
+    background: radial-gradient(rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 60%) 18px 55px / 5px 5px, radial-gradient(rgba(255, 255, 255, 0.7) 20%, rgba(255, 255, 255, 0.2) 50%, rgba(0, 0, 0, 0)) 16px 28px / 10px 10px, radial-gradient(rgba(255, 255, 255, 0.4) 20%, rgba(255, 255, 255, 0) 42%, rgba(0, 0, 0, 0.3) 49%, rgba(0, 0, 0, 0) 50%) 7px 24px / 22px 22px, radial-gradient(rgba(255, 255, 255, 0.7) 20%, #861a22, #FF9F81 40%, rgba(0, 0, 0, 0.3) 40%, rgba(0, 0, 0, 0) 50%) 21px 34px / 13px 13px, radial-gradient(rgba(255, 255, 255, 0.7) 2%, #861a22, #FF9F81 40%, rgba(0, 0, 0, 0.3) 40%, rgba(0, 0, 0, 0) 50%) 11px 39px / 13px 13px, radial-gradient(#861a22, #FF9F81 40%, rgba(0, 0, 0, 0.3) 40%, rgba(0, 0, 0, 0) 50%) 2px 34px / 13px 13px, radial-gradient(#fff, #FF9F81 25%, #861a22, #FF9F81 40%, rgba(0, 0, 0, 0.3) 40%, rgba(0, 0, 0, 0) 50%) 21px 23px / 13px 13px, radial-gradient(#fff 10%, #861a22, #FF9F81 40%, rgba(0, 0, 0, 0.5) 40%, rgba(0, 0, 0, 0) 50%) 12px 18px / 13px 13px, radial-gradient(rgba(255, 255, 255, 0.7) 2%, #861a22, #FF9F81 40%, rgba(0, 0, 0, 0.3) 40%, rgba(0, 0, 0, 0) 50%) 3px 22px / 13px 13px, radial-gradient(#861a22, #FF9F81, #861a22 42%, rgba(0, 0, 0, 0.2) 49%, rgba(0, 0, 0, 0) 55%, rgba(255, 255, 255, 0.2) 58%, rgba(0, 0, 0, 0) 62%) -2px 15px / 40px 40px, linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.3));
+    background-repeat: no-repeat;
+}
+
+.ring-l .ring:nth-of-type(1) .segment13::before {
+    background: radial-gradient(rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 60%) 10px 15px / 5px 5px, radial-gradient(rgba(255, 255, 255, 0.3) 20%, rgba(255, 255, 255, 0.1) 50%, rgba(0, 0, 0, 0)) 16px 41px / 10px 10px, radial-gradient(rgba(255, 255, 255, 0.2) 20%, rgba(255, 255, 255, 0) 42%, rgba(0, 0, 0, 0.3) 49%, rgba(0, 0, 0, 0) 50%) 7px 37px / 22px 22px, radial-gradient(#FF9F81, #861a22 40%, rgba(0, 0, 0, 0.3) 40%, rgba(0, 0, 0, 0) 50%) 21px 47px / 13px 13px, radial-gradient(rgba(255, 255, 255, 0.3) 2%, #FF9F81, #861a22 40%, rgba(0, 0, 0, 0.3) 40%, rgba(0, 0, 0, 0) 50%) 11px 52px / 13px 13px, radial-gradient(#FF9F81, #861a22 40%, rgba(0, 0, 0, 0.3) 40%, rgba(0, 0, 0, 0) 50%) 2px 47px / 13px 13px, radial-gradient(#FF9F81 15%, #861a22 40%, rgba(0, 0, 0, 0.3) 40%, rgba(0, 0, 0, 0) 50%) 21px 36px / 13px 13px, radial-gradient(#FF9F81, #861a22 40%, rgba(0, 0, 0, 0.5) 40%, rgba(0, 0, 0, 0) 50%) 12px 31px / 13px 13px, radial-gradient(#FF9F81, #861a22 40%, rgba(0, 0, 0, 0.3) 40%, rgba(0, 0, 0, 0) 50%) 3px 35px / 13px 13px, radial-gradient(#861a22, #861a22 42%, rgba(0, 0, 0, 0.2) 49%, rgba(0, 0, 0, 0) 55%, rgba(255, 255, 255, 0.2) 58%, rgba(0, 0, 0, 0) 62%) -2px 28px / 40px 40px;
+    background-repeat: no-repeat;
+}
+
+.ring-l .ring:nth-of-type(1) .segment12::before {
+    background: radial-gradient(rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 60%) 32px 52px / 5px 5px, radial-gradient(rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 60%) 29px 10px / 5px 5px, radial-gradient(#fff 20%, #c0c0c0 42%, rgba(0, 0, 0, 0.5) 49%, rgba(0, 0, 0, 0) 50%) 7px 32px / 16px 16px, radial-gradient(#bbb, #ddd 40%, rgba(0, 0, 0, 0.5) 40%, rgba(0, 0, 0, 0) 50%) 4px 38px / 10px 10px, radial-gradient(#bbb, #ddd 40%, rgba(0, 0, 0, 0.5) 40%, rgba(0, 0, 0, 0) 50%) 10px 41px / 10px 10px, radial-gradient(#ddd, #ddd 40%, rgba(0, 0, 0, 0.5) 40%, rgba(0, 0, 0, 0) 50%) 16px 38px / 10px 10px, radial-gradient(#aaa, #fff 40%, rgba(0, 0, 0, 0.5) 40%, rgba(0, 0, 0, 0) 50%) 16px 31px / 10px 10px, radial-gradient(#aaa, #fff 40%, rgba(0, 0, 0, 0.5) 40%, rgba(0, 0, 0, 0) 50%) 10px 29px / 10px 10px, radial-gradient(#aaa, #fff 40%, rgba(0, 0, 0, 0.5) 40%, rgba(0, 0, 0, 0) 50%) 5px 31px / 10px 10px, radial-gradient(#fff, #999, #fff 42%, rgba(0, 0, 0, 0.5) 49%, rgba(0, 0, 0, 0) 55%, rgba(255, 255, 255, 0.5) 58%, rgba(0, 0, 0, 0) 62%) 0 25px / 30px 30px;
+    background-repeat: no-repeat;
+}
+
+.ring-l .ring:nth-of-type(1) .segment11::before {
+    background: radial-gradient(rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 60%) 2px 39px / 5px 5px, radial-gradient(rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 60%) 15px 18px / 5px 5px, radial-gradient(rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 60%) 22px 47px / 5px 5px, radial-gradient(rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 60%) 32px 22px / 5px 5px, linear-gradient(to right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.0));
+    background-repeat: no-repeat;
+}
+
+.ring-l .ring:nth-of-type(1) .segment17::before {
+    background: radial-gradient(rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 60%) 30px 23px / 5px 5px, radial-gradient(rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 60%) 18px 38px / 5px 5px, radial-gradient(rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 60%) 2px 44px / 5px 5px, linear-gradient(to right, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0)), linear-gradient(to left, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.0));
+    background-repeat: no-repeat;
+}
+
+.ring-l .ring:nth-of-type(2) .segment14::before {
+    background: radial-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.6) 29%, rgba(0, 0, 0, 0) 35%, rgba(255, 255, 255, 0.5) 38%, rgba(0, 0, 0, 0) 42%) 0 5px / 30px 30px;
+    background-repeat: no-repeat;
+}
+
+.ring-l .ring:nth-of-type(2) .segment16::before {
+    background: radial-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.6) 29%, rgba(0, 0, 0, 0) 35%, rgba(255, 255, 255, 0.5) 38%, rgba(0, 0, 0, 0) 42%) 10px 15px / 30px 30px, linear-gradient(to right, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.3));
+    background-repeat: no-repeat;
+}
+
+.ring-l .ring:nth-of-type(2) .segment15::before {
+    background: radial-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.6) 29%, rgba(0, 0, 0, 0) 35%, rgba(255, 255, 255, 0.5) 38%, rgba(0, 0, 0, 0) 42%) -2px 15px / 40px 40px, linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.3));
+    background-repeat: no-repeat;
+}
+
+.ring-l .ring:nth-of-type(2) .segment13::before {
+    background: radial-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.6) 29%, rgba(0, 0, 0, 0) 35%, rgba(255, 255, 255, 0.5) 38%, rgba(0, 0, 0, 0) 42%) -2px 28px / 40px 40px;
+    background-repeat: no-repeat;
+}
+
+.ring-l .ring:nth-of-type(2) .segment12::before {
+    background: radial-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.6) 29%, rgba(0, 0, 0, 0) 35%, rgba(255, 255, 255, 0.5) 38%, rgba(0, 0, 0, 0) 42%) 0 25px / 30px 30px;
+    background-repeat: no-repeat;
+}
+
+.ring-l .emboss {
+    color: #E1BBBB;
+    text-shadow: 1px 1px #5D4040;
+    padding: 0;
+    font-size: 0.8em;
+    padding-left: 2px;
+}
+
+.ring-l .rotate {
+    animation-duration: var(--ring-l-rotation);
+}
+
+.ring-l {
+  position:absolute; top:0; left:200px;
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  <!-- This has been generated with react for easier manipulation -->
+<div class="rings">
+  <div class="ringWrapper ring-d">
+    <div class="ringWidth"></div>
+    <div class="rotate">
+      <div class="ring">
+        <div class="segment upperHalf  darken darken7" style="transform: rotateY(90deg) translateZ(170px);"><svg xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="noise-filter8" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+                <feTurbulence type="fractalNoise" baseFrequency="0.008" numOctaves="12" seed="23" stitchTiles="stitch" result="turbulence"></feTurbulence>
+                <feSpecularLighting surfaceScale="20" specularConstant="0.9" specularExponent="28" lighting-color="#999" in="turbulence" result="specularLighting">
+                  <feDistantLight azimuth="3" elevation="47"></feDistantLight>
+                </feSpecularLighting>
+              </filter>
+            </defs>
+            <rect class="texture" width="100%" height="100%" filter="url(#noise-filter8)"></rect>
+          </svg></div>
+        <div class="segment upperHalf  darken darken8" style="transform: rotateY(102.857deg) translateZ(170px);"><svg xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="noise-filter9" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+                <feTurbulence type="fractalNoise" baseFrequency="0.009000000000000001" numOctaves="13" seed="24" stitchTiles="stitch" result="turbulence"></feTurbulence>
+                <feSpecularLighting surfaceScale="20" specularConstant="0.9" specularExponent="29" lighting-color="#999" in="turbulence" result="specularLighting">
+                  <feDistantLight azimuth="3" elevation="46"></feDistantLight>
+                </feSpecularLighting>
+              </filter>
+            </defs>
+            <rect class="texture" width="100%" height="100%" filter="url(#noise-filter9)"></rect>
+          </svg></div>
+        <div class="segment upperHalf  darken darken9" style="transform: rotateY(115.714deg) translateZ(170px);"><svg xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="noise-filter10" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+                <feTurbulence type="fractalNoise" baseFrequency="0.01" numOctaves="14" seed="25" stitchTiles="stitch" result="turbulence"></feTurbulence>
+                <feSpecularLighting surfaceScale="20" specularConstant="0.9" specularExponent="30" lighting-color="#999" in="turbulence" result="specularLighting">
+                  <feDistantLight azimuth="3" elevation="45"></feDistantLight>
+                </feSpecularLighting>
+              </filter>
+            </defs>
+            <rect class="texture" width="100%" height="100%" filter="url(#noise-filter10)"></rect>
+          </svg></div>
+        <div class="segment upperHalf  darken darken10" style="transform: rotateY(128.571deg) translateZ(170px);"><svg xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="noise-filter11" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+                <feTurbulence type="fractalNoise" baseFrequency="0.011" numOctaves="15" seed="26" stitchTiles="stitch" result="turbulence"></feTurbulence>
+                <feSpecularLighting surfaceScale="20" specularConstant="0.9" specularExponent="31" lighting-color="#999" in="turbulence" result="specularLighting">
+                  <feDistantLight azimuth="3" elevation="44"></feDistantLight>
+                </feSpecularLighting>
+              </filter>
+            </defs>
+            <rect class="texture" width="100%" height="100%" filter="url(#noise-filter11)"></rect>
+          </svg></div>
+        <div class="segment upperHalf  darken darken11" style="transform: rotateY(141.429deg) translateZ(170px);"><svg xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="noise-filter12" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+                <feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="16" seed="27" stitchTiles="stitch" result="turbulence"></feTurbulence>
+                <feSpecularLighting surfaceScale="20" specularConstant="0.9" specularExponent="32" lighting-color="#999" in="turbulence" result="specularLighting">
+                  <feDistantLight azimuth="3" elevation="43"></feDistantLight>
+                </feSpecularLighting>
+              </filter>
+            </defs>
+            <rect class="texture" width="100%" height="100%" filter="url(#noise-filter12)"></rect>
+          </svg></div>
+        <div class="segment upperHalf " style="transform: rotateY(154.286deg) translateZ(170px);"><svg xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="noise-filter13" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+                <feTurbulence type="fractalNoise" baseFrequency="0.013000000000000001" numOctaves="17" seed="28" stitchTiles="stitch" result="turbulence"></feTurbulence>
+                <feSpecularLighting surfaceScale="20" specularConstant="0.9" specularExponent="33" lighting-color="#999" in="turbulence" result="specularLighting">
+                  <feDistantLight azimuth="3" elevation="42"></feDistantLight>
+                </feSpecularLighting>
+              </filter>
+            </defs>
+            <rect class="texture" width="100%" height="100%" filter="url(#noise-filter13)"></rect>
+          </svg></div>
+        <div class="segment upperHalf " style="transform: rotateY(167.143deg) translateZ(170px);"><svg xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="noise-filter14" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+                <feTurbulence type="fractalNoise" baseFrequency="0.014" numOctaves="18" seed="29" stitchTiles="stitch" result="turbulence"></feTurbulence>
+                <feSpecularLighting surfaceScale="20" specularConstant="0.9" specularExponent="34" lighting-color="#999" in="turbulence" result="specularLighting">
+                  <feDistantLight azimuth="3" elevation="41"></feDistantLight>
+                </feSpecularLighting>
+              </filter>
+            </defs>
+            <rect class="texture" width="100%" height="100%" filter="url(#noise-filter14)"></rect>
+          </svg></div>
+        <div class="segment upperHalf " style="transform: rotateY(180deg) translateZ(170px);"><svg xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="noise-filter15" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+                <feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="19" seed="30" stitchTiles="stitch" result="turbulence"></feTurbulence>
+                <feSpecularLighting surfaceScale="20" specularConstant="0.9" specularExponent="35" lighting-color="#999" in="turbulence" result="specularLighting">
+                  <feDistantLight azimuth="3" elevation="40"></feDistantLight>
+                </feSpecularLighting>
+              </filter>
+            </defs>
+            <rect class="texture" width="100%" height="100%" filter="url(#noise-filter15)"></rect>
+          </svg></div>
+        <div class="segment upperHalf " style="transform: rotateY(192.857deg) translateZ(170px);"><svg xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="noise-filter16" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+                <feTurbulence type="fractalNoise" baseFrequency="0.016" numOctaves="20" seed="31" stitchTiles="stitch" result="turbulence"></feTurbulence>
+                <feSpecularLighting surfaceScale="20" specularConstant="0.9" specularExponent="36" lighting-color="#999" in="turbulence" result="specularLighting">
+                  <feDistantLight azimuth="3" elevation="39"></feDistantLight>
+                </feSpecularLighting>
+              </filter>
+            </defs>
+            <rect class="texture" width="100%" height="100%" filter="url(#noise-filter16)"></rect>
+          </svg></div>
+        <div class="segment upperHalf " style="transform: rotateY(205.714deg) translateZ(170px);"><svg xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="noise-filter17" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+                <feTurbulence type="fractalNoise" baseFrequency="0.017" numOctaves="21" seed="32" stitchTiles="stitch" result="turbulence"></feTurbulence>
+                <feSpecularLighting surfaceScale="20" specularConstant="0.9" specularExponent="37" lighting-color="#999" in="turbulence" result="specularLighting">
+                  <feDistantLight azimuth="3" elevation="38"></feDistantLight>
+                </feSpecularLighting>
+              </filter>
+            </defs>
+            <rect class="texture" width="100%" height="100%" filter="url(#noise-filter17)"></rect>
+          </svg></div>
+        <div class="segment upperHalf  darken darken17" style="transform: rotateY(218.571deg) translateZ(170px);"><svg xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="noise-filter18" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+                <feTurbulence type="fractalNoise" baseFrequency="0.018000000000000002" numOctaves="22" seed="33" stitchTiles="stitch" result="turbulence"></feTurbulence>
+                <feSpecularLighting surfaceScale="20" specularConstant="0.9" specularExponent="38" lighting-color="#999" in="turbulence" result="specularLighting">
+                  <feDistantLight azimuth="3" elevation="37"></feDistantLight>
+                </feSpecularLighting>
+              </filter>
+            </defs>
+            <rect class="texture" width="100%" height="100%" filter="url(#noise-filter18)"></rect>
+          </svg></div>
+        <div class="segment upperHalf  darken darken18" style="transform: rotateY(231.429deg) translateZ(170px);"><svg xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="noise-filter19" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+                <feTurbulence type="fractalNoise" baseFrequency="0.019" numOctaves="23" seed="34" stitchTiles="stitch" result="turbulence"></feTurbulence>
+                <feSpecularLighting surfaceScale="20" specularConstant="0.9" specularExponent="39" lighting-color="#999" in="turbulence" result="specularLighting">
+                  <feDistantLight azimuth="3" elevation="36"></feDistantLight>
+                </feSpecularLighting>
+              </filter>
+            </defs>
+            <rect class="texture" width="100%" height="100%" filter="url(#noise-filter19)"></rect>
+          </svg></div>
+        <div class="segment upperHalf  darken darken19" style="transform: rotateY(244.286deg) translateZ(170px);"><svg xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="noise-filter20" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+                <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="24" seed="35" stitchTiles="stitch" result="turbulence"></feTurbulence>
+                <feSpecularLighting surfaceScale="20" specularConstant="0.9" specularExponent="40" lighting-color="#999" in="turbulence" result="specularLighting">
+                  <feDistantLight azimuth="3" elevation="35"></feDistantLight>
+                </feSpecularLighting>
+              </filter>
+            </defs>
+            <rect class="texture" width="100%" height="100%" filter="url(#noise-filter20)"></rect>
+          </svg></div>
+        <div class="segment upperHalf  darken darken20" style="transform: rotateY(257.143deg) translateZ(170px);"><svg xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="noise-filter21" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+                <feTurbulence type="fractalNoise" baseFrequency="0.021" numOctaves="25" seed="36" stitchTiles="stitch" result="turbulence"></feTurbulence>
+                <feSpecularLighting surfaceScale="20" specularConstant="0.9" specularExponent="41" lighting-color="#999" in="turbulence" result="specularLighting">
+                  <feDistantLight azimuth="3" elevation="34"></feDistantLight>
+                </feSpecularLighting>
+              </filter>
+            </defs>
+            <rect class="texture" width="100%" height="100%" filter="url(#noise-filter21)"></rect>
+          </svg></div>
+        <div class="segment upperHalf  darken darken21" style="transform: rotateY(270deg) translateZ(170px);"><svg xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="noise-filter22" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+                <feTurbulence type="fractalNoise" baseFrequency="0.022" numOctaves="26" seed="37" stitchTiles="stitch" result="turbulence"></feTurbulence>
+                <feSpecularLighting surfaceScale="20" specularConstant="0.9" specularExponent="42" lighting-color="#999" in="turbulence" result="specularLighting">
+                  <feDistantLight azimuth="3" elevation="33"></feDistantLight>
+                </feSpecularLighting>
+              </filter>
+            </defs>
+            <rect class="texture" width="100%" height="100%" filter="url(#noise-filter22)"></rect>
+          </svg></div>
+        <div class="segment lowerHalf " style="transform: rotateY(0deg) translateZ(170px);"><svg xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="noise-filter1" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+                <feTurbulence type="fractalNoise" baseFrequency="0.001" numOctaves="5" seed="16" stitchTiles="stitch" result="turbulence"></feTurbulence>
+                <feSpecularLighting surfaceScale="20" specularConstant="0.9" specularExponent="21" lighting-color="#999" in="turbulence" result="specularLighting">
+                  <feDistantLight azimuth="3" elevation="54"></feDistantLight>
+                </feSpecularLighting>
+              </filter>
+            </defs>
+            <rect class="texture" width="100%" height="100%" filter="url(#noise-filter1)"></rect>
+          </svg></div>
+        <div class="segment lowerHalf " style="transform: rotateY(12.8571deg) translateZ(170px);"><svg xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="noise-filter2" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+                <feTurbulence type="fractalNoise" baseFrequency="0.002" numOctaves="6" seed="17" stitchTiles="stitch" result="turbulence"></feTurbulence>
+                <feSpecularLighting surfaceScale="20" specularConstant="0.9" specularExponent="22" lighting-color="#999" in="turbulence" result="specularLighting">
+                  <feDistantLight azimuth="3" elevation="53"></feDistantLight>
+                </feSpecularLighting>
+              </filter>
+            </defs>
+            <rect class="texture" width="100%" height="100%" filter="url(#noise-filter2)"></rect>
+          </svg></div>
+        <div class="segment lowerHalf " style="transform: rotateY(25.7143deg) translateZ(170px);"><svg xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="noise-filter3" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+                <feTurbulence type="fractalNoise" baseFrequency="0.003" numOctaves="7" seed="18" stitchTiles="stitch" result="turbulence"></feTurbulence>
+                <feSpecularLighting surfaceScale="20" specularConstant="0.9" specularExponent="23" lighting-color="#999" in="turbulence" result="specularLighting">
+                  <feDistantLight azimuth="3" elevation="52"></feDistantLight>
+                </feSpecularLighting>
+              </filter>
+            </defs>
+            <rect class="texture" width="100%" height="100%" filter="url(#noise-filter3)"></rect>
+          </svg></div>
+        <div class="segment lowerHalf  darken darken3" style="transform: rotateY(38.5714deg) translateZ(170px);"><svg xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="noise-filter4" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+                <feTurbulence type="fractalNoise" baseFrequency="0.004" numOctaves="8" seed="19" stitchTiles="stitch" result="turbulence"></feTurbulence>
+                <feSpecularLighting surfaceScale="20" specularConstant="0.9" specularExponent="24" lighting-color="#999" in="turbulence" result="specularLighting">
+                  <feDistantLight azimuth="3" elevation="51"></feDistantLight>
+                </feSpecularLighting>
+              </filter>
+            </defs>
+            <rect class="texture" width="100%" height="100%" filter="url(#noise-filter4)"></rect>
+          </svg></div>
+        <div class="segment lowerHalf  darken darken4" style="transform: rotateY(51.4286deg) translateZ(170px);"><svg xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="noise-filter5" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+                <feTurbulence type="fractalNoise" baseFrequency="0.005" numOctaves="9" seed="20" stitchTiles="stitch" result="turbulence"></feTurbulence>
+                <feSpecularLighting surfaceScale="20" specularConstant="0.9" specularExponent="25" lighting-color="#999" in="turbulence" result="specularLighting">
+                  <feDistantLight azimuth="3" elevation="50"></feDistantLight>
+                </feSpecularLighting>
+              </filter>
+            </defs>
+            <rect class="texture" width="100%" height="100%" filter="url(#noise-filter5)"></rect>
+          </svg></div>
+        <div class="segment lowerHalf  darken darken5" style="transform: rotateY(64.2857deg) translateZ(170px);"><svg xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="noise-filter6" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+                <feTurbulence type="fractalNoise" baseFrequency="0.006" numOctaves="10" seed="21" stitchTiles="stitch" result="turbulence"></feTurbulence>
+                <feSpecularLighting surfaceScale="20" specularConstant="0.9" specularExponent="26" lighting-color="#999" in="turbulence" result="specularLighting">
+                  <feDistantLight azimuth="3" elevation="49"></feDistantLight>
+                </feSpecularLighting>
+              </filter>
+            </defs>
+            <rect class="texture" width="100%" height="100%" filter="url(#noise-filter6)"></rect>
+          </svg></div>
+        <div class="segment lowerHalf  darken darken6" style="transform: rotateY(77.1429deg) translateZ(170px);"><svg xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="noise-filter7" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+                <feTurbulence type="fractalNoise" baseFrequency="0.007" numOctaves="11" seed="22" stitchTiles="stitch" result="turbulence"></feTurbulence>
+                <feSpecularLighting surfaceScale="20" specularConstant="0.9" specularExponent="27" lighting-color="#999" in="turbulence" result="specularLighting">
+                  <feDistantLight azimuth="3" elevation="48"></feDistantLight>
+                </feSpecularLighting>
+              </filter>
+            </defs>
+            <rect class="texture" width="100%" height="100%" filter="url(#noise-filter7)"></rect>
+          </svg></div>
+        <div class="segment lowerHalf  darken darken22" style="transform: rotateY(282.857deg) translateZ(170px);"><svg xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="noise-filter23" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+                <feTurbulence type="fractalNoise" baseFrequency="0.023" numOctaves="27" seed="38" stitchTiles="stitch" result="turbulence"></feTurbulence>
+                <feSpecularLighting surfaceScale="20" specularConstant="0.9" specularExponent="43" lighting-color="#999" in="turbulence" result="specularLighting">
+                  <feDistantLight azimuth="3" elevation="32"></feDistantLight>
+                </feSpecularLighting>
+              </filter>
+            </defs>
+            <rect class="texture" width="100%" height="100%" filter="url(#noise-filter23)"></rect>
+          </svg></div>
+        <div class="segment lowerHalf  darken darken23" style="transform: rotateY(295.714deg) translateZ(170px);"><svg xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="noise-filter24" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+                <feTurbulence type="fractalNoise" baseFrequency="0.024" numOctaves="28" seed="39" stitchTiles="stitch" result="turbulence"></feTurbulence>
+                <feSpecularLighting surfaceScale="20" specularConstant="0.9" specularExponent="44" lighting-color="#999" in="turbulence" result="specularLighting">
+                  <feDistantLight azimuth="3" elevation="31"></feDistantLight>
+                </feSpecularLighting>
+              </filter>
+            </defs>
+            <rect class="texture" width="100%" height="100%" filter="url(#noise-filter24)"></rect>
+          </svg></div>
+        <div class="segment lowerHalf  darken darken24" style="transform: rotateY(308.571deg) translateZ(170px);"><svg xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="noise-filter25" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+                <feTurbulence type="fractalNoise" baseFrequency="0.025" numOctaves="29" seed="40" stitchTiles="stitch" result="turbulence"></feTurbulence>
+                <feSpecularLighting surfaceScale="20" specularConstant="0.9" specularExponent="45" lighting-color="#999" in="turbulence" result="specularLighting">
+                  <feDistantLight azimuth="3" elevation="30"></feDistantLight>
+                </feSpecularLighting>
+              </filter>
+            </defs>
+            <rect class="texture" width="100%" height="100%" filter="url(#noise-filter25)"></rect>
+          </svg></div>
+        <div class="segment lowerHalf  darken darken25" style="transform: rotateY(321.429deg) translateZ(170px);"><svg xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="noise-filter26" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+                <feTurbulence type="fractalNoise" baseFrequency="0.026000000000000002" numOctaves="30" seed="41" stitchTiles="stitch" result="turbulence"></feTurbulence>
+                <feSpecularLighting surfaceScale="20" specularConstant="0.9" specularExponent="46" lighting-color="#999" in="turbulence" result="specularLighting">
+                  <feDistantLight azimuth="3" elevation="29"></feDistantLight>
+                </feSpecularLighting>
+              </filter>
+            </defs>
+            <rect class="texture" width="100%" height="100%" filter="url(#noise-filter26)"></rect>
+          </svg></div>
+        <div class="segment lowerHalf " style="transform: rotateY(334.286deg) translateZ(170px);"><svg xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="noise-filter27" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+                <feTurbulence type="fractalNoise" baseFrequency="0.027" numOctaves="31" seed="42" stitchTiles="stitch" result="turbulence"></feTurbulence>
+                <feSpecularLighting surfaceScale="20" specularConstant="0.9" specularExponent="47" lighting-color="#999" in="turbulence" result="specularLighting">
+                  <feDistantLight azimuth="3" elevation="28"></feDistantLight>
+                </feSpecularLighting>
+              </filter>
+            </defs>
+            <rect class="texture" width="100%" height="100%" filter="url(#noise-filter27)"></rect>
+          </svg></div>
+        <div class="segment lowerHalf " style="transform: rotateY(347.143deg) translateZ(170px);"><svg xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="noise-filter28" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+                <feTurbulence type="fractalNoise" baseFrequency="0.028" numOctaves="32" seed="43" stitchTiles="stitch" result="turbulence"></feTurbulence>
+                <feSpecularLighting surfaceScale="20" specularConstant="0.9" specularExponent="48" lighting-color="#999" in="turbulence" result="specularLighting">
+                  <feDistantLight azimuth="3" elevation="27"></feDistantLight>
+                </feSpecularLighting>
+              </filter>
+            </defs>
+            <rect class="texture" width="100%" height="100%" filter="url(#noise-filter28)"></rect>
+          </svg></div>
+        <div class="segment upperHalf  darken darken7" style="transform: rotateY(90deg) translateZ(150px);"></div>
+        <div class="segment upperHalf  darken darken8" style="transform: rotateY(102.857deg) translateZ(150px);"></div>
+        <div class="segment upperHalf  darken darken9" style="transform: rotateY(115.714deg) translateZ(150px);"></div>
+        <div class="segment upperHalf  darken darken10" style="transform: rotateY(128.571deg) translateZ(150px);"></div>
+        <div class="segment upperHalf  darken darken11" style="transform: rotateY(141.429deg) translateZ(150px);"></div>
+        <div class="segment upperHalf " style="transform: rotateY(154.286deg) translateZ(150px);"></div>
+        <div class="segment upperHalf " style="transform: rotateY(167.143deg) translateZ(150px);"></div>
+        <div class="segment upperHalf " style="transform: rotateY(180deg) translateZ(150px);"></div>
+        <div class="segment upperHalf " style="transform: rotateY(192.857deg) translateZ(150px);"></div>
+        <div class="segment upperHalf " style="transform: rotateY(205.714deg) translateZ(150px);"></div>
+        <div class="segment upperHalf  darken darken17" style="transform: rotateY(218.571deg) translateZ(150px);"></div>
+        <div class="segment upperHalf  darken darken18" style="transform: rotateY(231.429deg) translateZ(150px);"></div>
+        <div class="segment upperHalf  darken darken19" style="transform: rotateY(244.286deg) translateZ(150px);"></div>
+        <div class="segment upperHalf  darken darken20" style="transform: rotateY(257.143deg) translateZ(150px);"></div>
+        <div class="segment upperHalf  darken darken21" style="transform: rotateY(270deg) translateZ(150px);"></div>
+        <div class="segment lowerHalf " style="transform: rotateY(0deg) translateZ(150px);"></div>
+        <div class="segment lowerHalf " style="transform: rotateY(12.8571deg) translateZ(150px);"></div>
+        <div class="segment lowerHalf " style="transform: rotateY(25.7143deg) translateZ(150px);"></div>
+        <div class="segment lowerHalf  darken darken3" style="transform: rotateY(38.5714deg) translateZ(150px);"></div>
+        <div class="segment lowerHalf  darken darken4" style="transform: rotateY(51.4286deg) translateZ(150px);"></div>
+        <div class="segment lowerHalf  darken darken5" style="transform: rotateY(64.2857deg) translateZ(150px);"></div>
+        <div class="segment lowerHalf  darken darken6" style="transform: rotateY(77.1429deg) translateZ(150px);"></div>
+        <div class="segment lowerHalf  darken darken22" style="transform: rotateY(282.857deg) translateZ(150px);"></div>
+        <div class="segment lowerHalf  darken darken23" style="transform: rotateY(295.714deg) translateZ(150px);"></div>
+        <div class="segment lowerHalf  darken darken24" style="transform: rotateY(308.571deg) translateZ(150px);"></div>
+        <div class="segment lowerHalf  darken darken25" style="transform: rotateY(321.429deg) translateZ(150px);"></div>
+        <div class="segment lowerHalf " style="transform: rotateY(334.286deg) translateZ(150px);"></div>
+        <div class="segment lowerHalf " style="transform: rotateY(347.143deg) translateZ(150px);"></div>
+      </div>
+    </div>
+  </div>
+  <div class="ringWrapper ring-l">
+    <div class="ringWidth"></div>
+    <div class="rotate">
+      <div class="ring">
+        <div class="segment upperHalf segment7 darken darken7" style="transform: rotateY(90deg) translateZ(160px);"></div>
+        <div class="segment upperHalf segment8 darken darken8" style="transform: rotateY(102.857deg) translateZ(160px);"></div>
+        <div class="segment upperHalf segment9 darken darken9" style="transform: rotateY(115.714deg) translateZ(160px);"></div>
+        <div class="segment upperHalf segment10 darken darken10" style="transform: rotateY(128.571deg) translateZ(160px);"></div>
+        <div class="segment upperHalf segment11 darken darken11" style="transform: rotateY(141.429deg) translateZ(160px);"></div>
+        <div class="segment upperHalf segment12" style="transform: rotateY(154.286deg) translateZ(160px);"></div>
+        <div class="segment upperHalf segment13" style="transform: rotateY(167.143deg) translateZ(160px);"></div>
+        <div class="segment upperHalf segment14" style="transform: rotateY(180deg) translateZ(160px);"></div>
+        <div class="segment upperHalf segment15" style="transform: rotateY(192.857deg) translateZ(160px);"></div>
+        <div class="segment upperHalf segment16" style="transform: rotateY(205.714deg) translateZ(160px);"></div>
+        <div class="segment upperHalf segment17 darken darken17" style="transform: rotateY(218.571deg) translateZ(160px);"></div>
+        <div class="segment upperHalf segment18 darken darken18" style="transform: rotateY(231.429deg) translateZ(160px);"></div>
+        <div class="segment upperHalf segment19 darken darken19" style="transform: rotateY(244.286deg) translateZ(160px);"></div>
+        <div class="segment upperHalf segment20 darken darken20" style="transform: rotateY(257.143deg) translateZ(160px);"></div>
+        <div class="segment upperHalf segment21 darken darken21" style="transform: rotateY(270deg) translateZ(160px);"></div>
+        <div class="segment lowerHalf segment0" style="transform: rotateY(0deg) translateZ(160px);"></div>
+        <div class="segment lowerHalf segment1" style="transform: rotateY(12.8571deg) translateZ(160px);"></div>
+        <div class="segment lowerHalf segment2" style="transform: rotateY(25.7143deg) translateZ(160px);"></div>
+        <div class="segment lowerHalf segment3 darken darken3" style="transform: rotateY(38.5714deg) translateZ(160px);"></div>
+        <div class="segment lowerHalf segment4 darken darken4" style="transform: rotateY(51.4286deg) translateZ(160px);"></div>
+        <div class="segment lowerHalf segment5 darken darken5" style="transform: rotateY(64.2857deg) translateZ(160px);"></div>
+        <div class="segment lowerHalf segment6 darken darken6" style="transform: rotateY(77.1429deg) translateZ(160px);"></div>
+        <div class="segment lowerHalf segment22 darken darken22" style="transform: rotateY(282.857deg) translateZ(160px);"></div>
+        <div class="segment lowerHalf segment23 darken darken23" style="transform: rotateY(295.714deg) translateZ(160px);"></div>
+        <div class="segment lowerHalf segment24 darken darken24" style="transform: rotateY(308.571deg) translateZ(160px);"></div>
+        <div class="segment lowerHalf segment25 darken darken25" style="transform: rotateY(321.429deg) translateZ(160px);"></div>
+        <div class="segment lowerHalf segment26" style="transform: rotateY(334.286deg) translateZ(160px);"></div>
+        <div class="segment lowerHalf segment27" style="transform: rotateY(347.143deg) translateZ(160px);"></div>
+        <div class="segment upperHalf  darken darken7" style="transform: rotateY(90deg) translateZ(145px);"></div>
+        <div class="segment upperHalf  darken darken8" style="transform: rotateY(102.857deg) translateZ(145px);"></div>
+        <div class="segment upperHalf  darken darken9" style="transform: rotateY(115.714deg) translateZ(145px);"></div>
+        <div class="segment upperHalf  darken darken10" style="transform: rotateY(128.571deg) translateZ(145px);"></div>
+        <div class="segment upperHalf  darken darken11" style="transform: rotateY(141.429deg) translateZ(145px);"></div>
+        <div class="segment upperHalf " style="transform: rotateY(154.286deg) translateZ(145px);"></div>
+        <div class="segment upperHalf " style="transform: rotateY(167.143deg) translateZ(145px);"></div>
+        <div class="segment upperHalf " style="transform: rotateY(180deg) translateZ(145px);"></div>
+        <div class="segment upperHalf " style="transform: rotateY(192.857deg) translateZ(145px);"></div>
+        <div class="segment upperHalf " style="transform: rotateY(205.714deg) translateZ(145px);"></div>
+        <div class="segment upperHalf  darken darken17" style="transform: rotateY(218.571deg) translateZ(145px);"></div>
+        <div class="segment upperHalf  darken darken18" style="transform: rotateY(231.429deg) translateZ(145px);"></div>
+        <div class="segment upperHalf  darken darken19" style="transform: rotateY(244.286deg) translateZ(145px);"></div>
+        <div class="segment upperHalf  darken darken20" style="transform: rotateY(257.143deg) translateZ(145px);"></div>
+        <div class="segment upperHalf  darken darken21" style="transform: rotateY(270deg) translateZ(145px);"></div>
+        <div class="segment lowerHalf " style="transform: rotateY(0deg) translateZ(145px);"></div>
+        <div class="segment lowerHalf " style="transform: rotateY(12.8571deg) translateZ(145px);"></div>
+        <div class="segment lowerHalf " style="transform: rotateY(25.7143deg) translateZ(145px);"></div>
+        <div class="segment lowerHalf  darken darken3" style="transform: rotateY(38.5714deg) translateZ(145px);"></div>
+        <div class="segment lowerHalf  darken darken4" style="transform: rotateY(51.4286deg) translateZ(145px);"></div>
+        <div class="segment lowerHalf  darken darken5" style="transform: rotateY(64.2857deg) translateZ(145px);"></div>
+        <div class="segment lowerHalf  darken darken6" style="transform: rotateY(77.1429deg) translateZ(145px);"></div>
+        <div class="segment lowerHalf  darken darken22" style="transform: rotateY(282.857deg) translateZ(145px);"></div>
+        <div class="segment lowerHalf  darken darken23" style="transform: rotateY(295.714deg) translateZ(145px);"></div>
+        <div class="segment lowerHalf  darken darken24" style="transform: rotateY(308.571deg) translateZ(145px);"></div>
+        <div class="segment lowerHalf  darken darken25" style="transform: rotateY(321.429deg) translateZ(145px);"></div>
+        <div class="segment lowerHalf " style="transform: rotateY(334.286deg) translateZ(145px);"></div>
+        <div class="segment lowerHalf " style="transform: rotateY(347.143deg) translateZ(145px);"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  
+  
+</body>
+
+</html>
