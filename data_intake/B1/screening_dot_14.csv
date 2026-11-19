@@ -1,0 +1,11 @@
+key,url,decision,tier,hits,reason,js_policy,evidence,notes,decided_on
+jhsu__DjPdNG,https://codepen.io/jhsu/pen/DjPdNG,accept,unclassified,spatial_layers,await_user_review,preserve,头像、文字和卡片边界沿多片连续纸褶错位，点 Open 实见折面起伏后回到平面；三组设置及拖动未逐项试，头像外链保留。,推荐审核，对照 227；仅候审，未正式入库。,2026-11-19
+cgruber__jWmPZz,https://codepen.io/cgruber/pen/jWmPZz,accept,unclassified,spatial_layers,await_user_review,preserve,晴空、云、后排建筑、前排房屋与树木分层，树遮挡立面、前楼遮挡后楼；默认画面可见，指针视差未实测。,推荐审核，对照 224；仅候审，未正式入库。,2026-11-19
+FWeinb__kdxZyG,https://codepen.io/FWeinb/pen/kdxZyG,accept,unclassified,spatial_layers,await_user_review,preserve,红、橙、深棕三条折面彼此穿插，构成无一致前后顺序的闭环；默认图形已见。不同于既有 Escher 方块镶嵌，但整体规模较小。,推荐审核，对照 213；仅候审，未正式入库。,2026-11-19
+YusukeNakaya__OJEqmNv,https://codepen.io/YusukeNakaya/pen/OJEqmNv,accept,unclassified,spatial_layers,await_user_review,preserve,大小高低不同的楼体互相挡住侧面，黑色路隙保留纵深；纯 CSS 持续动画，构图随时点变化；未做窄屏核验。,推荐审核，对照 224；仅候审，未正式入库。,2026-11-19
+Enrichr-Dev__OPprwwa,https://codepen.io/Enrichr-Dev/pen/OPprwwa,hold,unclassified,spatial_layers,await_user_review,preserve,相邻折片沿铰链相连，字样和圆形跨越接缝，折片倾角改变投影；已实见滚动进入及滑条区域，未确认滑条端点能保持。,备选，对照 227；仅候审，未正式入库。,2026-11-19
+agathaco__JaGQPr,https://codepen.io/agathaco/pen/JaGQPr,hold,unclassified,spatial_layers,await_user_review,preserve,灯塔前景、扫过天空的光束、交叠的远山、水面构成前后层；默认画面可见，持续动画的完整周期未验证。,备选，对照 224；仅候审，未正式入库。,2026-11-19
+JrmSoftworks__ZOOzNQ,https://codepen.io/JrmSoftworks/pen/ZOOzNQ,hold,unclassified,spatial_layers,await_user_review,preserve,多种铰接面折法；点击前排两处 Fold 后，两张面板进入折叠态且外轮廓不再平直。页面偏几何教学，未逐个测试 Fold/Unfold，外部 jQuery 保留。,备选，对照 227；仅候审，未正式入库。,2026-11-19
+crayon-code__vYXpmPB,https://codepen.io/crayon-code/pen/vYXpmPB,hold,unclassified,spatial_layers,await_user_review,preserve,六个徽章压在半透明卡片上沿；斜切底边、背折及投影可见。层级清楚但较浅；未点各徽章，外部背景和字体保留。,备选，对照 213；仅候审，未正式入库。,2026-11-19
+morchard__QWgLZvR,https://codepen.io/morchard/pen/QWgLZvR,hold,unclassified,spatial_layers,await_user_review,preserve,三棵竖立的树和人物分布于倾斜的格框地面，前后位置明确；默认多处不互遮且构成简单，移动和交互未测试。,备选，对照 224；仅候审，未正式入库。,2026-11-19
+ThinkerBell1234__MWvbRow,https://codepen.io/ThinkerBell1234/pen/MWvbRow,hold,unclassified,spatial_layers,await_user_review,preserve,书脊深阴影将两页分开，书页边缘有厚度，绿树片叠于纸面；桌面首屏书的外缘超出画面，固定尺寸与外部纸纹需复核。,待复核，对照 227；仅候审，未正式入库。,2026-11-19
