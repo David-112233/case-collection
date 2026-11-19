@@ -1,0 +1,7 @@
+key,url,decision,tier,hits,reason,js_policy,evidence,notes,decided_on
+jh3y__RwBRyzb,https://codepen.io/jh3y/pen/RwBRyzb,hold,unclassified,spatial_layers,await_user_review,preserve,云端实际对照顶部闭合与 End 到底后开启两帧：叶片从窗框内收起，露出斜高光玻璃、横窗框和玻璃后的角色；中途未定位精确比例。角色有可辨识的 Peter Griffin 形象，素材再利用宜另核权利或替换。,优先，对照 213 / 224；仅候审，未正式入库。,2026-11-19
+omar-rizaq__RNbVXZK,https://codepen.io/omar-rizaq/pen/RNbVXZK,hold,unclassified,spatial_layers,await_user_review,preserve,云端可见近侧连杆与抓手伸至腹舱前，另一手在体后边缘，机械面板露出齿轮；投影落在网格底座上。头、手臂、齿轮和位置均自动循环，不定义为两稳定帧；源码保持按压放大，未实测。顶部平台提示会遮最上方少量区域。,优先·多循环，对照 224 / 227；仅候审，未正式入库。,2026-11-19
+bodiche__EPdRBR,https://codepen.io/bodiche/pen/EPdRBR,hold,unclassified,spatial_layers,await_user_review,preserve,默认实测近、远机翼分别与机身相接，机身各半透明立面、机首螺旋桨和后部尾翼层次可辨；机翼覆盖一部分透视网格但网格仍透出。只验一张默认图，不要求可交互。,优先，对照 224 / 227；仅候审，未正式入库。,2026-11-19
+pyxofy__abMVewa,https://codepen.io/pyxofy/pen/abMVewa,hold,unclassified,spatial_layers,await_user_review,preserve,实测可见灰色轨道器挡在橙色储箱前，两侧白色助推器及前后两层不同透明度的云烟。多组件动画源码主周期 7 秒，截图为一次视觉观察，不宣称固定相位；若选中要另定取帧并核参考题材。,备选·循环，对照 213 / 224；仅候审，未正式入库。,2026-11-19
+hexagoncircle__zYrmVqb,https://codepen.io/hexagoncircle/pen/zYrmVqb,hold,unclassified,spatial_layers,await_user_review,preserve,实测窗扇将雨景分成多段，两片半透明纹理帘与窗框重叠但能透看；近处植物与窗台装饰遮挡关系清晰。雨丝运动，不把雨滴位置作为严格判据。非百叶窗启闭设计，本轮未测试点击。,备选·循环，对照 213 / 224；仅候审，未正式入库。,2026-11-19
+Chaipiphat-Pongprapachuen__OJrgVdW,https://codepen.io/Chaipiphat-Pongprapachuen/pen/OJrgVdW,hold,unclassified,spatial_layers,await_user_review,preserve,实测蓝色建筑门洞有内侧面，近处米色屋顶的排布遮住一部分后景，另一屋顶上还叠小屋；宽画面下只能看到局部城市。不要求完整图入屏，若选中提前固定视窗及裁取范围。,备选，对照 224 / 227；仅候审，未正式入库。,2026-11-19

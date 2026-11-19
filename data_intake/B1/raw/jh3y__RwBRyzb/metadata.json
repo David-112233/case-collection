@@ -1,0 +1,68 @@
+{
+  "source_id": "codepen:jh3y/rwbryzb",
+  "author": "jh3y",
+  "pen_id": "RwBRyzb",
+  "url": "https://codepen.io/jh3y/pen/RwBRyzb",
+  "acquisition": "cdpn_fullpage",
+  "acquisition_url": "https://cdpn.io/jh3y/fullpage/RwBRyzb",
+  "retrieved_at": "2026-11-19T21:11:21+00:00",
+  "license": "未单独核验；外链资源许可另查",
+  "fetch_status": "ok",
+  "title": "Peter's Blinds with CSS Scroll Linked Animations ✨",
+  "canonical_url": "https://codepen.io/jh3y/pen/RwBRyzb",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "ed03c6496aa39b29d8bb187f6cf943b24ad2fccd0f438ec8903db402e445f60f",
+  "source_html_sha256": "f92a7bf6eee22ab6393bd189ee0f7c3d0fc7b2e557b3ec3d9880ff4119f0375d",
+  "analysis": {
+    "js": {
+      "has_js": true,
+      "inline_js_chars": 124,
+      "external_scripts": [],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": true,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": true,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 3,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": true,
+      "clip_path": true,
+      "css_counter": false,
+      "media_query": false
+    },
+    "external_stylesheets": [],
+    "css_imports": [
+      "https://unpkg.com/normalize.css"
+    ],
+    "css_chars": 7305,
+    "element_count": 109,
+    "html_chars": 14709
+  },
+  "review": {
+    "label": "滚动卷起百叶窗",
+    "status": "优先",
+    "reference_case": "213 / 224",
+    "evidence": "云端实际对照顶部闭合与 End 到底后开启两帧：叶片从窗框内收起，露出斜高光玻璃、横窗框和玻璃后的角色；中途未定位精确比例。角色有可辨识的 Peter Griffin 形象，素材再利用宜另核权利或替换。",
+    "visual_verified": true,
+    "surface": "Cloud Chrome, cdpn.io public preview, 1331×894 desktop including preview banner; no mobile check",
+    "formal_admission": false
+  }
+}
