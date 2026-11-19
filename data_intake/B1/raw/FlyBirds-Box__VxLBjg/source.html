@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>CSS Animated Rustic Cabinet</title>
+
+    <link rel="canonical" href="https://codepen.io/FlyBirds-Box/pen/VxLBjg">
+  
+  
+  
+  
+<style>
+#Cabinet {
+    width: 100%;
+    margin: 0;
+    padding: 0 0 0px;
+    /* background-image: url(https://blogger.googleusercontent.com/img/a/AVvXsEhGtFj9Iqzw1W_GQ2CUrEA_0KFSzQaPGYIm6fuOyYHybM1OOzuyiD8D_Xg1hhFRqaJb_Sge3UlStqFNGFE9T6kl0ctpPpGHf5pXKwl2YoM7GtGJuTK4xnVOsYJgTZWWk0KE4Wp-xsiDlk6o5Toq-jaGSDz5QNtkHCXhgPCxs4HIYXjdLWyCuPt0gQJO);
+    background-size:auto;
+    background-repeat: repeat;
+    text-align: center;
+    background-position: top center;
+    background-size: 20%; */
+    overflow:hidden;
+    position: relative;
+    border-radius: 0;
+    /*box-shadow: none;*/
+}
+  
+#Cabinet::before {
+    content: '';
+    display: block;
+    height: 500px;
+  	width:500px;
+   background-image: url(https://blogger.googleusercontent.com/img/a/AVvXsEhGtFj9Iqzw1W_GQ2CUrEA_0KFSzQaPGYIm6fuOyYHybM1OOzuyiD8D_Xg1hhFRqaJb_Sge3UlStqFNGFE9T6kl0ctpPpGHf5pXKwl2YoM7GtGJuTK4xnVOsYJgTZWWk0KE4Wp-xsiDlk6o5Toq-jaGSDz5QNtkHCXhgPCxs4HIYXjdLWyCuPt0gQJO);
+    background-size:auto;
+    background-repeat: repeat;
+    background-size: 30%;
+  
+ 	border-radius:100%;
+  
+    box-shadow: 0px 0px 25px 0px rgb(0 0 0 / 50%);
+    position: absolute;
+ 	top: 75px;
+    left: calc(50% - 250px);
+}
+
+.frame {
+    width:100%;
+    height:40px;
+    background-image: url(https://3.bp.blogspot.com/-yS3WhiTUobE/WtqF3vvV9eI/AAAAAAAAA4U/fybzz-adYcIHzGBQzWrfDKwDdHTeZcL-wCLcBGAs/s1600/FlyBirdwooden-menu.jpg);
+    background-size:contain;
+    box-shadow: 0 5px 10px 0px rgba(0,0,0,.5);
+    border-bottom:3px solid #000;
+    border-top:3px solid #000;
+}
+
+
+/*
+.shade::before {
+    content: '';
+    display: block;
+    height: 100%;
+    width: 0;
+    box-shadow: 60px 0px 80px 70px rgba(0,0,0,.7);
+    position: absolute;
+}
+
+.shade::after {
+    content: '';
+    display: block;
+    height: 100%;
+    width: 0;
+    box-shadow: -60px 0px 80px 70px rgba(0,0,0,.7);
+    position: absolute;
+    right:0;
+}
+*/
+
+.cabinet-main-wrap {
+    width:835px;
+    margin:0 auto;
+    position: relative;
+}
+    
+
+/* icons */
+
+.icons {
+    width:110px;
+    position: absolute;
+    right:80px;
+    top:40px;
+    z-index:3;
+  
+  display:none!important
+}
+
+  /*
+.banner {
+    position: relative;
+    left: -50px;
+    height: 150px;
+    width:200px;
+}
+
+.banner img { 
+    width:200px;
+    height:auto;
+}
+
+.banner::after {
+    content:'';
+    display:block;
+    width:170px;
+    height: 100px;
+    border-radius: 100%;
+    background: rgba(0,0,0,.25);
+    position: absolute;
+    top:35px;
+    left:10px;
+    box-shadow: 0 0 16px 10px rgba(0,0,0,.25);
+    -webkit-transition: box-shadow 0.2s ease-in-out;
+    transition: box-shadow 0.2s ease-in-out;
+    z-index: -1;
+}
+
+.icons a {
+    position: relative;
+    display: inline-block;
+    width:50px;
+    padding-top:10px;
+}
+
+.icons a img {
+    width:50px; 
+    height:auto;
+}
+
+.icons a::after {
+    content:'';
+    display:block;
+    width:40px;
+    height: 40px;
+    border-radius: 100%;
+    background: rgba(0,0,0,.5);
+    position: absolute;
+    top:18px;
+    left:3px;
+    box-shadow: 0 0 16px 5px rgba(0,0,0,.99);
+    -webkit-transition: box-shadow 0.2s ease-in-out;
+    transition: box-shadow 0.2s ease-in-out;
+    z-index: -1;
+}
+
+.icons a:hover::after {
+    box-shadow: 0 0 12px 2px rgba(0,0,0,.99);
+    -webkit-transition: box-shadow 0.1s ease-in-out;
+    transition: box-shadow 0.1s ease-in-out;
+}
+*/
+
+/* pictures */
+
+.pictures {
+    width: 100%;
+    margin: 100px 0 -75px -60px;
+    position:relative;
+    z-index: 0;
+    text-align: center;
+}
+
+.picture01, .picture02 {
+    /*width:300px;*/
+    display:inline-block;
+}
+  
+  .picture01 {display:none!important}
+  .picture02 {width:450px}
+
+.pictures img {
+    /*width:200px;
+    height:148px;*/
+    width:300px;
+    height:248px;
+}
+
+.video-wrap {
+    /*width:200px;
+    height:148px;*/
+    width:300px;
+    height:248px;
+    margin-left:50px;
+    overflow:hidden;
+}
+
+.pictures video {
+    width:auto;
+    /*height:148px;*/
+    height:248px;
+}
+
+.picture02 video {float: right;}
+
+.picture01 .video-wrap {
+    background:url(https://3.bp.blogspot.com/-zDqK-NRje0Q/WtqbJ-41XaI/AAAAAAAAA48/cbntkt0o7BELhlTvBNcLN05s57xtcXu9wCLcBGAs/s1600/1.jpg) no-repeat;
+    background-size:contain;
+}
+
+.picture02 .video-wrap {
+    background:url(https://1.bp.blogspot.com/--wlJhPNkFqo/WtqbJ5_g-xI/AAAAAAAAA44/P2abyqusZHs9UG53Pl4J-RrW7vhapxe3wCLcBGAs/s1600/2.jpg) no-repeat;
+  /*background-size:contain;*/
+    background-size:cover;
+    background-position: right;
+}
+
+.picture01::before,
+.picture02::before {
+  content:'';
+  display:block;
+  /*width:200px;
+    height:148px;*/
+    width:300px;
+    height:248px;
+  background:#0b536b;
+  position:absolute;
+  z-index:0;
+  top:0;
+  margin-left:52px;
+  opacity:0.05;
+}
+
+.picture01::before {
+  background:url(https://4.bp.blogspot.com/-pVft7SkvjW4/WtqiIpEdYoI/AAAAAAAAA5Q/J3h1OArW-j0APpD_h-itdOnXivwxmtEkQCLcBGAs/s1600/WOODEN-SIGN.png) no-repeat;
+  background-size:70%;
+  opacity:1;
+  background-position: 80% 100%;
+}
+
+.picture01::after,
+.picture02::after {
+    content: '';
+    display: block;
+  /*width:300px;
+    height:282px;*/
+    width:450px;
+    height:382px;
+    position:absolute;
+    top:-65px;
+  	background: url(https://3.bp.blogspot.com/-G_7oIZaHEkg/Wto8oZ5ZzNI/AAAAAAAAA14/NkcIasYVVmceQIMH0g1ozUKI-whOiZTrQCEwYBhgL/s1600/FBwoodenframe-framewithshaddow-over2.png) no-repeat;
+    background-size:contain;
+    -webkit-transition: background-image 0.2s ease-in-out;
+    transition: background-image 0.2s ease-in-out;
+}
+
+.picture02:hover::after {
+    background: url(https://4.bp.blogspot.com/-oJshT1tnyK0/Wto8oXecdRI/AAAAAAAAA18/UF30p-8ZF9gZ_n0-C_NZrC66KpH4qMe5QCLcBGAs/s1600/FBwoodenframe-framewithshaddow.png) no-repeat;
+    background-size:contain;
+    -webkit-transition: background-image 0.2s ease-in-out;
+    transition: background-image 0.2s ease-in-out;
+}
+
+
+/* desk */
+
+.desk {
+    padding: 0;
+    margin: 0;
+    z-index: 1;
+    position:relative;
+}
+
+.desk::before {
+    content:'';
+    display:block;
+    width:500px;
+    margin-left:100px;
+    height:0;
+    box-shadow: 0px 200px 50px 50px rgb(0 0 0 / 50%); 
+}
+
+.desk div {
+    display:inline-block;
+    padding:0;
+    margin:0;
+    float:left;
+    background-size: cover;
+}
+
+.desk01 {
+    width:835px; 
+    height:138px; 
+    background: url(https://4.bp.blogspot.com/-nX6KyXHXgoQ/Wtot5Takf5I/AAAAAAAAAz0/nwP_V4i2MOccFk3X-l9Z4dhCO6jH_wGhQCLcBGAs/s1600/szafka_01.png) no-repeat;
+}
+
+.desk02 {
+    width:346px; 
+    height:48px; 
+    background: url(https://2.bp.blogspot.com/-a3qSurAfQtM/Wtot5TQNNyI/AAAAAAAAAz8/48JvVOTMF8Y3_XMLTQP4IyKGnG83xrEMgCLcBGAs/s1600/szafka_02.png) no-repeat;
+}
+
+.desk03 {
+    width:108px; 
+    height:48px; 
+    background: url(https://1.bp.blogspot.com/-Rqn8-1haEY0/Wtot59la2hI/AAAAAAAAA0A/WeX41im8SaQPbERYMXzfNyJb7hgPlvmSgCLcBGAs/s1600/szafka_03.png) no-repeat;
+    -webkit-transition: background-image 0.2s ease-in-out;
+    transition: background-image 0.2s ease-in-out;
+}   
+        
+.desk03::after {
+    content:'';
+    display:block;
+    width:108px; 
+    height:48px;  
+    background: url(https://4.bp.blogspot.com/-_zCFAfdbQlI/Wtot3z1YOeI/AAAAAAAAAzo/GpenvX-o54oG64ZIoNAZ1bwimhx-bK5mgCLcBGAs/s1600/szafka2_03.png) no-repeat;
+    background-size: cover;
+    position: absolute;
+    opacity:0;
+    -webkit-transition: opacity 0.2s ease-in-out;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.desk03:hover::after  {
+    opacity:1;  
+    -webkit-transition: opacity 0.2s ease-in-out;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.desk04 {
+    width:381px; 
+    height:48px; 
+    background: url(https://3.bp.blogspot.com/-rURgZOpGVwQ/Wtot6JhCrQI/AAAAAAAAA0E/0IeG62lDG60hqcGJE4VS5afR0YJAHV0swCLcBGAs/s1600/szafka_04.png) no-repeat;
+}
+
+.desk05 {
+    width:58px; 
+    height:129px; 
+    background: url(https://4.bp.blogspot.com/-uNVVxRd9g6o/Wtot6v5iuOI/AAAAAAAAA0I/-z9NvdhcUQkug9tGaf85oEnAnc_GqJ-ZgCLcBGAs/s1600/szafka_05.png) no-repeat;
+}
+
+.desk06 {
+    width:288px; 
+    height:129px; 
+    background: url(https://1.bp.blogspot.com/-yJQR62FvkeE/Wtot7X5gMEI/AAAAAAAAA0M/e1RYkAa7F9ghKO0wix_B4dEVtceEh_cjQCLcBGAs/s1600/szafka_06.png) no-repeat;
+    -webkit-transition: background-image 0.2s ease-in-out;
+    transition: background-image 0.2s ease-in-out;
+}
+    
+.desk06::after {
+    content:'';
+    display:block;
+    width:288px; 
+    height:129px; 
+    background: url(https://1.bp.blogspot.com/-YKwDaE1nvu0/Wtot35oI-zI/AAAAAAAAAzk/FL4uReCPgWgu3G2pHKHxyrK4kh4isFhmACLcBGAs/s1600/szafka2_06.png) no-repeat;
+    background-size: cover;
+    position: absolute;
+    opacity:0 
+
+    -moz-animation:open2 10s cubic-bezier(0.09, 1.8, 0.26, 1.65) infinite;
+    -webkit-animation:open2 10s cubic-bezier(0.09, 1.8, 0.26, 1.65) infinite;
+    animation:open2 10s cubic-bezier(0.09, 1.8, 0.26, 1.65) infinite;
+}
+
+.desk06:hover::after  {
+    opacity:1;  
+    -webkit-transition: opacity 0.2s ease-in-out;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.desk07 {
+    width:287px; 
+    height:129px; 
+    background: url(https://3.bp.blogspot.com/-thc0cI_hJlw/Wtot73yaZoI/AAAAAAAAA0U/sU87IjgB59k3oPDPh9ZtseFoelECz07YACLcBGAs/s1600/szafka_07.png) no-repeat;
+    -webkit-transition: background-image 0.2s ease-in-out;
+    transition: background-image 0.2s ease-in-out;
+}
+      
+.desk07::after {
+    content:'';
+    display:block;
+    width:287px; 
+    height:129px; 
+    background: url(https://2.bp.blogspot.com/-M3T0pcxmshU/Wtot3_IZWvI/AAAAAAAAAzg/yIzGxescKtoMHIemyQpKS7FaRj9S_HfKACLcBGAs/s1600/szafka2_07.png) no-repeat;
+    background-size: cover;
+    position: absolute;
+    opacity:0 
+
+    -moz-animation:open1 8s cubic-bezier(0.09, 1.8, 0.26, 1.65) infinite;
+    -webkit-animation:open1 8s cubic-bezier(0.09, 1.8, 0.26, 1.65) infinite;
+    animation:open1 8s cubic-bezier(0.09, 1.8, 0.26, 1.65) infinite;
+}
+
+.desk07:hover::after  {
+    opacity:1;  
+    -webkit-transition: opacity 0.2s ease-in-out;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.desk08 {
+    width:202px; 
+    height:129px; 
+    background: url(https://4.bp.blogspot.com/-4_lUll-07BE/Wtot7z_pKpI/AAAAAAAAA0Q/KoRdv0IuGu8dJAgicdPPG_2-jWBVxPXawCLcBGAs/s1600/szafka_08.png) no-repeat;
+}
+
+.desk09 {
+    width:58px; 
+    height:106px; 
+    background: url(https://4.bp.blogspot.com/-hctMrWE7DZQ/Wtot7x8l0KI/AAAAAAAAA0Y/gekVvssgxEoKqXFDcEY_PZ9VWZ_C7KrjgCLcBGAs/s1600/szafka_09.png) no-repeat;
+}
+
+.desk10 {
+    width:288px; 
+    height:106px; 
+    background: url(https://1.bp.blogspot.com/-NHSkfwb4jho/Wtot4r29kHI/AAAAAAAAAzs/2fQ9XIdBNQMp37Kg8LnwBTgGqkbkEe6bgCLcBGAs/s1600/szafka2_10.png) no-repeat;
+    -webkit-transition: background-image 0.2s ease-in-out;
+    transition: background-image 0.2s ease-in-out;
+}
+         
+.desk10::after {
+    content:'';
+    display:block;
+    width:288px; 
+    height:106px;  
+    background: url(https://3.bp.blogspot.com/-SYtz7wZVQ1U/Wtot8WcsU-I/AAAAAAAAA0c/G3CV9NSk7uIbEauP2Kyxc1IMIB0OVTyNgCLcBGAs/s1600/szafka_10.png) no-repeat;
+    background-size: cover;
+    position: absolute;
+    opacity:1;
+  
+    -moz-animation:open3 6s cubic-bezier(0.09, 1.8, 0.26, 1.65) infinite;
+    -webkit-animation:open3 6s cubic-bezier(0.09, 1.8, 0.26, 1.65) infinite;
+    animation:open3 6s cubic-bezier(0.09, 1.8, 0.26, 1.65) infinite;
+}
+
+.desk10:hover::after  {
+    opacity:0;  
+    -webkit-transition: opacity 0.2s ease-in-out;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.desk11 {
+    width:287px; 
+    height:106px; 
+    background: url(https://4.bp.blogspot.com/-xW7XoYot_Ws/Wtot8fkVP1I/AAAAAAAAA0g/EouvxXBxbq0ksfBQ2chFu9kF1Al-JsCawCLcBGAs/s1600/szafka_11.png) no-repeat;
+    -webkit-transition: background-image 0.2s ease-in-out;
+    transition: background-image 0.2s ease-in-out;
+}
+         
+.desk11::after {
+    content:'';
+    display:block;
+    width:287px; 
+    height:106px;  
+    background: url(https://3.bp.blogspot.com/-hG9fO6UOxKw/Wtot5GVMH3I/AAAAAAAAAzw/kB9xH48tQz0XuH5zuyxHGmmtXDtXdLlwgCLcBGAs/s1600/szafka2_11.png) no-repeat;
+    background-size: cover;
+    position: absolute;
+    opacity:0;
+
+    -moz-animation:open2 8s cubic-bezier(0.09, 1.8, 0.26, 1.65) 3s infinite;
+    -webkit-animation:open2 8s cubic-bezier(0.09, 1.8, 0.26, 1.65) 3s infinite;
+    animation:open2 8s cubic-bezier(0.09, 1.8, 0.26, 1.65) 3s infinite;
+}
+
+.desk11:hover::after  {
+    opacity:1;  
+   -webkit-transition: opacity 0.2s ease-in-out;
+    transition: opacity 0.2s ease-in-out;
+
+}
+    
+.desk12 {
+    width:105px; 
+    height:106px; 
+    background: url(https://1.bp.blogspot.com/-dgdLSc6-tH8/Wtot8WmB3NI/AAAAAAAAA0k/B7OaTUR2-kwKUh33a8b-SKx6R1i_pib5QCLcBGAs/s1600/szafka_12.png) no-repeat;
+    -webkit-transition: background-image 0.2s ease-out;
+    transition: background-image 0.2s ease-out;
+}
+             
+.desk12::after {
+    content:'';
+    display:block;
+    width:105px; 
+    height:106px;   
+    background: url(https://1.bp.blogspot.com/-cGbGfD6gBbs/Wtot5fbEaYI/AAAAAAAAAz4/nUZnbhy1ZnA1mIbaFNUG02Lx9fXKWHOQgCLcBGAs/s1600/szafka2_12.png) no-repeat;
+    background-size: cover;
+    position: absolute;
+    opacity:0;
+
+    -moz-animation:open1 3s cubic-bezier(0.09, 1.8, 0.26, 1.65) infinite;
+    -webkit-animation:open1 3s cubic-bezier(0.09, 1.8, 0.26, 1.65) infinite;
+    animation:open1 3s cubic-bezier(0.09, 1.8, 0.26, 1.65) infinite;
+}
+
+.desk12:hover::after  {
+    opacity:1;  
+    -webkit-transition: opacity 0.2s ease-in-out;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.desk13 {
+    width:97px; 
+    height:106px; 
+    background: url(https://3.bp.blogspot.com/-fH5KTYZ9q68/Wtot8zaFktI/AAAAAAAAA0o/jYl8RYKcGu0H8m73Ih1GvprYCSR-hSSWwCLcBGAs/s1600/szafka_13.png) no-repeat;
+}
+
+.desk14 {
+    width:835px; 
+    height:57px; 
+    background: url(https://4.bp.blogspot.com/-NbbquPV1s7k/Wtot84GhdoI/AAAAAAAAA0s/_Fx5yfTWvpYH6I8lgMOXnN8hNxu24Tj4wCLcBGAs/s1600/szafka_14.png) no-repeat;
+}
+  
+  
+@-moz-keyframes open3 { 
+   0%, 15%, 80%, 100% { 
+       opacity:1; 
+    } 
+  20%, 75% { 
+       opacity:0
+    } 
+}
+@-webkit-keyframes open3 { 
+   0%, 15%, 80%, 100% { 
+       opacity:1; 
+    } 
+  20%, 75% { 
+       opacity:0
+    }  
+}
+@keyframes open3 { 
+   0%, 15%, 80%, 100% { 
+       opacity:1; 
+    } 
+  20%, 75% { 
+       opacity:0
+    }  
+}  
+
+
+@-moz-keyframes open2 { 
+   0%, 25%, 60%, 100% { 
+       opacity:0; 
+    } 
+  30%, 50% { 
+       opacity:1
+    } 
+}
+@-webkit-keyframes open2 { 
+   0%, 25%, 60%, 100% { 
+       opacity:0; 
+    } 
+  30%, 50% { 
+       opacity:1
+    }  
+}
+@keyframes open2 { 
+   0%, 25%, 60%, 100% { 
+       opacity:0; 
+    } 
+  30%, 50% { 
+       opacity:1
+    } 
+}  
+  
+  
+  
+@-moz-keyframes open1 { 
+   0%, 75%, 100% { 
+       opacity:0; 
+    } 
+  50% { 
+       opacity:1
+    } 
+}
+@-webkit-keyframes open1 { 
+   0%, 75%, 100% { 
+       opacity:0; 
+    } 
+  50% { 
+       opacity:1
+    } 
+}
+@keyframes open1 { 
+   0%, 75%, 100% { 
+       opacity:0; 
+    } 
+  50% { 
+       opacity:1
+    } 
+}  
+  
+  
+  
+
+ /* floor */
+
+.floor-wrap {
+    margin-top:-140px;
+    position:relative;
+    box-shadow: 0 0px 15px 0px rgb(0 0 0 / 25%);
+    border-top:3px solid #111;
+}
+
+.floor-wrap .frame::after {
+    content:'';
+    display:block;
+    width:100%;
+    height:160px;
+    /* background:#e3e7e7 url('https://blogger.googleusercontent.com/img/a/AVvXsEj6ZjtwhdrUO4QHb-3HGUJeLfHHfhABZfn-NR8t2r_8wwmXRNsreaQx9uFJZKEu4rTzKJMl1kCS0AHXNjeRTZ5bYdy8g9DJtpe7i2TNbs21Gx2nctNapE1kwY8FFUjRXAFUkI0paFVYFO_t2f_ulVr6eGIlmSXvBPvWKnQV0qhjyp9DxDRV1HlQh2Sf') no-repeat;
+    background-position: bottom center;
+    background-size: cover;*/
+    position:absolute;
+    top:42px;
+}
+
+
+@media only screen and (max-width: 992px) {
+
+  
+    #Cabinet {
+      padding-bottom:10px
+    }
+  
+    .frame {
+        height:20px;
+    }
+    
+    .cabinet-main-wrap {
+        width:417px;
+    }
+  
+    .desk::before {
+        width:200px;
+        margin-left:70px;
+        box-shadow: 0px 120px 60px 60px rgba(0,0,0,.5); 
+    }
+    
+    .desk01 {
+        width:417px; 
+        height:69px; 
+    }
+
+    .desk02 {
+        width:173px; 
+        height:24px; 
+    }
+
+    .desk03, .desk03::after  {
+        width:54px; 
+        height:24px; 
+    }
+
+    .desk04 {
+        width:190px; 
+        height:24px; 
+    }
+
+    .desk05 {
+        width:29px; 
+        height:64px; 
+    }
+
+    .desk06, .desk06::after {
+        width:144px; 
+        height:64px; 
+    }
+
+    .desk07, .desk07::after {
+        width:143px; 
+        height:64px; 
+    }
+
+    .desk08 {
+        width:101px; 
+        height:64px; 
+    } 
+
+    .desk09 {
+        width:29px; 
+        height:53px; 
+    }
+
+    .desk10, .desk10::after {
+        width:144px; 
+        height:53px; 
+    }
+
+    .desk11, .desk11::after {
+        width:144px; 
+        height:53px; 
+    }
+
+    .desk12, .desk12::after {
+        width:52px; 
+        height:53px; 
+    }
+
+    .desk13 {
+        width:47px; 
+        height:53px; 
+    }
+
+    .desk14 {
+        width:417px; 
+        height:28px; 
+    }
+
+    
+
+    /* icons */
+
+    .icons {
+        width:70px;
+        top:35px;
+        right:10px
+    }
+  
+    .banner {
+        left: -20px;
+        height: 100px;
+        width:110px;
+    }
+  
+    .banner::after {
+        width:100px;
+        height: 50px;
+        top:25px;
+        left:7px;
+    }
+
+    .banner img { 
+        width:110px;
+        height:auto;
+    }
+  
+    .icons a {
+        padding-top:0px;
+        width:30px; 
+    }
+
+    .icons a img {
+        width:30px; 
+    }
+
+    .icons a::after {
+        width:20px;
+        height: 20px;
+        top:10px;
+        left:3px;
+        box-shadow: 0 0 11px 5px rgba(0,0,0,.99);
+    }
+
+    .icons a:hover::after {
+        box-shadow: 0 0 12px 2px rgba(0,0,0,.99);
+        -webkit-transition: box-shadow 0.1s ease-in-out;
+        transition: box-shadow 0.1s ease-in-out;
+    }
+
+
+    /* pictures */
+
+    .pictures {
+        width:303px; 
+        margin:20px 0 -50px 20px;
+        position:relative;
+        z-index: 0;
+    }
+
+    .picture01, .picture02 {
+        width:140px;
+        height:141px;
+        display:inline-block;
+        position:relative;
+    }
+
+    .picture01 img, .picture02 img  {
+        width:105px; 
+        height:auto;
+        margin-top:30px;
+    }
+  
+    .video-wrap {
+        width:105px;
+        height:74px;
+        margin-left:20px;
+        margin-top:30px;
+        overflow:hidden;
+    }
+
+    .pictures video {
+        display:none
+    }
+  
+    .picture01 .video-wrap {
+      background:url(https://2.bp.blogspot.com/-xIWRMgujdGk/WtqZHFY7WSI/AAAAAAAAA4o/MjN76Sr4-NU1tQ14Dac9d5r9JW_o1nS4wCLcBGAs/s1600/1.jpg) no-repeat;
+      background-size:contain;
+    }
+
+  .picture02 .video-wrap {
+      background:url(https://3.bp.blogspot.com/-0-knBVRMC_0/WtqZHCW3SrI/AAAAAAAAA4k/_MVNSmfpKuIbNVvh3aPropBD88ZSB3xvwCLcBGAs/s1600/2.jpg) no-repeat;
+      background-size:contain;
+  }
+
+    .picture01::after,
+    .picture02::after {
+        content: '';
+        display: block;
+        width:150px;
+        height:141px;
+        position:absolute;
+        top:0px;
+    }
+  
+    .picture01::before,
+    .picture02::before {
+        width:105px;
+        height:90px;
+        margin-left:20px;
+        top:25px;
+    }
+  
+  
+      /* floor */
+  
+    .floor-wrap {
+        margin-top:-70px;
+        box-shadow:0 0px 15px 0px rgb(0 0 0 / 25%);
+    }
+  
+    .floor-wrap .frame::after {
+        height:55px;
+        top:23px;
+    }
+    
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  <div id="Cabinet"   class="static-border" style="background: none;">
+  <div class="frame shade" style="display:none"></div>
+  <div class="header"></div>
+  <div class="cabinet-main-wrap">
+    <div class="pictures">
+        <div class="picture01">
+          <div class="video-wrap"><video src="https://dl.dropbox.com/s/q4083oeku22u28f/1.mp4"  autoplay="autoplay" loop="loop" muted="muted"  />
+          </div>
+        </div>
+        <div class="picture02">
+          <div class="video-wrap"><video src="https://dl.dropbox.com/s/zxmmwhdes8mioxi/2.mp4"  autoplay="autoplay" loop="loop" muted="muted"  />
+          </div>
+        </div>
+    </div>
+    <div class="icons">
+      <div class="banner"><img src="https://2.bp.blogspot.com/-wgCCHpMPhLE/Wtqp8W4MRfI/AAAAAAAAA5o/vgI1b6E4F_ww96wVpFdYJlLNbwBxDGVzgCLcBGAs/s1600/Flybirdsbox-rusticcabinet.png"/></div>
+        <a href="#"><img src="https://4.bp.blogspot.com/-Moz1ol1jKBA/Wtoy3iMfhfI/AAAAAAAAA1U/KUCe4r4A6DMlhcwWXNWehUxyhPNtcAP-wCLcBGAs/s1600/FlyBirdwoodenletters-instagram2.png"/></a>
+        <a href="#"><img src="https://2.bp.blogspot.com/-PUW3Jvoep9g/Wtoy3cXkieI/AAAAAAAAA1M/v117aVA6ZX0NgAUm5El-EdRUMp7tVPorgCLcBGAs/s1600/FlyBirdwoodenletters-googleplus2.png"/></a>
+        <a href="#"><img src="https://3.bp.blogspot.com/-KluK-pN-xp4/Wtoy3X2xEuI/AAAAAAAAA1Q/hJBJUUbpAM4H7PqjbwD5lFnAQoUP8kHhwCLcBGAs/s1600/FlyBirdwoodenletters-facebook2.png"/></a>
+        <a href="#"><img src="https://3.bp.blogspot.com/-duXzBxB_CrE/Wtoy36jhMcI/AAAAAAAAA1c/tOpmdUdtHJoJa6XQlMuF2oaxqlBZtXL6gCLcBGAs/s1600/FlyBirdwoodenletters-twitter2.png"/></a>
+    </div>
+    <div class="desk">
+        <div class="desk01"></div>
+        <div class="desk02"></div>
+        <div class="desk03"></div>
+        <div class="desk04"></div>
+        <div class="desk05"></div>
+        <div onmouseenter="bleep.play()" onmouseleave="bleep2.play()" class="desk06"></div>
+        <div onmouseenter="bleep.play()" onmouseleave="bleep2.play()"  class="desk07"></div>
+        <div class="desk08"></div>
+        <div class="desk09"></div>
+        <div onmouseenter="bleep.play()" onmouseleave="bleep2.play()" class="desk10"></div>
+        <div onmouseenter="bleep.play()" onmouseleave="bleep2.play()" class="desk11"></div>
+        <div class="desk12"></div>
+        <div class="desk13"></div>
+        <div class="desk14"></div>
+    </div>
+    <div style="clear:both"></div> 
+  </div>
+  <div class="floor-wrap">
+    <div class="frame"></div>
+  </div>
+</div>
+  
+    <script id="rendered-js" >
+var bleep = new Audio();
+bleep.src = 'https://dl.dropboxusercontent.com/s/eufnk89q4sfzuyz/opening-drawer-in.mp3';
+
+var bleep2 = new Audio();
+bleep2.src = 'https://dl.dropboxusercontent.com/s/x2fec15sylns4ev/opening-drawer-out.mp3';
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>
