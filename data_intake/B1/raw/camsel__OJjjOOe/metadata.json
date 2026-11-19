@@ -1,0 +1,68 @@
+{
+  "source_id": "codepen:camsel/ojjjooe",
+  "author": "camsel",
+  "pen_id": "OJjjOOe",
+  "url": "https://codepen.io/camsel/pen/OJjjOOe",
+  "acquisition": "cdpn_fullpage",
+  "acquisition_url": "https://cdpn.io/camsel/fullpage/OJjjOOe",
+  "retrieved_at": "2026-11-19T20:15:55+00:00",
+  "license": "未单独核验；外链资源许可另查",
+  "fetch_status": "ok",
+  "title": "Pure CSS Crossy Road",
+  "canonical_url": "https://codepen.io/camsel/pen/OJjjOOe",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "2700515a2daa2c0827ff2fe6c06455db2d2436e8da6dfc1b89fee0205b89a008",
+  "source_html_sha256": "4e6b1c7410c12fb6c588274a8874142db9aa88b3a40e178ab7d4b98221849bea",
+  "analysis": {
+    "js": {
+      "has_js": true,
+      "inline_js_chars": 75,
+      "external_scripts": [
+        "https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"
+      ],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 21,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": true,
+      "clip_path": false,
+      "css_counter": false,
+      "media_query": false
+    },
+    "external_stylesheets": [],
+    "css_imports": [],
+    "css_chars": 54438,
+    "element_count": 3327,
+    "html_chars": 169429
+  },
+  "review": {
+    "label": "铁路与河道并排的等轴世界",
+    "status": "备选·动态",
+    "reference_case": "213 / 224",
+    "evidence": "实测两帧看到斜向轨枕、立体树遮住草带、纵深影子与河道木段沿水面移动。当前预览主体仅占局部且运动持续，不要求全幅无裁切；正式取图先固定位置与动画时间，不评任何游戏交互。题材来自 Crossy Road，正式使用前核验素材许可。",
+    "visual_verified": true,
+    "surface": "Cloud Chrome, cdpn.io public preview, 1331×894 desktop including preview banner; no mobile check",
+    "formal_admission": false
+  }
+}

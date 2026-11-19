@@ -1,0 +1,68 @@
+{
+  "source_id": "codepen:sunkanmii-the-styleful/velmomz",
+  "author": "sunkanmii-the-styleful",
+  "pen_id": "vELMoMZ",
+  "url": "https://codepen.io/sunkanmii-the-styleful/pen/vELMoMZ",
+  "acquisition": "cdpn_fullpage",
+  "acquisition_url": "https://cdpn.io/sunkanmii-the-styleful/fullpage/vELMoMZ",
+  "retrieved_at": "2026-11-19T20:15:59+00:00",
+  "license": "未单独核验；外链资源许可另查",
+  "fetch_status": "ok",
+  "title": "3D CSS: final demo",
+  "canonical_url": "https://codepen.io/sunkanmii-the-styleful/pen/vELMoMZ",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "fca3adcab71b90876342c59968a1929a5d764a7b48c9c575fa61a8e78e0a9333",
+  "source_html_sha256": "8356fccdd59b95c3608ffab84cba89c345373c81bc64a1d1163d5279709d3324",
+  "analysis": {
+    "js": {
+      "has_js": true,
+      "inline_js_chars": 1611,
+      "external_scripts": [
+        "https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"
+      ],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 0,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": true,
+      "clip_path": false,
+      "css_counter": false,
+      "media_query": false
+    },
+    "external_stylesheets": [],
+    "css_imports": [],
+    "css_chars": 2343,
+    "element_count": 96,
+    "html_chars": 10928
+  },
+  "review": {
+    "label": "可调间距的采光方片层",
+    "status": "优先",
+    "reference_case": "224 / 227",
+    "evidence": "实测只拖 Layer Offset（2px→4.3px），其余面板 1000px / 20° / -10° 不变，亮色顶面投影移开，左下露出更多层厚。默认载入需等彩色顶面显示；旋转、其他控件及是否每个颜色点稳定未验，建议只评两状态的几何。",
+    "visual_verified": true,
+    "surface": "Cloud Chrome, cdpn.io public preview, 1331×894 desktop including preview banner; no mobile check",
+    "formal_admission": false
+  }
+}
