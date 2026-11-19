@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>Interactive Polaroid Gallery | Vanilla JS</title>
+
+    <link rel="canonical" href="https://codepen.io/Jopzik/pen/OJOvXvN">
+  
+  
+  
+  
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Reenie+Beanie&display=swap");
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+:root {
+  --photo-width: 300px;
+  --photo-height: 350px;
+  --image-margin: 8%;
+  --rotate: 0;
+  --image-size: calc(var(--photo-width) - (var(--image-margin) * 2));
+  --transition: 1000ms;
+  --micro-transition: 250ms;
+}
+
+body {
+  background: #f2f2f2;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.main {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.photo {
+  position: absolute;
+  top: var(--top);
+  left: var(--left);
+  width: var(--photo-width);
+  height: var(--photo-height);
+  z-index: var(--z-index);
+  cursor: pointer;
+  perspective: 1000px;
+}
+.photo .shadow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #92a1b0;
+  opacity: 0.6;
+  filter: blur(4px);
+  transform: translate(1%, 1%) rotate(var(--rotate));
+  transition: transform var(--transition), opacity var(--micro-transition) var(--transition);
+}
+.photo .content {
+  width: 100%;
+  height: 100%;
+}
+.photo .container,
+.photo .shadow {
+  transform-style: preserve-3d;
+}
+.photo .container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #FFF;
+  transform: rotate(var(--rotate));
+  border-radius: 0.25rem;
+  transition: transform var(--transition), box-shadow var(--micro-transition) var(--transition);
+}
+.photo .front,
+.photo .back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+.photo .back {
+  padding: var(--image-margin);
+  transform: rotateY(180deg);
+  font-family: "Reenie Beanie", cursive;
+  color: #545454;
+  font-size: xx-large;
+}
+.photo .image {
+  margin: var(--image-margin);
+  width: var(--image-size);
+  height: var(--image-size);
+  object-fit: cover;
+  pointer-events: none;
+}
+.photo .title {
+  color: #323232;
+  margin-top: -0.5rem;
+  padding: 0 var(--image-margin);
+  text-align: center;
+  font-family: "Gochi Hand", cursive;
+  font-size: xx-large;
+}
+.photo:not(.is-dragging) {
+  transition: top var(--transition), left var(--transition), transform var(--transition);
+}
+.photo.drag-up {
+  transition: transform var(--micro-transition);
+}
+.photo.drag-up .shadow {
+  transition: opacity var(--micro-transition);
+}
+.photo.is-rotating .shadow, .photo.is-rotating .container {
+  transition: none;
+}
+.photo.is-dragging {
+  transform: scale(1.1);
+}
+.photo.is-dragging .shadow {
+  opacity: 0.25;
+}
+.photo.is-open {
+  z-index: 1000 !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate3d(-50%, -50%, 0) !important;
+}
+.photo.is-open.to-right {
+  --rotate: 0 !important;
+}
+.photo.is-open.to-left {
+  --rotate: 360deg !important;
+}
+.photo.flip .container {
+  transform: scale(1.2) rotateY(180deg);
+  box-shadow: 0 2px 8px rgba(146, 161, 176, 0.3);
+  transition: transform var(--transition), box-shadow var(--micro-transition);
+}
+.photo.flip .shadow {
+  opacity: 0;
+  transition: transform var(--transition), opacity var(--micro-transition);
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  <main class="main" id="main"></main>
+  <script src='https://codepen.io/Jopzik/pen/YzyxZvx.js'></script>
+    <script id="rendered-js" >
+function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;} // Drag            = move
+// Click           = open
+// Click again     = close
+// Click outside   = close
+// Esc             = close
+// Drag + wheel(+) = rotate (+)
+// Drag + wheel(-) = rotate (-)
+
+
+// Functions
+const getClearVar = (cssVar, element = document.documentElement) => parseInt(getComputedStyle(element).getPropertyValue(cssVar).replace('px', ''));
+const getRandomCoordinate = (window, photo) => Math.floor(Math.random() * (window - photo));
+
+// Elements
+const cards = [];
+const main = document.getElementById('main');
+
+// Classes
+const openClass = 'is-open';
+const flipClass = 'flip';
+
+// Values
+const utils = {
+  index: 0,
+  active: null };
+
+
+// Handles
+const setInFront = () => {
+  utils.index += 1;
+  return utils.index;
+};
+
+class CardElement extends HTMLElement {
+  constructor(title, description, image) {
+    super();_defineProperty(this, "dragStartX",
+
+
+
+
+
+
+    0);_defineProperty(this, "dragStartY",
+    0);_defineProperty(this, "dragEndX",
+    0);_defineProperty(this, "dragEndY",
+    0);_defineProperty(this, "dragPrevX",
+    0);_defineProperty(this, "dragPrevY",
+    0);_defineProperty(this, "objInitLeft",
+    0);_defineProperty(this, "objInitTop",
+    0);_defineProperty(this, "inDrag",
+    false);_defineProperty(this, "rotate",
+
+    0);_defineProperty(this, "zIndex",
+    0);this.title = title;this.description = description;this.image = image;} // Drag utils
+
+  connectedCallback() {
+    this.render();
+    this.randomCoordinate();
+    this.addEventListener('mousedown', this);
+    this.addEventListener('mousemove', this);
+    this.addEventListener('mouseup', this);
+    this.addEventListener('mouseleave', this);
+    this.addEventListener('wheel', this);
+  }
+
+  disconnectedCallback() {
+    this.removeEventListener('mousedown', this);
+    this.removeEventListener('mousemove', this);
+    this.removeEventListener('mouseup', this);
+    this.removeEventListener('wheel', this);
+    this.removeEventListener('mouseleave', this);
+  }
+
+  handleEvent(event) {
+    if (event.type === 'mousedown') this.startDrag(event);
+    if (event.type === 'mousemove') this.moveDrag(event);
+    if (event.type === 'mouseup') {
+      // Event click
+      if (this.dragPrevX === this.dragEndX && this.dragPrevY === this.dragEndY) {
+        if (this.classList.contains(openClass)) {
+          utils.active = null;
+          this.close();
+        } else this.open();
+      }
+      this.stopDrag();
+    }
+    if (event.type === 'mouseleave') this.stopDrag();
+    if (event.type === 'wheel') this.rotateWhenWheel(event);
+  }
+
+  setPosition(x, y, z) {
+    const styles = `
+      --left    : ${x}px;
+      --top     : ${y}px;
+      --rotate  : ${z}deg;
+      --z-index : ${this.zIndex};
+    `;
+    this.setAttribute('style', styles);
+  }
+
+  startDrag(e) {
+    this.inDrag = true;
+    this.objInitLeft = this.offsetLeft;
+    this.objInitTop = this.offsetTop;
+    this.dragStartX = e.pageX;
+    this.dragStartY = e.pageY;
+    this.setInFront();
+  }
+
+  moveDrag(e) {
+    if (!this.inDrag || this.classList.contains(openClass)) return;
+    this.dragEndX = this.objInitLeft + e.pageX - this.dragStartX;
+    this.dragEndY = this.objInitTop + e.pageY - this.dragStartY;
+    this.setPosition(this.dragEndX, this.dragEndY, this.rotate);
+    this.classList.add('drag-up');
+    this.classList.add('is-dragging');
+  }
+
+  stopDrag() {
+    this.inDrag = false;
+    this.dragPrevX = this.dragEndX;
+    this.dragPrevY = this.dragEndY;
+    this.classList.remove('is-dragging', 'is-rotating');
+    setTimeout(() => {
+      this.classList.remove('drag-up');
+    }, 150);
+  }
+
+  closeActiveCard() {
+    if (utils.active === null) return;
+    cards[utils.active].close();
+    utils.active = null;
+  }
+
+  open() {
+    if (this.classList.contains('is-dragging')) return;
+    this.closeActiveCard();
+    utils.active = cards.indexOf(this);
+    this.setInFront();
+    this.classList.add(openClass);
+    setTimeout(() => {
+      this.classList.add(flipClass);
+    }, 1000);
+  }
+
+  close() {
+    this.classList.remove(flipClass, openClass);
+    this.setInFront();
+  }
+
+  setInFront() {
+    if (this.zIndex >= utils.index && this.zIndex !== 0) return;
+    this.zIndex = setInFront();
+    this.style.setProperty('--z-index', this.zIndex);
+  }
+
+  randomCoordinate() {
+    this.rotate = Math.floor(Math.random() * 360);
+    this.setPosition(
+    getRandomCoordinate(window.innerWidth, getClearVar('--photo-width')),
+    getRandomCoordinate(window.innerHeight, getClearVar('--photo-height')),
+    this.rotate);
+
+    this.setOrientationRotation();
+  }
+
+  setOrientationRotation() {
+    this.classList.remove('to-right', 'to-left');
+    this.classList.add(this.rotate <= 180 ? 'to-right' : 'to-left');
+  }
+
+  rotateWhenWheel(e) {
+    if (!this.inDrag) return;
+    this.classList.add('is-rotating');
+    if (this.rotate > 360)
+    this.rotate = 0;else
+    if (this.rotate < 0)
+    this.rotate = 360;
+
+    if (e.deltaY > 0)
+    this.rotate += 1.75;else
+    this.rotate -= 1.75;
+    this.style.setProperty('--rotate', `${this.rotate}deg`);
+    this.setOrientationRotation();
+  }
+
+  render() {
+    this.classList.add('photo');
+    this.innerHTML = `
+      <div class="shadow"></div>
+      <div class="content">
+        <div class="container">
+          <div class="front">
+            <img class="image" src=${this.image}/>
+            <p class="title">${this.title}</p>
+          </div>
+          <div class="back">
+            <p>${this.description}</p>
+          </div>
+        </div>
+      </div>
+    `;
+  }}
+
+
+customElements.define('card-element', CardElement);
+
+const closeCardsFromBody = () => {
+  const card = document.querySelector('card-element');
+  if (!card) return;
+  card.closeActiveCard();
+  utils.active = null;
+};
+
+document.body.addEventListener('click', e => {
+  if (e.target === main) closeCardsFromBody();
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeCardsFromBody();
+});
+
+const cardsData = [
+{
+  title: 'Pingüino Rancho',
+  description: 'Eras mi foto preferida. Mi pintalabios favorito. Los juegos tontos se irán tras de ti. Los días de ensalada, sin ti, sólo hoja gris serán.',
+  image: 'https://i.postimg.cc/B6X9sTDP/pinguino.jpg' },
+
+{
+  title: 'Nunca Sabrás',
+  description: 'No te sientas tan especial. No serás la primera en dejarme así, pero tú me enseñaste a veces jala, a veces no.',
+  image: 'https://i.postimg.cc/FF3CSC9s/Screenshot-1.jpg' },
+
+{
+  title: 'Nunca Te olvido',
+  description: 'Tomé un viaje largo para verte. Han sido cuatro años de harta hambre. Murió José José aquella tarde... Yo te perdono, pero no te quiero más en mi vida',
+  image: 'https://i.postimg.cc/sfYKxBcM/Screenshot-3.jpg' },
+
+{
+  title: 'Los Felices',
+  description: 'Me aterra imaginar que eras tú y que con nadie lo vuelva a sentir. Si aún recordarás nuestra canción o tan siquiera te acuerdas de mí.',
+  image: 'https://i.postimg.cc/HLW1vDk2/felices.jpg' },
+
+{
+  title: 'Aeroplanos',
+  description: 'Yo no olvidaré de esta tarde. Casa playa, overol y los cigarros. Alégrate, no podré odiarte.',
+  image: 'https://i.postimg.cc/nhJJ7Q8N/aeroplanos.jpg' },
+
+{
+  title: 'Cuarto',
+  description: 'A veces quisiera decir que fue lo peor que llegaras a mi vida, pero al pensar por un rato, antes de ti esto no era vida',
+  image: 'https://i.postimg.cc/zXfWN3PZ/Screenshot-5.jpg' }];
+
+
+
+cardsData.map(card => {
+  const cardElement = new CardElement(card.title, card.description, card.image);
+  cards.push(cardElement);
+  document.body.appendChild(cardElement);
+});
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>

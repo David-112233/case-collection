@@ -1,0 +1,10 @@
+key,url,decision,tier,hits,reason,js_policy,evidence,notes,decided_on
+creativeocean__OJGEpwy,https://codepen.io/creativeocean/pen/OJGEpwy,hold,unclassified,spatial_layers,await_user_review,preserve,滚至两段之间实见。大型斜椭圆轨道前缘盖住内圈及一颗球的一部分，侧面的球与投影仍可见；用滚动定位一帧，若比较球位需固定相位。未实测暂停。,优先，对照 224/227；仅候审，未正式入库。,2026-11-19
+Jopzik__OJOvXvN,https://codepen.io/Jopzik/pen/OJOvXvN,hold,unclassified,spatial_layers,await_user_review,preserve,旋转相框和相片层叠。实拖顶层 Cuarto 到画面右侧，露出下层 Aeroplanos，松手保持；不同初始排布不宜按绝对坐标评分。,优先，对照 213/227；仅候审，未正式入库。,2026-11-19
+regme__rNeQEm,https://codepen.io/regme/pen/rNeQEm,hold,unclassified,spatial_layers,await_user_review,preserve,实见固定俯视。薄墙叠在带厚度的基板上，墙段转角、门窗留口和斜投影相互呼应；一帧可看。,优先，对照 224；仅候审，未正式入库。,2026-11-19
+JJ-W__bNgvEEY,https://codepen.io/JJ-W/pen/bNgvEEY,hold,unclassified,spatial_layers,await_user_review,preserve,实见默认横向图：两条线折弯汇入 Tailor Cover Letters 卡片，箭头接入边沿而不压卡片文字；右侧卡片被画布截断，缩略导航浮在画布前方。点击 Horizontal 未确认切换，不列为实测通过。业务范围广，宜只用图布局作题。,优先，对照 213；仅候审，未正式入库。,2026-11-19
+john-phonk__GRxegPG,https://codepen.io/john-phonk/pen/GRxegPG,hold,unclassified,spatial_layers,await_user_review,preserve,待入场结束后，实见大白字横跨黑背景和矩形人像左缘，分行保持在图层上方；静止后取一帧。外链图片本次加载成功。,候选，对照 213；仅候审，未正式入库。,2026-11-19
+rfenik__QbbryG,https://codepen.io/rfenik/pen/QbbryG,hold,unclassified,spatial_layers,await_user_review,preserve,实点最上层黑桃，牌由斜躺抬为正面，后方多层仍斜叠且各有投影。可用默认与点击后两态；未逐张检查。,候选，对照 227；仅候审，未正式入库。,2026-11-19
+aybukeceylan__WNNwpqK,https://codepen.io/aybukeceylan/pen/WNNwpqK,hold,unclassified,spatial_layers,await_user_review,preserve,默认静态一帧实见：两侧坡面先后遮住太阳下沿，近处深色河岸压住坡脚；水面亮带与两边陆地交错。,候选，对照 224；仅候审，未正式入库。,2026-11-19
+pankaj_c__vEGjYwd,https://codepen.io/pankaj_c/pen/vEGjYwd,hold,unclassified,spatial_layers,await_user_review,preserve,实滚动：绿卡先遮挡蓝、黄、紫卡，继续滚动绿卡上移并露出蓝卡图形，百分比随滚动变化；指定滚动位置评两态。,候选，对照 213/227；仅候审，未正式入库。,2026-11-19
+ronanmccoy__RjvbqY,https://codepen.io/ronanmccoy/pen/RjvbqY,hold,unclassified,spatial_layers,await_user_review,preserve,静态实见每个三角端头插入后一段，箭身不挡步骤文字；结构清楚但只有三个节点和两处接缝，不列优先。,轻量候选，对照 213；仅候审，未正式入库。,2026-11-19
