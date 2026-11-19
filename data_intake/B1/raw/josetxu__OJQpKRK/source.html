@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>3D Ancient Egyptian Lock - Pure CSS</title>
+
+    <link rel="canonical" href="https://codepen.io/josetxu/pen/OJQpKRK">
+  
+  
+  
+  
+<style>
+:root {
+  --speed: 10s;
+}
+
+* {
+  transform-style: preserve-3d;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  perspective: 100vmin;
+  background: radial-gradient(circle at 50% 80%, #772f1a, #f2a65a);
+}
+
+.content {
+  width: 80vmin;
+  height: 80vmin;
+  position: absolute;
+  transform: rotateY(0deg) rotateX(0deg);
+  transition: all 0.5s ease 0s;
+  animation: start 4.5s ease 0.5s;
+}
+
+@keyframes start {
+  20%, 25% {
+    transform: rotateY(25deg) rotateX(5deg);
+  }
+  65%, 70% {
+    transform: rotateY(-25deg) rotateX(-5deg);
+  }
+  85% {
+    transform: rotateY(-5deg) rotateX(5deg);
+  }
+}
+.cuboid {
+  --width: 10;
+  --height: 10;
+  --depth: 10;
+  --hue: 15;
+  --sat: 25%;
+  height: calc(var(--height) * 1vmin);
+  width: calc(var(--width) * 1vmin);
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.side {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 2px;
+  border: 1px solid #0004;
+  transition: all 1s ease 0s;
+}
+
+.side:nth-of-type(1) {
+  transform: translate3d(-50%, -50%, calc(var(--depth) * 0.5vmin));
+  background: hsl(var(--hue), var(--sat), 55%);
+}
+
+.side:nth-of-type(2) {
+  transform: translate3d(-50%, -50%, calc(var(--depth) * -0.5vmin)) rotateY(180deg);
+  background: hsl(var(--hue), var(--sat), 25%);
+}
+
+.side:nth-of-type(3) {
+  width: calc(var(--depth) * 1vmin);
+  transform: translate(-50%, -50%) rotateY(90deg) translate3d(0, 0, calc(var(--width) * 0.5vmin));
+  background: hsl(var(--hue), var(--sat), 45%);
+}
+
+.side:nth-of-type(4) {
+  width: calc(var(--depth) * 1vmin);
+  transform: translate(-50%, -50%) rotateY(-90deg) translate3d(0, 0, calc(var(--width) * 0.5vmin));
+  background: hsl(var(--hue), var(--sat), 35%);
+}
+
+.side:nth-of-type(5) {
+  height: calc(var(--depth) * 1vmin);
+  transform: translate(-50%, -50%) rotateX(90deg) translate3d(0, 0, calc(var(--height) * 0.5vmin));
+  background: hsl(var(--hue), var(--sat), 40%);
+}
+
+.side:nth-of-type(6) {
+  height: calc(var(--depth) * 1vmin);
+  transform: translate(-50%, -50%) rotateX(-90deg) translate3d(0, 0, calc(var(--height) * 0.5vmin));
+  background: hsl(var(--hue), var(--sat), 30%);
+}
+
+/*** BASE ***/
+.base {
+  width: 56vmin;
+  height: 80vmin;
+  left: 10vmin;
+  position: absolute;
+}
+
+.base1 {
+  --width: 56;
+  --height: 80;
+  --depth: 1;
+  transform: translateZ(-3vmin);
+}
+
+.base2 {
+  --width: 8;
+  --height: 48;
+  --depth: 5;
+  left: 0;
+  transform: translateZ(5vmin);
+}
+
+.base3 {
+  --width: 8;
+  --height: 16;
+  --depth: 5;
+  left: 0;
+  bottom: 0;
+  top: initial;
+  transform: translateZ(5vmin);
+}
+
+.base4 {
+  --width: 8;
+  --height: 80;
+  --depth: 5;
+  left: 0;
+  bottom: 0;
+  top: initial;
+}
+
+.cuboid.base1 .side:nth-of-type(1) {
+  filter: brightness(0.75);
+  box-shadow: 0 -3vmin 3vmin 0 #0008 inset;
+}
+
+.fixed .cuboid {
+  --width: 8;
+  --height: 80;
+  --depth: 5;
+}
+
+.fixed .cuboid + .cuboid {
+  --height: 16;
+  transform: translateZ(5vmin);
+}
+
+.fixed .cuboid.f3 {
+  top: 32vmin;
+}
+
+.fixed .cuboid.f4 {
+  top: 64vmin;
+}
+
+.fixed {
+  position: absolute;
+  left: 24vmin;
+}
+
+.fixed + .fixed {
+  left: 40vmin;
+}
+
+.fixed + .fixed + .fixed {
+  left: 56vmin;
+}
+
+/*** LOCKING ***/
+.locking {
+  position: absolute;
+  left: 15.75vmin;
+  top: 6vmin;
+  animation: locking-move var(--speed) ease-in-out 0s infinite;
+  animation-fill-mode: forwards;
+}
+
+.locking .cuboid {
+  --width: 7.5;
+  --depth: 5;
+  transform: translateZ(5vmin);
+  --height: 10;
+}
+
+.cuboid.lock2 {
+  --height: 22;
+  top: 26vmin;
+}
+
+.cuboid.lock3 {
+  --height: 48;
+  transform: translateZ(0vmin);
+}
+
+.locking + .locking {
+  left: 31.75vmin;
+}
+
+.locking + .locking + .locking {
+  left: 47.75vmin;
+}
+
+.locking .cuboid .side {
+  filter: brightness(0.35);
+}
+
+@keyframes locking-move {
+  0%, 12.5%, 75%, 100% {
+    top: 6vmin;
+  }
+  25%, 62.5% {
+    top: 0vmin;
+  }
+}
+/*** BOLT ***/
+.bolt {
+  position: absolute;
+  width: 86vmin;
+  height: 10vmin;
+  bottom: 16vmin;
+  left: -10vmin;
+  animation: bolt-move var(--speed) ease-in-out 0s infinite;
+  animation-fill-mode: forwards;
+}
+
+.bolt .cuboid {
+  --width: 86;
+  transform: translateZ(5vmin);
+  --depth: 5;
+}
+
+.bolt .cuboid + .cuboid {
+  --width: 8;
+  --height: 6;
+  left: 10vmin;
+  top: -5.75vmin;
+  position: absolute;
+}
+
+.cuboid.b1 {
+  left: -6vmin;
+}
+
+.cuboid.b2 {
+  --width: 24 !important;
+  left: -6vmin !important;
+}
+
+.cuboid.b3 {
+  left: 26vmin !important;
+}
+
+.cuboid.b4 {
+  left: 42vmin !important;
+}
+
+.bolt .cuboid + .cuboid .side:nth-child(1) {
+  border-bottom-color: #fff0;
+}
+
+.cuboid.b5 {
+  left: 58vmin !important;
+  --width: 22 !important;
+}
+
+.cuboid.b6 {
+  left: 79.5vmin !important;
+  --height: 25 !important;
+  top: -10.25vmin !important;
+  --width: 6 !important;
+}
+
+.bolt .cuboid.b6 .side:nth-child(1) {
+  border-left-color: #fff0;
+}
+
+.cuboid.b6 .side {
+  border-radius: 3px;
+}
+
+.bolt .cuboid .side {
+  filter: brightness(0.6);
+}
+
+@keyframes bolt-move {
+  0%, 25%, 62.5%, 100% {
+    left: -10vmin;
+  }
+  37.5%, 50% {
+    left: 6vmin;
+  }
+}
+/*** KEY ***/
+.key {
+  position: absolute;
+  width: 69vmin;
+  height: 15vmin;
+  top: 16.25vmin;
+  left: 55vmin;
+  position: absolute;
+  animation: key-move var(--speed) ease-in-out 0s infinite;
+}
+
+.key .cuboid {
+  transform: translateZ(5vmin);
+  --depth: 5;
+  --width: 62;
+  left: 8.25vmin;
+  top: 9.5vmin;
+  --height: 6;
+}
+
+.cuboid.k2 {
+  --width: 47.6;
+  top: 6vmin;
+  --height: 3.75;
+  transform: translateZ(5.01vmin);
+}
+
+.cuboid.k2 .side:nth-child(1) {
+  border-bottom-color: #fff0;
+}
+
+.key .cuboid + .cuboid + .cuboid {
+  --width: 7.5;
+  top: 0.125vmin;
+  --height: 6.125;
+  transform: translateZ(5.01vmin);
+}
+
+.key .cuboid + .cuboid + .cuboid .side:nth-child(1) {
+  border-bottom-color: #fff0;
+}
+
+.cuboid.k3 .side:nth-of-type(4),
+.cuboid.k2 .side:nth-of-type(4) {
+  border-color: #fff0;
+}
+
+.cuboid.k4 {
+  left: 24.25vmin;
+}
+
+.cuboid.k5 {
+  left: 40.35vmin;
+}
+
+.cuboid.k6 {
+  left: 69.5vmin;
+  --width: 6 !important;
+  top: 7.65vmin !important;
+  --height: 9.5 !important;
+}
+
+.cuboid.k6 .side:nth-child(1) {
+  border-left-color: #fff0;
+}
+
+.cuboid.k6 .side {
+  border-radius: 3px;
+}
+
+.key .cuboid .side {
+  filter: brightness(1.75);
+}
+
+.cuboid.k1 .side:nth-of-type(6),
+.cuboid.k6 .side:nth-of-type(6) {
+  filter: none;
+}
+
+@keyframes key-move {
+  0%, 87.5%, 100% {
+    left: 61vmin;
+  }
+  12.5%, 75% {
+    left: 0;
+    top: 16.25vmin;
+  }
+  25%, 62.5% {
+    left: 0;
+    top: 10.25vmin;
+  }
+}
+/*** LATCH ***/
+.latch {
+  position: absolute;
+  height: 100%;
+  width: 8vmin;
+  left: -14vmin;
+}
+
+.latch .cuboid {
+  --width: 8;
+  --depth: 5.5;
+  --height: 80;
+  transform: translateZ(-0.5vmin);
+}
+
+.cuboid.la2 {
+  --height: 48 !important;
+  transform: translateZ(5vmin);
+}
+
+.cuboid.la3 {
+  top: 64vmin !important;
+  --height: 16 !important;
+  transform: translateZ(5vmin);
+}
+
+.cuboid.la4 {
+  transform: translateZ(8.25vmin);
+  --depth: 1;
+}
+
+/*** COVER ***/
+.cuboid.cover {
+  left: 0;
+  --depth: 1;
+  transform: translateZ(8.1vmin);
+  --width: 56;
+  --height: 80;
+}
+
+.cuboid.cover .side {
+  background: #b3968b10;
+  border-color: #602e1b40;
+}
+
+.container {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/*** CAM ***/
+.cam {
+  float: left;
+  width: 11.11%;
+  height: 11.11%;
+  z-index: 1;
+  position: relative;
+  cursor: pointer;
+}
+.cam:nth-child(1):hover ~ .container .content {
+  transform: rotateX(40deg) rotateY(-40deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(2):hover ~ .container .content {
+  transform: rotateX(40deg) rotateY(-30deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(3):hover ~ .container .content {
+  transform: rotateX(40deg) rotateY(-20deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(4):hover ~ .container .content {
+  transform: rotateX(40deg) rotateY(-10deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(5):hover ~ .container .content {
+  transform: rotateX(40deg) rotateY(0deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(6):hover ~ .container .content {
+  transform: rotateX(40deg) rotateY(10deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(7):hover ~ .container .content {
+  transform: rotateX(40deg) rotateY(20deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(8):hover ~ .container .content {
+  transform: rotateX(40deg) rotateY(30deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(9):hover ~ .container .content {
+  transform: rotateX(40deg) rotateY(40deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(10):hover ~ .container .content {
+  transform: rotateX(30deg) rotateY(-40deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(11):hover ~ .container .content {
+  transform: rotateX(30deg) rotateY(-30deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(12):hover ~ .container .content {
+  transform: rotateX(30deg) rotateY(-20deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(13):hover ~ .container .content {
+  transform: rotateX(30deg) rotateY(-10deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(14):hover ~ .container .content {
+  transform: rotateX(30deg) rotateY(0deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(15):hover ~ .container .content {
+  transform: rotateX(30deg) rotateY(10deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(16):hover ~ .container .content {
+  transform: rotateX(30deg) rotateY(20deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(17):hover ~ .container .content {
+  transform: rotateX(30deg) rotateY(30deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(18):hover ~ .container .content {
+  transform: rotateX(30deg) rotateY(40deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(19):hover ~ .container .content {
+  transform: rotateX(20deg) rotateY(-40deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(20):hover ~ .container .content {
+  transform: rotateX(20deg) rotateY(-30deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(21):hover ~ .container .content {
+  transform: rotateX(20deg) rotateY(-20deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(22):hover ~ .container .content {
+  transform: rotateX(20deg) rotateY(-10deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(23):hover ~ .container .content {
+  transform: rotateX(20deg) rotateY(0deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(24):hover ~ .container .content {
+  transform: rotateX(20deg) rotateY(10deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(25):hover ~ .container .content {
+  transform: rotateX(20deg) rotateY(20deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(26):hover ~ .container .content {
+  transform: rotateX(20deg) rotateY(30deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(27):hover ~ .container .content {
+  transform: rotateX(20deg) rotateY(40deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(28):hover ~ .container .content {
+  transform: rotateX(10deg) rotateY(-40deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(29):hover ~ .container .content {
+  transform: rotateX(10deg) rotateY(-30deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(30):hover ~ .container .content {
+  transform: rotateX(10deg) rotateY(-20deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(31):hover ~ .container .content {
+  transform: rotateX(10deg) rotateY(-10deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(32):hover ~ .container .content {
+  transform: rotateX(10deg) rotateY(0deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(33):hover ~ .container .content {
+  transform: rotateX(10deg) rotateY(10deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(34):hover ~ .container .content {
+  transform: rotateX(10deg) rotateY(20deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(35):hover ~ .container .content {
+  transform: rotateX(10deg) rotateY(30deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(36):hover ~ .container .content {
+  transform: rotateX(10deg) rotateY(40deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(37):hover ~ .container .content {
+  transform: rotateX(0deg) rotateY(-40deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(38):hover ~ .container .content {
+  transform: rotateX(0deg) rotateY(-30deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(39):hover ~ .container .content {
+  transform: rotateX(0deg) rotateY(-20deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(40):hover ~ .container .content {
+  transform: rotateX(0deg) rotateY(-10deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(41):hover ~ .container .content {
+  transform: rotateX(0deg) rotateY(0deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(42):hover ~ .container .content {
+  transform: rotateX(0deg) rotateY(10deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(43):hover ~ .container .content {
+  transform: rotateX(0deg) rotateY(20deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(44):hover ~ .container .content {
+  transform: rotateX(0deg) rotateY(30deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(45):hover ~ .container .content {
+  transform: rotateX(0deg) rotateY(40deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(46):hover ~ .container .content {
+  transform: rotateX(-10deg) rotateY(-40deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(47):hover ~ .container .content {
+  transform: rotateX(-10deg) rotateY(-30deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(48):hover ~ .container .content {
+  transform: rotateX(-10deg) rotateY(-20deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(49):hover ~ .container .content {
+  transform: rotateX(-10deg) rotateY(-10deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(50):hover ~ .container .content {
+  transform: rotateX(-10deg) rotateY(0deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(51):hover ~ .container .content {
+  transform: rotateX(-10deg) rotateY(10deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(52):hover ~ .container .content {
+  transform: rotateX(-10deg) rotateY(20deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(53):hover ~ .container .content {
+  transform: rotateX(-10deg) rotateY(30deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(54):hover ~ .container .content {
+  transform: rotateX(-10deg) rotateY(40deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(55):hover ~ .container .content {
+  transform: rotateX(-20deg) rotateY(-40deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(56):hover ~ .container .content {
+  transform: rotateX(-20deg) rotateY(-30deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(57):hover ~ .container .content {
+  transform: rotateX(-20deg) rotateY(-20deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(58):hover ~ .container .content {
+  transform: rotateX(-20deg) rotateY(-10deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(59):hover ~ .container .content {
+  transform: rotateX(-20deg) rotateY(0deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(60):hover ~ .container .content {
+  transform: rotateX(-20deg) rotateY(10deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(61):hover ~ .container .content {
+  transform: rotateX(-20deg) rotateY(20deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(62):hover ~ .container .content {
+  transform: rotateX(-20deg) rotateY(30deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(63):hover ~ .container .content {
+  transform: rotateX(-20deg) rotateY(40deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(64):hover ~ .container .content {
+  transform: rotateX(-30deg) rotateY(-40deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(65):hover ~ .container .content {
+  transform: rotateX(-30deg) rotateY(-30deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(66):hover ~ .container .content {
+  transform: rotateX(-30deg) rotateY(-20deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(67):hover ~ .container .content {
+  transform: rotateX(-30deg) rotateY(-10deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(68):hover ~ .container .content {
+  transform: rotateX(-30deg) rotateY(0deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(69):hover ~ .container .content {
+  transform: rotateX(-30deg) rotateY(10deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(70):hover ~ .container .content {
+  transform: rotateX(-30deg) rotateY(20deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(71):hover ~ .container .content {
+  transform: rotateX(-30deg) rotateY(30deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(72):hover ~ .container .content {
+  transform: rotateX(-30deg) rotateY(40deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(73):hover ~ .container .content {
+  transform: rotateX(-40deg) rotateY(-40deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(74):hover ~ .container .content {
+  transform: rotateX(-40deg) rotateY(-30deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(75):hover ~ .container .content {
+  transform: rotateX(-40deg) rotateY(-20deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(76):hover ~ .container .content {
+  transform: rotateX(-40deg) rotateY(-10deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(77):hover ~ .container .content {
+  transform: rotateX(-40deg) rotateY(0deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(78):hover ~ .container .content {
+  transform: rotateX(-40deg) rotateY(10deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(79):hover ~ .container .content {
+  transform: rotateX(-40deg) rotateY(20deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(80):hover ~ .container .content {
+  transform: rotateX(-40deg) rotateY(30deg);
+  animation-iteration-count: 0;
+}
+.cam:nth-child(81):hover ~ .container .content {
+  transform: rotateX(-40deg) rotateY(40deg);
+  animation-iteration-count: 0;
+}
+.cam:active ~ .container .content .cuboid.cover .side {
+  background: hsl(var(--hue), var(--sat), 55%);
+  border-color: #0004;
+  transition: all 1s ease 0s;
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  <div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="cam"></div>
+<div class="container">
+  <div class="content">
+    <div class="base">
+      <div class="cuboid base1">
+        <div class="side"></div>
+        <div class="side"></div>
+        <div class="side"></div>
+        <div class="side"></div>
+        <div class="side"></div>
+        <div class="side"></div>
+      </div>
+      <div class="cuboid base2">
+        <div class="side"></div>
+        <div class="side"></div>
+        <div class="side"></div>
+        <div class="side"></div>
+        <div class="side"></div>
+        <div class="side"></div>
+      </div>
+      <div class="cuboid base3">
+        <div class="side"></div>
+        <div class="side"></div>
+        <div class="side"></div>
+        <div class="side"></div>
+        <div class="side"></div>
+        <div class="side"></div>
+      </div>
+      <div class="cuboid base4">
+        <div class="side"></div>
+        <div class="side"></div>
+        <div class="side"></div>
+        <div class="side"></div>
+        <div class="side"></div>
+        <div class="side"></div>
+      </div>
+      <div class="fixed">
+        <div class="cuboid f1">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+        <div class="cuboid f2">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+        <div class="cuboid f3">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+        <div class="cuboid f4">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="fixed">
+        <div class="cuboid f1">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+        <div class="cuboid f2">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+        <div class="cuboid f3">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+        <div class="cuboid f4">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="fixed">
+        <div class="cuboid f1">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+        <div class="cuboid f2">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+        <div class="cuboid f3">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+        <div class="cuboid f4">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="locking">
+        <div class="cuboid lock1">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+        <div class="cuboid lock2">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+        <div class="cuboid lock3">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="locking">
+        <div class="cuboid lock1">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+        <div class="cuboid lock2">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+        <div class="cuboid lock3">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="locking">
+        <div class="cuboid lock1">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+        <div class="cuboid lock2">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+        <div class="cuboid lock3">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="bolt">
+        <div class="cuboid b1">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+        <div class="cuboid b2">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+        <div class="cuboid b3">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+        <div class="cuboid b4">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+        <div class="cuboid b5">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+        <div class="cuboid b6">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="key">
+        <div class="cuboid k1">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+        <div class="cuboid k2">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+        <div class="cuboid k3">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+        <div class="cuboid k4">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+        <div class="cuboid k5">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+        <div class="cuboid k6">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="latch">
+        <div class="cuboid la1">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+        <div class="cuboid la2">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+        <div class="cuboid la3">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+        <div class="cuboid la4">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cuboid cover">
+        <div class="side"></div>
+        <div class="side"></div>
+        <div class="side"></div>
+        <div class="side"></div>
+        <div class="side"></div>
+        <div class="side"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+    <script id="rendered-js" >
+// Inspired by this video from Youtube:
+// https://www.youtube.com/watch?v=0IZc7D4D5Eg
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>

@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>Only CSS: Chain</title>
+
+    <link rel="canonical" href="https://codepen.io/YusukeNakaya/pen/NyrqmZ">
+  
+  <link rel="stylesheet" href="https://public.codepenassets.com/css/normalize-5.0.0.min.css">
+
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Anton'>
+  
+<style>
+body {
+  background: radial-gradient(ellipse at center, white 15%, #aa9696 100%);
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  font-family: "Anton", sans-serif;
+  justify-content: center;
+  align-items: center;
+  perspective: 400px;
+}
+
+div {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+#pendulums {
+  display: flex;
+  transform: rotateX(0deg) rotateY(90deg) scale3d(0.7, 0.7, 0.7) translateX(300px);
+}
+#pendulums .pendulum {
+  position: relative;
+  width: 1px;
+  height: 300px;
+  margin: 0 12px;
+  transform-origin: 50% 0;
+}
+#pendulums .pendulum::before {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #282828;
+  transform-origin: 50% 0;
+  transform: rotateY(90deg);
+}
+#pendulums .pendulum::after {
+  content: "";
+  position: absolute;
+  bottom: 5px;
+  width: 200px;
+  height: 50px;
+  border: 5px solid #282828;
+  transform-origin: 50% 0;
+  transform: translate3d(-50%, 100%, 0px) rotateY(90deg);
+  border-radius: 100px;
+  box-sizing: border-box;
+}
+#pendulums .pendulum:nth-child(1) {
+  animation: pend 5000ms -200ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(1)::after {
+  background: linear-gradient(135deg, rgba(40, 180, 88, 0.5) 0%, rgba(248, 99, 203, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(2) {
+  animation: pend 5000ms -400ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(2)::after {
+  background: linear-gradient(135deg, rgba(21, 96, 124, 0.5) 0%, rgba(72, 167, 152, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(3) {
+  animation: pend 5000ms -600ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(3)::after {
+  background: linear-gradient(135deg, rgba(95, 34, 198, 0.5) 0%, rgba(156, 135, 80, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(4) {
+  animation: pend 5000ms -800ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(4)::after {
+  background: linear-gradient(135deg, rgba(163, 7, 180, 0.5) 0%, rgba(62, 105, 119, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(5) {
+  animation: pend 5000ms -1000ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(5)::after {
+  background: linear-gradient(135deg, rgba(48, 97, 233, 0.5) 0%, rgba(139, 110, 223, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(6) {
+  animation: pend 5000ms -1200ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(6)::after {
+  background: linear-gradient(135deg, rgba(15, 40, 140, 0.5) 0%, rgba(221, 59, 150, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(7) {
+  animation: pend 5000ms -1400ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(7)::after {
+  background: linear-gradient(135deg, rgba(69, 229, 1, 0.5) 0%, rgba(255, 157, 179, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(8) {
+  animation: pend 5000ms -1600ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(8)::after {
+  background: linear-gradient(135deg, rgba(132, 184, 139, 0.5) 0%, rgba(107, 92, 107, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(9) {
+  animation: pend 5000ms -1800ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(9)::after {
+  background: linear-gradient(135deg, rgba(228, 208, 237, 0.5) 0%, rgba(247, 15, 208, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(10) {
+  animation: pend 5000ms -2000ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(10)::after {
+  background: linear-gradient(135deg, rgba(243, 124, 126, 0.5) 0%, rgba(90, 105, 44, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(11) {
+  animation: pend 5000ms -2200ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(11)::after {
+  background: linear-gradient(135deg, rgba(11, 13, 90, 0.5) 0%, rgba(83, 108, 104, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(12) {
+  animation: pend 5000ms -2400ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(12)::after {
+  background: linear-gradient(135deg, rgba(169, 45, 46, 0.5) 0%, rgba(58, 192, 56, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(13) {
+  animation: pend 5000ms -2600ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(13)::after {
+  background: linear-gradient(135deg, rgba(63, 123, 35, 0.5) 0%, rgba(147, 18, 11, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(14) {
+  animation: pend 5000ms -2800ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(14)::after {
+  background: linear-gradient(135deg, rgba(178, 193, 97, 0.5) 0%, rgba(32, 208, 193, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(15) {
+  animation: pend 5000ms -3000ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(15)::after {
+  background: linear-gradient(135deg, rgba(90, 20, 220, 0.5) 0%, rgba(35, 147, 123, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(16) {
+  animation: pend 5000ms -3200ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(16)::after {
+  background: linear-gradient(135deg, rgba(135, 231, 126, 0.5) 0%, rgba(123, 65, 155, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(17) {
+  animation: pend 5000ms -3400ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(17)::after {
+  background: linear-gradient(135deg, rgba(170, 95, 53, 0.5) 0%, rgba(239, 76, 190, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(18) {
+  animation: pend 5000ms -3600ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(18)::after {
+  background: linear-gradient(135deg, rgba(241, 71, 184, 0.5) 0%, rgba(253, 194, 109, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(19) {
+  animation: pend 5000ms -3800ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(19)::after {
+  background: linear-gradient(135deg, rgba(233, 165, 176, 0.5) 0%, rgba(29, 253, 181, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(20) {
+  animation: pend 5000ms -4000ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(20)::after {
+  background: linear-gradient(135deg, rgba(114, 192, 238, 0.5) 0%, rgba(52, 14, 6, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(21) {
+  animation: pend 5000ms -4200ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(21)::after {
+  background: linear-gradient(135deg, rgba(216, 194, 40, 0.5) 0%, rgba(167, 186, 184, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(22) {
+  animation: pend 5000ms -4400ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(22)::after {
+  background: linear-gradient(135deg, rgba(126, 86, 143, 0.5) 0%, rgba(180, 199, 78, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(23) {
+  animation: pend 5000ms -4600ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(23)::after {
+  background: linear-gradient(135deg, rgba(250, 219, 112, 0.5) 0%, rgba(88, 68, 29, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(24) {
+  animation: pend 5000ms -4800ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(24)::after {
+  background: linear-gradient(135deg, rgba(77, 226, 152, 0.5) 0%, rgba(52, 204, 134, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(25) {
+  animation: pend 5000ms -5000ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(25)::after {
+  background: linear-gradient(135deg, rgba(103, 152, 49, 0.5) 0%, rgba(157, 79, 25, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(26) {
+  animation: pend 5000ms -5200ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(26)::after {
+  background: linear-gradient(135deg, rgba(158, 133, 211, 0.5) 0%, rgba(206, 124, 200, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(27) {
+  animation: pend 5000ms -5400ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(27)::after {
+  background: linear-gradient(135deg, rgba(55, 40, 33, 0.5) 0%, rgba(94, 212, 146, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(28) {
+  animation: pend 5000ms -5600ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(28)::after {
+  background: linear-gradient(135deg, rgba(74, 182, 169, 0.5) 0%, rgba(167, 29, 83, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(29) {
+  animation: pend 5000ms -5800ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(29)::after {
+  background: linear-gradient(135deg, rgba(90, 165, 44, 0.5) 0%, rgba(224, 41, 53, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(30) {
+  animation: pend 5000ms -6000ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(30)::after {
+  background: linear-gradient(135deg, rgba(70, 158, 238, 0.5) 0%, rgba(184, 16, 189, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(31) {
+  animation: pend 5000ms -6200ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(31)::after {
+  background: linear-gradient(135deg, rgba(226, 152, 90, 0.5) 0%, rgba(187, 230, 76, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(32) {
+  animation: pend 5000ms -6400ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(32)::after {
+  background: linear-gradient(135deg, rgba(212, 109, 197, 0.5) 0%, rgba(64, 231, 234, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(33) {
+  animation: pend 5000ms -6600ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(33)::after {
+  background: linear-gradient(135deg, rgba(26, 37, 209, 0.5) 0%, rgba(242, 84, 228, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(34) {
+  animation: pend 5000ms -6800ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(34)::after {
+  background: linear-gradient(135deg, rgba(12, 23, 6, 0.5) 0%, rgba(202, 218, 13, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(35) {
+  animation: pend 5000ms -7000ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(35)::after {
+  background: linear-gradient(135deg, rgba(74, 16, 129, 0.5) 0%, rgba(160, 217, 115, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(36) {
+  animation: pend 5000ms -7200ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(36)::after {
+  background: linear-gradient(135deg, rgba(166, 12, 231, 0.5) 0%, rgba(47, 198, 163, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(37) {
+  animation: pend 5000ms -7400ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(37)::after {
+  background: linear-gradient(135deg, rgba(79, 66, 188, 0.5) 0%, rgba(85, 60, 39, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(38) {
+  animation: pend 5000ms -7600ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(38)::after {
+  background: linear-gradient(135deg, rgba(211, 175, 161, 0.5) 0%, rgba(35, 219, 111, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(39) {
+  animation: pend 5000ms -7800ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(39)::after {
+  background: linear-gradient(135deg, rgba(232, 92, 195, 0.5) 0%, rgba(122, 50, 98, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(40) {
+  animation: pend 5000ms -8000ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(40)::after {
+  background: linear-gradient(135deg, rgba(228, 197, 233, 0.5) 0%, rgba(46, 37, 151, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(41) {
+  animation: pend 5000ms -8200ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(41)::after {
+  background: linear-gradient(135deg, rgba(168, 38, 104, 0.5) 0%, rgba(180, 90, 198, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(42) {
+  animation: pend 5000ms -8400ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(42)::after {
+  background: linear-gradient(135deg, rgba(148, 74, 251, 0.5) 0%, rgba(66, 19, 196, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(43) {
+  animation: pend 5000ms -8600ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(43)::after {
+  background: linear-gradient(135deg, rgba(6, 58, 153, 0.5) 0%, rgba(232, 242, 153, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(44) {
+  animation: pend 5000ms -8800ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(44)::after {
+  background: linear-gradient(135deg, rgba(93, 186, 188, 0.5) 0%, rgba(141, 85, 240, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(45) {
+  animation: pend 5000ms -9000ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(45)::after {
+  background: linear-gradient(135deg, rgba(243, 1, 207, 0.5) 0%, rgba(101, 109, 145, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(46) {
+  animation: pend 5000ms -9200ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(46)::after {
+  background: linear-gradient(135deg, rgba(128, 131, 44, 0.5) 0%, rgba(52, 198, 237, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(47) {
+  animation: pend 5000ms -9400ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(47)::after {
+  background: linear-gradient(135deg, rgba(132, 2, 83, 0.5) 0%, rgba(202, 162, 250, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(48) {
+  animation: pend 5000ms -9600ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(48)::after {
+  background: linear-gradient(135deg, rgba(90, 103, 88, 0.5) 0%, rgba(85, 142, 237, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(49) {
+  animation: pend 5000ms -9800ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(49)::after {
+  background: linear-gradient(135deg, rgba(83, 253, 5, 0.5) 0%, rgba(157, 64, 180, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(50) {
+  animation: pend 5000ms -10000ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(50)::after {
+  background: linear-gradient(135deg, rgba(63, 122, 182, 0.5) 0%, rgba(38, 84, 214, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(51) {
+  animation: pend 5000ms -10200ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(51)::after {
+  background: linear-gradient(135deg, rgba(177, 18, 220, 0.5) 0%, rgba(140, 42, 113, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(52) {
+  animation: pend 5000ms -10400ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(52)::after {
+  background: linear-gradient(135deg, rgba(230, 219, 228, 0.5) 0%, rgba(120, 234, 29, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(53) {
+  animation: pend 5000ms -10600ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(53)::after {
+  background: linear-gradient(135deg, rgba(224, 107, 180, 0.5) 0%, rgba(68, 238, 109, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(54) {
+  animation: pend 5000ms -10800ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(54)::after {
+  background: linear-gradient(135deg, rgba(58, 55, 114, 0.5) 0%, rgba(119, 47, 65, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(55) {
+  animation: pend 5000ms -11000ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(55)::after {
+  background: linear-gradient(135deg, rgba(10, 171, 191, 0.5) 0%, rgba(207, 73, 124, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(56) {
+  animation: pend 5000ms -11200ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(56)::after {
+  background: linear-gradient(135deg, rgba(207, 8, 108, 0.5) 0%, rgba(55, 184, 215, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(57) {
+  animation: pend 5000ms -11400ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(57)::after {
+  background: linear-gradient(135deg, rgba(32, 113, 53, 0.5) 0%, rgba(116, 225, 247, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(58) {
+  animation: pend 5000ms -11600ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(58)::after {
+  background: linear-gradient(135deg, rgba(61, 149, 55, 0.5) 0%, rgba(43, 252, 196, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(59) {
+  animation: pend 5000ms -11800ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(59)::after {
+  background: linear-gradient(135deg, rgba(187, 252, 115, 0.5) 0%, rgba(5, 81, 206, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(60) {
+  animation: pend 5000ms -12000ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(60)::after {
+  background: linear-gradient(135deg, rgba(216, 10, 93, 0.5) 0%, rgba(56, 20, 251, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(61) {
+  animation: pend 5000ms -12200ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(61)::after {
+  background: linear-gradient(135deg, rgba(158, 8, 126, 0.5) 0%, rgba(166, 243, 208, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(62) {
+  animation: pend 5000ms -12400ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(62)::after {
+  background: linear-gradient(135deg, rgba(111, 16, 93, 0.5) 0%, rgba(242, 222, 111, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(63) {
+  animation: pend 5000ms -12600ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(63)::after {
+  background: linear-gradient(135deg, rgba(51, 48, 116, 0.5) 0%, rgba(44, 124, 84, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(64) {
+  animation: pend 5000ms -12800ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(64)::after {
+  background: linear-gradient(135deg, rgba(191, 130, 34, 0.5) 0%, rgba(192, 10, 82, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(65) {
+  animation: pend 5000ms -13000ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(65)::after {
+  background: linear-gradient(135deg, rgba(163, 49, 253, 0.5) 0%, rgba(190, 20, 143, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(66) {
+  animation: pend 5000ms -13200ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(66)::after {
+  background: linear-gradient(135deg, rgba(98, 117, 84, 0.5) 0%, rgba(157, 131, 65, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(67) {
+  animation: pend 5000ms -13400ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(67)::after {
+  background: linear-gradient(135deg, rgba(217, 133, 3, 0.5) 0%, rgba(167, 3, 211, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(68) {
+  animation: pend 5000ms -13600ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(68)::after {
+  background: linear-gradient(135deg, rgba(123, 252, 24, 0.5) 0%, rgba(66, 143, 52, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(69) {
+  animation: pend 5000ms -13800ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(69)::after {
+  background: linear-gradient(135deg, rgba(128, 62, 20, 0.5) 0%, rgba(87, 72, 118, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(70) {
+  animation: pend 5000ms -14000ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(70)::after {
+  background: linear-gradient(135deg, rgba(165, 93, 151, 0.5) 0%, rgba(221, 4, 72, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(71) {
+  animation: pend 5000ms -14200ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(71)::after {
+  background: linear-gradient(135deg, rgba(107, 90, 229, 0.5) 0%, rgba(108, 132, 200, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(72) {
+  animation: pend 5000ms -14400ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(72)::after {
+  background: linear-gradient(135deg, rgba(192, 44, 217, 0.5) 0%, rgba(196, 247, 111, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(73) {
+  animation: pend 5000ms -14600ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(73)::after {
+  background: linear-gradient(135deg, rgba(180, 140, 178, 0.5) 0%, rgba(166, 123, 197, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(74) {
+  animation: pend 5000ms -14800ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(74)::after {
+  background: linear-gradient(135deg, rgba(92, 105, 132, 0.5) 0%, rgba(229, 141, 145, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(75) {
+  animation: pend 5000ms -15000ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(75)::after {
+  background: linear-gradient(135deg, rgba(10, 127, 53, 0.5) 0%, rgba(201, 157, 232, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(76) {
+  animation: pend 5000ms -15200ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(76)::after {
+  background: linear-gradient(135deg, rgba(134, 19, 10, 0.5) 0%, rgba(60, 199, 58, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(77) {
+  animation: pend 5000ms -15400ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(77)::after {
+  background: linear-gradient(135deg, rgba(99, 96, 16, 0.5) 0%, rgba(82, 29, 87, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(78) {
+  animation: pend 5000ms -15600ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(78)::after {
+  background: linear-gradient(135deg, rgba(255, 24, 180, 0.5) 0%, rgba(192, 89, 102, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(79) {
+  animation: pend 5000ms -15800ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(79)::after {
+  background: linear-gradient(135deg, rgba(114, 21, 85, 0.5) 0%, rgba(54, 176, 171, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(80) {
+  animation: pend 5000ms -16000ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(80)::after {
+  background: linear-gradient(135deg, rgba(111, 154, 110, 0.5) 0%, rgba(156, 244, 229, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(81) {
+  animation: pend 5000ms -16200ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(81)::after {
+  background: linear-gradient(135deg, rgba(162, 1, 14, 0.5) 0%, rgba(122, 8, 60, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(82) {
+  animation: pend 5000ms -16400ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(82)::after {
+  background: linear-gradient(135deg, rgba(159, 157, 70, 0.5) 0%, rgba(68, 248, 142, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(83) {
+  animation: pend 5000ms -16600ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(83)::after {
+  background: linear-gradient(135deg, rgba(169, 142, 252, 0.5) 0%, rgba(92, 139, 96, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(84) {
+  animation: pend 5000ms -16800ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(84)::after {
+  background: linear-gradient(135deg, rgba(62, 119, 57, 0.5) 0%, rgba(160, 250, 35, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(85) {
+  animation: pend 5000ms -17000ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(85)::after {
+  background: linear-gradient(135deg, rgba(128, 2, 66, 0.5) 0%, rgba(101, 184, 2, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(86) {
+  animation: pend 5000ms -17200ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(86)::after {
+  background: linear-gradient(135deg, rgba(121, 211, 235, 0.5) 0%, rgba(161, 92, 109, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(87) {
+  animation: pend 5000ms -17400ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(87)::after {
+  background: linear-gradient(135deg, rgba(125, 178, 57, 0.5) 0%, rgba(147, 138, 27, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(88) {
+  animation: pend 5000ms -17600ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(88)::after {
+  background: linear-gradient(135deg, rgba(206, 22, 105, 0.5) 0%, rgba(14, 103, 5, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(89) {
+  animation: pend 5000ms -17800ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(89)::after {
+  background: linear-gradient(135deg, rgba(108, 178, 104, 0.5) 0%, rgba(89, 170, 126, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(90) {
+  animation: pend 5000ms -18000ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(90)::after {
+  background: linear-gradient(135deg, rgba(12, 9, 112, 0.5) 0%, rgba(23, 146, 91, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(91) {
+  animation: pend 5000ms -18200ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(91)::after {
+  background: linear-gradient(135deg, rgba(228, 191, 144, 0.5) 0%, rgba(212, 186, 236, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(92) {
+  animation: pend 5000ms -18400ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(92)::after {
+  background: linear-gradient(135deg, rgba(195, 17, 7, 0.5) 0%, rgba(194, 157, 92, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(93) {
+  animation: pend 5000ms -18600ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(93)::after {
+  background: linear-gradient(135deg, rgba(178, 112, 124, 0.5) 0%, rgba(78, 105, 203, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(94) {
+  animation: pend 5000ms -18800ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(94)::after {
+  background: linear-gradient(135deg, rgba(41, 87, 204, 0.5) 0%, rgba(250, 145, 38, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(95) {
+  animation: pend 5000ms -19000ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(95)::after {
+  background: linear-gradient(135deg, rgba(97, 248, 171, 0.5) 0%, rgba(120, 103, 150, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(96) {
+  animation: pend 5000ms -19200ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(96)::after {
+  background: linear-gradient(135deg, rgba(75, 160, 11, 0.5) 0%, rgba(185, 232, 149, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(97) {
+  animation: pend 5000ms -19400ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(97)::after {
+  background: linear-gradient(135deg, rgba(42, 207, 49, 0.5) 0%, rgba(3, 29, 30, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(98) {
+  animation: pend 5000ms -19600ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(98)::after {
+  background: linear-gradient(135deg, rgba(47, 76, 200, 0.5) 0%, rgba(104, 117, 214, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(99) {
+  animation: pend 5000ms -19800ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(99)::after {
+  background: linear-gradient(135deg, rgba(113, 189, 164, 0.5) 0%, rgba(90, 215, 211, 0.5) 100%);
+}
+#pendulums .pendulum:nth-child(100) {
+  animation: pend 5000ms -20000ms ease-in-out infinite;
+}
+#pendulums .pendulum:nth-child(100)::after {
+  background: linear-gradient(135deg, rgba(122, 62, 20, 0.5) 0%, rgba(215, 107, 69, 0.5) 100%);
+}
+
+@keyframes pend {
+  0% {
+    transform: rotateX(0deg);
+  }
+  100% {
+    transform: rotateX(360deg);
+  }
+}
+@keyframes flip {
+  0% {
+    transform: rotateX(-5deg) rotateY(90deg) scale3d(0.7, 0.7, 0.7);
+  }
+  100% {
+    transform: rotateX(30deg) rotateY(90deg) scale3d(0.7, 0.7, 0.7);
+  }
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <div id="pendulums">
+  <div class="pendulum"></div>
+  <div class="pendulum"></div>
+  <div class="pendulum"></div>
+  <div class="pendulum"></div>
+  <div class="pendulum"></div>
+  <div class="pendulum"></div>
+  <div class="pendulum"></div>
+  <div class="pendulum"></div>
+  <div class="pendulum"></div>
+  <div class="pendulum"></div>
+  <div class="pendulum"></div>
+  <div class="pendulum"></div>
+  <div class="pendulum"></div>
+  <div class="pendulum"></div>
+  <div class="pendulum"></div>
+  <div class="pendulum"></div>
+  <div class="pendulum"></div>
+  <div class="pendulum"></div>
+  <div class="pendulum"></div>
+  <div class="pendulum"></div>
+  <div class="pendulum"></div>
+  <div class="pendulum"></div>
+  <div class="pendulum"></div>
+  <div class="pendulum"></div>
+  <div class="pendulum"></div>
+  <div class="pendulum"></div>
+  <div class="pendulum"></div>
+  <div class="pendulum"></div>
+  <div class="pendulum"></div>
+  <div class="pendulum"></div>
+  <div class="pendulum"></div>
+  <div class="pendulum"></div>
+  <div class="pendulum"></div>
+  <div class="pendulum"></div>
+  <div class="pendulum"></div>
+  <div class="pendulum"></div>
+  <div class="pendulum"></div>
+  <div class="pendulum"></div>
+  <div class="pendulum"></div>
+  <div class="pendulum"></div>
+  <div class="pendulum"></div>
+  <div class="pendulum"></div>
+  <div class="pendulum"></div>
+  <div class="pendulum"></div>
+  <div class="pendulum"></div>
+  <div class="pendulum"></div>
+  <div class="pendulum"></div>
+  <div class="pendulum"></div>
+  <div class="pendulum"></div>
+  <div class="pendulum"></div>
+</div>
+  
+  
+  
+</body>
+
+</html>

@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>Twisting a rectangular sheet in 3D with just CSS</title>
+
+    <link rel="canonical" href="https://codepen.io/MackFitz/pen/bGZxQjw">
+  
+  
+  
+  
+<style>
+@charset "UTF-8";
+body {
+  margin: 0;
+  height: 100vh;
+  display: grid;
+  background: #000;
+  font-size: 0.7vh;
+}
+
+:where(body *) {
+  transform-style: preserve-3d;
+}
+
+.strip, .strip div {
+  position: absolute;
+}
+
+.container {
+  height: 100em;
+  width: 90vw;
+  place-self: center;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.scene {
+  position: relative;
+  display: grid;
+  perspective: 100em;
+}
+
+@property --a {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: -360deg;
+}
+.strip {
+  height: 100em;
+  aspect-ratio: 0.2;
+  left: 50%;
+  position: relative;
+  --angle: calc(var(--a)/var(--segs)*var(--twist));
+  /* the angle of each segment is turned in relation to the previous: 360deg/36 = 10deg */
+  --rNgon: 20;
+  /* radius of the 36gonal cross-section */
+  --h: calc(100/var(--segs));
+  /*the height of the rectangular top-view of the ribbon's segment*/
+  transform-origin: 0 50%;
+}
+.strip div {
+  padding: 1px;
+}
+
+@keyframes spin {
+  100% {
+    rotate: y 360deg;
+  }
+}
+@keyframes twist {
+  0% {
+    --a: -360deg;
+  }
+  100% {
+    --a: 360deg;
+  }
+}
+.flat {
+  width: calc(1em*var(--rNgon));
+  height: calc(1em*var(--h));
+  background: hsl(calc(var(--step)*var(--angle)), 100%, 50%);
+  bottom: calc(var(--h)*1%*var(--step));
+  clip-path: polygon(0 0, 0 100%, 100% 100%);
+  transform-origin: 0 0;
+  rotate: y calc(var(--step)*var(--angle));
+}
+
+.angled {
+  --diagAngle: calc(atan(var(--h)/var(--rNgon)));
+  --diagonal: calc(var(--rNgon)/cos(var(--diagAngle)));
+  /* 50/cos(atan(25/50)) = 50/0.894427191 = 55.9016994375; */
+  --a36gon: calc(2*var(--rNgon)*sin(var(--angle)/2));
+  /* the length of the 36gon's each edge: 2*50*sin(5deg) = 100*.08715574274 = 8.715574274 */
+  --topY: calc(var(--rNgon)*sin(var(--angle)));
+  /* 50*sin(10deg) = 50*0.17364817766 = 8.68240888335 */
+  --topX: calc(var(--rNgon)*(1 - cos(var(--angle))));
+  /* the distance of the top right corner from the closest vertical axis: 50 - 49.2403876506 = 0.7596123494 */
+  --rhomba: calc(var(--h)/cos(atan(var(--topX)/var(--h))));
+  /* *25/cos(atan(0.7596123494/25)) = 25/cos(1.74036782) = 25.0115375561*/
+  --aAngled: calc(var(--rhomba)/cos(atan(var(--topY)/var(--rhomba))));
+  /* 25.0115375561/cos(atan(8.68240888335/25.0115375561)) = 26.4756725115 */
+  --angleA: calc(acos(
+    (var(--rNgon)*var(--rNgon) + var(--diagonal)*var(--diagonal) - var(--aAngled)*var(--aAngled))
+    /
+    (2*var(--rNgon)*var(--diagonal))
+  ));
+  /*acos((b^2 + c^2 - a^2 )/ 2*b*c = (50^2 + 55.9016994375^2 - 26.4756725076^2) / (2 * 50 * 55.9016994375)) = acos(0.88083883223) = 28.2562826deg */
+  --insideH: calc(var(--rNgon)*sin(var(--angleA)));
+  /* 50*sin(28.2562826deg) = 23.6708128101deg */
+  --insideRatio: calc((var(--rNgon)*cos(var(--angleA)))/var(--diagonal));
+  /* 44.0419416218/55.9016994375 = 0.78784620261 */
+  --inclinAngle: calc(asin(var(--topY)/var(--insideH)));
+  /* asin(8.68240888335/23.6708128101) = 21.5182821 deg */
+  width: calc(var(--diagonal)*1em);
+  height: calc(var(--insideH)*1em);
+  background: hsl(calc((.5 + var(--step))*var(--angle)), 100%, 50%);
+  clip-path: polygon(0 100%, calc(var(--insideRatio)*100%) 0, 100% 100%);
+  transform-origin: 0 100%;
+  transform: rotateY(calc(var(--step)*var(--angle))) rotate(var(--diagAngle)) rotateX(var(--inclinAngle));
+  bottom: calc(var(--h)*1em*(var(--step) + 1));
+}
+
+:nth-child(1 of .flat), :nth-child(1 of .angled) {
+  --step: 0;
+}
+
+:nth-child(2 of .flat), :nth-child(2 of .angled) {
+  --step: 1;
+}
+
+:nth-child(3 of .flat), :nth-child(3 of .angled) {
+  --step: 2;
+}
+
+:nth-child(4 of .flat), :nth-child(4 of .angled) {
+  --step: 3;
+}
+
+:nth-child(5 of .flat), :nth-child(5 of .angled) {
+  --step: 4;
+}
+
+:nth-child(6 of .flat), :nth-child(6 of .angled) {
+  --step: 5;
+}
+
+:nth-child(7 of .flat), :nth-child(7 of .angled) {
+  --step: 6;
+}
+
+:nth-child(8 of .flat), :nth-child(8 of .angled) {
+  --step: 7;
+}
+
+:nth-child(9 of .flat), :nth-child(9 of .angled) {
+  --step: 8;
+}
+
+:nth-child(10 of .flat), :nth-child(10 of .angled) {
+  --step: 9;
+}
+
+:nth-child(11 of .flat), :nth-child(11 of .angled) {
+  --step: 10;
+}
+
+:nth-child(12 of .flat), :nth-child(12 of .angled) {
+  --step: 11;
+}
+
+:nth-child(13 of .flat), :nth-child(13 of .angled) {
+  --step: 12;
+}
+
+:nth-child(14 of .flat), :nth-child(14 of .angled) {
+  --step: 13;
+}
+
+:nth-child(15 of .flat), :nth-child(15 of .angled) {
+  --step: 14;
+}
+
+:nth-child(16 of .flat), :nth-child(16 of .angled) {
+  --step: 15;
+}
+
+:nth-child(17 of .flat), :nth-child(17 of .angled) {
+  --step: 16;
+}
+
+:nth-child(18 of .flat), :nth-child(18 of .angled) {
+  --step: 17;
+}
+
+:nth-child(19 of .flat), :nth-child(19 of .angled) {
+  --step: 18;
+}
+
+:nth-child(20 of .flat), :nth-child(20 of .angled) {
+  --step: 19;
+}
+
+:nth-child(21 of .flat), :nth-child(21 of .angled) {
+  --step: 20;
+}
+
+:nth-child(22 of .flat), :nth-child(22 of .angled) {
+  --step: 21;
+}
+
+:nth-child(23 of .flat), :nth-child(23 of .angled) {
+  --step: 22;
+}
+
+:nth-child(24 of .flat), :nth-child(24 of .angled) {
+  --step: 23;
+}
+
+:nth-child(25 of .flat), :nth-child(25 of .angled) {
+  --step: 24;
+}
+
+:nth-child(26 of .flat), :nth-child(26 of .angled) {
+  --step: 25;
+}
+
+:nth-child(27 of .flat), :nth-child(27 of .angled) {
+  --step: 26;
+}
+
+:nth-child(28 of .flat), :nth-child(28 of .angled) {
+  --step: 27;
+}
+
+:nth-child(29 of .flat), :nth-child(29 of .angled) {
+  --step: 28;
+}
+
+:nth-child(30 of .flat), :nth-child(30 of .angled) {
+  --step: 29;
+}
+
+:nth-child(31 of .flat), :nth-child(31 of .angled) {
+  --step: 30;
+}
+
+:nth-child(32 of .flat), :nth-child(32 of .angled) {
+  --step: 31;
+}
+
+:nth-child(33 of .flat), :nth-child(33 of .angled) {
+  --step: 32;
+}
+
+:nth-child(34 of .flat), :nth-child(34 of .angled) {
+  --step: 33;
+}
+
+:nth-child(35 of .flat), :nth-child(35 of .angled) {
+  --step: 34;
+}
+
+:nth-child(36 of .flat), :nth-child(36 of .angled) {
+  --step: 35;
+}
+
+:nth-child(37 of .flat), :nth-child(37 of .angled) {
+  --step: 36;
+}
+
+:nth-child(38 of .flat), :nth-child(38 of .angled) {
+  --step: 37;
+}
+
+:nth-child(39 of .flat), :nth-child(39 of .angled) {
+  --step: 38;
+}
+
+:nth-child(40 of .flat), :nth-child(40 of .angled) {
+  --step: 39;
+}
+
+input {
+  display: none;
+}
+
+nav {
+  font-family: system-ui;
+  font-size: 30px;
+  color: #fff;
+  display: grid;
+  justify-items: center;
+  height: min-content;
+  gap: 1em;
+}
+nav > div {
+  background: #000;
+  position: relative;
+  display: grid;
+  justify-items: center;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+nav > div::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, fuchsia, #08f, yellow, red, yellow, cyan, fuchsia);
+  background-size: 200% 100%;
+  transition: background-position-x 0.5s ease-in-out;
+  background-position-x: 0%;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+nav > div * {
+  font-weight: bolder;
+  color: white;
+  transform-style: flat;
+}
+
+nav, .scene {
+  position: relative;
+  inset-block: 0;
+  width: 40vmin;
+}
+
+.multiChoice {
+  justify-self: center;
+  display: grid;
+  grid-template-columns: 2ch 5ch 2ch;
+  text-align: center;
+  margin-block: 0.5em;
+}
+
+#anims {
+  perspective: 5em;
+}
+#anims label {
+  margin-block: 0.25em;
+  text-transform: uppercase;
+}
+#anims label span {
+  display: inline-block;
+  transition: all 0.5s ease-in-out;
+  transition-delay: calc(.05s*var(--sStep));
+  rotate: var(--axis) 180deg;
+}
+#anims label span:nth-child(1) {
+  --sStep: 0;
+}
+#anims label span:nth-child(2) {
+  --sStep: 1;
+}
+#anims label span:nth-child(3) {
+  --sStep: 2;
+}
+#anims label span:nth-child(4) {
+  --sStep: 3;
+}
+#anims label span:nth-child(5) {
+  --sStep: 4;
+}
+#anims label:nth-child(1):hover span {
+  --axis: x;
+}
+#anims label:nth-child(2):hover span {
+  --axis: y;
+}
+
+.prev label:after {
+  content: "◀";
+}
+
+.next label:after {
+  content: "▶";
+}
+
+#spin:checked ~ .container .strip {
+  --a: 360deg;
+  animation: spin 6s linear infinite;
+}
+
+#twist:checked ~ .container .strip {
+  animation: twist calc(12s*var(--twist)) ease-in-out alternate infinite;
+}
+
+.playBtn {
+  width: 100px;
+  aspect-ratio: 1;
+}
+.playBtn::after {
+  content: "";
+  position: absolute;
+  transition: all 0.5s ease-in-out;
+  inset: 0;
+  background-image: radial-gradient(at 100% 100%, red, yellow, #08f, fuchsia);
+  pointer-events: none;
+  clip-path: path("M 37.5 100 C 25,100 12.5,100 0,100 0,66.66 0,33.33 0,0 H 37.5 C 37.5,33.33 37.5,66.66 37.5,100 45.88,100 54.16,100 100,100 100,66.66 100,33.33 100,0 H 62.5 C 62.5,33.33 62.5,66.66 62.5,100 87.5,100 75,100 62.5,100 z");
+}
+.playBtn:hover::after {
+  clip-path: path("M 37.5 100 C 25,100 12.5,100 0,100 0,66.66 37.5,33.33 37.5,0 H 0 C 0,33.33 37.5,66.66 37.5,100 45.88,100 54.16,100 62.5,100 62.5,66.66 100,33.33 100,0 H 62.5 C 62.5,33.33 100,66.66 100,100 87.5,100 75,100 62.5,100 z");
+}
+
+#playPause:checked ~ .container nav > div:after {
+  background-position-x: 100%;
+}
+#playPause:checked ~ .container .strip {
+  animation-play-state: paused;
+}
+#playPause:checked ~ .container .playBtn::after {
+  rotate: 90deg;
+  clip-path: path("M 50 100 C 33.33,100 16.66,100 0,100 16.66,66.66 33.33,33.33 50,0 H 50 C 50,0 50,0 50,100 50,100 50,100 50,100 50,66.66 50,33.33 50,0 H 50 C 66.66,33.33 83.33,66.66 100,100 83.33,100 66.66,100 50,100 z");
+}
+#playPause:checked ~ .container .playBtn:hover::after {
+  clip-path: path("M 50 80 C 33.33,80 16.66,80 0,100 0,66.66 25,33.33 50,0 H 50 C 50,0 50,0 50,80 50,80 50,80 50,80 50,66.66 50,33.33 50,0 H 50 C 50,33.33 100,66.66 100,100 83.33,80 66.66,80 50,80 z");
+}
+
+:is(#twist:not(:checked) ~ .container #anims label:nth-child(1), #spin:not(:checked) ~ .container #anims label:nth-child(2)) span {
+  color: gray;
+}
+
+#s20:checked ~ .container .strip {
+  --segs: 20;
+}
+
+#s20:checked ~ .container :is(:nth-child(n+21 of .flat),:nth-child(n+21 of .angled)) {
+  display: none;
+}
+
+#s20:checked ~ .container #segments .val::after {
+  content: "20";
+}
+
+#s30:checked ~ .container .strip {
+  --segs: 30;
+}
+
+#s30:checked ~ .container :is(:nth-child(n+31 of .flat),:nth-child(n+31 of .angled)) {
+  display: none;
+}
+
+#s30:checked ~ .container #segments .val::after {
+  content: "30";
+}
+
+#s40:checked ~ .container .strip {
+  --segs: 40;
+}
+
+#s40:checked ~ .container :is(:nth-child(n+41 of .flat),:nth-child(n+41 of .angled)) {
+  display: none;
+}
+
+#s40:checked ~ .container #segments .val::after {
+  content: "40";
+}
+
+#t5:checked ~ .container .strip {
+  --twist: 0.5;
+}
+
+#t5:checked ~ .container #twists .val::after {
+  content: "0.5";
+}
+
+#t10:checked ~ .container .strip {
+  --twist: 1;
+}
+
+#t10:checked ~ .container #twists .val::after {
+  content: "1";
+}
+
+#t15:checked ~ .container .strip {
+  --twist: 1.5;
+}
+
+#t15:checked ~ .container #twists .val::after {
+  content: "1.5";
+}
+
+#t20:checked ~ .container .strip {
+  --twist: 2;
+}
+
+#t20:checked ~ .container #twists .val::after {
+  content: "2";
+}
+
+#s20:checked ~ .container #segments .prev label,
+#s30:checked ~ .container #segments .prev label:nth-child(2),
+#s40:checked ~ .container #segments .prev label:nth-child(1),
+#s40:checked ~ .container #segments .next label,
+#s30:checked ~ .container #segments .next label:nth-child(1),
+#s20:checked ~ .container #segments .next label:nth-child(2),
+#t5:checked ~ .container #twists .prev label,
+#t10:checked ~ .container #twists .prev label:not(:nth-child(1)),
+#t15:checked ~ .container #twists .prev label:not(:nth-child(2)),
+#t20:checked ~ .container #twists .prev label:not(:nth-child(3)),
+#t20:checked ~ .container #twists .next label,
+#t15:checked ~ .container #twists .next label:not(:nth-child(3)),
+#t10:checked ~ .container #twists .next label:not(:nth-child(2)),
+#t5:checked ~ .container #twists .next label:not(:nth-child(1)) {
+  display: none;
+}
+
+@media (orientation: portrait) {
+  .container {
+    justify-content: space-around;
+  }
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <input type="checkbox" name="playPause" id="playPause" checked="checked"/>
+<input type="radio" name="anims" id="twist" checked="checked"/>
+<input type="radio" name="anims" id="spin"/>
+<input type="radio" name="segs" id="s20"/>
+<input type="radio" name="segs" id="s30" checked="checked"/>
+<input type="radio" name="segs" id="s40"/>
+<input type="radio" name="twist" id="t5"/>
+<input type="radio" name="twist" id="t10"/>
+<input type="radio" name="twist" id="t15" checked="checked"/>
+<input type="radio" name="twist" id="t20"/>
+<div class="container">
+  <nav>
+    <label class="playBtn" for="playPause"></label>
+    <div id="anims">Animation
+      <label for="twist"><span>t</span><span>w</span><span>i</span><span>s</span><span>t</span>
+      </label>
+      <label for="spin"><span>spin</span></label>
+    </div>
+    <div id="segments">Segments
+      <div class="multiChoice">
+        <div class="prev">
+          <label for="s20"></label>
+          <label for="s30"></label>
+        </div>
+        <div class="val"></div>
+        <div class="next">
+          <label for="s30"></label>
+          <label for="s40"></label>
+        </div>
+      </div>
+    </div>
+    <div id="twists">Twists
+      <div class="multiChoice">
+        <div class="prev">
+          <label for="t5"></label>
+          <label for="t10"></label>
+          <label for="t15"></label>
+        </div>
+        <div class="val"></div>
+        <div class="next">
+          <label for="t10"></label>
+          <label for="t15"></label>
+          <label for="t20"></label>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="scene">
+    <div class="strip">
+      <div class="flat"></div>
+      <div class="angled"></div>
+      <div class="flat"></div>
+      <div class="angled"></div>
+      <div class="flat"></div>
+      <div class="angled"></div>
+      <div class="flat"></div>
+      <div class="angled"></div>
+      <div class="flat"></div>
+      <div class="angled"></div>
+      <div class="flat"></div>
+      <div class="angled"></div>
+      <div class="flat"></div>
+      <div class="angled"></div>
+      <div class="flat"></div>
+      <div class="angled"></div>
+      <div class="flat"></div>
+      <div class="angled"></div>
+      <div class="flat"></div>
+      <div class="angled"></div>
+      <div class="flat"></div>
+      <div class="angled"></div>
+      <div class="flat"></div>
+      <div class="angled"></div>
+      <div class="flat"></div>
+      <div class="angled"></div>
+      <div class="flat"></div>
+      <div class="angled"></div>
+      <div class="flat"></div>
+      <div class="angled"></div>
+      <div class="flat"></div>
+      <div class="angled"></div>
+      <div class="flat"></div>
+      <div class="angled"></div>
+      <div class="flat"></div>
+      <div class="angled"></div>
+      <div class="flat"></div>
+      <div class="angled"></div>
+      <div class="flat"></div>
+      <div class="angled"></div>
+      <div class="flat"></div>
+      <div class="angled"></div>
+      <div class="flat"></div>
+      <div class="angled"></div>
+      <div class="flat"></div>
+      <div class="angled"></div>
+      <div class="flat"></div>
+      <div class="angled"></div>
+      <div class="flat"></div>
+      <div class="angled"></div>
+      <div class="flat"></div>
+      <div class="angled"></div>
+      <div class="flat"></div>
+      <div class="angled"></div>
+      <div class="flat"></div>
+      <div class="angled"></div>
+      <div class="flat"></div>
+      <div class="angled"></div>
+      <div class="flat"></div>
+      <div class="angled"></div>
+      <div class="flat"></div>
+      <div class="angled"></div>
+      <div class="flat"></div>
+      <div class="angled"></div>
+      <div class="flat"></div>
+      <div class="angled"></div>
+      <div class="flat"></div>
+      <div class="angled"></div>
+      <div class="flat"></div>
+      <div class="angled"></div>
+      <div class="flat"></div>
+      <div class="angled"></div>
+      <div class="flat"></div>
+      <div class="angled"></div>
+      <div class="flat"></div>
+      <div class="angled"></div>
+      <div class="flat"></div>
+      <div class="angled"></div>
+      <div class="flat"></div>
+      <div class="angled"></div>
+    </div>
+  </div>
+</div>
+  
+  
+  
+</body>
+
+</html>
