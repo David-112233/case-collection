@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>Overlapping SVG shapes with image fill</title>
+
+    <link rel="canonical" href="https://codepen.io/astrotim/pen/eYKMmR">
+  
+  
+  
+  
+<style>
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.shape {
+  position: relative;
+  padding-bottom: 36.40%;
+  height: 0;
+  overflow:hidden;
+  margin-top: -8%;
+}
+
+.shape svg {
+  width: 100%;
+  position: absolute;
+}
+
+.first {
+  z-index: 3;
+  margin-top: 0;
+}
+
+.second {
+  z-index: 2;
+}
+
+.third {
+  z-index: 1;
+}
+
+.second, .third {
+
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  <div class="shape first">
+  <?xml version="1.0" encoding="utf-8"?>
+  <svg version="1.1"
+       baseProfile="full"
+       xmlns="http://www.w3.org/2000/svg"
+       xmlns:xlink="http://www.w3.org/1999/xlink"
+       xmlns:ev="http://www.w3.org/2001/xml-events"
+       viewBox="0 0 1280 853">
+  <defs>
+    <pattern id="bgimg1" patternUnits="userSpaceOnUse" width="1280" height="853">
+      <image xlink:href="https://38.media.tumblr.com/5c0a918c9f6b05db6002fb50cc0eacb8/tumblr_naj3mgttxL1st5lhmo1_1280.jpg" x="0" y="-150" width="1280" height="853" />
+    </pattern>
+  </defs>
+  <path fill="url(#bgimg1)" d="M1280,0v373.333l-640,93.333L0,373.333V0H1280z"/>
+  </svg>  
+</div>
+<div class="shape second">
+  <?xml version="1.0" encoding="utf-8"?>
+  <svg version="1.1"
+       baseProfile="full"
+       xmlns="http://www.w3.org/2000/svg"
+       xmlns:xlink="http://www.w3.org/1999/xlink"
+       xmlns:ev="http://www.w3.org/2001/xml-events"
+       viewBox="0 0 1280 853">
+  <defs>
+    <pattern id="bgimg2" patternUnits="userSpaceOnUse" width="1280" height="853">
+      <image xlink:href="https://38.media.tumblr.com/19a1925ae010acf1628c081bdb5d5597/tumblr_naj3gayWkL1st5lhmo1_1280.jpg" x="0" y="-50" width="1280" height="853" />
+    </pattern>
+  </defs>
+  <path fill="url(#bgimg2)" d="M1280,0v373.333l-640,93.333L0,373.333V0H1280z"/>
+  </svg>  
+</div>
+<div class="shape third">
+  <?xml version="1.0" encoding="utf-8"?>
+  <svg version="1.1"
+       baseProfile="full"
+       xmlns="http://www.w3.org/2000/svg"
+       xmlns:xlink="http://www.w3.org/1999/xlink"
+       xmlns:ev="http://www.w3.org/2001/xml-events"
+       viewBox="0 0 1280 853">
+  <defs>
+    <pattern id="bgimg3" patternUnits="userSpaceOnUse" width="1280" height="853">
+      <image xlink:href="https://38.media.tumblr.com/b0599573cbde31e8f8ec2ce4f211bfc1/tumblr_naj3a897XB1st5lhmo1_1280.jpg" x="0" y="-350" width="1280" height="853" />
+    </pattern>
+  </defs>
+  <path fill="url(#bgimg3)" d="M1280,0v373.333l-640,93.333L0,373.333V0H1280z"/>
+  </svg>  
+</div>
+  
+  
+  
+</body>
+
+</html>

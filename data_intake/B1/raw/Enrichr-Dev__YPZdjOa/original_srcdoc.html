@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>Refractive glass lens</title>
+
+    <link rel="canonical" href="https://codepen.io/Enrichr-Dev/pen/YPZdjOa">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Parkinsans:wght@400;500;600;700;800&family=Instrument+Sans:wght@400;500;600&family=Fira+Code:wght@400;500&display=swap">
+  
+  
+  
+<style>
+/* Refractive glass lens · from the Enrichr Library: https://enrichr.dev/elements/refractive-glass-lens.html */
+html, body { margin: 0; min-height: 100%; background: #0c1e18; }
+#enrichr-root { min-height: 100vh; }
+#enrichr-root > * { min-height: 100vh; }
+
+/* Enrichr Library · https://enrichr.dev */
+.ef-rgl__zone { position: relative; isolation: isolate; overflow: hidden; min-height: 22rem; display: flex; align-items: center; border-radius: 1rem; touch-action: pan-y; container-type: inline-size; background-color: var(--ef-bg, #0c1e18); background-image: linear-gradient(rgba(148, 163, 184, 0.09) 1px, transparent 1px), linear-gradient(90deg, rgba(148, 163, 184, 0.09) 1px, transparent 1px); background-size: 40px 40px; color: #e2e8f0; }
+.ef-rgl__scene { position: relative; z-index: 1; padding: 2.4rem clamp(1.2rem, 5vw, 3rem); max-width: 46rem; }
+.ef-rgl__kicker { display: inline-block; padding: 0.3rem 0.7rem; border: 1px solid rgba(230, 255, 85, 0.4); border-radius: 999px; color: var(--ef-accent, #e6ff55); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+.ef-rgl .ef-rgl__t { margin: 1rem 0 0.8rem; font-size: clamp(1.8rem, 6vw, 3.6rem); font-size: clamp(1.8rem, 7.5cqi, 3.6rem); font-weight: 800; line-height: 1.05; letter-spacing: -0.02em; }
+.ef-rgl__t em { font-style: normal; background: linear-gradient(90deg, var(--ef-accent, #e6ff55), #c6f26b 55%, #0a6b46); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.ef-rgl .ef-rgl__p { margin: 0; opacity: 1; max-width: 34rem; color: #94a3b8; font-size: 1.05rem; line-height: 1.55; }
+.ef-rgl .ef-rgl__chips { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 1.4rem 0 0; padding: 0; list-style: none; }
+.ef-rgl .ef-rgl__chips li { margin: 0; opacity: 1; padding: 0.55rem 1rem; border-radius: 0.6rem; font-size: 0.85rem; font-weight: 700; color: #0c1e18; background: #f87171; }
+.ef-rgl .ef-rgl__chips li:nth-child(2) { background: #4ade80; }
+.ef-rgl .ef-rgl__chips li:nth-child(3) { background: #0a6b46; }
+.ef-rgl .ef-rgl__chips li:nth-child(4) { background: #f8fafc; }
+.ef-rgl__lens { position: absolute; left: 0; top: 0; z-index: 3; width: var(--ef-w, 192px); height: var(--ef-h, 192px); border-radius: var(--ef-radius, 50%); pointer-events: none; will-change: transform; background: rgba(255, 255, 255, 0.03); -webkit-backdrop-filter: blur(3px) saturate(1.6); backdrop-filter: blur(3px) saturate(1.6); box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.35), inset 0 0 20px rgba(255, 255, 255, 0.25), inset 0 2px 4px rgba(255, 255, 255, 0.6), inset 0 -4px 8px rgba(0, 0, 0, 0.4); transition: width 0.2s cubic-bezier(0.16, 1, 0.3, 1), height 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-radius 0.2s ease; }
+@media (prefers-reduced-motion: reduce) { .ef-rgl__lens { transition: none; } }
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <div id="enrichr-root">
+<div class="ef-rgl"><div class="ef-rgl__zone"><div class="ef-rgl__scene"><span class="ef-rgl__kicker">Optical filter</span><h2 class="ef-rgl__t"></h2><p class="ef-rgl__p"></p><ul class="ef-rgl__chips" aria-hidden="true"><li>Red</li><li>Green</li><li>Blue</li><li>Glass</li></ul></div><div class="ef-rgl__lens" aria-hidden="true"></div></div></div>
+</div>
+  
+    <script id="rendered-js" >
+// Enrichr Library · https://enrichr.dev
+// Refractive glass lens: a glass disc follows the pointer and bends whatever is behind it. An SVG filter used as a
+// backdrop-filter warps the backdrop with turbulence noise, then splits it into red, green and blue copies shifted
+// sideways (chromatic aberration) and screens them back together. The lens squashes along its direction of travel.
+// Chromium browsers get the full refraction; others get a frosted-glass fallback. "Invert" mode swaps in an inverting lens.
+// mount(root, { title (wrap a phrase in *stars* to colour it), text, mode ("refract" | "invert"), warp, fringe (px), noise, size (px), shape, smoothing, accent, background })
+function mount(root, o) {
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var zone = root.querySelector(".ef-rgl__zone"),lens = root.querySelector(".ef-rgl__lens");
+  var title = root.querySelector(".ef-rgl__t"),text = root.querySelector(".ef-rgl__p");
+  var svgOk = !!window.chrome && /Chrome\//.test(navigator.userAgent);
+  var NS = "http://www.w3.org/2000/svg",id = "ef-rgl-" + Math.random().toString(36).slice(2, 8);
+  function el(tag, attrs, parent) {
+    var n = document.createElementNS(NS, tag);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(n);
+    return n;
+  }
+  var svg = el("svg", { "aria-hidden": "true", width: "0", height: "0" });
+  svg.style.cssText = "position:absolute;width:0;height:0;pointer-events:none";
+  var f = el("filter", { id: id, x: "-30%", y: "-30%", width: "160%", height: "160%" }, svg);
+  var turb = el("feTurbulence", { type: "fractalNoise", baseFrequency: "0.018", numOctaves: "3", seed: "5", result: "noise" }, f);
+  var disp = el("feDisplacementMap", { "in": "SourceGraphic", in2: "noise", scale: "35", xChannelSelector: "R", yChannelSelector: "G", result: "bent" }, f);
+  var red = el("feOffset", { "in": "bent", dx: "-6", dy: "0", result: "rOff" }, f);
+  el("feColorMatrix", { "in": "rOff", type: "matrix", values: "1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0", result: "r" }, f);
+  var blue = el("feOffset", { "in": "bent", dx: "6", dy: "0", result: "bOff" }, f);
+  el("feColorMatrix", { "in": "bOff", type: "matrix", values: "0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0", result: "b" }, f);
+  el("feColorMatrix", { "in": "bent", type: "matrix", values: "0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0", result: "g" }, f);
+  el("feBlend", { "in": "r", in2: "g", mode: "screen", result: "rg" }, f);
+  el("feBlend", { "in": "rg", in2: "b", mode: "screen" }, f);
+  zone.appendChild(svg);
+
+  var opts = {},raf = 0,visible = true,io = null,ro = null,placed = false;
+  var tx = 0,ty = 0,x = 0,y = 0,sx = 1,sy = 1,ang = 0;
+
+  // Before the pointer arrives, park the lens over the headline so the effect is visible straight away.
+  function rest() {
+    if (placed) return;
+    var z = zone.getBoundingClientRect(),t = title.getBoundingClientRect();
+    tx = x = Math.min(z.width * 0.62, t.left - z.left + t.width * 0.55);
+    ty = y = t.top - z.top + t.height / 2;
+  }
+  function paint() {
+    lens.style.transform = "translate3d(" + x.toFixed(1) + "px," + y.toFixed(1) + "px,0) translate(-50%,-50%) rotate(" + ang.toFixed(1) + "deg) scale(" + sx.toFixed(3) + "," + sy.toFixed(3) + ")";
+  }
+  function frame() {
+    raf = 0;
+    if (!visible) return;
+    var k = reduce ? 1 : opts.smoothing;
+    var px = x,py = y;
+    x += (tx - x) * k;
+    y += (ty - y) * k;
+    var vx = x - px,vy = y - py,speed = Math.sqrt(vx * vx + vy * vy);
+    if (!reduce && speed > 0.5) {
+      var s = Math.min(speed * 0.015, 0.35);
+      sx = 1 + s;sy = 1 - s;
+      ang = Math.atan2(vy, vx) * 180 / Math.PI;
+    } else {
+      sx += (1 - sx) * 0.3;sy += (1 - sy) * 0.3;
+    }
+    paint();
+    if (Math.abs(tx - x) + Math.abs(ty - y) > 0.3 || Math.abs(1 - sx) > 0.002) raf = requestAnimationFrame(frame);
+  }
+  function wake() {if (!raf && visible) raf = requestAnimationFrame(frame);}
+  function move(e) {
+    var r = zone.getBoundingClientRect();
+    tx = e.clientX - r.left;
+    ty = e.clientY - r.top;
+    placed = true;
+    wake();
+  }
+  function heading(s) {
+    title.textContent = "";
+    String(s).split("*").forEach(function (part, i) {
+      if (!part) return;
+      if (i % 2) {var em = document.createElement("em");em.textContent = part;title.appendChild(em);} else
+      title.appendChild(document.createTextNode(part));
+    });
+  }
+  function update(next) {
+    opts = Object.assign({ title: "Optical glass with *chromatic aberration*", text: "Move the pointer across the text and chips: the lens bends the light and pulls red, green and blue apart.", mode: "refract", warp: 35, fringe: 6, noise: 0.018, size: 192, shape: "circle", smoothing: 0.16, accent: "#e6ff55", background: "#0c1e18" }, opts, next || {});
+    opts.smoothing = Math.max(0.02, Math.min(1, Number(opts.smoothing)));
+    heading(opts.title);
+    text.textContent = opts.text;
+    zone.style.setProperty("--ef-bg", opts.background);
+    zone.style.setProperty("--ef-accent", opts.accent);
+    disp.setAttribute("scale", String(Number(opts.warp)));
+    turb.setAttribute("baseFrequency", String(Number(opts.noise)));
+    red.setAttribute("dx", String(-Number(opts.fringe)));
+    blue.setAttribute("dx", String(Number(opts.fringe)));
+    var size = Number(opts.size),wide = opts.shape === "pill";
+    lens.style.setProperty("--ef-w", (wide ? Math.round(size * 1.6) : size) + "px");
+    lens.style.setProperty("--ef-h", size + "px");
+    lens.style.setProperty("--ef-radius", { circle: "50%", square: "24px", pill: "9999px", leaf: "40% 10% 40% 10%" }[opts.shape] || "50%");
+    var bf = opts.mode === "invert" ? "invert(1) hue-rotate(180deg)" : svgOk ? "url(#" + id + ")" : "";
+    lens.style.backdropFilter = bf;
+    lens.style.webkitBackdropFilter = bf;
+    rest();
+    paint();
+  }
+  update(o);
+  zone.addEventListener("pointermove", move);
+  zone.addEventListener("pointerdown", move);
+  if ("ResizeObserver" in window) {ro = new ResizeObserver(function () {rest();paint();});ro.observe(zone);}
+  if ("IntersectionObserver" in window) {io = new IntersectionObserver(function (e) {visible = e[0].isIntersecting;if (visible) wake();});io.observe(zone);}
+  return {
+    update: update,
+    destroy: function () {
+      cancelAnimationFrame(raf);raf = 0;
+      if (io) io.disconnect();
+      if (ro) ro.disconnect();
+      zone.removeEventListener("pointermove", move);
+      zone.removeEventListener("pointerdown", move);
+      if (svg.parentNode) svg.parentNode.removeChild(svg);
+    } };
+
+}
+
+// Start it with the Library's default settings. Change any of these to taste;
+// the full list, with sliders, is on https://enrichr.dev/elements/refractive-glass-lens.html
+var enrichr = mount(document.getElementById("enrichr-root"), {
+  "title": "Optical glass with *chromatic aberration*",
+  "mode": "refract",
+  "warp": 35,
+  "fringe": 6,
+  "noise": 0.018,
+  "size": 192,
+  "shape": "circle",
+  "smoothing": 0.16 });
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>

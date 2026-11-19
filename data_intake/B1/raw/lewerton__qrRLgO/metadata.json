@@ -1,0 +1,68 @@
+{
+  "source_id": "codepen:lewerton/qrrlgo",
+  "author": "lewerton",
+  "pen_id": "qrRLgO",
+  "url": "https://codepen.io/lewerton/pen/qrRLgO",
+  "acquisition": "cdpn_fullpage",
+  "acquisition_url": "https://cdpn.io/lewerton/fullpage/qrRLgO",
+  "retrieved_at": "2026-11-19T18:11:59+00:00",
+  "license": "未单独核验；外链资源许可另查",
+  "fetch_status": "ok",
+  "title": "Pure CSS Animated 3D Tunnel",
+  "canonical_url": "https://codepen.io/lewerton/pen/qrRLgO",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "bff565046a394e1651650945f4cb7f9bf2e7321cd4d3f5d7b5f5823e3f33561a",
+  "source_html_sha256": "bfebd6a581022b6d48972e5b2893f2bd29badd7ba504359f0ba065beff2ab021",
+  "analysis": {
+    "js": {
+      "has_js": false,
+      "inline_js_chars": 0,
+      "external_scripts": [],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 5,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": true,
+      "clip_path": false,
+      "css_counter": false,
+      "media_query": false
+    },
+    "external_stylesheets": [
+      "https://public.codepenassets.com/css/normalize-5.0.0.min.css"
+    ],
+    "css_imports": [],
+    "css_chars": 5116,
+    "element_count": 0,
+    "html_chars": 6127
+  },
+  "review": {
+    "label": "纹理通道的内向透视",
+    "status": "普通·循环",
+    "reference_case": "224 / 227",
+    "evidence": "实见石砖地面、多纹理左右墙与暗顶四面收束到同一远处，阴影压暗纵深；源码 20 秒往返与独立纹理运动，未实测可暂停。建议固定一帧或按消失点、几何连续性评，不严格对照某颗石砖。",
+    "visual_verified": true,
+    "surface": "Cloud Chrome, cdpn.io public preview, 1331×894 desktop including preview banner; no mobile check",
+    "formal_admission": false
+  }
+}
