@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>Letter + Envelope Animation (HTML, CSS, JS, SVG) </title>
+
+    <link rel="canonical" href="https://codepen.io/christadejesus/pen/XWPmjed">
+  
+  
+  
+  
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap');
+
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* COLORS */
+  --primary-dk: #324376; /* blue background */
+  --primary-lt: #85BAA1; /* page lines */
+  --accent-dk: #F76C5E; /* seal/button background & vertical page line */
+  --accent-md: #D4BB8F; /* page hole */
+  --accent-lt: #F5DD90; /* envelope */
+  --neutral-dk: #333; /* message text */ 
+  --neutral-lt: #fff; /* page background & 'open' text */
+  
+  /* FONTS */
+  --font-sans: "Poppins", sans-serif;
+  --font-display: "Courier Prime", serif; 
+}
+/* MAIN STYLES */ 
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-family: var(--font-display);
+  font-size: 14px;
+  background: var(--primary-dk);
+}
+p {
+  line-height: 1.5;
+}
+.container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 450px;
+  width: 100%;
+}
+/* ENVELOPE BACK */
+.envelope-back {
+  position: absolute;
+  bottom: 0;
+  width: 425px;
+  height: 400px;
+}
+.envelope-back-base {
+  filter: drop-shadow(2px 10px 10px rgba(0,0,0,.5));
+}
+.envelope-flap-open {
+  display: none;
+  filter: drop-shadow(2px 10px 10px rgba(0,0,0,.5));
+}
+/* PAGE */
+.page-container {
+  height: 450px; 
+  width: 425px;
+  padding-top: 50px;
+  overflow: hidden;
+}
+.page {
+  position: relative;
+  background: var(--neutral-lt);
+  width: 300px;
+  height: 388px;
+  padding: 45px 20px 20px 40px;
+  margin: 280px auto 0 auto;
+  box-shadow: 2px 8px 24px rgba(0,0,0,.6);
+  z-index: 10;
+}
+.page-show {
+  margin: 0 auto;
+  transition: ease all 1s;
+}
+.hole-container {
+  position: absolute; 
+  top: 0;
+  left: 9px;
+  height: 100%;
+  width: 20px;
+  border-right: 1px solid var(--accent-dk);
+  z-index: 100;
+}
+.line-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+/* ENVELOPE FRONT */
+.envelope-front {
+  position: absolute;
+  bottom: 0;
+  width: 375px;
+  height: 200px;
+  z-index: 1000;
+}
+.seal-container {
+  position: absolute;
+  bottom: 14px;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.envelope-seal {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  background: var(--accent-dk);
+  color: var(--neutral-lt);
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+.seal-closed {
+  background: transparent;
+  color: var(--neutral-dk);
+}
+.envelope-front-base {
+ filter: drop-shadow(0px 0px 10px rgba(0,0,0,.2));
+}
+.envelope-flap-closed {
+  filter: drop-shadow(0px 0px 5px rgba(0,0,0,.2));
+}
+.hide {
+  display: none; 
+}
+.show {
+  display: block;
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <!-- This div contains all visible elements -->
+<div class="container">
+  <!-- This div contains the back or bottom side of the envelope as well as the flap when in open position -->
+  <div class="envelope-back">
+    <svg width="425" height="450">
+      <polygon class="envelope-flap-open" id="envelope-flap-open" points="24,200 211,50 399,200 24,200" style="fill: var(--accent-lt);"></polygon>
+      <polygon class="envelope-back-base" points="25,200 400,200 400,400 25,400" style="fill: var(--accent-lt);"></polygon>
+    </svg>
+  </div>
+  <!-- This div holds elements of the paper svg and message contents -->
+  <div class="page-container">
+    <div class="page" id="page">
+      <p class="message" id="message"><!-- Paper message will be inserted here with JS --></p>
+      <!-- Paper holes -->
+      <svg class="hole-container"> 
+        <circle cx="6" cy="58" r="6" fill="var(--primary-dk)"></circle>     
+        <circle cx="6" cy="194" r="6" fill="var(--accent-md)"></circle>     
+      </svg>
+      <!-- Paper lines -->
+      <svg class="line-container" height="503" width="350">
+        <line x1="0" y1="39" x2="300" y2="39" style="stroke-width: 1px; stroke: var(--primary-lt)"></line>
+        <line x1="0" y1="60" x2="300" y2="60" style="stroke-width: 1px; stroke: var(--primary-lt)"></line>
+         <line x1="0" y1="81" x2="300" y2="81" style="stroke-width: 1px; stroke: var(--primary-lt)"></line>
+        <line x1="0" y1="102" x2="300" y2="102" style="stroke-width: 1px; stroke: var(--primary-lt)"></line>
+        <line x1="0" y1="123" x2="300" y2="123" style="stroke-width: 1px; stroke: var(--primary-lt)"></line>
+        <line x1="0" y1="144" x2="300" y2="144" style="stroke-width: 1px; stroke: var(--primary-lt)"></line>
+        <line x1="0" y1="165" x2="300" y2="165" style="stroke-width: 1px; stroke: var(--primary-lt)"></line>
+        <line x1="0" y1="186" x2="300" y2="186" style="stroke-width: 1px; stroke: var(--primary-lt)"></line>
+        <line x1="0" y1="207" x2="300" y2="207" style="stroke-width: 1px; stroke: var(--primary-lt)"></line>
+        <line x1="0" y1="228" x2="300" y2="228" style="stroke-width: 1px; stroke: var(--primary-lt)"></line>
+        <line x1="0" y1="249" x2="300" y2="249" style="stroke-width: 1px; stroke: var(--primary-lt)"></line>
+        <line x1="0" y1="270" x2="300" y2="270" style="stroke-width: 1px; stroke: var(--primary-lt)"></line>
+        <line x1="0" y1="291" x2="300" y2="291" style="stroke-width: 1px; stroke: var(--primary-lt)"></line>
+        <line x1="0" y1="312" x2="300" y2="312" style="stroke-width: 1px; stroke: var(--primary-lt)"></line>
+        <line x1="0" y1="333" x2="300" y2="333" style="stroke-width: 1px; stroke: var(--primary-lt)"></line>
+        <line x1="0" y1="354" x2="300" y2="354" style="stroke-width: 1px; stroke: var(--primary-lt)"></line>
+        <line x1="0" y1="373" x2="300" y2="373" style="stroke-width: 1px; stroke: var(--primary-lt)"></line>
+      </svg>
+    </div>
+  </div>
+  <!-- This div holds all top or front elements including the envelope base front, flap when closed, seal/button -->
+  <div class="envelope-front">
+    <div class="seal-container">
+      <button class="envelope-seal" id="envelope-seal" onclick="toggleEnvelope()">open</button>
+    </div>
+    <svg width="375" height="200">
+      <polygon class="envelope-front-base" points="0,0 187,150 375,0 375,200 0,200 0,0" style="fill: var(--accent-lt);"></polygon>
+      <polygon class="envelope-flap-closed" id="envelope-flap-closed" points="0,0 375,0 187,150 0,0" style="fill: var(--accent-lt);"></polygon>
+    </svg>
+  </div>
+</div>
+  
+    <script id="rendered-js" >
+// Typing animation
+
+const msg = 'Sometimes the hardest step forward is the first one, but every step after that gets a little easier. So keep going, one step at a time, until you reach your destination. ❤'; // The message being typed
+
+let i = 0;
+let delay = 50;
+
+function typeWriter() {
+  if (i < msg.length) {
+    document.getElementById("message").innerHTML += msg.charAt(i);
+    i++;
+    setTimeout(typeWriter, delay);
+  }
+}
+typeWriter(); //Calling the function here starts the animation without delay
+
+// Envelope seal click event
+
+const envelopeFlapClosed = document.getElementById("envelope-flap-closed");
+const envelopeFlapOpen = document.getElementById("envelope-flap-open");
+const page = document.getElementById("page");
+const envelopeSeal = document.getElementById("envelope-seal");
+
+function toggleEnvelope() {
+
+  if (envelopeSeal.innerHTML === "open") {
+    envelopeSeal.innerHTML = "close";
+    envelopeSeal.classList.add("seal-closed");
+    envelopeFlapClosed.classList.add("hide");
+    envelopeFlapOpen.classList.add("show");
+    page.classList.add("page-show");
+  } else {
+    envelopeSeal.innerHTML = "open";
+    envelopeSeal.classList.remove("seal-closed");
+    envelopeFlapClosed.classList.remove("hide");
+    envelopeFlapOpen.classList.remove("show");
+    page.classList.remove("page-show");
+  }
+}
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>

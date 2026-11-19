@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>Only CSS: Train a GO, GO!</title>
+
+    <link rel="canonical" href="https://codepen.io/YusukeNakaya/pen/ppoeWB">
+  
+  <link rel="stylesheet" href="https://public.codepenassets.com/css/normalize-5.0.0.min.css">
+
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Anton'>
+  
+<style>
+body {
+  background: #fff;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  font-family: "Anton", sans-serif;
+  justify-content: center;
+  align-items: center;
+  perspective: 600px;
+}
+
+div {
+  position: absolute;
+  transform-style: preserve-3d;
+  background: linear-gradient(45deg, #0bc2a7 0%, #3df4d9 100%);
+  box-sizing: border-box;
+  will-change: transform;
+}
+
+.window {
+  background: rgba(0, 100, 255, 0.3);
+  border-left: 10px solid #0bc2a7;
+  border-right: 10px solid #15ccb1;
+}
+
+.rail {
+  width: 660px;
+  height: 660px;
+  background: none;
+  border-radius: 100%;
+  border: 30px double black;
+  transform-origin: 0 0;
+  transform: translate3d(-330px, -30px, -330px) rotateX(90deg);
+  box-sizing: border-box;
+}
+
+.tonnels {
+  animation: tonnel 15000ms ease-in-out infinite alternate;
+}
+.tonnels .tonnel .parts {
+  transform: translate(-430px, -170px) translateZ(-25px) rotateX(90deg);
+}
+.tonnels .tonnel .parts .top {
+  width: 200px;
+  height: 50px;
+  background: linear-gradient(90deg, #646464 0%, #969696 100%);
+}
+.tonnels .tonnel .parts .left {
+  width: 170px;
+  height: 50px;
+  transform-origin: 0 0;
+  transform: rotateY(90deg);
+  background: linear-gradient(90deg, #646464 0%, #969696 100%);
+}
+.tonnels .tonnel .parts .right {
+  width: 170px;
+  height: 50px;
+  transform-origin: 0 0;
+  transform: translate(200px, 0) rotateY(90deg);
+  background: linear-gradient(90deg, #646464 0%, #969696 100%);
+}
+.tonnels .tonnel:nth-child(1) {
+  transform: translateZ(0px) rotateY(-53.5deg);
+}
+.tonnels .tonnel:nth-child(2) {
+  transform: translateZ(0px) rotateY(-47deg);
+}
+.tonnels .tonnel:nth-child(3) {
+  transform: translateZ(0px) rotateY(-40.5deg);
+}
+.tonnels .tonnel:nth-child(4) {
+  transform: translateZ(0px) rotateY(-34deg);
+}
+.tonnels .tonnel:nth-child(5) {
+  transform: translateZ(0px) rotateY(-27.5deg);
+}
+.tonnels .tonnel:nth-child(6) {
+  transform: translateZ(0px) rotateY(-21deg);
+}
+.tonnels .tonnel:nth-child(7) {
+  transform: translateZ(0px) rotateY(-14.5deg);
+}
+.tonnels .tonnel:nth-child(8) {
+  transform: translateZ(0px) rotateY(-8deg);
+}
+.tonnels .tonnel:nth-child(9) {
+  transform: translateZ(0px) rotateY(-1.5deg);
+}
+.tonnels .tonnel:nth-child(10) {
+  transform: translateZ(0px) rotateY(5deg);
+}
+
+#trains {
+  animation: drive 15000ms ease-in-out infinite alternate;
+}
+#trains .line {
+  width: 600px;
+  height: 600px;
+  background: none;
+  border-radius: 100%;
+  border: 2px solid rgba(100, 100, 100, 0.7);
+  transform-origin: 0 0;
+  transform: translate3d(-300px, -162px, -300px) rotateX(90deg);
+}
+#trains .train:nth-child(1) {
+  transform: rotateY(-50deg);
+}
+#trains .train:nth-child(1) .front .connect {
+  display: none;
+}
+#trains .train:nth-child(1) .front .go {
+  display: block;
+  font-size: 12px;
+  line-height: 17px;
+  text-align: center;
+  width: 40px;
+  height: 17px;
+  background: #000;
+  color: #fff;
+  transform: translate(30px, -30px);
+}
+#trains .train:nth-child(3) {
+  transform: rotateY(50deg);
+}
+#trains .train:nth-child(3) .back .connect {
+  display: none;
+}
+#trains .train .go {
+  display: none;
+}
+#trains .train .shadow {
+  width: 100px;
+  height: 200px;
+  background: none;
+  transform-origin: 0 0;
+  transform: translate(0px, 69px) rotateX(-90deg);
+}
+#trains .train .shadow .inner {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  filter: blur(10px);
+}
+#trains .train .wrapper {
+  transform: translate3d(250px, -100px, 100px) rotateX(0deg);
+}
+#trains .train .window {
+  width: 100%;
+  height: 30px;
+  background: rgba(0, 100, 255, 0.3);
+  transform: translate(0px, -30px);
+}
+#trains .train .front {
+  width: 100px;
+  height: 50px;
+}
+#trains .train .front::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 15px;
+  height: 15px;
+  background: #b1e4ab;
+  border-radius: 100%;
+}
+#trains .train .front::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 15px;
+  height: 15px;
+  background: #b1e4ab;
+  border-radius: 100%;
+}
+#trains .train .front .connect {
+  width: 20px;
+  height: 50px;
+  transform-origin: 0% 0%;
+  transform: translate(40px, 41px) rotateX(90deg);
+  border-radius: 0 0 99px 99px;
+}
+#trains .train .left {
+  width: 200px;
+  height: 50px;
+  transform-origin: 0% 0%;
+  transform: translate(100px, 0px) rotateY(90deg);
+}
+#trains .train .left .window::before {
+  content: "";
+  position: absolute;
+  left: calc(70% - 10px);
+  height: 100%;
+  width: 20px;
+  background: linear-gradient(45deg, #0bc2a7 0%, #3df4d9 100%);
+}
+#trains .train .left .window::after {
+  content: "";
+  position: absolute;
+  left: calc(30% - 10px);
+  height: 100%;
+  width: 20px;
+  background: linear-gradient(45deg, #0bc2a7 0%, #3df4d9 100%);
+}
+#trains .train .right {
+  width: 200px;
+  height: 50px;
+  transform-origin: 0% 0%;
+  transform: translate(0px, 0px) rotateY(90deg);
+}
+#trains .train .right .window::before {
+  content: "";
+  position: absolute;
+  left: calc(70% - 10px);
+  height: 100%;
+  width: 20px;
+  background: linear-gradient(45deg, #0bc2a7 0%, #3df4d9 100%);
+}
+#trains .train .right .window::after {
+  content: "";
+  position: absolute;
+  left: calc(30% - 10px);
+  height: 100%;
+  width: 20px;
+  background: linear-gradient(45deg, #0bc2a7 0%, #3df4d9 100%);
+}
+#trains .train .back {
+  width: 100px;
+  height: 50px;
+  transform: translateZ(-200px);
+}
+#trains .train .back::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 15px;
+  height: 15px;
+  background: #b1e4ab;
+  border-radius: 100%;
+}
+#trains .train .back::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 15px;
+  height: 15px;
+  background: #b1e4ab;
+  border-radius: 100%;
+}
+#trains .train .back .connect {
+  width: 20px;
+  height: 50px;
+  transform-origin: 0% 0%;
+  transform: translate(40px, 40px) rotateX(-90deg);
+  border-radius: 0 0 99px 99px;
+}
+#trains .train .bottom {
+  width: 100px;
+  height: 200px;
+  transform-origin: 0% 0%;
+  transform: translate(0px, 50px) rotateX(-90deg);
+}
+#trains .train .top {
+  width: 100px;
+  height: 200px;
+  transform-origin: 0% 0%;
+  transform: translate(0px, -30px) rotateX(-90deg);
+}
+#trains .train .top .antena {
+  width: 60px;
+  height: 10px;
+  transform: translate3d(20px, 30px, -30px);
+}
+#trains .train .top .antena::before {
+  content: "";
+  position: absolute;
+  width: 30px;
+  height: 10px;
+  background: linear-gradient(45deg, #0bc2a7 0%, #3df4d9 100%);
+  transform-origin: 0% 0%;
+  transform: translate(30px, 0px) rotateY(-90deg);
+}
+#trains .train .top .antena_rear {
+  transform: translate3d(20px, 160px, -30px);
+}
+
+@keyframes drive {
+  0% {
+    transform: rotateX(-30deg) rotateY(0deg);
+  }
+  100% {
+    transform: rotateX(-30deg) rotateY(-1080deg);
+  }
+}
+@keyframes tonnel {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(1080deg);
+  }
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <div id="trains">
+  <div class="line"></div>
+  <div class="rail"></div>
+  <div class="tonnels">
+    <div class="tonnel">
+      <div class="parts">
+        <div class="top"></div>
+        <div class="left"></div>
+        <div class="right"></div>
+      </div>
+    </div>
+    <div class="tonnel">
+      <div class="parts">
+        <div class="top"></div>
+        <div class="left"></div>
+        <div class="right"></div>
+      </div>
+    </div>
+    <div class="tonnel">
+      <div class="parts">
+        <div class="top"></div>
+        <div class="left"></div>
+        <div class="right"></div>
+      </div>
+    </div>
+    <div class="tonnel">
+      <div class="parts">
+        <div class="top"></div>
+        <div class="left"></div>
+        <div class="right"></div>
+      </div>
+    </div>
+    <div class="tonnel">
+      <div class="parts">
+        <div class="top"></div>
+        <div class="left"></div>
+        <div class="right"></div>
+      </div>
+    </div>
+    <div class="tonnel">
+      <div class="parts">
+        <div class="top"></div>
+        <div class="left"></div>
+        <div class="right"></div>
+      </div>
+    </div>
+    <div class="tonnel">
+      <div class="parts">
+        <div class="top"></div>
+        <div class="left"></div>
+        <div class="right"></div>
+      </div>
+    </div>
+    <div class="tonnel">
+      <div class="parts">
+        <div class="top"></div>
+        <div class="left"></div>
+        <div class="right"></div>
+      </div>
+    </div>
+    <div class="tonnel">
+      <div class="parts">
+        <div class="top"></div>
+        <div class="left"></div>
+        <div class="right"></div>
+      </div>
+    </div>
+    <div class="tonnel">
+      <div class="parts">
+        <div class="top"></div>
+        <div class="left"></div>
+        <div class="right"></div>
+      </div>
+    </div>
+  </div>
+  <div class="train_wrapper">
+    <div class="train">
+      <div class="wrapper">
+        <div class="shadow">
+          <div class="inner"></div>
+        </div>
+        <div class="body">
+          <div class="front">
+            <div class="window"></div>
+            <div class="connect"></div>
+            <div class="go">蒲田</div>
+          </div>
+          <div class="left">
+            <div class="window"></div>
+          </div>
+          <div class="right">
+            <div class="window"></div>
+          </div>
+          <div class="back">
+            <div class="window"></div>
+            <div class="connect"></div>
+          </div>
+          <div class="top">
+            <div class="antena antena_front"></div>
+            <div class="antena antena_rear"></div>
+          </div>
+          <div class="bottom"></div>
+        </div>
+      </div>
+    </div>
+    <div class="train">
+      <div class="wrapper">
+        <div class="shadow">
+          <div class="inner"></div>
+        </div>
+        <div class="body">
+          <div class="front">
+            <div class="window"></div>
+            <div class="connect"></div>
+            <div class="go">蒲田</div>
+          </div>
+          <div class="left">
+            <div class="window"></div>
+          </div>
+          <div class="right">
+            <div class="window"></div>
+          </div>
+          <div class="back">
+            <div class="window"></div>
+            <div class="connect"></div>
+          </div>
+          <div class="top">
+            <div class="antena antena_front"></div>
+            <div class="antena antena_rear"></div>
+          </div>
+          <div class="bottom"></div>
+        </div>
+      </div>
+    </div>
+    <div class="train">
+      <div class="wrapper">
+        <div class="shadow">
+          <div class="inner"></div>
+        </div>
+        <div class="body">
+          <div class="front">
+            <div class="window"></div>
+            <div class="connect"></div>
+            <div class="go">蒲田</div>
+          </div>
+          <div class="left">
+            <div class="window"></div>
+          </div>
+          <div class="right">
+            <div class="window"></div>
+          </div>
+          <div class="back">
+            <div class="window"></div>
+            <div class="connect"></div>
+          </div>
+          <div class="top">
+            <div class="antena antena_front"></div>
+            <div class="antena antena_rear"></div>
+          </div>
+          <div class="bottom"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  
+  
+</body>
+
+</html>

@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>Kinematic Chains (arm) variations DOM/Canvas/SVG</title>
+
+    <link rel="canonical" href="https://codepen.io/BarbWire/pen/LERaBbw">
+  
+  <link rel="stylesheet" href="https://public.codepenassets.com/css/normalize-5.0.0.min.css">
+
+  
+  
+<style>
+:root {
+     --bg: #0e0f13;
+     --panel: #151824;
+     --inner: #0b0c10;
+     --muted: #9aa4b2;
+     --a: #4a90e2;
+     --b: #357ab8;
+     --c: #2c5f8a;
+}
+
+body {
+     margin: 0;
+     padding: 40px;
+     background: var(--bg);
+     color: white;
+     font-family: system-ui;
+}
+
+.container {
+     display: flex;
+     gap: 40px;
+     flex-wrap: wrap;
+}
+
+.panel {
+     width: 360px;
+     height: 520px;
+     background: var(--panel);
+     padding: 16px;
+     border-radius: 14px;
+     display: flex;
+     flex-direction: column;
+     gap: 12px;
+}
+
+.controlRow {
+     display: flex;
+     align-items: center;
+     gap: 10px;
+}
+
+.tag {
+     width: 50px;
+     font-size: 12px;
+     color: var(--muted);
+     text-transform: uppercase;
+}
+
+input[type="range"] {
+     flex: 1;
+     accent-color: var(--a);
+}
+
+.frame {
+     width: 360px;
+     height: 360px;
+     background: var(--inner);
+     border-radius: 12px;
+     position: relative;
+     overflow: hidden;
+}
+
+/* IMPORTANT: slotted root container styling */
+::slotted(.chain-root) {
+     position: absolute;
+     inset: 0;
+}
+
+/* These DO still work because they are light DOM classes */
+.segment {
+     position: absolute;
+     transform-origin: top center;
+}
+
+.upper {
+     width: 22px;
+     height: 90px;
+     top: 80px;
+     left: 169px;
+     background: var(--a);
+     border-radius: 11px;
+     /*svg*/
+     rx: 11px;
+     fill: #4a90e2;
+}
+
+.lower {
+     width: 20px;
+     height: 75px;
+     top: 90px;
+     background: var(--b);
+     border-radius: 10px;
+}
+
+.hand {
+     width: 18px;
+     height: 55px;
+     top: 74px;
+     background: var(--c);
+     border-radius: 9px;
+}
+
+canvas {
+     width: 360px;
+     height: 360px;
+     background: var(--inner);
+     border-radius: 12px;
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <!DOCTYPE html>
+<html>
+
+<head>
+     <meta charset="UTF-8" />
+     <title>Kinematic Chain Comparison</title>
+
+</head>
+
+<body>
+
+     <h3>Kinematic Chains (arm) Variations DOM/Canvas/SVG</h3>
+     <!-- Both demos use transforms (no trig):
+     DOM → CSS transform hierarchy
+     Canvas → manual transform stack -->
+     <div class="container">
+
+          <!-- DOM -->
+          <arm-demo title="DOM - hierarchical transforms (CSS)" id="domDemo">
+
+               <!-- IMPORTANT: single slotted root -->
+               <div slot="frame" class="chain-root">
+                    <div id="upper" class="segment upper">
+                         <div id="lower" class="segment lower">
+                              <div id="hand" class="segment hand"></div>
+                         </div>
+                    </div>
+               </div>
+
+          </arm-demo>
+
+          <!-- CANVAS -->
+          <arm-demo title="Canvas - Redraw (ctx.transform/rotate)" id="canvasDemo">
+               <canvas slot="frame" id="c" width="360" height="360"></canvas>
+          </arm-demo>
+
+          <arm-demo title="Canvas - State redraw (trigonometry)" id="canvasDemo2">
+               <canvas slot="frame" id="d" width="360" height="360"></canvas>
+          </arm-demo>
+
+          <arm-demo title="SVG - Nested Groups Transform" id="svgDemo">
+               <!-- TODO use classes here for attr -->
+               <svg slot="frame" id="svgArm" width="360" height="360" viewBox="0 0 360 360">
+                    <!-- SHOULDER -->
+                    <g id="svgUpper">
+                         <rect x="0" y="-11" width="90" height="22" rx="11" fill="#4a90e2" />
+                         <!-- ELBOW -->
+                         <g id="svgLower">
+                              <rect x="0" y="-10" width="75" height="20" rx="10" fill="#357ab8" />
+
+                              <!-- WRIST -->
+                              <g id="svgHand">
+                                   <rect x="0" y="-9" width="55" height="18" rx="9" fill="#2c5f8a" />
+                              </g>
+                         </g>
+                    </g>
+               </svg>
+
+          </arm-demo>
+
+     </div>
+
+</body>
+
+</html>
+  
+    <script id="rendered-js" >
+// TODO: UNIFY ALL shared values (shared across canvas instances)
+/*
+          CSS REQUIREMENTS (not shown here, but REQUIRED):
+
+          1) Each segment (#upper, #lower, #hand):
+             - must have a defined size (length = width, thickness = height)
+             - must be positioned (e.g. position: absolute)
+             - must use: transform-origin: left center
+               → this defines the rotation pivot ("joint")
+
+          2) Hierarchy (CRITICAL):
+             - #lower must be inside #upper
+             - #hand must be inside #lower
+             → transforms propagate automatically (like canvas transform stack)
+
+          3) Joint positioning:
+             - each child must be offset by its parent length (e.g. left = parent width)
+             → equivalent to canvas: translate(length, 0)
+
+          4) Base position:
+             - #upper must be placed at the arm origin (shoulder)
+
+          SUMMARY:
+          JS only updates angles via CSS `transform: rotate(...)`
+          CSS + DOM structure define geometry and movement behavior
+          */
+
+/* ================= DOM RENDERER ================= */
+const domDemo = document.getElementById("domDemo");
+// get once destructured
+// NOTE: elements must already be NESTED in the DOM:
+// #upper > #lower > #hand
+const parts = [
+domDemo.querySelector("#upper"),
+domDemo.querySelector("#lower"),
+domDemo.querySelector("#hand")];
+
+
+// only update target
+domDemo.addEventListener("change", e => {
+  const { index, value } = e.detail;
+  // Apply rotation via CSS (browser handles transform math)
+  parts[index].style.transform = `rotate(${value}deg)`;
+});
+/* ================= CANVAS RENDERER ================= */
+
+// Get canvas + context
+const canvasDemo = document.getElementById("canvasDemo");
+const canvas = canvasDemo.querySelector("#c");
+const ctx = canvas.getContext("2d");
+
+// Joint angles (degrees): [shoulder, elbow, wrist]
+const angles = [90, 90, 90];
+
+// Segment lengths (also act as transform offsets)
+const L1 = 90,
+L2 = 75,
+L3 = 55;
+
+// Base position of the arm (shoulder joint in world space)
+const baseX = 180,
+baseY = 80;
+
+/**
+ * Draws a single arm segment.
+ * Always drawn along +X axis starting at (0,0),
+ * so transforms (translate/rotate) determine final position.
+ */
+function drawSegment(len, thickness, color) {
+  ctx.beginPath();
+  ctx.roundRect(0, -thickness / 2, len, thickness, thickness / 2);
+  ctx.fillStyle = color;
+  ctx.fill();
+}
+
+/**
+ * Main render function.
+ * Uses hierarchical transforms:
+ * each segment is drawn relative to the previous one.
+ */
+function draw() {
+  ctx.clearRect(0, 0, 360, 360);
+
+  ctx.save(); // isolate all transforms
+
+  // === SHOULDER (root transform) ===
+  ctx.translate(baseX, baseY); // move to shoulder position
+  ctx.rotate((angles[0] + 90) * Math.PI / 180);
+  // +90 because segment is drawn horizontally, but we want "up" as default
+
+  drawSegment(L1, 22, "#4a90e2");
+
+  // Move origin to end of upper arm (elbow joint)
+  ctx.translate(L1, 0);
+
+  // === ELBOW (relative rotation) ===
+  ctx.rotate(angles[1] * Math.PI / 180);
+  drawSegment(L2, 20, "#357ab8");
+
+  // Move to wrist joint
+  ctx.translate(L2, 0);
+
+  // === WRIST (relative rotation) ===
+  ctx.rotate(angles[2] * Math.PI / 180);
+  drawSegment(L3, 18, "#2c5f8a");
+
+  ctx.restore(); // reset transform state
+}
+
+/**
+ * Update a single joint angle from UI event
+ * e.detail = { index: jointIndex, value: newAngle }
+ */
+canvasDemo.addEventListener("change", e => {
+  const { index, value } = e.detail;
+  angles[index] = value;
+  draw();
+});
+
+// Initial render
+draw();
+
+// CANVAS DEMO TRIG
+/* ================= CANVAS RENDERER (TRIG INSTANCE) ================= */
+
+const canvasDemo2 = document.getElementById("canvasDemo2");
+const canvas2 = canvasDemo2.querySelector("#d");
+const ctx2 = canvas2.getContext("2d");
+
+const TRIG = {
+  lengths: [90, 75, 55],
+  base: { x: 180, y: 80 },
+  angles: [0, 0, 0] // degrees
+};
+
+const widths = [22, 20, 18];
+const colors = ["#4a90e2", "#357ab8", "#2c5f8a"];
+
+// =================  KINEMATICS (trig) =================
+function solveChain(aDeg, L, base) {
+  let x = base.x;
+  let y = base.y;
+
+  let angle = 0;
+
+  const pts = [[x, y]];
+
+  for (let i = 0; i < 3; i++) {if (window.CP.shouldStopExecution(0)) break;
+    angle += aDeg[i] * Math.PI / 180;
+
+    // ONLY upper arm offset
+    if (i === 0) angle += Math.PI / 2;
+
+    x += Math.cos(angle) * L[i];
+    y += Math.sin(angle) * L[i];
+
+    pts.push([x, y]);
+  }window.CP.exitedLoop(0);
+
+  return pts;
+}
+
+// ================= ROUNDED RECT SEGMENT (NO transforms) =================
+function drawRoundedSegment(p1, p2, width, color) {
+  const dx = p2[0] - p1[0];
+  const dy = p2[1] - p1[1];
+
+  const len = Math.hypot(dx, dy);
+  const angle = Math.atan2(dy, dx);
+  const r = width / 2;
+
+  ctx2.save();
+
+  // move to start point
+  ctx2.translate(p1[0], p1[1]);
+  // rotate into segment direction
+  ctx2.rotate(angle);
+  // draw centered rounded rectangle
+  ctx2.fillStyle = color;
+  ctx2.beginPath();
+  ctx2.roundRect(0, -r, len, width, r);
+  ctx2.fill();
+
+  ctx2.restore();
+}
+
+// ================= RENDER =================
+function drawTrig() {
+  ctx2.clearRect(0, 0, 360, 360);
+
+  const pts = solveChain(TRIG.angles, TRIG.lengths, TRIG.base);
+
+  for (let i = 0; i < 3; i++) {if (window.CP.shouldStopExecution(1)) break;
+    drawRoundedSegment(pts[i], pts[i + 1], widths[i], colors[i]);
+  }window.CP.exitedLoop(1);
+}
+
+// ================= INPUT =================
+canvasDemo2.addEventListener("change", e => {
+  const { index, value } = e.detail;
+
+  TRIG.angles[index] = +value;
+
+  drawTrig();
+});
+
+drawTrig();
+
+// SVG - MY FAVOURITE
+// shared state
+const anglesSVG = [0, 0, 0];
+
+const joints = [
+{
+  el: document.getElementById("svgUpper"),
+  base: "translate(180,80)",
+  offset: 90 },
+
+{
+  el: document.getElementById("svgLower"),
+  base: "translate(90,0)",
+  offset: 0 },
+
+{
+  el: document.getElementById("svgHand"),
+  base: "translate(75,0)",
+  offset: 0 }];
+
+
+
+function updateSVG() {
+  for (let i = 0; i < joints.length; i++) {if (window.CP.shouldStopExecution(2)) break;
+    const { el, base, offset } = joints[i];
+    const angle = anglesSVG[i] + offset;
+    el.setAttribute("transform", `${base} rotate(${angle})`);
+  }window.CP.exitedLoop(2);
+}
+svgDemo.addEventListener("change", e => {
+  const { index, value } = e.detail;
+  anglesSVG[index] = value;
+  updateSVG();
+});
+updateSVG();
+// This is only the reuseable container
+/* ================= COMPONENT ================= */
+class ArmDemo extends HTMLElement {
+  connectedCallback() {
+    const title = this.getAttribute("title") || "";
+    this.attachShadow({
+      mode: "open" });
+
+    // append template once to head, clone
+    // create styleSheet, append once to head referenceing tag
+    this.shadowRoot.innerHTML = `
+      <style>
+       .controlRow {
+               display: flex;
+               align-items: center;
+               gap: 10px;
+          }
+
+          .tag {
+               width: 50px;
+               font-size: 12px;
+               color: var(--muted);
+               text-transform: uppercase;
+          }
+
+          input[type="range"] {
+               flex: 1;
+               accent-color: var(--a);
+          }
+
+          /* shared frame */
+          .frame {
+               width: 360px;
+               height: 360px;
+               background: var(--inner);
+               border-radius: 12px;
+               position: relative;
+               overflow: hidden;
+          }
+
+          /* DOM segments */
+          .segment {
+               border-radius: 50%;
+               position: absolute;
+               transform-origin: top center;
+          }
+
+        .panel {
+          width: 360px;
+          height: 520px;
+          background: var(--panel);
+          padding: 16px;
+          border-radius: 14px;
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+          color: white;
+        }
+
+        .frame {
+          width: 360px;
+          height: 360px;
+          background: var(--inner);
+          border-radius: 12px;
+          overflow: hidden;
+          position: relative;
+        }
+
+        /* slotted root styling (THIS is correct usage) */
+        ::slotted(.chain-root) {
+          position: absolute;
+          inset: 0;
+        }
+      </style>
+
+      <div class="panel">
+        <h3>${title}</h3>
+
+        <div class="controlRow">
+          <div class="tag">upper</div>
+          <input data-joint="0" type="range" min="-180" max="180" value="0">
+        </div>
+
+        <div class="controlRow">
+          <div class="tag">lower</div>
+          <input data-joint="1" type="range" min="-180" max="180" value="0">
+        </div>
+
+        <div class="controlRow">
+          <div class="tag">hand</div>
+          <input data-joint="2" type="range" min="-180" max="180" value="0">
+        </div>
+
+        <div class="frame">
+          <slot name="frame"></slot>
+        </div>
+      </div>
+    `;
+    this.inputs = [...this.shadowRoot.querySelectorAll("input")];
+    this.inputs.forEach((input) =>
+    input.addEventListener("input", e => this.onInput(e)));
+
+    queueMicrotask(() => {
+      this.inputs.forEach(input => {
+        input.dispatchEvent(
+        new Event("input", {
+          bubbles: true }));
+
+
+      });
+    });
+  }
+  onInput(e) {
+    const index = +e.target.dataset.joint;
+    this.dispatchEvent(
+    new CustomEvent("change", {
+      detail: {
+        index,
+        value: +e.target.value },
+
+      bubbles: true }));
+
+
+  }}
+
+customElements.define("arm-demo", ArmDemo);
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>
