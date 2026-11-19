@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>CSS 3D Treasures</title>
+
+    <link rel="canonical" href="https://codepen.io/rukh/pen/jbMrmo">
+  
+  
+  
+  
+<style>
+body{
+  background-color: #000;
+  overflow: hidden;
+}
+#container{
+  width: 600px;
+  height: 600px;
+  margin: auto;
+  perspective: 920px;
+}
+#container *:not(face):not(svg) {
+  transform-style: preserve-3d;
+}
+#wrap{
+  width: 600px;
+  height: 600px;
+  transform: rotateX(60deg) rotateZ(-60deg);
+  transform-origin: center center 32px;
+}
+treasure{
+  width: 200px;
+  height: 200px;
+  display: block;
+  float: left;
+  box-shadow: inset 0 0 0 2px #8F6;
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <div id="container">
+  <div id="wrap">
+    <treasure></treasure>
+    <treasure></treasure>
+    <treasure></treasure>
+    <treasure></treasure>
+    <treasure></treasure>
+    <treasure></treasure>
+    <treasure></treasure>
+    <treasure></treasure>
+    <treasure></treasure>
+  </div>
+</div>
+  <script src='https://codepen.io/rukh/pen/EVBBVo.js'></script>
+    <script id="rendered-js" >
+var l = 160, //length
+w = 80, //width
+h = 120, //height
+open = 80, //open treasure
+color = '#000';
+
+var hL = w / 2, //height of lid
+hC = h - hL > 0 ? h - hL : 0, //height of crate
+wC = (w * .2588).toFixed(2), //part of cap
+cC = (w * .483).toFixed(1); //center of cap
+
+var style = document.getElementsByTagName('style')[0],
+container = document.getElementById('container'),
+wrap = document.getElementById('wrap'),
+T = document.getElementsByTagName('treasure');
+
+
+//My CSS preprocesor:
+//String snippets:
+
+
+var String1 = "";
+for (var i = 0; i < 6; ++i) {if (window.CP.shouldStopExecution(0)) break;
+  String1 += `.lid > face:nth-child(${i + 1}){
+  transform: translateY(${(hL - wC / 2).toFixed(1)}px) rotateX(${i * 30 - 75}deg) translateZ(${cC}px)
+}
+`;
+}window.CP.exitedLoop(0);
+
+var String2 = "";
+for (var i = 0; i < T.length; ++i) {if (window.CP.shouldStopExecution(1)) break;
+  String2 += `#T${i + 1}:checked ~ #wrap > treasure:nth-child(${i + 1}) .lid,\n`;
+}window.CP.exitedLoop(1);
+String2 = String2.slice(0, -2);
+String2 += `
+{ transform: translateZ(${hC}px) rotateX(${open}deg); }
+`;
+
+style.innerHTML += `
+treasure *{
+  position: absolute;
+}
+
+input{
+  display: none;
+}
+
+.chest{
+  left: ${(T[0].offsetWidth - l) / 2}px;
+  top: ${(T[0].offsetWidth - w) / 2}px;
+}
+
+face{
+  display: block;
+  transform-origin: center;
+  background-color: ${color};
+}
+
+.crate > face{
+  box-shadow: inset 0 0 0 4px #40F;
+}
+
+.crate > face:nth-child(3n-2){
+  width: ${l}px;
+  height: ${w}px;
+}
+
+.crate > face:nth-child(3n-1){
+  width: ${l}px;
+  height: ${hC}px;
+}
+
+.crate > face:nth-child(3n){
+  width: ${w}px;
+  height: ${hC}px;
+}
+
+.crate > face:nth-child(1){ transform: rotateX(180deg)}
+.crate > face:nth-child(2){ transform: translate3d(0,${w - hC / 2}px,${hC / 2}px) rotateX(-90deg) }
+.crate > face:nth-child(3){ transform: translate3d(-${w / 2}px,${(w - hC) / 2}px,${hC / 2}px) rotate(-90deg) rotateX(90deg) }
+.crate > face:nth-child(4){ transform: translateZ(${hC}px); background-color: transparent; }
+.crate > face:nth-child(5){ transform: translate3d(0,-${hC / 2}px,${hC / 2}px) rotateX(90deg) }
+.crate > face:nth-child(6){ transform: translate3d(${l - w / 2}px,${(w - hC) / 2}px,${hC / 2}px) rotate(90deg) rotateX(90deg) }
+
+.lid{
+  transform: translateZ(${hC}px);
+  transition: 400ms ease-out;
+}
+
+.lid > face{
+  width: ${l}px;
+  height: ${wC}px;
+  box-shadow: inset 0 0 0 4px #09F;
+}
+
+${String1}
+.lid > svg{
+  width:${w}px;
+  height:${hL}px;
+}
+
+.lid > svg:first-of-type{ transform: translateX(${l - hL}px) translateY(${hL / 2}px) translateZ(${hL / 2}px) rotate(-90deg) rotateX(-90deg)}
+.lid > svg:last-of-type{ transform: translateX(${-hL}px) translateY(${hL / 2}px) translateZ(${hL / 2}px) rotate(90deg) rotateX(-90deg)}
+${String2}
+`;
+
+//svg def start------
+var svgns = 'http://www.w3.org/2000/svg',
+svgxlink = 'http://www.w3.org/1999/xlink',
+svgdefs = document.createElementNS(svgns, 'svg');
+svgdefs.setAttribute('display', 'none');
+document.body.insertBefore(svgdefs, container);
+
+var path = document.createElementNS(svgns, 'path');
+path.id = 'side';
+var pC1 = (w / 15).toFixed(2);
+var pC2 = (w / 4).toFixed(2);
+path.setAttribute('d',
+'M' + 0 + ',' + hL +
+'L' + pC1 + ',' + pC2 +
+' ' + pC2 + ',' + pC1 +
+' ' + hL + ',' + 0 +
+' ' + pC2 * 3 + ',' + pC1 +
+' ' + pC1 * 14 + ',' + pC2 +
+' ' + w + ',' + hL + 'Z');
+path.setAttribute('fill', color);
+path.setAttribute('stroke', '#02F');
+path.setAttribute('stroke-width', '2px');
+//path.setAttribute('stroke-alignment','inner'); //Not supported
+svgdefs.appendChild(path);
+//svg def end------
+
+for (var i = 0; i < T.length; ++i) {if (window.CP.shouldStopExecution(2)) break;
+
+  var input = document.createElement('input');
+  input.setAttribute('type', 'checkbox');
+  input.id = 'T' + (i + 1);
+  container.insertBefore(input, wrap);
+
+  var chest = document.createElement('label');
+  chest.setAttribute('for', 'T' + (i + 1));
+  chest.className = 'chest';
+  T[i].appendChild(chest);
+
+  var crate = document.createElement('div');
+  crate.className = 'crate';
+  chest.appendChild(crate);
+
+  var lid = document.createElement('div');
+  lid.className = 'lid';
+  chest.appendChild(lid);
+
+  for (var j = 0; j < 6; ++j) {if (window.CP.shouldStopExecution(3)) break;
+    var face = document.createElement('face');
+    crate.appendChild(face);
+  }window.CP.exitedLoop(3);
+  for (var j = 0; j < 6; ++j) {if (window.CP.shouldStopExecution(4)) break;
+    var face = document.createElement('face');
+    lid.appendChild(face);
+  }window.CP.exitedLoop(4);
+  for (var j = 0; j < 2; ++j) {if (window.CP.shouldStopExecution(5)) break;
+    var lidSide = document.createElementNS(svgns, 'svg');
+    lid.appendChild(lidSide);
+    var lidPath = document.createElementNS(svgns, 'use');
+    lidPath.setAttributeNS(svgxlink, 'href', '#side');
+    lidSide.appendChild(lidPath);
+  }window.CP.exitedLoop(5);
+}
+
+// + orbital script:
+// codepen.io/rukh/pen/EVBBVo
+window.CP.exitedLoop(2);
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>
