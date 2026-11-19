@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>Vending Machine</title>
+
+    <link rel="canonical" href="https://codepen.io/mayuk/pen/VwppeEb">
+  
+  
+  
+  
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #537895;
+  background-image: linear-gradient(315deg, #537895 0%, #09203f 74%);
+  height: calc(100vh - 17px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  height: 520px;
+}
+
+#vending-machine {
+  width: 900px;
+  height: 520px;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: #6a93cb;
+  margin: 0 auto;
+  position: relative;
+  border-radius: 15px;
+  box-shadow: -3px -3px 5px #ffffff70, 3px 3px 5px rgba(0, 0, 0, 0.5);
+}
+
+.glass-panel {
+  position: absolute;
+  width: calc(65% - 8px);
+  height: calc(100% - 40px);
+  z-index: 4;
+  top: 19px;
+  left: 19px;
+  border-radius: 15px;
+  background: rgba(0, 0, 0, 0.0525);
+  border: 2px solid rgba(0, 0, 0, 0.15);
+}
+.glass-panel .glass-shine {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  border-radius: 15px;
+}
+.glass-panel .glass-shine::before, .glass-panel .glass-shine::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+}
+.glass-panel .glass-shine::before {
+  top: -125%;
+  right: 0;
+  bottom: -108%;
+  left: -30%;
+  transform-origin: 100% 50%;
+  background-image: linear-gradient(to left, transparent 10%, rgba(255, 255, 255, 0.04) 10%, rgba(255, 255, 255, 0.07) 15%, transparent 15%, transparent 20%, rgba(255, 255, 255, 0.06) 20%, rgba(255, 255, 255, 0.1) 25%, transparent 25%), linear-gradient(to left, rgba(0, 0, 0, 0) 0.5%, rgba(0, 0, 0, 0.4) 130%);
+  transform: translate(0%, 16.6666666667%) rotate(45deg);
+  transition: transform 550ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+#display {
+  width: 65%;
+  height: 500px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.02);
+  box-shadow: inset -2px -2px 7px #ffffff25, inset 3px 3px 6px rgba(0, 0, 0, 0.4);
+}
+
+.product {
+  width: calc(16.667% - 25px);
+  height: 130px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  margin: 10px;
+  color: #ffffff90;
+  background-color: #6a93cb;
+  border-radius: 5px;
+  border: none;
+  box-shadow: -2px -2px 3px #ffffff35, 4px 4px 5px rgba(0, 0, 0, 0.3);
+  font-weight: 500;
+  font-size: 16px;
+  outline: none;
+  transition: all 200ms;
+}
+
+.product.active {
+  background: #1b62c460;
+  box-shadow: -4px -5px 10px #ffffff35, 5px 6px 10px rgba(0, 0, 0, 0.3);
+  width: calc(16.667% - 15px);
+  height: 140px;
+}
+
+img {
+  width: auto;
+  height: 60%;
+}
+
+#controls {
+  width: calc(35% - 40px);
+  display: flex;
+  flex-direction: column;
+}
+
+#mini-display {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-family: "Orbitron", sans-serif;
+  width: calc(100% - 30px);
+  height: 100px;
+  border-radius: 10px;
+  color: #ffffff85;
+  text-align: center;
+  white-space: pre-line;
+  padding: 12px 8px;
+  background: rgba(255, 222, 239, 0.09);
+  box-shadow: inset -2px -2px 4px #ffffff20, inset 2px 2px 6px rgba(0, 0, 0, 0.4);
+}
+#mini-display .main-text {
+  font-size: 0.85em;
+}
+#mini-display .sub-text {
+  display: flex;
+  justify-content: space-around;
+  font-size: 0.8em;
+}
+
+#keyboard {
+  width: 100%;
+  height: 400px;
+  padding-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.operator,
+.big-button,
+.small-button {
+  width: calc(33% - 20px);
+  height: 60px;
+  margin: 10px;
+  color: #ffffff85;
+  background-color: #6786bf4f;
+  border-radius: 10px;
+  border: none;
+  box-shadow: -2px -2px 6px #ffffff70, 4px 4px 9px rgba(0, 0, 0, 0.4);
+  font-weight: 500;
+  font-size: 16px;
+  outline: none;
+  cursor: pointer;
+}
+
+.big-button {
+  width: calc(50% - 20px);
+}
+
+.small-button {
+  height: 40px;
+}
+
+.operator:active,
+.big-button:active,
+.small-button:active {
+  font-size: 13px;
+  box-shadow: inset -3px -3px 7px #ffffff45, inset 3px 3px 5px rgba(0, 0, 0, 0.4);
+}
+
+.cancel {
+  background: #ff6d6d4f;
+}
+
+.purchase {
+  background: #4eadb24f;
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  <html>
+
+<head>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+  <div id="root"></div>
+</body>
+
+</html>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/react/16.10.1/umd/react.production.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.10.1/umd/react-dom.production.min.js'></script>
+    <script id="rendered-js" >
+const App = () => {
+  //   States
+  const [row, setRow] = React.useState("");
+  const [col, setCol] = React.useState("");
+  const [amountReq, setAmountReq] = React.useState(0);
+  const [amountEntered, setAmountEntered] = React.useState(0);
+  const [message, setMessage] = React.useState(
+  "Please select an item from the showcase");
+
+  const [selected, setSelected] = React.useState("");
+
+  //   Populates the products list
+  const populateProducts = () => {
+    let products = [];
+    let rows = ["A", "B", "C"];
+    for (let x = 0; x < rows.length; x++) {if (window.CP.shouldStopExecution(0)) break;
+      for (let cols = 1; cols <= 6; cols++) {if (window.CP.shouldStopExecution(1)) break;
+        products.push( /*#__PURE__*/
+        React.createElement("div", {
+          id: `${rows[x]}${cols}`,
+          class:
+          selected === `${rows[x]}${cols}` ? "product active" : "product " }, /*#__PURE__*/
+
+
+        React.createElement("img", { src: "https://pngimg.com/uploads/cocacola/coca_cola_PNG8899.png" }),
+        rows[x],
+        cols));
+
+
+      }window.CP.exitedLoop(1);
+    }window.CP.exitedLoop(0);
+
+    return products;
+  };
+
+  //   Populates the number buttons
+  const populateNumberButton = () => {
+    let buttons = [];
+    for (let cols = 1; cols <= 6; cols++) {if (window.CP.shouldStopExecution(2)) break;
+      buttons.push( /*#__PURE__*/
+      React.createElement("button", { class: "operator", onClick: () => setCol(cols) },
+      cols));
+
+
+    }window.CP.exitedLoop(2);
+
+    return buttons;
+  };
+
+  const populateMoneyButtons = () => {
+    let allowedCoins = {
+      QUARTER: 25,
+      DIME: 10,
+      NICKEL: 5 };
+
+    let buttons = [];
+    Object.keys(allowedCoins).map(type => {
+      buttons.push( /*#__PURE__*/
+      React.createElement("button", { class: "small-button", onClick: () => insertMoney(type) }, "\xA2 ",
+      allowedCoins[type]));
+
+
+    });
+
+    return buttons;
+  };
+
+  const insertMoney = coin => {
+    switch (coin) {
+      case "QUARTER":
+        setAmountEntered(amountEntered + 25);
+        break;
+      case "DIME":
+        setAmountEntered(amountEntered + 10);
+        break;
+      default:
+        setAmountEntered(amountEntered + 5);}
+
+  };
+
+  const cancelTransaction = () => {
+    setMessage(`Visit us again, amount returned - $ ${amountEntered / 100}`);
+    setAmountReq(0);
+    setAmountEntered(0);
+    setRow("");
+    setCol("");
+    setTimeout(() => {
+      setMessage("Please select an item from the showcase");
+    }, 5000);
+  };
+
+  const purchaseTransaction = () => {
+    if (!row || !col) {
+      return setMessage(
+      `No Product selected, please make a selection from the showcase`);
+
+    }
+    if (amountReq > amountEntered / 100) {
+      return setMessage(
+      `Insufficient amount. Please enter additional amount or cancel to abort transaction.`);
+
+    }
+    let change = amountEntered / 100 - amountReq;
+    setMessage(
+    `Please collect your product ${row}${col}, collect your change $ ${change.toFixed(
+    2)
+    }. Thank you for shopping with us`);
+
+    setAmountReq(0);
+    setAmountEntered(0);
+    setRow("");
+    setCol("");
+    setTimeout(() => {
+      setMessage("Please select an item from the showcase");
+    }, 5000);
+  };
+
+  const displayMessage = () => {
+    let view = /*#__PURE__*/
+    React.createElement(React.Fragment, null, /*#__PURE__*/
+    React.createElement("div", { class: "main-text" }, message), /*#__PURE__*/
+    React.createElement("div", { class: "sub-text" }, /*#__PURE__*/
+    React.createElement("div", null, "Item : ",
+    row,
+    col), /*#__PURE__*/
+
+    React.createElement("div", null, "Amount Inserted : $  ", amountEntered / 100)));
+
+
+
+
+    return view;
+  };
+
+  React.useEffect(() => {
+    setSelected(`${row}${col}`);
+    if (row && col) {
+      switch (row) {
+        case "A":
+          setAmountReq(0.5);
+          setMessage(`Price of the item $0.50`);
+          break;
+        case "B":
+          setAmountReq(0.75);
+          setMessage(`Price of the item $0.75`);
+          break;
+        default:
+          setAmountReq(1.0);
+          setMessage(`Price of the item $1.00`);}
+
+    }
+  }, [row, col]);
+
+  return /*#__PURE__*/(
+    React.createElement("div", { class: "container" }, /*#__PURE__*/
+    React.createElement("div", { id: "vending-machine" }, /*#__PURE__*/
+    React.createElement("div", { class: "glass-panel" }, /*#__PURE__*/
+    React.createElement("div", { class: "glass-shine" })), /*#__PURE__*/
+
+    React.createElement("div", { id: "display" }, populateProducts()), /*#__PURE__*/
+    React.createElement("div", { id: "controls" }, /*#__PURE__*/
+    React.createElement("div", { id: "mini-display" }, displayMessage()), /*#__PURE__*/
+    React.createElement("div", { id: "keyboard" }, /*#__PURE__*/
+    React.createElement("button", {
+      class: "operator",
+      onClick: () => {
+        setCol("");
+        setRow("A");
+      } }, "A"), /*#__PURE__*/
+
+
+
+    React.createElement("button", {
+      class: "operator",
+      onClick: () => {
+        setCol("");
+        setRow("B");
+      } }, "B"), /*#__PURE__*/
+
+
+
+    React.createElement("button", {
+      class: "operator",
+      onClick: () => {
+        setCol("");
+        setRow("C");
+      } }, "C"),
+
+
+
+    populateNumberButton(),
+    populateMoneyButtons(), /*#__PURE__*/
+    React.createElement("button", { class: "big-button cancel", onClick: cancelTransaction }, "Cancel"), /*#__PURE__*/
+
+
+    React.createElement("button", { class: "big-button purchase", onClick: purchaseTransaction }, "Purchase"))))));
+
+
+
+
+
+
+
+};
+
+ReactDOM.render( /*#__PURE__*/React.createElement(App, null), document.getElementById("root"));
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>

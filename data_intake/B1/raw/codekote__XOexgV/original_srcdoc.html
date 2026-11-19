@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>SVG interactive sunset animation</title>
+
+    <link rel="canonical" href="https://codepen.io/codekote/pen/XOexgV">
+  
+  <link rel="stylesheet" href="https://public.codepenassets.com/css/reset-2.0.min.css">
+
+  
+  
+<style>
+body {
+        margin: 0;
+        padding: 0;
+        background-color: #EBE3F2;
+}
+      #doc {
+          display: -webkit-box;
+          display: -moz-box;
+          display: -ms-flexbox;
+          display: -webkit-flex;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          height: 100%;
+      }
+
+        #doc #flex {
+          margin-top:10%;
+            width: 300px;
+            height: 320px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 18px 100px 0 rgba(99,89,128,0.71); 
+            -webkit-transition: box-shadow 0.35s ease-in-out 0s;
+            -moz-transition: box-shadow 0.35s ease-in-out 0;
+            -o-transition: box-shadow 0.35s ease-in-out 0;
+            transition: box-shadow 0.35s ease-in-out 0;  
+            z-index: 100;
+          
+        }
+
+        #doc #flex:hover {
+            width: 300px;
+            height: 320px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 18px 100px 0 rgba(233,130,157,1);
+            -webkit-transition: box-shadow 0.35s ease-in-out 0;
+            -moz-transition: box-shadow 0.35s ease-in-out 0;
+            -o-transition: box-shadow 0.35s ease-in-out 0;
+            transition: box-shadow 0.35s ease-in-out 0;   
+            z-index: 100;
+        }
+        svg {
+            display: block;
+            z-index: 0;
+        }
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <div id="doc">
+        <div id="flex">
+            <svg width="300px" height="320px" viewBox="0 0 300 320" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="svg">
+                <defs>
+                    <radialGradient cx="50%" cy="100%" fx="50%" fy="100%" r="100%" gradientTransform="translate(0.5,1),scale(1,1),rotate(0),translate(-0.5,-1)" id="bg_color">
+                        <stop class="stop-1" stop-color="#FCEE89" offset="0%"></stop>
+                        <stop class="stop-2" stop-color="#F7918B" offset="50%"></stop>
+                        <stop class="stop-3" stop-color="#5B5D8B" offset="100%"></stop>
+                    </radialGradient>
+                    
+                    <filter x="-100%" y="-100%" width="320%" height="320%" filterUnits="objectBoundingBox" id="sun-filter">
+                        <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+                        <feGaussianBlur stdDeviation="35" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+                        <feColorMatrix values="0 0 0 0 1   0 0 0 0 1   0 0 0 0 0.8   0 0 0 1 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+                    </filter>
+                    <linearGradient x1="0%" y1="100%" x2="0%" y2="0%" id="lrock_color">
+                            <stop stop-color="#85728F" offset="0%" class="stop-0"></stop>
+                            <stop stop-color="#59517C" offset="100%" class="stop-1"></stop>
+                        </linearGradient>
+                    <linearGradient x1="0%" y1="100%" x2="0%" y2="0%" id="rrock_color">
+                        <stop stop-color="#A68893" offset="0%" class="stop-0"></stop>
+                        <stop stop-color="#7C567C" offset="100%" class="stop-1"></stop>
+                    </linearGradient>
+                </defs>
+                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <g transform="translate(-32.000000, 0.000000)">
+                        <rect id="bg" fill="url(#bg_color)" fill-rule="evenodd" x="32" y="0" width="300" height="320"></rect>
+                        <g id="stars" stroke-width="1" fill="#FFFFFF" fill-rule="evenodd" transform="translate(47.000000, 5.000000)" fill-opacity="1">
+                            <polygon points="56.5 31 57.2142857 29.2142857 59 28.5 57.2142857 27.7857143 56.5 26 55.7857143 27.7857143 54 28.5 55.7857143 29.2142857"></polygon>
+                            <polygon points="107.5 23 108.214286 21.2142857 110 20.5 108.214286 19.7857143 107.5 18 106.785714 19.7857143 105 20.5 106.785714 21.2142857"></polygon>
+                            <circle cx="60.5" cy="0.5" r="1"></circle>
+                            <circle cx="0.5" cy="38.5" r="1"></circle>
+                            <circle cx="22.5" cy="10.5" r="1"></circle>
+                            <circle cx="156.5" cy="21.5" r="1"></circle>
+                            <circle cx="134.5" cy="3.5" r="1"></circle>
+                            <circle cx="207.5" cy="7.5" r="1"></circle>
+                            <circle cx="273.5" cy="46.5" r="1"></circle>
+                            <circle cx="192.5" cy="34.5" r="1"></circle>
+                            <circle cx="90.5" cy="50.5" r="1"></circle>
+                            <circle cx="258.5" cy="9.5" r="1"></circle>
+                        </g>
+                        <g id="cloud3" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(247.000000, 115.000000)" >
+                            <path d="M62.5,20.5 C86,20.5 115,22.8655148 115,16 C115,9.1344852 84,0 62.5,0 C41,6.06552813e-16 21,11.0928677 21,16 C21,20.9071323 39,20.5 62.5,20.5 Z" id="cloud3_1" fill="#ECD9E5" opacity="0.6"></path>
+                            <path d="M40,28 C58.5,28 74,29.1018659 74,23.6666667 C74,18.2314674 38.4255319,13 21.5,13 C4.57446809,13 9.26416875e-16,19.7818536 0,23.6666667 C0,27.5514797 21.5,28 40,28 Z" id="cloud3_2" fill="#ECD9E5" opacity="0.2" transform="translate(37.000000, 20.545851) scale(-1, 1) translate(-37.000000, -20.545851) "></path>
+                        </g>
+                        <g id="cloud2" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(203.000000, 52.000000)" >
+                            <path d="M31.1750002,16.5 C54.6750002,16.5 89.0546512,12.0237341 95.6750002,8.5 C102.295349,4.97626588 83.6750002,0 62.1750002,0 C40.6750002,7.04297731e-16 8.07736398,5.09229024 1.67500019,8.5 C-4.7273636,11.9077098 7.67500019,16.5 31.1750002,16.5 Z" id="cloud2_1" fill="#ECD9E5" opacity="0.6"></path>
+                            <path d="M70.3128476,24.5 C54.4968486,24.5 45.2064646,21.8901137 38.3128476,17.0012248 C31.4192305,12.1123359 53.0899034,8 70.3128476,8 C87.5357917,8 115.812848,12.6453067 107.312848,17.0012248 C98.8128476,21.3571429 86.1288465,24.5 70.3128476,24.5 Z" id="cloud2_2" fill="#ECD9E5" opacity="0.2"></path>
+                        </g>
+                        <g id="cloud1" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(0.000000, 71.000000)" >
+                            <path d="M49.0053191,23.7357211 C76.7553191,23.7357211 111,25.412155 111,17.4023877 C111,12.93743 105.471237,2.52858854 87,0.235721065 C72.3353555,-1.58462728 42.7653216,7.73572107 31,7.73572107 C4.41535922,7.73572107 1.38969777e-15,11.6774001 0,17.4023877 C0,23.1273754 21.2553191,23.7357211 49.0053191,23.7357211 Z" id="cloud1_1" fill="#ECD9E5" opacity="0.6"></path>
+                            <path d="M90.5265957,37 C111.776596,37 138,35.9600552 138,29.6666667 C138,23.3732781 109.968085,15 90.5265957,15 C71.0851064,15 53,25.1684621 53,29.6666667 C53,34.1648713 69.2765957,37 90.5265957,37 Z" id="cloud1_2" fill="#ECD9E5" opacity="0.2" transform="translate(95.500000, 26.000000) scale(-1, 1) translate(-95.500000, -26.000000) "></path>
+                        </g>
+                        <g id="sun" >
+                            <circle id="sun_path" fill="#FFFCF2" cx="182" cy="254" r="50"></circle>
+                            <use fill-opacity="1" filter="url(#sun-filter)" xlink:href="#sun_path"></use>
+                        </g>
+                        <path d="M154,241.5 C163.752561,231.81731 171.419228,224.650643 177,220 C182.580772,215.349357 191.914105,208.349357 205,199 L235.5,227.5 C249.796785,231.259139 258.296785,234.592472 261,237.5 C263.703215,240.407528 287.369882,267.907528 332,320 L154,320 L154,241.5 Z" id="rrock" fill="url(#rrock_color)" fill-rule="evenodd" transform="translate(243.000000, 259.500000) scale(-1, 1) translate(-243.000000, -259.500000) "></path>
+                        <path d="M32,197.589226 C36.5130217,196.803407 40.6796883,195.967268 44.5,195.080808 C48.3203117,194.194348 61.9869783,186.167412 85.5,171 C89.1666667,175.347924 93,178.525253 97,180.531987 C101,182.538721 107,184.378227 115,186.050505 L154,218.659933 C156.963707,221.208562 170.5,223.676768 173.5,225.181818 C176.5,226.686869 204,249.262626 222,263.309764 C230.843147,270.210926 252.843147,289.107671 288,320 L32,320 L32,197.589226 Z" id="lrock" fill="url(#lrock_color)" fill-rule="evenodd"></path>
+                    </g>
+                </g>
+            </svg>
+        </div>
+    </div>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/svg.js/3.0.11/svg.min.js'></script>
+    <script id="rendered-js" >
+var doc = document.getElementById('flex');
+var stars = SVG.adopt(document.getElementById('stars'));
+var lrock = SVG.adopt(document.getElementById('lrock'));
+var rrock = SVG.adopt(document.getElementById('rrock'));
+var lrock_stop_0 = SVG('#lrock_color .stop-0');
+var lrock_stop_1 = SVG('#lrock_color .stop-1');
+var rrock_stop_0 = SVG('#rrock_color .stop-0');
+var rrock_stop_1 = SVG('#rrock_color .stop-1');
+var cloud1 = SVG.adopt(document.getElementById('cloud1'));
+var cloud2 = SVG.adopt(document.getElementById('cloud2'));
+var cloud3 = SVG.adopt(document.getElementById('cloud3'));
+var cloud1_1 = SVG.adopt(document.getElementById('cloud1_1'));
+var cloud2_1 = SVG.adopt(document.getElementById('cloud2_1'));
+var cloud3_1 = SVG.adopt(document.getElementById('cloud3_1'));
+var sun_path = SVG.adopt(document.getElementById('sun_path'));
+var bg_color = SVG.adopt(document.getElementById('bg_color'));
+
+
+var a_time = { duration: 350, ease: '<>' };
+
+doc.onmouseenter = doc.onmouseleave = handler;
+function handler(event) {
+  if (event.type == 'mouseenter') {
+    stars.animate(a_time).attr('fill-opacity', '0');
+    cloud1.animate(a_time).move(-60, 0);
+    cloud2.animate(a_time).move(70, 0);
+    cloud3.animate(a_time).move(70, 0);
+    lrock.animate(a_time).move(-20, 171);
+    rrock.animate(a_time).move(130, 200);
+    lrock_stop_0.animate(a_time).update('0%', '#D37F80');
+    lrock_stop_1.animate(a_time).update('100%', '#966B80');
+    rrock_stop_0.animate(a_time).update('0%', '#E18F90');
+    rrock_stop_1.animate(a_time).update('100%', '#B08499');
+
+
+    cloud1_1.animate(a_time).attr({ fill: '#fff', 'opacity': '1' });
+    cloud2_1.animate(a_time).attr({ fill: '#fff', 'opacity': '1' });
+    cloud3_1.animate(a_time).attr({ fill: '#fff', 'opacity': '1' });
+    sun_path.animate(a_time).attr({ cx: "182", cy: "122" });
+    bg_color.animate(a_time).attr({ fy: "40%", cy: "40%" });
+
+
+  }
+  if (event.type == 'mouseleave') {
+    stars.animate(a_time).attr('fill-opacity', '1');
+    cloud1.animate(a_time).move(0, 0);
+    cloud2.animate(a_time).move(0, 0);
+    cloud3.animate(a_time).move(0, 0);
+    lrock.animate(a_time).move(0, 171);
+    rrock.animate(a_time).move(150, 200);
+    lrock_stop_0.animate(a_time).update('0%', '#85728F');
+    lrock_stop_1.animate(a_time).update('100%', '#59517C');
+    rrock_stop_0.animate(a_time).update('0%', '#A68893');
+    rrock_stop_1.animate(a_time).update('100%', '#7C567C');
+    cloud1_1.animate(a_time).attr({ fill: '#ECD9E5', 'opacity': '0.6' });
+    cloud2_1.animate(a_time).attr({ fill: '#ECD9E5', 'opacity': '0.6' });
+    cloud3_1.animate(a_time).attr({ fill: '#ECD9E5', 'opacity': '0.6' });
+    sun_path.animate(a_time).attr({ cx: "182", cy: "254" });
+    bg_color.animate(a_time).attr({ fy: "100%", cy: "100%" });
+  }
+}
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>
