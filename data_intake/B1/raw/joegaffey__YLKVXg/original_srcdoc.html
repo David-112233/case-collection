@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>Street 3D CSS</title>
+
+    <link rel="canonical" href="https://codepen.io/joegaffey/pen/YLKVXg">
+  
+  
+  
+  
+<style>
+body{
+  margin: 0;
+  overflow: hidden;
+  background-color: #222;
+}
+input{
+  display: none;
+}
+#container{
+  position: relative;
+  margin: auto;
+  margin-top: 10vmin;
+  width: 80vmin;
+  height: 80vmin;
+  perspective: 140vmin;
+  pointer-events: visible;
+  transform-style: preserve-3d;
+}
+#container *{
+  position: absolute;
+}
+#container *:not(path){
+  transform-style: preserve-3d;
+}
+label{
+  display: block;
+  background-size: 100% 100%;
+}
+#wrap{
+  transform-origin: 40vmin 40vmin;
+  transform: rotateX(60deg) rotate(-45deg) translate3d(-200vmin, -100vmin, -60vmin);
+}
+#ground{
+  transform: translateZ(-20vmin);
+  width: 3000vmin;
+  height: 3000vmin;
+  left: 0vmin;
+  top: 10vmin;  
+  background-color: #575;
+}
+
+#road{
+  transform: translate3d(0,50vmin,0); 
+  width: 3000vmin;
+  height: 60vmin;
+  left: 0vmin;
+  top: 10vmin;
+  background-color: #888;
+}
+
+#house{
+  left: 5vmin;
+  top: 5vmin;
+}
+
+#walls > div:nth-child(-n+2){
+  width: 50vmin;
+  height: 30vmin;
+}
+#walls > div:nth-of-type(1){
+  transform: translate3d(-25vmin,10vmin,15vmin) rotate(90deg) rotateX(-90deg);
+}
+#walls > div:nth-of-type(2){
+  transform: translate3d(25vmin,10vmin,15vmin) rotate(-90deg) rotateX(-90deg);
+}
+#walls > svg{
+  width: 50vmin;
+  height: 55vmin;
+}
+#walls > svg:nth-of-type(1){
+  transform: translate3d(0,22.5vmin,27.5vmin) rotateX(-90deg);
+}
+#walls > svg:nth-of-type(2){
+  transform: translate3d(0,-27.5vmin,27.5vmin) rotate(180deg) rotateX(-90deg);
+  pointer-events: none;
+}
+
+#roof > *:nth-child(-n+2){
+  width: 50vmin;
+  height: 35.36vmin;
+}
+#roof > *:nth-child(1){
+  transform: translate3d(-12.5vmin,7.32vmin,42.5vmin) rotate(90deg) rotateX(-45deg);
+}
+#roof > *:nth-child(2){
+  transform: translate3d(12.5vmin,7.32vmin,42.5vmin) rotate(-90deg) rotateX(-45deg);
+  pointer-events: none;
+}
+.open > * > *{
+  cursor: pointer;
+  transition: 200ms ease-out;
+}
+
+#walls > .open > div:nth-child(1){
+  transform: translate3d(18vmin,50vmin,26vmin) rotateX(-90deg);
+}
+#door{
+  width: 14vmin;
+  height: 26vmin;
+  transform-origin: left;
+}
+
+#walls > .open > div:nth-child(2){
+  transform: translate3d(22vmin,0vmin,25vmin) rotate(180deg) rotateX(-90deg);
+}
+#walls > .open > div:nth-child(3){
+  transform: translate3d(28vmin,0vmin,25vmin) rotate(180deg) rotateX(-90deg) scaleX(-1);
+}
+
+#roof > .open > div{
+  transform: translate3d(25vmin,30vmin,55vmin) rotate(-90deg) rotateX(-45deg) translateY(15vmin);
+}
+
+.openDoor {
+  transform: rotateY(-60deg);
+}
+
+#door{
+  background-image: url(http://www.fensterbau-kohlmann.de/Media/Bilder/Tuer_Holz/TuerHolz6.jpg);
+}
+#walls > div:nth-child(-n+2){
+  background-color: #ddd;
+  background-size: 10%;
+}
+#roof > div {
+   background-image: url(https://s-media-cache-ak0.pinimg.com/736x/75/d4/28/75d42817a3c36f0da00b9ef37b6bcafa.jpg); 
+  background-size: 20%;
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <div id="container">
+  <div id="wrap">
+    
+    <div id="ground">
+      <div id="house">
+        <div id="walls">
+          <div></div>
+          <div></div>
+          <svg viewBox="0 0 50 55"><path d="m0,55h18v-26h14v26h18v-30l-25,-25-25,25z" fill="#BBB"/></svg>
+          <div class="open">
+            <div><label id="door" for="D" class="door" onclick="toggleDoor(this)"></label></div>
+          </div>
+        </div>
+        
+        <div id="roof">
+          <div></div>
+          <div></div>
+        </div>
+        
+      </div>
+      
+    <div id="road"></div>  
+    </div>
+    
+  </div>
+</div>
+
+<!-- <svg>
+  <defs>
+    <pattern id="pattern" patternUnits="userSpaceOnUse" width="11" height="11">
+      <image xlink:href="https://s-media-cache-ak0.pinimg.com/736x/75/d4/28/75d42817a3c36f0da00b9ef37b6bcafa.jpg" x="0" y="0" width="11" height="11" />
+    </pattern>
+  </defs>
+</svg> -->
+  
+    <script id="rendered-js" >
+const houseNode = document.querySelector('#house');
+for (let i = 1; i <= 20; i++) {
+  var cloneNode = houseNode.cloneNode(true);
+  cloneNode.style.left = i * 60 + 'vmin';
+  houseNode.after(cloneNode);
+}
+
+const doorNodes = document.querySelectorAll('.door');
+setInterval(() => {
+  let doorNode = doorNodes[Math.floor(Math.random() * doorNodes.length)];
+  doorNode.className += " openDoor";
+  setTimeout(() => {
+    doorNode.classList.remove("openDoor");
+  }, 1000);
+}, Math.random() * 2000);
+
+function toggleDoor(node) {
+  if (node.open) {
+    node.open = false;
+    node.classList.remove("openDoor");
+  } else
+  {
+    node.open = true;
+    node.className += " openDoor";
+  }
+}
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>
