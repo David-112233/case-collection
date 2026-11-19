@@ -1,0 +1,71 @@
+{
+  "source_id": "codepen:mandysvg/kkwdaeg",
+  "author": "MandySVG",
+  "pen_id": "KKWdaeg",
+  "url": "https://codepen.io/MandySVG/pen/KKWdaeg",
+  "acquisition": "cdpn_fullpage",
+  "acquisition_url": "https://cdpn.io/MandySVG/fullpage/KKWdaeg",
+  "retrieved_at": "2026-11-19T04:11:22+00:00",
+  "license": "未单独核验；外链资源许可另查",
+  "fetch_status": "ok",
+  "title": "Deep Sea Surprise!",
+  "canonical_url": "https://codepen.io/MandySVG/pen/KKWdaeg",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "b384f1edcc4731059a5bc312b605c5d1264cbb8f78dfb4b8356b554dc2f42d25",
+  "source_html_sha256": "b5465e2b81fdf8e6fbdf0571b048e3c8319da42ddac3401efce9afa30326bdfc",
+  "analysis": {
+    "js": {
+      "has_js": true,
+      "inline_js_chars": 2207,
+      "external_scripts": [
+        "https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js",
+        "https://assets.codepen.io/16327/MorphSVGPlugin3.min.js",
+        "https://unpkg.co/gsap@3/dist/gsap.min.js",
+        "https://unpkg.com/gsap@3/dist/Draggable.min.js"
+      ],
+      "inline_event_handlers": 0,
+      "has_gsap": true,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 0,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": false,
+      "clip_path": false,
+      "css_counter": false,
+      "media_query": false
+    },
+    "external_stylesheets": [],
+    "css_imports": [],
+    "css_chars": 2109,
+    "element_count": 178,
+    "html_chars": 54875
+  },
+  "review": {
+    "label": "深海拉绳开灯",
+    "status": "优先",
+    "reference_case": "224/227",
+    "evidence": "实点拉绳，见暗处只显示灯与绳，再点亮露出背鳍在鱼身后、眼睑盖住眼球下半、牙齿冒出下颌边缘；眼部动画不需逐像素比较。",
+    "visual_verified": true,
+    "surface": "Cloud Chrome, CodePen Full Page default or stated interaction; desktop only",
+    "formal_admission": false
+  }
+}

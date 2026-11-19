@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>Pure CSS Isometric Towers</title>
+
+    <link rel="canonical" href="https://codepen.io/tipadev/pen/mGmPxY">
+  
+  <link rel="stylesheet" href="https://public.codepenassets.com/css/reset-2.0.min.css">
+
+  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/evil-icons@1.9.0/assets/evil-icons.min.css'>
+  
+<style>
+@import url("https://fonts.googleapis.com/css?family=Roboto+Mono:300");
+html {
+  font-family: "Roboto Mono";
+  font-size: 10px;
+  position: absolute;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  background: #3E1897;
+  background: radial-gradient(circle at 45% 45%, #892CDC, #36159A 45%);
+}
+
+.face {
+  overflow: hidden;
+  transform-origin: 0 0;
+  background-position: center;
+  background-size: 100% 100% !important;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+  backface-visibility: hidden;
+}
+
+.scene, .shape, .face {
+  position: absolute;
+  transform-style: preserve-3d;
+}
+
+.scene {
+  top: 50%;
+  left: 50%;
+  width: 80em;
+  height: 80em;
+  margin: -40em 0 0 -40em;
+  transform: rotateX(-30deg) rotateY(-135deg);
+}
+
+.shape {
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  transform-origin: 50%;
+}
+.shape .ft {
+  width: 100%;
+  height: 100%;
+}
+.shape .bk {
+  left: 100%;
+  width: 100%;
+  height: 100%;
+}
+.shape .rt {
+  transform: rotateY(-90deg) translateX(-50%);
+}
+.shape .lt {
+  transform: rotateY(90deg) translateX(-50%);
+}
+.shape .tp {
+  transform: rotateX(90deg) translateY(-50%);
+}
+.shape .bm {
+  transform: rotateX(-90deg) translateY(-50%);
+}
+.shape .lt {
+  left: 100%;
+}
+.shape .bm {
+  top: 100%;
+}
+
+.tower-main {
+  width: 9em;
+  height: 22em;
+  margin: -11em 0 0 -4.5em;
+  transform: translate3D(0em, -11em, 0.1em) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  opacity: 1;
+}
+.tower-main .shadow-ft {
+  width: 100%;
+  height: 14em;
+  transform: translateZ(-6em) translateY(15em) rotateX(90deg);
+  opacity: 0.5;
+  background: linear-gradient(to top, #F951FD, rgba(249, 81, 253, 0));
+}
+.tower-main .shadow-lt {
+  width: 5em;
+  height: 3em;
+  transform: translateZ(-2em) translateX(7em) translateY(6em) rotateX(90deg) rotateZ(-64deg);
+  opacity: 0.5;
+  background: #4E35A0;
+}
+.tower-main > .ft, .tower-main > .bk {
+  width: 9em;
+  margin-left: 0;
+}
+.tower-main .ft {
+  transform: translateZ(4.5em);
+}
+.tower-main > .bk {
+  transform: translateZ(-4.5em) rotateY(180deg);
+  background-color: #A470F1;
+  background-image: linear-gradient(to bottom, #A470F1, #6038E5);
+}
+.tower-main .rt {
+  width: 9em;
+}
+.tower-main .lt {
+  width: 9em;
+  width: 9em;
+  height: 22em;
+  background-image: linear-gradient(to bottom, #3A20A6, #281B86);
+}
+.tower-main .rt {
+  height: 22em;
+}
+.tower-main .tp {
+  width: 9em;
+  height: 9em;
+  background: #A16DF1;
+  background-image: linear-gradient(-45deg, #6B3CE6, #A16DF1);
+}
+
+.door {
+  overflow: visible;
+  width: 6em;
+  height: 6em;
+  margin: -3em 0 0 -3em;
+  transform: translate3D(0em, -3em, -4em) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  opacity: 1;
+}
+.door .bk {
+  transform: translateZ(-0.5em) rotateY(180deg);
+  background-color: #F951FF;
+  box-shadow: inset -6px -7px 0 5px #FCA4FF;
+}
+.door .shadow {
+  width: 6em;
+  height: 6em;
+  transform: translateZ(-7em) translateY(5.5em) translateX(0.5em) rotateX(90deg);
+  opacity: 0.5;
+  background: linear-gradient(to top, #F951FD, rgba(249, 81, 253, 0));
+}
+.door:after {
+  width: 6em;
+  height: 1em;
+  content: "";
+  opacity: 0.5;
+  background-color: #F953FF;
+}
+
+[class*=window] {
+  width: 1em;
+  height: 1em;
+  margin: -0.5em 0 0 -0.5em;
+  opacity: 1;
+}
+[class*=window] .bk {
+  transform: translateZ(-0.5em) rotateY(180deg);
+}
+[class*=window] .lt {
+  width: 1em;
+  height: 1em;
+}
+[class*=window]:not([class*=side])[class$="1"] {
+  transform: translate3D(3em, 3em, -4em) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+[class*=window]:not([class*=side])[class$="1"] .bk {
+  background: #F951FF;
+}
+[class*=window]:not([class*=side])[class$="2"] {
+  transform: translate3D(1em, 3em, -4em) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+[class*=window]:not([class*=side])[class$="2"] .bk {
+  background: #F951FF;
+}
+[class*=window]:not([class*=side])[class$="3"] {
+  transform: translate3D(-1em, 3em, -4em) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+[class*=window]:not([class*=side])[class$="3"] .bk {
+  background: #F951FF;
+}
+[class*=window]:not([class*=side])[class$="4"] {
+  transform: translate3D(-3em, 3em, -4em) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+[class*=window]:not([class*=side])[class$="4"] .bk {
+  background: #F951FF;
+}
+[class*=window]:not([class*=side])[class$="5"] {
+  transform: translate3D(3em, 1em, -4em) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+[class*=window]:not([class*=side])[class$="5"] .bk {
+  background: #ED49FF;
+}
+[class*=window]:not([class*=side])[class$="6"] {
+  transform: translate3D(1em, 1em, -4em) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+[class*=window]:not([class*=side])[class$="6"] .bk {
+  background: #ED49FF;
+}
+[class*=window]:not([class*=side])[class$="7"] {
+  transform: translate3D(-1em, 1em, -4em) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+[class*=window]:not([class*=side])[class$="7"] .bk {
+  background: #ED49FF;
+}
+[class*=window]:not([class*=side])[class$="8"] {
+  transform: translate3D(-3em, 1em, -4em) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+[class*=window]:not([class*=side])[class$="8"] .bk {
+  background: #ED49FF;
+}
+[class*=window]:not([class*=side])[class$="9"] {
+  transform: translate3D(3em, -1em, -4em) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+[class*=window]:not([class*=side])[class$="9"] .bk {
+  background: #D239FF;
+}
+[class*=window]:not([class*=side])[class$="10"] {
+  transform: translate3D(1em, -1em, -4em) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+[class*=window]:not([class*=side])[class$="10"] .bk {
+  background: #D239FF;
+}
+[class*=window]:not([class*=side])[class$="11"] {
+  transform: translate3D(-1em, -1em, -4em) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+[class*=window]:not([class*=side])[class$="11"] .bk {
+  background: #D239FF;
+}
+[class*=window]:not([class*=side])[class$="12"] {
+  transform: translate3D(-3em, -1em, -4em) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+[class*=window]:not([class*=side])[class$="12"] .bk {
+  background: #D239FF;
+}
+[class*=window]:not([class*=side])[class$="13"] {
+  transform: translate3D(3em, -3em, -4em) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+[class*=window]:not([class*=side])[class$="13"] .bk {
+  background: #AE2EFF;
+}
+[class*=window]:not([class*=side])[class$="14"] {
+  transform: translate3D(1em, -3em, -4em) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+[class*=window]:not([class*=side])[class$="14"] .bk {
+  background: #AE2EFF;
+}
+[class*=window]:not([class*=side])[class$="15"] {
+  transform: translate3D(-1em, -3em, -4em) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+[class*=window]:not([class*=side])[class$="15"] .bk {
+  background: #AE2EFF;
+}
+[class*=window]:not([class*=side])[class$="16"] {
+  transform: translate3D(-3em, -3em, -4em) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+[class*=window]:not([class*=side])[class$="16"] .bk {
+  background: #AE2EFF;
+}
+[class*=window]:not([class*=side])[class$="17"] {
+  transform: translate3D(3em, -5em, -4em) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+[class*=window]:not([class*=side])[class$="17"] .bk {
+  background: #9626FF;
+}
+[class*=window]:not([class*=side])[class$="18"] {
+  transform: translate3D(1em, -5em, -4em) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+[class*=window]:not([class*=side])[class$="18"] .bk {
+  background: #9626FF;
+}
+[class*=window]:not([class*=side])[class$="19"] {
+  transform: translate3D(-1em, -5em, -4em) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+[class*=window]:not([class*=side])[class$="19"] .bk {
+  background: #9626FF;
+}
+[class*=window]:not([class*=side])[class$="20"] {
+  transform: translate3D(-3em, -5em, -4em) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+[class*=window]:not([class*=side])[class$="20"] .bk {
+  background: #9626FF;
+}
+[class*=window]:not([class*=side])[class$="21"] {
+  transform: translate3D(3em, -7em, -4em) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+[class*=window]:not([class*=side])[class$="21"] .bk {
+  background: #7E1FFF;
+}
+[class*=window]:not([class*=side])[class$="22"] {
+  transform: translate3D(1em, -7em, -4em) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+[class*=window]:not([class*=side])[class$="22"] .bk {
+  background: #7E1FFF;
+}
+[class*=window]:not([class*=side])[class$="23"] {
+  transform: translate3D(-1em, -7em, -4em) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+[class*=window]:not([class*=side])[class$="23"] .bk {
+  background: #7E1FFF;
+}
+[class*=window]:not([class*=side])[class$="24"] {
+  transform: translate3D(-3em, -7em, -4em) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+[class*=window]:not([class*=side])[class$="24"] .bk {
+  background: #7E1FFF;
+}
+[class*=window]:not([class*=side])[class$="25"] {
+  transform: translate3D(3em, -9em, -4em) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+[class*=window]:not([class*=side])[class$="25"] .bk {
+  background: #6F1AFF;
+}
+[class*=window]:not([class*=side])[class$="26"] {
+  transform: translate3D(1em, -9em, -4em) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+[class*=window]:not([class*=side])[class$="26"] .bk {
+  background: #6F1AFF;
+}
+[class*=window]:not([class*=side])[class$="27"] {
+  transform: translate3D(-1em, -9em, -4em) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+[class*=window]:not([class*=side])[class$="27"] .bk {
+  background: #6F1AFF;
+}
+[class*=window]:not([class*=side])[class$="28"] {
+  transform: translate3D(-3em, -9em, -4em) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+[class*=window]:not([class*=side])[class$="28"] .bk {
+  background: #6F1AFF;
+}
+
+.tower-side {
+  width: 6em;
+  height: 14em;
+  margin: -7em 0 0 -3em;
+  transform: translate3D(7em, -7em, 0em) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  opacity: 1;
+}
+.tower-side .ft {
+  transform: translateZ(3em);
+}
+.tower-side > .bk {
+  transform: translateZ(-3em) rotateY(180deg);
+  background: linear-gradient(to left, #5D44A9 0%, #5D44A9 50%, #9961ED 55%, #9961ED 100%);
+}
+.tower-side .lt {
+  width: 6em;
+  height: 14em;
+  background: #36159A;
+}
+.tower-side .tp {
+  width: 6em;
+  height: 6em;
+  background-image: linear-gradient(315deg, #5838C8, #8258CF);
+}
+.tower-side .shadow-tp {
+  width: 6em;
+  height: 6em;
+  transform: rotateZ(45deg) translateX(2em) translateY(-8em);
+  background: #8652EB;
+}
+
+[class*=corner-] {
+  width: 3em;
+  height: 1em;
+  margin: -0.5em 0 0 -1.5em;
+  opacity: 1;
+}
+[class*=corner-] .bk {
+  transform: translateZ(-1.5em) rotateY(180deg);
+  box-shadow: inset -1px -1px 0 1px #301E95;
+}
+[class*=corner-] .lt {
+  width: 3em;
+  height: 1em;
+  box-shadow: inset 1px -1px 0 1px #2B1A89;
+}
+[class*=corner-][class$="1"] {
+  transform: translate3D(1.5em, 5em, -1.5em) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+[class*=corner-][class$="1"] .bk {
+  background: #F956FF;
+}
+[class*=corner-][class$="1"] .lt {
+  background: #F455FF;
+}
+[class*=corner-][class$="2"] {
+  transform: translate3D(1.5em, 3em, -1.5em) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+[class*=corner-][class$="2"] .bk {
+  background: #F951FF;
+}
+[class*=corner-][class$="2"] .lt {
+  background: #DD3DFF;
+}
+[class*=corner-][class$="3"] {
+  transform: translate3D(1.5em, 1em, -1.5em) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+[class*=corner-][class$="3"] .bk {
+  background: #E040FF;
+}
+[class*=corner-][class$="3"] .lt {
+  background: #C234FF;
+}
+[class*=corner-][class$="4"] {
+  transform: translate3D(1.5em, -1em, -1.5em) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+[class*=corner-][class$="4"] .bk {
+  background: #8E23FF;
+}
+[class*=corner-][class$="4"] .lt {
+  background: #A429FF;
+}
+[class*=corner-][class$="5"] {
+  transform: translate3D(1.5em, -3em, -1.5em) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+[class*=corner-][class$="5"] .bk {
+  background: #6F1AFF;
+}
+[class*=corner-][class$="5"] .lt {
+  background: #8721FF;
+}
+[class*=corner-][class$="6"] {
+  transform: translate3D(1.5em, -5em, -1.5em) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+[class*=corner-][class$="6"] .bk {
+  background: #6F1AFF;
+}
+[class*=corner-][class$="6"] .lt {
+  background: #741CFF;
+}
+
+[class*=side-window] .lt {
+  width: 1em;
+  height: 1em;
+}
+[class*=side-window][class$="1"] {
+  transform: translate3D(2.5em, 5em, 1.5em) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+[class*=side-window][class$="1"] .lt {
+  background: #F455FF;
+}
+[class*=side-window][class$="2"] {
+  transform: translate3D(2.5em, 3em, 1.5em) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+[class*=side-window][class$="2"] .lt {
+  background: #DD3DFF;
+}
+[class*=side-window][class$="3"] {
+  transform: translate3D(2.5em, 1em, 1.5em) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+[class*=side-window][class$="3"] .lt {
+  background: #C234FF;
+}
+[class*=side-window][class$="4"] {
+  transform: translate3D(2.5em, -1em, 1.5em) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+[class*=side-window][class$="4"] .lt {
+  background: #A429FF;
+}
+[class*=side-window][class$="5"] {
+  transform: translate3D(2.5em, -3em, 1.5em) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+[class*=side-window][class$="5"] .lt {
+  background: #8721FF;
+}
+[class*=side-window][class$="6"] {
+  transform: translate3D(2.5em, -5em, 1.5em) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+[class*=side-window][class$="6"] .lt {
+  background: #741CFF;
+}
+
+.floor {
+  width: 31em;
+  height: 1.5em;
+  margin: -0.5em 0 0 -15.5em;
+  transform: translate3D(3em, 0.5em, 0em) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  opacity: 1;
+}
+.floor .ft {
+  transform: translateZ(12em);
+}
+.floor .bk {
+  transform: translateZ(-12em) rotateY(180deg);
+  background: radial-gradient(circle at center, #9D34E8, #7E29DC);
+}
+.floor .rt {
+  width: 24em;
+  height: 1.5em;
+}
+.floor .lt {
+  width: 24em;
+  height: 1.5em;
+  background: linear-gradient(to top, #26128B, #531BC7);
+}
+.floor .tp, .floor .bm {
+  width: 31em;
+  height: 24em;
+}
+.floor .tp {
+  background: linear-gradient(to top, #5831E3 30%, #8B53EB 80%, #B386F4);
+}
+.floor .shadow-lt {
+  width: 10em;
+  height: 100%;
+  transform: rotateZ(-180deg) rotateY(-45deg) rotateX(-90deg) translateX(0.5em) translateZ(-6em) translateY(-5.5em);
+  background: linear-gradient(to top, #3A21A7, rgba(58, 33, 167, 0));
+}
+
+.roof {
+  width: 6em;
+  height: 1em;
+  margin: -0.5em 0 0 -3em;
+  transform: translate3D(0em, -21.5em, 0em) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  opacity: 1;
+}
+.roof .tp {
+  width: 6em;
+  height: 6em;
+  background: #4A2CC0;
+  background-image: linear-gradient(to top, #4A2CC0, #3920A4);
+  box-shadow: inset 4px 0px 2px 5px #3920A4;
+}
+
+.shameless-plug {
+  font-size: 1.5em;
+  line-height: 1.5em;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 1em;
+  color: #FFFFFF;
+}
+.shameless-plug a {
+  font-style: italic;
+  text-decoration: none;
+  color: #FFFFFF;
+}
+.shameless-plug .icon {
+  fill: #FFFFFF;
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <div class="scene">
+  <div class="shape tower-side">
+    <div class="face ft"></div>
+    <div class="face bk"></div>
+    <div class="face lt"></div>
+    <div id="side-windows">
+      <div class="shape side-window0">
+        <div class="face lt"></div>
+      </div>
+      <div class="shape side-window1">
+        <div class="face lt"></div>
+      </div>
+      <div class="shape side-window2">
+        <div class="face lt"></div>
+      </div>
+      <div class="shape side-window3">
+        <div class="face lt"></div>
+      </div>
+      <div class="shape side-window4">
+        <div class="face lt"></div>
+      </div>
+      <div class="shape side-window5">
+        <div class="face lt"></div>
+      </div>
+      <div class="shape side-window6">
+        <div class="face lt"></div>
+      </div>
+    </div>
+    <div id="corners">
+      <div class="shape corner-0">
+        <div class="face bk"></div>
+        <div class="face lt"></div>
+      </div>
+      <div class="shape corner-1">
+        <div class="face bk"></div>
+        <div class="face lt"></div>
+      </div>
+      <div class="shape corner-2">
+        <div class="face bk"></div>
+        <div class="face lt"></div>
+      </div>
+      <div class="shape corner-3">
+        <div class="face bk"></div>
+        <div class="face lt"></div>
+      </div>
+      <div class="shape corner-4">
+        <div class="face bk"></div>
+        <div class="face lt"></div>
+      </div>
+      <div class="shape corner-5">
+        <div class="face bk"></div>
+        <div class="face lt"></div>
+      </div>
+      <div class="shape corner-6">
+        <div class="face bk"></div>
+        <div class="face lt"></div>
+      </div>
+    </div>
+    <div class="face tp">
+      <div class="face shadow-tp"></div>
+    </div>
+    <div class="shadow-lt"></div>
+  </div>
+  <div class="shape door">
+    <div class="face bk"></div>
+    <div class="face shadow"></div>
+  </div>
+  <div class="shape tower-main">
+    <div class="face ft"></div>
+    <div class="face bk"></div>
+    <div class="face rt"></div>
+    <div class="face lt"></div>
+    <div class="face tp"></div>
+    <div class="shadow-ft"></div>
+    <div class="shadow-lt"></div>
+    <div id="windows">
+      <div class="shape window-0">
+        <div class="face bk"></div>
+      </div>
+      <div class="shape window-1">
+        <div class="face bk"></div>
+      </div>
+      <div class="shape window-2">
+        <div class="face bk"></div>
+      </div>
+      <div class="shape window-3">
+        <div class="face bk"></div>
+      </div>
+      <div class="shape window-4">
+        <div class="face bk"></div>
+      </div>
+      <div class="shape window-5">
+        <div class="face bk"></div>
+      </div>
+      <div class="shape window-6">
+        <div class="face bk"></div>
+      </div>
+      <div class="shape window-7">
+        <div class="face bk"></div>
+      </div>
+      <div class="shape window-8">
+        <div class="face bk"></div>
+      </div>
+      <div class="shape window-9">
+        <div class="face bk"></div>
+      </div>
+      <div class="shape window-10">
+        <div class="face bk"></div>
+      </div>
+      <div class="shape window-11">
+        <div class="face bk"></div>
+      </div>
+      <div class="shape window-12">
+        <div class="face bk"></div>
+      </div>
+      <div class="shape window-13">
+        <div class="face bk"></div>
+      </div>
+      <div class="shape window-14">
+        <div class="face bk"></div>
+      </div>
+      <div class="shape window-15">
+        <div class="face bk"></div>
+      </div>
+      <div class="shape window-16">
+        <div class="face bk"></div>
+      </div>
+      <div class="shape window-17">
+        <div class="face bk"></div>
+      </div>
+      <div class="shape window-18">
+        <div class="face bk"></div>
+      </div>
+      <div class="shape window-19">
+        <div class="face bk"></div>
+      </div>
+      <div class="shape window-20">
+        <div class="face bk"></div>
+      </div>
+      <div class="shape window-21">
+        <div class="face bk"></div>
+      </div>
+      <div class="shape window-22">
+        <div class="face bk"></div>
+      </div>
+      <div class="shape window-23">
+        <div class="face bk"></div>
+      </div>
+      <div class="shape window-24">
+        <div class="face bk"></div>
+      </div>
+      <div class="shape window-25">
+        <div class="face bk"></div>
+      </div>
+      <div class="shape window-26">
+        <div class="face bk"></div>
+      </div>
+      <div class="shape window-27">
+        <div class="face bk"></div>
+      </div>
+      <div class="shape window-28">
+        <div class="face bk"></div>
+      </div>
+    </div>
+  </div>
+  <div class="shape floor">
+    <div class="face ft"></div>
+    <div class="face bk"></div>
+    <div class="face rt"></div>
+    <div class="face lt"></div>
+    <div class="face bm"></div>
+    <div class="face tp"></div>
+    <div class="shadow-lt"></div>
+  </div>
+  <div class="shape roof">
+    <div class="face tp"></div>
+  </div>
+</div>
+<div class="shameless-plug">
+  <div class="inspired-by">
+    <p>inspired by </p><a href="https://dribbble.com/shots/3863328-Daily-challenge-illustration-3-100-isometric-building">Walid Beno's Dribbble shot </a>
+  </div><br/>
+  <p>check me out. 😎</p><a href="https://twitter.com/xdesro" target="_blank">
+    <div class="icon" data-icon="ei-sc-twitter" data-size="s"></div></a><a href="https://github.com/xdesro" target="_blank">
+    <div class="icon" data-icon="ei-sc-github" data-size="s"></div></a><a href="https://henry.codes" target="_blank">
+    <div class="icon" data-icon="ei-link" data-size="s"></div></a>
+</div>
+  <script src='https://cdn.jsdelivr.net/npm/evil-icons@1.9.0/assets/evil-icons.min.js'></script>
+    <script id="rendered-js" >
+// Inspired by Walid Beno's Dribbble shot: https://dribbble.com/shots/3863328-Daily-challenge-illustration-3-100-isometric-building
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>
