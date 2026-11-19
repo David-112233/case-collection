@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>Flash Floods</title>
+
+    <link rel="canonical" href="https://codepen.io/Eric-Hackathorn/pen/ZYpyNWd">
+  
+  
+  
+  
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flash Flood — NOAA GSL</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --noaa-dark:  #003087;
+    --noaa-light: #0085CA;
+    --noaa-pale:  #4fb3e8;
+    --accent:     #2dd4bf;
+    --accent2:    #7ee8dc;
+    --bg:         #020c1a;
+    --panel:      #03102a;
+    --panel2:     #040e24;
+    --border:     #0d2655;
+    --text-dim:   #4a7aaa;
+    --text-mid:   #7aadd4;
+  }
+  body { background: var(--bg); display: flex; align-items: center; justify-content: center; min-height: 100vh; font-family: 'Barlow', sans-serif; padding: 20px; }
+  .wrapper { width: 100%; max-width: 920px; border: 1px solid var(--border); box-shadow: 0 0 60px rgba(0,133,202,.14); }
+  .header { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; background: var(--noaa-dark); border-bottom: 2px solid var(--noaa-light); gap: 12px; flex-wrap: wrap; }
+  .header-brand { display: flex; align-items: center; gap: 11px; }
+  .noaa-logo-wrap { flex-shrink: 0; width: 46px; height: 46px; }
+  .noaa-logo-wrap svg { width: 100%; height: 100%; }
+  .brand-text { display: flex; flex-direction: column; gap: 2px; }
+  .brand-agency { font-family: 'Barlow Condensed', sans-serif; font-size: 9px; font-weight: 400; color: var(--noaa-pale); letter-spacing: .10em; text-transform: uppercase; line-height: 1; }
+  .brand-divider { width: 1px; height: 30px; background: rgba(255,255,255,.2); flex-shrink: 0; }
+  .header-title-block { flex: 1; min-width: 0; }
+  .header-title { font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: .06em; line-height: 1; margin-bottom: 2px; }
+  .header-sub { font-size: 10px; color: var(--noaa-pale); font-weight: 300; letter-spacing: .05em; }
+  #pauseBtn { flex-shrink: 0; display: flex; align-items: center; gap: 7px; font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 600; color: #fff; letter-spacing: .08em; text-transform: uppercase; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.22); padding: 6px 14px 6px 10px; cursor: pointer; border-radius: 2px; white-space: nowrap; transition: all .18s; }
+  #pauseBtn:hover { background: rgba(255,255,255,.16); border-color: var(--noaa-light); color: var(--noaa-pale); }
+  .btn-icon { width: 16px; height: 16px; position: relative; flex-shrink: 0; }
+  .btn-icon .bar1, .btn-icon .bar2 { position: absolute; top: 2px; width: 4px; height: 12px; background: currentColor; border-radius: 1px; transition: all .18s; }
+  .btn-icon .bar1 { left: 2px; } .btn-icon .bar2 { left: 9px; }
+  #pauseBtn.paused .bar1 { width: 0; height: 0; background: transparent; border-style: solid; border-width: 7px 0 7px 13px; border-color: transparent transparent transparent currentColor; border-radius: 0; top: 1px; left: 2px; }
+  #pauseBtn.paused .bar2 { opacity: 0; }
+  .progress-rail { height: 3px; background: var(--noaa-dark); cursor: pointer; overflow: hidden; }
+  #progressBar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--noaa-light), var(--accent2)); pointer-events: none; }
+  .canvas-wrap { position: relative; line-height: 0; }
+  canvas { display: block; width: 100%; height: auto; cursor: default; }
+  .hotspot-hint { position: absolute; bottom: 10px; right: 12px; font-size: 10px; color: rgba(45,212,191,.55); letter-spacing: .06em; pointer-events: none; animation: hintFade 3s ease-in-out 2s both; }
+  @keyframes hintFade { 0%{opacity:0} 20%{opacity:1} 80%{opacity:1} 100%{opacity:0} }
+  .controls-bar { background: var(--panel2); padding: 10px 16px; border-top: 1px solid var(--border); display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .ctrl-group { display: flex; align-items: center; gap: 8px; }
+  .ctrl-label { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 600; color: var(--text-dim); letter-spacing: .10em; text-transform: uppercase; white-space: nowrap; }
+  .speed-btns { display: flex; gap: 3px; }
+  .speed-btn { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 600; color: var(--text-dim); letter-spacing: .04em; background: none; border: 1px solid var(--border); padding: 3px 9px; cursor: pointer; border-radius: 2px; transition: all .15s; }
+  .speed-btn:hover { color: var(--noaa-pale); border-color: var(--noaa-light); }
+  .speed-btn.active { color: var(--noaa-light); border-color: var(--noaa-light); background: rgba(0,133,202,.12); }
+  .ctrl-group.slider-group { flex: 1; min-width: 200px; align-items: center; gap: 8px; }
+  .slider-inner { flex: 1; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+  .slider-row { display: flex; align-items: center; gap: 8px; }
+  input[type=range]#intensitySlider { flex: 1; min-width: 0; -webkit-appearance: none; appearance: none; height: 4px; border-radius: 2px; outline: none; cursor: pointer; background: linear-gradient(to right, var(--noaa-light) 0%, var(--noaa-light) var(--pct,0%), #1a3a5c var(--pct,0%), #1a3a5c 100%); }
+  input[type=range]#intensitySlider::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%; background: #fff; border: 2px solid var(--noaa-light); box-shadow: 0 0 6px rgba(0,133,202,.5); cursor: pointer; }
+  input[type=range]#intensitySlider::-moz-range-thumb { width: 16px; height: 16px; border-radius: 50%; background: #fff; border: 2px solid var(--noaa-light); cursor: pointer; }
+  .slider-ticks { display: flex; justify-content: space-between; padding: 0 1px; }
+  .slider-ticks span { font-size: 9px; color: var(--text-dim); letter-spacing: .04em; }
+  #intensityVal { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 600; color: var(--noaa-pale); white-space: nowrap; min-width: 36px; text-align: right; }
+  #autoBtn { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 600; color: var(--accent2); letter-spacing: .08em; text-transform: uppercase; background: none; border: 1px solid var(--accent2); padding: 4px 10px; cursor: pointer; border-radius: 2px; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .25s; }
+  #autoBtn.visible { opacity: 1; pointer-events: auto; }
+  .info-panel { background: var(--panel); padding: 14px 18px 16px; border-top: 1px solid var(--border); min-height: 88px; }
+  .stage-view { display: grid; grid-template-columns: auto 1fr; gap: 0 18px; align-items: start; }
+  .stage-indicator { display: flex; flex-direction: column; gap: 6px; padding-top: 3px; }
+  .stage-pip { width: 7px; height: 7px; border-radius: 50%; background: var(--border); transition: background .4s, box-shadow .4s; }
+  .stage-pip.active { background: var(--noaa-light); box-shadow: 0 0 7px rgba(0,133,202,.6); }
+  .stage-text h2 { font-family: 'Barlow Condensed', sans-serif; font-size: 17px; font-weight: 700; color: var(--noaa-pale); text-transform: uppercase; letter-spacing: .07em; margin-bottom: 5px; }
+  .stage-text p { font-size: 12.5px; color: var(--text-mid); line-height: 1.65; max-width: 720px; font-weight: 300; }
+  .hotspot-view { display: none; animation: tooltipIn .2s ease-out; }
+  .hotspot-view.active { display: flex; align-items: flex-start; gap: 14px; }
+  @keyframes tooltipIn { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:none} }
+  .hotspot-icon { flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%; background: rgba(0,133,202,.15); border: 1px solid rgba(0,133,202,.35); display: flex; align-items: center; justify-content: center; font-size: 16px; margin-top: 1px; }
+  .hotspot-body { flex: 1; }
+  .hotspot-body h3 { font-family: 'Barlow Condensed', sans-serif; font-size: 15px; font-weight: 700; color: var(--accent2); text-transform: uppercase; letter-spacing: .07em; margin-bottom: 5px; }
+  .hotspot-body p { font-size: 12.5px; color: var(--text-mid); line-height: 1.65; font-weight: 300; }
+  .hotspot-close { flex-shrink: 0; font-size: 11px; font-family: 'Barlow Condensed', sans-serif; font-weight: 600; color: var(--text-dim); letter-spacing: .06em; text-transform: uppercase; background: none; border: 1px solid var(--border); padding: 3px 9px; cursor: pointer; border-radius: 2px; transition: all .15s; margin-top: 2px; }
+  .hotspot-close:hover { color: var(--noaa-pale); border-color: var(--noaa-light); }
+  .footer { background: var(--panel2); padding: 7px 16px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); gap: 8px; flex-wrap: wrap; }
+  .footer-left { display: flex; align-items: center; gap: 8px; }
+  .footer span { font-size: 10px; color: var(--text-dim); letter-spacing: .05em; }
+  .footer-gsl { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 600; color: var(--noaa-pale); letter-spacing: .08em; text-transform: uppercase; }
+  .footer-sep { color: var(--border); }
+  #timeLabel { font-variant-numeric: tabular-nums; }
+  .replay-btn { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 600; color: var(--text-dim); letter-spacing: .08em; text-transform: uppercase; background: none; border: 1px solid var(--border); padding: 3px 10px; cursor: pointer; border-radius: 1px; transition: all .2s; }
+  .replay-btn:hover { color: var(--noaa-light); border-color: var(--noaa-light); }
+  @media (max-width: 520px) {
+    body { padding: 0; } .wrapper { border-left: none; border-right: none; box-shadow: none; }
+    .header { padding: 8px 12px; gap: 8px; } .brand-divider,.header-sub,.brand-agency { display: none; }
+    .header-title { font-size: 16px; } .controls-bar { padding: 8px 12px; gap: 10px; }
+    .ctrl-group.speed-group,.ctrl-group.slider-group { width: 100%; } .ctrl-group.slider-group { min-width: 0; }
+    .info-panel { padding: 12px 14px 14px; } .footer { padding: 6px 12px; } .footer-sep { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+  <div class="header">
+    <div class="header-brand">
+      <div class="noaa-logo-wrap">
+        <svg preserveAspectRatio="xMidYMid meet" width="100%" height="100%" overflow="visible" viewBox="0 0 422 422" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="210.19" cy="210.19" r="179.411" fill="white"/>
+          <path d="M372.071 130.713C372.171 130.668 394.274 174.446 390.353 220.974C388.216 299.13 319.138 387.787 216.193 390.672L201.842 390.374C95.7505 385.101 30.5578 295.101 30.8643 213.763C31.1257 198.648 31.0626 181.738 37.4449 160.836L43.9533 162.783C71.141 173.058 100.474 252.485 195.829 257.01C199.967 257.209 207.918 257.389 207.9 257.425C201.725 263.581 166.631 278.057 150.703 281.869C154.868 280.869 150.378 281.77 150.703 281.869C189.059 305.638 227.407 259.895 277.203 253.161L292.456 252.26C289.544 243.066 276.41 243.841 275.184 243.959C240.73 247.348 249.339 243.4 248.267 243.733C301.2 227.139 331.705 184.749 369.8 133.21L372.08 130.704L372.071 130.713Z" fill="#0085CA"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M295.142 51.5476C291.446 49.5827 260.373 30.9157 212.677 30.1676C109.281 30.5371 63.749 106.413 63.749 106.413C86.6278 117.626 110.363 151.39 110.696 151.868C136.298 187.787 171.977 243.454 218.203 244.518C233.005 244.86 242.849 236.009 254.09 225.121C295.133 185.38 300.875 111.902 353.447 101.555C353.447 101.555 333.931 72.1795 295.133 51.5476H295.142ZM180.577 100.148H192.863C197.821 100.148 201.815 104.141 201.815 109.099V138.672C201.815 143.63 197.821 147.623 192.863 147.623H180.577C175.619 147.623 171.625 143.63 171.625 138.672V109.099C171.625 104.141 175.619 100.148 180.577 100.148ZM183.849 108.297H189.591C190.736 108.297 191.656 109.216 191.656 110.361V137.41C191.656 138.555 190.736 139.474 189.591 139.474H183.849C182.704 139.474 181.785 138.555 181.785 137.41V110.361C181.785 109.216 182.704 108.297 183.849 108.297ZM219.447 100.157C214.489 100.157 210.505 104.141 210.505 109.099V147.614H220.655V128.55H230.526V147.614H240.676V109.099C240.676 104.141 236.692 100.157 231.734 100.157H219.456H219.447ZM222.728 108.288H228.444C229.588 108.288 230.517 109.216 230.517 110.361V120.429H220.646V110.361C220.646 109.216 221.575 108.288 222.719 108.288H222.728ZM258.3 100.157C253.342 100.157 249.357 104.141 249.357 109.099V147.614H259.508V128.55H269.378V147.614H279.529V109.099C279.529 104.141 275.544 100.157 270.586 100.157H258.309H258.3ZM261.581 108.288H267.296C268.441 108.288 269.369 109.216 269.369 110.361V120.429H259.498V110.361C259.498 109.216 260.427 108.288 261.572 108.288H261.581ZM132.746 100.157V147.614H142.923V110.361C142.923 109.216 143.825 108.288 144.97 108.288H150.721C151.866 108.288 152.794 109.216 152.794 110.361V147.614H162.944V109.099C162.944 104.141 158.96 100.157 154.002 100.157H132.755H132.746Z" fill="#003087"/>
+        </svg>
+      </div>
+      <div class="brand-text"><span class="brand-agency">National Oceanic &amp; Atmospheric Administration</span></div>
+    </div>
+    <div class="brand-divider"></div>
+    <div class="header-title-block">
+      <div class="header-title">Flash Flood</div>
+      <div class="header-sub">Watershed Cross-Section &nbsp;·&nbsp; Basin to Floodplain</div>
+    </div>
+    <button id="pauseBtn" onclick="togglePause()">
+      <span class="btn-icon"><span class="bar1"></span><span class="bar2"></span></span>
+      <span id="pauseLabel">Pause</span>
+    </button>
+  </div>
+
+  <div class="progress-rail" id="progressRail" onclick="scrubToClick(event)">
+    <div id="progressBar"></div>
+  </div>
+
+  <div class="canvas-wrap">
+    <canvas id="c" width="920" height="460"></canvas>
+    <div class="hotspot-hint">CLICK TO EXPLORE</div>
+  </div>
+
+  <div class="controls-bar">
+    <div class="ctrl-group speed-group">
+      <span class="ctrl-label">Speed</span>
+      <div class="speed-btns">
+        <button class="speed-btn" data-speed="0.5">½×</button>
+        <button class="speed-btn active" data-speed="1">1×</button>
+        <button class="speed-btn" data-speed="2">2×</button>
+      </div>
+    </div>
+    <div class="ctrl-group slider-group">
+      <span class="ctrl-label" style="white-space:nowrap">Rainfall Intensity</span>
+      <div class="slider-inner">
+        <div class="slider-row">
+          <input type="range" id="intensitySlider" min="0" max="100" value="0">
+          <span id="intensityVal">0%</span>
+        </div>
+        <div class="slider-ticks"><span>Dry</span><span>Heavy Rain</span><span>Flash Flood</span></div>
+      </div>
+    </div>
+    <button id="autoBtn" onclick="resumeAuto()">↺ Auto</button>
+  </div>
+
+  <div class="info-panel">
+    <div class="stage-view" id="stageView">
+      <div class="stage-indicator">
+        <div class="stage-pip active" id="pip0"></div>
+        <div class="stage-pip" id="pip1"></div>
+        <div class="stage-pip" id="pip2"></div>
+      </div>
+      <div class="stage-text">
+        <h2 id="stageName">Normal Dry Conditions</h2>
+        <p id="stageDesc">The watershed is dry. The stream channel holds minimal baseflow fed by groundwater. Dry or lightly moist soil can absorb rainfall — up to 1–2 inches per hour under ideal conditions. The floodplain is clear. No watches or warnings are in effect.</p>
+      </div>
+    </div>
+    <div class="hotspot-view" id="hotspotView">
+      <div class="hotspot-icon" id="hotspotIcon">🌧️</div>
+      <div class="hotspot-body">
+        <h3 id="hotspotTitle">Title</h3>
+        <p id="hotspotBody">Body</p>
+      </div>
+      <button class="hotspot-close" onclick="closeHotspot()">← Back</button>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-left">
+      <span class="footer-gsl">Global Systems Laboratory</span>
+      <span class="footer-sep">·</span>
+      <span id="timeLabel">0:00 / 0:28</span>
+    </div>
+    <button class="replay-btn" onclick="restartAnimation()">↺ Replay</button>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('c');
+const ctx    = canvas.getContext('2d');
+const W = canvas.width, H = canvas.height;
+
+const lerp      = (a,b,t) => a+(b-a)*t;
+const clamp     = (v,lo,hi) => Math.max(lo,Math.min(hi,v));
+const easeInOut = t => t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+const lerpRGB   = (r1,g1,b1,r2,g2,b2,t) =>
+  `rgb(${Math.round(lerp(r1,r2,t))},${Math.round(lerp(g1,g2,t))},${Math.round(lerp(b1,b2,t))})`;
+
+// ── Terrain cross-section ──────────────────────────────────────────────────
+// W→E: upstream mountain basin → foothills → channel → alluvial fan → floodplain
+// Surface terrain
+const TX=[0,  45, 95, 145, 195, 240, 278, 310, 340, 368, 400, 435, 472, 510, 552, 598, 648, 700, 755, 812, 870, 920];
+const TY=[210,248,285,315, 338, 355, 365, 372, 376, 379, 382, 384, 385, 386, 387, 386, 385, 385, 386, 387, 388, 390];
+
+// Channel bottom — carved into the main terrain
+const CX_T=[285,310,340,368,400,435,472,510,552,598,648];
+const CY_T=[376,378,382,385,388,391,392,393,394,392,390];
+
+// Bedrock (impermeable layer ~80px below surface)
+const BX=TX, BY=TY.map(y=>y+82);
+
+function buildPath(xs,ys,close=true){
+  const p=new Path2D(); p.moveTo(xs[0],ys[0]);
+  for(let i=1;i<xs.length;i++){const mx=(xs[i-1]+xs[i])/2,my=(ys[i-1]+ys[i])/2;p.quadraticCurveTo(xs[i-1],ys[i-1],mx,my);}
+  if(close){p.lineTo(xs[xs.length-1],H);p.lineTo(xs[0],H);p.closePath();}
+  return p;
+}
+function buildOpenPath(xs,ys){
+  const p=new Path2D(); p.moveTo(xs[0],ys[0]);
+  for(let i=1;i<xs.length;i++){const mx=(xs[i-1]+xs[i])/2,my=(ys[i-1]+ys[i])/2;p.quadraticCurveTo(xs[i-1],ys[i-1],mx,my);}
+  p.lineTo(xs[xs.length-1],ys[ys.length-1]);
+  return p;
+}
+const TERRAIN_PATH = buildPath(TX,TY);
+const BEDROCK_PATH = buildPath(BX,BY);
+const CHANNEL_PATH = buildOpenPath(CX_T,CY_T);
+
+// Terrain y at any x (linear interp)
+function terrainY(x){
+  for(let i=1;i<TX.length;i++){
+    if(TX[i]>=x){const t=(x-TX[i-1])/(TX[i]-TX[i-1]);return lerp(TY[i-1],TY[i],t);}
+  }return H;
+}
+function channelBottomY(x){
+  if(x<CX_T[0]||x>CX_T[CX_T.length-1]) return terrainY(x)+4;
+  for(let i=1;i<CX_T.length;i++){
+    if(CX_T[i]>=x){const t=(x-CX_T[i-1])/(CX_T[i]-CX_T[i-1]);return lerp(CY_T[i-1],CY_T[i],t);}
+  }return terrainY(x)+4;
+}
+
+// Soil layers (for saturation visualization)
+const SOIL_LAYERS=[
+  {y:0, h:22, label:'Topsoil', dryColor:[88,68,42], wetColor:[52,42,28]},
+  {y:22,h:30, label:'Subsoil', dryColor:[112,88,58], wetColor:[68,54,36]},
+  {y:52,h:30, label:'Rock/Clay',dryColor:[128,108,82],wetColor:[88,72,52]},
+];
+
+// Rain drops (deterministic)
+const RAIN_DROPS=Array.from({length:80},(_,i)=>({
+  x:140+(i/80)*560,  // concentrated over basin+channel (x=140–700)
+  phase:(i*0.618)%1,
+  len:8+(i*0.231)%7,
+  speed:0.7+(i*0.092)%0.5
+}));
+
+// Stream turbulence particles
+const STREAM_PARTS=Array.from({length:35},(_,i)=>({
+  xFrac:(i/35), phase:(i*0.541)%1
+}));
+
+// Floating debris in flood
+const DEBRIS=Array.from({length:12},(_,i)=>({
+  xFrac:0.05+(i/12)*0.88,
+  phase:(i*0.382)%1,
+  size:2+(i*0.31)%4
+}));
+
+// ── Stages ────────────────────────────────────────────────────────────────
+const STAGES=[
+  {
+    name:"Normal Dry Conditions",
+    desc:"The watershed is dry. The stream channel holds minimal baseflow fed by groundwater. Dry or lightly moist soil can absorb rainfall — up to 1–2 inches per hour under ideal conditions. The floodplain is clear. No watches or warnings are in effect."
+  },
+  {
+    name:"Intense Rainfall — Soil Saturating",
+    desc:"A powerful convective storm cell is dropping 2–4 inches of rain per hour over the upper basin. The soil absorbs water initially, but as it saturates it can no longer take in more. Water that can't soak in becomes runoff — flowing downhill across the surface and rapidly concentrating in the channel. The stream is rising fast."
+  },
+  {
+    name:"Flash Flood — Channel Overflowing",
+    desc:"The stream channel has overflowed its banks. A wall of water is moving downstream with tremendous force — carrying sediment, debris, and uprooted vegetation. Flash floods can reach peak flow within minutes of heavy rainfall, and can arrive as a surge even in areas where it isn't raining. This is why forecasters issue Flash Flood Warnings: leave immediately. Do not wait to see the water."
+  }
+];
+
+// ── Hotspots ──────────────────────────────────────────────────────────────
+const HOTSPOTS=[
+  {
+    id:'rain',
+    test:(x,y)=>x>130&&x<500&&y>30&&y<180,
+    minDome:.10, icon:'🌧️',
+    title:'Convective Rain Cell',
+    body:'Flash floods are usually triggered by convective storms — intense, localized thunderstorms that can drop 2–6 inches of rain in just 1–3 hours. Unlike widespread frontal storms that bring steady rain over large areas, convective cells dump enormous amounts of water in a small footprint. A storm sitting over a steep mountain basin can funnel enormous quantities of water into a single stream channel in minutes. The National Weather Service issues Flash Flood Watches when conditions are favorable and Warnings when a flood is imminent or occurring.'
+  },
+  {
+    id:'soil',
+    test:(x,y)=>{ const ty=terrainY(x); return y>ty&&y<ty+82&&x>140&&x<650; },
+    minDome:0, icon:'🪨',
+    title:'Soil Saturation',
+    body:'Dry soil acts like a sponge — it can absorb significant rainfall. But once saturated, it behaves like pavement. The same storm that produces 0.5 inches of runoff on dry ground can produce 3–4 inches of runoff on saturated soil. This is why the second or third storm in a series is far more dangerous than the first. Antecedent soil moisture — how wet the soil already is — is one of the most important variables in flash flood forecasting. Burn scars from wildfires remove vegetation and bake the soil, creating near-zero infiltration even in the first storm.'
+  },
+  {
+    id:'basin',
+    test:(x,y)=>x<285&&y>120&&y<400,
+    minDome:0, icon:'⛰️',
+    title:'Drainage Basin',
+    body:'A drainage basin (or watershed) is all the land that drains to a common point. Steep, narrow basins concentrate runoff rapidly — water has little distance to travel before reaching the channel. In box canyons and slot canyons of the Southwest, a storm miles away can send a wall of water through a dry wash with no local rain at all. Urbanization dramatically increases flash flood risk: roads, parking lots, and rooftops replace absorptive soil with impervious surfaces, tripling or quadrupling runoff volumes.'
+  },
+  {
+    id:'wave',
+    test:(x,y)=>x>285&&x<870&&y>330&&y<H,
+    minDome:.42, icon:'🌊',
+    title:'Flash Flood Wave',
+    body:'When the channel cannot carry the incoming flow, water spills over its banks. The surge front can travel faster than a person can run. Flash flood water carries enormous kinetic energy — just 6 inches of moving water can knock an adult off their feet; 2 feet of water can carry away a vehicle. The sediment-laden flow erodes stream banks, undercuts bridges, and deposits debris fans across roads and floodplains. Most flash flood fatalities involve vehicles — nearly half of all deaths occur when people attempt to drive through flooded roadways.'
+  },
+  {
+    id:'gauge',
+    test:(x,y)=>x>W-138&&x<W-12&&y>240&&y<410,
+    minDome:0, icon:'📊',
+    title:'Stream Gauge & NWS Thresholds',
+    body:'Stream gauges measure water level (stage) and flow rate (discharge) in real time, reporting every 15 minutes to the USGS National Water Information System. The National Weather Service sets flood thresholds for each gauge: Action Stage (be aware), Flood Stage (minor flooding), Moderate Flood Stage, and Major Flood Stage. When forecast models show a gauge will exceed Flood Stage, NWS issues a Flood Warning. NOAA\'s Global Systems Laboratory develops the forecast models and decision support tools that help forecasters make these calls — often with only 30–90 minutes of lead time for flash floods.'
+  }
+];
+
+// ── Animation state ────────────────────────────────────────────────────────
+const CYCLE=28000;
+let elapsed=0,lastFrameTs=null,pausedFlag=false,speedMult=1;
+let manualMode=false,manualDome=0,manualHeat=0;
+let hoveredId=null,currentDome=0,currentTime=0;
+
+function getPos(e){ const r=canvas.getBoundingClientRect(); return{x:(e.clientX-r.left)*(W/r.width),y:(e.clientY-r.top)*(H/r.height)}; }
+canvas.addEventListener('mousemove',e=>{ const{x,y}=getPos(e); const h=HOTSPOTS.find(h=>currentDome>=h.minDome&&h.test(x,y)); hoveredId=h?h.id:null; canvas.style.cursor=h?'pointer':'default'; });
+canvas.addEventListener('mouseleave',()=>{ hoveredId=null; canvas.style.cursor='default'; });
+canvas.addEventListener('click',e=>{ const{x,y}=getPos(e); const h=HOTSPOTS.find(h=>currentDome>=h.minDome&&h.test(x,y)); if(h)showHotspot(h); });
+function showHotspot(h){ document.getElementById('stageView').style.display='none'; document.getElementById('hotspotView').className='hotspot-view active'; document.getElementById('hotspotIcon').textContent=h.icon; document.getElementById('hotspotTitle').textContent=h.title; document.getElementById('hotspotBody').textContent=h.body; if(!pausedFlag)togglePause(); }
+function closeHotspot(){ document.getElementById('stageView').style.display=''; document.getElementById('hotspotView').className='hotspot-view'; if(pausedFlag)togglePause(); }
+function togglePause(){ pausedFlag=!pausedFlag; document.getElementById('pauseBtn').classList.toggle('paused',pausedFlag); document.getElementById('pauseLabel').textContent=pausedFlag?'Play':'Pause'; if(!pausedFlag){lastFrameTs=null;requestAnimationFrame(draw);} }
+function restartAnimation(){ elapsed=0;lastFrameTs=null;manualMode=false;updateAutoBtn();closeHotspot();if(pausedFlag)togglePause(); }
+function scrubToClick(e){ const r=document.getElementById('progressRail').getBoundingClientRect(); elapsed=clamp((e.clientX-r.left)/r.width,0,1)*CYCLE; lastFrameTs=null; }
+document.querySelectorAll('.speed-btn').forEach(btn=>{ btn.addEventListener('click',()=>{ speedMult=parseFloat(btn.dataset.speed); document.querySelectorAll('.speed-btn').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); }); });
+const slider=document.getElementById('intensitySlider');
+slider.addEventListener('input',()=>{ const v=parseInt(slider.value); manualMode=true; manualDome=v/100; manualHeat=clamp((v-10)/90,0,1); updateAutoBtn(); updateSliderStyle(v); document.getElementById('intensityVal').textContent=v+'%'; updateStageText(v<28?0:v<58?1:2); });
+function updateSliderStyle(v){ slider.style.setProperty('--pct',v+'%'); }
+function resumeAuto(){ manualMode=false;lastFrameTs=null;updateAutoBtn(); }
+function updateAutoBtn(){ document.getElementById('autoBtn').classList.toggle('visible',manualMode); }
+
+function getState(t){
+  let dome,heat,stageIdx;
+  if(t<.20){dome=0;heat=0;stageIdx=0;}
+  else if(t<.33){const p=easeInOut((t-.20)/.13);dome=p*.52;heat=p*.28;stageIdx=p>.5?1:0;}
+  else if(t<.46){dome=.52;heat=.28;stageIdx=1;}
+  else if(t<.59){const p=easeInOut((t-.46)/.13);dome=.52+p*.48;heat=.28+p*.72;stageIdx=p>.5?2:1;}
+  else if(t<.78){dome=1;heat=1;stageIdx=2;}
+  else{const p=easeInOut((t-.78)/.22);dome=1-p;heat=1-p;stageIdx=p>.5?0:2;}
+  return{dome:clamp(dome,0,1),heat:clamp(heat,0,1),stageIdx};
+}
+
+// ── Drawing ────────────────────────────────────────────────────────────────
+
+// Sky: clear blue → dark grey storm
+function drawSky(dome){
+  const g=ctx.createLinearGradient(0,0,0,TY[0]);
+  const top=dome<.5?lerpRGB(12,42,105,18,24,48,dome*2):lerpRGB(18,24,48,8,12,22,(dome-.5)*2);
+  g.addColorStop(0,top);
+  g.addColorStop(.55,lerpRGB(28,88,175,20,32,68,dome));
+  g.addColorStop(1,lerpRGB(55,120,205,35,48,82,dome));
+  ctx.fillStyle=g; ctx.fillRect(0,0,W,Math.max(...TY)+10);
+}
+
+// Storm cell: cumulonimbus — single continuous shape, no stacked ellipses
+function drawStormCell(dome,time){
+  if(dome<.08) return;
+  const vis=clamp((dome-.08)/.30,0,1);
+  const wobX=Math.sin(time*.22)*6;
+  const cx=310+wobX;
+
+  ctx.save();
+
+  // Dark rain curtain below cloud base — draws first so cloud sits on top
+  if(vis>.4){
+    const rv=clamp((vis-.4)/.4,0,1);
+    const rg=ctx.createLinearGradient(cx-90,140,cx-90,220);
+    rg.addColorStop(0,`rgba(18,20,30,${rv*.55})`);
+    rg.addColorStop(1,'rgba(18,20,30,0)');
+    ctx.fillStyle=rg;
+    ctx.beginPath();
+    ctx.ellipse(cx,182,lerp(0,88,rv),lerp(0,42,rv),0,0,Math.PI*2);
+    ctx.fill();
+  }
+
+  // Main cloud body — draw as a single filled path using arcs
+  // Build a lumpy cloud silhouette with bezier curves
+  const scale=vis;
+  ctx.fillStyle=`rgba(38,42,55,${vis*0.92})`;
+  ctx.beginPath();
+  // Start at bottom-left
+  ctx.moveTo(cx-lerp(0,95,scale), 155);
+  // Left side bumps up
+  ctx.bezierCurveTo(
+    cx-lerp(0,105,scale), 138,
+    cx-lerp(0,88,scale),  118,
+    cx-lerp(0,60,scale),  112
+  );
+  // Upper-left dome
+  ctx.bezierCurveTo(
+    cx-lerp(0,55,scale), 92,
+    cx-lerp(0,20,scale), 82,
+    cx,                  86
+  );
+  // Upper-right dome
+  ctx.bezierCurveTo(
+    cx+lerp(0,22,scale), 82,
+    cx+lerp(0,52,scale), 90,
+    cx+lerp(0,58,scale), 108
+  );
+  // Right side
+  ctx.bezierCurveTo(
+    cx+lerp(0,88,scale),  115,
+    cx+lerp(0,100,scale), 135,
+    cx+lerp(0,92,scale),  155
+  );
+  // Bottom — flat-ish cloud base
+  ctx.bezierCurveTo(
+    cx+lerp(0,72,scale), 162,
+    cx-lerp(0,72,scale), 162,
+    cx-lerp(0,95,scale), 155
+  );
+  ctx.closePath();
+  ctx.fill();
+
+  // Slightly lighter highlight on upper portion
+  ctx.fillStyle=`rgba(52,56,72,${vis*0.60})`;
+  ctx.beginPath();
+  ctx.ellipse(cx-lerp(0,12,scale), lerp(155,108,scale), lerp(0,45,scale), lerp(0,28,scale), -0.2, 0, Math.PI*2);
+  ctx.fill();
+
+  // Dark flat base (precipitation area)
+  ctx.fillStyle=`rgba(14,15,22,${vis*0.72})`;
+  ctx.beginPath();
+  ctx.ellipse(cx, 156, lerp(0,88,scale), lerp(0,16,scale), 0, 0, Math.PI*2);
+  ctx.fill();
+
+  // Lightning
+  if(dome>.55){
+    const lVis=clamp((dome-.55)/.25,0,1);
+    const lPhase=Math.sin(time*3.2)*0.5+0.5;
+    if(lPhase>.72){
+      ctx.strokeStyle=`rgba(255,245,180,${lVis*lPhase*0.92})`;
+      ctx.lineWidth=1.5; ctx.beginPath();
+      ctx.moveTo(cx-4,162);
+      ctx.lineTo(cx+9,186);
+      ctx.lineTo(cx+1,186);
+      ctx.lineTo(cx+12,208);
+      ctx.stroke();
+    }
+  }
+
+  ctx.restore();
+}
+
+// Rain: drops only under the storm cell (x=140–480), never in clear sky on right
+function drawRain(dome,time){
+  if(dome<.12) return;
+  const vis=clamp((dome-.12)/.30,0,1);
+  RAIN_DROPS.forEach(d=>{
+    // Hard cutoff — no rain east of x=480 (under the storm cell only)
+    if(d.x>480) return;
+    const p=((time*d.speed*.7+d.phase)%1);
+    const tY=terrainY(d.x);
+    const dropY=148+p*(tY-158);
+    const al=vis*Math.sin(p*Math.PI)*.80;
+    if(al<.05) return;
+    // Rain intensity fades toward edges of cell
+    const cellFade=clamp(1-Math.abs(d.x-310)/170,0,1);
+    if(cellFade<.05) return;
+    ctx.strokeStyle=`rgba(130,185,235,${al*cellFade})`;
+    ctx.lineWidth=1.2;
+    ctx.beginPath();
+    ctx.moveTo(d.x-1,dropY);
+    ctx.lineTo(d.x-2,dropY+d.len+dome*5);
+    ctx.stroke();
+  });
+}
+
+// Soil layers with saturation
+function drawSoilLayers(dome){
+  // Draw soil only in the terrain body, clipped
+  ctx.save();
+  ctx.beginPath(); ctx.fill(TERRAIN_PATH); // use fill to define clip shape
+  ctx.clip(TERRAIN_PATH);
+
+  const sat=clamp((dome-.05)/.60,0,1); // saturation lags rain slightly
+  SOIL_LAYERS.forEach(layer=>{
+    // Sample at multiple x positions
+    for(let xi=0;xi<TX.length-1;xi++){
+      const x1=TX[xi], x2=TX[xi+1];
+      const y1=TY[xi],  y2=TY[xi+1];
+      const top1=y1+layer.y, top2=y2+layer.y;
+      const bot1=y1+layer.y+layer.h, bot2=y2+layer.y+layer.h;
+      const [dr,dg,db]=layer.dryColor;
+      const [wr,wg,wb]=layer.wetColor;
+      const c=lerpRGB(dr,dg,db,wr,wg,wb,sat);
+      ctx.fillStyle=c;
+      ctx.beginPath();
+      ctx.moveTo(x1,top1); ctx.lineTo(x2,top2);
+      ctx.lineTo(x2,bot2); ctx.lineTo(x1,bot1);
+      ctx.closePath(); ctx.fill();
+    }
+  });
+
+  // Saturation water effect in soil (blue tint when saturated)
+  if(sat>.35){
+    const wVis=clamp((sat-.35)/.40,0,1);
+    const sg=ctx.createLinearGradient(0,0,0,H);
+    sg.addColorStop(0,'rgba(40,120,200,0)');
+    sg.addColorStop(.4,`rgba(30,100,185,${wVis*.22})`);
+    sg.addColorStop(1,`rgba(20,80,165,${wVis*.12})`);
+    ctx.fillStyle=sg; ctx.fill(TERRAIN_PATH);
+  }
+  ctx.restore();
+}
+
+// Bedrock layer (impermeable)
+function drawBedrock(){
+  const bg=ctx.createLinearGradient(0,H-60,0,H);
+  bg.addColorStop(0,'rgba(65,55,45,1)');
+  bg.addColorStop(1,'rgba(45,38,30,1)');
+  ctx.fillStyle=bg; ctx.fill(BEDROCK_PATH);
+  // Rock texture lines
+  ctx.strokeStyle='rgba(80,68,52,0.55)'; ctx.lineWidth=1; ctx.setLineDash([4,8]);
+  for(let i=0;i<3;i++){
+    const yo=i*18;
+    ctx.beginPath();
+    for(let xi=0;xi<BX.length-1;xi++){
+      const x=BX[xi]+(BX[xi+1]-BX[xi])*.5, y=BY[xi]+yo;
+      xi===0?ctx.moveTo(BX[xi],BY[xi]+yo):ctx.lineTo(x,y);
+    }
+    ctx.stroke();
+  }
+  ctx.setLineDash([]);
+}
+
+// Water in stream channel — feathered left and right edges, no hard cutoffs
+function drawStreamWater(dome,time){
+  const flowSpeed=lerp(0.18,1.40,dome);
+  const maxRise=lerp(0,42,dome);
+  const xStart=CX_T[0];
+  const xEnd=dome>.42
+    ? CX_T[CX_T.length-1]+lerp(0,130,clamp((dome-.42)/.35,0,1))
+    : CX_T[CX_T.length-1];
+  const fadeW=48; // px over which edges fade in/out
+
+  ctx.save();
+  ctx.beginPath();
+  ctx.moveTo(xStart, channelBottomY(xStart));
+  for(let x=xStart;x<=xEnd;x+=4){
+    const chX=Math.min(x, CX_T[CX_T.length-1]);
+    const baseY=channelBottomY(chX)-maxRise;
+    // Taper depth to zero at both ends
+    const leftFade =clamp((x-xStart)/fadeW,0,1);
+    const rightFade=clamp((xEnd-x)/fadeW,0,1);
+    const edgeFade =Math.min(leftFade,rightFade);
+    const wave=Math.sin(x*.045-time*flowSpeed*6.5)*lerp(0.5,2.8,dome)+
+               Math.sin(x*.082+time*flowSpeed*4.2)*lerp(0.3,1.8,dome);
+    const y=channelBottomY(chX) - maxRise*edgeFade + wave*edgeFade;
+    x===xStart ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+  }
+  // Bottom follows channel bed
+  for(let x=xEnd;x>=xStart;x-=4){
+    ctx.lineTo(x, channelBottomY(Math.min(x,CX_T[CX_T.length-1]))+8);
+  }
+  ctx.closePath();
+
+  // Horizontal gradient — transparent at edges, opaque in center
+  const hg=ctx.createLinearGradient(xStart,0,xEnd,0);
+  hg.addColorStop(0,                         'rgba(35,105,195,0)');
+  hg.addColorStop(fadeW/(xEnd-xStart),        `rgba(45,130,210,0.88)`);
+  hg.addColorStop(1-(fadeW/(xEnd-xStart))*0.8,`rgba(28,68,145,0.88)`);
+  hg.addColorStop(1,                         'rgba(28,68,145,0)');
+  ctx.fillStyle=hg; ctx.fill();
+  ctx.restore();
+
+  // Turbulence particles (only in center, away from edges)
+  if(dome>.15){
+    const vis=clamp((dome-.15)/.30,0,1);
+    STREAM_PARTS.forEach(p=>{
+      const xRange=CX_T[CX_T.length-1]-CX_T[0];
+      const px=CX_T[0]+fadeW+((p.xFrac)%1)*(xRange-fadeW*2);
+      const baseY=channelBottomY(px)-maxRise*0.5;
+      const py=baseY+Math.sin(time*2.2+p.phase*Math.PI*2)*4;
+      const al=vis*(0.18+0.12*Math.sin(time*1.8+p.phase*Math.PI*2));
+      if(al<.04) return;
+      ctx.fillStyle=`rgba(140,205,255,${al})`;
+      ctx.beginPath(); ctx.arc(px,py,2,0,Math.PI*2); ctx.fill();
+    });
+  }
+}
+
+// Debris floating on flood surface — drawn after terrain so it's on top of water
+function drawDebris(dome,time){
+  if(dome<.42) return;
+  const vis=clamp((dome-.42)/.35,0,1);
+  if(vis<.35) return;
+  const dVis=clamp((vis-.35)/.40,0,1);
+  const maxRise=lerp(0,42,dome);
+  const xStart=CX_T[0];
+  const xEnd=CX_T[CX_T.length-1]+lerp(0,130,vis);
+  const fadeW=48;
+  DEBRIS.forEach(d=>{
+    const xRange=xEnd-xStart;
+    const dx=xStart+((d.xFrac+time*0.10)%1)*xRange;
+    const leftFade=clamp((dx-xStart)/fadeW,0,1);
+    const rightFade=clamp((xEnd-dx)/fadeW,0,1);
+    const edgeFade=Math.min(leftFade,rightFade);
+    if(edgeFade<.12) return;
+    const chX=Math.min(dx,CX_T[CX_T.length-1]);
+    const waterY=channelBottomY(chX)-maxRise*edgeFade;
+    const dy=waterY+Math.sin(time*1.5+d.phase*Math.PI*2)*2.5;
+    const al=dVis*edgeFade*(0.62+0.25*Math.sin(time+d.phase*Math.PI*2));
+    if(al<.06) return;
+    ctx.fillStyle=`rgba(110,82,48,${al})`;
+    ctx.beginPath(); ctx.arc(dx,dy,d.size,0,Math.PI*2); ctx.fill();
+  });
+}
+
+// Runoff arrows: surface water flowing toward channel — upstream basin slopes only
+function drawRunoffArrows(dome,time){
+  if(dome<.20) return;
+  const vis=clamp((dome-.20)/.35,0,1);
+  // Only on the upstream left-side slopes where rain is falling
+  const arrows=[
+    {x:105,dir:1},{x:148,dir:1},{x:192,dir:1},{x:238,dir:1},{x:272,dir:1}
+  ];
+  arrows.forEach((a,i)=>{
+    const p=((time*.45+i*.18)%1);
+    const startY=terrainY(a.x)-5;
+    const endX=a.x+a.dir*lerp(18,32,vis);
+    const endY=terrainY(endX)-3;
+    const al=vis*Math.sin(p*Math.PI)*.72;
+    if(al<.05) return;
+    ctx.strokeStyle=`rgba(80,165,235,${al})`; ctx.lineWidth=1.5;
+    ctx.beginPath(); ctx.moveTo(a.x,startY); ctx.lineTo(endX,endY); ctx.stroke();
+    const angle=Math.atan2(endY-startY,endX-a.x);
+    ctx.fillStyle=`rgba(80,165,235,${al})`;
+    ctx.beginPath();
+    ctx.moveTo(endX,endY);
+    ctx.lineTo(endX-8*Math.cos(angle-0.4),endY-8*Math.sin(angle-0.4));
+    ctx.lineTo(endX-8*Math.cos(angle+0.4),endY-8*Math.sin(angle+0.4));
+    ctx.closePath(); ctx.fill();
+  });
+}
+
+// Stage gauge — right side
+function drawGauge(dome,heat){
+  const gx=W-88, gy=250, gh=148, gw=38;
+  // Gauge box
+  ctx.fillStyle='rgba(0,0,0,.65)'; ctx.beginPath(); ctx.roundRect(gx-8,gy-18,gw+16,gh+42,4); ctx.fill();
+  ctx.font='bold 9px Barlow Condensed'; ctx.textAlign='center'; ctx.fillStyle='rgba(255,255,255,.55)';
+  ctx.fillText('STREAM',gx+gw/2,gy-6); ctx.fillText('GAUGE',gx+gw/2,gy+3);
+
+  // Gauge tube
+  ctx.fillStyle='rgba(255,255,255,.08)'; ctx.beginPath(); ctx.roundRect(gx,gy+10,gw,gh,3); ctx.fill();
+  ctx.strokeStyle='rgba(255,255,255,.20)'; ctx.lineWidth=1; ctx.stroke();
+
+  // Threshold marks
+  const thresholds=[
+    {frac:.25, label:'ACTION', color:'rgba(255,230,50,.85)'},
+    {frac:.52, label:'FLOOD',  color:'rgba(255,145,30,.90)'},
+    {frac:.78, label:'MAJOR',  color:'rgba(255,55,30,.95)'},
+  ];
+  thresholds.forEach(t=>{
+    const ty=gy+10+gh*(1-t.frac);
+    ctx.strokeStyle=t.color; ctx.lineWidth=1; ctx.setLineDash([3,3]);
+    ctx.beginPath(); ctx.moveTo(gx,ty); ctx.lineTo(gx+gw,ty); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.font='bold 8px Barlow Condensed'; ctx.textAlign='right';
+    ctx.fillStyle=t.color; ctx.fillText(t.label,gx-2,ty+3);
+  });
+
+  // Water fill in gauge
+  const fillFrac=clamp(lerp(0.04,0.92,heat),0,1);
+  const fillH=gh*fillFrac;
+  const fillY=gy+10+gh-fillH;
+  const waterColor=fillFrac<.28
+    ?`rgba(45,130,210,0.85)`
+    :fillFrac<.55
+    ?`rgba(255,165,40,0.90)`
+    :`rgba(255,55,30,0.95)`;
+  ctx.fillStyle=waterColor;
+  ctx.beginPath(); ctx.roundRect(gx+1,fillY,gw-2,fillH,2); ctx.fill();
+
+  // Stage readout
+  const stageLabel=fillFrac<.22?'Low':fillFrac<.46?'Rising':fillFrac<.68?'Flood Stage':'Major Flood';
+  ctx.font='bold 10px Barlow Condensed'; ctx.textAlign='center';
+  ctx.fillStyle=fillFrac<.22?'rgba(255,255,255,.62)':waterColor;
+  ctx.fillText(stageLabel,gx+gw/2,gy+gh+28);
+
+  // Numeric stage (feet)
+  const stageFt=(fillFrac*22).toFixed(1);
+  ctx.font='bold 18px Barlow Condensed';
+  ctx.fillStyle=waterColor;
+  ctx.fillText(`${stageFt}ft`,gx+gw/2,gy+gh+44);
+}
+
+function drawHotspotHover(dome,time){
+  if(!hoveredId) return;
+  const h=HOTSPOTS.find(h=>h.id===hoveredId);
+  if(!h||dome<h.minDome) return;
+  const pulse=0.5+Math.sin(time*4)*0.28;
+  ctx.strokeStyle=`rgba(45,212,191,${pulse})`; ctx.lineWidth=1.5; ctx.setLineDash([4,4]);
+  if(h.id==='rain')      { ctx.beginPath(); ctx.roundRect(130,32,368,148,4); ctx.stroke(); }
+  else if(h.id==='soil') { ctx.beginPath(); ctx.roundRect(140,terrainY(300),420,78,4); ctx.stroke(); }
+  else if(h.id==='basin'){ ctx.beginPath(); ctx.roundRect(8,122,270,272,4); ctx.stroke(); }
+  else if(h.id==='wave') { ctx.beginPath(); ctx.roundRect(285,332,580,110,4); ctx.stroke(); }
+  else if(h.id==='gauge'){ ctx.beginPath(); ctx.roundRect(W-140,238,128,172,4); ctx.stroke(); }
+  ctx.setLineDash([]);
+}
+
+function drawLabels(dome,heat){
+  // Terrain labels
+  ctx.font='bold 10px Barlow Condensed'; ctx.textAlign='center';
+  ctx.fillStyle='rgba(255,255,255,.55)';
+  ctx.fillText('UPPER BASIN',130,TY[0]-12);
+  ctx.fillStyle='rgba(255,255,255,.48)';
+  ctx.fillText('CHANNEL',460,TY[9]-20);
+  ctx.fillStyle='rgba(255,255,255,.48)';
+  ctx.fillText('FLOODPLAIN',750,TY[18]-12);
+
+  // Clear sky sun — right side, fades in once storm is active
+  if(dome>.10){
+    const la=clamp((dome-.10)/.25,0,1);
+    const sx=775, sy=68;
+    // Sun disc
+    ctx.fillStyle=`rgba(255,228,110,${la*.68})`;
+    ctx.beginPath(); ctx.arc(sx,sy,13,0,Math.PI*2); ctx.fill();
+    // Rays
+    for(let i=0;i<8;i++){
+      const a=(i/8)*Math.PI*2;
+      ctx.strokeStyle=`rgba(255,228,110,${la*.45})`; ctx.lineWidth=1.5;
+      ctx.beginPath();
+      ctx.moveTo(sx+Math.cos(a)*16,sy+Math.sin(a)*16);
+      ctx.lineTo(sx+Math.cos(a)*22,sy+Math.sin(a)*22);
+      ctx.stroke();
+    }
+    ctx.font='bold 10px Barlow Condensed'; ctx.textAlign='center';
+    ctx.fillStyle=`rgba(255,228,110,${la*.88})`;
+    ctx.fillText('CLEAR SKIES',sx,sy+28);
+    ctx.font='9px Barlow';
+    ctx.fillStyle=`rgba(255,255,255,${la*.58})`;
+    ctx.fillText('No rain here',sx,sy+40);
+  }
+
+  // Upstream flood water arrow — appears during flood stage
+  if(dome>.52){
+    const la=clamp((dome-.52)/.25,0,1);
+    ctx.font='bold 10px Barlow Condensed'; ctx.textAlign='center';
+    ctx.fillStyle=`rgba(255,165,40,${la*.90})`;
+    ctx.fillText('WATER COMING',500,terrainY(490)-36);
+    ctx.fillText('FROM UPSTREAM ↓',500,terrainY(490)-23);
+  }
+
+  // Soil saturation label
+  if(dome>.18){
+    const la=clamp((dome-.18)/.28,0,1);
+    const sat=clamp((dome-.05)/.60,0,1);
+    ctx.font='9px Barlow'; ctx.textAlign='left';
+    ctx.fillStyle=`rgba(255,255,255,${la*.72})`;
+    ctx.fillText(sat<.30?'SOIL ABSORBING':sat<.65?'NEARING SATURATION':'SOIL SATURATED',148,terrainY(200)+36);
+  }
+
+  // Flash flood warning banner
+  if(dome>.72){
+    const la=clamp((dome-.72)/.20,0,1);
+    ctx.font='bold 12px Barlow Condensed'; ctx.textAlign='center';
+    ctx.fillStyle=`rgba(255,55,30,${la*.95})`;
+    ctx.fillText('⚠ FLASH FLOOD WARNING ⚠',460,H-10);
+  }
+
+  // W→E
+  ctx.font='10px Barlow'; ctx.fillStyle='rgba(255,255,255,.35)';
+  ctx.textAlign='left';  ctx.fillText('↑ UPSTREAM',8,H-10);
+  ctx.textAlign='right'; ctx.fillText('DOWNSTREAM ↑',W-148,H-10);
+}
+
+// ── UI ──────────────────────────────────────────────────────────────────────
+let lastStageIdx=-1;
+function updateStageText(si){
+  if(si===lastStageIdx) return; lastStageIdx=si;
+  document.getElementById('stageName').textContent=STAGES[si].name;
+  document.getElementById('stageDesc').textContent=STAGES[si].desc;
+  for(let i=0;i<3;i++) document.getElementById(`pip${i}`).classList.toggle('active',i===si);
+}
+function updateUI(dome,si,t){
+  const cur=t*28,mm=Math.floor(cur/60),ss=String(Math.floor(cur%60)).padStart(2,'0');
+  document.getElementById('timeLabel').textContent=`${mm}:${ss} / 0:28`;
+  document.getElementById('progressBar').style.width=(t*100)+'%';
+  if(document.getElementById('hotspotView').className.indexOf('active')===-1) updateStageText(si);
+  if(!manualMode){const v=Math.round(dome*100);slider.value=v;updateSliderStyle(v);document.getElementById('intensityVal').textContent=v+'%';}
+}
+
+function draw(ts){
+  if(!pausedFlag){
+    if(lastFrameTs!==null) elapsed+=(ts-lastFrameTs)*speedMult;
+    lastFrameTs=ts; if(elapsed>=CYCLE) elapsed=elapsed%CYCLE;
+  } else { lastFrameTs=null; }
+  const t=elapsed/CYCLE;
+  let dome,heat,stageIdx;
+  if(manualMode){ dome=manualDome;heat=manualHeat;stageIdx=dome<.28?0:dome<.58?1:2; }
+  else { ({dome,heat,stageIdx}=getState(t)); }
+  currentDome=dome; currentTime=elapsed/1000;
+  const time=currentTime;
+
+  drawSky(dome);
+  drawStormCell(dome,time);
+  drawRain(dome,time);
+  drawBedrock();
+  drawSoilLayers(dome);
+  drawRunoffArrows(dome,time);
+  drawStreamWater(dome,time);
+  drawTerrain();
+  drawDebris(dome,time);
+  drawGauge(dome,heat);
+  drawHotspotHover(dome,time);
+  drawLabels(dome,heat);
+
+  if(!manualMode) updateUI(dome,stageIdx,t);
+  else if(document.getElementById('hotspotView').className.indexOf('active')===-1) updateStageText(stageIdx);
+  requestAnimationFrame(draw);
+}
+
+// Terrain surface (drawn last so it covers soil internals at edges)
+function drawTerrain(){
+  const tg=ctx.createLinearGradient(0,200,0,H);
+  tg.addColorStop(0,'rgb(78,62,42)');
+  tg.addColorStop(.25,'rgb(65,52,35)');
+  tg.addColorStop(1,'rgb(50,40,28)');
+  ctx.strokeStyle='rgba(105,88,62,0.7)'; ctx.lineWidth=1.5;
+  ctx.fillStyle=tg; ctx.fill(TERRAIN_PATH); ctx.stroke(TERRAIN_PATH);
+}
+
+requestAnimationFrame(draw);
+</script>
+</body>
+</html>
+  
+  
+  
+</body>
+
+</html>
