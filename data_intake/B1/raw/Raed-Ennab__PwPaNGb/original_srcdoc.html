@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>Light &amp; Shadow — Reflection</title>
+
+    <link rel="canonical" href="https://codepen.io/Raed-Ennab/pen/PwPaNGb">
+  
+  
+  
+  
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <!--
+  CodePen Challenge: Light & Shadow — Week: Reflection
+  Tags: cpc-reflection, codepenchallenge
+  Notes:
+  • Panel 1 uses CSS -webkit-box-reflect (with gradient mask) for a crisp mirror. 
+    (Supported in Chromium/WebKit. Firefox users still get Panel 2.)
+  • Panel 2 uses pure SVG (feTurbulence + feDisplacementMap) for a cross‑browser water reflection with live controls.
+  • Everything is self‑contained: no external assets.
+-->
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Reflection — CodePen Challenge (Light & Shadow)</title>
+	<style>
+		:root {
+			--bg: #0b0f1a;
+			--bg2: #0e1324;
+			--fg: #e6e9ef;
+			--muted: #9aa4b2;
+			--card: rgba(255, 255, 255, 0.05);
+			--border: rgba(255, 255, 255, 0.08);
+			--glow: 0 20px 60px rgba(120, 170, 255, 0.25), 0 2px 8px rgba(120, 170, 255, 0.25);
+			--radius: 18px;
+			--shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+			--accent: #7aa2ff;
+		}
+
+		html,
+		body {
+			height: 100%;
+		}
+
+		body {
+			margin: 0;
+			font: 16px/1.45 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+			color: var(--fg);
+			background:
+				radial-gradient(1200px 600px at 20% -10%, rgba(120, 170, 255, 0.25), transparent 60%),
+				radial-gradient(1000px 600px at 100% 0%, rgba(255, 120, 200, 0.18), transparent 60%),
+				linear-gradient(180deg, var(--bg), var(--bg2));
+		}
+
+		.wrap {
+			max-width: 1100px;
+			margin: 40px auto;
+			padding: 0 20px;
+		}
+
+		header {
+			text-align: center;
+			margin-bottom: 28px;
+		}
+
+		header h1 {
+			font-size: clamp(24px, 3.8vw, 40px);
+			margin: 0 0 8px;
+			letter-spacing: 0.3px;
+		}
+
+		header p {
+			margin: 0;
+			color: var(--muted);
+		}
+
+		.grid {
+			display: grid;
+			gap: 22px;
+			grid-template-columns: 1fr;
+		}
+
+		@media (min-width: 980px) {
+			.grid {
+				grid-template-columns: 1fr 1fr;
+			}
+		}
+
+		.card {
+			background: var(--card);
+			border: 1px solid var(--border);
+			border-radius: var(--radius);
+			box-shadow: var(--shadow);
+			overflow: clip;
+		}
+
+		.card .head {
+			padding: 16px 18px 0;
+		}
+
+		.card h2 {
+			margin: 0 0 4px;
+			font-size: 18px;
+			letter-spacing: 0.2px;
+		}
+
+		.card .sub {
+			margin: 0 0 10px;
+			color: var(--muted);
+			font-size: 14px;
+		}
+
+		.card .body {
+			padding: 16px 18px 20px;
+		}
+
+		/* ---------- Panel 1: CSS reflection via -webkit-box-reflect ---------- */
+		.reflectable {
+			width: 100%;
+			aspect-ratio: 16/9;
+			border-radius: 14px;
+			transform-style: preserve-3d;
+			transition: transform .6s cubic-bezier(.2, .8, .2, 1), box-shadow .6s;
+			box-shadow: var(--glow);
+			/* The reflection itself */
+			-webkit-box-reflect: below 0 linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.08) 15%, rgba(0, 0, 0, 0.25) 45%, rgba(0, 0, 0, 0.5) 85%);
+		}
+
+		.reflectable:hover {
+			transform: perspective(900px) rotateX(5deg) rotateY(-6deg) translateY(-2px);
+		}
+
+		/* The scene drawn in SVG */
+		.scene svg {
+			width: 100%;
+			height: 100%;
+			display: block;
+			border-radius: 14px;
+		}
+
+		/* ---------- Panel 2: SVG water reflection (cross‑browser) ---------- */
+		.svg-wrap {
+			width: 100%;
+			aspect-ratio: 3/2;
+			border-radius: 14px;
+			overflow: hidden;
+			border: 1px solid var(--border);
+			background: #0a0e18;
+		}
+
+		.controls {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 12px;
+			margin-top: 14px;
+		}
+
+		.control {
+			display: grid;
+			gap: 6px;
+			font-size: 13px;
+			color: var(--muted);
+		}
+
+		.control label {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+
+		.control output {
+			color: var(--fg);
+			font-variant-numeric: tabular-nums;
+		}
+
+		input[type="range"] {
+			-webkit-appearance: none;
+			appearance: none;
+			height: 28px;
+			background: transparent;
+			width: 100%;
+		}
+
+		input[type="range"]:focus {
+			outline: none;
+		}
+
+		input[type="range"]::-webkit-slider-runnable-track {
+			height: 6px;
+			background: linear-gradient(90deg, rgba(122, 162, 255, 0.35), rgba(122, 162, 255, 0.1));
+			border-radius: 999px;
+		}
+
+		input[type="range"]::-moz-range-track {
+			height: 6px;
+			background: linear-gradient(90deg, rgba(122, 162, 255, 0.35), rgba(122, 162, 255, 0.1));
+			border-radius: 999px;
+		}
+
+		input[type="range"]::-webkit-slider-thumb {
+			-webkit-appearance: none;
+			appearance: none;
+			margin-top: -6px;
+			width: 18px;
+			height: 18px;
+			border-radius: 50%;
+			background: var(--accent);
+			box-shadow: 0 0 0 4px rgba(122, 162, 255, 0.15);
+		}
+
+		input[type="range"]::-moz-range-thumb {
+			width: 18px;
+			height: 18px;
+			border: none;
+			border-radius: 50%;
+			background: var(--accent);
+			box-shadow: 0 0 0 4px rgba(122, 162, 255, 0.15);
+		}
+
+		footer {
+			text-align: center;
+			color: var(--muted);
+			font-size: 13px;
+			margin: 28px 0 10px;
+		}
+
+		.tag {
+			display: inline-flex;
+			gap: 6px;
+			align-items: center;
+			background: var(--card);
+			border: 1px solid var(--border);
+			padding: 6px 10px;
+			border-radius: 999px;
+		}
+
+		.tag code {
+			color: var(--fg);
+		}
+	</style>
+</head>
+
+<body>
+	<div class="wrap">
+		<header>
+			<h1>Light & Shadow — Reflection</h1>
+			<p>Two approaches: <strong>CSS mirror</strong> via <code>-webkit-box-reflect</code>, and a <strong>cross‑browser SVG water reflection</strong> with live controls.</p>
+		</header>
+
+		<section class="grid">
+			<!-- Panel 1: CSS -webkit-box-reflect -->
+			<article class="card">
+				<div class="head">
+					<h2>1) CSS Mirror (<code>-webkit-box-reflect</code>)</h2>
+					<p class="sub">A crisp studio‑style reflection with a gradient mask. Hover for a subtle 3D tilt.</p>
+				</div>
+				<div class="body">
+					<div class="reflectable scene" aria-label="Neon orb with reflective floor">
+						<!-- Self-contained SVG artwork (no external assets) -->
+						<svg viewBox="0 0 800 450" role="img" aria-labelledby="ttl desc">
+							<title id="ttl">Neon Orb</title>
+							<desc id="desc">A glowing orb over a reflective surface with light beams.</desc>
+							<defs>
+								<linearGradient id="bgGrad" x1="0" x2="0" y1="0" y2="1">
+									<stop offset="0%" stop-color="#0a0e18" />
+									<stop offset="100%" stop-color="#0e1430" />
+								</linearGradient>
+								<radialGradient id="orb" cx="50%" cy="50%" r="55%">
+									<stop offset="0%" stop-color="#cfe3ff" />
+									<stop offset="50%" stop-color="#7aa2ff" />
+									<stop offset="100%" stop-color="#4e64ff" />
+								</radialGradient>
+								<filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+									<feGaussianBlur stdDeviation="15" result="b" />
+									<feMerge>
+										<feMergeNode in="b" />
+										<feMergeNode in="SourceGraphic" />
+									</feMerge>
+								</filter>
+							</defs>
+							<rect width="800" height="450" fill="url(#bgGrad)" />
+							<!-- Floor split -->
+							<rect y="260" width="800" height="190" fill="#070b14" />
+							<g filter="url(#softGlow)">
+								<circle cx="400" cy="220" r="95" fill="url(#orb)" />
+								<!-- light beams -->
+								<g opacity="0.5">
+									<rect x="120" y="170" width="560" height="5" fill="#89a7ff" transform="rotate(4 120 170)" />
+									<rect x="140" y="205" width="520" height="5" fill="#89a7ff" transform="rotate(-3 140 205)" />
+									<rect x="100" y="240" width="600" height="5" fill="#89a7ff" transform="rotate(2 100 240)" />
+								</g>
+							</g>
+						</svg>
+					</div>
+					<p class="sub" style="margin-top:12px">Tip: tweak the gradient inside <code>-webkit-box-reflect</code> to control how the mirror fades.</p>
+				</div>
+			</article>
+
+			<!-- Panel 2: SVG Water Reflection -->
+			<article class="card">
+				<div class="head">
+					<h2>2) SVG Water Reflection (cross‑browser)</h2>
+					<p class="sub">Mirrors the scene and distorts it with animated noise for a subtle rippling water effect.</p>
+				</div>
+				<div class="body">
+					<div class="svg-wrap">
+						<svg viewBox="0 0 1200 800" width="100%" height="100%" role="img" aria-labelledby="svgt">
+							<title id="svgt">Mountain Lake — Water Reflection</title>
+							<defs>
+								<!-- Scene gradients -->
+								<linearGradient id="sky" x1="0" x2="0" y1="0" y2="1">
+									<stop offset="0%" stop-color="#0b1022" />
+									<stop offset="100%" stop-color="#15234a" />
+								</linearGradient>
+								<radialGradient id="sun" cx="65%" cy="25%" r="20%">
+									<stop offset="0%" stop-color="#ffeeb5" />
+									<stop offset="70%" stop-color="#ffa8a8" stop-opacity="0.9" />
+									<stop offset="100%" stop-color="#ff7ab3" stop-opacity="0.5" />
+								</radialGradient>
+								<linearGradient id="mountA" x1="0" y1="0" x2="1" y2="1">
+									<stop offset="0%" stop-color="#6b88d6" />
+									<stop offset="100%" stop-color="#314d9d" />
+								</linearGradient>
+								<linearGradient id="mountB" x1="0" y1="0" x2="1" y2="1">
+									<stop offset="0%" stop-color="#889de0" />
+									<stop offset="100%" stop-color="#3f57ad" />
+								</linearGradient>
+
+								<!-- Ripple filter -->
+								<filter id="ripple" x="-10%" y="-10%" width="120%" height="140%">
+									<feTurbulence id="turb" type="fractalNoise" baseFrequency="0.003 0.06" numOctaves="2" seed="2" />
+									<feDisplacementMap id="dmap" in="SourceGraphic" in2="turb" scale="20" xChannelSelector="R" yChannelSelector="G" />
+									<feGaussianBlur stdDeviation="0.25" />
+								</filter>
+
+								<!-- Fade mask so the reflection dissolves into the lake -->
+								<linearGradient id="fadeGrad" x1="0" x2="0" y1="0" y2="1">
+									<stop offset="0%" stop-color="#fff" />
+									<stop offset="65%" stop-color="#fff" />
+									<stop offset="100%" stop-color="#000" />
+								</linearGradient>
+								<mask id="fadeMask">
+									<rect width="1200" height="400" fill="url(#fadeGrad)" />
+								</mask>
+
+								<!-- Reusable scene group -->
+								<g id="scene">
+									<rect width="1200" height="400" fill="url(#sky)" />
+									<circle cx="820" cy="150" r="110" fill="url(#sun)" />
+									<g opacity="0.95">
+										<polygon points="100,360 360,180 580,360" fill="url(#mountA)" />
+										<polygon points="460,360 760,140 1060,360" fill="url(#mountB)" />
+										<polygon points="0,360 1200,360 1200,420 0,420" fill="#0a0e18" />
+									</g>
+								</g>
+							</defs>
+
+							<!-- Top (original) -->
+							<use href="#scene" />
+
+							<!-- Lake (bottom) background -->
+							<rect y="400" width="1200" height="400" fill="#0a0e18" />
+
+							<!-- Mirrored reflection -->
+							<g transform="translate(0,800) scale(1,-1)" filter="url(#ripple)" mask="url(#fadeMask)">
+								<use href="#scene" />
+							</g>
+						</svg>
+					</div>
+
+					<div class="controls">
+						<div class="control">
+							<label>Ripple amplitude <output id="ampOut">20</output></label>
+							<input id="amp" type="range" min="0" max="60" step="1" value="20" />
+						</div>
+						<div class="control">
+							<label>Noise (Y) frequency <output id="freqOut">0.060</output></label>
+							<input id="freq" type="range" min="0.01" max="0.20" step="0.005" value="0.060" />
+						</div>
+						<div class="control">
+							<label>Animation speed <output id="speedOut">1.0×</output></label>
+							<input id="speed" type="range" min="0.25" max="3" step="0.05" value="1" />
+						</div>
+						<div class="control">
+							<label>Seed <output id="seedOut">2</output></label>
+							<input id="seed" type="range" min="0" max="10" step="1" value="2" />
+						</div>
+					</div>
+				</div>
+			</article>
+		</section>
+
+		<footer>
+			<span class="tag">Tag your Pen: <code>cpc-reflection</code> · <code>codepenchallenge</code></span>
+		</footer>
+	</div>
+
+	<script>
+		// ---------- SVG ripple controls ----------
+		const svg = document.querySelector('.svg-wrap svg');
+		const turb = svg.getElementById('turb');
+		const dmap = svg.getElementById('dmap');
+		// Animate the turbulence by updating the baseFrequency over time (Y component)
+		let t = 0;
+		let speed = 1.0; // seconds multiplier
+		function tick(ts) {
+			t += (speed * 0.0016); // ~60fps baseline
+			// baseFrequency: "x y" — gently oscillate Y for a shimmery water feel
+			const baseX = 0.003;
+			const baseY0 = parseFloat(freq.value);
+			const y = Math.max(0.001, baseY0 + Math.sin(t) * baseY0 * 0.25);
+			turb.setAttribute('baseFrequency', baseX.toFixed(4) + ' ' + y.toFixed(4));
+			requestAnimationFrame(tick);
+		}
+		requestAnimationFrame(tick);
+		// UI wiring
+		const amp = document.getElementById('amp');
+		const freq = document.getElementById('freq');
+		const seed = document.getElementById('seed');
+		const speedCtl = document.getElementById('speed');
+		const ampOut = document.getElementById('ampOut');
+		const freqOut = document.getElementById('freqOut');
+		const speedOut = document.getElementById('speedOut');
+		const seedOut = document.getElementById('seedOut');
+
+		function setAmp(v) {
+			dmap.setAttribute('scale', v);
+			ampOut.textContent = v;
+		}
+
+		function setFreq(v) {
+			freqOut.textContent = (+v).toFixed(3);
+		}
+
+		function setSeed(v) {
+			turb.setAttribute('seed', v);
+			seedOut.textContent = v;
+		}
+
+		function setSpeed(v) {
+			speed = +v;
+			speedOut.textContent = v + '\u00D7';
+		}
+		setAmp(amp.value);
+		setFreq(freq.value);
+		setSeed(seed.value);
+		setSpeed(speedCtl.value);
+		amp.addEventListener('input', e => setAmp(e.target.value));
+		freq.addEventListener('input', e => setFreq(e.target.value));
+		seed.addEventListener('input', e => setSeed(e.target.value));
+		speedCtl.addEventListener('input', e => setSpeed(e.target.value));
+	</script>
+</body>
+
+</html>
+  
+  
+  
+</body>
+
+</html>
