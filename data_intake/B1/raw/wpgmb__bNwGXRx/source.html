@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>Split Theme Typography</title>
+
+    <link rel="canonical" href="https://codepen.io/wpgmb/pen/bNwGXRx">
+  
+  
+  
+  
+<style>
+:root{
+  --drag-x: 0px;
+  --drag-y: 0px;
+  --font-size: clamp(42px, 8vw, 120px);
+  --pad-x: 18px;
+  --pad-y: 10px;
+  --font: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  --light-fill:
+    linear-gradient(
+      125deg,
+      rgba(255, 60, 60, 0.22) 0%,
+      rgba(247, 247, 1, 0.26) 18%,
+      rgba(58, 255, 58, 0.20) 36%,
+      rgba(60, 225, 255, 0.20) 55%,
+      rgba(70, 110, 255, 0.18) 75%,
+      rgba(255, 70, 220, 0.20) 100%
+    ),
+    linear-gradient(
+      140deg, #ffffff 0%, #fffef1 18%, #f7fff2 36%, #f2fcff 56%, #f2f4ff 76%, #fff3fb 100%
+    );
+--dark-fill:
+  linear-gradient(
+    125deg,
+    rgba(255, 40, 40, 0.22) 0%,
+    rgba(247, 247, 1, 0.15) 18%,
+    rgba(60, 255, 60, 0.16) 36%,
+    rgba(45, 230, 255, 0.18) 55%,
+    rgba(70, 120, 255, 0.20) 75%,
+    rgba(255, 65, 230, 0.18) 100%
+    ),
+        linear-gradient(
+          140deg,
+          #06070f 0%,
+          #121020 22%,
+          #0c1330 46%,
+          #0a1822 68%,
+          #12111f 84%,
+          #05070d 100%
+        );
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: #000;
+    }
+
+    body {
+      position: relative;
+      font-family: var(--font);
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: none;
+      cursor: default;
+    }
+
+    .top-text-control {
+      position: fixed;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(620px, calc(100vw - 28px));
+      z-index: 40;
+      pointer-events: auto;
+    }
+
+    #textChanger {
+      width: 100%;
+      height: 50px;
+      padding: 0 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(15, 23, 42, 0.14);
+      outline: none;
+      background: #ffffff;
+      color: #0f172a;
+      box-shadow:
+        0 10px 26px rgba(0,0,0,0.12),
+        inset 0 1px 0 rgba(255,255,255,0.9);
+      font: 600 15px/1.2 Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      letter-spacing: 0.01em;
+      user-select: text;
+      -webkit-user-select: text;
+      touch-action: manipulation;
+    }
+
+    #textChanger::placeholder {
+      color: #64748b;
+    }
+
+    #textChanger:focus {
+      border-color: rgba(59, 130, 246, 0.45);
+      box-shadow:
+        0 12px 30px rgba(0,0,0,0.14),
+        0 0 0 4px rgba(59, 130, 246, 0.12);
+    }
+
+    @media (max-width: 640px) {
+      .top-text-control {
+        top: 12px;
+        width: calc(100vw - 20px);
+      }
+
+      #textChanger {
+        height: 44px;
+        border-radius: 12px;
+        font-size: 14px;
+      }
+    }
+
+    .panel {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      width: 50%;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .panel.left {
+      left: 0;
+      z-index: 1;
+      background-image: var(--light-fill);
+      background-color: #ffffff;
+    }
+
+    .panel.right {
+      right: 0;
+      z-index: 2;
+      background-image: var(--dark-fill);
+      background-color: #06070f;
+    }
+
+    .panel::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(
+          180deg,
+          rgba(255,255,255,0.10) 0%,
+          rgba(255,255,255,0.03) 24%,
+          rgba(255,255,255,0.00) 58%
+        );
+      mix-blend-mode: screen;
+      opacity: 0.55;
+    }
+
+    .seam {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: calc(50% - 1px);
+      width: 2px;
+      pointer-events: none;
+      background:
+        linear-gradient(
+          to bottom,
+          rgba(255,255,255,0.18),
+          rgba(255,255,255,0.07) 35%,
+          rgba(255,255,255,0.18) 70%,
+          rgba(255,255,255,0.09)
+        );
+      box-shadow:
+        0 0 14px rgba(255,255,255,0.08),
+        0 0 16px rgba(0,255,255,0.03),
+        0 0 16px rgba(255,0,255,0.03);
+      z-index: 4;
+    }
+
+    .text-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 10;
+      overflow: hidden;
+    }
+
+    .text-layer.left-half {
+      clip-path: inset(0 50% 0 0);
+    }
+
+    .text-layer.right-half {
+      clip-path: inset(0 0 0 50%);
+    }
+
+    .word {
+      position: absolute;
+      left: 0;
+      top: 0;
+      transform: translate(var(--drag-x), var(--drag-y));
+      padding: var(--pad-y) var(--pad-x);
+      font: 800 var(--font-size)/1 var(--font);
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+      color: transparent;
+      -webkit-background-clip: text;
+      background-clip: text;
+      background-size: 100% 100%;
+      background-position: 50% 50%;
+      background-repeat: no-repeat;
+      will-change: transform;
+    }
+
+    .ink-dark {
+      background-image: var(--dark-fill);
+      filter: drop-shadow(0 2px 8px rgba(10,12,20,0.22));
+    }
+
+    .ink-light {
+      background-image: var(--light-fill);
+      filter: drop-shadow(0 2px 8px rgba(255,255,255,0.12));
+    }
+
+    #dragHitbox {
+      position: fixed;
+      left: 0;
+      top: 0;
+      transform: translate(var(--drag-x), var(--drag-y));
+      padding: var(--pad-y) var(--pad-x);
+      font: 800 var(--font-size)/1 var(--font);
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+      color: transparent;
+      background: transparent;
+      border-radius: 14px;
+      cursor: grab;
+      z-index: 20;
+      touch-action: none;
+      outline: none;
+    }
+
+    #dragHitbox::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 14px;
+      border: 1px dashed rgba(255,255,255,0);
+      transition: border-color 160ms ease, background-color 160ms ease;
+      pointer-events: none;
+    }
+
+    #dragHitbox:hover::before,
+    #dragHitbox:focus-visible::before {
+      border-color: rgba(255,255,255,0.20);
+      background: rgba(255,255,255,0.03);
+    }
+
+    #dragHitbox.dragging {
+      cursor: grabbing;
+    }
+
+    #dragHitbox.dragging::before {
+      border-color: rgba(255,255,255,0.22);
+      background: rgba(255,255,255,0.04);
+    }
+</style>
+
+  </head>
+
+<body translate="no">
+  <div class="top-text-control">
+    <input
+      id="textChanger"
+      type="text"
+      placeholder="Type here to change text"
+      autocomplete="off"
+      spellcheck="false"
+      aria-label="Change draggable text"
+    />
+  </div>
+
+  <div class="panel left" aria-hidden="true"></div>
+  <div class="panel right" aria-hidden="true"></div>
+  <div class="seam" aria-hidden="true"></div>
+
+  <div class="text-layer left-half" aria-hidden="true">
+    <div class="word ink-dark">Drag Me</div>
+  </div>
+
+  <div class="text-layer right-half" aria-hidden="true">
+    <div class="word ink-light">Drag Me</div>
+  </div>
+
+  <div id="dragHitbox" role="button" tabindex="0" aria-label="Drag Me">Drag Me</div>
+  
+    <script id="rendered-js" >
+(function () {
+  const root = document.documentElement;
+  const hitbox = document.getElementById('dragHitbox');
+  const textInput = document.getElementById('textChanger');
+
+  let pos = { x: 0, y: 0 };
+  let drag = {
+    active: false,
+    pointerId: null,
+    offsetX: 0,
+    offsetY: 0 };
+
+
+  const MARGIN = 8;
+  const DEFAULT_TEXT = 'Drag Me';
+
+  function getWordNodes() {
+    return document.querySelectorAll('.word');
+  }
+
+  function setDisplayText(value) {
+    const next = value && value.length ? value : DEFAULT_TEXT;
+
+    getWordNodes().forEach(node => {
+      node.textContent = next;
+    });
+
+    hitbox.textContent = next;
+    hitbox.setAttribute('aria-label', next);
+
+    applyPosition(pos.x, pos.y);
+  }
+
+  function size() {
+    return {
+      w: hitbox.offsetWidth || 0,
+      h: hitbox.offsetHeight || 0 };
+
+  }
+
+  function clamp(n, min, max) {
+    return Math.max(min, Math.min(max, n));
+  }
+
+  function applyPosition(x, y) {
+    const s = size();
+    const maxX = Math.max(MARGIN, window.innerWidth - s.w - MARGIN);
+    const maxY = Math.max(MARGIN, window.innerHeight - s.h - MARGIN);
+
+    pos.x = clamp(x, MARGIN, maxX);
+    pos.y = clamp(y, MARGIN, maxY);
+
+    root.style.setProperty('--drag-x', pos.x + 'px');
+    root.style.setProperty('--drag-y', pos.y + 'px');
+  }
+
+  function centerWord() {
+    const s = size();
+    const x = Math.round((window.innerWidth - s.w) / 2);
+    const y = Math.round((window.innerHeight - s.h) / 2);
+    applyPosition(x, y);
+  }
+
+  function startDrag(e) {
+    e.preventDefault();
+    drag.active = true;
+    drag.pointerId = e.pointerId;
+    drag.offsetX = e.clientX - pos.x;
+    drag.offsetY = e.clientY - pos.y;
+    hitbox.classList.add('dragging');
+
+    try {hitbox.setPointerCapture(e.pointerId);} catch (_) {}
+  }
+
+  function moveDrag(e) {
+    if (!drag.active) return;
+    if (drag.pointerId !== null && e.pointerId !== drag.pointerId) return;
+
+    const nextX = e.clientX - drag.offsetX;
+    const nextY = e.clientY - drag.offsetY;
+    applyPosition(nextX, nextY);
+  }
+
+  function endDrag(e) {
+    if (!drag.active) return;
+    if (drag.pointerId !== null && e.pointerId !== drag.pointerId) return;
+
+    drag.active = false;
+    drag.pointerId = null;
+    hitbox.classList.remove('dragging');
+  }
+
+  hitbox.addEventListener('pointerdown', startDrag);
+  hitbox.addEventListener('pointermove', moveDrag);
+  hitbox.addEventListener('pointerup', endDrag);
+  hitbox.addEventListener('pointercancel', endDrag);
+  hitbox.addEventListener('lostpointercapture', () => {
+    drag.active = false;
+    drag.pointerId = null;
+    hitbox.classList.remove('dragging');
+  });
+
+  hitbox.addEventListener('keydown', e => {
+    const step = e.shiftKey ? 20 : 8;
+    if (e.key === 'ArrowLeft') {e.preventDefault();applyPosition(pos.x - step, pos.y);}
+    if (e.key === 'ArrowRight') {e.preventDefault();applyPosition(pos.x + step, pos.y);}
+    if (e.key === 'ArrowUp') {e.preventDefault();applyPosition(pos.x, pos.y - step);}
+    if (e.key === 'ArrowDown') {e.preventDefault();applyPosition(pos.x, pos.y + step);}
+  });
+
+  if (textInput) {
+    textInput.addEventListener('input', () => {
+      setDisplayText(textInput.value);
+    });
+
+    textInput.addEventListener('keydown', e => {
+      e.stopPropagation();
+    });
+
+    textInput.addEventListener('pointerdown', e => {
+      e.stopPropagation();
+    });
+  }
+
+  function init() {
+    setDisplayText(DEFAULT_TEXT);
+    centerWord();
+  }
+
+  window.addEventListener('load', init);
+  window.addEventListener('resize', () => applyPosition(pos.x, pos.y));
+
+  requestAnimationFrame(() => {
+    setDisplayText(DEFAULT_TEXT);
+    centerWord();
+  });
+})();
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>

@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>CSS Only - Burger Customizer</title>
+
+    <link rel="canonical" href="https://codepen.io/hernandack/pen/qEEMoxm">
+  
+  
+  
+  
+<style>
+:root {
+  --burger-bun-height: 60px;
+  --burger-filler-height: 24px;
+  --burger-filler-height-2: calc(var(--burger-filler-height) / 2);
+  --burger-filler-height-3: calc(var(--burger-filler-height) / 3);
+  --burger-filler-width: 100%;
+  --burger-filler-radius: 1rem;
+}
+
+body {
+	background: #2d2d2d;
+	color: #fff;
+}
+
+.order {
+  display: grid;
+  grid-template-columns: minmax(200px,2fr) minmax(200px, 6fr);
+  grid-template-rows: repeat(8, minmax(0, 3rem));
+  align-items: center;
+  gap: 1rem;
+  overflow: hidden;
+	padding: 0.5rem 2rem;
+}
+input {
+  display: none;
+}
+.order__checkbox {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.order__label {
+  font-size: 1.2rem;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 1rem;
+}
+.order__label__switch {
+  width: 3rem;
+  height: 1.5rem;
+  background-color: #fff;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.order__label__switch__indicator {
+  width: 1.5rem;
+  height: 1rem;
+  background-color: #000;
+  border-radius: 1.3rem;
+  translate: 0.3rem 0;
+  transition: all 0.3s ease-in-out;
+}
+.order__checkbox:checked + .order__label .order__label__switch__indicator {
+  translate: 1.2rem 0;
+  background-color: #f96b4a;
+}
+
+.burger {
+  position: relative;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  grid-column: 2 / -1;
+  grid-row: 1 / -1;
+}
+.burger::before {
+	content: "";
+	inset: -40px -40px;
+	background: rgb(0 0 0 / .4);
+	position: absolute;
+	z-index: -1;
+	outline: 2px solid white;
+	border-radius: var(--burger-filler-radius);
+	box-shadow: 0.5rem 0.5rem 2rem rgb(0 0 0 / .5)
+}
+
+.burger__bun {
+  width: 100%;
+}
+
+.burger__bun--top {
+  height: var(--burger-bun-height);
+  border-radius: 9rem 9rem var(--burger-filler-radius) var(--burger-filler-radius);
+}
+
+.burger__bun--bottom {
+  height: calc(var(--burger-bun-height) / 2);
+  border-radius: var(--burger-filler-radius) var(--burger-filler-radius) 9rem 9rem;
+}
+
+.burger > div {
+  animation: filler 1s cubic-bezier(.47,1.61,.7,.12) both;
+}
+.burger__patty,
+.burger__onion,
+.burger__lettuce,
+.burger__cheese,
+.burger__tomato,
+.burger__pickles {
+  width: var(--burger-filler-width);
+  height: var(--burger-filler-height);
+  border-radius: var(--burger-filler-radius);
+}
+
+.burger__patty {
+  background-color: var(--burger-patty-color);
+}
+
+.burger__onion {
+  background-color: var(--burger-onion-color);
+  height: var(--burger-filler-height-2);
+}
+
+.burger__ketchup {
+  width: var(--burger-filler-width);
+  height: var(--burger-filler-height-3);
+  background-color: var(--burger-ketchup-color);
+  border-radius: var(--burger-filler-radius);
+}
+
+.burger__lettuce {
+  background-color: var(--burger-lettuce-color);
+  height: var(--burger-filler-height);
+  margin-top: calc(var(--burger-filler-height) / -1.2);
+}
+
+.burger__cheese {
+  background-color: var(--burger-cheese-color);
+  height: var(--burger-filler-height-2);
+  margin-top: -5px;
+  margin-bottom: -5px;
+  position: relative;
+  z-index: 1;
+}
+
+.burger__mustard {
+  width: var(--burger-filler-width);
+  height: var(--burger-filler-height-3);
+  background-color: var(--burger-mustard-color);
+  border-radius: var(--burger-filler-radius);
+}
+
+.burger__tomato {
+  background-color: var(--burger-tomato-color);
+  height: var(--burger-filler-height-2);
+}
+
+.burger__pickles {
+  background-color: var(--burger-pickles-color);
+  margin-top: -5px;
+  margin-bottom: calc(var(--burger-filler-height-2) * -1);
+}
+
+.order__checkbox {
+  margin-right: 0.5rem;
+}
+
+.order__label {
+  margin-right: 1rem;
+}
+
+/* checkbox toggler */
+#pickles:not(:checked) ~ .burger .burger__pickles {
+  display: none;
+}
+#tomato:not(:checked) ~ .burger .burger__tomato {
+  display: none;
+}
+#mustard:not(:checked) ~ .burger .burger__mustard {
+  display: none;
+}
+#cheese:not(:checked) ~ .burger .burger__cheese {
+  display: none;
+}
+#lettuce:not(:checked) ~ .burger .burger__lettuce {
+  display: none;
+}
+#ketchup:not(:checked) ~ .burger .burger__ketchup {
+  display: none;
+}
+#onion:not(:checked) ~ .burger .burger__onion {
+  display: none;
+}
+#patty:not(:checked) ~ .burger .burger__patty {
+  display: none;
+}
+
+@keyframes filler {
+  0% {
+    transform: scaleY(0) translateX(50%);
+    opacity: 0;
+  }
+  90% {
+    transform: scaleY(1) translateX(-20%);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleY(1) translateX(0);
+    opacity: 1;
+  }
+}
+
+.pattern-1 {
+  background:
+  radial-gradient(circle at 8% 12%, #fff8dc 1px, transparent 2px),
+  radial-gradient(circle at 20% 18%, #fff8dc 1px, transparent 2px),
+  radial-gradient(circle at 35% 10%, #fff8dc 1px, transparent 2px),
+  radial-gradient(circle at 50% 20%, #fff8dc 1px, transparent 2px),
+  radial-gradient(circle at 65% 15%, #fff8dc 1px, transparent 2px),
+  radial-gradient(circle at 80% 25%, #fff8dc 1px, transparent 2px),
+  radial-gradient(circle at 15% 35%, #fff8dc 1px, transparent 2px),
+  radial-gradient(circle at 30% 40%, #fff8dc 1px, transparent 2px),
+  radial-gradient(circle at 45% 30%, #fff8dc 1px, transparent 2px),
+  radial-gradient(circle at 60% 35%, #fff8dc 1px, transparent 2px),
+  radial-gradient(circle at 75% 40%, #fff8dc 1px, transparent 2px),
+  radial-gradient(circle at 90% 50%, #fff8dc 1px, transparent 2px),
+  radial-gradient(circle at 10% 60%, #fff8dc 1px, transparent 2px),
+  radial-gradient(circle at 25% 70%, #fff8dc 1px, transparent 2px),
+  radial-gradient(circle at 40% 65%, #fff8dc 1px, transparent 2px),
+  radial-gradient(circle at 55% 75%, #fff8dc 1px, transparent 2px),
+  radial-gradient(circle at 70% 80%, #fff8dc 1px, transparent 2px),
+  radial-gradient(circle at 85% 85%, #fff8dc 1px, transparent 2px),
+  linear-gradient(to bottom,rgb(224, 156, 72) 0%,rgb(219, 167, 99) 100%);
+background-repeat: no-repeat;
+background-size: cover;
+position: relative;
+box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.2),
+            0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.pattern-onion {
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.8) 10%,
+    rgba(255, 255, 255, 0.6) 20%,
+    rgba(255, 255, 255, 0.4) 30%,
+    rgba(255, 255, 255, 0.3) 40%,
+    rgba(255, 255, 255, 0.6) 50%,
+    rgba(255, 255, 255, 0.4) 60%,
+    rgba(255, 255, 255, 0.8) 70%,
+    rgba(255, 255, 255, 0.6) 80%,
+    rgba(255, 255, 255, 0.4) 90%
+  ),
+  repeating-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.6),
+    rgba(255, 255, 255, 0.2) 5px,
+    transparent 5px,
+    transparent 10px
+  );
+background-blend-mode: overlay;
+border-radius: var(--burger-filler-radius);
+box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.pattern-patty {
+  background: radial-gradient(circle, 
+    #7d4e2d 20%, 
+    #5c3a20 60%, 
+    #4a2e18 100%),
+  repeating-linear-gradient(
+    -45deg,
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.2) 5px,
+    transparent 5px,
+    transparent 10px
+  );
+background-blend-mode: multiply;
+border-radius: var(--burger-filler-radius);
+box-shadow: 
+  inset 0 2px 4px rgba(0, 0, 0, 0.3),
+  0 2px 4px rgba(0, 0, 0, 0.2); 
+overflow: hidden;
+}
+
+.pattern-lettuce {
+  background: linear-gradient(
+    to bottom,
+    #27ae60 0%,
+    #2ecc71 50%,
+    #27ae60 100%
+  );
+  border-radius: var(--burger-filler-radius);
+  clip-path: polygon(
+    0% 80%, 10% 90%, 20% 70%, 30% 85%, 40% 75%, 50% 90%, 
+    60% 70%, 70% 85%, 80% 75%, 90% 90%, 100% 80%, 
+    100% 100%, 0% 100%
+  );
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.pattern-cheese {
+  background: linear-gradient(
+    to bottom,
+    #f39c12 0%,
+    #f1c40f 50%,
+    #f39c12 100%
+  );
+  border-radius: var(--burger-filler-radius);
+  clip-path: polygon(
+    0% 0%, 100% 0%, 100% 70%, 90% 80%, 80% 70%, 70% 85%, 
+    60% 75%, 50% 90%, 40% 75%, 30% 85%, 20% 70%, 10% 80%, 
+    0% 70%
+  );
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.pattern-ketchup {
+  background: 
+    radial-gradient(
+      ellipse at 50% 10%, 
+      rgba(255, 255, 255, 0.2) 0%, 
+      transparent 40%
+    ),#d32f2f;
+  border-radius: var(--burger-filler-radius);
+  clip-path: path(
+    "M0,20 C5,10 15,5 25,15 C35,5 45,15 55,10 C65,5 75,15 85,10 C95,15 100,10 100,20 
+    L100,80 C90,85 80,75 70,85 C60,75 50,85 40,75 C30,85 20,75 10,85 C5,80 0,85 0,80 Z"
+  );
+  box-shadow: 
+    inset 0 3px 4px rgba(255, 255, 255, 0.3),
+    0 2px 4px rgba(178, 34, 34, 0.4);
+  height: var(--burger-filler-height-3);
+  overflow: visible;
+}
+
+.pattern-mustard {
+  background: 
+    radial-gradient(
+      circle at 30% 30%,
+      rgba(255, 255, 255, 0.3) 0%,
+      transparent 30%
+    ),
+    repeating-linear-gradient(
+      45deg,
+      #f1c40f 0%,
+      #f39c12 8%,
+      #f1c40f 15%
+    );
+  border-radius: var(--burger-filler-radius);
+  clip-path: path(
+    "M0,25 C15,15 25,20 35,10 C45,5 55,15 65,10 C75,15 85,5 100,15 
+    L100,80 C85,75 75,85 65,80 C55,90 45,75 35,85 C25,75 15,90 0,80 Z"
+  );
+  box-shadow: 
+    inset 0 2px 5px rgba(255, 255, 255, 0.4),
+    0 1px 3px rgba(0, 0, 0, 0.2);
+  overflow: visible;
+}
+
+.pattern-pickles {
+  background: linear-gradient(
+    to bottom,
+    #3c885e 0%,
+    #2e6b4a 50%,
+    #3c885e 100%
+  );
+  border-radius: var(--burger-filler-radius);
+  clip-path: polygon(
+    5% 10%, 15% 5%, 30% 15%, 40% 10%, 50% 20%, 60% 10%, 
+    70% 15%, 85% 5%, 95% 10%, 90% 30%, 80% 40%, 85% 60%, 
+    70% 70%, 60% 60%, 50% 80%, 40% 60%, 30% 70%, 15% 60%, 
+    10% 40%, 5% 30%
+  );
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.pattern-tomato {
+  background: 
+    radial-gradient(circle at center, 
+      rgba(255, 255, 255, 0.4) 10%, 
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at center,
+      #e74c3c 20%,
+      #e74c3c 60%,
+      #c0392b 100%
+    ),
+    repeating-radial-gradient(
+      circle at center,
+      rgba(231, 76, 60, 0.9),
+      rgba(231, 76, 60, 0.9) 5px,
+      rgba(192, 57, 43, 0.8) 6px,
+      rgba(192, 57, 43, 0.8) 8px
+    );
+  background-blend-mode: soft-light, normal, multiply;
+  border-radius: var(--burger-filler-radius);
+  box-shadow: 
+    inset 0 0 10px rgba(255, 255, 255, 0.4),
+    inset 0 0 5px rgba(0, 0, 0, 0.2);
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  <main class="order">
+    <input type="checkbox" id="patty" class="order__checkbox" checked />
+    <label for="patty" class="order__label">
+      <div class="order__label__switch">
+        <div class="order__label__switch__indicator"></div>
+      </div>
+      <span class="order__label--text">Patty</span>
+    </label>
+
+    <input type="checkbox" id="onion" class="order__checkbox" />
+    <label for="onion" class="order__label">
+      <div class="order__label__switch">
+        <div class="order__label__switch__indicator"></div>
+      </div>
+      <span class="order__label--text">Onion</span>
+    </label>
+
+    <input type="checkbox" id="ketchup" class="order__checkbox" />
+    <label for="ketchup" class="order__label">
+      <div class="order__label__switch">
+        <div class="order__label__switch__indicator"></div>
+      </div>
+      <span class="order__label--text">Ketchup</span>
+    </label>
+
+    <input type="checkbox" id="lettuce" class="order__checkbox" checked />
+    <label for="lettuce" class="order__label">
+      <div class="order__label__switch">
+        <div class="order__label__switch__indicator"></div>
+      </div>
+      <span class="order__label--text">Lettuce</span>
+    </label>
+
+    <input type="checkbox" id="cheese" class="order__checkbox" checked />
+    <label for="cheese" class="order__label">
+      <div class="order__label__switch">
+        <div class="order__label__switch__indicator"></div>
+      </div>
+      <span class="order__label--text">Cheese</span>
+    </label>
+
+    <input type="checkbox" id="mustard" class="order__checkbox" />
+    <label for="mustard" class="order__label">
+      <div class="order__label__switch">
+        <div class="order__label__switch__indicator"></div>
+      </div>
+      <span class="order__label--text">Mustard</span>
+    </label>
+
+    <input type="checkbox" id="tomato" class="order__checkbox" checked />
+    <label for="tomato" class="order__label">
+      <div class="order__label__switch">
+        <div class="order__label__switch__indicator"></div>
+      </div>
+      <span class="order__label--text">Tomato</span>
+    </label>
+
+    <input type="checkbox" id="pickles" class="order__checkbox" checked />
+    <label for="pickles" class="order__label">
+      <div class="order__label__switch">
+        <div class="order__label__switch__indicator"></div>
+      </div>
+      <span class="order__label--text">Pickles</span>
+    </label>
+
+    <div class="burger">
+      <div class="burger__bun burger__bun--top pattern-1"></div>
+      <div class="burger__onion pattern-onion"></div>
+      <div class="burger__cheese pattern-cheese"></div>
+      <div class="burger__patty pattern-patty"></div>
+      <div class="burger__ketchup pattern-ketchup"></div>
+      <div class="burger__lettuce pattern-lettuce"></div>
+      <div class="burger__patty pattern-patty"></div>
+      <div class="burger__lettuce pattern-lettuce"></div>
+      <div class="burger__mustard pattern-mustard"></div>
+      <div class="burger__ketchup pattern-ketchup"></div>
+      <div class="burger__tomato pattern-tomato"></div>
+      <div class="burger__pickles pattern-pickles"></div>
+      <div class="burger__bun burger__bun--bottom pattern-1"></div>
+    </div>
+  </main>
+  
+  
+  
+</body>
+
+</html>

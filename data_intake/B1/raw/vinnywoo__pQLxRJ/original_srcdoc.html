@@ -1,0 +1,3443 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>Only CSS: Diorama Maker v1.0 - Heart</title>
+
+    <link rel="canonical" href="https://codepen.io/vinnywoo/pen/pQLxRJ">
+  
+  <link rel="stylesheet" href="https://public.codepenassets.com/css/normalize-5.0.0.min.css">
+
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Lato:400'>
+  
+<style>
+body {
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  font-family: "Lato", sans-serif;
+  align-items: center;
+  perspective: 1000px;
+}
+
+div {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+.input {
+  display: none;
+}
+.input.wireframe:checked + .wireframe {
+  background: rgba(255, 255, 255, 0.6);
+}
+.input.wireframe:checked ~ .diorama .box_panel {
+  display: block !important;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.input.camera_h:checked + .camera_h {
+  background: rgba(255, 255, 255, 0.6);
+}
+.input.camera_h:checked ~ .diorama .diorama_z {
+  animation: cameraZ 5000ms ease-in-out infinite alternate;
+}
+.input.camera_v:checked + .camera_v {
+  background: rgba(255, 255, 255, 0.6);
+}
+.input.camera_v:checked ~ .diorama .diorama_x {
+  animation: cameraX 9000ms ease-in-out infinite alternate;
+}
+
+.label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 20px;
+  width: 200px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.15);
+  font-size: 14px;
+  border-radius: 5px;
+  transition: 400ms;
+  cursor: pointer;
+}
+.label:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+.label.wireframe {
+  transform: translateY(20px);
+}
+.label.camera_h {
+  transform: translateY(70px);
+}
+.label.camera_v {
+  transform: translateY(120px);
+}
+
+.diorama {
+  position: relative;
+  transform: rotateX(60deg) translateZ(140px);
+}
+.diorama_x {
+  transition: 1000ms cubic-bezier(0.17, 0.935, 0.305, 1);
+}
+.diorama_z {
+  transition: 1000ms cubic-bezier(0.17, 0.935, 0.305, 1);
+}
+
+.base {
+  position: absolute;
+  width: 360px;
+  height: 360px;
+  transform: translate(-50%, -50%) translateZ(-340px);
+}
+.base_panel {
+  position: absolute;
+  background: linear-gradient(45deg, #232226 0%, #000000 100%);
+}
+.base_panel.o-top {
+  width: 360px;
+  height: 360px;
+}
+.base_panel.o-top::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.1);
+  transform: translateZ(-60px) scale(1.1);
+}
+.base_panel.o-front {
+  bottom: 0;
+  width: 400px;
+  height: 30px;
+  font-size: 7px;
+  line-height: 1;
+  color: #666;
+  text-align: center;
+  transform-origin: 0 100%;
+  transform: rotateX(-60deg) translateX(-20px) translateY(30px);
+  clip-path: polygon(20px 0, 380px 0, 395.2px 30px, 4.8px 30px);
+  filter: brightness(80%);
+}
+.base_panel.o-back {
+  width: 400px;
+  height: 30px;
+  transform-origin: 0 0;
+  transform: rotateX(60deg) translateX(-20px) translateY(-30px);
+  clip-path: polygon(20px 30px, 380px 30px, 395.2px 0, 4.8px 0);
+  filter: brightness(40%);
+}
+.base_panel.o-left {
+  width: 30px;
+  height: 400px;
+  transform-origin: 0 0;
+  transform: rotateY(-60deg) translateX(-30px) translateY(-20px);
+  clip-path: polygon(0 4.8px, 30px 20px, 30px 380px, 0 395.2px);
+  filter: brightness(60%);
+}
+.base_panel.o-right {
+  right: 0;
+  width: 30px;
+  height: 400px;
+  transform-origin: 100% 100%;
+  transform: rotateY(60deg) translateX(30px) translateY(-20px);
+  clip-path: polygon(0 20px, 30px 4.8px, 30px 395.2px, 0 380px);
+  filter: brightness(60%);
+}
+
+@keyframes cameraZ {
+  0% {
+    transform: rotateZ(-60deg);
+  }
+  100% {
+    transform: rotateZ(60deg);
+  }
+}
+@keyframes cameraX {
+  0% {
+    transform: rotateX(-20deg);
+  }
+  100% {
+    transform: rotateX(20deg);
+  }
+}
+.layer {
+  position: absolute;
+  top: -140px;
+  left: -140px;
+  display: grid;
+  grid-template: auto/repeat(7, 1fr);
+  width: 280px;
+  height: 280px;
+}
+.layer:nth-child(1) {
+  transform: translateZ(-40px);
+}
+.layer:nth-child(2) {
+  transform: translateZ(-80px);
+}
+.layer:nth-child(3) {
+  transform: translateZ(-120px);
+}
+.layer:nth-child(4) {
+  transform: translateZ(-160px);
+}
+.layer:nth-child(5) {
+  transform: translateZ(-200px);
+}
+.layer:nth-child(6) {
+  transform: translateZ(-240px);
+}
+.layer:nth-child(7) {
+  transform: translateZ(-280px);
+}
+.layer:nth-child(8) {
+  transform: translateZ(-320px);
+}
+.layer:nth-child(9) {
+  transform: translateZ(-360px);
+}
+.layer:nth-child(10) {
+  transform: translateZ(-400px);
+}
+
+.box {
+  position: relative;
+}
+.box_inner {
+  position: relative;
+}
+.box_panel {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 0, 0, 0.1);
+}
+.box_panel.o-front {
+  filter: brightness(80%);
+  transform: rotateX(-90deg) translateZ(20px);
+}
+.box_panel.o-back {
+  filter: brightness(40%);
+  transform: rotateX(90deg) translateZ(20px);
+}
+.box_panel.o-right {
+  filter: brightness(60%);
+  transform: rotateY(90deg) translateZ(20px);
+}
+.box_panel.o-left {
+  filter: brightness(60%);
+  transform: rotateY(-90deg) translateZ(20px);
+}
+.box_panel.o-top {
+  transform: rotateX(0deg) translateZ(20px);
+}
+
+.controller {
+  position: absolute;
+  width: 20%;
+  height: 100%;
+}
+.controller.o-1 {
+  left: 0%;
+}
+.controller.o-1:hover ~ .diorama .diorama_z {
+  transform: rotateZ(140deg);
+}
+.controller.o-2 {
+  left: 20%;
+}
+.controller.o-2:hover ~ .diorama .diorama_z {
+  transform: rotateZ(70deg);
+}
+.controller.o-3 {
+  left: 40%;
+}
+.controller.o-3:hover ~ .diorama .diorama_z {
+  transform: rotateZ(0deg);
+}
+.controller.o-4 {
+  left: 60%;
+}
+.controller.o-4:hover ~ .diorama .diorama_z {
+  transform: rotateZ(-70deg);
+}
+.controller.o-5 {
+  left: 80%;
+}
+.controller.o-5:hover ~ .diorama .diorama_z {
+  transform: rotateZ(-140deg);
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <!-- Make your diorama!!-->
+<!-- Original https://codepen.io/YusukeNakaya/pen/dQOOea-->
+<!-- - STEP 1: Fork-->
+<!-- - STEP 2: Change property "title" and "colors".-->
+<!-- - STEP 3: Share on SNS-->
+<!-- Name Plate-->
+<!-- Color of cube. ex: "#ff0000", "rgba(255, 255, 255, 1)"-->
+<div class="controller o-1"></div>
+<div class="controller o-2"></div>
+<div class="controller o-3"></div>
+<div class="controller o-4"></div>
+<div class="controller o-5"></div>
+<input class="input wireframe" id="wireframe" type="checkbox"/>
+<label class="label wireframe" for="wireframe">Wire frame</label>
+<input class="input camera_h" id="camera_h" type="checkbox" checked="checked"/>
+<label class="label camera_h" for="camera_h">Camera Left-Right</label>
+<input class="input camera_v" id="camera_v" type="checkbox" checked="checked"/>
+<label class="label camera_v" for="camera_v">Camera Up-Down</label>
+<div class="diorama">
+  <div class="diorama_x">
+    <div class="diorama_z">
+      <div class="base">
+        <div class="base_panel o-top"></div>
+        <div class="base_panel o-front">
+          <h1 class="diorama_title">Heart</h1>
+        </div>
+        <div class="base_panel o-back"></div>
+        <div class="base_panel o-left"></div>
+        <div class="base_panel o-right"></div>
+      </div>
+      <div class="layer">
+        <div class="box key_0_0">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_0_1">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_0_2">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_0_3">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_0_4">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_0_5">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_0_6">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_0_7">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_0_8">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_0_9">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_0_10">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_0_11">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_0_12">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_0_13">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_0_14">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_0_15">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_0_16">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_0_17">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_0_18">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_0_19">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_0_20">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_0_21">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_0_22">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_0_23">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_0_24">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_0_25">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_0_26">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_0_27">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_0_28">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_0_29">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_0_30">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_0_31">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_0_32">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_0_33">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_0_34">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_0_35">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_0_36">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_0_37">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_0_38">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_0_39">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_0_40">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_0_41">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_0_42">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_0_43">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_0_44">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_0_45">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_0_46">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_0_47">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_0_48">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+      </div>
+      <div class="layer">
+        <div class="box key_1_0">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_1_1">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_1_2">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_1_3">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_1_4">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_1_5">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_1_6">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_1_7">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_1_8">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_1_9">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_1_10">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_1_11">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_1_12">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_1_13">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_1_14">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_1_15">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_1_16">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_1_17">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_1_18">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_1_19">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_1_20">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_1_21">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_1_22">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:#55efc4;display:block"></div>
+            <div class="box_panel o-left" style="background:#55efc4;display:block"></div>
+            <div class="box_panel o-right" style="background:#55efc4;display:block"></div>
+            <div class="box_panel o-top" style="background:#55efc4;display:block"></div>
+            <div class="box_panel o-back" style="background:#55efc4;display:block"></div>
+          </div>
+        </div>
+        <div class="box key_1_23">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:#81ecec;display:block"></div>
+            <div class="box_panel o-left" style="background:#81ecec;display:block"></div>
+            <div class="box_panel o-right" style="background:#81ecec;display:block"></div>
+            <div class="box_panel o-top" style="background:#81ecec;display:block"></div>
+            <div class="box_panel o-back" style="background:#81ecec;display:block"></div>
+          </div>
+        </div>
+        <div class="box key_1_24">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_1_25">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:#a29bfe;display:block"></div>
+            <div class="box_panel o-left" style="background:#a29bfe;display:block"></div>
+            <div class="box_panel o-right" style="background:#a29bfe;display:block"></div>
+            <div class="box_panel o-top" style="background:#a29bfe;display:block"></div>
+            <div class="box_panel o-back" style="background:#a29bfe;display:block"></div>
+          </div>
+        </div>
+        <div class="box key_1_26">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:#ffeaa7;display:block"></div>
+            <div class="box_panel o-left" style="background:#ffeaa7;display:block"></div>
+            <div class="box_panel o-right" style="background:#ffeaa7;display:block"></div>
+            <div class="box_panel o-top" style="background:#ffeaa7;display:block"></div>
+            <div class="box_panel o-back" style="background:#ffeaa7;display:block"></div>
+          </div>
+        </div>
+        <div class="box key_1_27">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_1_28">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_1_29">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_1_30">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_1_31">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_1_32">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_1_33">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_1_34">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_1_35">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_1_36">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_1_37">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_1_38">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_1_39">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_1_40">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_1_41">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_1_42">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_1_43">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_1_44">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_1_45">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_1_46">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_1_47">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_1_48">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+      </div>
+      <div class="layer">
+        <div class="box key_2_0">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_2_1">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_2_2">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_2_3">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_2_4">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_2_5">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_2_6">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_2_7">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_2_8">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_2_9">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_2_10">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_2_11">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_2_12">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_2_13">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_2_14">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_2_15">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_2_16">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_2_17">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_2_18">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_2_19">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_2_20">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_2_21">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:#55efc4;display:block"></div>
+            <div class="box_panel o-left" style="background:#55efc4;display:block"></div>
+            <div class="box_panel o-right" style="background:#55efc4;display:block"></div>
+            <div class="box_panel o-top" style="background:#55efc4;display:block"></div>
+            <div class="box_panel o-back" style="background:#55efc4;display:block"></div>
+          </div>
+        </div>
+        <div class="box key_2_22">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:#fd79a8;display:block"></div>
+            <div class="box_panel o-left" style="background:#fd79a8;display:block"></div>
+            <div class="box_panel o-right" style="background:#fd79a8;display:block"></div>
+            <div class="box_panel o-top" style="background:#fd79a8;display:block"></div>
+            <div class="box_panel o-back" style="background:#fd79a8;display:block"></div>
+          </div>
+        </div>
+        <div class="box key_2_23">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:#e84393;display:block"></div>
+            <div class="box_panel o-left" style="background:#e84393;display:block"></div>
+            <div class="box_panel o-right" style="background:#e84393;display:block"></div>
+            <div class="box_panel o-top" style="background:#e84393;display:block"></div>
+            <div class="box_panel o-back" style="background:#e84393;display:block"></div>
+          </div>
+        </div>
+        <div class="box key_2_24">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:#74b9ff;display:block"></div>
+            <div class="box_panel o-left" style="background:#74b9ff;display:block"></div>
+            <div class="box_panel o-right" style="background:#74b9ff;display:block"></div>
+            <div class="box_panel o-top" style="background:#74b9ff;display:block"></div>
+            <div class="box_panel o-back" style="background:#74b9ff;display:block"></div>
+          </div>
+        </div>
+        <div class="box key_2_25">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:#e84393;display:block"></div>
+            <div class="box_panel o-left" style="background:#e84393;display:block"></div>
+            <div class="box_panel o-right" style="background:#e84393;display:block"></div>
+            <div class="box_panel o-top" style="background:#e84393;display:block"></div>
+            <div class="box_panel o-back" style="background:#e84393;display:block"></div>
+          </div>
+        </div>
+        <div class="box key_2_26">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:#fd79a8;display:block"></div>
+            <div class="box_panel o-left" style="background:#fd79a8;display:block"></div>
+            <div class="box_panel o-right" style="background:#fd79a8;display:block"></div>
+            <div class="box_panel o-top" style="background:#fd79a8;display:block"></div>
+            <div class="box_panel o-back" style="background:#fd79a8;display:block"></div>
+          </div>
+        </div>
+        <div class="box key_2_27">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:#fab1a0;display:block"></div>
+            <div class="box_panel o-left" style="background:#fab1a0;display:block"></div>
+            <div class="box_panel o-right" style="background:#fab1a0;display:block"></div>
+            <div class="box_panel o-top" style="background:#fab1a0;display:block"></div>
+            <div class="box_panel o-back" style="background:#fab1a0;display:block"></div>
+          </div>
+        </div>
+        <div class="box key_2_28">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_2_29">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_2_30">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_2_31">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_2_32">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_2_33">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_2_34">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_2_35">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_2_36">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_2_37">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_2_38">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_2_39">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_2_40">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_2_41">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_2_42">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_2_43">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_2_44">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_2_45">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_2_46">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_2_47">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_2_48">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+      </div>
+      <div class="layer">
+        <div class="box key_3_0">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_3_1">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_3_2">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_3_3">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_3_4">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_3_5">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_3_6">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_3_7">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_3_8">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_3_9">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_3_10">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_3_11">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_3_12">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_3_13">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_3_14">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_3_15">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_3_16">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_3_17">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_3_18">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_3_19">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_3_20">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_3_21">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:#81ecec;display:block"></div>
+            <div class="box_panel o-left" style="background:#81ecec;display:block"></div>
+            <div class="box_panel o-right" style="background:#81ecec;display:block"></div>
+            <div class="box_panel o-top" style="background:#81ecec;display:block"></div>
+            <div class="box_panel o-back" style="background:#81ecec;display:block"></div>
+          </div>
+        </div>
+        <div class="box key_3_22">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:#fd79a8;display:block"></div>
+            <div class="box_panel o-left" style="background:#fd79a8;display:block"></div>
+            <div class="box_panel o-right" style="background:#fd79a8;display:block"></div>
+            <div class="box_panel o-top" style="background:#fd79a8;display:block"></div>
+            <div class="box_panel o-back" style="background:#fd79a8;display:block"></div>
+          </div>
+        </div>
+        <div class="box key_3_23">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:#fd79a8;display:block"></div>
+            <div class="box_panel o-left" style="background:#fd79a8;display:block"></div>
+            <div class="box_panel o-right" style="background:#fd79a8;display:block"></div>
+            <div class="box_panel o-top" style="background:#fd79a8;display:block"></div>
+            <div class="box_panel o-back" style="background:#fd79a8;display:block"></div>
+          </div>
+        </div>
+        <div class="box key_3_24">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:#fd79a8;display:block"></div>
+            <div class="box_panel o-left" style="background:#fd79a8;display:block"></div>
+            <div class="box_panel o-right" style="background:#fd79a8;display:block"></div>
+            <div class="box_panel o-top" style="background:#fd79a8;display:block"></div>
+            <div class="box_panel o-back" style="background:#fd79a8;display:block"></div>
+          </div>
+        </div>
+        <div class="box key_3_25">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:#fd79a8;display:block"></div>
+            <div class="box_panel o-left" style="background:#fd79a8;display:block"></div>
+            <div class="box_panel o-right" style="background:#fd79a8;display:block"></div>
+            <div class="box_panel o-top" style="background:#fd79a8;display:block"></div>
+            <div class="box_panel o-back" style="background:#fd79a8;display:block"></div>
+          </div>
+        </div>
+        <div class="box key_3_26">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:#fd79a8;display:block"></div>
+            <div class="box_panel o-left" style="background:#fd79a8;display:block"></div>
+            <div class="box_panel o-right" style="background:#fd79a8;display:block"></div>
+            <div class="box_panel o-top" style="background:#fd79a8;display:block"></div>
+            <div class="box_panel o-back" style="background:#fd79a8;display:block"></div>
+          </div>
+        </div>
+        <div class="box key_3_27">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:#ff7675;display:block"></div>
+            <div class="box_panel o-left" style="background:#ff7675;display:block"></div>
+            <div class="box_panel o-right" style="background:#ff7675;display:block"></div>
+            <div class="box_panel o-top" style="background:#ff7675;display:block"></div>
+            <div class="box_panel o-back" style="background:#ff7675;display:block"></div>
+          </div>
+        </div>
+        <div class="box key_3_28">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_3_29">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_3_30">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_3_31">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_3_32">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_3_33">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_3_34">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_3_35">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_3_36">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_3_37">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_3_38">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_3_39">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_3_40">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_3_41">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_3_42">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_3_43">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_3_44">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_3_45">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_3_46">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_3_47">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_3_48">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+      </div>
+      <div class="layer">
+        <div class="box key_4_0">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_4_1">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_4_2">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_4_3">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_4_4">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_4_5">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_4_6">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_4_7">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_4_8">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_4_9">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_4_10">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_4_11">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_4_12">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_4_13">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_4_14">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_4_15">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_4_16">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_4_17">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_4_18">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_4_19">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_4_20">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_4_21">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_4_22">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:#74b9ff;display:block"></div>
+            <div class="box_panel o-left" style="background:#74b9ff;display:block"></div>
+            <div class="box_panel o-right" style="background:#74b9ff;display:block"></div>
+            <div class="box_panel o-top" style="background:#74b9ff;display:block"></div>
+            <div class="box_panel o-back" style="background:#74b9ff;display:block"></div>
+          </div>
+        </div>
+        <div class="box key_4_23">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:#fd79a8;display:block"></div>
+            <div class="box_panel o-left" style="background:#fd79a8;display:block"></div>
+            <div class="box_panel o-right" style="background:#fd79a8;display:block"></div>
+            <div class="box_panel o-top" style="background:#fd79a8;display:block"></div>
+            <div class="box_panel o-back" style="background:#fd79a8;display:block"></div>
+          </div>
+        </div>
+        <div class="box key_4_24">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:#e84393;display:block"></div>
+            <div class="box_panel o-left" style="background:#e84393;display:block"></div>
+            <div class="box_panel o-right" style="background:#e84393;display:block"></div>
+            <div class="box_panel o-top" style="background:#e84393;display:block"></div>
+            <div class="box_panel o-back" style="background:#e84393;display:block"></div>
+          </div>
+        </div>
+        <div class="box key_4_25">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:#fd79a8;display:block"></div>
+            <div class="box_panel o-left" style="background:#fd79a8;display:block"></div>
+            <div class="box_panel o-right" style="background:#fd79a8;display:block"></div>
+            <div class="box_panel o-top" style="background:#fd79a8;display:block"></div>
+            <div class="box_panel o-back" style="background:#fd79a8;display:block"></div>
+          </div>
+        </div>
+        <div class="box key_4_26">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:#ff7675;display:block"></div>
+            <div class="box_panel o-left" style="background:#ff7675;display:block"></div>
+            <div class="box_panel o-right" style="background:#ff7675;display:block"></div>
+            <div class="box_panel o-top" style="background:#ff7675;display:block"></div>
+            <div class="box_panel o-back" style="background:#ff7675;display:block"></div>
+          </div>
+        </div>
+        <div class="box key_4_27">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_4_28">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_4_29">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_4_30">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_4_31">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_4_32">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_4_33">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_4_34">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_4_35">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_4_36">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_4_37">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_4_38">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_4_39">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_4_40">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_4_41">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_4_42">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_4_43">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_4_44">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_4_45">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_4_46">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_4_47">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_4_48">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+      </div>
+      <div class="layer">
+        <div class="box key_5_0">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_5_1">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_5_2">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_5_3">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_5_4">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_5_5">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_5_6">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_5_7">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_5_8">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_5_9">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_5_10">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_5_11">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_5_12">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_5_13">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_5_14">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_5_15">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_5_16">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_5_17">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_5_18">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_5_19">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_5_20">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_5_21">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_5_22">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_5_23">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:#a29bfe;display:block"></div>
+            <div class="box_panel o-left" style="background:#a29bfe;display:block"></div>
+            <div class="box_panel o-right" style="background:#a29bfe;display:block"></div>
+            <div class="box_panel o-top" style="background:#a29bfe;display:block"></div>
+            <div class="box_panel o-back" style="background:#a29bfe;display:block"></div>
+          </div>
+        </div>
+        <div class="box key_5_24">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:#fd79a8;display:block"></div>
+            <div class="box_panel o-left" style="background:#fd79a8;display:block"></div>
+            <div class="box_panel o-right" style="background:#fd79a8;display:block"></div>
+            <div class="box_panel o-top" style="background:#fd79a8;display:block"></div>
+            <div class="box_panel o-back" style="background:#fd79a8;display:block"></div>
+          </div>
+        </div>
+        <div class="box key_5_25">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:#fab1a0;display:block"></div>
+            <div class="box_panel o-left" style="background:#fab1a0;display:block"></div>
+            <div class="box_panel o-right" style="background:#fab1a0;display:block"></div>
+            <div class="box_panel o-top" style="background:#fab1a0;display:block"></div>
+            <div class="box_panel o-back" style="background:#fab1a0;display:block"></div>
+          </div>
+        </div>
+        <div class="box key_5_26">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_5_27">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_5_28">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_5_29">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_5_30">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_5_31">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_5_32">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_5_33">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_5_34">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_5_35">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_5_36">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_5_37">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_5_38">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_5_39">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_5_40">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_5_41">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_5_42">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_5_43">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_5_44">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_5_45">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_5_46">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_5_47">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_5_48">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+      </div>
+      <div class="layer">
+        <div class="box key_6_0">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_6_1">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_6_2">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_6_3">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_6_4">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_6_5">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_6_6">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_6_7">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_6_8">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_6_9">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_6_10">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_6_11">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_6_12">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_6_13">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_6_14">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_6_15">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_6_16">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_6_17">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_6_18">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_6_19">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_6_20">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_6_21">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_6_22">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_6_23">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_6_24">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:#ffeaa7;display:block"></div>
+            <div class="box_panel o-left" style="background:#ffeaa7;display:block"></div>
+            <div class="box_panel o-right" style="background:#ffeaa7;display:block"></div>
+            <div class="box_panel o-top" style="background:#ffeaa7;display:block"></div>
+            <div class="box_panel o-back" style="background:#ffeaa7;display:block"></div>
+          </div>
+        </div>
+        <div class="box key_6_25">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_6_26">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_6_27">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_6_28">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_6_29">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_6_30">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_6_31">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_6_32">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_6_33">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_6_34">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_6_35">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_6_36">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_6_37">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_6_38">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_6_39">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_6_40">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_6_41">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_6_42">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_6_43">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_6_44">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_6_45">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_6_46">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_6_47">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+        <div class="box key_6_48">
+          <div class="box_inner">
+            <div class="box_panel o-front" style="background:none;display:none"></div>
+            <div class="box_panel o-left" style="background:none;display:none"></div>
+            <div class="box_panel o-right" style="background:none;display:none"></div>
+            <div class="box_panel o-top" style="background:none;display:none"></div>
+            <div class="box_panel o-back" style="background:none;display:none"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  
+  
+</body>
+
+</html>

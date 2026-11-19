@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>Ship CSS Drawing</title>
+
+    <link rel="canonical" href="https://codepen.io/red-tyger-the-looper/pen/KKNgMyK">
+  
+  
+  
+  
+<style>
+:root {
+  --skyhigh: rgb(53, 123, 199);
+  --skylow: rgb(137, 184, 235);
+  --hullcolor: rgb(0, 0, 0);
+  --deckcolor: rgb(255, 255, 255);
+  --trimcolor: rgb(255, 0, 0);
+  --oceanbackground: rgb(80, 80, 223);
+  --oceanmedwave: rgb(41, 41, 168);
+  --oceanlargewave: rgb(17, 17, 78);
+}
+.canvasbox {
+  height: 300px;
+  width: 300px;
+  background-image: linear-gradient(
+    var(--skyhigh),
+    rgb(53, 123, 199),
+    var(--skylow),
+    rgb(137, 184, 235)
+  );
+  border-radius: 10%;
+  margin: auto;
+  display: block;
+  overflow: hidden;
+  position: relative;
+}
+.smallwave1 {
+  /*  box-shadow: (horiz-offset vert-offset blur spread color) Must set fill of the item
+                casting the shadow to transparent to get the wave effect! */
+  height: 10%;
+  width: 10%;
+  border-radius: 0% 00% 50% 50%;
+  background-color: transparent;
+  box-shadow: 0px 20px 0px 0px var(--oceanbackground, rgb(80, 80, 223));
+  top: 51%;
+  left: 0%;
+}
+.smallwave2 {
+  height: 10%;
+  width: 10%;
+  border-radius: 0% 00% 50% 50%;
+  background-color: transparent;
+  box-shadow: 0px 20px 0px 0px var(--oceanbackground, rgb(80, 80, 223));
+  top: 51%;
+  left: 10%;
+}
+.smallwave3 {
+  height: 10%;
+  width: 10%;
+  border-radius: 0% 00% 50% 50%;
+  background-color: transparent;
+  box-shadow: 0px 20px 0px 0px var(--oceanbackground, rgb(80, 80, 223));
+  top: 51%;
+  left: 20%;
+}
+.smallwave4 {
+  height: 10%;
+  width: 10%;
+  border-radius: 0% 00% 50% 50%;
+  background-color: transparent;
+  box-shadow: 0px 20px 0px 0px var(--oceanbackground, rgb(80, 80, 223));
+  top: 51%;
+  left: 80%;
+}
+.smallwave5 {
+  height: 10%;
+  width: 10%;
+  border-radius: 0% 00% 50% 50%;
+  background-color: transparent;
+  box-shadow: 0px 20px 0px 0px var(--oceanbackground, rgb(80, 80, 223));
+  top: 51%;
+  left: 90%;
+}
+.oceanback {
+  height: 10%;
+  width: 100%;
+  background-color: var(--oceanbackground, rgb(80, 80, 223));
+  top: 63%;
+}
+.smokestack1 {
+  height: 12%;
+  width: 8%;
+  background-color: var(--hullcolor, rgb(0, 0, 0));
+  top: 39%;
+  left: 41%;
+  transform: skew(-12deg);
+}
+.smokestack2 {
+  height: 12%;
+  width: 8%;
+  background-color: var(--hullcolor, rgb(0, 0, 0));
+  top: 39%;
+  left: 51%;
+  transform: skew(-12deg);
+}
+.stacktrim1 {
+  height: 5%;
+  width: 8%;
+  background-color: var(--trimcolor, rgb(255, 0, 0));
+  transform: skew(-12deg);
+  top: 39%;
+  left: 41.75%;
+}
+.stacktrim2 {
+  height: 5%;
+  width: 8%;
+  background-color: var(--trimcolor, rgb(255, 0, 0));
+  transform: skew(-12deg);
+  top: 39%;
+  left: 51.75%;
+}
+.shiphull {
+  height: 16%;
+  width: 50%;
+  background-color: var(--hullcolor, rgb(0, 0, 0));
+  border-radius: 0% 0% 30% 0%;
+  top: 58.75%;
+  left: 33%;
+}
+.shipbow {
+  height: 0px;
+  width: 0px;
+  /* draw a triangle for the ship's bow */
+  border-top: 55px solid var(--hullcolor, rgb(0, 0, 0));
+  border-left: 60px solid transparent;
+  border-right: 0px solid transparent;
+  top: 56%;
+  left: 13%;
+}
+.shipbow2 {
+  height: 0px;
+  width: 0px;
+  border-left: 10px solid var(--hullcolor, rgb(0, 0, 0));
+  border-bottom: 0px solid transparent;
+  border-top: 10px solid transparent;
+  top: 56%;
+  left: 33%;
+}
+.hulltrim1 {
+  height: 2%;
+  width: 46%;
+  background-color: var(--trimcolor, rgb(255, 0, 0));
+  top: 63.5%;
+  left: 37%;
+}
+.hulltrim2 {
+  height: 4%;
+  width: 15%;
+  background-color: var(--trimcolor, rgb(255, 0, 0));
+  transform: skew(12deg);
+  transform: skew(46deg);
+  top: 61.75%;
+  left: 21.5%;
+}
+.maindeck {
+  height: 0px;
+  width: 90px;
+  border-bottom: 25px solid var(--deckcolor, rgb(255, 255, 255));
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  top: 50.5%;
+  left: 25%;
+}
+.bridge {
+  height: 2%;
+  width: 6%;
+  background-color: rgb(0, 0, 0);
+  transform: skewX(-25deg);
+  top: 52.5%;
+  left: 28.85%;
+}
+.porthole1 {
+  height: 2%;
+  width: 2%;
+  background-color: rgb(0, 0, 0);
+  padding: 0%;
+  border: solid rgb(0, 0, 0);
+  border-radius: 50%;
+  border-width: 1px;
+  top: 53.5%;
+  left: 42%;
+}
+.porthole2 {
+  height: 2%;
+  width: 2%;
+  background-color: rgb(0, 0, 0);
+  padding: 0%;
+  border: solid rgb(0, 0, 0);
+  border-radius: 50%;
+  border-width: 1px;
+  top: 53.5%;
+  left: 47.5%;
+}
+.porthole3 {
+  height: 2%;
+  width: 2%;
+  background-color: rgb(0, 0, 0);
+  padding: 0%;
+  border: solid rgb(0, 0, 0);
+  border-radius: 50%;
+  border-width: 1px;
+  top: 53.5%;
+  left: 53%;
+}
+.mediumwave1 {
+  height: 15%;
+  width: 20%;
+  border-radius: 0% 00% 50% 50%;
+  background-color: transparent;
+  box-shadow: 0px 20px 0px 0px var(--oceanmedwave, rgb(41, 41, 168));
+  top: 54%;
+  left: -15%;
+}
+.mediumwave2 {
+  height: 15%;
+  width: 20%;
+  border-radius: 0% 00% 50% 50%;
+  background-color: transparent;
+  box-shadow: 0px 20px 0px 0px var(--oceanmedwave, rgb(41, 41, 168));
+  top: 54%;
+  left: 5%;
+}
+.mediumwave3 {
+  height: 15%;
+  width: 20%;
+  border-radius: 0% 00% 50% 50%;
+  background-color: transparent;
+  box-shadow: 0px 20px 0px 0px var(--oceanmedwave, rgb(41, 41, 168));
+  top: 54%;
+  left: 25%;
+}
+.mediumwave4 {
+  height: 15%;
+  width: 20%;
+  border-radius: 0% 00% 50% 50%;
+  background-color: transparent;
+  box-shadow: 0px 20px 0px 0px var(--oceanmedwave, rgb(41, 41, 168));
+  top: 54%;
+  left: 45%;
+}
+.mediumwave5 {
+  height: 15%;
+  width: 20%;
+  border-radius: 0% 00% 50% 50%;
+  background-color: transparent;
+  box-shadow: 0px 20px 0px 0px var(--oceanmedwave, rgb(41, 41, 168));
+  top: 54%;
+  left: 65%;
+}
+.mediumwave6 {
+  height: 15%;
+  width: 20%;
+  border-radius: 0% 00% 50% 50%;
+  background-color: transparent;
+  box-shadow: 0px 20px 0px 0px var(--oceanmedwave, rgb(41, 41, 168));
+  top: 54%;
+  left: 85%;
+}
+.oceanmid {
+  height: 15%;
+  width: 100%;
+  background-color: var(--oceanmedwave, rgb(41, 41, 168));
+  top: 69%;
+}
+.largewave1 {
+  height: 18%;
+  width: 40%;
+  border-radius: 0% 0% 50% 50%;
+  background-color: transparent;
+  box-shadow: 0px 28px 0px 0px var(--oceanlargewave, rgb(17, 17, 78));
+  top: 63%;
+  left: -5%;
+}
+.largewave2 {
+  height: 18%;
+  width: 40%;
+  border-radius: 0% 0% 50% 50%;
+  background-color: transparent;
+  box-shadow: 0px 28px 0px 0px var(--oceanlargewave, rgb(17, 17, 78));
+  top: 63%;
+  left: 35%;
+}
+.largewave3 {
+  height: 18%;
+  width: 40%;
+  border-radius: 0% 0% 50% 50%;
+  background-color: transparent;
+  box-shadow: 0px 28px 0px 0px var(--oceanlargewave, rgb(17, 17, 78));
+  top: 63%;
+  left: 75%;
+}
+.oceanfore {
+  height: 20%;
+  width: 100%;
+  background-color: var(--oceanlargewave, rgb(17, 17, 78));
+  top: 82%;
+}
+.canvasbox * {
+  position: absolute;
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  <!-- draw canvas box -->
+<div class="canvasbox">
+  <!-- draw small background wave 1 -->
+  <div class="smallwave1"></div>
+  <!-- draw small background wave 2 -->
+  <div class="smallwave2"></div>
+  <!-- draw small background wave 3 -->
+  <div class="smallwave3"></div>
+  <!-- draw small background wave 4 -->
+  <div class="smallwave4"></div>
+  <!-- draw small background wave 5 -->
+  <div class="smallwave5"></div>
+  <!-- draw ocean background -->
+  <div class="oceanback"></div>
+  <!-- draw shiphull -->
+  <div class="shiphull"></div>
+  <!-- draw smokestack 1 -->
+  <div class="smokestack1"></div>
+  <!-- draw smokestack 2 -->
+  <div class="smokestack2"></div>
+  <!-- draw stack trim 1 -->
+  <div class="stacktrim1"></div>
+  <!-- draw stack trim 2 -->
+  <div class="stacktrim2"></div>
+  <!-- draw ship deck -->
+  <div class="maindeck"></div>
+  <!-- draw ship bow -->
+  <div class="shipbow"></div>
+  <!-- draw back of ship bow -->
+  <div class="shipbow2"></div>
+  <!-- draw hull trim 1 -->
+  <div class="hulltrim1"></div>
+  <!-- draw hull trim 2 -->
+  <div class="hulltrim2"></div>
+  <!-- draw bridge deck -->
+  <div class="bridge"></div>
+  <!-- draw porthole 1 -->
+  <div class="porthole1"></div>
+  <!-- draw porthole 2 -->
+  <div class="porthole2"></div>
+  <!-- draw porthole 3 -->
+  <div class="porthole3"></div>
+  <!-- draw ocean medium wave 1 -->
+  <div class="mediumwave1"></div>
+  <!-- draw ocean medium wave 2 -->
+  <div class="mediumwave2"></div>
+  <!-- draw ocean medium wave 3 -->
+  <div class="mediumwave3"></div>
+  <!-- draw ocean medium wave 4 -->
+  <div class="mediumwave4"></div>
+  <!-- draw ocean medium wave 5 -->
+  <div class="mediumwave5"></div>
+  <!-- draw ocean medium wave 6 -->
+  <div class="mediumwave6"></div>
+  <!-- draw ocean midground -->
+  <div class="oceanmid"></div>
+  <!-- draw  ocean large wave 1 -->
+  <div class="largewave1"></div>
+  <!-- draw  ocean large wave 2 -->
+  <div class="largewave2"></div>
+  <!-- draw ocean large wave 3 -->
+  <div class="largewave3"></div>
+  <!-- draw ocean foreground -->
+  <div class="oceanfore"></div>
+</div> <!-- end div class="canvasbox" -->
+  
+  
+  
+</body>
+
+</html>
