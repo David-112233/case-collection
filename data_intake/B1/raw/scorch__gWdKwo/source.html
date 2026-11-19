@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>microscopic plant cross section</title>
+
+    <link rel="canonical" href="https://codepen.io/scorch/pen/gWdKwo">
+  
+  <link rel="stylesheet" href="https://public.codepenassets.com/css/reset-2.0.min.css">
+
+  
+  
+<style>
+canvas, body{
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  
+  
+    <script id="rendered-js" >
+var canvas = document.createElement("canvas");
+document.getElementsByTagName("body")[0].appendChild(canvas);
+var ctx = canvas.getContext("2d");
+var bg = [256, 240, 227];
+
+setup();
+window.addEventListener("resize", setup);
+
+function setup() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  fill(1);
+  draw();
+}
+
+function fill(amt) {
+  ctx.beginPath();
+  ctx.rect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = `rgba(${bg[0]}, ${bg[1]}, ${bg[2]}, ${amt})`;
+  ctx.fill();
+}
+
+function draw() {
+  var circles = [];
+  packCircle(circles, {});
+}
+
+function packCircle(circles, options) {
+  var radius = options.radius || 18;
+  var center = options.center || { x: canvas.width / 2, y: canvas.height / 2 };
+  var speed_r = 0.02153;
+  var speed_a = Math.PI * 2 * 0.264;
+  var temp_x = center.x;
+  var temp_y = center.y;
+  var nc = new Circle({ x: temp_x, y: temp_y, r: radius });
+  if (circles.length < 1) {
+    circles.push(new Circle({ x: temp_x, y: temp_y, r: 35, color: 'rgba(0,0,0,0)' }));
+    // nc.draw()
+  }
+  var s = 0;
+  var num = 10000;
+  var smax = num * 1.5;
+  loop1: for (var i = 0; i < num; i++) {if (window.CP.shouldStopExecution(0)) break;
+    var n = num / i;
+    s = (s + 1) % smax;
+    var r = radius * (Math.sin(1 - s / smax * Math.PI * 2) + 1) * 0.33 + 0.4;
+
+    temp_x = center.x + Math.cos(i * speed_a + Math.random() * 0.03) * (i / radius + i) * speed_r + Math.random() - 0.5;
+    temp_y = center.y + Math.sin(i * speed_a + Math.random() * 0.03) * (i / radius + i) * speed_r + Math.random() - 0.5;
+
+    // console.log(Math.abs(Math.tan(n*Math.PI)))
+    nc.updateOptions({ r: r, x: temp_x, y: temp_y, color: `hsla(${r / radius * 180 + 220},100%,40%,1)` });
+    var touching = false;
+    loop2: for (var c = 0; c < circles.length; c++) {if (window.CP.shouldStopExecution(1)) break;
+      touching = touching || nc.touchesCircle(circles[c]);
+    }window.CP.exitedLoop(1);
+    if (!touching) {
+      circles.push(nc);
+      nc.draw();
+      // ctx.beginPath()
+      // ctx.arc(temp_x, temp_y, radius, 0, 2 * Math.PI, false)
+      // ctx.strokeStyle = 'rgba(256,0,256,0.18)'
+      // ctx.stroke()
+      nc = new Circle({});
+      // radius *= 0.9982
+      // break loop1
+    } else {
+        //   ctx.beginPath()
+        //   ctx.arc(temp_x, temp_y, radius, 0, 2 * Math.PI, false)
+        //   ctx.strokeStyle = 'rgba(56,80,56,0.27)'
+        //   ctx.stroke()
+      }
+  }window.CP.exitedLoop(0);
+}
+
+function Circle(options) {
+  this.x = options.x || 0;
+  this.y = options.y || 0;
+  this.r = options.r || 10;
+  this.ctx = options.ctx || ctx;
+  this.color = options.color || 'rgba(90,190,220,0.81)';
+
+  this.updateOptions = function (options) {
+    this.x = options.x || this.x;
+    this.y = options.y || this.y;
+    this.r = options.r || this.r;
+    this.ctx = options.ctx || this.ctx;
+    this.color = options.color || this.color;
+  };
+
+  this.draw = function () {
+    this.ctx.beginPath();
+    this.ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false);
+    this.ctx.fillStyle = `rgba(256, 256, 256, 0.5)`;
+    this.ctx.fill();
+    this.ctx.lineWidth = 0.5;
+    this.ctx.strokeStyle = this.color;
+    this.ctx.stroke();
+  };
+
+  this.touchesCircle = function (circle) {
+    var tx = circle.x - this.x;
+    var ty = circle.y - this.y;
+    var dsq = tx * tx + ty * ty;
+    var rsq = circle.r + this.r;
+    rsq = rsq * rsq;
+    // console.log(dsq, rsq, tx, ty)
+    return rsq >= dsq;
+  };
+}
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>
