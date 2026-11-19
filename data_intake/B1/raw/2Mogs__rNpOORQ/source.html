@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>SVG dynamic floorplan</title>
+
+    <link rel="canonical" href="https://codepen.io/2Mogs/pen/rNpOORQ">
+  
+  
+  
+  
+<style>
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: Arial, sans-serif;
+}
+
+body {
+  color: #1e1e1e;
+  padding: 48px;
+}
+
+h1 {
+  font-size: 1.3rem;
+}
+
+h2 {
+  font-size: 1.2rem;
+}
+
+p {
+  font-size: 0.9rem;
+  margin-top: 12px;
+}
+
+.mt_xs {
+  margin-top: 12px;
+}
+
+.mt_lrg {
+  margin-top: 48px;
+}
+
+.wrapper {
+  border: 1px solid lightgrey;
+  overflow: hidden;
+}
+
+.output {
+  font-size: 1rem;
+  margin: 0 24px;
+}
+
+#floorplan {
+  position: relative;
+  max-width: 808px;
+  min-width: 808px;
+  width: 808px;
+  max-height: 423px;
+  min-height: 423px;
+  height: 423px;
+  vector-effect: non-scaling-stroke;
+}
+
+.windows,
+.walls {
+  fill: #fff;
+  stroke: #e6e6e6;
+  stroke-width: 2;
+}
+
+.desk-set {
+  fill: #8a9fc0;
+  stroke: #fff;
+  stroke-width: 2;
+}
+
+.desk {
+  cursor: pointer;
+}
+
+.desk:hover {
+  stroke: #8b189b;
+}
+
+.desk.user-selected:hover {
+  stroke: #8a9fc0;
+}
+
+.desk.unavailable {
+  cursor: initial;
+  stroke: #fff;
+}
+
+.desk:hover .table {
+  stroke: #8b189b;
+  stroke-width: 2;
+}
+
+.user-selected {
+  fill: #8b189b;
+}
+
+.unavailable {
+  fill: #e6e6e6;
+}
+
+.desk.unavailable:hover {
+  stroke: #fff;
+}
+
+.grabbable {
+  cursor: move;
+  /* fallback if grab cursor is unsupported */
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+}
+
+.grabbable.active {
+  cursor: grabbing;
+  cursor: -moz-grabbing;
+  cursor: -webkit-grabbing;
+}
+
+.grabbable.touching .walls {
+  stroke: #bada55;
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  <h1>Proof of concept for client internal desk booking tool</h1>
+<p>SVG markup defines the walls etc for an office. Additionally, the <code>&lt;defs&gt;</code> describe required desk/chair objects to be drawn into the office.</p>
+<p>A JSON object describes all desks for a particular office, together with the layout. Individual desk attributes allow a desk to be un-bookable, eg for Covid distancing.</p>
+<p>JavaScript iterates through the JSON and appends desks to the SVG as required.</p>
+<p>It must be noted that this is not an accessible interface, and rather functions to enhance the booking process.</p>
+
+<div class="wrapper mt_lrg">
+	
+	<!--
+		SVG for individual office layout. 
+		Defines table types and gives room structure.
+		Room content and layout defined in JSON - see JavaScript
+
+		It is highly recommend all design tool exported SVGs be processed thorugh an optimisation tool. eg https://jakearchibald.github.io/svgomg/ 
+	-->
+
+	<!-- Update viewBox  -->
+	<svg id="floorplan" class="grabbable" xmlns="http://www.w3.org/2000/svg" transform="scale(1) translate(0 0)" viewBox="0 0 808 423">
+
+		<!-- Definitions for individual table types -->
+		<defs>
+			<g id="desk_type1">
+				<rect class="table" width="50" height="80" stroke="none"/>
+				<circle cx="50" cy="40" r="15"/>
+			</g>
+
+			<g id="desk_type2">
+				<path d="M-13-72v-175h175v57h-118v118Z" stroke="none"/>
+				<circle cx="75" cy="-160" r="15"/>
+			</g>
+
+			<g id="desk_type3">
+				<path d="m0 0 c25 -21 76 -21 101 0 l31 -55 l-78 -45 l-79 45z" stroke="none"/>
+				<circle cx="52" cy="-13" r="15"/>
+			</g>
+		</defs>
+
+		<!-- Main walls - defined by SVG created by designer -->
+		<g class="walls" transform="translate(1677 1247)">
+			<path d="M-869-824h-309a80,80,0,0,0-6-30,80,80,0,0,0-17-25,80,80,0,0,0-25.709-17,80,80,0,0,0-31-6.361c-2,0-4.059.077-6.117.23V-824H-1677v-423h808l0,423Z"/>
+		</g>
+
+		<!-- Extra room elements - windows, internal walls etc -->
+		<g class="windows">
+			<rect x="25" width="98" height="8"/>
+			<rect x="550" width="98" height="8"/>
+			<rect x="680" width="98" height="8"/>
+		</g>
+	</svg>
+</div>
+
+<!-- Utility DOM elements only required for development -->
+<div class="ui mt_lrg">
+	<h2>Selected desk:</h2>
+	<p class="output"></p>
+</div>
+
+<div class="ui mt_xs">
+	<div class="slidecontainer">
+		<label for="zoom-control">Zoom:</label>
+		<input type="range" min=".5" max="2" value="1" class="slider" id="zoom-control" step="0.01">
+	</div>
+</div>
+  
+    <script id="rendered-js" >
+// Variable definitions
+// DOM
+const floorplan = document.querySelector('#floorplan');
+const output = document.querySelector('.output');
+const zoomControl = document.querySelector('#zoom-control');
+
+// SVG
+const xmlns = 'http://www.w3.org/2000/svg';
+const xlinkns = 'http://www.w3.org/1999/xlink';
+const svgViewbox = floorplan.getAttributeNS(null, "viewBox");
+const svgHeight = svgViewbox.split(' ')[3];
+const svgWidth = svgViewbox.split(' ')[2];
+
+// UI interactions
+let zoom = 1;
+let translateX = 0;
+let translateY = 0;
+let startX = 0;
+let startY = 0;
+
+let allDesks = [];
+
+
+// JSON description of office layout
+/*
+	Desks are arranged in sets for easier management of the generation 
+	process, which is manually transcribing printed and hand annotated desk layouts
+	Set properties:
+		id - utility for manually inspetcing markup
+		transform - position / rotation of desk sets
+		desks - array of desk objects
+	Desk properties:
+		def - SVG <defs> id. ie which object to use
+		deskId - data returned on click
+		transform - position / rotation of desk
+		bookable (default: true) - if false, no click event is applied to desk
+		className - styling class required by desk. eg 'unavailable' styles !bookable as greyed out
+*/
+const floorplanData = [
+{
+  id: 'set0',
+  transform: 'translate(81 115)',
+  desks: [
+  { def: 'desk_type1', deskId: '0', transform: 'rotate(-90)', bookable: false, className: 'unavailable' },
+  { def: 'desk_type1', deskId: '1', transform: 'translate(85 0) rotate(-90)' },
+  { def: 'desk_type1', deskId: '2', transform: 'translate(115 6)', bookable: false, className: 'unavailable' },
+  { def: 'desk_type1', deskId: '3', transform: 'translate(115 92)' },
+  { def: 'desk_type1', deskId: '4', transform: 'translate(165 178) rotate(90)' },
+  { def: 'desk_type1', deskId: '5', transform: 'translate(80 178) rotate(90)' },
+  { def: 'desk_type1', deskId: '6', transform: 'translate(50 172) rotate(180)', bookable: false, className: 'unavailable' },
+  { def: 'desk_type1', deskId: '7', transform: 'translate(50 86) rotate(180)' }] },
+
+{
+  id: 'set1',
+  transform: 'translate(370 280)',
+  desks: [
+  { def: 'desk_type3', deskId: '20' },
+  { def: 'desk_type3', deskId: '21', transform: 'translate(-8 -199) rotate(120)' },
+  { def: 'desk_type3', deskId: '22', transform: 'translate(169 -106) rotate(-120)' }] },
+
+
+{
+  id: 'set1',
+  transform: 'translate(580 270) rotate(33)',
+  desks: [
+  { def: 'desk_type1', deskId: '10', transform: 'rotate(-90)' },
+  { def: 'desk_type1', deskId: '11', transform: 'translate(80 6) rotate(90)' }] }];
+
+
+
+
+// Methods to scan JSON and build required desks into DOM -- START
+const addDesk = data => {
+  const useDesk = document.createElementNS(xmlns, 'use');
+  useDesk.setAttributeNS(xlinkns, 'xlink:href', `#${data.def}`);
+  useDesk.classList.add('desk');
+  if (data.className) useDesk.classList.add(data.className);
+  if (data.deskId) useDesk.setAttribute('data-desk_id', data.deskId);
+  if (!data.bookable) useDesk.setAttribute('data-bookable', data.bookable);
+  if (data.transform) useDesk.setAttribute('transform', data.transform);
+  return useDesk;
+};
+const addDeskSet = data => {
+  const deskSet = document.createElementNS(xmlns, 'g');
+  deskSet.classList.add('desk-set');
+  if (data.className) deskSet.classList.add(data.className);
+  if (data.id) deskSet.setAttribute('data-desk_set_id', data.id);
+  if (data.transform) deskSet.setAttribute('transform', data.transform);
+  data.desks.forEach(desk => {
+    let newDesk = addDesk(desk);
+    deskSet.appendChild(newDesk);
+    allDesks.push(newDesk);
+  });
+  floorplan.appendChild(deskSet);
+};
+floorplanData.forEach(deskSet => addDeskSet(deskSet));
+// Scan JSON and Build -- END
+
+
+// Methods to dynamically add interactivity to desks -- START
+const setListeners = () => {
+  allDesks.forEach(desk => desk.dataset.bookable !== 'false' ? desk.addEventListener('click', evt => handleClick(evt)) : null);
+};
+const handleClick = evt => {
+  clearAll();
+  evt.currentTarget.classList.add('user-selected');
+  output.innerHTML = `ID: ${evt.currentTarget.dataset.desk_id}`;
+};
+
+const clearDesk = target => {
+  target.classList.remove('user-selected');
+};
+const clearAll = () => {
+  allDesks.forEach(desk => clearDesk(desk));
+};
+// Initialise interactivity after office plan has been created
+setListeners();
+// Dynamically add interactivity to desks -- END
+
+
+
+
+
+// Methods to handle Zoom & Pan -- Start
+zoomControl.addEventListener('input', evt => {
+  zoom = evt.target.value * 1;
+  setTransform();
+});
+const startDrag = evt => {
+  floorplan.classList.add('active');
+  startX = evt.clientX - translateX;
+  startY = evt.clientY - translateY;
+  document.addEventListener('mousemove', handlePanning);
+};
+const endDrag = evt => {
+  floorplan.classList.remove('active');
+  document.removeEventListener('mousemove', handlePanning);
+};
+const handlePanning = evt => {
+  translateX = evt.clientX - startX;
+  translateY = evt.clientY - startY;
+  setTransform();
+};
+floorplan.addEventListener('mousedown', evt => startDrag(evt));
+document.addEventListener('mouseup', evt => endDrag(evt));
+
+const setTransform = () => {
+  floorplan.setAttributeNS(null, "transform", `scale(${zoom}) translate(${translateX} ${translateY})`);
+};
+// Zoom and Pan -- END
+
+
+
+/**
+* TOUCH EVENTS for mobile
+*/
+document.addEventListener('touchstart', evt => {
+  const touchobj = evt.changedTouches[0];
+  floorplan.classList.add('touching');
+  startX = touchobj.pageX - translateX;
+  startY = touchobj.pageY - translateY;
+  document.addEventListener('touchmove', handleTouchPanning);
+});
+document.addEventListener('touchend', evt => {
+  document.removeEventListener('touchmove', handleTouchPanning);
+  floorplan.classList.remove('touching');
+});
+const handleTouchPanning = evt => {
+  const touchobj = evt.changedTouches[0];
+  translateX = parseInt(evt.changedTouches[0].clientX) - startX;
+  translateY = parseInt(evt.changedTouches[0].clientY) - startY;
+  setTransform();
+};
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>

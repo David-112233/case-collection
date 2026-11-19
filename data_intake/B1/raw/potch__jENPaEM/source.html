@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>CSS Grid Floorplan</title>
+
+    <link rel="canonical" href="https://codepen.io/potch/pen/jENPaEM">
+  
+  
+  
+  
+<style>
+body {
+  font-family: sans-serif;
+  font-size: clamp(10px, 3vmin, 16px);
+}
+.grid {
+  display: grid;
+  --size: 1fr;
+  aspect-ratio: 5/4;
+  grid-auto-columns: var(--size);
+  grid-auto-rows: var(--size);
+}
+.room {
+  border: 1px dashed #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+.wallEW {
+  border: 2px solid black;
+  margin: -1px;
+  height: 0;
+  position: relative;
+  z-index: 2
+}
+.doorEW {
+  border: 2px solid #000;
+  border-width: 0 2px;
+  background: #eee;
+  margin: -2px 3px -3px 5px;
+  height: 6px;
+  position: relative;
+  z-index: 3; 
+}
+.wallNS {
+  border: 2px solid black;
+  margin: -1px;
+  width: 0;
+  position: relative;
+  z-index: 2
+}
+.doorNS {
+  border: 1px solid #000;
+  border-width: 2px 0;
+  background: #eee;
+  width: 6px;
+  margin: 6px -2px 4px -2px;
+  position: relative;
+  z-index: 3;
+}
+
+.block {
+  background: #ccc;
+  width: calc(100% - 4px);
+  height: calc(100% - 4px);
+  transform: translate(2px, 2px);
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  <div class="plan">
+</div>
+  
+    <script id="rendered-js" type="module">
+import {
+signal,
+computed,
+effect,
+dom } from
+"https://unpkg.com/@potch/minifw@1";
+
+const val = s => s.value || s;
+const add = (a, b) => computed(() => val(a) + val(b));
+
+const room = (x, y, x2, y2, text) =>
+dom(
+"div",
+{
+  className: "room",
+  style: `grid-area: ${val(y)} / ${val(x)} / ${val(y2)} / ${val(x2)}` },
+
+text);
+
+
+const wallEW = (a, b, c) =>
+dom("div", {
+  className: "wallEW",
+  style: `grid-area: ${val(a)} / ${val(b)} / ${val(a)} / ${val(c)}` });
+
+
+const wallNS = (a, b, c) =>
+dom("div", {
+  className: "wallNS",
+  style: `grid-area: ${val(b)} / ${val(a)} / ${val(c)} / ${val(a)}` });
+
+
+const doorEW = (a, b, c) =>
+dom("div", {
+  className: "doorEW",
+  style: `grid-area: ${val(a)} / ${val(b)} / ${val(a)} / ${val(c)}` });
+
+
+const doorNS = (a, b, c) =>
+dom("div", {
+  className: "doorNS",
+  style: `grid-area: ${val(b)} / ${val(a)} / ${val(c)} / ${val(a)}` });
+
+
+const block = (x, y, w, h, transform = "") =>
+dom("div", {
+  className: "block",
+  style: `grid-area: ${val(y)} / ${val(x)} / span ${val(h)} / span ${val(w)}; transform: ${transform};` });
+
+
+// on a feet grid
+const START = 1;
+const PIANO_WID = 10;
+const PIANO_HGT = 11;
+const PIANO_S = add(START, PIANO_HGT);
+const PIANO_E = add(START, PIANO_WID);
+
+const LIVING_WID = 14;
+const LIVING_HGT = 16;
+const LIVING_E = add(PIANO_E, LIVING_WID);
+const LIVING_S = add(START, LIVING_HGT);
+
+const OFFICE_WID = 11;
+const OFFICE_HGT = 10;
+const OFFICE_E = add(LIVING_E, OFFICE_WID);
+const OFFICE_S = add(START, OFFICE_HGT);
+
+const CLOSET_WID = 3;
+const CLOSET_E = add(OFFICE_E, CLOSET_WID);
+
+const GUEST_WID = 12;
+const GUEST_E = add(CLOSET_E, GUEST_WID);
+
+const KITCHEN_WID = 11;
+const KITCHEN_HGT = 9;
+const KITCHEN_E = add(PIANO_E, KITCHEN_WID);
+
+const ENTRY_WID = 4;
+const ENTRY_S = add(LIVING_S, KITCHEN_HGT);
+const ENTRY_E = add(KITCHEN_E, ENTRY_WID);
+
+const HALL_HGT = 4;
+const HALL_WID = 18;
+const HALL_E = add(LIVING_E, HALL_WID);
+const HALL_S = add(OFFICE_S, HALL_HGT);
+
+const GARAGE_WID = 19;
+const GARAGE_HGT = 18;
+const GARAGE_E = add(START, GARAGE_WID);
+const GARAGE_S = add(ENTRY_S, GARAGE_HGT);
+
+const BATH_HGT = 6;
+const BATH_S = add(OFFICE_S, BATH_HGT);
+
+const FURN_WID = 3;
+const FURN_E = add(ENTRY_E, FURN_WID);
+
+
+effect(() => {
+  document.
+  querySelector(".plan").
+  replaceChildren(
+  dom(
+  "div",
+  { className: "grid" },
+  room(START, START, PIANO_E, PIANO_S, "nook"),
+  room(PIANO_E, START, LIVING_E, LIVING_S, "living"),
+  room(LIVING_E, START, OFFICE_E, OFFICE_S, "office"),
+  room(OFFICE_E, START, CLOSET_E, OFFICE_S, ""),
+  room(CLOSET_E, START, GUEST_E, OFFICE_S, "guest"),
+  room(START, PIANO_S, PIANO_E, ENTRY_S, "dining"),
+  room(PIANO_E, LIVING_S, KITCHEN_E, ENTRY_S, "kitchen"),
+  room(LIVING_E, OFFICE_S, HALL_E, HALL_S, "hall"),
+  room(HALL_E, OFFICE_S, GUEST_E, BATH_S, "bath"),
+  room(KITCHEN_E, HALL_S, ENTRY_E, ENTRY_S, "entry"),
+  room(ENTRY_E, HALL_S, FURN_E, ENTRY_S, ""),
+  room(FURN_E, HALL_S, HALL_E, ENTRY_S, "primary"),
+  room(START, ENTRY_S, GARAGE_E, GARAGE_S, "garage"),
+  room(HALL_E, BATH_S, GUEST_E, ENTRY_S, "ensuite"),
+
+  wallEW(START, START, GUEST_E),
+  wallNS(START, START, ENTRY_S),
+  wallEW(ENTRY_S, START, GUEST_E),
+  wallNS(GUEST_E, START, ENTRY_S),
+
+  wallEW(PIANO_S, START, START + 2),
+  wallEW(PIANO_S, START + 6, PIANO_E),
+  wallNS(PIANO_E, PIANO_S, LIVING_S),
+  wallEW(LIVING_S, PIANO_E, KITCHEN_E),
+  wallNS(KITCHEN_E, LIVING_S, LIVING_S.value + 3),
+  wallNS(KITCHEN_E, LIVING_S.value + 6, ENTRY_S),
+
+  wallNS(LIVING_E, START, OFFICE_S),
+  wallNS(OFFICE_E, START, OFFICE_S),
+  wallNS(CLOSET_E, START, OFFICE_S),
+  wallEW(START + 4, OFFICE_E, CLOSET_E),
+  wallEW(START + 8, OFFICE_E, CLOSET_E),
+  wallEW(OFFICE_S, LIVING_E, GUEST_E),
+  wallEW(HALL_S, ENTRY_E, HALL_E),
+  wallNS(HALL_E, OFFICE_S, ENTRY_S),
+  wallNS(ENTRY_E, HALL_S, ENTRY_S),
+  wallNS(FURN_E, HALL_S, ENTRY_S),
+  wallEW(HALL_S.value + 3, ENTRY_E, FURN_E),
+  wallEW(HALL_S.value + 7, ENTRY_E, FURN_E),
+  wallNS(HALL_E, HALL_S, ENTRY_S),
+  wallEW(BATH_S, HALL_E, GUEST_E),
+  wallEW(BATH_S.value + 4, GUEST_E.value - 3, GUEST_E),
+  wallNS(START, ENTRY_S, GARAGE_S),
+  wallNS(GARAGE_E, ENTRY_S, GARAGE_S),
+  wallEW(GARAGE_S, START, GARAGE_E),
+
+  doorEW(ENTRY_S, START + 8, START + 11),
+  doorEW(ENTRY_S, KITCHEN_E, ENTRY_E),
+
+  doorNS(START, PIANO_S, PIANO_S.value + 3),
+
+  doorEW(START, START + 3, START + 10),
+  doorEW(OFFICE_S, OFFICE_E.value - 3, OFFICE_E),
+  doorEW(OFFICE_S, CLOSET_E, CLOSET_E.value + 3),
+  doorEW(HALL_S, ENTRY_E, ENTRY_E.value + 3),
+  doorEW(HALL_S, HALL_E.value - 3, HALL_E),
+
+  doorNS(HALL_E, OFFICE_S, HALL_S),
+  doorNS(HALL_E, OFFICE_S, HALL_S),
+  doorNS(HALL_E, BATH_S.value + 2, BATH_S.value + 5),
+
+  doorNS(FURN_E, HALL_S.value + 3, HALL_S.value + 7),
+  doorNS(FURN_E, HALL_S.value + 7, HALL_S.value + 11),
+
+  doorNS(CLOSET_E, START, START + 4),
+  doorNS(OFFICE_E, START + 4, START + 8),
+
+  doorEW(OFFICE_S, OFFICE_E, CLOSET_E),
+
+  // piano
+  block(START + 1, START + 2, 5, 5, "translate(5%,0) rotate(-15deg)"),
+  block(START + 1, START + 1, 3, 2, "translate(4%,-30%) rotate(-15deg) scaleY(.75)"),
+  block(START, PIANO_S.value - 3, 2, 3),
+  block(START, PIANO_S.value - 5, 2, 2),
+  block(PIANO_E, LIVING_S.value - 2, 10, 2),
+
+  // dining
+  block(START + 1, PIANO_S.value + 3, 4, 7),
+  block(START, ENTRY_S.value - 2, 7, 2),
+  block(PIANO_E.value - 3, PIANO_S, 3, 6),
+
+  // kitchen
+  block(PIANO_E, LIVING_S, 8, 3),
+  block(19, 17, 3, 3),
+  block(12, 23, 10, 3),
+
+  // living
+  block(PIANO_E.value + 1, LIVING_S.value - 7, 8, 3),
+  block(PIANO_E.value + 1, LIVING_S.value - 10, 4, 3),
+  block(LIVING_E.value - 3, START + 3, 3, 5),
+  block(LIVING_E.value - 2, OFFICE_S.value - 2, 2, 2),
+  block(PIANO_E.value + 3, START, 5, 2),
+  block(LIVING_E.value - 4, START, 3, 2),
+  block(PIANO_E, START, 3, 4, "translate(5%, 15%) rotate(-15deg)"),
+  block(LIVING_E.value - 1, START + 1, 1, 2),
+
+  // primary
+  block(FURN_E.value + 2, HALL_S, 7, 7),
+  block(FURN_E, HALL_S, 2, 2),
+  block(FURN_E.value + 9, HALL_S, 2, 2),
+  block(HALL_E.value - 6, ENTRY_S.value - 2, 6, 2),
+
+  // bath
+  block(HALL_E, HALL_S, 3, 2),
+  block(GUEST_E.value - 3, OFFICE_S, 3, 6),
+
+  // ensuite        
+  block(HALL_E, BATH_S, 3, 2),
+  block(HALL_E, ENTRY_S.value - 3, 2, 3),
+  block(GUEST_E.value - 3, BATH_S, 3, 4),
+  block(GUEST_E.value - 3, BATH_S.value + 4, 3, 5),
+
+  // guest
+  block(GUEST_E.value - 7, OFFICE_S.value - 6, 5, 6),
+  block(GUEST_E.value - 2, OFFICE_S.value - 2, 2, 2),
+  block(GUEST_E.value - 9, OFFICE_S.value - 2, 2, 2),
+  block(CLOSET_E, START, 3, 2),
+  block(CLOSET_E.value + 3, START, 2, 2),
+  block(GUEST_E.value - 2, START + 1, 2, 2, "translate(10%,-40%) rotate(30deg) scale(.75)"),
+
+  // office
+  block(LIVING_E, START, 2, 2),
+  block(LIVING_E.value + 2, START, 5, 2),
+  block(LIVING_E.value + 7, START, 4, 3),
+  block(LIVING_E, OFFICE_S.value - 2, 5, 2),
+  block(LIVING_E.value + 5, OFFICE_S.value - 2, 3, 2),
+  block(LIVING_E.value + 3, OFFICE_S.value - 6, 2, 4),
+
+  // entry
+  block(ENTRY_E.value - 1, HALL_S, 1, 3),
+
+  // furnace 
+  block(ENTRY_E, HALL_S, 3, 3, "scale(.75)"),
+
+  // garage
+  block(START, ENTRY_S, 5, 4),
+  block(START + 5, ENTRY_S, 3, 3),
+  block(START + 5, ENTRY_S, 3, 3),
+  block(START + 14, ENTRY_S, 3, 3),
+  block(START + 11, ENTRY_S, 3, 3, "scale(.9, .8)"),
+  block(GARAGE_E.value - 2, ENTRY_S.value + 2, 2, 3),
+  doorNS(START, ENTRY_S.value + 4, ENTRY_S.value + 7),
+  doorNS(GARAGE_E, ENTRY_S, ENTRY_S.value + 2),
+  wallNS(GARAGE_E.value - 2, ENTRY_S, ENTRY_S.value + 2),
+  wallEW(ENTRY_S.value + 2, GARAGE_E.value - 2, GARAGE_E),
+  doorEW(GARAGE_S, START + 1, GARAGE_E.value - 1)));
+
+
+  document.querySelector(".grid").style.aspectRatio = GUEST_E.value + "/" + GARAGE_S.value;
+});
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>

@@ -1,0 +1,11 @@
+key,url,decision,tier,hits,reason,js_policy,evidence,notes,decided_on
+gwenduling__bGNKwLe,https://codepen.io/gwenduling/pen/bGNKwLe,hold,unclassified,spatial_layers,await_user_review,preserve,两层 CSS Grid 真实墙线、门扇打开弧、窗与家具；楼梯连接二层有 OPEN TO BELOW 与阳台。桌面首屏显示一层，实滚见二层完整；适合分两帧。,优先，对照 224；仅候审，未正式入库。,2026-11-19
+Webmassa__dOvxqN,https://codepen.io/Webmassa/pen/dOvxqN,hold,unclassified,spatial_layers,await_user_review,preserve,SVG 整张平面斜置，房间色块与有开口的深色墙共边，外侧窗、台阶及露台对齐，房间图标压住地面纹理。桌面默认全图实见；悬停和窄屏未验证。,优先，对照 224/227；仅候审，未正式入库。,2026-11-19
+2Mogs__rNpOORQ,https://codepen.io/2Mogs/pen/rNpOORQ,hold,unclassified,spatial_layers,await_user_review,preserve,SVG 门弧与窗线画出边界，桌椅组各自转向，三块曲边桌面拼合，圆椅压在桌缘。实点蓝色桌位显示 ID: 1；缩放平移未验证；只用公开 demo，无实际预订。,优先，对照 224；仅候审，未正式入库。,2026-11-19
+fyildiz1974__emBzKep,https://codepen.io/fyildiz1974/pen/emBzKep,hold,unclassified,spatial_layers,await_user_review,preserve,同一图纸以地面线分开塔楼大厅、基础、浅蓝护城河与地下层，两侧塔形和图注圆标嵌入轮廓。默认全剖面实见；点击 A 标识后同一屏未确认明显状态切换，按静态画面审核。,优先，对照 213/224；仅候审，未正式入库。,2026-11-19
+potch__jENPaEM,https://codepen.io/potch/pen/jENPaEM,hold,unclassified,spatial_layers,await_user_review,preserve,栅格生成不规则房间，门槽嵌进黑墙段，灰色家具色块贴墙而斜转的桌椅打破格线；初屏和实滚下半屏含车库，非一帧全图。,候选，对照 224；仅候审，未正式入库。,2026-11-19
+ysuthar__MWWKEGy,https://codepen.io/ysuthar/pen/MWWKEGy,hold,unclassified,spatial_layers,await_user_review,preserve,较重的灰色实墙挖出门槽，家具和卫生间设备在各围合单元内部，椅子从桌边各方向围合。仅桌面初始观察；右边缘贴视口，缩放操作未验证。,候选，对照 224；仅候审，未正式入库。,2026-11-19
+Art2B__zLRpoO,https://codepen.io/Art2B/pen/zLRpoO,hold,unclassified,spatial_layers,await_user_review,preserve,SVG 不规则房间带门弧、窗和成排尺寸字，红/蓝/灰提供房态层；首屏仅实见上部房间，未核对后续全部楼面或点击。,候选，对照 224；仅候审，未正式入库。,2026-11-19
+Derzone__EdOmWm,https://codepen.io/Derzone/pen/EdOmWm,hold,unclassified,spatial_layers,await_user_review,preserve,等轴高楼逐层对齐，实点第 5 层编号，黄色层横向凸出，两侧面仍接合，叠放位置明确；没有假定移开指针后仍保持。,候选，对照 224/227；仅候审，未正式入库。,2026-11-19
+waterfallmedia__GrBjQB,https://codepen.io/waterfallmedia/pen/GrBjQB,hold,unclassified,spatial_layers,await_user_review,preserve,白线等轴完整态显示前围栏遮住灌木边沿、屋顶压住墙面；实拖时间轴回到早段，围栏和灌木消失而屋体留在原构图。未验证重复重载的精确时间。,候选，对照 224/227；仅候审，未正式入库。,2026-11-19
+davidkpiano__xLKBpM,https://codepen.io/davidkpiano/pen/xLKBpM,hold,unclassified,spatial_layers,await_user_review,preserve,中间山墙叠在左右长檐之前，门阶逐层盖过门槛前方。实拖滑杆从 6 Rooms 向左后观察到 3 Rooms、两翼同时收窄；未验证各档及移动端。,候选，对照 224/227；仅候审，未正式入库。,2026-11-19
