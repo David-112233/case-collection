@@ -1,0 +1,70 @@
+{
+  "source_id": "codepen:eternalsunshineofspotlessmind/bgrdpoz",
+  "author": "eternalsunshineofspotlessmind",
+  "pen_id": "bGRdPoz",
+  "url": "https://codepen.io/eternalsunshineofspotlessmind/pen/bGRdPoz",
+  "acquisition": "cdpn_fullpage",
+  "acquisition_url": "https://cdpn.io/eternalsunshineofspotlessmind/fullpage/bGRdPoz",
+  "retrieved_at": "2026-11-19T13:15:20+00:00",
+  "license": "未单独核验；外链资源许可另查",
+  "fetch_status": "ok",
+  "title": "CSS 3D viewer (zoom, rotate, pan)",
+  "canonical_url": "https://codepen.io/eternalsunshineofspotlessmind/pen/bGRdPoz",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "fdf49fc3fba385b6b99a19401002ba640df39c3c6f62941970daa7110061e000",
+  "source_html_sha256": "e1ddf7dc03dd26268c83a4b840cd5acdd8f2616809890793cea60ced83ab9dba",
+  "analysis": {
+    "js": {
+      "has_js": true,
+      "inline_js_chars": 11361,
+      "external_scripts": [
+        "https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"
+      ],
+      "inline_event_handlers": 1,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 0,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": true,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": true,
+      "clip_path": false,
+      "css_counter": false,
+      "media_query": false
+    },
+    "external_stylesheets": [],
+    "css_imports": [
+      "https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300"
+    ],
+    "css_chars": 7119,
+    "element_count": 64,
+    "html_chars": 23055
+  },
+  "review": {
+    "label": "网格场景中的立方体与俯视投影",
+    "status": "优先",
+    "reference_case": "224/227",
+    "evidence": "实点 Cube 添加红色对象并调高 Height，再点 TOP：斜视网格变为方形网格，红色对象占据网格中的一块区域，设置面板仍叠在画布之上。建议对照同一对象斜视与俯视，网格大小和模型位置固定；未确认 FRONT 按钮有效，也未测所有属性。",
+    "visual_verified": true,
+    "surface": "Cloud Chrome, CodePen public preview default or stated interaction; desktop only",
+    "formal_admission": false
+  }
+}

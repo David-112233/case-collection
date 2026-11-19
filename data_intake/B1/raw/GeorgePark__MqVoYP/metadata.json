@@ -1,0 +1,70 @@
+{
+  "source_id": "codepen:georgepark/mqvoyp",
+  "author": "GeorgePark",
+  "pen_id": "MqVoYP",
+  "url": "https://codepen.io/GeorgePark/pen/MqVoYP",
+  "acquisition": "cdpn_fullpage",
+  "acquisition_url": "https://cdpn.io/GeorgePark/fullpage/MqVoYP",
+  "retrieved_at": "2026-11-19T13:15:26+00:00",
+  "license": "未单独核验；外链资源许可另查",
+  "fetch_status": "ok",
+  "title": "3D Emoji Town (Pure CSS)",
+  "canonical_url": "https://codepen.io/GeorgePark/pen/MqVoYP",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "20b9f5542275a071a9b71b02a86b29a4e2b7ee09b20db9af41d09ebfbb52eb56",
+  "source_html_sha256": "ac90835a0f2028bea1a21a14f7aa9585d6664f5fe1214e34302ff04b3548eecf",
+  "analysis": {
+    "js": {
+      "has_js": true,
+      "inline_js_chars": 607,
+      "external_scripts": [
+        "https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"
+      ],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 27,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": true,
+      "clip_path": false,
+      "css_counter": false,
+      "media_query": false
+    },
+    "external_stylesheets": [
+      "https://public.codepenassets.com/css/reset-2.0.min.css"
+    ],
+    "css_imports": [],
+    "css_chars": 31442,
+    "element_count": 224,
+    "html_chars": 43024
+  },
+  "review": {
+    "label": "旋转纸片式小镇",
+    "status": "优先",
+    "reference_case": "224/227",
+    "evidence": "实调底部方向滑块从左端到略过中点，医院、银行等建筑与街道转到新方位，部分直立立面侧向变薄；房屋仍立在对应路段边，说明是把直立表情图层与地面共同旋转，不是直接整体缩放。可评两处固定滑块位置，不要求车辆、人物、太阳的位置一致。",
+    "visual_verified": true,
+    "surface": "Cloud Chrome, CodePen public preview default or stated interaction; desktop only",
+    "formal_admission": false
+  }
+}
