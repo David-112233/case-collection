@@ -1,0 +1,68 @@
+{
+  "source_id": "codepen:mr-tipton/ypqggxa",
+  "author": "mr-tipton",
+  "pen_id": "YPqGgxa",
+  "url": "https://codepen.io/mr-tipton/pen/YPqGgxa",
+  "acquisition": "cdpn_fullpage",
+  "acquisition_url": "https://cdpn.io/mr-tipton/fullpage/YPqGgxa",
+  "retrieved_at": "2026-11-19T04:11:22+00:00",
+  "license": "未单独核验；外链资源许可另查",
+  "fetch_status": "ok",
+  "title": "SVG Liquid Glass - feDisplacementMap",
+  "canonical_url": "https://codepen.io/mr-tipton/pen/YPqGgxa",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "e9ea4a79465425e43146584e7b46a6fd7b7968e3c6b1baaf5c11c2d8373cdfe1",
+  "source_html_sha256": "ec6c024769947e954ecaf25206c64fb34262eaf7d997278c37d2721bd3b41324",
+  "analysis": {
+    "js": {
+      "has_js": true,
+      "inline_js_chars": 17186,
+      "external_scripts": [
+        "https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"
+      ],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 1,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": false,
+      "clip_path": true,
+      "css_counter": false,
+      "media_query": false
+    },
+    "external_stylesheets": [],
+    "css_imports": [],
+    "css_chars": 5979,
+    "element_count": 65,
+    "html_chars": 28947
+  },
+  "review": {
+    "label": "液态玻璃镜片",
+    "status": "优先",
+    "reference_case": "213/227",
+    "evidence": "镜片覆盖部分标题与湖图，镜片内局部扭曲、外部不受影响；实点 Orange plexiglass 后内部转橙并变模糊，按钮及对应数值改变。球在动，评测可忽略它。",
+    "visual_verified": true,
+    "surface": "Cloud Chrome, CodePen Full Page default or stated interaction; desktop only",
+    "formal_admission": false
+  }
+}

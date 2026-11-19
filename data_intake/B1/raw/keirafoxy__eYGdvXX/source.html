@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>Pure CSS Snowglobe</title>
+
+    <link rel="canonical" href="https://codepen.io/keirafoxy/pen/eYGdvXX">
+  
+  
+  
+  
+<style>
+body {
+    margin: 0;
+    padding: 0;  
+		background: #FBD5C5;
+}
+.wrapper {
+    display: flex;
+		width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+    background: #FBD5C5;
+}
+.wrapper__content {
+        width: 800px;
+        height: 600px;
+        position: relative;
+        background: #FBD5C5
+    }
+.ball {
+    width: 416px;
+    height: 440px;
+    position: relative;
+    margin: 80px auto;
+}
+.ball__glass {
+        overflow: hidden;
+        width: 416px;
+        height: 416px;
+        border-radius: 100%;
+        background: #28367F;
+        position: absolute;
+        box-shadow: 0 0 10px 6px rgb(255 255 255 / 38%);
+    }
+.ball__stand {
+        position: absolute;
+        background: #ED6B69;
+        bottom: 0;
+        width: 266px;
+        height: 65px;
+        bottom: 0;
+        left: 75px;
+        border-radius: 6px;
+
+    }
+.ball__stand:before,
+        .ball__stand:after {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 51px;
+            height: 51px;
+            border-radius: 0 50% 50% 50%;
+            background: #ED6B69;
+            bottom: 0;
+        }
+.ball__stand:before {
+            transform: rotate(42deg);
+            left: -23px;
+        }
+.ball__stand:after{
+            transform: rotate(49deg);
+            right: -23px;
+        }
+.house {
+    width: 227px;
+    height: 217px;
+    position: absolute;
+    left: 95px;
+    top: 115px;
+}
+.house__body {
+        position: absolute;
+        width: 227px;
+        height: 140px;
+        background: #F5A6A7;
+        top: 78px;
+    }
+.house__pipe{
+        background: #F5A6A7;
+        position: absolute;
+        width: 45px;
+        height: 60px;
+        top: 2px;
+        left: 36px;
+    }
+.house__roof {
+        content: "";
+        position: absolute;
+        left: 0px;
+        border: 114px solid transparent;
+        border-bottom-color: #ED6B69;
+        bottom: 105px;
+        transform: scaleY(0.7);
+    }
+.house__eyes {
+        position: absolute;
+        left: 57px;
+        right: 56px;
+        top: 32px;
+    }
+.house__eyes:after,
+        .house__eyes:before {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border-radius: 100%;
+            top: 0;
+            background: #2A377F;
+        }
+.house__eyes:after {
+            right: 0;
+        }
+.house__eyes:before {
+            left: 0;
+        }
+.house__blush {
+        position: absolute;
+        left: 22px;
+        right: 22px;
+        top: 69px;
+    }
+.house__blush:after,
+        .house__blush:before {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 44px;
+            height: 34px;
+            border-radius: 43%;
+            top: 0;
+            background: #FFFFFF;
+        }
+.house__blush:after {
+            right: 0;
+        }
+.house__blush:before {
+            left: 0;
+        }
+.house__mouth {
+        position: absolute;
+        left: 96px;
+        top: 39px;
+        border: 8px solid transparent;
+        border-radius: 100%;
+        width: 18px;
+        height: 18px;
+        border-bottom-color: #2A377F;
+        border-right-color: #2A377F;
+        transform: rotate(45deg);
+    }
+.house__mouth:after,
+        .house__mouth:before {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 100%;
+            background: #2A377F;
+        }
+.house__mouth:after {
+            right: -4px;
+            top: -4px;
+            transform: rotate(131deg);
+        }
+.house__mouth:before {
+            left: -4px;
+            top: 14px;
+            transform: rotate(137deg);
+        }
+.snow {
+    position: absolute;
+    background: #FFFFFF;
+    left:0;
+    right: 0;
+    bottom: 0;
+    height: 86px;
+}
+.snow__waves {
+        display: flex;
+        font-size: 40px;
+        position: absolute;
+        top: -33px;
+        left: 113px;
+        transform: scaleX(2);
+        color: #FFFFFF;
+    }
+.snow__waves span {
+            transform: rotate(90deg);
+            margin: 0 10px;
+            position: relative;
+        }
+.snow__waves span:nth-child(even) {
+                margin: 8px 1px 0 10px;
+            }
+.snow__waves span:nth-child(even):after {
+                    content: "";
+                    display: block;
+                    background: #fff;
+                    width: 45px;
+                    height: 43px;
+                    position: absolute;
+                    left: -2px;
+                    top: 35px;
+                    border-radius: 100%;
+                }
+.stars {
+    left: 42px;
+    right: 42px;
+    top: 42px;
+    bottom: 42px;
+    border-radius: 100%;
+    position: absolute;
+}
+.stars__item {
+        width: 13px;
+        height: 13px;
+        position: absolute;
+        border-radius: 100%;
+        background: #FFFFFF;
+    }
+.stars__item:first-child {
+            left: 0px;
+            top: 159px;
+        }
+.stars__item:nth-child(2) {
+            left: 21px;
+            top: 81px;
+        }
+.stars__item:nth-child(3) {
+            left: 79px;
+            top: 24px;  
+        }
+.stars__item:nth-child(4) {
+            left: 158px;
+            top: 2px;
+        }
+.stars__item:nth-child(5) {
+            left: 237px;
+            top: 23px;
+        }
+.stars__item:nth-child(6) {
+            left: 293px;
+            top: 80px;
+        }
+.stars__item:nth-child(7) {
+            right: 3px;
+            top: 160px;
+        }
+</style>
+
+  </head>
+
+<body translate="no">
+  <div class="wrapper">
+	 <div class="wrapper__content">
+			<div class="ball">
+				 <div class="ball__glass">
+						<div class="stars">
+							 <div class="stars__item"></div>
+							 <div class="stars__item"></div>
+							 <div class="stars__item"></div>
+							 <div class="stars__item"></div>
+							 <div class="stars__item"></div>
+							 <div class="stars__item"></div>
+							 <div class="stars__item"></div>
+						</div>
+						<div class="house">
+							 <div class="house__body">
+									<div class="house__eyes"></div> 
+									<div class="house__blush"></div>
+									<div class="house__mouth"></div>
+							 </div>
+							 <div class="house__pipe"></div>
+							 <div class="house__roof"></div>
+						</div>
+						<div class="snow">
+							 <div class="snow__waves">
+									<span>(</span>
+									<span>)</span>
+									<span>(</span>
+									<span>)</span>
+									<span>(</span>
+									<span>)</span>
+									<span>(</span>
+									<span>)</span>
+							 </div>
+						</div>
+				 </div>
+				 <div class="ball__stand"></div>
+			</div>
+	 </div>
+</div>
+  
+    <script id="rendered-js" >
+/*Based on artwork by Craig Seagreen*/
+/*https://dribbble.com/shots/9134273-Snow-Globe*/
+/*Thx ❅❅❅ */
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>

@@ -1,0 +1,11 @@
+key,url,decision,tier,hits,reason,js_policy,evidence,notes,decided_on
+miocene__NWRWQpX,https://codepen.io/miocene/pen/NWRWQpX,hold,unclassified,spatial_layers,await_user_review,preserve,红色塔体、跨越空隙的梁、连接不同高度的双向阶梯和屋顶遮挡；实见带标题的默认画面，不评移动端与后续关卡。,优先，对照 224；仅候审，未正式入库。,2026-11-19
+mr-tipton__YPqGgxa,https://codepen.io/mr-tipton/pen/YPqGgxa,hold,unclassified,spatial_layers,await_user_review,preserve,镜片覆盖部分标题与湖图，镜片内局部扭曲、外部不受影响；实点 Orange plexiglass 后内部转橙并变模糊，按钮及对应数值改变。球在动，评测可忽略它。,优先，对照 213/227；仅候审，未正式入库。,2026-11-19
+MandySVG__KKWdaeg,https://codepen.io/MandySVG/pen/KKWdaeg,hold,unclassified,spatial_layers,await_user_review,preserve,实点拉绳，见暗处只显示灯与绳，再点亮露出背鳍在鱼身后、眼睑盖住眼球下半、牙齿冒出下颌边缘；眼部动画不需逐像素比较。,优先，对照 224/227；仅候审，未正式入库。,2026-11-19
+creme__bXNoQv,https://codepen.io/creme/pen/bXNoQv,hold,unclassified,spatial_layers,await_user_review,preserve,瓶缘包住红液层，液面是独立椭圆，容器高光盖在液色和手柄前；一张代表画面即可判，动画未详测。,优先，对照 227；仅候审，未正式入库。,2026-11-19
+SE-Sam__mddBOYz,https://codepen.io/SE-Sam/pen/mddBOYz,hold,unclassified,spatial_layers,await_user_review,preserve,两座基座各承托建筑，蓝色桥段跨基座边缘，右侧两座楼体略有互遮；运动循环，实见其一帧，未约束循环帧。,备选，对照 224；仅候审，未正式入库。,2026-11-19
+jannypie__XWmPXP,https://codepen.io/jannypie/pen/XWmPXP,hold,unclassified,spatial_layers,await_user_review,preserve,中央主圆顶盖住两个小圆顶的部分轮廓，前部拱框覆盖侧墙接缝，横贯底台裁去后排塔脚；单帧可判。,备选，对照 224；仅候审，未正式入库。,2026-11-19
+tipadev__mGmPxY,https://codepen.io/tipadev/pen/mGmPxY,hold,unclassified,spatial_layers,await_user_review,preserve,较低塔体遮挡主塔立面，主塔顶部环边框出下凹井口，门光投在基座；结构明确，几何细节不多。,备选，对照 224；仅候审，未正式入库。,2026-11-19
+mark854__yLMYoKj,https://codepen.io/mark854/pen/yLMYoKj,hold,unclassified,spatial_layers,await_user_review,preserve,透明方体远近侧面深浅叠加，可透见对侧层；四条窄长方体从不同位置接到主体，实见运动中的一帧，所在姿态未固定。,备选，对照 227；仅候审，未正式入库。,2026-11-19
+osublake__PZyymg,https://codepen.io/osublake/pen/PZyymg,hold,unclassified,spatial_layers,await_user_review,preserve,实测分别从画布两端拖出两条斜丝带，交点处后画带压在先画带上，颜色梯度塑造厚度；空画布默认无图，需记录拖动端点，不验证自动编织。,备选，对照 213/227；仅候审，未正式入库。,2026-11-19
+keirafoxy__eYGdvXX,https://codepen.io/keirafoxy/pen/eYGdvXX,hold,unclassified,spatial_layers,await_user_review,preserve,圆边限制场景，底部不规则雪带盖住房屋下沿，屋顶覆盖烟囱一角，雪罩轮廓与底座相接；单帧清楚，复杂度较低。,备选，对照 224/227；仅候审，未正式入库。,2026-11-19

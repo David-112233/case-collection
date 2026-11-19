@@ -1,0 +1,68 @@
+{
+  "source_id": "codepen:keirafoxy/eygdvxx",
+  "author": "keirafoxy",
+  "pen_id": "eYGdvXX",
+  "url": "https://codepen.io/keirafoxy/pen/eYGdvXX",
+  "acquisition": "cdpn_fullpage",
+  "acquisition_url": "https://cdpn.io/keirafoxy/fullpage/eYGdvXX",
+  "retrieved_at": "2026-11-19T04:11:29+00:00",
+  "license": "未单独核验；外链资源许可另查",
+  "fetch_status": "ok",
+  "title": "Pure CSS Snowglobe",
+  "canonical_url": "https://codepen.io/keirafoxy/pen/eYGdvXX",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "29c70fbca2987b971d15b8f899651cc8bebb3e389246f7c4a9a824a21b7ef104",
+  "source_html_sha256": "b036414742cb00a318f1206795f052bc2574d0226cb0136b1d739263fa56da1b",
+  "analysis": {
+    "js": {
+      "has_js": true,
+      "inline_js_chars": 122,
+      "external_scripts": [
+        "https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"
+      ],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 0,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": false,
+      "clip_path": false,
+      "css_counter": false,
+      "media_query": false
+    },
+    "external_stylesheets": [],
+    "css_imports": [],
+    "css_chars": 5606,
+    "element_count": 31,
+    "html_chars": 7918
+  },
+  "review": {
+    "label": "雪罩和房屋",
+    "status": "备选",
+    "reference_case": "224/227",
+    "evidence": "圆边限制场景，底部不规则雪带盖住房屋下沿，屋顶覆盖烟囱一角，雪罩轮廓与底座相接；单帧清楚，复杂度较低。",
+    "visual_verified": true,
+    "surface": "Cloud Chrome, CodePen Full Page default or stated interaction; desktop only",
+    "formal_admission": false
+  }
+}
