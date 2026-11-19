@@ -1,0 +1,5 @@
+key,url,decision,tier,hits,reason,js_policy,evidence,notes,decided_on
+dpletiko__oNJrKze,https://codepen.io/dpletiko/pen/oNJrKze,hold,unclassified,spatial_layers,await_user_review,preserve,云端滚到骑手卡片居中略偏下，看到上端伸出框的合成图；保持同一滚动位置，勾选右上 Explode?，实测倾斜分解为后方图片、中间虚线边框与前方独立骑手剪影。正式取帧应先锁定滚动位置；外链图片及许可另核，其他项目未逐一测试。,优先，对照 213 / 224；仅候审，未正式入库。,2026-11-19
+josetxu__xxmyPJo,https://codepen.io/josetxu/pen/xxmyPJo,hold,unclassified,spatial_layers,await_user_review,preserve,实测闭门正视及底部箭头触发的透视倾斜，交错门缝、门面凹孔和走廊侧墙、顶面格栅、地面可辨。开门未实测，源码有按压/悬停行为，不将打开当成稳定实测帧；背景星场源码500秒循环。,优先·闭门构图，对照 224 / 227；仅候审，未正式入库。,2026-11-19
+Arthega__vYvggxj,https://codepen.io/Arthega/pen/vYvggxj,hold,unclassified,spatial_layers,await_user_review,preserve,实测银环与铜环在同一视窗，前缘挡住部分内壁，露出背侧内壁与环孔。两环不交扣，不将其定义为链；源码旋转周期5秒，建议选有足够内孔面积的代表帧并记录相位。,备选·循环，对照 224 / 227；仅候审，未正式入库。,2026-11-19
+ibrahim-munsif-mohamed__dyqWRpG,https://codepen.io/ibrahim-munsif-mohamed/pen/dyqWRpG,hold,unclassified,spatial_layers,await_user_review,preserve,云端实测粉色远山、紫色街区与车辆、近处桥拱及护墙上下叠置；各带自动平移，源有1/9/15/90/200秒等多周期，不是静止默认或可暂停验证，不固定车辆位置，入选后需统一采样时点。,备选·循环，对照 213 / 224；仅候审，未正式入库。,2026-11-19

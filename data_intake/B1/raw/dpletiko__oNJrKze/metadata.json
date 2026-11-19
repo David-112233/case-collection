@@ -1,0 +1,70 @@
+{
+  "source_id": "codepen:dpletiko/onjrkze",
+  "author": "dpletiko",
+  "pen_id": "oNJrKze",
+  "url": "https://codepen.io/dpletiko/pen/oNJrKze",
+  "acquisition": "cdpn_fullpage",
+  "acquisition_url": "https://cdpn.io/dpletiko/fullpage/oNJrKze",
+  "retrieved_at": "2026-11-19T18:12:07+00:00",
+  "license": "未单独核验；外链资源许可另查",
+  "fetch_status": "ok",
+  "title": "Pop out image scrollers with CSS scroll-driven animations 🤙",
+  "canonical_url": "https://codepen.io/dpletiko/pen/oNJrKze",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "8a37e00214d0d2b3ecc75b8a873117f3625a5e9ba55a63d6ff9e6e1755eaef4a",
+  "source_html_sha256": "df70a9fe4e0e354787d94de479c3a1bae6a3b01ce81e61923459896430798d7a",
+  "analysis": {
+    "js": {
+      "has_js": true,
+      "inline_js_chars": 271,
+      "external_scripts": [
+        "https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"
+      ],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": true,
+      "has_animation_range": true,
+      "has_view_timeline": true,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 1,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": true,
+      "clip_path": true,
+      "css_counter": false,
+      "media_query": false
+    },
+    "external_stylesheets": [
+      "https://public.codepenassets.com/css/normalize-5.0.0.min.css"
+    ],
+    "css_imports": [],
+    "css_chars": 3037,
+    "element_count": 32,
+    "html_chars": 6100
+  },
+  "review": {
+    "label": "越框骑手照片分层",
+    "status": "优先",
+    "reference_case": "213 / 224",
+    "evidence": "云端滚到骑手卡片居中略偏下，看到上端伸出框的合成图；保持同一滚动位置，勾选右上 Explode?，实测倾斜分解为后方图片、中间虚线边框与前方独立骑手剪影。正式取帧应先锁定滚动位置；外链图片及许可另核，其他项目未逐一测试。",
+    "visual_verified": true,
+    "surface": "Cloud Chrome, cdpn.io public preview, 1331×894 desktop including preview banner; no mobile check",
+    "formal_admission": false
+  }
+}
