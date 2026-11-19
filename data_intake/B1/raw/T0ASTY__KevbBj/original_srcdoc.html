@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>Isometric house with building animation</title>
+
+    <link rel="canonical" href="https://codepen.io/T0ASTY/pen/KevbBj">
+  
+  
+  
+  
+<style>
+.container {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  overflow: none;
+}
+.house {
+  left: 50vw;
+  position: absolute;
+  width: 200px;
+}
+.house .face {
+  position: absolute;
+  height: 200px;
+  width: 200px;
+  transform-origin: 0 0;
+  left: - 50px;
+  top: 300px;
+  border: 1px solid black;
+}
+.house .face.roof {
+  background: #f5f5f5;
+  transform: rotate(210deg) scaleY(0.864);
+  animation: 5s ease-in-out 0s 1 slideInFromTop;
+  animation-iteration-count: infinite;
+}
+.house .face.cutout {
+  top: 201px;
+  border-left: 100px solid transparent;
+  border-right: 100px solid transparent;
+  border-bottom: 100px solid #e0e0e0;
+  width: 0;
+  height: 0;
+  transform: rotate(-30deg) skewX(-30deg) scaleY(0.864);
+  animation: 5s ease-in-out 0s 1 slideInFromRightFast;
+  animation-iteration-count: infinite;
+  border-top: none;
+}
+.house .face.cutout:after {
+  content: "";
+  position: absolute;
+  width: 1px;
+  height: 100px;
+  top: -1px;
+  left: 50px;
+  transform: skewX(45deg);
+  background: black;
+}
+.house .face.cutout:before {
+  content: "";
+  position: absolute;
+  width: 1px;
+  height: 100px;
+  top: -1px;
+  left: -50px;
+  transform: skewX(-45deg);
+  background: black;
+}
+.house .face.right {
+  background: #e0e0e0;
+  height: 140px;
+  border-top: 0;
+  transform: rotate(-30deg) skewX(-30deg) scaleY(0.864);
+  animation: 5s ease-in-out 0s 1 slideInFromRightFast;
+  animation-iteration-count: infinite;
+}
+.house .face.left {
+  transform: rotate(90deg) skewX(-30deg) scaleY(0.864);
+  background: #cccccc;
+  width: 140px;
+  animation: 5s ease-in-out 0s 1 slideInFromLeftFast;
+  animation-iteration-count: infinite;
+}
+.house .face.door {
+  border: solid black 2px;
+  transform: rotate(90deg) skewX(-30deg) scaleY(0.864);
+  height: 43px;
+  width: 88px;
+  top: 340px;
+  left: -13px;
+  animation: 5s ease-in-out 0s 1 slideInFromLeftSlow;
+  animation-iteration-count: infinite;
+}
+.house .face.door .knob {
+  top: 30px;
+  left: 55px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: black;
+  position: absolute;
+  animation: 5s ease-in-out 0s 1 slideInChrome;
+  animation-iteration-count: infinite;
+}
+.house .face.door .knob:after {
+  background: black;
+  content: "";
+  height: 8px;
+  width: 3px;
+  left: 2px;
+  top: -5px;
+  position: absolute;
+  animation: 5s ease-in-out 0s 1 slideInChrome;
+  animation-iteration-count: infinite;
+  border-radius: 20%;
+}
+.house .face.window {
+  border: solid black 2px;
+}
+.house .face.window-left {
+  top: 290px;
+  height: 108px;
+  width: 68px;
+  left: -70px;
+  transform: rotate(90deg) skewX(-30deg) scaleY(0.864);
+  animation: 5s ease-in-out 0s 1 slideInFromLeft;
+  animation-iteration-count: infinite;
+}
+.house .face.window-right {
+  transform: rotate(-30deg) skewX(-30deg) scaleY(0.864);
+  height: 68px;
+  width: 108px;
+  top: 305px;
+  left: 43px;
+  animation: 5s ease-in-out 0s 1 slideInFromRightSlow;
+  animation-iteration-count: infinite;
+}
+.house .face.window-right-top {
+  transform: rotate(-30deg) skewX(-30deg) scaleY(0.864);
+  height: 30px;
+  width: 30px;
+  top: 205px;
+  left: 75px;
+  border-radius: 50%;
+  animation: 5s ease-in-out 0s 1 slideInFromRight;
+  animation-iteration-count: infinite;
+}
+.window-left .plus {
+  left: 36px;
+  background: black;
+  height: 108px;
+  position: absolute;
+  width: 2px;
+  animation: 5s ease-in-out 0s 1 slideInChrome;
+  animation-iteration-count: infinite;
+}
+.window-left .plus:after {
+  background: black;
+  content: "";
+  height: 2px;
+  left: -36px;
+  position: absolute;
+  top: 50px;
+  width: 68px;
+  animation: 5s ease-in-out 0s 1 slideInChrome;
+  animation-iteration-count: infinite;
+}
+.house .window-right .plus {
+  left: 56px;
+  background: black;
+  height: 68px;
+  position: absolute;
+  width: 2px;
+  animation: 5s ease-in-out 0s 1 slideInChrome;
+  animation-iteration-count: infinite;
+}
+.house .window-right .plus:after {
+  background: black;
+  content: "";
+  height: 2px;
+  left: -56px;
+  position: absolute;
+  top: 38px;
+  width: 108px;
+  animation: 5s ease-in-out 0s 1 slideInChrome;
+  animation-iteration-count: infinite;
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100vw) rotate(90deg) skewX(-30deg) scaleY(0.864);
+  }
+  50% {
+    transform: translateX(0) rotate(90deg) skewX(-30deg) scaleY(0.864);
+  }
+  100% {
+    transform: translateX(0) rotate(90deg) skewX(-30deg) scaleY(0.864);
+  }
+}
+@keyframes slideInFromLeftFast {
+  0% {
+    transform: translateX(-100vw) rotate(90deg) skewX(-30deg) scaleY(0.864);
+  }
+  40% {
+    transform: translateX(0) rotate(90deg) skewX(-30deg) scaleY(0.864);
+  }
+  100% {
+    transform: translateX(0) rotate(90deg) skewX(-30deg) scaleY(0.864);
+  }
+}
+@keyframes slideInFromLeftSlow {
+  0% {
+    transform: translateX(-100vw) rotate(90deg) skewX(-30deg) scaleY(0.864);
+  }
+  55% {
+    transform: translateX(0) rotate(90deg) skewX(-30deg) scaleY(0.864);
+  }
+  100% {
+    transform: translateX(0) rotate(90deg) skewX(-30deg) scaleY(0.864);
+  }
+}
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(100vw) rotate(-30deg) skewX(-30deg) scaleY(0.864);
+  }
+  50% {
+    transform: rotate(-30deg) skewX(-30deg) scaleY(0.864);
+  }
+  100% {
+    transform: translateX(0) rotate(-30deg) skewX(-30deg) scaleY(0.864);
+  }
+}
+@keyframes slideInFromRightFast {
+  0% {
+    transform: translateX(100vw) rotate(-30deg) skewX(-30deg) scaleY(0.864);
+  }
+  30% {
+    transform: rotate(-30deg) skewX(-30deg) scaleY(0.864);
+  }
+  100% {
+    transform: translateX(0) rotate(-30deg) skewX(-30deg) scaleY(0.864);
+  }
+}
+@keyframes slideInFromRightSlow {
+  0% {
+    transform: translateX(100vw) rotate(-30deg) skewX(-30deg) scaleY(0.864);
+  }
+  60% {
+    transform: rotate(-30deg) skewX(-30deg) scaleY(0.864);
+  }
+  100% {
+    transform: translateX(0) rotate(-30deg) skewX(-30deg) scaleY(0.864);
+  }
+}
+@keyframes slideInFromTop {
+  0% {
+    transform: translateY(-100vh) rotate(210deg) scaleY(0.864);
+  }
+  60% {
+    transform: translateY(0) rotate(210deg) scaleY(0.864);
+  }
+  100% {
+    transform: translateY(0) rotate(210deg) scaleY(0.864);
+  }
+}
+@keyframes slideInChrome {
+  0% {
+    transform: translateX(100vw);
+  }
+  55% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <div class="container">
+  <div class="house">
+    <span class="face roof"></span>
+    <span class="face cutout"></span>
+    <span class="face right"></span>
+    <span class="face left"></span>
+    <span class="face door">
+    <span class="knob"></span>
+    </span>
+    <span class="face window-left">
+    <span class="plus"></span>
+    </span>
+    <span class="face window-right">
+    <span class="plus"></span>
+    </span>
+    <span class="face window-right-top"></span>
+  </div>
+</div>
+  
+  
+  
+</body>
+
+</html>

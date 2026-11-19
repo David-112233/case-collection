@@ -1,0 +1,69 @@
+{
+  "source_id": "codepen:portalpacific/zezjkyv",
+  "author": "PortalPacific",
+  "pen_id": "ZEZJKyv",
+  "url": "https://codepen.io/PortalPacific/pen/ZEZJKyv",
+  "acquisition": "cdpn_fullpage",
+  "acquisition_url": "https://cdpn.io/PortalPacific/fullpage/ZEZJKyv",
+  "retrieved_at": "2026-11-19T15:17:47+00:00",
+  "license": "未单独核验；外链资源许可另查",
+  "fetch_status": "ok",
+  "title": "Habbo Hotel Isometric Perspective - 26.565 degrees (arctangent of 0.5).",
+  "canonical_url": "https://codepen.io/PortalPacific/pen/ZEZJKyv",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "8a8858db38b068fa09de1757beb0f983421c539bc53e602ed97eddd9cc7124ec",
+  "source_html_sha256": "85f05121d609df2520d01e68655e6f0fa02032676fa624a2f2af75c971afd80f",
+  "analysis": {
+    "js": {
+      "has_js": true,
+      "inline_js_chars": 4147,
+      "external_scripts": [
+        "https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js",
+        "https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"
+      ],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 0,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": false,
+      "clip_path": false,
+      "css_counter": false,
+      "media_query": false
+    },
+    "external_stylesheets": [],
+    "css_imports": [],
+    "css_chars": 178,
+    "element_count": 4,
+    "html_chars": 5660
+  },
+  "review": {
+    "label": "彩色块体的错位邻接和遮挡",
+    "status": "候选",
+    "reference_case": "224/227",
+    "evidence": "单帧实见彩块以两组斜边方向紧密排布，高绿块顶面与侧面同时可见，浅色窄条从较低前块后方延伸，高块挡住了低块的部分侧面；不测试互动或把作品标题角度当作事后量测。",
+    "visual_verified": true,
+    "surface": "Cloud Chrome, CodePen public preview default or stated interaction; desktop only",
+    "formal_admission": false
+  }
+}
