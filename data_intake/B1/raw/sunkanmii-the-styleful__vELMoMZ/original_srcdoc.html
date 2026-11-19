@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>3D CSS: final demo</title>
+
+    <link rel="canonical" href="https://codepen.io/sunkanmii-the-styleful/pen/vELMoMZ">
+  
+  
+  
+  
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #004569 0%, #461238 50%, #00183e 100%);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.scene {
+  perspective: 1000px;
+}
+
+.scene div {
+  transform-style: preserve-3d;
+}
+
+.image-container {
+  position: relative;
+  wwidth: 18.75rem;
+  height: 18.75rem;
+  transform: rotateX(20deg) rotateY(-10deg);
+  --layers-count: 35;
+  --layer-offset: 2px;
+}
+
+.layers,
+.layer {
+  position: absolute;
+  inset: 0;
+}
+
+.layer {
+  transform: translateZ(calc(var(--i) * var(--layer-offset)));
+
+  --n: calc(var(--i) / var(--layers-count));
+
+  filter: brightness(calc(0.4 + var(--n) * 0.8))
+    saturate(calc(0.8 + var(--n) * 0.4));
+}
+
+.layer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+  display: block;
+}
+
+.original {
+  position: relative;
+  z-index: 1;
+  width: 18.75rem;
+  height: 18.75rem;
+}
+
+.original img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+  display: block;
+  box-shadow: 0 20px 60px rgb(0 0 0 / 0.6);
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+  background: rgba(255 255 255 / 0.1);
+  backdrop-filter: blur(10px);
+  padding: 1.15rem;
+  height: 20rem;
+  border-radius: 10px;
+  overflow-y: scroll;
+  color: white;
+  max-width: 250px;
+}
+
+.controls h3 {
+  margin-bottom: 15px;
+  font-size: 1.15rem;
+}
+
+.controls label {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin: 15px 0 5px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+.controls input {
+  width: 100%;
+}
+
+.controls span {
+  font-weight: bold;
+}
+
+.image-selector {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgb(255 255 255 / 0.2);
+}
+
+.image-selector button {
+  width: 100%;
+  padding: 8px;
+  margin: 5px 0;
+  background: rgb(255 255 255 / 0.2);
+  border: 1px solid rgb(255 255 255 / 0.3);
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.3s;
+}
+
+.image-selector button:hover {
+  background: rgb(255 255 255 / 0.3);
+}
+
+.image-selector button.active {
+  background: rgb(255 255 255 / 0.4);
+  border-color: white;
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <div class="scene">
+  <div class="image-container">
+    <div class="original">
+      <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809" alt="3D Image">
+    </div>
+    <div class="layers" aria-hidden="true">
+      <div class="layer" style="--i: 1;"><img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809" alt=""></div>
+      <div class="layer" style="--i: 2;"><img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809" alt=""></div>
+      <div class="layer" style="--i: 3;"><img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809" alt=""></div>
+      <div class="layer" style="--i: 4;"><img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809" alt=""></div>
+      <div class="layer" style="--i: 5;"><img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809" alt=""></div>
+      <div class="layer" style="--i: 6;"><img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809" alt=""></div>
+      <div class="layer" style="--i: 7;"><img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809" alt=""></div>
+      <div class="layer" style="--i: 8;"><img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809" alt=""></div>
+      <div class="layer" style="--i: 9;"><img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809" alt=""></div>
+      <div class="layer" style="--i: 10;"><img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809" alt=""></div>
+      <div class="layer" style="--i: 11;"><img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809" alt=""></div>
+      <div class="layer" style="--i: 12;"><img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809" alt=""></div>
+      <div class="layer" style="--i: 13;"><img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809" alt=""></div>
+      <div class="layer" style="--i: 14;"><img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809" alt=""></div>
+      <div class="layer" style="--i: 15;"><img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809" alt=""></div>
+      <div class="layer" style="--i: 16;"><img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809" alt=""></div>
+      <div class="layer" style="--i: 17;"><img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809" alt=""></div>
+      <div class="layer" style="--i: 18;"><img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809" alt=""></div>
+      <div class="layer" style="--i: 19;"><img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809" alt=""></div>
+      <div class="layer" style="--i: 20;"><img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809" alt=""></div>
+      <div class="layer" style="--i: 21;"><img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809" alt=""></div>
+      <div class="layer" style="--i: 22;"><img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809" alt=""></div>
+      <div class="layer" style="--i: 23;"><img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809" alt=""></div>
+      <div class="layer" style="--i: 24;"><img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809" alt=""></div>
+      <div class="layer" style="--i: 25;"><img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809" alt=""></div>
+      <div class="layer" style="--i: 26;"><img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809" alt=""></div>
+      <div class="layer" style="--i: 27;"><img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809" alt=""></div>
+      <div class="layer" style="--i: 28;"><img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809" alt=""></div>
+      <div class="layer" style="--i: 29;"><img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809" alt=""></div>
+      <div class="layer" style="--i: 30;"><img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809" alt=""></div>
+      <div class="layer" style="--i: 31;"><img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809" alt=""></div>
+      <div class="layer" style="--i: 32;"><img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809" alt=""></div>
+      <div class="layer" style="--i: 33;"><img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809" alt=""></div>
+      <div class="layer" style="--i: 34;"><img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809" alt=""></div>
+      <div class="layer" style="--i: 35;"><img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809" alt=""></div>
+    </div>
+  </div>
+</div>
+
+<div class="controls">
+  <h3>3D Controls</h3>
+  <label>Perspective: <span id="perspValue">1000px</span></label>
+  <input type="range" id="perspective" min="200" max="2000" value="1000">
+
+  <label>Layer Offset: <span id="offsetValue">2px</span></label>
+  <input type="range" id="offset" min="0.5" max="5" step="0.1" value="2">
+
+  <label>Rotate X: <span id="rotXValue">20°</span></label>
+  <input type="range" id="rotateX" min="-90" max="90" value="20">
+
+  <label>Rotate Y: <span id="rotYValue">-10°</span></label>
+  <input type="range" id="rotateY" min="-90" max="90" value="-10">
+
+  <div class="image-selector">
+    <label>Try Different Images:</label>
+    <button data-img="https://images.unsplash.com/photo-1579546929518-9e396f3cc809" class="active">Abstract Gradient</button>
+    <button data-img="https://images.unsplash.com/photo-1506905925346-21bda4d32df4">Mountain Landscape</button>
+    <button data-img="https://images.unsplash.com/photo-1518791841217-8f162f1e1131">Cat Portrait</button>
+    <button data-img="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05">Foggy Forest</button>
+  </div>
+</div>
+  
+    <script id="rendered-js" >
+const scene = document.querySelector(".scene");
+const container = document.querySelector(".image-container");
+
+document.getElementById("perspective").addEventListener("input", e => {
+  const val = e.target.value;
+  scene.style.perspective = val + "px";
+  document.getElementById("perspValue").textContent = val + "px";
+});
+
+document.getElementById("offset").addEventListener("input", e => {
+  const val = e.target.value;
+  container.style.setProperty("--layer-offset", val + "px");
+  document.getElementById("offsetValue").textContent = val + "px";
+});
+
+document.getElementById("rotateX").addEventListener("input", e => {
+  const val = e.target.value;
+  updateRotation();
+  document.getElementById("rotXValue").textContent = val + "°";
+});
+
+document.getElementById("rotateY").addEventListener("input", e => {
+  const val = e.target.value;
+  updateRotation();
+  document.getElementById("rotYValue").textContent = val + "°";
+});
+
+function updateRotation() {
+  const x = document.getElementById("rotateX").value;
+  const y = document.getElementById("rotateY").value;
+  container.style.transform = `rotateX(${x}deg) rotateY(${y}deg)`;
+}
+
+// Image selector
+document.querySelectorAll(".image-selector button").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const imgUrl = btn.dataset.img;
+
+    // Update all images
+    document.querySelectorAll("img").forEach(img => {
+      img.src = imgUrl;
+    });
+
+    // Update active button
+    document.
+    querySelectorAll(".image-selector button").
+    forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+  });
+});
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>
