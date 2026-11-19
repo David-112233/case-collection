@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>succulent garden</title>
+
+    <link rel="canonical" href="https://codepen.io/emilieparks/pen/MmEqxX">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <link rel="stylesheet" href="https://public.codepenassets.com/css/normalize-5.0.0.min.css">
+
+  
+  
+<style>
+body {
+  background: #333; 
+  font-size: 24px;
+  letter-spacing: 0.5px;
+  font-family: 'EB Garamond', serif;
+  line-height: 1.4;
+  padding: 10px;
+}
+main {
+  display: flex;
+  width: 1120px;
+  margin: 0 auto;
+}
+ .plant-drawer {
+  width: 0;
+  background: #DCEDC8;
+  margin-right: 0;
+  display: flex; 
+  flex-wrap: wrap; 
+  left: -100%; 
+  transition: 2s all;
+}
+.plant-drawer.open {
+  left: 0;
+  width: 30%;
+  margin-right: 10px;
+  padding: 8px;
+}
+.plant-drawer div {
+  text-align: center; 
+  width: 40%; 
+  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/160607/circle.svg) no-repeat;
+  background-position: bottom;
+  min-height: 120px;
+  position: relative;
+  margin: 2px;
+}
+.plant-drawer.open p{
+  z-index: 3;
+}
+.original{
+  opacity: .9;
+}
+.succulent {
+  max-height: 80%;
+  max-width: 90%;
+  position: absolute;
+  bottom: 4px;
+  transform: translateX(-50%);
+}
+.original:hover{
+  opacity: 1;
+  cursor: grab;
+}
+.succulent.planted {
+  opacity: 1;
+  transform: scale(0.6);
+}
+
+/*terrarium*/
+.terrarium-chooser{
+  width: 100%;
+  background: #fff;
+  position: relative;
+  min-height: 100vh;
+  padding: 5px;
+}
+.terrarium-chooser.shrink {
+  width: 68%;
+}
+.terr-wrap {
+  position: relative;
+  width: 22%;
+  height: 22%;
+  transition: 1s all;
+}
+.start .soil,
+.start .frame {
+  width: 100%;
+  opacity: 0.8;
+  pointer-events: none;
+}
+.frame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  pointer-events: none;
+}
+.just-terr{
+  display: flex;
+  position: relative;
+  top: 12%;
+}
+.terr-wrap:hover {
+  width: 33%;
+  cursor: grab;
+}
+.start:hover img {
+  opacity: 1;
+}
+.terrarium-chooser p {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.shrink .terr-wrap {
+  width: 100%;
+  height: 100%;
+  bottom: initial;
+  top: 250px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+.shrink .terr-wrap {
+  opacity: 1; 
+}
+.selected{
+  opacity: 1;
+}
+
+
+/*context menu*/
+.context-menu{
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  display:none;
+}
+.thumb {
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  right: 0;
+  opacity:0.4;
+}
+.btn {
+  color: #555555;
+}
+.glyphicon {
+  padding: 3px;
+  color: #555555;
+}
+.glyphicon:hover {
+  color: rgba(0,0,0,1);
+  cursor: pointer;
+}
+.button-wrap{
+  padding-top: 5px;
+  position: absolute;
+  bottom: 20px;
+  left: 10px;
+  display:none;
+}
+.shrink .context-menu,
+.shrink .button-wrap {
+  display: block;
+}
+
+
+
+/*UI styling cause I hated how big the tooltip looked*/
+.ui-tooltip, .arrow:after {
+    background: black;
+  }
+.ui-tooltip {
+    padding: 10px 20px;
+    color: white;
+    font: bold 14px "Helvetica Neue", Sans-Serif;
+    box-shadow: 0 0 0;
+  }
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <main>
+  <section class="plant-drawer">
+    <p>Drag plants into your terrarium</p>
+    <div class="small">
+    <img class="succulent original" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/160607/succulent-agave.svg" alt="agave succulent">
+    </div>
+    <div class="small">
+      <img class="succulent original smaller" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/160607/succulent-barrel-cactus.svg" alt="barrel cactus">
+    </div>
+    <div>
+      <img class="succulent original" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/160607/succulent-purple-agave.svg" alt="purple agave succulent">
+    </div>
+    <div>
+      <img class="succulent original smaller" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/160607/succulent-cacti.svg" alt="three cacti grouped together">
+    </div>
+    <div class="tall">
+      <img class="succulent original" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/160607/succulent-purslane.svg" alt="purslane succulent">
+    </div>
+    <div class="tall">
+      <img class="succulent original" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/160607/succulent-snakeplant.svg" alt="snake plant succulent with two flowers">
+    </div>
+    <div>
+      <img class="succulent original smaller" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/160607/succulent-gnome.svg" alt="a little gnome">
+    </div>
+    <div>
+      <img class="succulent original smaller" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/160607/succulent-gemstone.svg" alt="decorative purple crystal">
+    </div>
+  </section>
+  
+  
+  
+  <!--WOOT! Here terrarium section!-->
+  <section class="terrarium-chooser">
+    <p>Choose your terrarium</p>
+    
+    <!--Context menu here-->
+    <div class="context-menu">
+      <div class="thumb"></div>
+      <button type="button" class="btn btn-default up" aria-label="Bring forward" data-toggle="tooltip" title="Bring forward">
+        <span class="glyphicon glyphicon-menu-up"></span>
+      </button>
+     <button type="button" class="btn btn-default down" aria-label="Send backward" data-toggle="tooltip" title="Send backward"> 
+       <span class="glyphicon glyphicon-menu-down"></span>
+      </button>
+      <button type="button" class="btn btn-default minus" aria-label="Make smaller" data-toggle="tooltip" title="Make smaller">
+        <span class="glyphicon glyphicon-minus minus"></span>
+      </button>
+      <button type="button" class="btn btn-default" aria-label="Embiggen" data-toggle="tooltip" title="Embiggen">
+        <span class="glyphicon glyphicon-plus plus"></span>
+      </button>
+      <button type="button" class="btn btn-default" aria-label="Delete" data-toggle="tooltip" title="Delete">
+       <span class="glyphicon glyphicon-trash"></span>
+      </button>
+    </div>
+    
+    <div class="button-wrap">
+      <button type="button" class="btn btn-default"><a class="clear">clear</a></button>
+      <button type="button" class="btn btn-default"><a class="new">new terrarium</a></button>
+    </div>
+    
+    
+    <div class="just-terr">
+    <div class="terr-wrap start">
+      <img class="soil" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/160607/terrarium-bottle-soil.svg" alt="Bottle-shaped terrarium soil" />
+      <img class="frame" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/160607/terrarium-bottle-frame.svg" alt="Bottle-shaped terrarium outline" />
+    </div>
+    <div class="terr-wrap start 2">
+      <img class="soil" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/160607/terrarium-house-soil.svg" alt="House-shaped terrarium soil" />
+      <img class="frame" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/160607/terrarium-house-frame.svg" alt="House-shaped terrarium outline" />
+    </div>
+    <div class="terr-wrap start 3">
+      <img class="soil" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/160607/terrarium-dome-soil.svg" alt="Dome-shaped terrarium soil" />
+      <img class="frame" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/160607/terrarium-dome-frame.svg" alt="Dome-shaped terrarium outline" />
+    </div>
+    <div class="terr-wrap start 4">
+      <img class="soil" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/160607/terrarium-bowl-soil.svg" alt="Bowl-shaped terrarium soil" />
+      <img class="frame" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/160607/terrarium-bowl-frame.svg" alt="Bowl-shaped terrarium outline" />
+    </div>
+    <div class="terr-wrap start 5">
+      <img class="soil" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/160607/terrarium-geo-soil.svg" alt="Geometric terrarium soil" />
+      <img class="frame" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/160607/terrarium-geo-frame.svg" alt="Geometric terrarium outline" />
+    </div>
+    </div>
+  </section>
+</main>
+  
+    <script id="rendered-js" >
+$(document).ready(function () {
+  $('[data-toggle="tooltip"]').tooltip({ placement: "bottom" });
+});
+$('.terr-wrap.start').on('click', function () {
+  $(this).removeClass('start').addClass('selected');
+  $('.terr-wrap.start').fadeOut();
+  $('.terrarium-chooser p').fadeOut();
+  $('.terrarium-chooser').addClass('shrink');
+  $('.plant-drawer').addClass('open');
+  $(this).droppable({
+    drop: function (e, ui) {
+      if ($(ui.helper).clone().hasClass('original')) {
+        $(this).append($(ui.helper).clone());
+        $(this).find('succulent').removeClass('original').addClass('planted');
+        $(this).find('succulent').draggable();
+      }
+      //also want to delete original
+    } });
+
+});
+//clean up classes once succulents are dragged into terrarium
+$('terr-wrap').on('click', '.succulent', function () {
+  $('terr-wrap .succulent').removeClass('edit');
+  $(this).addClass('edit');
+  var bg = $(this).attr('src');
+  $('thumb').css({
+    "background": "url(" + bg + ") no-repeat",
+    "background-size": "contain",
+    "background-position": "50% 50%" });
+
+});
+function getScale() {
+  var div = $('edit').css('transform');
+  var values = div.split('(')[1];
+  values = values.split('(')[0];
+  values = values.split('(');
+  var a = values[0];
+  var b = values[1];
+  return Math.sqrt(a * a + b * b);
+}
+$('.plus').on('click', function () {
+  $('.edit').css('transform', 'scale(' + (getScale() + 0.05) + ')');
+});
+//experimenting. may not need this later
+$('.original').draggable({
+  appendTo: ".terr-wrap.selected",
+  helper: "clone" });
+
+$('.planted').draggable();
+$('.terr-wrap.selected').droppable({});
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>

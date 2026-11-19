@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>Magazine Layout #codepenchallenge</title>
+
+    <link rel="canonical" href="https://codepen.io/ales_codes/pen/KKWONwe">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  
+  
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway&display=swap");
+
+:root {
+	--color-dark: #111;
+	--color-light: #fff;
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: "Raleway", sans-serif;
+}
+
+/* ------------------------------ */
+/* MOBILE FIRST 820px and smaller */
+/* ------------------------------ */
+
+/* ======= */
+/* GENERAL */
+/* ======= */
+
+.row {
+	width: 100%;
+}
+
+.dark {
+	background-color: var(--color-dark);
+	color: var(--color-light);
+}
+
+.light {
+	color: var(--color-dark);
+	background-color: var(--color-light);
+}
+
+.one,
+.two,
+.three,
+.four {
+	position: relative;
+}
+
+.text-style {
+	font-size: 0.9rem;
+}
+
+.left,
+.right {
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: #111;
+	color: #fff;
+	font-size: 0.8rem;
+}
+
+h2 {
+	font-size: 2rem;
+	font-family: "Montserrat", sans-serif;
+	margin-bottom: 20px;
+}
+
+p {
+	margin-bottom: 0.4em;
+}
+
+aside {
+	background-color: rgb(0, 0, 0);
+	padding: 1em;
+	font-size: 1.25rem;
+	color: white;
+	margin: 1em 0.2em 1em 0.2em;
+	transform: skewX(-5deg);
+}
+
+/* =============== */
+/* GENERAL DESKTOP */
+/* =============== */
+
+@media (min-width: 820px) {
+	.row {
+		height: 700px;
+		position: relative;
+		z-index: -1;
+	}
+
+	.skew-tl::after {
+		content: "";
+		width: 150px;
+		height: 100%;
+		background-color: var(--color-dark);
+		position: absolute;
+		left: 0;
+		top: 0;
+		clip-path: polygon(100% 0, 0 0, 0 100%);
+	}
+
+	.skew-tr::after {
+		content: "";
+		width: 150px;
+		height: 100%;
+		background-color: var(--color-light);
+		position: absolute;
+		right: 0;
+		top: 0;
+		clip-path: polygon(100% 0, 0 0, 100% 100%);
+	}
+
+	.skew-text-tr::after {
+		content: "";
+		width: 150px;
+		height: 100%;
+		background-color: var(--color-dark);
+		position: absolute;
+		right: -150px;
+		top: 0;
+		clip-path: polygon(80% 0, 0 0, 0 100%);
+		opacity: 0.9;
+	}
+
+	.skew-text-tl::after {
+		content: "";
+		width: 150px;
+		height: 100%;
+		background-color: var(--color-light);
+		position: absolute;
+		left: -150px;
+		top: 0;
+		clip-path: polygon(100% 0, 20% 0, 100% 100%);
+	}
+
+	h2 {
+		font-size: 3rem;
+		margin-bottom: 20px;
+		column-span: all;
+	}
+}
+
+/* ============= */
+/* HEADER MOBILE */
+/* ============= */
+
+header .text {
+	background-color: var(--color-dark);
+	opacity: 0.9;
+	height: auto;
+	position: relative;
+	z-index: 1;
+	margin: 0 auto;
+	margin: 2rem 1rem;
+	padding: 2rem 1rem;
+}
+
+header figure {
+	position: absolute;
+	top: 0;
+	max-height: 800px;
+	z-index: 0;
+}
+
+header img {
+	max-width: 820px;
+}
+
+.headline {
+	color: var(--color-light);
+	font-size: 3.5rem;
+	font-family: "Montserrat", sans-serif;
+	margin-bottom: 16px;
+}
+
+.subhead {
+	color: var(--color-light);
+	font-size: 2rem;
+	font-family: "Montserrat", sans-serif;
+}
+
+header .info-flex {
+	margin-top: 3rem;
+	display: flex;
+	flex-direction: column;
+	font-size: 0.75rem;
+}
+
+header p {
+	font-size: 1rem;
+	margin-bottom: 0.3em;
+}
+
+header .tag {
+	background-color: #00ffea;
+	padding: 0.2em 1.2em;
+	color: var(--color-dark);
+	transform: skewX(-15deg);
+	display: inline-block;
+	font-size: 0.8rem;
+}
+
+/* ============== */
+/* HEADER DESKTOP */
+/* ============== */
+
+@media (min-width: 820px) {
+	header .text {
+		height: 500px;
+		width: 800px;
+		top: 50px;
+		left: 50px;
+		position: absolute;
+	}
+
+	.right {
+		left: unset;
+		right: 0;
+	}
+
+	header figure {
+		position: absolute;
+		top: 0;
+		right: 0;
+		height: 700px;
+		width: auto;
+		z-index: 0;
+		overflow: hidden;
+	}
+
+	header img {
+		height: 1000px;
+		width: auto;
+	}
+
+	.headline {
+		color: var(--color-dark);
+		text-shadow: -2px -2px rgb(0, 204, 255), 2px 2px rgb(136, 255, 209);
+		font-size: 7rem;
+		margin-bottom: 16px;
+	}
+
+	.subhead {
+		color: #ccc;
+		font-size: 3rem;
+		font-family: "Montserrat", sans-serif;
+	}
+
+	header .info-flex {
+		margin-top: 3rem;
+		display: flex;
+		flex-direction: column;
+		font-size: 0.75rem;
+	}
+
+	header .info-flex {
+		flex-direction: row;
+		justify-content: space-around;
+	}
+
+	header p {
+		margin-top: 1rem;
+		color: white;
+		font-family: "Raleway", sans-serif;
+	}
+
+	header .tag {
+		background-color: #00ffea;
+		padding: 0.2em 1.5em;
+		color: var(--color-dark);
+		transform: skewX(-15deg);
+		display: inline-block;
+	}
+
+	header svg {
+		margin-top: 0.7rem;
+		filter: grayscale(1);
+	}
+}
+
+/* ================== */
+/* SECTION ONE MOBILE */
+/* ================== */
+
+.one .text {
+	background-color: var(--color-light);
+	opacity: 0.9;
+	height: auto;
+	position: relative;
+	z-index: 1;
+	top: 20px;
+	margin: 2rem 1rem;
+	padding: 2rem 1rem;
+}
+
+.one figure {
+	position: absolute;
+	top: 0;
+	max-height: 800px;
+	z-index: 0;
+}
+
+.one img {
+	max-width: 820px;
+}
+
+/* =================== */
+/* SECTION ONE DESKTOP */
+/* =================== */
+
+@media (min-width: 820px) {
+	.one .text {
+		position: absolute;
+		height: 600px;
+		width: 800px;
+		top: 50px;
+		right: 50px;
+		z-index: 1;
+		font-size: 0.85rem;
+		column-count: 3;
+		padding: 1rem;
+	}
+
+	.one figure {
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 700px;
+		width: auto;
+		z-index: 0;
+		overflow: hidden;
+	}
+
+	.one img {
+		height: 900px;
+		width: auto;
+	}
+}
+
+/* ================== */
+/* SECTION TWO MOBILE */
+/* ================== */
+
+.two .text {
+	background-color: var(--color-dark);
+	opacity: 0.9;
+	height: auto;
+	position: relative;
+	z-index: 1;
+	top: 20px;
+	margin: 2rem 1rem;
+	padding: 2rem 1rem;
+}
+
+.two figure {
+	position: absolute;
+	top: 0;
+	max-height: 800px;
+	z-index: 0;
+}
+
+.two img {
+	max-width: 820px;
+}
+
+/* =================== */
+/* SECTION TWO DESKTOP */
+/* =================== */
+
+@media (min-width: 820px) {
+	.two .text {
+		position: absolute;
+		height: 500px;
+		width: 800px;
+		top: 50px;
+		left: 50px;
+		z-index: 1;
+		font-size: 0.85rem;
+		column-count: 2;
+		padding: 1rem;
+	}
+
+	.right {
+		left: unset;
+		right: 0;
+	}
+
+	.two figure {
+		position: absolute;
+		top: 0;
+		right: 0;
+		height: 700px;
+		width: auto;
+		z-index: 0;
+		overflow: hidden;
+	}
+
+	.two img {
+		height: 900px;
+		width: auto;
+	}
+}
+
+/* ==================== */
+/* SECTION THREE MOBILE */
+/* ==================== */
+
+.three .text {
+	background-color: var(--color-light);
+	opacity: 0.9;
+	height: auto;
+	position: relative;
+	z-index: 1;
+	top: 20px;
+	margin: 2rem 1rem;
+	padding: 2rem 1rem;
+}
+
+.three figure {
+	position: absolute;
+	top: 0;
+	max-height: 800px;
+	z-index: 0;
+}
+
+.three img {
+	max-width: 820px;
+}
+
+/* ===================== */
+/* SECTION THREE DESKTOP */
+/* ===================== */
+
+@media (min-width: 820px) {
+	.three .text {
+		position: absolute;
+		height: 600px;
+		width: 800px;
+		top: 50px;
+		right: 50px;
+		z-index: 1;
+		font-size: 0.85rem;
+		column-count: 3;
+		padding: 1rem;
+	}
+
+	.three figure {
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 700px;
+		width: auto;
+		z-index: 0;
+		overflow: hidden;
+	}
+
+	.three img {
+		height: 900px;
+		width: auto;
+	}
+}
+
+/* =================== */
+/* SECTION FOUR MOBILE */
+/* =================== */
+
+.four .text {
+	background-color: var(--color-dark);
+	opacity: 0.9;
+	height: auto;
+	position: relative;
+	z-index: 1;
+	top: 20px;
+	margin: 2rem 1rem;
+	padding: 2rem 1rem;
+}
+
+.four figure {
+	position: absolute;
+	top: 0;
+	max-height: 800px;
+	z-index: 0;
+}
+
+.four img {
+	max-width: 820px;
+}
+
+/* ==================== */
+/* SECTION FOUR DESKTOP */
+/* ==================== */
+
+@media (min-width: 820px) {
+	.four .text {
+		position: absolute;
+		height: 500px;
+		width: 800px;
+		top: 50px;
+		left: 50px;
+		z-index: 1;
+		font-size: 0.85rem;
+		column-count: 3;
+		padding: 1rem;
+	}
+
+	.right {
+		left: unset;
+		right: 0;
+	}
+
+	.four figure {
+		position: absolute;
+		top: 0;
+		right: 0;
+		height: 700px;
+		width: auto;
+		z-index: 0;
+		overflow: hidden;
+	}
+
+	.four img {
+		height: 900px;
+		width: auto;
+	}
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  <!-- ====== -->
+<!-- HEADER -->
+<!-- ====== -->
+
+<header class="row dark">
+	<div class="text skew-text-tr">
+		<h1 class="headline">Arcade Life</h1>
+		<h2 class="subhead">The next generation of arcade gamers top the leaderboard</h2>
+		<div class="article-meta">
+
+			<div class="info-flex">
+				<svg id="author-avatar" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" width="30" height="30">
+					<title id="avatarTitle">Author Avatar</title>
+					<desc id="avatarDesc">A cartoon avatar of a smiling purple square on a blue background.</desc>
+					<mask id="mask__beam" maskUnits="userSpaceOnUse" x="0" y="0" width="36" height="36">
+						<rect width="36" height="36" rx="72" fill="white"></rect>
+					</mask>
+					<g mask="url(#mask__beam)">
+						<rect width="36" height="36" fill="#0ebeff"></rect>
+						<rect x="0" y="0" width="36" height="36" transform="translate(6 6) rotate(192 18 18) scale(1)" fill="#754cac" rx="6"></rect>
+						<g transform="translate(0 2) rotate(-2 18 18)">
+							<path d="M13,19 a1,0.75 0 0,0 10,0" fill="white"></path>
+							<rect x="12" y="14" width="1.5" height="2" rx="1" stroke="none" fill="white"></rect>
+							<rect x="22" y="14" width="1.5" height="2" rx="1" stroke="none" fill="white"></rect>
+						</g>
+					</g>
+				</svg>
+
+				<p class="byline">by Penny Pen</p>
+				<p class="dateline">June 21, 2021</p>
+				<p class="article-tags">
+					<span class="tag">culture</span> <span class="tag">games</span> <span class="tag featured">featured</span>
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<figure class="picture skew-tl"><img src="https://images.unsplash.com/flagged/photo-1556491168-3e6ffa3e26b2" alt="a person in black high-heeled boots sitting on an arcade basketball game. " />
+		<figcaption class="right">Photo by Ersin Mandaliev</figcaption>
+	</figure>
+</header>
+
+<!-- =========== -->
+<!-- SECTION ONE -->
+<!-- =========== -->
+
+<section class="one row light">
+
+	<div class="text text-style skew-text-tl">
+		<h2 class="light">Arcade Life</h2>
+		<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis quidem est minima quam! Laborum odit quidem earum perferendis eius laudantium perspiciatis similique deleniti delectus suscipit, cum corrupti facere reprehenderit esse.</p>
+		<p>Animi aut, atque quibusdam similique distinctio enim iure, blanditiis rerum autem illum eum in. Dolorem quasi aspernatur nemo deserunt quo, libero dolore atque magni, ullam nihil corrupti et illo earum?</p>
+		<p>Quos, ad? Et, iure. Officia fuga unde quibusdam nemo modi perspiciatis quisquam consectetur voluptates, dolore ab eaque voluptatem corporis placeat consequatur itaque qui asperiores. Consequuntur quas vitae animi est ea!</p>
+		<p>Accusantium nemo labore corrupti laudantium! Quo reprehenderit ea perspiciatis temporibus! Illo sapiente harum fuga molestias temporibus iste animi. Velit, tenetur mollitia sit magni nulla quos veniam molestias consectetur aliquam eaque.</p>
+		<p>Voluptatem, omnis, placeat recusandae iste explicabo accusantium velit laboriosam voluptatum similique, fugit culpa enim! Suscipit labore odit porro assumenda, molestiae aperiam laboriosam explicabo nemo soluta facere sed libero magnam. Odio.</p>
+		<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis quidem est minima quam! Laborum odit quidem earum perferendis eius laudantium perspiciatis similique deleniti delectus suscipit, cum corrupti facere reprehenderit esse. Sed officia ipsum, soluta quibusdam enim quisquam ea atque nulla sunt temporibus, dolorum veniam dolor aspernatur quod. Praesentium vitae exercitationem quod, inventore eius quidem ea sit, nemo reprehenderit voluptatum officia.</p>
+
+		<aside>
+			<p>Quos, ad? Et, iure. Libero dolore atque magni.</p>
+		</aside>
+
+		<p>Animi aut, atque quibusdam similique distinctio enim iure, blanditiis rerum autem illum eum in. Dolorem quasi aspernatur nemo deserunt quo, libero dolore atque magni, ullam nihil corrupti et illo earum?</p>
+
+		<!-- <p>Voluptatem, omnis, placeat recusandae iste explicabo accusantium velit laboriosam voluptatum similique, fugit culpa enim! Suscipit labore odit porro assumenda, molestiae aperiam laboriosam explicabo nemo soluta facere sed libero magnam. Odio.</p>
+    <p>Quae, cumque blanditiis? Nisi rem ullam, ducimus qui praesentium, temporibus mollitia ex voluptatibus aut accusamus reprehenderit soluta eius expedita dicta adipisci debitis repudiandae quibusdam laborum possimus cupiditate quidem doloribus quas.</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum vitae debitis reiciendis nam molestias, iure, recusandae magnam cupiditate ut dolore aliquam nesciunt ipsum sit illum nihil quibusdam mollitia veritatis maiores.</p> -->
+
+	</div>
+
+	<figure class="skew-tr"><img src="https://images.unsplash.com/flagged/photo-1556339911-7ef846e7db43" alt="a smiling person in a pink hoodie, standing in front of a bright pink lighted arcade basketball game. " />
+		<figcaption class="left">Photo by Freddy G</figcaption>
+	</figure>
+
+</section>
+<!--===========-->
+<!-- SECTION TWO -->
+<!-- =========== -->
+
+<section class="two row dark">
+	<div class="text text-style skew-text-tr">
+		<h2>High Scores &amp; High Drama</h2>
+		<p>Voluptatem, omnis, placeat recusandae iste explicabo accusantium velit laboriosam voluptatum similique, fugit culpa enim! Suscipit labore odit porro assumenda, molestiae aperiam laboriosam explicabo nemo soluta facere sed libero magnam. Odio.</p>
+		<p>Animi aut, atque quibusdam similique distinctio enim iure, blanditiis rerum autem illum eum in. Dolorem quasi aspernatur nemo deserunt quo, libero dolore atque magni, ullam nihil corrupti et illo earum?</p>
+		<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis quidem est minima quam! Laborum odit quidem earum perferendis eius laudantium perspiciatis similique deleniti delectus suscipit, cum corrupti facere reprehenderit esse.</p>
+		<p>Voluptatem, omnis, placeat recusandae iste explicabo accusantium velit laboriosam voluptatum similique, fugit culpa enim! Suscipit labore odit porro assumenda, molestiae aperiam laboriosam explicabo nemo soluta facere sed libero magnam. Odio.</p>
+		<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id amet ad blanditiis vero delectus incidunt tempore reiciendis eius qui vel placeat reprehenderit, ut, dolore asperiores possimus impedit. Ipsum, culpa eaque!</p>
+		<p>Velit vero esse quisquam accusantium? Dolore alias, quaerat quod excepturi officiis ipsa placeat officia necessitatibus illo, vero quasi esse aut. Doloremque nesciunt placeat animi saepe tempore aspernatur, officia vitae laudantium!</p>
+	</div>
+
+	<!-- <figure><img src="https://assets.codepen.io/t-1/cassidy-james-blaede-1lzJt360gkE-unsplash.jpg" alt="two people playing Guitar Hero Arcade. " />
+        <figcaption>Photo by Cassidy James Blaede</figcaption>
+    </figure> -->
+	<!-- full size image: https://images.unsplash.com/photo-1536818968680-deeec2e9fd11-->
+
+	<figure class="skew-tl"><img src="https://images.unsplash.com/photo-1601637155580-ac6c49428450" alt="a person wearing a bucket hat, sitting on a skee ball machine lane. " />
+		<figcaption class="right">Photo by Nick Jones</figcaption>
+	</figure>
+
+</section>
+
+<!-- ============= -->
+<!-- SECTION THREE -->
+<!-- ============= -->
+
+<section class="three row light">
+	<div class="text text-style skew-text-tl">
+		<h2>Leveling Up</h2>
+		<p>Animi aut, atque quibusdam similique distinctio enim iure, blanditiis rerum autem illum eum in. Dolorem quasi aspernatur nemo deserunt quo, libero dolore atque magni, ullam nihil corrupti et illo earum?</p>
+		<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis quidem est minima quam! Laborum odit quidem earum perferendis eius laudantium perspiciatis similique deleniti delectus suscipit, cum corrupti facere reprehenderit esse.</p>
+		<p>Voluptatem, omnis, placeat recusandae iste explicabo accusantium velit laboriosam voluptatum similique, fugit culpa enim! Suscipit labore odit porro assumenda, molestiae aperiam laboriosam explicabo nemo soluta facere sed libero magnam. Odio.</p>
+		<p>Animi aut, atque quibusdam similique distinctio enim iure, blanditiis rerum autem illum eum in. Dolorem quasi aspernatur nemo deserunt quo, libero dolore atque magni, ullam nihil corrupti et illo earum?</p>
+
+		<aside>
+			<p>Labore vero cumque provident, deleniti nam, cumque vero.</p>
+		</aside>
+
+		<!-- <p>Voluptatem, omnis, placeat recusandae iste explicabo accusantium velit laboriosam voluptatum similique, fugit culpa enim! Suscipit labore odit porro assumenda, molestiae aperiam laboriosam explicabo nemo soluta facere sed libero magnam. Odio.</p>
+    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id amet ad blanditiis vero delectus incidunt tempore reiciendis eius qui vel placeat reprehenderit, ut, dolore asperiores possimus impedit. Ipsum, culpa eaque!</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis quidem est minima quam! Laborum odit quidem earum perferendis eius laudantium perspiciatis similique deleniti delectus suscipit, cum corrupti facere reprehenderit esse.</p> -->
+		<p>Velit vero esse quisquam accusantium? Dolore alias, quaerat quod excepturi officiis ipsa placeat officia necessitatibus illo, vero quasi esse aut. Doloremque nesciunt placeat animi saepe tempore aspernatur, officia vitae laudantium!</p>
+		<p>Asperiores cum quisquam voluptate adipisci nihil ipsa eum libero recusandae inventore facilis modi nulla, provident ut, ad explicabo magnam unde voluptates commodi.</p>
+		<p>Consectetur sed, itaque modi fugit asperiores similique maxime voluptatum incidunt labore vero cumque provident, deleniti nam? Molestiae impedit nostrum soluta quo iure, iste, nobis expedita minus ad officia dolor saepe.</p>
+
+		<p>Consectetur sed, itaque modi fugit asperiores similique maxime voluptatum incidunt labore vero cumque provident, deleniti nam? Molestiae impedit nostrum soluta quo iure, iste, nobis expedita minus ad officia dolor saepe.</p>
+		<p>Aperiam est ab harum alias quae rem, cumque vero. Dolore possimus quas eius dolor voluptatibus cumque velit, ratione aspernatur voluptatem? Nulla voluptatem quaerat placeat error, ipsam alias dignissimos odit excepturi?</p>
+	</div>
+
+	<figure class="skew-tr"><img src="https://images.unsplash.com/photo-1604112900927-e4d6d3ce3a2e" alt="a person in a white t-shirt sitting on a wheel of fortune arcade game. " />
+		<figcaption class="left">Photo by Nick Jones</figcaption>
+	</figure>
+
+</section>
+
+<!-- ============= -->
+<!-- SECTION FOUR -->
+<!-- ============= -->
+
+<section class="four row dark">
+	<div class="text text-style skew-text-tr">
+		<h2 class="dark">Game Over?</h2>
+		<p>Animi aut, atque quibusdam similique distinctio enim iure, blanditiis rerum autem illum eum in. Dolorem quasi aspernatur nemo deserunt quo, libero dolore atque magni, ullam nihil corrupti et illo earum?</p>
+
+		<aside class="light">
+			<p>Labore vero cumque provident, deleniti nam, cumque vero.</p>
+		</aside>
+
+		<p>Velit vero esse quisquam accusantium? Dolore alias, quaerat quod excepturi officiis ipsa placeat officia necessitatibus illo, vero quasi esse aut. Doloremque nesciunt placeat animi saepe tempore aspernatur, officia vitae laudantium!</p>
+
+		<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis quidem est minima quam! Laborum odit quidem earum perferendis eius laudantium perspiciatis similique deleniti delectus suscipit, cum corrupti facere reprehenderit esse.</p>
+		<p>Aperiam est ab harum alias quae rem, cumque vero. Dolore possimus quas eius dolor voluptatibus cumque velit, ratione aspernatur voluptatem? Nulla voluptatem quaerat placeat error, ipsam alias dignissimos odit excepturi?</p>
+		<p>Consectetur sed, itaque modi fugit asperiores similique maxime voluptatum incidunt labore vero cumque provident, deleniti nam? Molestiae impedit nostrum soluta quo iure, iste, nobis expedita minus ad officia dolor saepe.</p>
+
+		<p>Consectetur sed, itaque modi fugit asperiores similique maxime voluptatum incidunt labore vero cumque provident, deleniti nam? Molestiae impedit nostrum soluta quo iure, iste, nobis expedita minus ad officia dolor saepe.</p>
+		<p>Aperiam est ab harum alias quae rem, cumque vero. Dolore possimus quas eius dolor voluptatibus cumque velit, ratione aspernatur voluptatem? Nulla voluptatem quaerat placeat error, ipsam alias dignissimos odit excepturi?</p>
+	</div>
+
+	<figure class="skew-tl"><img src="https://images.unsplash.com/photo-1533236897111-3e94666b2edf" alt="three neon-lit skee ball lanes. " />
+		<figcaption class="right">Photo by Element5 Digital</figcaption>
+	</figure>
+</section>
+  
+  
+  
+</body>
+
+</html>
