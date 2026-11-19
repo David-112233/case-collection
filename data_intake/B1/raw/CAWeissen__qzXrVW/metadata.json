@@ -1,0 +1,73 @@
+{
+  "source_id": "codepen:caweissen/qzxrvw",
+  "author": "CAWeissen",
+  "pen_id": "qzXrVW",
+  "url": "https://codepen.io/CAWeissen/pen/qzXrVW",
+  "acquisition": "cdpn_fullpage",
+  "acquisition_url": "https://cdpn.io/CAWeissen/fullpage/qzXrVW",
+  "retrieved_at": "2026-11-19T03:18:54+00:00",
+  "license": "未单独核验；外链资源许可另查",
+  "fetch_status": "ok",
+  "title": "SVG Mask - Scroll to Reveal Text w/Parallax (best viewed on mobile)",
+  "canonical_url": "https://codepen.io/CAWeissen/pen/qzXrVW",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "e5faede68ff408c1d486910d4d38741490f0d5c7ec664fb7dfd7388c0d7cbc4e",
+  "source_html_sha256": "4bd2521b316ffb3b454f9f04c8cd1dc210b2d356d8716fb4f3920efc2a53771f",
+  "analysis": {
+    "js": {
+      "has_js": true,
+      "inline_js_chars": 981,
+      "external_scripts": [
+        "https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js",
+        "https://cdn.jsdelivr.net/npm/animejs@3.0.0/lib/anime.min.js",
+        "https://cdnjs.cloudflare.com/ajax/libs/rellax/1.10.0/rellax.js"
+      ],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 0,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": false,
+      "clip_path": false,
+      "css_counter": false,
+      "media_query": true
+    },
+    "external_stylesheets": [
+      "https://fonts.googleapis.com/css?family=Montserrat&amp;display=swap"
+    ],
+    "css_imports": [],
+    "css_chars": 1713,
+    "element_count": 54,
+    "html_chars": 11617
+  },
+  "review": {
+    "label": "山景文字遮罩",
+    "status": "source_only_backup",
+    "reference_case": "213/227",
+    "evidence": "归档源码明确分开背景山图、轮廓字及被 SUMMIT 字形掏空的前景山图，滚动驱动独立运动。此前云端桌面首屏仅白底和署名，未见两张山图；原因和移动端未核验，不作为视觉通过。",
+    "visual_verified": false,
+    "surface": "此前云端桌面 CodePen Full Page，仅见白底与署名；此补录未重新打开。",
+    "formal_admission": false,
+    "included_in_primary_count": false
+  }
+}
