@@ -1,0 +1,72 @@
+{
+  "source_id": "codepen:jh3y/jjeegbk",
+  "author": "jh3y",
+  "pen_id": "JjEegBK",
+  "url": "https://codepen.io/jh3y/pen/JjEegBK",
+  "acquisition": "cdpn_fullpage",
+  "acquisition_url": "https://cdpn.io/jh3y/fullpage/JjEegBK",
+  "retrieved_at": "2026-11-19T12:11:23+00:00",
+  "license": "未单独核验；外链资源许可另查",
+  "fetch_status": "ok",
+  "title": "CSS 3D Print Shop 😁",
+  "canonical_url": "https://codepen.io/jh3y/pen/JjEegBK",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "536a3caa4286514cd99115f42c095c9a9dbea0c652580a1e981a491026ff923f",
+  "source_html_sha256": "93ffdd0bd81d3fdb1facbf7aa6db3b04a3b64d5821154e8debabb4fd8701d635",
+  "analysis": {
+    "js": {
+      "has_js": true,
+      "inline_js_chars": 1952,
+      "external_scripts": [
+        "https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"
+      ],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 7,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": true,
+      "clip_path": true,
+      "css_counter": false,
+      "media_query": false
+    },
+    "external_stylesheets": [
+      "https://public.codepenassets.com/css/normalize-5.0.0.min.css"
+    ],
+    "css_imports": [
+      "https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap"
+    ],
+    "css_chars": 15141,
+    "element_count": 97,
+    "html_chars": 22246
+  },
+  "review": {
+    "label": "打印机壳体、纸槽与托盘",
+    "status": "候选",
+    "reference_case": "213/224",
+    "evidence": "首屏实见后纸架竖起，前出纸缝凹在机壳里，暗色托盘从开口向前伸，前方另有错位纸叠。适合单帧评内外壳层级，没有提交 URL 或测试打印和音频。",
+    "visual_verified": true,
+    "surface": "Cloud Chrome, CodePen Full Page default or stated interaction; desktop only",
+    "formal_admission": false
+  }
+}
