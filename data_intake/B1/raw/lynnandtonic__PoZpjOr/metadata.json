@@ -1,0 +1,70 @@
+{
+  "source_id": "codepen:lynnandtonic/pozpjor",
+  "author": "lynnandtonic",
+  "pen_id": "PoZpjOr",
+  "url": "https://codepen.io/lynnandtonic/pen/PoZpjOr",
+  "acquisition": "cdpn_fullpage_cloud_browser_dom",
+  "acquisition_url": "https://cdpn.io/lynnandtonic/fullpage/PoZpjOr",
+  "retrieved_at": "2026-11-18T15:43:21.313Z",
+  "fetch_status": "ok",
+  "title": "CSS folded poster effect",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "9b44e742c89eb4ef541edf79661db3290411c9a71b376ea360cd7991a93c0d33",
+  "source_html_sha256": "924c7e4e9a5a16dd2729c8cc1eef2dc2a5a6c18bce6c3a65e4c65d413b0dd85d",
+  "analysis": {
+    "js": {
+      "has_js": true,
+      "inline_js_chars": 56,
+      "external_scripts": [
+        "https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"
+      ],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 0,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": false,
+      "clip_path": false,
+      "css_counter": false,
+      "media_query": false
+    },
+    "external_stylesheets": [
+      "https://public.codepenassets.com/css/reset-2.0.min.css"
+    ],
+    "css_imports": [],
+    "css_chars": 2026,
+    "element_count": 11,
+    "html_chars": 4112
+  },
+  "visual_review": {
+    "viewport": [
+      1180,
+      757
+    ],
+    "default_only": true,
+    "mobile_verified": false,
+    "screenshot_available": true
+  },
+  "candidate_status": "recommended_pending_user_review",
+  "license": "not separately verified"
+}

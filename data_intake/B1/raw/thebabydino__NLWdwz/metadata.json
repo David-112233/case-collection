@@ -1,0 +1,66 @@
+{
+  "source_id": "codepen:thebabydino/nlwdwz",
+  "author": "thebabydino",
+  "pen_id": "NLWdwz",
+  "url": "https://codepen.io/thebabydino/pen/NLWdwz",
+  "acquisition": "cdpn_fullpage_cloud_browser_dom",
+  "acquisition_url": "https://cdpn.io/thebabydino/fullpage/NLWdwz",
+  "retrieved_at": "2026-11-18T15:45:08.127Z",
+  "fetch_status": "ok",
+  "title": "Responsive infographic banners with CSS variables",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "1970a51095b5d26cb7383e8aed2619841a15e3ac0cdc00b415199abf2a6adcbf",
+  "source_html_sha256": "aaa0224e8d38c6b07c4cacb95610a158079b9cb99d3f39c0f81886c9e62ad237",
+  "analysis": {
+    "js": {
+      "has_js": false,
+      "inline_js_chars": 0,
+      "external_scripts": [],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 0,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": true,
+      "clip_path": false,
+      "css_counter": true,
+      "media_query": true
+    },
+    "external_stylesheets": [],
+    "css_imports": [],
+    "css_chars": 2632,
+    "element_count": 12,
+    "html_chars": 4458
+  },
+  "visual_review": {
+    "viewport": [
+      1180,
+      757
+    ],
+    "default_only": true,
+    "mobile_verified": false,
+    "screenshot_available": true
+  },
+  "candidate_status": "recommended_pending_user_review",
+  "license": "not separately verified"
+}
