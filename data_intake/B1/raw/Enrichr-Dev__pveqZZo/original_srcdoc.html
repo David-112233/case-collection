@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>Mask shape sections</title>
+
+    <link rel="canonical" href="https://codepen.io/Enrichr-Dev/pen/pveqZZo">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Parkinsans:wght@400;500;600;700;800&family=Instrument+Sans:wght@400;500;600&family=Fira+Code:wght@400;500&display=swap">
+  
+  
+  
+<style>
+/* Mask shape sections · from the Enrichr Library: https://enrichr.dev/elements/mask-shape-sections.html */
+html, body { margin: 0; min-height: 100%; background: #0c1e18; }
+#enrichr-root { min-height: 100vh; }
+#enrichr-root > * { min-height: 100vh; }
+/* This demo follows the page scroll, so the page gets room to scroll above and below it. */
+.enrichr-scroll-hint { box-sizing: border-box; height: 55vh; margin: 0; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 2rem; color: #fbf8f1; opacity: .75; font: 600 .95rem/1 'Parkinsans', system-ui, sans-serif; letter-spacing: .1em; text-transform: uppercase; }
+.enrichr-scroll-hint::after { content: "\2193"; margin-left: .5em; }
+.enrichr-scroll-end { height: 100vh; }
+
+/* Enrichr Library · https://enrichr.dev */
+.ef-mask__item { position: relative; height: var(--ef-h, 16rem); margin: 0 0 1rem; overflow: hidden; }
+.ef-mask__img { position: absolute; inset: 0; background-size: cover; background-position: center; background-image: linear-gradient(135deg, var(--ef-a, #2f7d5b), var(--ef-b, #c6f26b)); }
+.ef-mask__cap { position: absolute; left: 1rem; bottom: 0.8rem; z-index: 1; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #fff; mix-blend-mode: difference; }
+.ef-mask__item[data-shape="circle"] .ef-mask__img { clip-path: circle(calc(var(--p, 1) * 75%) at 50% 50%); }
+.ef-mask__item[data-shape="diamond"] .ef-mask__img { clip-path: polygon(50% calc(50% - var(--p, 1) * 60%), calc(50% + var(--p, 1) * 60%) 50%, 50% calc(50% + var(--p, 1) * 60%), calc(50% - var(--p, 1) * 60%) 50%); }
+.ef-mask__item[data-shape="band"] .ef-mask__img { clip-path: inset(calc((1 - var(--p, 1)) * 48%) 0); }
+@media (prefers-reduced-motion: reduce) { .ef-mask__item .ef-mask__img { clip-path: none !important; } }
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <p class="enrichr-scroll-hint" aria-hidden="true">Scroll down</p>
+<div id="enrichr-root">
+<div class="ef-mask">
+  <div class="ef-mask__item" data-shape="circle"><div class="ef-mask__img"></div><span class="ef-mask__cap"></span></div>
+  <div class="ef-mask__item" data-shape="diamond"><div class="ef-mask__img"></div><span class="ef-mask__cap"></span></div>
+  <div class="ef-mask__item" data-shape="band"><div class="ef-mask__img"></div><span class="ef-mask__cap"></span></div>
+</div>
+</div>
+<div class="enrichr-scroll-end" aria-hidden="true"></div>
+  
+    <script id="rendered-js" >
+// Enrichr Library · https://enrichr.dev
+// Mask shape sections: the same image is cropped through a different shape in each section (circle, diamond, band),
+// and each shape opens as its section scrolls into view. The shape is a CSS clip-path driven by one custom property, --p.
+// mount(root, { image (URL or empty for a gradient), captions (comma separated), height (px), manual (0 = follow scroll, 1-100 = fixed %), colorA, colorB })
+function mount(root, o) {
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var box = root.querySelector(".ef-mask");
+  var items = Array.prototype.slice.call(root.querySelectorAll(".ef-mask__item"));
+  var opts = {},raf = 0;
+
+  function safeUrl(u) {
+    try {var x = new URL(u, window.location.href);return /^https?:$/.test(x.protocol) ? x.href : "";} catch (e) {return "";}
+  }
+  function render() {
+    var caps = opts.captions.split(",").map(function (c) {return c.trim();});
+    var url = opts.image ? safeUrl(opts.image) : "";
+    box.style.setProperty("--ef-a", opts.colorA);
+    box.style.setProperty("--ef-b", opts.colorB);
+    box.style.setProperty("--ef-h", opts.height + "px");
+    items.forEach(function (it, i) {
+      it.querySelector(".ef-mask__cap").textContent = caps[i] || "";
+      it.querySelector(".ef-mask__img").style.backgroundImage = url ? 'url("' + url + '")' : "";
+    });
+    paint();
+  }
+  function paint() {
+    raf = 0;
+    var vh = window.innerHeight || 800;
+    items.forEach(function (it) {
+      var p = 1;
+      if (!reduce) {
+        if (opts.manual > 0) p = opts.manual / 100;else
+        {
+          var r = it.getBoundingClientRect();
+          var t = Math.min(1, Math.max(0, (vh * 0.95 - r.top) / (vh * 0.6)));
+          p = t * t * (3 - 2 * t);
+        }
+      }
+      it.style.setProperty("--p", p.toFixed(3));
+    });
+  }
+  function schedule() {if (!raf) raf = requestAnimationFrame(paint);}
+  function update(next) {
+    opts = Object.assign({ image: "", captions: "Capture, Verify, Rebuild", height: 256, manual: 0, colorA: "#2f7d5b", colorB: "#c6f26b" }, opts, next || {});
+    render();
+  }
+  update(o);
+  if (!reduce) {
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+  }
+  return { update: update, destroy: function () {cancelAnimationFrame(raf);window.removeEventListener("scroll", schedule);window.removeEventListener("resize", schedule);} };
+}
+
+// Start it with the Library's default settings. Change any of these to taste;
+// the full list, with sliders, is on https://enrichr.dev/elements/mask-shape-sections.html
+var enrichr = mount(document.getElementById("enrichr-root"), {
+  "captions": "Capture, Verify, Rebuild",
+  "image": "",
+  "height": 256,
+  "manual": 0,
+  "colorA": "#2f7d5b",
+  "colorB": "#c6f26b" });
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>

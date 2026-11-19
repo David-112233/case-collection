@@ -1,0 +1,6 @@
+key,url,decision,tier,hits,reason,js_policy,evidence,notes,decided_on
+marcelodavanzo__zvJqRK,https://codepen.io/marcelodavanzo/pen/zvJqRK,hold,unclassified,spatial_layers,await_user_review,preserve,实测点 Toggle，灰色矩形前片先转为倾斜梯形，停止后向前伏倒，有可见边厚，后面的白色方形光窗完全显露。取默认闭合及点击后停稳两帧；只实测打开，不承诺回切全流程。构造相对简洁。,优先，对照 224 / 227；仅候审，未正式入库。,2026-11-19
+Enrichr-Dev__pveqZZo,https://codepen.io/Enrichr-Dev/pen/pveqZZo,hold,unclassified,spatial_layers,await_user_review,preserve,实测向下滚动：Capture 可见渐变区域两侧呈鼓形，继续滚动可见 VERIFY 的斜边及 REBUILD 的全宽渐变区。按对应段与相对滚动位置采图，不能把不同段当作同一遮罩的两态。主要测二维裁切，不是真三维；属 Enrichr 组件体系，先确认是否要用已公开的实现作基准。,备选，对照 213 / 224；仅候审，未正式入库。,2026-11-19
+peterwestendorp__DbwoyV,https://codepen.io/peterwestendorp/pen/DbwoyV,hold,unclassified,spatial_layers,await_user_review,preserve,实见中心暗孔周围由近端青蓝大矩形到远端绿色短段渐密，围成弯曲圆筒通道。与此前纹理通道的区别是取样重点为独立明亮环段的缩短和径向收拢；同类题材不宜同时优先。源码有 10 秒循环；需记录相位，不当作静止。,备选·循环，对照 224 / 227；仅候审，未正式入库。,2026-11-19
+davidkpiano__XbpEKe,https://codepen.io/davidkpiano/pen/XbpEKe,hold,unclassified,spatial_layers,await_user_review,preserve,实见紫底白色等轴点阵，随后上部网格偏斜、层间网格局部叠合。多轨 4 秒动画，截取同一相位再比较；这是透明点阵形状，不把后部点可见说成实体遮挡。,备选·循环，对照 224 / 227；仅候审，未正式入库。,2026-11-19
+scorch__gWdKwo,https://codepen.io/scorch/pen/gWdKwo,hold,unclassified,spatial_layers,await_user_review,preserve,实见米色背景中心空腔，外圈与内圈以较大空心圆包围更细的放射点带。按二维层次、空腔与边界评审，不把它当作组织学标注或实体遮挡；未复核时序与输入行为。,备选·定帧待复核，对照 224；仅候审，未正式入库。,2026-11-19

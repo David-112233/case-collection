@@ -1,0 +1,70 @@
+{
+  "source_id": "codepen:enrichr-dev/pveqzzo",
+  "author": "Enrichr-Dev",
+  "pen_id": "pveqZZo",
+  "url": "https://codepen.io/Enrichr-Dev/pen/pveqZZo",
+  "acquisition": "cdpn_fullpage",
+  "acquisition_url": "https://cdpn.io/Enrichr-Dev/fullpage/pveqZZo",
+  "retrieved_at": "2026-11-19T23:09:06+00:00",
+  "license": "未单独核验；外链资源许可另查",
+  "fetch_status": "ok",
+  "title": "Mask shape sections",
+  "canonical_url": "https://codepen.io/Enrichr-Dev/pen/pveqZZo",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "45abf92a6f88e021b8b4fd6e1c42da67c3c4822ca7de38b367071bc1c97c5055",
+  "source_html_sha256": "7db75b3a22b3160e8510e1e0b3f93caa4582bd50727bf36e3995849ba0bb7c76",
+  "analysis": {
+    "js": {
+      "has_js": true,
+      "inline_js_chars": 2830,
+      "external_scripts": [
+        "https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"
+      ],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 0,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": false,
+      "clip_path": true,
+      "css_counter": false,
+      "media_query": true
+    },
+    "external_stylesheets": [
+      "https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Parkinsans:wght@400;500;600;700;800&family=Instrument+Sans:wght@400;500;600&family=Fira+Code:wght@400;500&display=swap"
+    ],
+    "css_imports": [],
+    "css_chars": 1823,
+    "element_count": 14,
+    "html_chars": 6587
+  },
+  "review": {
+    "label": "随滚动展开的三段形状遮罩",
+    "status": "备选",
+    "reference_case": "213 / 224",
+    "evidence": "实测向下滚动：Capture 可见渐变区域两侧呈鼓形，继续滚动可见 VERIFY 的斜边及 REBUILD 的全宽渐变区。按对应段与相对滚动位置采图，不能把不同段当作同一遮罩的两态。主要测二维裁切，不是真三维；属 Enrichr 组件体系，先确认是否要用已公开的实现作基准。",
+    "visual_verified": true,
+    "surface": "Cloud Chrome, cdpn.io public preview, 1331×894 desktop including preview banner; no mobile check",
+    "formal_admission": false
+  }
+}
