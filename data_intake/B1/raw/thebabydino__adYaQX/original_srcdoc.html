@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>layered marble pyramid (pure CSS)</title>
+
+    <link rel="canonical" href="https://codepen.io/thebabydino/pen/adYaQX">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  
+  
+<style>
+body {
+  overflow: hidden;
+  height: 100vh;
+  perspective: 32em;
+  perspective-origin: 50% calc(50% - 13em);
+  background: linear-gradient(#000000, #222222);
+}
+
+.a3d {
+  animation: r 5s linear infinite;
+}
+
+@keyframes r {
+  to {
+    transform: rotateY(1turn);
+  }
+}
+div, :before {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-style: preserve-3d;
+}
+
+.s3d:nth-child(1) .s2d:last-child {
+  margin: -4.33333em;
+  width: 8.66667em;
+  height: 8.66667em;
+  transform: translateY(0.68865em) rotateX(90deg);
+}
+.s3d:nth-child(1) .s2d:nth-child(-n + 4) {
+  clip-path: url(#c1);
+}
+.s3d:nth-child(2) {
+  animation: split2 10s ease-in infinite alternate;
+}
+@keyframes split2 {
+  0%, 25% {
+    transform: none;
+  }
+  75%, 100% {
+    transform: translateY(-4em);
+  }
+}
+.s3d:nth-child(2) .s2d:last-child {
+  margin: -2.16667em;
+  width: 4.33333em;
+  height: 4.33333em;
+  transform: translateY(-2.37548em) rotateX(90deg);
+}
+.s3d:nth-child(2) .s2d:nth-child(-n + 4) {
+  clip-path: url(#c2);
+}
+.s3d:nth-child(3) {
+  animation: split3 10s ease-in infinite alternate;
+}
+@keyframes split3 {
+  0%, 25% {
+    transform: none;
+  }
+  75%, 100% {
+    transform: translateY(-6em);
+  }
+}
+.s3d:nth-child(3) .s2d:nth-child(-n + 4) {
+  clip-path: url(#c3);
+}
+
+.s2d {
+  overflow: hidden;
+  backface-visibility: hidden;
+  background: url(https://upload.wikimedia.org/wikipedia/commons/2/20/Light_brown_stone_texture.jpg) 50%/cover;
+}
+.s2d:before {
+  margin: inherit;
+  width: inherit;
+  height: inherit;
+  background: #000;
+  content: '';
+}
+.s2d:nth-child(-n + 4) {
+  margin: -7.50555em;
+  width: 15.01111em;
+  height: 15.01111em;
+  transform-origin: 50% 11.25833em;
+  background: url(https://upload.wikimedia.org/wikipedia/commons/2/20/Light_brown_stone_texture.jpg) 50%/cover, url(https://upload.wikimedia.org/wikipedia/commons/a/a7/Stone_gimp.png) 0/13em, url(https://upload.wikimedia.org/wikipedia/commons/a/a7/Stone_gimp.png) 0/13em;
+  background-blend-mode: lighten;
+  animation: shine 1.25s linear infinite;
+}
+.s2d:nth-child(-n + 4):before {
+  opacity: .01;
+  animation: shade 2.5s linear infinite alternate;
+}
+.s2d:nth-child(5):before {
+  opacity: .85;
+  transform: scale(0.95);
+  animation: shadow 10s ease-in infinite alternate;
+}
+.s2d:nth-child(1) {
+  transform: rotateY(0deg) translateZ(6.5em) rotateX(35.26439deg);
+}
+.s2d:nth-child(1):before {
+  animation-delay: 0s;
+}
+.s2d:nth-child(2) {
+  transform: rotateY(90deg) translateZ(6.5em) rotateX(35.26439deg);
+}
+.s2d:nth-child(2):before {
+  animation-delay: -1.25s;
+}
+.s2d:nth-child(3) {
+  transform: rotateY(180deg) translateZ(6.5em) rotateX(35.26439deg);
+}
+.s2d:nth-child(3):before {
+  animation-delay: -2.5s;
+}
+.s2d:nth-child(4) {
+  transform: rotateY(270deg) translateZ(6.5em) rotateX(35.26439deg);
+}
+.s2d:nth-child(4):before {
+  animation-delay: -3.75s;
+}
+
+@keyframes shine {
+  to {
+    background-position: 50%, -13em, -39em;
+  }
+}
+@keyframes shade {
+  to {
+    opacity: .75;
+  }
+}
+@keyframes shadow {
+  to {
+    filter: blur(1.5em);
+  }
+}
+a {
+  position: absolute;
+  top: 1em;
+  left: 1em;
+  color: lime;
+  font: 1em trebuchet ms, verdana, sans-serif;
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <svg>
+  <clipPath id="c3" clipPathUnits="objectBoundingBox">
+    <polygon points="0.50000,0.00000 0.64434,0.25000 0.35566,0.25000"></polygon>
+  </clipPath>
+  <clipPath id="c2" clipPathUnits="objectBoundingBox">
+    <polygon points="0.64434,0.25000 0.78868,0.50000 0.21132,0.50000 0.35566,0.25000"></polygon>
+  </clipPath>
+  <clipPath id="c1" clipPathUnits="objectBoundingBox">
+    <polygon points="0.78868,0.50000 0.93301,0.75000 0.06699,0.75000 0.21132,0.50000"></polygon>
+  </clipPath>
+</svg>
+<div class="a3d">
+  <div class="s3d">
+    <div class="s2d"></div>
+    <div class="s2d"></div>
+    <div class="s2d"></div>
+    <div class="s2d"></div>
+    <div class="s2d"></div>
+  </div>
+  <div class="s3d">
+    <div class="s2d"></div>
+    <div class="s2d"></div>
+    <div class="s2d"></div>
+    <div class="s2d"></div>
+    <div class="s2d"></div>
+  </div>
+  <div class="s3d">
+    <div class="s2d"></div>
+    <div class="s2d"></div>
+    <div class="s2d"></div>
+    <div class="s2d"></div>
+  </div>
+</div><a href="https://codepen.io/thebabydino/pen/wMvPaQ" target="_blank">see my other layered pyramid</a>
+  
+    <script id="rendered-js" >
+/* 
+This demo (and a lot of other recent 3D demos I've done) uses `clip-path` on HTML elements, currently not supported in IE/ Edge. 
+
+If you like my 3D stuff, please vote for `clip-path` on HTML elements to be implemented in Edge https://wpdev.uservoice.com/forums/257854-microsoft-edge-developer/suggestions/6519995-support-clip-path-property
+*/
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>

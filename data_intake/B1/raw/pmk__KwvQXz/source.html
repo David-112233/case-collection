@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>CSS Chinese Folding Fan</title>
+
+    <link rel="canonical" href="https://codepen.io/pmk/pen/KwvQXz">
+  
+  
+  
+  
+<style>
+@import url("https://fonts.googleapis.com/css?family=Shojumaru");
+body {
+  background-color: #D3A87A;
+  text-align: center;
+  font-size: 100%;
+  font-family: Arial;
+  line-height: 1.2;
+}
+
+h1 {
+  text-align: center;
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.7);
+  font-size: 8vmin;
+  font-family: "Shojumaru", cursive;
+}
+
+.wrapper {
+  position: relative;
+  perspective: 1600px;
+  perspective-origin: 50% 50%;
+  transform-origin: 100% 100%;
+  display: inline-block;
+  margin: 5px auto;
+}
+
+.fan {
+  transform-style: preserve-3d;
+  position: relative;
+  width: 400px;
+  height: 200px;
+  background-color: rgba(255, 0, 0, 0);
+  transform-origin: center bottom;
+  animation: wave 6s ease infinite;
+}
+
+.segment {
+  overflow: hidden;
+  position: absolute;
+  display: inline-block;
+  transform-origin: 50% 100%;
+  bottom: 0;
+  left: 184px;
+  animation: none 6s ease infinite;
+}
+
+.top {
+  position: relative;
+  width: 32px;
+  height: 8px;
+}
+
+.segment.leaf .top {
+  animation: scale 6s ease infinite;
+}
+
+.top:before, .top:after {
+  content: "";
+  position: absolute;
+  border-style: solid;
+}
+
+.top:before {
+  left: 0;
+  border-width: 8px 0 0 16px;
+  border-color: transparent transparent transparent #ee0000;
+}
+
+.top:after {
+  right: 0;
+  border-width: 0 0 8px 16px;
+  border-color: transparent transparent #aa0000 transparent;
+}
+
+.bottom {
+  position: relative;
+  width: 32px;
+  height: 192px;
+}
+
+.segment.leaf .bottom {
+  animation: scale 6s ease infinite;
+}
+
+.bottom:before, .bottom:after {
+  content: "";
+  position: absolute;
+  border-style: solid;
+}
+
+.bottom:before {
+  left: 0;
+  border-width: 0 16px 192px 0;
+  border-color: transparent #ee0000 transparent transparent;
+}
+
+.bottom:after {
+  right: 0;
+  border-width: 192px 16px 0 0;
+  border-color: #aa0000 transparent transparent transparent;
+}
+
+.segment.base .top:before,
+.segment.base .top:after {
+  border-color: #536007;
+}
+
+.segment.base .bottom:before {
+  border-color: transparent #536007 transparent transparent;
+}
+
+.segment.base .bottom:after {
+  border-color: #536007 transparent transparent transparent;
+}
+
+@keyframes wave {
+  0%, 39%, 71%, 100% {
+    transform: rotateX(0deg) rotateY(0deg);
+  }
+  40%, 46%, 52%, 58%, 63%, 69% {
+    transform: rotateX(0deg) rotateY(10deg);
+  }
+  43%, 49%, 55%, 61%, 66% {
+    transform: rotateX(30deg) rotateY(10deg);
+  }
+}
+@keyframes scale {
+  0%, 20%, 90%, 100% {
+    transform: scaleX(0.1);
+  }
+  40%, 70% {
+    transform: scaleX(1);
+  }
+}
+.segment:nth-of-type(1) {
+  transform: rotate(81deg);
+  animation-name: fold1;
+}
+
+@keyframes fold1 {
+  0%, 20%, 90%, 100% {
+    transform: rotate(90deg);
+  }
+  40%, 70% {
+    transform: rotate(81deg);
+  }
+}
+.segment:nth-of-type(2) {
+  transform: rotate(72deg);
+  animation-name: fold2;
+}
+
+@keyframes fold2 {
+  0%, 20%, 90%, 100% {
+    transform: rotate(90deg);
+  }
+  40%, 70% {
+    transform: rotate(72deg);
+  }
+}
+.segment:nth-of-type(3) {
+  transform: rotate(63deg);
+  animation-name: fold3;
+}
+
+@keyframes fold3 {
+  0%, 20%, 90%, 100% {
+    transform: rotate(90deg);
+  }
+  40%, 70% {
+    transform: rotate(63deg);
+  }
+}
+.segment:nth-of-type(4) {
+  transform: rotate(54deg);
+  animation-name: fold4;
+}
+
+@keyframes fold4 {
+  0%, 20%, 90%, 100% {
+    transform: rotate(90deg);
+  }
+  40%, 70% {
+    transform: rotate(54deg);
+  }
+}
+.segment:nth-of-type(5) {
+  transform: rotate(45deg);
+  animation-name: fold5;
+}
+
+@keyframes fold5 {
+  0%, 20%, 90%, 100% {
+    transform: rotate(90deg);
+  }
+  40%, 70% {
+    transform: rotate(45deg);
+  }
+}
+.segment:nth-of-type(6) {
+  transform: rotate(36deg);
+  animation-name: fold6;
+}
+
+@keyframes fold6 {
+  0%, 20%, 90%, 100% {
+    transform: rotate(90deg);
+  }
+  40%, 70% {
+    transform: rotate(36deg);
+  }
+}
+.segment:nth-of-type(7) {
+  transform: rotate(27deg);
+  animation-name: fold7;
+}
+
+@keyframes fold7 {
+  0%, 20%, 90%, 100% {
+    transform: rotate(90deg);
+  }
+  40%, 70% {
+    transform: rotate(27deg);
+  }
+}
+.segment:nth-of-type(8) {
+  transform: rotate(18deg);
+  animation-name: fold8;
+}
+
+@keyframes fold8 {
+  0%, 20%, 90%, 100% {
+    transform: rotate(90deg);
+  }
+  40%, 70% {
+    transform: rotate(18deg);
+  }
+}
+.segment:nth-of-type(9) {
+  transform: rotate(9deg);
+  animation-name: fold9;
+}
+
+@keyframes fold9 {
+  0%, 20%, 90%, 100% {
+    transform: rotate(90deg);
+  }
+  40%, 70% {
+    transform: rotate(9deg);
+  }
+}
+.segment:nth-of-type(10) {
+  transform: rotate(0deg);
+  animation-name: fold10;
+}
+
+@keyframes fold10 {
+  0%, 20%, 90%, 100% {
+    transform: rotate(90deg);
+  }
+  40%, 70% {
+    transform: rotate(0deg);
+  }
+}
+.segment:nth-of-type(11) {
+  transform: rotate(-9deg);
+  animation-name: fold11;
+}
+
+@keyframes fold11 {
+  0%, 20%, 90%, 100% {
+    transform: rotate(90deg);
+  }
+  40%, 70% {
+    transform: rotate(-9deg);
+  }
+}
+.segment:nth-of-type(12) {
+  transform: rotate(-18deg);
+  animation-name: fold12;
+}
+
+@keyframes fold12 {
+  0%, 20%, 90%, 100% {
+    transform: rotate(90deg);
+  }
+  40%, 70% {
+    transform: rotate(-18deg);
+  }
+}
+.segment:nth-of-type(13) {
+  transform: rotate(-27deg);
+  animation-name: fold13;
+}
+
+@keyframes fold13 {
+  0%, 20%, 90%, 100% {
+    transform: rotate(90deg);
+  }
+  40%, 70% {
+    transform: rotate(-27deg);
+  }
+}
+.segment:nth-of-type(14) {
+  transform: rotate(-36deg);
+  animation-name: fold14;
+}
+
+@keyframes fold14 {
+  0%, 20%, 90%, 100% {
+    transform: rotate(90deg);
+  }
+  40%, 70% {
+    transform: rotate(-36deg);
+  }
+}
+.segment:nth-of-type(15) {
+  transform: rotate(-45deg);
+  animation-name: fold15;
+}
+
+@keyframes fold15 {
+  0%, 20%, 90%, 100% {
+    transform: rotate(90deg);
+  }
+  40%, 70% {
+    transform: rotate(-45deg);
+  }
+}
+.segment:nth-of-type(16) {
+  transform: rotate(-54deg);
+  animation-name: fold16;
+}
+
+@keyframes fold16 {
+  0%, 20%, 90%, 100% {
+    transform: rotate(90deg);
+  }
+  40%, 70% {
+    transform: rotate(-54deg);
+  }
+}
+.segment:nth-of-type(17) {
+  transform: rotate(-63deg);
+  animation-name: fold17;
+}
+
+@keyframes fold17 {
+  0%, 20%, 90%, 100% {
+    transform: rotate(90deg);
+  }
+  40%, 70% {
+    transform: rotate(-63deg);
+  }
+}
+.segment:nth-of-type(18) {
+  transform: rotate(-72deg);
+  animation-name: fold18;
+}
+
+@keyframes fold18 {
+  0%, 20%, 90%, 100% {
+    transform: rotate(90deg);
+  }
+  40%, 70% {
+    transform: rotate(-72deg);
+  }
+}
+.segment:nth-of-type(19) {
+  transform: rotate(-81deg);
+  animation-name: fold19;
+}
+
+@keyframes fold19 {
+  0%, 20%, 90%, 100% {
+    transform: rotate(90deg);
+  }
+  40%, 70% {
+    transform: rotate(-81deg);
+  }
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  <h1>CSS Chinese Folding Fan</h1>
+<div class="wrapper">
+	<div class="fan">
+	    <div class="segment leaf"><div class="top"></div><div class="bottom"></div></div>
+	    <div class="segment leaf"><div class="top"></div><div class="bottom"></div></div>
+	    <div class="segment leaf"><div class="top"></div><div class="bottom"></div></div>
+	    <div class="segment leaf"><div class="top"></div><div class="bottom"></div></div>
+	    <div class="segment leaf"><div class="top"></div><div class="bottom"></div></div>
+	    <div class="segment leaf"><div class="top"></div><div class="bottom"></div></div>
+	    <div class="segment leaf"><div class="top"></div><div class="bottom"></div></div>
+	    <div class="segment leaf"><div class="top"></div><div class="bottom"></div></div>
+	    <div class="segment leaf"><div class="top"></div><div class="bottom"></div></div>
+	    <div class="segment leaf"><div class="top"></div><div class="bottom"></div></div>
+	    <div class="segment leaf"><div class="top"></div><div class="bottom"></div></div>
+	    <div class="segment leaf"><div class="top"></div><div class="bottom"></div></div>
+	    <div class="segment leaf"><div class="top"></div><div class="bottom"></div></div>
+	    <div class="segment leaf"><div class="top"></div><div class="bottom"></div></div>
+	    <div class="segment leaf"><div class="top"></div><div class="bottom"></div></div>
+	    <div class="segment leaf"><div class="top"></div><div class="bottom"></div></div>
+	    <div class="segment leaf"><div class="top"></div><div class="bottom"></div></div>
+	    <div class="segment leaf"><div class="top"></div><div class="bottom"></div></div>
+	    <div class="segment base"><div class="top"></div><div class="bottom"></div></div>
+	</div>
+</div>
+<br><br><br><br><br><br>
+<h2>Like it? - Check out my other <a href="https://codepen.io/pmk/popular/">Pens</a></h2>
+  <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+  
+  
+</body>
+
+</html>
