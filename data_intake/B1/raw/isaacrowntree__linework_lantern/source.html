@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>linework — true-3D annotated technical drawings in SVG</title>
+<meta name="description" content="A tiny zero-dependency renderer: 3D points in, depth-sorted SVG strings out. Built for exploded diagrams, callouts and dimension lines.">
+<link rel="canonical" href="https://isaacrowntree.com/linework/">
+
+<!-- Social cards. The library's whole pitch is visual, so a link that unfurls
+     to a blank rectangle wastes the impression. Absolute URLs are mandatory —
+     Slack, Bluesky and X will not resolve a relative og:image. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="linework">
+<meta property="og:url" content="https://isaacrowntree.com/linework/">
+<meta property="og:title" content="linework — true-3D annotated technical drawings in SVG">
+<meta property="og:description" content="Drop a glTF, OBJ or STL model and watch it become a drawing: rotate, project, depth-sort, emit SVG strings. Zero dependencies, ~180-line core.">
+<meta property="og:image" content="https://isaacrowntree.com/linework/social-card.png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+<meta property="og:image:alt" content="The LINE/WORK wordmark on a cyanotype blueprint grid, beside a street lantern drawn as white feature-edge linework.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="linework — true-3D annotated technical drawings in SVG">
+<meta name="twitter:description" content="Drop a glTF, OBJ or STL model and watch it become a drawing: rotate, project, depth-sort, emit SVG strings. Zero dependencies, ~180-line core.">
+<meta name="twitter:image" content="https://isaacrowntree.com/linework/social-card.png">
+<meta name="twitter:image:alt" content="The LINE/WORK wordmark on a cyanotype blueprint grid, beside a street lantern drawn as white feature-edge linework.">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📐</text></svg>">
+<style>
+  /* Cyanotype blueprint — a deliberate single-theme world: the medium is the subject. */
+  :root {
+    --field-0: #0D2140; --field-1: #11294A; --panel: #16325B; --panel-2: #1B3A66;
+    --ink: #C9DFF5; --bright: #F4F9FF; --mut: #7FA3C9; --grid: #1D3B69; --grid-2: #234476;
+    --acc: #FFC24B; /* amber: interaction affordances ONLY */
+    --disp: "Futura", "Century Gothic", "Trebuchet MS", sans-serif;
+    --mono: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; color: var(--ink); font: 16px/1.55 system-ui, sans-serif;
+    background:
+      repeating-linear-gradient(0deg, transparent 0 23px, var(--grid) 23px 24px),
+      repeating-linear-gradient(90deg, transparent 0 23px, var(--grid) 23px 24px),
+      radial-gradient(1200px 800px at 30% -10%, var(--field-1), var(--field-0));
+    background-attachment: fixed;
+  }
+  ::selection { background: var(--acc); color: var(--field-0); }
+  a { color: var(--bright); }
+  a:hover { color: var(--acc); }
+
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+  .eyebrow { font-family: var(--disp); text-transform: uppercase; letter-spacing: .22em; font-size: 12px; color: var(--mut); }
+
+  /* ---------- hero ---------- */
+  header.hero { padding: 56px 0 40px; }
+  .hero-grid { display: grid; grid-template-columns: 360px minmax(0,1fr); gap: 40px; align-items: start; }
+  h1.wordmark {
+    margin: 8px 0 0; font-family: var(--disp); font-weight: 700;
+    font-size: clamp(36px, 4.5vw, 52px); letter-spacing: .03em; color: var(--bright);
+    text-transform: uppercase; white-space: nowrap;
+  }
+  h1 .tick { color: var(--acc); }
+  .tagline { font-size: 17px; margin: 14px 0 22px; max-width: 34ch; }
+  .stats { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 22px; }
+  .stat {
+    font-family: var(--mono); font-size: 12px; padding: 5px 10px;
+    border: 1px solid var(--mut); border-radius: 3px; color: var(--bright);
+  }
+  .install {
+    font-family: var(--mono); font-size: 14px; background: var(--panel);
+    border: 1px solid var(--grid-2); border-radius: 4px; padding: 12px 14px;
+    color: var(--bright); user-select: all;
+  }
+  .install b { color: var(--acc); font-weight: 400; }
+  .heroctas { margin-top: 18px; display: flex; gap: 10px; flex-wrap: wrap; }
+  .btn {
+    font-family: var(--disp); text-transform: uppercase; letter-spacing: .12em; font-size: 12px;
+    padding: 10px 16px; border-radius: 3px; text-decoration: none;
+    border: 1px solid var(--mut); color: var(--bright);
+  }
+  .btn.primary { border-color: var(--acc); color: var(--acc); }
+  .btn:hover { border-color: var(--acc); color: var(--acc); }
+
+  /* board */
+  .board {
+    background: linear-gradient(180deg, var(--panel), var(--field-1));
+    border: 1px solid var(--grid-2); border-radius: 6px; overflow: hidden;
+    box-shadow: 0 30px 60px -30px rgba(0,0,0,.6);
+  }
+  .board svg { display: block; width: 100%; height: auto; cursor: grab; touch-action: pan-y; }
+  body.tilting .board svg { cursor: grabbing; }
+  .boardbar {
+    display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+    padding: 10px 14px; border-top: 1px solid var(--grid-2); background: var(--field-1);
+  }
+  .boardbar label { font-family: var(--disp); text-transform: uppercase; letter-spacing: .14em; font-size: 11px; color: var(--mut); display: flex; align-items: center; gap: 10px; }
+  input[type="range"] { accent-color: var(--acc); width: 160px; }
+  #perf { margin-left: auto; font-family: var(--mono); font-size: 12px; color: var(--acc); }
+  .hint { font-size: 12.5px; color: var(--mut); margin-top: 8px; }
+  .hint b { color: var(--acc); font-weight: 500; }
+
+  /* SVG drawing classes — the library never styles; this page does */
+  .ink { stroke: var(--bright); stroke-width: 2; fill: none; stroke-linecap: round; }
+  .mut { stroke: var(--mut); stroke-width: 1.1; fill: none; }
+  .dash { stroke: var(--mut); stroke-width: 1.1; fill: none; stroke-dasharray: 5 5; }
+  .face3 { fill: var(--panel-2); stroke: var(--bright); stroke-width: 1.4; }
+  .top3 { fill: var(--grid-2); stroke: var(--bright); stroke-width: 1.1; }
+  .side3 { fill: var(--panel); stroke: var(--bright); stroke-width: 1.1; }
+  .shadow { fill: #000; opacity: .3; }
+  .bl { fill: var(--field-1); stroke: var(--bright); stroke-width: 1.4; }
+  .bt { font: 700 12px var(--disp); fill: var(--bright); }
+  .an { font: 11px var(--mono); fill: var(--ink); }
+  .tt { font: 700 11px var(--disp); fill: var(--bright); letter-spacing: .08em; }
+  .tbr { fill: var(--field-1); stroke: var(--mut); }
+  .ax { stroke: var(--acc); stroke-width: 2; fill: none; }
+
+  /* draw-in */
+  .draw { stroke-dasharray: 1; stroke-dashoffset: 1; animation: drawin .7s ease forwards; }
+  @keyframes drawin { to { stroke-dashoffset: 0; } }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+
+  /* ---------- sections ---------- */
+  section { padding: 44px 0; border-top: 1px solid var(--grid); }
+  h2 { font-family: var(--disp); text-transform: uppercase; letter-spacing: .14em; font-size: 20px; color: var(--bright); margin: 4px 0 18px; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+  .card { background: var(--panel); border: 1px solid var(--grid-2); border-radius: 5px; padding: 18px; }
+  .card h3 { margin: 0 0 8px; font-family: var(--disp); letter-spacing: .06em; font-size: 15px; color: var(--bright); text-transform: uppercase; }
+  .card p { margin: 0; font-size: 14.5px; color: var(--ink); }
+
+  pre {
+    background: var(--field-1); border: 1px solid var(--grid-2); border-radius: 5px;
+    padding: 18px; overflow-x: auto; font: 13px/1.6 var(--mono); color: var(--ink); margin: 0;
+  }
+  pre .k { color: var(--acc); } pre .s { color: #9FD08C; } pre .c { color: var(--mut); }
+  .honest { font-size: 13px; color: var(--mut); margin-top: 10px; }
+  .honest b { color: var(--acc); font-weight: 500; }
+
+  .pipe { display: flex; gap: 0; flex-wrap: wrap; align-items: stretch; font-family: var(--disp); }
+  .pipe .step {
+    border: 1px solid var(--mut); padding: 12px 18px; text-transform: uppercase;
+    letter-spacing: .1em; font-size: 12.5px; color: var(--bright); background: var(--panel);
+  }
+  .pipe .arr { align-self: center; padding: 0 10px; color: var(--acc); font-size: 18px; }
+
+  .coord-grid { display: grid; grid-template-columns: 300px minmax(0,1fr); gap: 28px; align-items: start; }
+  table { border-collapse: collapse; width: 100%; font-size: 14px; }
+  th { font-family: var(--disp); text-transform: uppercase; letter-spacing: .1em; font-size: 11px; color: var(--mut); text-align: left; padding: 6px 10px; border-bottom: 1px solid var(--grid-2); }
+  td { padding: 7px 10px; border-bottom: 1px solid var(--grid); vertical-align: top; }
+  td code, li code { font-family: var(--mono); color: var(--bright); font-size: 13px; }
+
+  footer { padding: 36px 0 60px; border-top: 1px solid var(--grid); color: var(--mut); font-size: 13.5px; }
+  footer .wrap { display: flex; gap: 18px; flex-wrap: wrap; }
+
+  @media (max-width: 880px) {
+    .hero-grid, .coord-grid { grid-template-columns: 1fr; }
+  }
+
+  /* import dropzone */
+  #drop { display: block; cursor: pointer; }
+  .drop-big {
+    border: 2px dashed var(--grid-2); border-radius: 8px; padding: 40px 20px;
+    text-align: center; color: var(--ink); font-size: 16px; background: var(--field-1);
+    transition: border-color .15s, background .15s;
+  }
+  .drop-big span { display: block; margin-top: 6px; color: var(--mut); font-size: 13px; }
+  #drop:hover .drop-big, #drop.over .drop-big { border-color: var(--acc); background: var(--panel); }
+  #iperf { margin-left: auto; font-family: var(--mono); font-size: 12px; color: var(--acc); }
+  .boardbar label.toggle { text-transform: none; letter-spacing: .04em; gap: 6px; cursor: pointer; }
+  .boardbar label.toggle input { accent-color: var(--acc); width: auto; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Zero-dependency · SVG out</div>
+      <h1 class="wordmark">Line<span class="tick">/</span>work</h1>
+      <p class="tagline">A tiny true-3D renderer for <strong>annotated technical drawings</strong>. 3D points in — depth-sorted SVG strings out.</p>
+      <div class="stats">
+        <span class="stat">~180-line core</span>
+        <span class="stat">0 deps</span>
+        <span class="stat">tested</span>
+        <span class="stat">MIT</span>
+      </div>
+      <div class="install" id="install" title="Click to copy" style="cursor:copy">$ <b>npm i linework</b></div>
+      <div class="heroctas">
+        <a class="btn primary" href="https://github.com/isaacrowntree/linework">GitHub</a>
+        <a class="btn" href="#code">The code behind this drawing</a>
+      </div>
+      <p class="hint">Every drawing on this page — including the one to the right — is rendered <b>live by the library</b> when the page loads.</p>
+    </div>
+
+    <div>
+      <div class="board">
+        <svg id="stage" viewBox="0 0 800 600" role="img" aria-label="A CC0 street lantern, imported from a glTF mesh and rendered as feature-edge linework with dimension lines, callout balloons and a title block — drag to orbit">
+          <defs>
+            <marker id="dimarr" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0L8 4L0 8z" fill="var(--mut)"/>
+            </marker>
+          </defs>
+          <g id="scene"></g>
+        </svg>
+        <div class="boardbar">
+          <label data-no-orbit>Creases <input id="hcrease" type="range" min="10" max="45" value="25" aria-label="Crease angle threshold"></label>
+          <label data-no-orbit class="toggle"><input id="anno" type="checkbox" checked aria-label="Show annotations"> Annotate</label>
+          <span id="perf">—</span>
+        </div>
+      </div>
+      <label id="drop" for="ifile" data-no-orbit style="display:block;margin-top:12px">
+        <div class="drop-big">Drop your own <b>.glb</b>, <b>.obj</b> or <b>.stl</b><br><span>or click to choose — runs in your browser, nothing uploaded</span></div>
+        <input id="ifile" type="file" accept=".glb,.gltf,.obj,.stl" hidden>
+      </label>
+      <p class="hint" id="istat" style="min-height:1.2em"></p>
+      <p class="hint"><b>Drag</b> to orbit · <b>double-click</b> resets · the slider raises the crease threshold. The amber readout is real: feature edges extracted and depth-sorted this frame.</p>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Why this exists</div>
+    <h2>The empty category</h2>
+    <div class="cards">
+      <div class="card"><h3>WebGL fights linework</h3><p>three.js makes shaded surfaces easy and technical drawing painful: 1px line limits, dash patterns via shaders, text callouts as a separate DOM overlay system. Every signature element of a service manual is an uphill fight.</p></div>
+      <div class="card"><h3>Pseudo-3D toys can't annotate</h3><p>Zdog nailed the flat-shaded look — and shipped its last release in early 2022, with text as a third-party plugin. Dimension lines, balloons and leader text are the load-bearing half of a technical drawing.</p></div>
+      <div class="card"><h3>SVG strings are the point</h3><p>Output is plain markup: themeable with CSS variables, crawlable, printable, screen-reader friendly — and renderable server-side at build time with zero client JavaScript.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="code">
+  <div class="wrap">
+    <div class="eyebrow">Objectivity</div>
+    <h2>The code behind the hero</h2>
+    <pre><code><span class="c">// the lantern above — a whole glTF mesh becomes linework in three calls</span>
+<span class="k">import</span> { parseGLB, meshToShapes } <span class="k">from</span> <span class="s">"linework/import"</span>;
+<span class="k">import</span> { render } <span class="k">from</span> <span class="s">"linework"</span>;
+
+<span class="k">const</span> meshes = parseGLB(<span class="k">await</span> (<span class="k">await</span> fetch(<span class="s">"lantern.glb"</span>)).arrayBuffer());
+<span class="k">const</span> shapes = meshToShapes(meshes, { angle: 25, fit: { cx: 400, cy: 300, size: 440 } });
+el.innerHTML = render(shapes, { yaw: .6, pitch: .35, f: 1400, cx: 400, cy: 300 });</code></pre>
+    <p class="honest">Feature-edge extraction keeps the outline and hard creases, nothing from the smooth interior of a face — the lines a draftsperson would draw. Prefer to <b>hand-author</b> instead? The <code>sketch</code> layer builds annotated scenes — boxes, cylinders, dimension notes, exploded parts — with scoped context blocks; see <a href="scene.js">docs/scene.js</a> and the <a href="https://github.com/isaacrowntree/linework#the-sketch-layer--dx-is-a-feature">sketch docs</a>.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Architecture</div>
+    <h2>The classic pipeline, honestly implemented</h2>
+    <div class="pipe">
+      <span class="step">3D model</span><span class="arr">→</span>
+      <span class="step">rotate · yaw/pitch</span><span class="arr">→</span>
+      <span class="step">perspective project</span><span class="arr">→</span>
+      <span class="step">painter's sort</span><span class="arr">→</span>
+      <span class="step">SVG strings</span>
+    </div>
+    <p class="honest">Paint order is <b>computed every frame</b>, never authored — members interleave correctly at any angle. Shapes sharing a <code>part</code> key sort as one object and emit inside one <code>&lt;g&gt;</code>, so CSS transforms on animated parts keep working. Known painter's-algorithm caveat: cyclic overlaps can't sort — split long members into segments if you construct one.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap coord-grid">
+    <div>
+      <div class="eyebrow">Conventions</div>
+      <h2>Coordinates</h2>
+      <svg id="axes" viewBox="0 0 300 240" role="img" aria-label="Axis triad: x right, y down, z toward viewer"></svg>
+    </div>
+    <div>
+      <table>
+        <thead><tr><th>Field</th><th>Meaning</th></tr></thead>
+        <tbody>
+          <tr><td><code>x</code></td><td>right, in your SVG's user units</td></tr>
+          <tr><td><code>y</code></td><td><strong>down</strong> — screen convention, not math convention</td></tr>
+          <tr><td><code>z</code></td><td>toward the viewer; negative z recedes and depth-dims</td></tr>
+          <tr><td><code>view.yaw</code></td><td>rotation about the vertical axis through <code>cx</code> (radians)</td></tr>
+          <tr><td><code>view.pitch</code></td><td>rotation about the horizontal axis through <code>cy</code>; positive looks down</td></tr>
+          <tr><td><code>view.f</code></td><td>perspective focal distance — <code>k = f / (f − z)</code>; larger = flatter</td></tr>
+          <tr><td><code>bias</code></td><td>per-shape depth nudge for deliberate layering of coplanar shapes</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">No client JS required</div>
+    <h2>Renders server-side</h2>
+    <pre><code><span class="c">// render() is a pure string function — run it at build time</span>
+<span class="k">import</span> { render } <span class="k">from</span> <span class="s">"linework"</span>;
+<span class="k">import</span> { writeFileSync } <span class="k">from</span> <span class="s">"node:fs"</span>;
+
+writeFileSync(<span class="s">"diagram.svg"</span>, wrap(render(shapes, view)));</code></pre>
+    <p class="honest">Static site generators can ship finished 3D-looking exploded diagrams with <b>zero client JavaScript</b> — the README hero image in this repo is generated exactly this way (<code>bun run images</code>).</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>MIT</span>
+    <span>·</span>
+    <a href="https://github.com/isaacrowntree/linework">github.com/isaacrowntree/linework</a>
+    <span>·</span>
+    <span>extracted from <a href="https://github.com/isaacrowntree">Fitment</a> — will that part fit your bike?</span>
+  </div>
+</footer>
+
+<!-- data-cfasync="false" opts this out of Cloudflare Rocket Loader, which rewrites
+     type="module" and re-executes the script itself, breaking ES module linking. -->
+<script type="module" data-cfasync="false">
+  import { xform, render } from "./linework.js?v=f399d697";
+  import { line3 } from "./helpers.js?v=5e94f57a";
+  import { orbit } from "./orbit.js?v=6f044eb4";
+  import { parseGLB, parseOBJ, parseSTL, meshToShapes } from "./import.js?v=e21ba9d0";
+
+  /* ---------- hero: a glTF mesh imported live, orbiting ---------- */
+  const stage = document.getElementById("stage");
+  const g = document.getElementById("scene");
+  const perf = document.getElementById("perf");
+  const hcrease = document.getElementById("hcrease");
+  const anno = document.getElementById("anno");
+  const istat = document.getElementById("istat");
+  const drop = document.getElementById("drop");
+  const ifile = document.getElementById("ifile");
+  const HVIEW = { yaw: 0.62, pitch: 0.32, f: 1400, cx: 400, cy: 300 };
+  let meshes = null, nativeSize = [0, 0, 0];
+  let curShapes = [], anchors = null; // cached — recomputed on mesh/crease change, NOT per orbit frame
+
+  // Feature extraction + fit are view-independent, so do them once and only
+  // re-project each frame. Also precompute the annotation anchors here.
+  function rebuild() {
+    if (!meshes) return;
+    curShapes = meshToShapes(meshes, { angle: +hcrease.value, cls: "ink", fit: { cx: 400, cy: 300, size: 400 } });
+    const mn = [Infinity, Infinity, Infinity], mx = [-Infinity, -Infinity, -Infinity];
+    let apex, reach, base;
+    for (const s of curShapes) for (const c of s.d) {
+      if (c[0] === "Z") continue; const p = c[1];
+      for (let k = 0; k < 3; k++) { if (p[k] < mn[k]) mn[k] = p[k]; if (p[k] > mx[k]) mx[k] = p[k]; }
+      if (!apex || p[1] < apex[1]) apex = p;      // topmost model point
+      if (!reach || p[0] > reach[0]) reach = p;   // furthest-out model point
+      if (!base || p[1] > base[1]) base = p;      // lowest model point
+    }
+    const corners = [];
+    for (const A of [mn[0], mx[0]]) for (const B of [mn[1], mx[1]]) for (const C of [mn[2], mx[2]]) corners.push([A, B, C]);
+    anchors = { corners, apex, reach, base };
+  }
+
+  // Paper-space annotation layer, composed OVER the imported drawing — proof
+  // that annotations are first-class regardless of where the geometry came
+  // from. Overall dimensions auto-derive from the mesh bounds; callout balloons
+  // anchor to the model's extreme features; the title block is fixed. It all
+  // re-projects each frame, so it tracks the orbiting model yet stays flat.
+  function annotate(view) {
+    const X = xform(view), f = (n) => n.toFixed(1);
+    let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+    for (const c of anchors.corners) { const q = X(c); if (q.x < x0) x0 = q.x; if (q.y < y0) y0 = q.y; if (q.x > x1) x1 = q.x; if (q.y > y1) y1 = q.y; }
+    const top = X(anchors.apex), right = X(anchors.reach), bottom = X(anchors.base);
+    const [nw, nh] = nativeSize, o = [];
+    // overall width dimension, bracketing below the drawing
+    const yb = y1 + 24;
+    o.push(`<line x1="${f(x0)}" y1="${f(y1)}" x2="${f(x0)}" y2="${f(yb + 5)}" class="mut"/><line x1="${f(x1)}" y1="${f(y1)}" x2="${f(x1)}" y2="${f(yb + 5)}" class="mut"/>`);
+    o.push(`<line x1="${f(x0)}" y1="${f(yb)}" x2="${f(x1)}" y2="${f(yb)}" class="mut" marker-start="url(#dimarr)" marker-end="url(#dimarr)"/>`);
+    o.push(`<rect x="${f((x0 + x1) / 2 - 26)}" y="${f(yb - 9)}" width="52" height="16" fill="var(--field-1)"/><text x="${f((x0 + x1) / 2)}" y="${f(yb + 4)}" text-anchor="middle" class="an">${nw.toFixed(1)}</text>`);
+    // overall height dimension, bracketing to the left
+    const xl = x0 - 24, my = (y0 + y1) / 2;
+    o.push(`<line x1="${f(x0)}" y1="${f(y0)}" x2="${f(xl - 5)}" y2="${f(y0)}" class="mut"/><line x1="${f(x0)}" y1="${f(y1)}" x2="${f(xl - 5)}" y2="${f(y1)}" class="mut"/>`);
+    o.push(`<line x1="${f(xl)}" y1="${f(y0)}" x2="${f(xl)}" y2="${f(y1)}" class="mut" marker-start="url(#dimarr)" marker-end="url(#dimarr)"/>`);
+    o.push(`<g transform="rotate(-90 ${f(xl - 8)} ${f(my)})"><rect x="${f(xl - 8 - 26)}" y="${f(my - 9)}" width="52" height="16" fill="var(--field-1)"/><text x="${f(xl - 8)}" y="${f(my + 4)}" text-anchor="middle" class="an">${nh.toFixed(1)}</text></g>`);
+    // callout balloons at auto-picked extreme features
+    const bl = (n, a, dx, dy) => `<line x1="${f(a.x)}" y1="${f(a.y)}" x2="${f(a.x + dx)}" y2="${f(a.y + dy)}" class="mut"/><circle cx="${f(a.x + dx)}" cy="${f(a.y + dy)}" r="11" class="bl"/><text x="${f(a.x + dx)}" y="${f(a.y + dy + 4)}" text-anchor="middle" class="bt">${n}</text>`;
+    o.push(bl(1, top, 26, -22) + bl(2, right, 30, -4) + bl(3, bottom, -26, 20));
+    // legend + title block, fixed in paper space
+    o.push(`<text x="20" y="588" class="an">1 apex · 2 reach · 3 base · overall dims in model units</text>`);
+    o.push(`<rect x="554" y="18" width="228" height="40" class="tbr"/><line x1="554" y1="38" x2="782" y2="38" class="mut"/><text x="562" y="33" class="tt">IMPORTED · CC0 LANTERN</text><text x="562" y="53" class="an">glTF mesh → ${curShapes.length} feature edges</text>`);
+    return o.join("");
+  }
+
+  function draw(view) {
+    if (!meshes) return;
+    const t0 = performance.now();
+    g.innerHTML = render(curShapes, view) + (anno.checked ? annotate(view) : "");
+    perf.textContent = `${curShapes.length} edges · ${(performance.now() - t0).toFixed(1)} ms`;
+  }
+  const ctl = orbit(stage, { view: HVIEW, idle: 0.08, pitchRange: [0.05, 0.6], onFrame: draw });
+  hcrease.addEventListener("input", () => { rebuild(); ctl.redraw(); });
+  anno.addEventListener("change", () => ctl.redraw());
+
+  function ingest(buf, name) {
+    try {
+      const lc = name.toLowerCase();
+      const m = lc.endsWith(".obj") ? parseOBJ(new TextDecoder().decode(buf))
+        : lc.endsWith(".stl") ? parseSTL(buf)
+        : parseGLB(buf);
+      const tris = m.reduce((a, x) => a + x.indices.length / 3, 0);
+      if (!tris) throw new Error("no geometry found");
+      meshes = m;
+      // native bounding box → the overall-dimension values the annotations show
+      const mn = [Infinity, Infinity, Infinity], mx = [-Infinity, -Infinity, -Infinity];
+      for (const mesh of m) { const p = mesh.positions; for (let i = 0; i < p.length; i += 3) for (let k = 0; k < 3; k++) { if (p[i + k] < mn[k]) mn[k] = p[i + k]; if (p[i + k] > mx[k]) mx[k] = p[i + k]; } }
+      nativeSize = [mx[0] - mn[0], mx[1] - mn[1], mx[2] - mn[2]];
+      istat.innerHTML = `<b>${name}</b> — ${m.length} mesh · ${tris.toLocaleString()} triangles → feature edges, live.`;
+      rebuild();
+      ctl.redraw();
+    } catch (err) {
+      istat.innerHTML = `<span style="color:#E06A5D">Couldn't read ${name}: ${err.message}. Try an uncompressed .glb (no Draco), .obj, or .stl.</span>`;
+    }
+  }
+  const readFile = (f) => f.arrayBuffer().then((b) => ingest(b, f.name));
+  ifile.addEventListener("change", () => ifile.files[0] && readFile(ifile.files[0]));
+  drop.addEventListener("dragover", (ev) => { ev.preventDefault(); drop.classList.add("over"); });
+  drop.addEventListener("dragleave", () => drop.classList.remove("over"));
+  drop.addEventListener("drop", (ev) => {
+    ev.preventDefault(); drop.classList.remove("over");
+    if (ev.dataTransfer.files[0]) readFile(ev.dataTransfer.files[0]);
+  });
+  fetch("./lantern.glb").then((r) => r.arrayBuffer()).then((b) => ingest(b, "lantern.glb (CC0)"))
+    .catch(() => { istat.textContent = "Drop a .glb or .obj to begin."; });
+
+  document.getElementById("install").addEventListener("click", async () => {
+    try { await navigator.clipboard.writeText("npm i linework"); } catch {}
+  });
+
+  /* ---------- coordinate triad: also drawn by the library ---------- */
+  const av = { yaw: 0.6, pitch: 0.22, f: 900, cx: 130, cy: 130 };
+  const O = [130, 150];
+  const axShapes = [
+    line3(O, 0, [O[0] + 95, O[1]], 0, "ax"),
+    line3(O, 0, [O[0], O[1] + 70], 0, "ink"),
+    line3(O, 0, O, 95, "dash"),
+  ];
+  const AX = xform(av);
+  const lab = (p, z, t) => { const q = AX([p[0], p[1], z]); return `<text x="${q.x + 6}" y="${q.y + 4}" class="an">${t}</text>`; };
+  document.getElementById("axes").innerHTML =
+    render(axShapes, av) + lab([O[0] + 98, O[1]], 0, "+x") + lab([O[0], O[1] + 78], 0, "+y (down)") + lab(O, 102, "+z (viewer)");
+</script>
+</body>
+</html>

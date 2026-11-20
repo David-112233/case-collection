@@ -1,0 +1,3 @@
+"key","url","decision","tier","hits","reason","js_policy","evidence","notes","decided_on"
+"Evirtual__aquarium","https://css3dlab.edgarasneverdauskas.com/models/aquarium/","hold","unclassified","spatial_layers","await_user_review","none","两次暂停实见不同鱼位。亮水线、半透明玻璃、砂床和水草同帧可辨；实见蓝鱼在左侧由侧面变为近乎侧缘。鱼之间逐次遮挡未逐项验证。","优先；224/213；本页公开源码与互动编辑器，暂停由演示外壳提供。","2026-11-20"
+"isaacrowntree__linework_lantern","https://isaacrowntree.com/linework/","hold","unclassified","spatial_layers","await_user_review","preserve","实拖灯笼场景：长横梁相对竖柱的屏幕角度及灯笼轮廓变化，尺寸辅助线和编号保持标注。只评线框空间投影与标注依附，不声称不透明遮挡。","备选；227/224；依赖原项目相对路径模块及默认 CC0 模型，归档 HTML 不是自包含播放包；未测导入/双击复位。","2026-11-20"
