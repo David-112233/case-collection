@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>Generative Blocks</title>
+
+    <link rel="canonical" href="https://codepen.io/cobra_winfrey/pen/GRGNbvb">
+  
+  <link rel="stylesheet" href="https://public.codepenassets.com/css/normalize-5.0.0.min.css">
+
+  
+  
+<style>
+body {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  filter: none;
+  --width: 100px;
+  --mouseX: 0;
+  --mouseY: 0;
+  --translate: 0%, 0%;
+  --scale: 1;
+  --scale-2: 1;
+  background: #ece9ea;
+  cursor: pointer;
+}
+body:before {
+  content: "click & hover";
+  font-family: "Futura", sans-serif;
+  position: absolute;
+  bottom: 10px;
+  font-size: 10px;
+}
+body #wrap {
+  filter: drop-shadow(1px 0 0 #000) drop-shadow(0 1px 0 #000) drop-shadow(-1px 0 0 #000) drop-shadow(0 -1px 0 #000) drop-shadow(1px 1px 0 #000) drop-shadow(1px -1px 0 #000) drop-shadow(-1px 1px 0 #000) drop-shadow(-1px -1px 0 #000);
+  position: relative;
+  z-index: 0;
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+}
+body #plane {
+  z-index: 0;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  transform-style: preserve-3d;
+  transform: scale(calc(0.75 + (var(--mouseY) / 3))) translateY(50px) rotateX(calc(35deg - (var(--mouseY) * -35deg))) rotate(calc(45deg + (var(--mouseX) * 180deg))) rotateY(-180deg);
+}
+body .box {
+  width: var(--width);
+  height: var(--width);
+  position: relative;
+  transition: transform 0.3s ease-in-out;
+  transform-style: preserve-3d;
+  transform: translate(var(--translate)) scale3d(calc(var(--scale-1) * 0.125), calc(var(--scale-2) * 0.125), calc(var(--size) * 0.005));
+  transform-origin: 50% 50% 50%;
+}
+body .box:nth-of-type(1) {
+  transition-delay: 0.0166666667s;
+}
+body .box:nth-of-type(1) .side:nth-of-type(1):before {
+  transition-delay: 0.175s;
+}
+body .box:nth-of-type(1) .side:nth-of-type(2):before {
+  transition-delay: 0.3416666667s;
+}
+body .box:nth-of-type(1) .side:nth-of-type(3):before {
+  transition-delay: 0.5083333333s;
+}
+body .box:nth-of-type(1) .side:nth-of-type(4):before {
+  transition-delay: 0.675s;
+}
+body .box:nth-of-type(1) .side:nth-of-type(5):before {
+  transition-delay: 0.8416666667s;
+}
+body .box:nth-of-type(1) .side:nth-of-type(6):before {
+  transition-delay: 1.0083333333s;
+}
+body .box:nth-of-type(2) {
+  transition-delay: 0.0333333333s;
+}
+body .box:nth-of-type(2) .side:nth-of-type(1):before {
+  transition-delay: 0.1833333333s;
+}
+body .box:nth-of-type(2) .side:nth-of-type(2):before {
+  transition-delay: 0.35s;
+}
+body .box:nth-of-type(2) .side:nth-of-type(3):before {
+  transition-delay: 0.5166666667s;
+}
+body .box:nth-of-type(2) .side:nth-of-type(4):before {
+  transition-delay: 0.6833333333s;
+}
+body .box:nth-of-type(2) .side:nth-of-type(5):before {
+  transition-delay: 0.85s;
+}
+body .box:nth-of-type(2) .side:nth-of-type(6):before {
+  transition-delay: 1.0166666667s;
+}
+body .box:nth-of-type(3) {
+  transition-delay: 0.05s;
+}
+body .box:nth-of-type(3) .side:nth-of-type(1):before {
+  transition-delay: 0.1916666667s;
+}
+body .box:nth-of-type(3) .side:nth-of-type(2):before {
+  transition-delay: 0.3583333333s;
+}
+body .box:nth-of-type(3) .side:nth-of-type(3):before {
+  transition-delay: 0.525s;
+}
+body .box:nth-of-type(3) .side:nth-of-type(4):before {
+  transition-delay: 0.6916666667s;
+}
+body .box:nth-of-type(3) .side:nth-of-type(5):before {
+  transition-delay: 0.8583333333s;
+}
+body .box:nth-of-type(3) .side:nth-of-type(6):before {
+  transition-delay: 1.025s;
+}
+body .box:nth-of-type(4) {
+  transition-delay: 0.0666666667s;
+}
+body .box:nth-of-type(4) .side:nth-of-type(1):before {
+  transition-delay: 0.2s;
+}
+body .box:nth-of-type(4) .side:nth-of-type(2):before {
+  transition-delay: 0.3666666667s;
+}
+body .box:nth-of-type(4) .side:nth-of-type(3):before {
+  transition-delay: 0.5333333333s;
+}
+body .box:nth-of-type(4) .side:nth-of-type(4):before {
+  transition-delay: 0.7s;
+}
+body .box:nth-of-type(4) .side:nth-of-type(5):before {
+  transition-delay: 0.8666666667s;
+}
+body .box:nth-of-type(4) .side:nth-of-type(6):before {
+  transition-delay: 1.0333333333s;
+}
+body .box:nth-of-type(5) {
+  transition-delay: 0.0833333333s;
+}
+body .box:nth-of-type(5) .side:nth-of-type(1):before {
+  transition-delay: 0.2083333333s;
+}
+body .box:nth-of-type(5) .side:nth-of-type(2):before {
+  transition-delay: 0.375s;
+}
+body .box:nth-of-type(5) .side:nth-of-type(3):before {
+  transition-delay: 0.5416666667s;
+}
+body .box:nth-of-type(5) .side:nth-of-type(4):before {
+  transition-delay: 0.7083333333s;
+}
+body .box:nth-of-type(5) .side:nth-of-type(5):before {
+  transition-delay: 0.875s;
+}
+body .box:nth-of-type(5) .side:nth-of-type(6):before {
+  transition-delay: 1.0416666667s;
+}
+body .box:nth-of-type(6) {
+  transition-delay: 0.1s;
+}
+body .box:nth-of-type(6) .side:nth-of-type(1):before {
+  transition-delay: 0.2166666667s;
+}
+body .box:nth-of-type(6) .side:nth-of-type(2):before {
+  transition-delay: 0.3833333333s;
+}
+body .box:nth-of-type(6) .side:nth-of-type(3):before {
+  transition-delay: 0.55s;
+}
+body .box:nth-of-type(6) .side:nth-of-type(4):before {
+  transition-delay: 0.7166666667s;
+}
+body .box:nth-of-type(6) .side:nth-of-type(5):before {
+  transition-delay: 0.8833333333s;
+}
+body .box:nth-of-type(6) .side:nth-of-type(6):before {
+  transition-delay: 1.05s;
+}
+body .box:nth-of-type(7) {
+  transition-delay: 0.1166666667s;
+}
+body .box:nth-of-type(7) .side:nth-of-type(1):before {
+  transition-delay: 0.225s;
+}
+body .box:nth-of-type(7) .side:nth-of-type(2):before {
+  transition-delay: 0.3916666667s;
+}
+body .box:nth-of-type(7) .side:nth-of-type(3):before {
+  transition-delay: 0.5583333333s;
+}
+body .box:nth-of-type(7) .side:nth-of-type(4):before {
+  transition-delay: 0.725s;
+}
+body .box:nth-of-type(7) .side:nth-of-type(5):before {
+  transition-delay: 0.8916666667s;
+}
+body .box:nth-of-type(7) .side:nth-of-type(6):before {
+  transition-delay: 1.0583333333s;
+}
+body .box:nth-of-type(8) {
+  transition-delay: 0.1333333333s;
+}
+body .box:nth-of-type(8) .side:nth-of-type(1):before {
+  transition-delay: 0.2333333333s;
+}
+body .box:nth-of-type(8) .side:nth-of-type(2):before {
+  transition-delay: 0.4s;
+}
+body .box:nth-of-type(8) .side:nth-of-type(3):before {
+  transition-delay: 0.5666666667s;
+}
+body .box:nth-of-type(8) .side:nth-of-type(4):before {
+  transition-delay: 0.7333333333s;
+}
+body .box:nth-of-type(8) .side:nth-of-type(5):before {
+  transition-delay: 0.9s;
+}
+body .box:nth-of-type(8) .side:nth-of-type(6):before {
+  transition-delay: 1.0666666667s;
+}
+body .box:nth-of-type(9) {
+  transition-delay: 0.15s;
+}
+body .box:nth-of-type(9) .side:nth-of-type(1):before {
+  transition-delay: 0.2416666667s;
+}
+body .box:nth-of-type(9) .side:nth-of-type(2):before {
+  transition-delay: 0.4083333333s;
+}
+body .box:nth-of-type(9) .side:nth-of-type(3):before {
+  transition-delay: 0.575s;
+}
+body .box:nth-of-type(9) .side:nth-of-type(4):before {
+  transition-delay: 0.7416666667s;
+}
+body .box:nth-of-type(9) .side:nth-of-type(5):before {
+  transition-delay: 0.9083333333s;
+}
+body .box:nth-of-type(9) .side:nth-of-type(6):before {
+  transition-delay: 1.075s;
+}
+body .box:nth-of-type(10) {
+  transition-delay: 0.1666666667s;
+}
+body .box:nth-of-type(10) .side:nth-of-type(1):before {
+  transition-delay: 0.25s;
+}
+body .box:nth-of-type(10) .side:nth-of-type(2):before {
+  transition-delay: 0.4166666667s;
+}
+body .box:nth-of-type(10) .side:nth-of-type(3):before {
+  transition-delay: 0.5833333333s;
+}
+body .box:nth-of-type(10) .side:nth-of-type(4):before {
+  transition-delay: 0.75s;
+}
+body .box:nth-of-type(10) .side:nth-of-type(5):before {
+  transition-delay: 0.9166666667s;
+}
+body .box:nth-of-type(10) .side:nth-of-type(6):before {
+  transition-delay: 1.0833333333s;
+}
+body .box:nth-of-type(11) {
+  transition-delay: 0.1833333333s;
+}
+body .box:nth-of-type(11) .side:nth-of-type(1):before {
+  transition-delay: 0.2583333333s;
+}
+body .box:nth-of-type(11) .side:nth-of-type(2):before {
+  transition-delay: 0.425s;
+}
+body .box:nth-of-type(11) .side:nth-of-type(3):before {
+  transition-delay: 0.5916666667s;
+}
+body .box:nth-of-type(11) .side:nth-of-type(4):before {
+  transition-delay: 0.7583333333s;
+}
+body .box:nth-of-type(11) .side:nth-of-type(5):before {
+  transition-delay: 0.925s;
+}
+body .box:nth-of-type(11) .side:nth-of-type(6):before {
+  transition-delay: 1.0916666667s;
+}
+body .box:nth-of-type(12) {
+  transition-delay: 0.2s;
+}
+body .box:nth-of-type(12) .side:nth-of-type(1):before {
+  transition-delay: 0.2666666667s;
+}
+body .box:nth-of-type(12) .side:nth-of-type(2):before {
+  transition-delay: 0.4333333333s;
+}
+body .box:nth-of-type(12) .side:nth-of-type(3):before {
+  transition-delay: 0.6s;
+}
+body .box:nth-of-type(12) .side:nth-of-type(4):before {
+  transition-delay: 0.7666666667s;
+}
+body .box:nth-of-type(12) .side:nth-of-type(5):before {
+  transition-delay: 0.9333333333s;
+}
+body .box:nth-of-type(12) .side:nth-of-type(6):before {
+  transition-delay: 1.1s;
+}
+body .box:nth-of-type(13) {
+  transition-delay: 0.2166666667s;
+}
+body .box:nth-of-type(13) .side:nth-of-type(1):before {
+  transition-delay: 0.275s;
+}
+body .box:nth-of-type(13) .side:nth-of-type(2):before {
+  transition-delay: 0.4416666667s;
+}
+body .box:nth-of-type(13) .side:nth-of-type(3):before {
+  transition-delay: 0.6083333333s;
+}
+body .box:nth-of-type(13) .side:nth-of-type(4):before {
+  transition-delay: 0.775s;
+}
+body .box:nth-of-type(13) .side:nth-of-type(5):before {
+  transition-delay: 0.9416666667s;
+}
+body .box:nth-of-type(13) .side:nth-of-type(6):before {
+  transition-delay: 1.1083333333s;
+}
+body .box:nth-of-type(14) {
+  transition-delay: 0.2333333333s;
+}
+body .box:nth-of-type(14) .side:nth-of-type(1):before {
+  transition-delay: 0.2833333333s;
+}
+body .box:nth-of-type(14) .side:nth-of-type(2):before {
+  transition-delay: 0.45s;
+}
+body .box:nth-of-type(14) .side:nth-of-type(3):before {
+  transition-delay: 0.6166666667s;
+}
+body .box:nth-of-type(14) .side:nth-of-type(4):before {
+  transition-delay: 0.7833333333s;
+}
+body .box:nth-of-type(14) .side:nth-of-type(5):before {
+  transition-delay: 0.95s;
+}
+body .box:nth-of-type(14) .side:nth-of-type(6):before {
+  transition-delay: 1.1166666667s;
+}
+body .box:nth-of-type(15) {
+  transition-delay: 0.25s;
+}
+body .box:nth-of-type(15) .side:nth-of-type(1):before {
+  transition-delay: 0.2916666667s;
+}
+body .box:nth-of-type(15) .side:nth-of-type(2):before {
+  transition-delay: 0.4583333333s;
+}
+body .box:nth-of-type(15) .side:nth-of-type(3):before {
+  transition-delay: 0.625s;
+}
+body .box:nth-of-type(15) .side:nth-of-type(4):before {
+  transition-delay: 0.7916666667s;
+}
+body .box:nth-of-type(15) .side:nth-of-type(5):before {
+  transition-delay: 0.9583333333s;
+}
+body .box:nth-of-type(15) .side:nth-of-type(6):before {
+  transition-delay: 1.125s;
+}
+body .box:nth-of-type(16) {
+  transition-delay: 0.2666666667s;
+}
+body .box:nth-of-type(16) .side:nth-of-type(1):before {
+  transition-delay: 0.3s;
+}
+body .box:nth-of-type(16) .side:nth-of-type(2):before {
+  transition-delay: 0.4666666667s;
+}
+body .box:nth-of-type(16) .side:nth-of-type(3):before {
+  transition-delay: 0.6333333333s;
+}
+body .box:nth-of-type(16) .side:nth-of-type(4):before {
+  transition-delay: 0.8s;
+}
+body .box:nth-of-type(16) .side:nth-of-type(5):before {
+  transition-delay: 0.9666666667s;
+}
+body .box:nth-of-type(16) .side:nth-of-type(6):before {
+  transition-delay: 1.1333333333s;
+}
+body .box:nth-of-type(17) {
+  transition-delay: 0.2833333333s;
+}
+body .box:nth-of-type(17) .side:nth-of-type(1):before {
+  transition-delay: 0.3083333333s;
+}
+body .box:nth-of-type(17) .side:nth-of-type(2):before {
+  transition-delay: 0.475s;
+}
+body .box:nth-of-type(17) .side:nth-of-type(3):before {
+  transition-delay: 0.6416666667s;
+}
+body .box:nth-of-type(17) .side:nth-of-type(4):before {
+  transition-delay: 0.8083333333s;
+}
+body .box:nth-of-type(17) .side:nth-of-type(5):before {
+  transition-delay: 0.975s;
+}
+body .box:nth-of-type(17) .side:nth-of-type(6):before {
+  transition-delay: 1.1416666667s;
+}
+body .box:nth-of-type(18) {
+  transition-delay: 0.3s;
+}
+body .box:nth-of-type(18) .side:nth-of-type(1):before {
+  transition-delay: 0.3166666667s;
+}
+body .box:nth-of-type(18) .side:nth-of-type(2):before {
+  transition-delay: 0.4833333333s;
+}
+body .box:nth-of-type(18) .side:nth-of-type(3):before {
+  transition-delay: 0.65s;
+}
+body .box:nth-of-type(18) .side:nth-of-type(4):before {
+  transition-delay: 0.8166666667s;
+}
+body .box:nth-of-type(18) .side:nth-of-type(5):before {
+  transition-delay: 0.9833333333s;
+}
+body .box:nth-of-type(18) .side:nth-of-type(6):before {
+  transition-delay: 1.15s;
+}
+body .box:nth-of-type(19) {
+  transition-delay: 0.3166666667s;
+}
+body .box:nth-of-type(19) .side:nth-of-type(1):before {
+  transition-delay: 0.325s;
+}
+body .box:nth-of-type(19) .side:nth-of-type(2):before {
+  transition-delay: 0.4916666667s;
+}
+body .box:nth-of-type(19) .side:nth-of-type(3):before {
+  transition-delay: 0.6583333333s;
+}
+body .box:nth-of-type(19) .side:nth-of-type(4):before {
+  transition-delay: 0.825s;
+}
+body .box:nth-of-type(19) .side:nth-of-type(5):before {
+  transition-delay: 0.9916666667s;
+}
+body .box:nth-of-type(19) .side:nth-of-type(6):before {
+  transition-delay: 1.1583333333s;
+}
+body .box:nth-of-type(20) {
+  transition-delay: 0.3333333333s;
+}
+body .box:nth-of-type(20) .side:nth-of-type(1):before {
+  transition-delay: 0.3333333333s;
+}
+body .box:nth-of-type(20) .side:nth-of-type(2):before {
+  transition-delay: 0.5s;
+}
+body .box:nth-of-type(20) .side:nth-of-type(3):before {
+  transition-delay: 0.6666666667s;
+}
+body .box:nth-of-type(20) .side:nth-of-type(4):before {
+  transition-delay: 0.8333333333s;
+}
+body .box:nth-of-type(20) .side:nth-of-type(5):before {
+  transition-delay: 1s;
+}
+body .box:nth-of-type(20) .side:nth-of-type(6):before {
+  transition-delay: 1.1666666667s;
+}
+body .box:nth-of-type(21) {
+  transition-delay: 0.35s;
+}
+body .box:nth-of-type(21) .side:nth-of-type(1):before {
+  transition-delay: 0.3416666667s;
+}
+body .box:nth-of-type(21) .side:nth-of-type(2):before {
+  transition-delay: 0.5083333333s;
+}
+body .box:nth-of-type(21) .side:nth-of-type(3):before {
+  transition-delay: 0.675s;
+}
+body .box:nth-of-type(21) .side:nth-of-type(4):before {
+  transition-delay: 0.8416666667s;
+}
+body .box:nth-of-type(21) .side:nth-of-type(5):before {
+  transition-delay: 1.0083333333s;
+}
+body .box:nth-of-type(21) .side:nth-of-type(6):before {
+  transition-delay: 1.175s;
+}
+body .box:nth-of-type(22) {
+  transition-delay: 0.3666666667s;
+}
+body .box:nth-of-type(22) .side:nth-of-type(1):before {
+  transition-delay: 0.35s;
+}
+body .box:nth-of-type(22) .side:nth-of-type(2):before {
+  transition-delay: 0.5166666667s;
+}
+body .box:nth-of-type(22) .side:nth-of-type(3):before {
+  transition-delay: 0.6833333333s;
+}
+body .box:nth-of-type(22) .side:nth-of-type(4):before {
+  transition-delay: 0.85s;
+}
+body .box:nth-of-type(22) .side:nth-of-type(5):before {
+  transition-delay: 1.0166666667s;
+}
+body .box:nth-of-type(22) .side:nth-of-type(6):before {
+  transition-delay: 1.1833333333s;
+}
+body .box:nth-of-type(23) {
+  transition-delay: 0.3833333333s;
+}
+body .box:nth-of-type(23) .side:nth-of-type(1):before {
+  transition-delay: 0.3583333333s;
+}
+body .box:nth-of-type(23) .side:nth-of-type(2):before {
+  transition-delay: 0.525s;
+}
+body .box:nth-of-type(23) .side:nth-of-type(3):before {
+  transition-delay: 0.6916666667s;
+}
+body .box:nth-of-type(23) .side:nth-of-type(4):before {
+  transition-delay: 0.8583333333s;
+}
+body .box:nth-of-type(23) .side:nth-of-type(5):before {
+  transition-delay: 1.025s;
+}
+body .box:nth-of-type(23) .side:nth-of-type(6):before {
+  transition-delay: 1.1916666667s;
+}
+body .box:nth-of-type(24) {
+  transition-delay: 0.4s;
+}
+body .box:nth-of-type(24) .side:nth-of-type(1):before {
+  transition-delay: 0.3666666667s;
+}
+body .box:nth-of-type(24) .side:nth-of-type(2):before {
+  transition-delay: 0.5333333333s;
+}
+body .box:nth-of-type(24) .side:nth-of-type(3):before {
+  transition-delay: 0.7s;
+}
+body .box:nth-of-type(24) .side:nth-of-type(4):before {
+  transition-delay: 0.8666666667s;
+}
+body .box:nth-of-type(24) .side:nth-of-type(5):before {
+  transition-delay: 1.0333333333s;
+}
+body .box:nth-of-type(24) .side:nth-of-type(6):before {
+  transition-delay: 1.2s;
+}
+body .box:nth-of-type(25) {
+  transition-delay: 0.4166666667s;
+}
+body .box:nth-of-type(25) .side:nth-of-type(1):before {
+  transition-delay: 0.375s;
+}
+body .box:nth-of-type(25) .side:nth-of-type(2):before {
+  transition-delay: 0.5416666667s;
+}
+body .box:nth-of-type(25) .side:nth-of-type(3):before {
+  transition-delay: 0.7083333333s;
+}
+body .box:nth-of-type(25) .side:nth-of-type(4):before {
+  transition-delay: 0.875s;
+}
+body .box:nth-of-type(25) .side:nth-of-type(5):before {
+  transition-delay: 1.0416666667s;
+}
+body .box:nth-of-type(25) .side:nth-of-type(6):before {
+  transition-delay: 1.2083333333s;
+}
+body .box:nth-of-type(26) {
+  transition-delay: 0.4333333333s;
+}
+body .box:nth-of-type(26) .side:nth-of-type(1):before {
+  transition-delay: 0.3833333333s;
+}
+body .box:nth-of-type(26) .side:nth-of-type(2):before {
+  transition-delay: 0.55s;
+}
+body .box:nth-of-type(26) .side:nth-of-type(3):before {
+  transition-delay: 0.7166666667s;
+}
+body .box:nth-of-type(26) .side:nth-of-type(4):before {
+  transition-delay: 0.8833333333s;
+}
+body .box:nth-of-type(26) .side:nth-of-type(5):before {
+  transition-delay: 1.05s;
+}
+body .box:nth-of-type(26) .side:nth-of-type(6):before {
+  transition-delay: 1.2166666667s;
+}
+body .box:nth-of-type(27) {
+  transition-delay: 0.45s;
+}
+body .box:nth-of-type(27) .side:nth-of-type(1):before {
+  transition-delay: 0.3916666667s;
+}
+body .box:nth-of-type(27) .side:nth-of-type(2):before {
+  transition-delay: 0.5583333333s;
+}
+body .box:nth-of-type(27) .side:nth-of-type(3):before {
+  transition-delay: 0.725s;
+}
+body .box:nth-of-type(27) .side:nth-of-type(4):before {
+  transition-delay: 0.8916666667s;
+}
+body .box:nth-of-type(27) .side:nth-of-type(5):before {
+  transition-delay: 1.0583333333s;
+}
+body .box:nth-of-type(27) .side:nth-of-type(6):before {
+  transition-delay: 1.225s;
+}
+body .box:nth-of-type(28) {
+  transition-delay: 0.4666666667s;
+}
+body .box:nth-of-type(28) .side:nth-of-type(1):before {
+  transition-delay: 0.4s;
+}
+body .box:nth-of-type(28) .side:nth-of-type(2):before {
+  transition-delay: 0.5666666667s;
+}
+body .box:nth-of-type(28) .side:nth-of-type(3):before {
+  transition-delay: 0.7333333333s;
+}
+body .box:nth-of-type(28) .side:nth-of-type(4):before {
+  transition-delay: 0.9s;
+}
+body .box:nth-of-type(28) .side:nth-of-type(5):before {
+  transition-delay: 1.0666666667s;
+}
+body .box:nth-of-type(28) .side:nth-of-type(6):before {
+  transition-delay: 1.2333333333s;
+}
+body .box:nth-of-type(29) {
+  transition-delay: 0.4833333333s;
+}
+body .box:nth-of-type(29) .side:nth-of-type(1):before {
+  transition-delay: 0.4083333333s;
+}
+body .box:nth-of-type(29) .side:nth-of-type(2):before {
+  transition-delay: 0.575s;
+}
+body .box:nth-of-type(29) .side:nth-of-type(3):before {
+  transition-delay: 0.7416666667s;
+}
+body .box:nth-of-type(29) .side:nth-of-type(4):before {
+  transition-delay: 0.9083333333s;
+}
+body .box:nth-of-type(29) .side:nth-of-type(5):before {
+  transition-delay: 1.075s;
+}
+body .box:nth-of-type(29) .side:nth-of-type(6):before {
+  transition-delay: 1.2416666667s;
+}
+body .box:nth-of-type(30) {
+  transition-delay: 0.5s;
+}
+body .box:nth-of-type(30) .side:nth-of-type(1):before {
+  transition-delay: 0.4166666667s;
+}
+body .box:nth-of-type(30) .side:nth-of-type(2):before {
+  transition-delay: 0.5833333333s;
+}
+body .box:nth-of-type(30) .side:nth-of-type(3):before {
+  transition-delay: 0.75s;
+}
+body .box:nth-of-type(30) .side:nth-of-type(4):before {
+  transition-delay: 0.9166666667s;
+}
+body .box:nth-of-type(30) .side:nth-of-type(5):before {
+  transition-delay: 1.0833333333s;
+}
+body .box:nth-of-type(30) .side:nth-of-type(6):before {
+  transition-delay: 1.25s;
+}
+body .box:nth-of-type(31) {
+  transition-delay: 0.5166666667s;
+}
+body .box:nth-of-type(31) .side:nth-of-type(1):before {
+  transition-delay: 0.425s;
+}
+body .box:nth-of-type(31) .side:nth-of-type(2):before {
+  transition-delay: 0.5916666667s;
+}
+body .box:nth-of-type(31) .side:nth-of-type(3):before {
+  transition-delay: 0.7583333333s;
+}
+body .box:nth-of-type(31) .side:nth-of-type(4):before {
+  transition-delay: 0.925s;
+}
+body .box:nth-of-type(31) .side:nth-of-type(5):before {
+  transition-delay: 1.0916666667s;
+}
+body .box:nth-of-type(31) .side:nth-of-type(6):before {
+  transition-delay: 1.2583333333s;
+}
+body .box:nth-of-type(32) {
+  transition-delay: 0.5333333333s;
+}
+body .box:nth-of-type(32) .side:nth-of-type(1):before {
+  transition-delay: 0.4333333333s;
+}
+body .box:nth-of-type(32) .side:nth-of-type(2):before {
+  transition-delay: 0.6s;
+}
+body .box:nth-of-type(32) .side:nth-of-type(3):before {
+  transition-delay: 0.7666666667s;
+}
+body .box:nth-of-type(32) .side:nth-of-type(4):before {
+  transition-delay: 0.9333333333s;
+}
+body .box:nth-of-type(32) .side:nth-of-type(5):before {
+  transition-delay: 1.1s;
+}
+body .box:nth-of-type(32) .side:nth-of-type(6):before {
+  transition-delay: 1.2666666667s;
+}
+body .box:nth-of-type(33) {
+  transition-delay: 0.55s;
+}
+body .box:nth-of-type(33) .side:nth-of-type(1):before {
+  transition-delay: 0.4416666667s;
+}
+body .box:nth-of-type(33) .side:nth-of-type(2):before {
+  transition-delay: 0.6083333333s;
+}
+body .box:nth-of-type(33) .side:nth-of-type(3):before {
+  transition-delay: 0.775s;
+}
+body .box:nth-of-type(33) .side:nth-of-type(4):before {
+  transition-delay: 0.9416666667s;
+}
+body .box:nth-of-type(33) .side:nth-of-type(5):before {
+  transition-delay: 1.1083333333s;
+}
+body .box:nth-of-type(33) .side:nth-of-type(6):before {
+  transition-delay: 1.275s;
+}
+body .box:nth-of-type(34) {
+  transition-delay: 0.5666666667s;
+}
+body .box:nth-of-type(34) .side:nth-of-type(1):before {
+  transition-delay: 0.45s;
+}
+body .box:nth-of-type(34) .side:nth-of-type(2):before {
+  transition-delay: 0.6166666667s;
+}
+body .box:nth-of-type(34) .side:nth-of-type(3):before {
+  transition-delay: 0.7833333333s;
+}
+body .box:nth-of-type(34) .side:nth-of-type(4):before {
+  transition-delay: 0.95s;
+}
+body .box:nth-of-type(34) .side:nth-of-type(5):before {
+  transition-delay: 1.1166666667s;
+}
+body .box:nth-of-type(34) .side:nth-of-type(6):before {
+  transition-delay: 1.2833333333s;
+}
+body .box:nth-of-type(35) {
+  transition-delay: 0.5833333333s;
+}
+body .box:nth-of-type(35) .side:nth-of-type(1):before {
+  transition-delay: 0.4583333333s;
+}
+body .box:nth-of-type(35) .side:nth-of-type(2):before {
+  transition-delay: 0.625s;
+}
+body .box:nth-of-type(35) .side:nth-of-type(3):before {
+  transition-delay: 0.7916666667s;
+}
+body .box:nth-of-type(35) .side:nth-of-type(4):before {
+  transition-delay: 0.9583333333s;
+}
+body .box:nth-of-type(35) .side:nth-of-type(5):before {
+  transition-delay: 1.125s;
+}
+body .box:nth-of-type(35) .side:nth-of-type(6):before {
+  transition-delay: 1.2916666667s;
+}
+body .box:nth-of-type(36) {
+  transition-delay: 0.6s;
+}
+body .box:nth-of-type(36) .side:nth-of-type(1):before {
+  transition-delay: 0.4666666667s;
+}
+body .box:nth-of-type(36) .side:nth-of-type(2):before {
+  transition-delay: 0.6333333333s;
+}
+body .box:nth-of-type(36) .side:nth-of-type(3):before {
+  transition-delay: 0.8s;
+}
+body .box:nth-of-type(36) .side:nth-of-type(4):before {
+  transition-delay: 0.9666666667s;
+}
+body .box:nth-of-type(36) .side:nth-of-type(5):before {
+  transition-delay: 1.1333333333s;
+}
+body .box:nth-of-type(36) .side:nth-of-type(6):before {
+  transition-delay: 1.3s;
+}
+body .box .side {
+  top: 0;
+  left: 0;
+  transform-origin: 50% 50% -100px;
+  --darken: var(--dark);
+  --darken-2: var(--dark-2);
+  --angle: 90deg;
+  --size: 200% 100%;
+  --position: 0% 0%;
+}
+body .box .side:before {
+  content: "";
+  background-image: linear-gradient(var(--angle), hsla(var(--color), var(--darken)) 50%, hsla(var(--color-2), var(--darken-2)) 50%);
+  background-size: var(--size);
+  background-position: var(--position);
+  transition: background 0.4s ease-in-out;
+  --darken: calc(var(--dark) * 0.9);
+}
+body .box .side:first-of-type:before {
+  top: -100%;
+  transform-origin: bottom;
+  transform: rotateX(90deg);
+  --angle: 0deg;
+  --size: 100% 200%;
+  --position: 0% calc(100% * var(--slide));
+  --darken: calc(var(--dark) * 1.025);
+  --darken-2: calc(var(--dark-2) * 1.025);
+}
+body .box .side:nth-of-type(2):before {
+  top: 100%;
+  transform-origin: top;
+  transform: rotateX(-90deg);
+  --angle: 0deg;
+  --size: 100% 200%;
+  --position: 0% calc(100% * var(--slide));
+}
+body .box .side:nth-of-type(3):before {
+  left: -100%;
+  transform-origin: right;
+  transform: rotateY(-90deg);
+  --darken: calc(var(--dark) * 0.95);
+  --darken-2: calc(var(--dark-2) * 0.95);
+  --angle: 90deg;
+  --position: calc(100% - (100% * var(--slide))) 0%;
+}
+body .box .side:nth-of-type(4):before {
+  left: 100%;
+  transform-origin: left;
+  transform: rotateY(90deg);
+  --darken: calc(var(--dark) * 1.05);
+  --darken-2: calc(var(--dark-2) * 1.05);
+  --angle: 90deg;
+  --position: calc(100% - (100% * var(--slide))) 0%;
+}
+body .box .side:nth-of-type(5):before {
+  transform: translateZ(calc(var(--width) * -1));
+  --darken: calc(var(--dark) * 1.05);
+  --darken-2: calc(var(--dark-2) * 1.05);
+  --angle: 0deg;
+  --size: 100% 200%;
+  --position: 0% calc(100% * var(--slide));
+}
+body .box .side,
+body .box .side:before {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  backface-visibility: visible;
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <div id='wrap'>
+  <div id='plane'>
+    <div class='box'>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+    </div>
+    <div class='box'>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+    </div>
+    <div class='box'>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+    </div>
+    <div class='box'>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+    </div>
+    <div class='box'>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+    </div>
+    <div class='box'>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+    </div>
+    <div class='box'>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+    </div>
+    <div class='box'>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+    </div>
+    <div class='box'>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+    </div>
+    <div class='box'>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+    </div>
+    <div class='box'>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+    </div>
+    <div class='box'>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+    </div>
+    <div class='box'>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+    </div>
+    <div class='box'>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+    </div>
+    <div class='box'>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+    </div>
+    <div class='box'>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+    </div>
+    <div class='box'>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+    </div>
+    <div class='box'>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+    </div>
+    <div class='box'>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+    </div>
+    <div class='box'>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+    </div>
+    <div class='box'>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+    </div>
+    <div class='box'>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+    </div>
+    <div class='box'>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+    </div>
+    <div class='box'>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+    </div>
+    <div class='box'>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+    </div>
+    <div class='box'>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+    </div>
+    <div class='box'>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+    </div>
+    <div class='box'>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+    </div>
+    <div class='box'>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+    </div>
+    <div class='box'>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+    </div>
+    <div class='box'>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+    </div>
+    <div class='box'>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+    </div>
+    <div class='box'>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+    </div>
+    <div class='box'>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+    </div>
+    <div class='box'>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+    </div>
+    <div class='box'>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+      <div class='side'></div>
+    </div>
+  </div>
+</div>
+  
+    <script id="rendered-js" >
+let toggle;
+let colors = {
+  color: [
+  { shade: "69, 100%", darken: "48%" },
+  { shade: "264, 100%", darken: "71%" },
+  { shade: "340, 7%", darken: "92%" },
+  { shade: "0, 0%", darken: "100%" }] };
+
+
+
+function draw() {
+  toggle = !toggle;
+  console.log(toggle);
+  document.querySelectorAll(".box").forEach(cell => {
+    cell.style.setProperty("--size", Math.floor(Math.random() * 400) + 75);
+    cell.style.setProperty("--rotate", Math.floor(Math.random() * 360));
+    cell.style.setProperty(
+    "--translate",
+    Math.floor(Math.random() * 200) -
+    100 +
+    "%," + (
+    Math.floor(Math.random() * 200) - 100) +
+    "%");
+
+
+    for (let i = 0; i < 3; i++) {if (window.CP.shouldStopExecution(0)) break;
+      cell.style.setProperty("--scale-" + i, Math.floor(Math.random() * 6) + 1);
+    }window.CP.exitedLoop(0);
+
+    if (toggle) {
+      let rand = Math.floor(Math.random() * colors.color.length);
+      cell.style.setProperty("--color-2", colors.color[rand].shade);
+      cell.style.setProperty("--dark-2", colors.color[rand].darken);
+      cell.style.setProperty("--slide", "0");
+    } else {
+      let rand = Math.floor(Math.random() * colors.color.length);
+      cell.style.setProperty("--color", colors.color[rand].shade);
+      cell.style.setProperty("--dark", colors.color[rand].darken);
+      cell.style.setProperty("--slide", "1");
+    }
+  });
+}
+
+draw();
+draw();
+
+document.body.addEventListener("click", function () {
+  draw();
+});
+
+let mouse = { x: 0, y: 0 };
+let body = document.body;
+let width = window.innerWidth / 2;
+let height = window.innerWidth / 2;
+
+body.addEventListener("mousemove", ({ clientX, clientY }) => {
+  mouse.x = (width - event.pageX) * -1 / width;
+  mouse.y = (height - event.pageY) * 1 / height;
+  body.style.setProperty("--mouseX", mouse.x);
+  body.style.setProperty("--mouseY", mouse.y);
+});
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>

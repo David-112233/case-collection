@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>Floating Bottle Loader</title>
+
+    <link rel="canonical" href="https://codepen.io/phatros/pen/voYWvQ">
+  
+  
+  
+  
+<style>
+@import url("https://fonts.googleapis.com/css?family=Lily+Script+One&display=swap");
+html, body {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  background-color: #ddd;
+}
+
+h1 {
+  font-size: 2em;
+  font-family: "Lily Script One";
+  color: #505e77;
+  letter-spacing: 7px;
+}
+
+.imgContainer {
+  position: relative;
+  width: 200px;
+  height: 220px;
+  overflow: hidden;
+}
+.imgContainer img.bottle {
+  width: 50%;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+  bottom: 18px;
+  animation: floating 1.75s ease-in-out infinite alternate;
+}
+.imgContainer img.wave {
+  animation: wave 2.3s linear infinite;
+  animation-delay: -0.2s;
+  position: absolute;
+  bottom: 0;
+  width: 200%;
+}
+.imgContainer img.wave.delay {
+  animation-duration: 3.5s;
+}
+
+@keyframes wave {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+@keyframes floating {
+  from {
+    transform: translate(-50%, 10px);
+  }
+  to {
+    transform: translate(-50%, -10px);
+  }
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <div class="imgContainer"><img class="wave" src="https://i.pinimg.com/originals/64/91/54/6491542a239217a7d44bfba368cd06c8.png" alt=""/><img class="bottle" src="https://i.pinimg.com/originals/67/19/71/6719713708a3a22081b18e9a520c85e8.png" alt=""/><img class="wave delay" src="https://i.pinimg.com/originals/64/91/54/6491542a239217a7d44bfba368cd06c8.png" alt=""/><img class="wave delay" src="https://i.pinimg.com/originals/64/91/54/6491542a239217a7d44bfba368cd06c8.png" alt=""/></div>
+<h1>Loading...</h1>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+  
+  
+</body>
+
+</html>

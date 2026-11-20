@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>strata #32</title>
+
+    <link rel="canonical" href="https://codepen.io/tfrere/pen/bNwxYOV">
+  
+  
+  
+  
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 100%; height: 100%; overflow: hidden; }
+body { display: flex; justify-content: center; align-items: center; font-family: "Courier New", monospace; background: #f5f5f5; color: #333; }
+.artwork { display: flex; flex-direction: column; align-items: center; max-width: 100%; max-height: 100%; padding: 24px; gap: 16px; }
+.svg-container { display: flex; justify-content: center; align-items: center; }
+.svg-container svg { max-width: 100%; max-height: calc(100vh - 120px); width: auto; height: auto; }
+.controls { display: flex; align-items: center; gap: 12px; }
+.seed-label { font-size: 13px; letter-spacing: 0.12em; opacity: 0.4; }
+.seed-input { font-family: inherit; font-size: 13px; width: 80px; padding: 4px 8px; border: 1px solid #ccc; border-radius: 4px; text-align: center; background: #fff; color: #333; }
+.btn { font-family: inherit; font-size: 12px; padding: 5px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fff; color: #333; cursor: pointer; letter-spacing: 0.05em; }
+.btn:hover { background: #eee; }
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <div class="artwork">
+  <div class="svg-container"></div>
+  <div class="controls">
+    <span class="seed-label" id="seed-display"></span>
+    <input type="number" id="seed-input" class="seed-input" />
+    <button id="btn-random" class="btn">Random</button>
+  </div>
+</div>
+  
+    <script id="rendered-js" type="module">
+// ═══════════════════════════════════════════════════════════════
+// SKETCH: strata
+// ═══════════════════════════════════════════════════════════════
+import { SVG } from "https://esm.sh/@svgdotjs/svg.js@3.2.5";
+import { createNoise2D, createNoise3D, createNoise4D } from "https://esm.sh/simplex-noise@4.0.3";
+import * as culori from "https://esm.sh/culori@4.0.2";
+import { Clipper, FillRule, JoinType, EndType } from "https://esm.sh/@countertype/clipper2-ts";
+// ── Swirl deformation ────────────────────────────────────────
+function applyAttractors(attractors, points, diag) {
+    for (const at of attractors) {
+        const { cx, cy, r, a, fe, se } = at;
+        for (const pt of points) {
+            const dx = pt.x - cx;
+            const dy = pt.y - cy;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 1e-6)
+                continue;
+            const swirlT = Math.pow(1 - Math.min(dist / r, 1), fe);
+            const globalT = Math.pow(1 - Math.min(dist / diag, 1), se);
+            const theta = Math.atan2(dy, dx) + swirlT * a * globalT;
+            pt.x = cx + Math.cos(theta) * dist;
+            pt.y = cy + Math.sin(theta) * dist;
+        }
+    }
+}
+function spawnAttractors(spec, W, H, random) {
+    const out = [];
+    for (let i = 0; i < spec.count; i++) {
+        out.push({
+            cx: random.range(0, W),
+            cy: random.range(0, H),
+            r: random.range(spec.rMin, spec.rMax),
+            a: random.range(spec.angleMin, spec.angleMax) * random.pick([-1, 1]),
+            fe: spec.fe,
+            se: spec.se,
+        });
+    }
+    return out;
+}
+// ── Attractor presets ────────────────────────────────────────
+const PRESETS = {
+    gentle: [
+        { count: 3, rMin: 800, rMax: 2000, angleMin: 20, angleMax: 60, fe: 1, se: 3 },
+        { count: 1, rMin: 3000, rMax: 8000, angleMin: 40, angleMax: 80, fe: 1, se: 1 },
+    ],
+    fold: [
+        { count: 4, rMin: 600, rMax: 1500, angleMin: 60, angleMax: 120, fe: 2, se: 2 },
+        { count: 2, rMin: 2000, rMax: 6000, angleMin: 80, angleMax: 140, fe: 1, se: 2 },
+    ],
+    vortex: [
+        { count: 2, rMin: 1200, rMax: 2500, angleMin: 120, angleMax: 200, fe: 2, se: 3 },
+        { count: 5, rMin: 500, rMax: 1000, angleMin: 60, angleMax: 100, fe: 3, se: 4 },
+    ],
+    agate: [
+        { count: 3, rMin: 1000, rMax: 3000, angleMin: 40, angleMax: 90, fe: 1, se: 2 },
+        { count: 3, rMin: 800, rMax: 1200, angleMin: 80, angleMax: 150, fe: 2, se: 3 },
+        { count: 1, rMin: 5000, rMax: 12000, angleMin: 30, angleMax: 60, fe: 1, se: 1 },
+    ],
+    fault: [
+        { count: 6, rMin: 400, rMax: 800, angleMin: 150, angleMax: 250, fe: 3, se: 2 },
+        { count: 2, rMin: 3000, rMax: 10000, angleMin: 40, angleMax: 80, fe: 1, se: 1 },
+    ],
+};
+const PRESET_NAMES = Object.keys(PRESETS);
+// ── Helpers ──────────────────────────────────────────────────
+function makeCirclePoly(cx, cy, r) {
+    const n = 64;
+    const pts = [];
+    for (let i = 0; i < n; i++) {
+        const a = (i / n) * Math.PI * 2;
+        pts.push({ x: cx + Math.cos(a) * r, y: cy + Math.sin(a) * r });
+    }
+    return pts;
+}
+function rotatePoly(pts, cx, cy, angleDeg) {
+    const rad = (angleDeg * Math.PI) / 180;
+    const cos = Math.cos(rad);
+    const sin = Math.sin(rad);
+    return pts.map(p => {
+        const dx = p.x - cx;
+        const dy = p.y - cy;
+        return { x: cx + dx * cos - dy * sin, y: cy + dx * sin + dy * cos };
+    });
+}
+function polyToD(poly) {
+    if (poly.length < 3)
+        return "";
+    let d = `M${poly[0].x.toFixed(2)},${poly[0].y.toFixed(2)}`;
+    for (let k = 1; k < poly.length; k++) {
+        d += `L${poly[k].x.toFixed(2)},${poly[k].y.toFixed(2)}`;
+    }
+    return d + "Z";
+}
+// ── Sketch ───────────────────────────────────────────────────
+// --- Sketch draw function ---
+function draw({ svg, params, random, color, width, height, clear }) {
+    clear();
+    const W = width;
+    const H = height;
+    const refScale = Math.min(W / 750, H / 1000);
+    const margin = params.margin * refScale;
+    const diag = Math.sqrt(W * W + H * H);
+    const palette = color.randomPalette();
+    const bg = color.lighten(palette[0], 0.92);
+    const inks = palette.slice(1);
+    const numColors = inks.length;
+    const presetKey = params.preset === "auto" ? random.pick(PRESET_NAMES) : params.preset;
+    const specs = PRESETS[presetKey] || PRESETS.agate;
+    // ── 1. Generate contours ─────────────────────────────────
+    const numLayers = params.layers;
+    const spacing = params.density * refScale;
+    const overflow = diag * 0.3;
+    const xStart = -overflow, xEnd = W + overflow;
+    const yStart = -overflow, yEnd = H + overflow;
+    const cx = W / 2, cy = H / 2;
+    const maxR = diag * 0.6;
+    const isClosed = ["concentric", "diamond"].includes(params.shape);
+    const contours = [];
+    const allPoints = [];
+    function addContour(pts) {
+        contours.push(pts);
+        for (const pt of pts)
+            allPoints.push(pt);
+    }
+    function resample(pts) {
+        const out = [pts[0]];
+        for (let i = 1; i < pts.length; i++) {
+            const a = pts[i - 1], b = pts[i];
+            const dx = b.x - a.x, dy = b.y - a.y;
+            const len = Math.sqrt(dx * dx + dy * dy);
+            const steps = Math.ceil(len / spacing);
+            for (let s = 1; s <= steps; s++) {
+                const t = s / steps;
+                out.push({ x: a.x + dx * t, y: a.y + dy * t });
+            }
+        }
+        return out;
+    }
+    switch (params.shape) {
+        case "horizontal": {
+            const step = (yEnd - yStart) / (numLayers - 1);
+            for (let li = 0; li < numLayers; li++) {
+                const y = yStart + li * step;
+                const pts = [];
+                for (let x = xStart; x <= xEnd; x += spacing)
+                    pts.push({ x, y });
+                addContour(pts);
+            }
+            break;
+        }
+        case "vertical": {
+            const step = (xEnd - xStart) / (numLayers - 1);
+            for (let li = 0; li < numLayers; li++) {
+                const x = xStart + li * step;
+                const pts = [];
+                for (let y = yStart; y <= yEnd; y += spacing)
+                    pts.push({ x, y });
+                addContour(pts);
+            }
+            break;
+        }
+        case "concentric": {
+            const rStep = maxR / numLayers;
+            for (let li = 1; li <= numLayers; li++) {
+                const rx = li * rStep;
+                const ry = li * rStep * (H / W);
+                const circ = Math.PI * 2 * Math.max(rx, ry);
+                const n = Math.max(12, Math.ceil(circ / spacing));
+                const pts = [];
+                for (let i = 0; i <= n; i++) {
+                    const a = (i / n) * Math.PI * 2;
+                    pts.push({ x: cx + Math.cos(a) * rx, y: cy + Math.sin(a) * ry });
+                }
+                addContour(pts);
+            }
+            break;
+        }
+        case "chevron": {
+            const step = (yEnd - yStart) / (numLayers - 1);
+            for (let li = 0; li < numLayers; li++) {
+                const baseY = yStart + li * step;
+                const pts = [];
+                for (let x = xStart; x <= xEnd; x += spacing) {
+                    const t = (x - xStart) / (xEnd - xStart);
+                    pts.push({ x, y: baseY + Math.abs(t - 0.5) * 2 * H * 0.3 });
+                }
+                addContour(pts);
+            }
+            break;
+        }
+        case "diamond": {
+            const rStep = maxR / numLayers;
+            for (let li = 1; li <= numLayers; li++) {
+                const s = li * rStep;
+                addContour(resample([
+                    { x: cx, y: cy - s }, { x: cx + s, y: cy },
+                    { x: cx, y: cy + s }, { x: cx - s, y: cy },
+                    { x: cx, y: cy - s },
+                ]));
+            }
+            break;
+        }
+    }
+    // ── 2. Deform ────────────────────────────────────────────
+    const allAttractors = [];
+    for (const spec of specs) {
+        const scaled = Object.assign(Object.assign({}, spec), { rMin: spec.rMin * refScale, rMax: spec.rMax * refScale, angleMin: (spec.angleMin * Math.PI) / 180, angleMax: (spec.angleMax * Math.PI) / 180 });
+        const attractors = spawnAttractors(scaled, W, H, random);
+        for (const at of attractors)
+            allAttractors.push(at);
+        applyAttractors(attractors, allPoints, diag);
+    }
+    // ── 3. Center & scale to fill page (with fit margin) ───────
+    // After deformation, content may drift. Refit to canvas (like undercurrent).
+    if (allPoints.length > 0) {
+        let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+        for (const p of allPoints) {
+            if (p.x < minX)
+                minX = p.x;
+            if (p.x > maxX)
+                maxX = p.x;
+            if (p.y < minY)
+                minY = p.y;
+            if (p.y > maxY)
+                maxY = p.y;
+        }
+        const bw = maxX - minX || 1;
+        const bh = maxY - minY || 1;
+        const fm = params.fitMargin;
+        const targetW = W * (1 - 2 * fm);
+        const targetH = H * (1 - 2 * fm);
+        const s = Math.min(targetW / bw, targetH / bh);
+        const ox = (W - s * bw) / 2 - s * minX;
+        const oy = (H - s * bh) / 2 - s * minY;
+        for (const p of allPoints) {
+            p.x = ox + p.x * s;
+            p.y = oy + p.y * s;
+        }
+    }
+    // ── 4. Build filled shapes ───────────────────────────────
+    // Like marbling: each shape is a filled polygon.
+    // Closed shapes overlap (inner on top of outer).
+    // Open shapes tile (area between consecutive contours).
+    function layerColor(index) {
+        switch (params.colorMode) {
+            case "gradient": {
+                const t = index / (numLayers - 1);
+                return inks[Math.min(Math.floor(t * (numColors - 1)), numColors - 1)];
+            }
+            case "alternating":
+                return inks[index % numColors];
+            case "bands":
+            default:
+                return inks[Math.floor(index / params.bandSize) % numColors];
+        }
+    }
+    const shapes = [];
+    if (isClosed) {
+        // Overlapping filled polygons, outer → inner
+        for (let i = contours.length - 1; i >= 0; i--) {
+            if (contours[i].length < 3)
+                continue;
+            shapes.push({ poly: contours[i], color: layerColor(i) });
+        }
+    }
+    else {
+        // Area between consecutive contours
+        for (let i = 0; i < contours.length - 1; i++) {
+            const top = contours[i], bot = contours[i + 1];
+            if (top.length < 2 || bot.length < 2)
+                continue;
+            shapes.push({ poly: [...top, ...bot.slice().reverse()], color: layerColor(i) });
+        }
+    }
+    const rings = [];
+    if (params.circleRings > 0) {
+        const maxCircleR = Math.min(W, H) * params.circleRadius;
+        const ringStep = maxCircleR / params.circleRings;
+        const baseRot = random.pick([-1, 1]) * params.circleRotation;
+        for (let i = 0; i < params.circleRings; i++) {
+            rings.push({
+                cx, cy,
+                outerR: maxCircleR - i * ringStep,
+                innerR: i < params.circleRings - 1 ? maxCircleR - (i + 1) * ringStep : 0,
+                rot: baseRot * ((i + 1) / params.circleRings),
+            });
+        }
+    }
+    // ── 6. Clip shapes with circles ──────────────────────────
+    const finalShapes = [];
+    const outerCircle = rings.length > 0
+        ? makeCirclePoly(rings[0].cx, rings[0].cy, rings[0].outerR)
+        : null;
+    for (const shape of shapes) {
+        // Part outside all circles
+        if (outerCircle) {
+            try {
+                const outside = Clipper.differenceD([shape.poly], [outerCircle], FillRule.NonZero);
+                for (const p of outside)
+                    finalShapes.push({ poly: p, color: shape.color });
+            }
+            catch (_a) {
+                finalShapes.push(shape);
+            }
+        }
+        else {
+            finalShapes.push(shape);
+        }
+        // Part inside each ring annulus, rotated
+        for (const ring of rings) {
+            const outer = makeCirclePoly(ring.cx, ring.cy, ring.outerR);
+            const inner = ring.innerR > 0 ? makeCirclePoly(ring.cx, ring.cy, ring.innerR) : null;
+            try {
+                let pieces = Clipper.intersectD([shape.poly], [outer], FillRule.NonZero);
+                if (inner && pieces.length > 0) {
+                    pieces = Clipper.differenceD(pieces, [inner], FillRule.NonZero);
+                }
+                for (const p of pieces) {
+                    finalShapes.push({ poly: rotatePoly(p, ring.cx, ring.cy, ring.rot), color: shape.color });
+                }
+            }
+            catch ( /* skip */_b) { /* skip */ }
+        }
+    }
+    // ── 7. Deflate & render ──────────────────────────────────
+    svg.rect(W, H).fill(bg);
+    const clip = svg.clip();
+    clip.rect(W - 2 * margin, H - 2 * margin).move(margin, margin);
+    const group = svg.group().clipWith(clip);
+    group.rect(W - 2 * margin, H - 2 * margin).move(margin, margin).fill(inks[1 % numColors]);
+    const deflateAmount = params.deflate * refScale;
+    for (const shape of finalShapes) {
+        if (deflateAmount > 0 && shape.poly.length >= 3) {
+            try {
+                const deflated = Clipper.inflatePathsD([shape.poly], -deflateAmount, JoinType.Round, EndType.Polygon);
+                for (const p of deflated) {
+                    const d = polyToD(p);
+                    if (d)
+                        group.path(d).fill(shape.color).stroke("none");
+                }
+            }
+            catch (_c) {
+                const d = polyToD(shape.poly);
+                if (d)
+                    group.path(d).fill(shape.color).stroke("none");
+            }
+        }
+        else {
+            const d = polyToD(shape.poly);
+            if (d)
+                group.path(d).fill(shape.color).stroke("none");
+        }
+    }
+    // Passe-partout frame
+    if (margin > 0) {
+        const w = margin;
+        svg.path(`M 0,0 L ${W},0 L ${W - w},${w} L ${w},${w} Z`).fill(bg);
+        svg.path(`M ${W - w},${w} L ${W},0 L ${W},${H} L ${W - w},${H - w} Z`).fill(bg);
+        svg.path(`M ${W - w},${H - w} L ${W},${H} L 0,${H} L ${w},${H - w} Z`).fill(bg);
+        svg.path(`M ${w},${H - w} L 0,${H} L 0,0 L ${w},${w} Z`).fill(bg);
+    }
+    // Debug attractors
+    if (params.showAttractors) {
+        const dbg = svg.group();
+        for (const at of allAttractors) {
+            const rVis = Math.min(at.r, diag * 0.5);
+            dbg.circle(rVis * 2).center(at.cx, at.cy)
+                .fill("none").stroke({ color: "#ff0000", width: 2.4 }).opacity(0.6);
+            dbg.circle(9).center(at.cx, at.cy).fill("#ff0000");
+        }
+    }
+}
+// --- Sketch config ---
+const SKETCH_CONFIG = {
+    paper: { width: 75, height: 100, unit: "mm", dpi: 300 },
+    seed: 32,
+    backgroundColor: "#ffffff",
+    showBorder: true,
+    borderRadius: 0,
+    padding: 0,
+};
+// Current param values (from active preset)
+const params = {
+    "shape": "concentric",
+    "layers": 120,
+    "density": 1.5,
+    "preset": "auto",
+    "margin": 28,
+    "colorMode": "bands",
+    "bandSize": 7,
+    "circleRings": 0,
+    "circleRadius": 0.36,
+    "circleRotation": 29.5,
+    "deflate": 0,
+    "fitMargin": 0.13,
+    "showAttractors": false
+};
+// ═══════════════════════════════════════════════════════════════
+// RUNTIME (generative-art-boilerplate)
+// ═══════════════════════════════════════════════════════════════
+const PALETTES_URL = "https://unpkg.com/nice-color-palettes@4.0.0/1000.json";
+let PALETTES = [["#69d2e7", "#a7dbd8", "#e0e4cc", "#f38630", "#fa6900"]];
+const PAPER_PRESETS = {
+    A5: { width: 148, height: 210 }, A4: { width: 210, height: 297 },
+    A3: { width: 297, height: 420 }, A2: { width: 420, height: 594 },
+    letter: { width: 215.9, height: 279.4 }, postcard: { width: 105, height: 148 },
+    square: { width: 210, height: 210 },
+};
+function resolveDimensions(config = {}) {
+    var _a, _b, _c, _d;
+    const unit = (_a = config.unit) !== null && _a !== void 0 ? _a : "mm";
+    const dpi = (_b = config.dpi) !== null && _b !== void 0 ? _b : 300;
+    if (config.preset) {
+        let { width: w, height: h } = PAPER_PRESETS[config.preset];
+        if (config.orientation === "landscape")
+            [w, h] = [h, w];
+        return { widthPx: Math.round((w / 25.4) * dpi), heightPx: Math.round((h / 25.4) * dpi) };
+    }
+    const w = (_c = config.width) !== null && _c !== void 0 ? _c : 85, h = (_d = config.height) !== null && _d !== void 0 ? _d : 120;
+    if (unit === "px")
+        return { widthPx: w, heightPx: h };
+    const toMM = (v) => unit === "cm" ? v * 10 : unit === "in" ? v * 25.4 : v;
+    return { widthPx: Math.round((toMM(w) / 25.4) * dpi), heightPx: Math.round((toMM(h) / 25.4) * dpi) };
+}
+const math = {
+    lerp: (a, b, t) => a + (b - a) * t,
+    clamp: (v, min, max) => Math.min(Math.max(v, min), max),
+    mapRange: (v, iMin, iMax, oMin, oMax) => ((v - iMin) / (iMax - iMin)) * (oMax - oMin) + oMin,
+    inverseLerp: (a, b, v) => a === b ? 0 : Math.min(Math.max((v - a) / (b - a), 0), 1),
+    smoothstep: (e0, e1, x) => { const t = Math.min(Math.max((x - e0) / (e1 - e0), 0), 1); return t * t * (3 - 2 * t); },
+    fract: (x) => x - Math.floor(x),
+    degToRad: (d) => (d * Math.PI) / 180,
+    radToDeg: (r) => (r * 180) / Math.PI,
+    mod: (n, m) => ((n % m) + m) % m,
+    pingpong: (t, len) => { const tt = ((t % (len * 2)) + len * 2) % (len * 2); return len - Math.abs(tt - len); },
+    distance: (x1, y1, x2, y2) => Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2),
+    angle: (x1, y1, x2, y2) => Math.atan2(y2 - y1, x2 - x1),
+};
+function roundedRectPath(width, height, radius, offsetX = 0, offsetY = 0) {
+    const r = Math.min(radius, width / 2, height / 2);
+    return [
+        `M ${r + offsetX},${offsetY}`, `h ${width - 2 * r}`,
+        `a ${r},${r} 0 0 1 ${r},${r}`, `v ${height - 2 * r}`,
+        `a ${r},${r} 0 0 1 -${r},${r}`, `h -${width - 2 * r}`,
+        `a ${r},${r} 0 0 1 -${r},-${r}`, `v -${height - 2 * r}`,
+        `a ${r},${r} 0 0 1 ${r},-${r}`, "z",
+    ].join(" ");
+}
+function mulberry32(seed) {
+    let s = seed | 0;
+    return () => { s = (s + 0x6d2b79f5) | 0; let t = Math.imul(s ^ (s >>> 15), 1 | s); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+}
+function hashString(str) {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+        hash = (hash << 5) - hash + str.charCodeAt(i);
+        hash |= 0;
+    }
+    return hash;
+}
+function createRandom(initialSeed) {
+    let _seed, _prng = Math.random;
+    let _noise2D, _noise3D, _noise4D;
+    function _rebuildNoise() {
+        _noise2D = createNoise2D(_prng);
+        _noise3D = createNoise3D(_prng);
+        _noise4D = createNoise4D(_prng);
+    }
+    function setSeed(seed) {
+        _seed = seed;
+        _prng = mulberry32(typeof seed === "string" ? hashString(seed) : seed);
+        _rebuildNoise();
+    }
+    function value() { return _prng(); }
+    function range(min, max) { return min + value() * (max - min); }
+    function rangeFloor(min, max) { return Math.floor(range(min, max)); }
+    function snap(min, max, step) { return Math.round(range(min, max) / step) * step; }
+    function boolean() { return value() > 0.5; }
+    function chance(p = 0.5) { return value() < p; }
+    function sign() { return value() > 0.5 ? 1 : -1; }
+    function pick(arr) { return arr[rangeFloor(0, arr.length)]; }
+    function shuffle(arr) { const c = [...arr]; for (let i = c.length - 1; i > 0; i--) {
+        const j = rangeFloor(0, i + 1);
+        [c[i], c[j]] = [c[j], c[i]];
+    } return c; }
+    function weighted(weights) { const total = weights.reduce((s, w) => s + w, 0); let r = value() * total; for (let i = 0; i < weights.length; i++) {
+        r -= weights[i];
+        if (r <= 0)
+            return i;
+    } return weights.length - 1; }
+    function weightedSet(set) { return set[weighted(set.map(s => s.weight))].value; }
+    function gaussian(mean = 0, std = 1) { const u1 = value(), u2 = value(); return Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2) * std + mean; }
+    function power(exp) { return Math.pow(value(), exp); }
+    function rangePow(min, max, exp) { return min + (max - min) * Math.pow(value(), exp); }
+    function triangular(min, max, mode) { const u = value(), fc = (mode - min) / (max - min); return u < fc ? min + Math.sqrt(u * (max - min) * (mode - min)) : max - Math.sqrt((1 - u) * (max - min) * (max - mode)); }
+    function perturb(v, amount) { return v + gaussian(0, amount); }
+    function exponential(lambda = 1) { return -Math.log(value()) / lambda; }
+    function poisson(lambda) { const L = Math.exp(-lambda); let k = 0, p = 1; do {
+        k++;
+        p *= value();
+    } while (p > L); return k - 1; }
+    function gamma(shape) { if (shape < 1)
+        return gamma(shape + 1) * Math.pow(value(), 1 / shape); const d = shape - 1 / 3, c = 1 / Math.sqrt(9 * d); for (;;) {
+        let x, v;
+        do {
+            x = gaussian(0, 1);
+            v = 1 + c * x;
+        } while (v <= 0);
+        v = v * v * v;
+        const u = value(), x2 = x * x;
+        if (u < 1 - 0.0331 * (x2 * x2))
+            return d * v;
+        if (Math.log(u) < 0.5 * x2 + d * (1 - v + Math.log(v)))
+            return d * v;
+    } }
+    function beta(a, b) { const x = gamma(a), y = gamma(b); return x / (x + y); }
+    function onCircle(r = 1) { const t = value() * 2 * Math.PI; return [Math.cos(t) * r, Math.sin(t) * r]; }
+    function insideCircle(r = 1) { const d = r * Math.sqrt(value()), t = value() * 2 * Math.PI; return [Math.cos(t) * d, Math.sin(t) * d]; }
+    function onSphere(r = 1) { const u = value(), v = value(), t = 2 * Math.PI * u, p = Math.acos(2 * v - 1); return [Math.sin(p) * Math.cos(t) * r, Math.sin(p) * Math.sin(t) * r, Math.cos(p) * r]; }
+    function insideSphere(r = 1) { const d = r * Math.cbrt(value()); const [x, y, z] = onSphere(1); return [x * d, y * d, z * d]; }
+    function noise2D(x, y, freq = 1, amp = 1) { return _noise2D(x * freq, y * freq) * amp; }
+    function noise3D(x, y, z, freq = 1, amp = 1) { return _noise3D(x * freq, y * freq, z * freq) * amp; }
+    function noise4D(x, y, z, w, freq = 1, amp = 1) { return _noise4D(x * freq, y * freq, z * freq, w * freq) * amp; }
+    function fBm(x, y, octaves = 6, lac = 2, gain = 0.5) { let sum = 0, amp = 1, freq = 1, norm = 0; for (let o = 0; o < octaves; o++) {
+        sum += noise2D(x, y, freq, amp);
+        norm += amp;
+        amp *= gain;
+        freq *= lac;
+    } return sum / norm; }
+    function halton(index, base) { let r = 0, f = 1, i = Math.max(1, Math.floor(index)); while (i > 0) {
+        f /= base;
+        r += f * (i % base);
+        i = Math.floor(i / base);
+    } return r; }
+    function halton2D(index) { return [halton(index, 2), halton(index, 3)]; }
+    function gaussian2D(mx = 0, my = 0, sx = 1, sy = 1, rho = 0) { const x = gaussian(0, 1), z = gaussian(0, 1); return [mx + sx * x, my + sy * (rho * x + Math.sqrt(1 - rho * rho) * z)]; }
+    _rebuildNoise();
+    if (initialSeed !== undefined)
+        setSeed(initialSeed);
+    return { value, range, rangeFloor, snap, boolean, chance, sign, pick, shuffle, weighted, weightedSet,
+        gaussian, power, rangePow, triangular, perturb, exponential, poisson, gamma, beta,
+        onCircle, insideCircle, onSphere, insideSphere,
+        noise2D, noise3D, noise4D, fBm, halton, halton2D, gaussian2D,
+        setSeed, getSeed: () => _seed, getRandomSeed: () => String(Math.floor(Math.random() * 1000000)) };
+}
+function createColorModule(random) {
+    const { interpolate, formatHex, parse, converter, wcagLuminance } = culori;
+    const toOklch = converter("oklch");
+    function palette(index) { const i = index !== undefined ? Math.abs(index) % PALETTES.length : 0; return PALETTES[i]; }
+    function randomPalette() { return palette(random.rangeFloor(0, PALETTES.length)); }
+    function lerpColor(a, b, t, space = "oklch") { var _a; const fn = interpolate([a, b], space); return (_a = formatHex(fn(t))) !== null && _a !== void 0 ? _a : "#000000"; }
+    function gradient(from, to, steps, space = "oklch") { const fn = interpolate([from, to], space); return Array.from({ length: steps }, (_, i) => { var _a; const t = steps <= 1 ? 0 : i / (steps - 1); return (_a = formatHex(fn(t))) !== null && _a !== void 0 ? _a : "#000000"; }); }
+    function lighten(color, amount) { return lerpColor(color, "#ffffff", amount); }
+    function darken(color, amount) { return lerpColor(color, "#000000", amount); }
+    function luminance(color) { const c = parse(color); return c ? wcagLuminance(c) : 0; }
+    function toHex(color) { var _a; return (_a = formatHex(parse(color))) !== null && _a !== void 0 ? _a : "#000000"; }
+    function toOKLCH(color) { var _a, _b; const c = toOklch(color); return { l: (_a = c === null || c === void 0 ? void 0 : c.l) !== null && _a !== void 0 ? _a : 0, c: (_b = c === null || c === void 0 ? void 0 : c.c) !== null && _b !== void 0 ? _b : 0, h: c === null || c === void 0 ? void 0 : c.h }; }
+    return { palette, randomPalette, paletteCount: PALETTES.length, lerp: lerpColor, gradient, lighten, darken, luminance, toHex, toOKLCH };
+}
+// --- Bootstrap ---
+async function boot() {
+    var _a, _b, _c;
+    try {
+        const res = await fetch(PALETTES_URL);
+        if (res.ok)
+            PALETTES = await res.json();
+    }
+    catch (e) { /* fallback to single palette */ }
+    const config = SKETCH_CONFIG;
+    const dims = resolveDimensions(config.paper);
+    const width = dims.widthPx;
+    const height = dims.heightPx;
+    const padding = (_a = config.padding) !== null && _a !== void 0 ? _a : 100;
+    const bgColor = config.backgroundColor;
+    const strokeColor = bgColor === "#000000" ? "#ffffff" : "#000000";
+    const borderRadius = (_b = config.borderRadius) !== null && _b !== void 0 ? _b : 50;
+    const showBorder = (_c = config.showBorder) !== null && _c !== void 0 ? _c : true;
+    const container = document.querySelector(".svg-container");
+    const svg = SVG().addTo(container).size(width, height).viewbox(0, 0, width, height);
+    const random = createRandom(config.seed);
+    const color = createColorModule(random);
+    function clear(drawBorder) {
+        svg.clear();
+        const bgPath = roundedRectPath(width, height, borderRadius, 0, 0);
+        svg.path(bgPath).attr({ fill: bgColor, stroke: "none" });
+        if (drawBorder !== false && showBorder) {
+            const sw = 2, inset = sw / 2;
+            const bPath = roundedRectPath(width - sw, height - sw, borderRadius, inset, inset);
+            svg.path(bPath).attr({ fill: "none", stroke: strokeColor, "stroke-width": sw });
+        }
+    }
+    function drawInnerSquare() {
+        svg.rect(width - 2 * padding, height - 2 * padding)
+            .move(padding, padding).fill("none").stroke({ color: strokeColor, width: 3 });
+    }
+    function regenerate(newSeed) {
+        random.setSeed(newSeed);
+        const ctx = {
+            mode: "2d", svg, params, random, color, math, width, height,
+            innerWidth: width - padding * 2, innerHeight: height - padding * 2,
+            padding, strokeColor, backgroundColor: bgColor,
+            clear, drawInnerSquare,
+            animation: { time: 0, frame: 0, playhead: 0, deltaTime: 0, fps: 60, duration: 0, isPlaying: false },
+            container, signal: (new AbortController()).signal,
+            requestDraw: () => { }, checkpoint: () => Promise.resolve(true),
+        };
+        draw(ctx);
+        document.getElementById("seed-display").textContent = "#" + newSeed;
+    }
+    regenerate(config.seed);
+    document.getElementById("btn-random").addEventListener("click", () => {
+        const s = Math.floor(Math.random() * 1000000);
+        document.getElementById("seed-input").value = s;
+        regenerate(s);
+    });
+    document.getElementById("seed-input").value = config.seed;
+    document.getElementById("seed-input").addEventListener("change", (e) => {
+        regenerate(Number(e.target.value) || 0);
+    });
+}
+boot();
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>
