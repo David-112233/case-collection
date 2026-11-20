@@ -1,0 +1,24 @@
+{
+  "slot_utc": "2026-11-20T18:12:00Z",
+  "candidate_count": 1,
+  "total_if_verified": 280,
+  "formal_admission_excluded": true,
+  "cases": [
+    {
+      "review_no": "C280",
+      "id": "josetxu__GRMdpRM",
+      "url": "https://codepen.io/josetxu/pen/GRMdpRM",
+      "label": "悬挑踏步、斜向凹槽、墙地分层",
+      "original_blob": "220fb7dee62f8ba81fc6a13d39d6883366488900",
+      "derived_blob": "76cb10179ab4102510fe4c381e6c202a12e6c386",
+      "desktop_settled_default_verified": true,
+      "one_time_entrance_sourced": true
+    }
+  ],
+  "excluded": [
+    {
+      "id": "SpeakerClear",
+      "reason": "Public app cloud Chromium reports unable to start WebGL; 3D scene not rendered, despite pinned upstream source and verified licenses."
+    }
+  ]
+}
