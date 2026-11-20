@@ -1,0 +1,14 @@
+{
+  "id": "isaacrowntree__linework_lantern",
+  "url": "https://isaacrowntree.com/linework/",
+  "upstream": "https://github.com/isaacrowntree/linework/tree/5137afd9ada16e5252c2651b14dddd402d52d8bb/docs",
+  "check": "实拖灯笼场景：长横梁相对竖柱的屏幕角度及灯笼轮廓变化，尺寸辅助线和编号保持标注。只评线框空间投影与标注依附，不声称不透明遮挡。",
+  "note": "备选；227/224；依赖原项目相对路径模块及默认 CC0 模型，归档 HTML 不是自包含播放包；未测导入/双击复位。",
+  "format": "Unmodified upstream docs/index.html; modules and model available via pinned docs tree, not vendored.",
+  "upstream_revision": "5137afd9ada16e5252c2651b14dddd402d52d8bb",
+  "upstream_blob_sha": "642680f28c37e804cab90367c3805e17df4245a3",
+  "licence": "MIT source; included notice",
+  "status": "hold",
+  "visual_check": "cloud desktop Chromium",
+  "collected_on": "2026-11-20"
+}

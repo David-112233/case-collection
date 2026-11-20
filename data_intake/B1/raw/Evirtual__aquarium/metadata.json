@@ -1,0 +1,14 @@
+{
+  "id": "Evirtual__aquarium",
+  "url": "https://css3dlab.edgarasneverdauskas.com/models/aquarium/",
+  "upstream": "https://github.com/Evirtual/css-3d-lab/blob/88d044dd0c84baa94f27967f5991b7327fb44317/src/models/snippets-batch-o-aquarium.ts",
+  "check": "两次暂停实见不同鱼位。亮水线、半透明玻璃、砂床和水草同帧可辨；实见蓝鱼在左侧由侧面变为近乎侧缘。鱼之间逐次遮挡未逐项验证。",
+  "note": "优先；224/213；本页公开源码与互动编辑器，暂停由演示外壳提供。",
+  "format": "Pinned MIT model snippet plus a minimal preview wrapper derived from the snippet; original TypeScript retained.",
+  "upstream_revision": "88d044dd0c84baa94f27967f5991b7327fb44317",
+  "upstream_blob_sha": "5bece0fae947a20f4aa6c3a15eec148f6df93b4f",
+  "licence": "MIT source; included notice",
+  "status": "hold",
+  "visual_check": "cloud desktop Chromium",
+  "collected_on": "2026-11-20"
+}
