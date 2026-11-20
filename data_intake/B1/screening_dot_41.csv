@@ -1,0 +1,3 @@
+key,url,decision,tier,hits,reason,js_policy,evidence,notes,decided_on
+RAFA3L__ZEmBzEv,https://codepen.io/RAFA3L/pen/ZEmBzEv,hold,unclassified,spatial_layers,await_user_review,preserve,实测通电后拨盘切换：暖色日落（27°F，山脊遮住太阳下沿）与深蓝夜景（14°F，月亮完整位于山脊之上）；嵌套表圈框住近树、湖、山脊和天体。切换后等画面呈现；其他状态、移动端和外链资源许可未测。,优先，对照 224 / 213；仅候审，未正式入库。,2026-11-20
+manonsmnn__JjLbmge,https://codepen.io/manonsmnn/pen/JjLbmge,hold,unclassified,spatial_layers,await_user_review,preserve,实测连续画面中，折纸双翼先完整在盘左侧，随后被圆盘逐步挡住、完全消失，再从右侧露出。未检验飞至圆盘之前的交叠；不是两稳定态，选两代表帧。不把球盘本身当真实球体几何。,备选，对照 213 / 227；仅候审，未正式入库。,2026-11-20
