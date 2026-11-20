@@ -1,0 +1,3 @@
+key,url,decision,tier,hits,reason,js_policy,evidence,notes,decided_on
+josetxu__RwOrooX,https://codepen.io/josetxu/pen/RwOrooX,hold,unclassified,spatial_layers,await_user_review,none,默认等待开场动画结束后，三块石质折梁的投影端点组成闭合三角错视；鼠标停在主体可保持分开，明确看到三块彼此错开的实体。云端作者原页实测两种稳定画面。,与 C280 同作者，但 C280 为开放式墙面阶梯和地板，不是同一组折梁的投影闭合／分离。,2026-11-20
+pottersson__WNeBLxj,https://codepen.io/pottersson/pen/WNeBLxj,hold,unclassified,spatial_layers,await_user_review,preserve,开场生成后，红绿蓝三条六边环相互遮挡，每条一段在上、一段在下，三个内部孔洞清楚；云端确认完整构图。源码显示稳定后仅底层光晕脉动，环的位置不再改变。,区别于 C284 三块折梁的投影错视：此例为三个平面环在交叉点交替盖住彼此；没有几何分离态。,2026-11-20
