@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>Habbo Hotel Isometric Perspective - 26.565 degrees (arctangent of 0.5).</title>
+
+    <link rel="canonical" href="https://codepen.io/PortalPacific/pen/ZEZJKyv">
+  
+  
+  
+  
+<style>
+.iso.face.bottom {
+  fill: brown;
+}
+
+.iso.outline {
+  stroke: white;
+  fill: none;
+  vector-effect: non-scaling-stroke;
+}
+
+.vis:hover .pipedon:not(:hover) * {
+  opacity: 0.3;
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <svg width="960px" height="500px"></svg><svg width="960px" height="500px"></svg>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js'></script>
+    <script id="rendered-js" >
+(function () {
+  var color, data, enter_pipedons, height, iso_layout, isometric, parallelepipedon, path_generator, pipedons, svg, treemap, vis, width, zoom, zoomable_layer;
+
+  svg = d3.select('svg');
+
+  width = svg.node().getBoundingClientRect().width;
+
+  height = svg.node().getBoundingClientRect().height;
+
+  zoomable_layer = svg.append('g');
+
+  zoom = d3.behavior.zoom().scaleExtent([1.2, 10]).on('zoom', function () {
+    return zoomable_layer.attr({
+      transform: "translate(" + zoom.translate() + ")scale(" + zoom.scale() + ")" });
+
+  });
+
+  svg.call(zoom);
+
+  vis = zoomable_layer.append('g').attr({
+    "class": 'vis',
+    transform: "translate(" + width / 2 + "," + height / 3 + ")" });
+
+
+  isometric = function (_3d_p) {
+    var angle = Math.atan(0.5); // approximately 26.565 degrees
+    var cos_angle = Math.cos(angle);
+    var sin_angle = Math.sin(angle);
+    return [
+    _3d_p[0] * cos_angle - _3d_p[1] * cos_angle,
+    _3d_p[0] * sin_angle + _3d_p[1] * sin_angle - _3d_p[2]];
+
+  };
+
+  parallelepipedon = function (d) {
+    var fb, ft, mlb, mlt, mrb, mrt, nb, nt;
+    if (!(d.x != null)) {
+      d.x = 0;
+    }
+    if (!(d.y != null)) {
+      d.y = 0;
+    }
+    if (!(d.h != null)) {
+      d.h = 0;
+    }
+    if (!(d.dx != null)) {
+      d.dx = 10;
+    }
+    if (!(d.dy != null)) {
+      d.dy = 10;
+    }
+    if (!(d.dh != null)) {
+      d.dh = 10;
+    }
+    fb = isometric([d.x, d.y, d.h], mlb = isometric([d.x + d.dx, d.y, d.h], nb = isometric([d.x + d.dx, d.y + d.dy, d.h], mrb = isometric([d.x, d.y + d.dy, d.h], ft = isometric([d.x, d.y, d.h + d.dh], mlt = isometric([d.x + d.dx, d.y, d.h + d.dh], nt = isometric([d.x + d.dx, d.y + d.dy, d.h + d.dh], mrt = isometric([d.x, d.y + d.dy, d.h + d.dh]))))))));
+    d.iso = {
+      face_bottom: [fb, mrb, nb, mlb],
+      face_left: [mlb, mlt, nt, nb],
+      face_right: [nt, mrt, mrb, nb],
+      face_top: [ft, mrt, nt, mlt],
+      outline: [ft, mrt, mrb, nb, mlb, mlt],
+      far_point: fb };
+
+    return d;
+  };
+
+  iso_layout = function (data, shape, scale) {
+    if (!(scale != null)) {
+      scale = 1;
+    }
+    data.forEach(function (d) {
+      return shape(d, scale);
+    });
+    return data.sort(function (a, b) {
+      return b.dh - a.dh;
+    });
+  };
+
+  path_generator = function (d) {
+    return 'M' + d.map(function (p) {
+      return p.join(' ');
+    }).join('L') + 'z';
+  };
+
+  treemap = d3.layout.treemap().size([300, 300]).value(function (d) {
+    return d.area;
+  }).sort(function (a, b) {
+    return a.dh - b.dh;
+  }).ratio(1).round(false);
+
+  color = d3.scale.category20();
+
+  data = d3.range(30).map(function () {
+    return {
+      area: Math.random(),
+      dh: Math.random() * 150 };
+
+  });
+
+  data = treemap.nodes({
+    children: data }).
+  filter(function (n) {
+    return n.depth === 1;
+  });
+
+  iso_layout(data, parallelepipedon);
+
+  pipedons = vis.selectAll('.pipedon').data(data);
+
+  enter_pipedons = pipedons.enter().append('g').attr({
+    "class": 'pipedon' });
+
+
+  enter_pipedons.append('path').attr({
+    "class": 'iso face bottom',
+    d: function (d) {
+      return path_generator(d.iso.face_bottom);
+    } });
+
+
+  enter_pipedons.append('path').attr({
+    "class": 'iso face left template',
+    d: function (d) {
+      return path_generator(d.iso.face_left);
+    },
+    fill: function (d, i) {
+      return color(i);
+    } });
+
+
+  enter_pipedons.append('path').attr({
+    "class": 'iso face right',
+    d: function (d) {
+      return path_generator(d.iso.face_right);
+    },
+    fill: function (d) {
+      color = d3.hcl(d3.select(this.parentNode).select('.template').style('fill'));
+      return d3.hcl(color.h, color.c, color.l - 12);
+    } });
+
+
+  enter_pipedons.append('path').attr({
+    "class": 'iso face top',
+    d: function (d) {
+      return path_generator(d.iso.face_top);
+    },
+    fill: function (d) {
+      color = d3.hcl(d3.select(this.parentNode).select('.template').style('fill'));
+      return d3.hcl(color.h, color.c, color.l + 12);
+    } });
+
+
+  enter_pipedons.append('path').attr({
+    "class": 'iso outline',
+    d: function (d) {
+      return path_generator(d.iso.outline);
+    } });
+
+
+}).call(this);
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>

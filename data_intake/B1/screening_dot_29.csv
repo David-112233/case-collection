@@ -1,0 +1,7 @@
+key,url,decision,tier,hits,reason,js_policy,evidence,notes,decided_on
+jh3y__JoYmpKp,https://codepen.io/jh3y/pen/JoYmpKp,hold,unclassified,spatial_layers,await_user_review,preserve,实点 reveal：深色立方柱块阵整体升起，下面出现对齐的倾斜坐标网格及 U/V 字样，块阵内部排列保持。可比同一指针位置前后两态；只验证 reveal，不把悬停取样坐标当作已校准。,优先，对照 224/227；仅候审，未正式入库。,2026-11-19
+jh3y__GgJYjXW,https://codepen.io/jh3y/pen/GgJYjXW,hold,unclassified,spatial_layers,await_user_review,preserve,实点 explode，原先仅框内模糊而框外清晰的同一标题拆为上层渐变边、中央暗色底片和下层文字，等过渡结束仍保持。可比较两态；未遍历其他参数。,优先，对照 213/227；仅候审，未正式入库。,2026-11-19
+jh3y__QWELPQg,https://codepen.io/jh3y/pen/QWELPQg,hold,unclassified,spatial_layers,await_user_review,preserve,实勾 Exploded view，保持 Transform style 3D 开启：合拢时多个透绿方片合成一体，拆开时六面仍保持原朝向，顶底和四侧都向外移，投影上仍有交叠。可用同一机位两态评几何；未测关闭 3D 或 Plane 设置。,优先，对照 224/227；仅候审，未正式入库。,2026-11-19
+PortalPacific__ZEZJKyv,https://codepen.io/PortalPacific/pen/ZEZJKyv,hold,unclassified,spatial_layers,await_user_review,preserve,单帧实见彩块以两组斜边方向紧密排布，高绿块顶面与侧面同时可见，浅色窄条从较低前块后方延伸，高块挡住了低块的部分侧面；不测试互动或把作品标题角度当作事后量测。,候选，对照 224/227；仅候审，未正式入库。,2026-11-19
+T0ASTY__KevbBj,https://codepen.io/T0ASTY/pen/KevbBj,hold,unclassified,spatial_layers,await_user_review,preserve,实见屋顶与两面墙之间留缝、窗框线跨出墙边，后续屋顶贴住墙顶、窗框回到墙内。源码为 5 秒循环，不视作点击或稳定完成态；入围后固定两个动画相位观察交接边。,动态候选，对照 213/224；仅候审，未正式入库。,2026-11-19
+jh3y__PoGQgjE,https://codepen.io/jh3y/pen/PoGQgjE,hold,unclassified,spatial_layers,await_user_review,preserve,实点棱柱从 2020 切至 2021，前方面转至另一朝向，彩色烟花亮纹与数字位于棱柱面内，底部光晕另成一层。可比切换前后的前面、顶面和侧面；烟花仍动，只比构图。,候选，对照 213/227；仅候审，未正式入库。,2026-11-19
