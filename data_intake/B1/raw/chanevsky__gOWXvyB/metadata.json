@@ -1,0 +1,68 @@
+{
+  "source_id": "codepen:chanevsky/gowxvyb",
+  "author": "chanevsky",
+  "pen_id": "gOWXvyB",
+  "url": "https://codepen.io/chanevsky/pen/gOWXvyB",
+  "title": "CSS: Photo lens",
+  "acquisition": "cdpn_fullpage_http_srcdoc",
+  "acquisition_url": "https://cdpn.io/chanevsky/fullpage/gOWXvyB",
+  "retrieved_at": "2026-11-20T12:13:54+00:00",
+  "fetch_status": "ok",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "f6f7b4c3365bb8343f01f1a6e2f7a4338202c80f4bdec62353df81da3d22bab6",
+  "source_html_sha256": "6af8fb70f7ace570bef59062a5972a43376038a5c9a18fd01ab741d1ed3a57f2",
+  "license": "CodePen public-pen default; project-specific and external asset licenses not separately verified",
+  "analysis": {
+    "js": {
+      "has_js": false,
+      "inline_js_chars": 0,
+      "external_scripts": [],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 10,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": false,
+      "clip_path": false,
+      "css_counter": false,
+      "media_query": false
+    },
+    "external_stylesheets": [
+      "https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/css/bootstrap.min.css"
+    ],
+    "css_imports": [],
+    "css_chars": 39635,
+    "element_count": 89,
+    "html_chars": 44654
+  },
+  "review": {
+    "label": "摄影镜头、同心嵌套、反射叠层",
+    "evidence": "固定正视图中不透光的外壳与内缘压在有色玻璃外周，多个同心环逐层递进，偏心反射覆盖内环。与整机相机图案不同，是光学组件嵌套。",
+    "visual_verified": true,
+    "surface": "Cloud Chrome CodePen Full Page iframe at 1331x894; photo lens static desktop frame; laptop coherent open frame only",
+    "mobile_verified": false,
+    "external_dependencies_preserved": true,
+    "offline_replay_verified": false,
+    "formal_admission": false
+  }
+}

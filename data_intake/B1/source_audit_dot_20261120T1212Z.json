@@ -1,0 +1,26 @@
+{
+  "slot": "2026-11-20T12:12:24Z",
+  "reviewed_count": 2,
+  "candidates": [
+    {
+      "review_id": "C271",
+      "key": "chanevsky__gOWXvyB",
+      "url": "https://codepen.io/chanevsky/pen/gOWXvyB",
+      "visual_evidence": "固定正视图中不透光的外壳与内缘压在有色玻璃外周，多个同心环逐层递进，偏心反射覆盖内环。与整机相机图案不同，是光学组件嵌套。",
+      "feature": "摄影镜头、同心嵌套、反射叠层"
+    },
+    {
+      "review_id": "C272",
+      "key": "viktorkovalenko__QaGmNq",
+      "url": "https://codepen.io/viktorkovalenko/pen/QaGmNq",
+      "visual_evidence": "仅采用打开时的单帧。屏幕边框覆盖图片边缘，与键盘底座沿横向转轴形成夹角；键帽和触控板嵌于近处面板，可见底壳薄侧边。忽略循环旋转及外部屏幕照片；部分转动角度有穿面伪影。",
+      "feature": "笔记本翻盖、转轴嵌合、屏键转折"
+    }
+  ],
+  "not_counted": {
+    "BXQJoK": "mainly character animation",
+    "RwLLYeL": "thin static composition",
+    "NWjRYJq": "flat facade overlaps too simple"
+  },
+  "no_main_write": true
+}
