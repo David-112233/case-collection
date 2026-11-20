@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>Impossible cube | pure CSS</title>
+
+    <link rel="canonical" href="https://codepen.io/jermin/pen/beXaOx">
+  
+  
+  
+  
+<style>
+body {
+  margin: 0;
+  background: #BADA55;
+  overflow: hidden;
+}
+
+body * {
+  box-sizing: border-box;
+  transform-style: preserve-3d;
+}
+
+.pane, .illusion {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.pane {
+  height: 480px;
+  width: 480px;
+  margin: -240px;
+}
+
+.illusion {
+  height: 240px;
+  width: 240px;
+  margin: -72.2891566265px;
+  transform: rotate(-30deg) rotateY(35.25deg) rotateX(-45deg);
+}
+
+.edge {
+  position: absolute;
+  height: 120px;
+  width: 120px;
+}
+.edge:nth-child(1) {
+  z-index: 3;
+  bottom: 0;
+  right: 0;
+  transform: translateX(8px) translateY(8px);
+}
+.edge:nth-child(2) {
+  z-index: 3;
+  top: 0;
+  right: 0;
+  transform: translateX(8px) translateY(-8px) rotate(-90deg);
+}
+.edge:nth-child(2) .cube .side.right {
+  border-color: #cc4f39;
+}
+.edge:nth-child(2) .cube .end.top {
+  border: 12px solid #993b2b;
+  border-width: 0 16px 16px 0;
+  background: none;
+}
+.edge:nth-child(2) .cube .inner.top, .edge:nth-child(2) .cube .inner.top_ {
+  background: #993b2b;
+}
+.edge:nth-child(2) .cube .inner.back_, .edge:nth-child(2) .cube .inner.left {
+  display: none;
+}
+.edge:nth-child(3) {
+  z-index: 3;
+  bottom: 0;
+  left: 0;
+  transform: translateX(-8px) translateY(8px) rotate(90deg);
+}
+.edge:nth-child(3) .cube .side.bottom {
+  border-color: #993b2b;
+}
+.edge:nth-child(3) .cube .end.left {
+  border: 12px solid #cc4f39;
+  border-width: 0 16px 16px 0;
+  background: none;
+}
+.edge:nth-child(3) .cube .inner.top, .edge:nth-child(3) .cube .inner.back {
+  display: none;
+}
+.edge:nth-child(3) .cube .inner.left, .edge:nth-child(3) .cube .inner.left_ {
+  background: #cc4f39;
+}
+.edge:nth-child(4) {
+  z-index: 2;
+  top: 0;
+  right: 0;
+  transform: translateZ(-16px) translateZ(-120px) translateX(8px) translateY(-8px) rotateX(-180deg);
+}
+.edge:nth-child(4) .cube .side.bottom {
+  border-color: #cc4f39;
+}
+.edge:nth-child(4) .cube .end.left {
+  background: #993b2b;
+}
+.edge:nth-child(4) .cube .inner.left, .edge:nth-child(4) .cube .inner.left_ {
+  background: #993b2b;
+}
+.edge:nth-child(5) {
+  z-index: 2;
+  bottom: 0;
+  left: 0;
+  transform: translateX(-8px) translateZ(-16px) translateZ(-120px) translateY(8px) rotateY(-180deg);
+}
+.edge:nth-child(5) .cube .side.right {
+  border-color: #993b2b;
+}
+.edge:nth-child(6) {
+  z-index: 2;
+  top: 0;
+  left: 0;
+  transform: translateX(-8px) translateZ(-16px) translateZ(-120px) translateY(-8px) rotateY(-180deg) rotate(-90deg);
+}
+.edge:nth-child(6) .cube .side.right {
+  border-color: #cc4f39;
+}
+.edge:nth-child(6) .cube .side.bottom {
+  border-color: #993b2b;
+}
+.edge:nth-child(6) .cube .inner.left_, .edge:nth-child(6) .cube .inner.top_ {
+  display: none;
+}
+.edge:nth-child(6) .cube .end.back {
+  border: 12px solid tomato;
+  border-width: 0 16px 16px 0;
+  background: none;
+}
+.edge:nth-child(7) {
+  bottom: 0;
+  right: 0;
+  transform: translateX(8px) translateZ(-16px) translateZ(-120px) translateY(8px) rotateY(90deg);
+}
+.edge:nth-child(7) .cube .inner.left, .edge:nth-child(7) .cube .inner.left_ {
+  background: tomato;
+}
+.edge:nth-child(7) .cube .inner.back, .edge:nth-child(7) .cube .inner.back_ {
+  background: #993b2b;
+}
+.edge:nth-child(7) .cube .end.back {
+  background: #993b2b;
+}
+.edge:nth-child(7) .cube .end.left {
+  background: tomato;
+}
+.edge .cube {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 120px;
+  width: 120px;
+}
+.edge .cube .side {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 120px;
+  width: 120px;
+}
+.edge .cube .side.front {
+  border: 40px solid tomato;
+  border-width: 0 40px 40px 0;
+  transform: translateZ(60px);
+}
+.edge .cube .side.right {
+  border: 40px solid tomato;
+  border-width: 0 0 40px 40px;
+  transform: rotateY(90deg) translateZ(60px);
+}
+.edge .cube .side.bottom {
+  border: 40px solid tomato;
+  border-width: 40px 40px 0 0;
+  transform: rotateX(-90deg) translateZ(60px);
+}
+.edge .cube .end {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 40px;
+  width: 40px;
+}
+.edge .cube .end.left {
+  top: auto;
+  bottom: 0;
+  background: #993b2b;
+  transform-origin: 0 50%;
+  transform: translateZ(20px) rotateY(-90deg);
+}
+.edge .cube .end.top {
+  left: auto;
+  right: 0;
+  background: #cc4f39;
+  transform-origin: 0 0%;
+  transform: translateZ(20px) rotateX(90deg);
+}
+.edge .cube .end.back {
+  top: auto;
+  bottom: 0;
+  left: auto;
+  right: 0;
+  background: tomato;
+  transform-origin: 0 0%;
+  transform: translateZ(-60px);
+}
+.edge .cube .inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 80px;
+  width: 40px;
+}
+.edge .cube .inner.left {
+  background: #993b2b;
+  transform-origin: 0 50%;
+  transform: translateX(80px) translateZ(20px) rotateY(-90deg);
+}
+.edge .cube .inner.left_ {
+  background: #993b2b;
+  transform-origin: 0 50%;
+  transform: translateY(80px) translateX(80px) translateZ(-20px) rotateY(-90deg) rotate(-90deg);
+}
+.edge .cube .inner.top {
+  background: #cc4f39;
+  transform-origin: 0 0%;
+  transform: translateY(80px) translateX(80px) translateZ(20px) rotate(90deg) rotateY(-90deg);
+}
+.edge .cube .inner.top_ {
+  background: #cc4f39;
+  transform-origin: 0 0%;
+  transform: translateY(80px) translateX(120px) translateZ(20px) rotate(90deg) rotateY(-90deg) rotate(90deg);
+}
+.edge .cube .inner.back {
+  background: tomato;
+  transform-origin: 0 0%;
+  transform: translateY(80px) translateX(80px) translateZ(20px) rotate(90deg);
+}
+.edge .cube .inner.back_ {
+  top: auto;
+  bottom: 0;
+  left: auto;
+  right: 0;
+  background: tomato;
+  transform-origin: 0 0%;
+  transform: translateY(-40px) translateZ(20px);
+}
+.edge .cube .extend {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 120px;
+  width: 120px;
+  z-index: 99;
+}
+.edge .cube .extend .tbr-inner {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 40px;
+  width: 80px;
+}
+.edge .cube .extend .tbr-inner.left {
+  background: #993b2b;
+  transform: translateX(80px) translateZ(20px);
+}
+.edge .cube .extend .tbr-inner.top {
+  background: #cc4f39;
+  transform: translateZ(40px) translateX(80px) translateY(-20px) rotateX(-90deg);
+}
+.edge .cube .extend .tbr-inner._left {
+  background: #993b2b;
+  transform: translateY(60px) translateX(20px) translateZ(20px) rotate(90deg);
+}
+.edge .cube .extend .tbr-inner._top {
+  background: tomato;
+  transform: translateZ(40px) translateY(60px) rotateY(-90deg) rotate(-90deg);
+}
+.edge .cube .extend .tbr-inner.left_ {
+  background: tomato;
+  transform: translateZ(100px) rotateY(90deg);
+}
+.edge .cube .extend .tbr-inner.top_ {
+  background: #cc4f39;
+  transform: translateZ(100px) translateX(20px) translateY(-20px) rotateY(-90deg) rotateX(-90deg);
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  <div class="pane"> 
+  <div class="illusion">
+    <!-- bfr-->
+    <div class="edge">
+      <div class="cube">
+        <div class="side front"></div>
+        <div class="side bottom"></div>
+        <div class="side right"></div>
+        <div class="inner left"></div>
+        <div class="inner top"></div>
+        <div class="inner back"></div>
+        <div class="inner left_"></div>
+        <div class="inner top_"></div>
+        <div class="inner back_"></div>
+        <div class="end left"></div>
+        <div class="end top"></div>
+        <div class="end back"></div>
+        <div class="extend"> 
+        </div>
+      </div>
+    </div>
+    <!-- tfr-->
+    <div class="edge">
+      <div class="cube">
+        <div class="side front"></div>
+        <div class="side bottom"></div>
+        <div class="side right"></div>
+        <div class="inner left"></div>
+        <div class="inner top"></div>
+        <div class="inner back"></div>
+        <div class="inner left_"></div>
+        <div class="inner top_"></div>
+        <div class="inner back_"></div>
+        <div class="end left"></div>
+        <div class="end top"></div>
+        <div class="end back"></div>
+        <div class="extend"> 
+        </div>
+      </div>
+    </div>
+    <!-- bfl-->
+    <div class="edge">
+      <div class="cube">
+        <div class="side front"></div>
+        <div class="side bottom"></div>
+        <div class="side right"></div>
+        <div class="inner left"></div>
+        <div class="inner top"></div>
+        <div class="inner back"></div>
+        <div class="inner left_"></div>
+        <div class="inner top_"></div>
+        <div class="inner back_"></div>
+        <div class="end left"></div>
+        <div class="end top"></div>
+        <div class="end back"></div>
+        <div class="extend"> 
+        </div>
+      </div>
+    </div>
+    <!-- bbr-->
+    <div class="edge">
+      <div class="cube">
+        <div class="side front"></div>
+        <div class="side bottom"></div>
+        <div class="side right"></div>
+        <div class="inner left"></div>
+        <div class="inner top"></div>
+        <div class="inner back"></div>
+        <div class="inner left_"></div>
+        <div class="inner top_"></div>
+        <div class="inner back_"></div>
+        <div class="end left"></div>
+        <div class="end top"></div>
+        <div class="end back"></div>
+        <div class="extend"> 
+        </div>
+      </div>
+    </div>
+    <!-- bbl-->
+    <div class="edge">
+      <div class="cube">
+        <div class="side front"></div>
+        <div class="side bottom"></div>
+        <div class="side right"></div>
+        <div class="inner left"></div>
+        <div class="inner top"></div>
+        <div class="inner back"></div>
+        <div class="inner left_"></div>
+        <div class="inner top_"></div>
+        <div class="inner back_"></div>
+        <div class="end left"></div>
+        <div class="end top"></div>
+        <div class="end back"></div>
+        <div class="extend"> 
+        </div>
+      </div>
+    </div>
+    <!-- tbl-->
+    <div class="edge">
+      <div class="cube">
+        <div class="side front"></div>
+        <div class="side bottom"></div>
+        <div class="side right"></div>
+        <div class="inner left"></div>
+        <div class="inner top"></div>
+        <div class="inner back"></div>
+        <div class="inner left_"></div>
+        <div class="inner top_"></div>
+        <div class="inner back_"></div>
+        <div class="end left"></div>
+        <div class="end top"></div>
+        <div class="end back"></div>
+        <div class="extend"> 
+        </div>
+      </div>
+    </div>
+    <!-- tbr-->
+    <div class="edge">
+      <div class="cube">
+        <div class="side front"></div>
+        <div class="side bottom"></div>
+        <div class="side right"></div>
+        <div class="inner left"></div>
+        <div class="inner top"></div>
+        <div class="inner back"></div>
+        <div class="inner left_"></div>
+        <div class="inner top_"></div>
+        <div class="inner back_"></div>
+        <div class="end left"></div>
+        <div class="end top"></div>
+        <div class="end back"></div>
+        <div class="extend">
+          <div class="tbr-inner left"></div>
+          <div class="tbr-inner top"></div>
+          <div class="tbr-inner left_"></div>
+          <div class="tbr-inner top_"></div>
+          <div class="tbr-inner _left"></div>
+          <div class="tbr-inner _top"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  
+  
+</body>
+
+</html>

@@ -5,16 +5,16 @@
   "url": "https://codepen.io/scootman/pen/wrNdYP",
   "acquisition": "cdpn_fullpage",
   "acquisition_url": "https://cdpn.io/scootman/fullpage/wrNdYP",
-  "retrieved_at": "2026-10-03T15:31:07+00:00",
-  "license": "MIT (CodePen public pen default)",
-  "candidate_target_tier": "T1",
-  "candidate_found_via": "websearch-2026-10-03",
+  "retrieved_at": "2026-11-19T01:12:02+00:00",
+  "license": "未单独核验；外链资源许可另查",
+  "candidate_target_tier": "T6",
+  "candidate_found_via": "public web search: occlusion and interlocking design",
   "fetch_status": "ok",
   "title": "Exploded isometric via CSS 3D transforms",
   "canonical_url": "https://codepen.io/scootman/pen/wrNdYP",
   "codepen_console_shim_removed": 1,
-  "original_srcdoc_sha256": "a7c0f681d0a54e931bf3e666b41f238a1062071fc84c2ae73797b82eac2ee315",
-  "source_html_sha256": "0518d9f547bbc0be89bbde80448aa6a5c72cfaf04eff2642a0fa877abfe478b7",
+  "original_srcdoc_sha256": "64be21733cec6ebf589efa31612a21f80c4071469d37eaf3e8b12e71b968fa7c",
+  "source_html_sha256": "29a4bcdf222a47a99c7b30782b385347393314633db5abe09ea55e2e007efafc",
   "analysis": {
     "js": {
       "has_js": true,
@@ -22,7 +22,7 @@
       "external_scripts": [
         "https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js",
         "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js",
-        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/436544/svg-injector.min.js"
+        "https://assets.codepen.io/436544/svg-injector.min.js"
       ],
       "inline_event_handlers": 0,
       "has_gsap": false,
@@ -58,6 +58,15 @@
     "css_imports": [],
     "css_chars": 26890,
     "element_count": 52,
-    "html_chars": 33436
+    "html_chars": 33417
+  },
+  "review": {
+    "label": "等轴时间轴剖层",
+    "status": "备选",
+    "reference_case": "213/224",
+    "evidence": "时间轴在平面态用边框、色段和标签形成叠层；在中央触发后实见倾转并出现标注，图层间距不及书页案例明显。未测所有标签和主题。",
+    "visual_verified": true,
+    "surface": "Cloud Chromium, CodePen Full Page default or stated interaction; desktop only",
+    "formal_admission": false
   }
 }

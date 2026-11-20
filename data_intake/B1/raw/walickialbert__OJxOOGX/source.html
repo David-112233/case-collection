@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>CSS Art - School Building - Fully Responsive</title>
+
+    <link rel="canonical" href="https://codepen.io/walickialbert/pen/OJxOOGX">
+  
+  <link rel="stylesheet" href="https://public.codepenassets.com/css/reset-2.0.min.css">
+
+  
+  
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: column;
+  height: 100vh;
+  background: #80cec1;
+}
+
+.body {
+  position: relative;
+  z-index: 1;
+  width: calc(72 * 1.3vmin);
+  height: calc(35 * 1.3vmin);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: column;
+}
+
+.base {
+  width: 100%;
+  height: calc(19 * 1.3vmin);
+  background: #ffd04c;
+}
+
+.roof {
+  border-bottom: calc(6 * 1.3vmin) solid #545454;
+  border-left: calc(4 * 1.3vmin) solid transparent;
+  border-right: calc(4 * 1.3vmin) solid transparent;
+  height: 0;
+  width: calc(100% - 10 * 1.3vmin);
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+}
+.roof .chimney {
+  position: absolute;
+  width: calc(2 * 1.3vmin);
+  height: calc(2.5 * 1.3vmin);
+  background: #6e6e6e;
+  bottom: 0;
+}
+.roof .chimney:before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: calc(-0.25 * 1.3vmin);
+  background: #545454;
+  width: calc(2.5 * 1.3vmin);
+  height: calc(0.5 * 1.3vmin);
+}
+.roof .chimney:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: calc(-0.25 * 1.3vmin);
+  background: #7a7a7a;
+  width: calc(2.5 * 1.3vmin);
+  height: calc(0.5 * 1.3vmin);
+}
+.roof .chimney1 {
+  left: calc(7 * 1.3vmin);
+}
+.roof .chimney2 {
+  left: calc(20 * 1.3vmin);
+}
+.roof .chimney3 {
+  right: calc(20 * 1.3vmin);
+}
+.roof .chimney4 {
+  right: calc(7 * 1.3vmin);
+}
+
+.tower {
+  width: calc(9 * 1.3vmin);
+  height: calc(22 * 1.3vmin);
+  background: #fdc147;
+  position: absolute;
+  bottom: 0;
+  z-index: 1;
+}
+.tower.tower1 {
+  left: 0;
+}
+.tower.tower2 {
+  right: 0;
+}
+.tower .towerRoof {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 calc(5 * 1.3vmin) calc(5 * 1.3vmin) calc(5 * 1.3vmin);
+  border-color: transparent transparent #6e6e6e transparent;
+  position: absolute;
+  top: calc(-5 * 1.3vmin);
+  left: calc(-0.5 * 1.3vmin);
+}
+.tower .towerRoof .spike {
+  position: absolute;
+  left: calc(-0.25 * 1.3vmin);
+  bottom: calc(-0.25 * 1.3vmin);
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 calc(0.25 * 1.3vmin) calc(1.5 * 1.3vmin) calc(0.25 * 1.3vmin);
+  border-color: transparent transparent #6e6e6e transparent;
+}
+.tower .towerRoof .window {
+  position: absolute;
+  bottom: calc(-4 * 1.3vmin);
+  left: calc(-0.75 * 1.3vmin);
+  width: calc(1.5 * 1.3vmin);
+  height: calc(2 * 1.3vmin);
+  background: #474747;
+  border: calc(0.25 * 1.3vmin) solid #fff5cf;
+  opacity: 0.8;
+}
+.tower .towerRoof .window:before {
+  content: "";
+  position: absolute;
+  height: calc(0.25 * 1.3vmin);
+  width: 100%;
+  background: #fff5cf;
+  left: 0;
+  top: calc(0.625 * 1.3vmin);
+}
+.tower .towerRoof .window:after {
+  content: "";
+  position: absolute;
+  width: calc(0.25 * 1.3vmin);
+  height: 100%;
+  background: #fff5cf;
+  left: calc(0.375 * 1.3vmin);
+  top: 0;
+}
+
+.towerBase {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+.towerBase .floor {
+  height: calc(7.3 * 1.3vmin);
+  width: 100%;
+  position: relative;
+}
+.towerBase .floor1:before {
+  content: "";
+  position: absolute;
+  height: calc(0.5 * 1.3vmin);
+  width: 100%;
+  background: #f5a21c;
+}
+.towerBase .floor2:before {
+  content: "";
+  position: absolute;
+  top: calc(-0.5 * 1.3vmin);
+  height: calc(0.75 * 1.3vmin);
+  width: 100%;
+  background: #f5a21c;
+}
+.towerBase .floor3:before {
+  content: "";
+  position: absolute;
+  top: calc(-0.5 * 1.3vmin);
+  height: calc(0.75 * 1.3vmin);
+  width: 100%;
+  background: #f5a21c;
+}
+.towerBase .towerWindow {
+  position: absolute;
+  top: calc(1 * 1.3vmin);
+  left: calc(2 * 1.3vmin);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: calc(5 * 1.3vmin);
+  height: calc(5 * 1.3vmin);
+  border: calc(0.5 * 1.3vmin) solid #fff5cf;
+}
+.towerBase .towerWindow:before {
+  content: "";
+  position: absolute;
+  width: calc(4.8 * 1.3vmin);
+  height: calc(4.8 * 1.3vmin);
+  border: 5px dotted #fff5cf;
+  border-top: none;
+  border-bottom: none;
+}
+.towerBase .towerWindow .window {
+  width: 50%;
+  height: 50%;
+  display: flex;
+  background: #545454;
+}
+.towerBase .towerWindow .window:nth-of-type(1) {
+  border: calc(0.25 * 1.3vmin) solid #fff5cf;
+  border-top: none;
+  border-left: none;
+}
+.towerBase .towerWindow .window:nth-of-type(2) {
+  border: calc(0.25 * 1.3vmin) solid #fff5cf;
+  border-top: none;
+  border-right: none;
+}
+.towerBase .towerWindow .window:nth-of-type(3) {
+  border: calc(0.25 * 1.3vmin) solid #fff5cf;
+  border-bottom: none;
+  border-left: none;
+}
+.towerBase .towerWindow .window:nth-of-type(4) {
+  border: calc(0.25 * 1.3vmin) solid #fff5cf;
+  border-bottom: none;
+  border-right: none;
+}
+.towerBase .towerWindow .window span {
+  width: 50%;
+  height: 100%;
+  display: block;
+  position: relative;
+}
+.towerBase .towerWindow .window span:nth-of-type(1) {
+  border-right: calc(0.125 * 1.3vmin) solid #fff5cf;
+}
+.towerBase .towerWindow .window span:nth-of-type(2) {
+  border-left: calc(0.125 * 1.3vmin) solid #fff5cf;
+}
+.towerBase .towerWindow .window span:before {
+  content: "";
+  position: absolute;
+  height: calc(0.0675 * 1.3vmin);
+  width: 100%;
+  background: #fff5cf;
+  left: 0;
+  top: calc(0.825 * 1.3vmin);
+}
+
+.base {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  padding: 0 calc(9 * 1.3vmin);
+}
+.base:before {
+  content: "";
+  top: calc(-0.6 * 1.3vmin);
+  left: 0;
+  position: absolute;
+  width: 100%;
+  height: calc(1.2 * 1.3vmin);
+  background: linear-gradient(#fff 60%, rgba(255, 255, 255, 0.5) 60%);
+}
+.base .section {
+  height: 100%;
+  background: #ffb32a;
+}
+.base .section.section1, .base .section.section3 {
+  width: calc(16 * 1.3vmin);
+}
+.base .section.section2 {
+  width: calc(100% - (2 * (16 * 1.3vmin)));
+}
+.base .section .floor1 {
+  height: calc(100% - 2 * (7.3 * 1.3vmin));
+  width: 100%;
+}
+.base .section .floor2 {
+  height: calc(7.3 * 1.3vmin);
+  width: 100%;
+  position: relative;
+}
+.base .section .floor2:before {
+  content: "";
+  position: absolute;
+  top: calc(-0.5 * 1.3vmin);
+  height: calc(0.75 * 1.3vmin);
+  width: 100%;
+  background: #f5a21c;
+}
+.base .section .floor3 {
+  height: calc(7.3 * 1.3vmin);
+  width: 100%;
+  position: relative;
+}
+.base .section .floor3:before {
+  content: "";
+  position: absolute;
+  top: calc(-0.5 * 1.3vmin);
+  height: calc(0.75 * 1.3vmin);
+  width: 100%;
+  background: #f5a21c;
+}
+.base .section .floor {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.base .section .floor .window {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: calc(2.5 * 1.3vmin);
+  height: calc(5 * 1.3vmin);
+  border: calc(0.5 * 1.3vmin) solid #fff5cf;
+  position: relative;
+  background: #545454;
+}
+.base .section .floor .window:before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: calc(0.25 * 1.3vmin);
+  background: #fff5cf;
+  left: calc(0.625 * 1.3vmin);
+  top: 0;
+}
+.base .section .floor .window:after {
+  content: "";
+  position: absolute;
+  height: calc(0.25 * 1.3vmin);
+  width: 100%;
+  background: #fff5cf;
+  left: 0;
+  top: calc(2 * 1.3vmin);
+}
+.base .section.section1 .floor1, .base .section.section3 .floor1 {
+  position: relative;
+}
+.base .section.section1 .floor1 .window, .base .section.section3 .floor1 .window {
+  top: calc(-1.5 * 1.3vmin);
+}
+.base .section.section1 .windowSmall, .base .section.section3 .windowSmall {
+  position: absolute;
+}
+.base .section .windowSmall {
+  width: calc(1.5 * 1.3vmin);
+  height: calc(2 * 1.3vmin);
+  background: #474747;
+  border: calc(0.25 * 1.3vmin) solid #fff5cf;
+  opacity: 0.8;
+}
+.base .section .windowSmall:before {
+  content: "";
+  position: absolute;
+  height: calc(0.25 * 1.3vmin);
+  width: 100%;
+  background: #fff5cf;
+  left: 0;
+  top: calc(0.625 * 1.3vmin);
+}
+.base .section .windowSmall:after {
+  content: "";
+  position: absolute;
+  width: calc(0.25 * 1.3vmin);
+  height: 100%;
+  background: #fff5cf;
+  left: calc(0.375 * 1.3vmin);
+  top: 0;
+}
+.base .section .windowSmall.windowSmall1 {
+  bottom: calc(1.2 * 1.3vmin);
+  left: calc(1.8 * 1.3vmin);
+}
+.base .section .windowSmall.windowSmall2 {
+  bottom: calc(1.2 * 1.3vmin);
+  right: calc(1.8 * 1.3vmin);
+}
+.base .section.section2 .windowSmall {
+  position: relative;
+}
+.base .section.section2 .windowPlaceholder,
+.base .section.section2 .windowWrapper {
+  width: calc(4.5 * 1.3vmin);
+}
+.base .section.section2 .centerWindow {
+  top: calc(-2 * 1.3vmin);
+  left: calc(0.25 * 1.3vmin);
+  width: calc(4 * 1.3vmin);
+  height: calc(9 * 1.3vmin);
+  border: calc(0.5 * 1.3vmin) solid #fff5cf;
+  position: relative;
+  background: #545454;
+  border-top-right-radius: calc(3 * 1.3vmin);
+  border-top-left-radius: calc(3 * 1.3vmin);
+}
+.base .section.section2 .centerWindow .v {
+  position: absolute;
+  top: 0;
+  left: calc(1.4 * 1.3vmin);
+  width: calc(0.25 * 1.3vmin);
+  height: 100%;
+  background: #fff5cf;
+}
+.base .section.section2 .centerWindow .h {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: calc(0.25 * 1.3vmin);
+  background: #fff5cf;
+}
+.base .section.section2 .centerWindow .h.h1 {
+  top: calc(2 * 1.3vmin);
+}
+.base .section.section2 .centerWindow .h.h2 {
+  top: calc(4 * 1.3vmin);
+}
+.base .section.section2 .centerWindow .h.h3 {
+  bottom: calc(2 * 1.3vmin);
+}
+.base .section.section2 .doors {
+  position: relative;
+  top: calc(0.6 * 1.3vmin);
+  width: calc(4.5 * 1.3vmin);
+  height: calc(6 * 1.3vmin);
+}
+.base .section.section2 .doors:before {
+  content: "";
+  position: absolute;
+  top: calc(-0.5 * 1.3vmin);
+  left: calc(-0.5 * 1.3vmin);
+  z-index: 0;
+  background: #fff;
+  width: calc(5.5 * 1.3vmin);
+  height: calc(6.5 * 1.3vmin);
+  border-top-right-radius: calc(3 * 1.3vmin);
+  border-top-left-radius: calc(3 * 1.3vmin);
+}
+.base .section.section2 .doors:after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  background: #ffe499;
+  width: calc(4.5 * 1.3vmin);
+  height: calc(6 * 1.3vmin);
+  border-top-right-radius: calc(3 * 1.3vmin);
+  border-top-left-radius: calc(3 * 1.3vmin);
+}
+.base .section.section2 .doors span {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: calc(0.125 * 1.3vmin);
+  height: 100%;
+  background: #545454;
+  z-index: 2;
+  top: 0;
+}
+.base .section.section2 .doors span:after {
+  content: "";
+  position: absolute;
+  width: calc(0.5 * 1.3vmin);
+  height: calc(0.5 * 1.3vmin);
+  border-radius: 50%;
+  left: 1.3vmin;
+  top: calc(3 * 1.3vmin);
+  background: #545454;
+}
+.base .section.section2 .doors span:before {
+  content: "";
+  position: absolute;
+  width: calc(0.5 * 1.3vmin);
+  height: calc(0.5 * 1.3vmin);
+  border-radius: 50%;
+  right: 1.3vmin;
+  top: calc(3 * 1.3vmin);
+  background: #545454;
+}
+.base .miniTower {
+  position: absolute;
+  top: calc(-2.5 * 1.3vmin);
+  left: calc(5.5 * 1.3vmin);
+  width: calc(5 * 1.3vmin);
+  height: calc(6 * 1.3vmin);
+  background: #fdb22a;
+}
+.base .miniTower:before {
+  content: "";
+  position: absolute;
+  top: calc(-2.5 * 1.3vmin);
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 calc(2.5 * 1.3vmin) calc(2.5 * 1.3vmin) calc(2.5 * 1.3vmin);
+  border-color: transparent transparent #fdb22a transparent;
+  z-index: 3;
+}
+.base .miniTower:after {
+  content: "";
+  position: absolute;
+  top: calc(-3 * 1.3vmin);
+  left: calc(-0.5 * 1.3vmin);
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 calc(3 * 1.3vmin) calc(3 * 1.3vmin) calc(3 * 1.3vmin);
+  border-color: transparent transparent #6e6e6e transparent;
+  z-index: 2;
+}
+
+.front .triangle {
+  position: absolute;
+  top: calc(8.5 * 1.3vmin);
+  left: calc(50% - 10 *1.3vmin);
+}
+.front .triangle .tr1 {
+  position: absolute;
+  top: calc(-0.5 * 1.3vmin);
+  left: calc(-2 * 1.3vmin);
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 calc(12 * 1.3vmin) calc(7 * 1.3vmin) calc(12 * 1.3vmin);
+  border-color: transparent transparent #fff transparent;
+  z-index: 1;
+}
+.front .triangle .tr2 {
+  position: absolute;
+  top: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 calc(10 * 1.3vmin) calc(6 * 1.3vmin) calc(10 * 1.3vmin);
+  border-color: transparent transparent #ffc319 transparent;
+  z-index: 2;
+}
+.front .triangle .tr3 {
+  position: absolute;
+  top: calc(1 * 1.3vmin);
+  left: calc(2 * 1.3vmin);
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 calc(8 * 1.3vmin) calc(5 * 1.3vmin) calc(8 * 1.3vmin);
+  border-color: transparent transparent #ffd04c transparent;
+  z-index: 3;
+}
+.front .triangle .clock {
+  width: calc(3 * 1.3vmin);
+  height: calc(3 * 1.3vmin);
+  border-radius: 50%;
+  border: calc(0.25 * 1.3vmin) solid #545454;
+  background: #fff;
+  position: absolute;
+  left: calc(8.5 * 1.3vmin);
+  top: calc(2 * 1.3vmin);
+  z-index: 5;
+}
+.front .triangle .clock .clockHand1 {
+  width: 1.3vmin;
+  height: calc(0.25 * 1.3vmin);
+  background: #545454;
+  position: absolute;
+  top: calc(50% - 0.25 * 1.3vmin);
+  left: calc(50% - 0 * 1.3vmin);
+  transform-origin: left;
+  transform: rotate(15deg);
+}
+.front .triangle .clock .clockHand2 {
+  width: 1.3vmin;
+  height: calc(0.25 * 1.3vmin);
+  background: #545454;
+  position: absolute;
+  top: calc(50% - 0.25 * 1.3vmin);
+  left: calc(50% - 0 * 1.3vmin);
+  transform-origin: left;
+  transform: rotate(135deg);
+}
+.front .mainTower {
+  position: absolute;
+  top: calc(4 * 1.3vmin);
+  left: calc(50% - 2.5 * 1.3vmin);
+  width: calc(5 * 1.3vmin);
+  height: calc(6 * 1.3vmin);
+  background: #ffd04c;
+}
+.front .mainTower:before {
+  content: "";
+  top: 0;
+  left: calc(-0.5 * 1.3vmin);
+  position: absolute;
+  width: calc(100% + 1.3vmin);
+  height: calc(0.8 * 1.3vmin);
+  background: linear-gradient(#fff 60%, rgba(255, 255, 255, 0.5) 60%);
+}
+.front .mainTower .windowSmall {
+  position: absolute;
+  top: calc(1.5 * 1.3vmin);
+  left: calc(1.5 * 1.3vmin);
+  width: calc(1.5 * 1.3vmin);
+  height: calc(2 * 1.3vmin);
+  background: #474747;
+  border: calc(0.25 * 1.3vmin) solid #fff5cf;
+  opacity: 0.8;
+}
+.front .mainTower .windowSmall:before {
+  content: "";
+  position: absolute;
+  height: calc(0.25 * 1.3vmin);
+  width: 100%;
+  background: #fff5cf;
+  left: 0;
+  top: calc(0.625 * 1.3vmin);
+}
+.front .mainTower .windowSmall:after {
+  content: "";
+  position: absolute;
+  width: calc(0.25 * 1.3vmin);
+  height: 100%;
+  background: #fff5cf;
+  left: calc(0.375 * 1.3vmin);
+  top: 0;
+}
+.front .towerRoof {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 calc(2.5 * 1.3vmin) calc(2 * 1.3vmin) calc(2.5 * 1.3vmin);
+  position: absolute;
+  top: calc(-2 * 1.3vmin);
+  border-color: transparent transparent #545454 transparent;
+}
+.front .towerRoof .mast {
+  position: absolute;
+  width: calc(0.125 * 1.3vmin);
+  height: calc(3 * 1.3vmin);
+  background: #545454;
+  top: calc(-2 * 1.3vmin);
+  left: calc(-0.1 * 1.3vmin);
+}
+.front .towerRoof .flag {
+  width: calc(2 * 1.3vmin);
+  height: 1.3vmin;
+  background: red;
+  position: absolute;
+  top: calc(-2 * 1.3vmin);
+  left: 0;
+}
+
+.columns {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  bottom: 0px;
+  height: calc(20 * 1.3vmin);
+  width: calc(24 * 1.3vmin);
+  z-index: 5;
+}
+.columns:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: calc(0.5 * 1.3vmin);
+  top: 0;
+  background: #e6e6e6;
+}
+.columns .column {
+  width: calc(2.5 * 1.3vmin);
+  height: 100%;
+  background: linear-gradient(90deg, #fde1b7 40%, #fff0d7 40%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.columns .column .top {
+  width: calc(4 * 1.3vmin);
+  height: calc(1.5 * 1.3vmin);
+  background: #fff;
+  position: relative;
+  left: calc(-0.75 * 1.3vmin);
+  border-radius: 1.3vmin;
+}
+.columns .column .top:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: calc(4 * 1.3vmin);
+  height: calc(0.5 * 1.3vmin);
+  background: #e6e6e6;
+}
+.columns .column .bottom {
+  width: calc(4 * 1.3vmin);
+  height: calc(1.5 * 1.3vmin);
+  background: #fff;
+  position: relative;
+  left: calc(-0.75 * 1.3vmin);
+  border-radius: 1.3vmin;
+}
+.columns .column .bottom:before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  width: calc(4 * 1.3vmin);
+  height: calc(0.5 * 1.3vmin);
+  background: #e6e6e6;
+}
+
+.shadowWrapper {
+  width: 100%;
+  height: calc(19 * 1.3vmin);
+  position: absolute;
+  overflow: hidden;
+  pointer-events: none;
+}
+.shadowWrapper .shadow1 {
+  position: absolute;
+  right: calc(-6 * 1.3vmin);
+  top: calc(6 * 1.3vmin);
+  height: calc(30 * 1.3vmin);
+  width: calc(34 * 1.3vmin);
+  background: rgba(0, 0, 0, 0.15);
+  transform: rotate(-45deg);
+}
+.shadowWrapper .shadow2 {
+  position: absolute;
+  right: calc(-1 * 1.3vmin);
+  top: calc(-6 * 1.3vmin);
+  height: calc(16 * 1.3vmin);
+  width: calc(75 * 1.3vmin);
+  background: rgba(0, 0, 0, 0.15);
+  transform: rotate(-45deg);
+}
+
+.ground {
+  height: calc(4 * 1.3vmin);
+  width: 100%;
+  background: linear-gradient(#aab32c 40%, #545454 40%);
+  position: relative;
+  z-index: 2;
+}
+.ground .path {
+  width: calc(5 * 1.3vmin);
+  height: calc(3 * 1.3vmin);
+  background: #545454;
+  margin: 0 auto;
+}
+.ground .tree {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  height: calc(var(--tree-size) * 1.666);
+  width: var(--tree-size);
+  position: absolute;
+}
+.ground .tree .treeBody {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+.ground .tree .trunk {
+  height: calc(var(--tree-size) / 3);
+  width: calc(var(--tree-size) / 7.5);
+  background-color: #523b36;
+}
+.ground .tree.tree1 {
+  --tree-size: calc(6 * 1.3vmin);
+  top: calc(-9 * 1.3vmin);
+  left: calc(50% - 10 * 1.3vmin);
+}
+.ground .tree.tree1 .top {
+  position: absolute;
+  width: calc(var(--tree-size) / 1.2);
+  height: calc(var(--tree-size) / 1.2);
+  left: calc((var(--tree-size) / 1.2) / 3);
+  bottom: calc(var(--tree-size) / 4);
+  border-radius: 50%;
+  background: #26713b;
+  z-index: 5;
+}
+.ground .tree.tree1 .mid {
+  position: absolute;
+  width: calc(var(--tree-size) / 1.2);
+  height: calc(var(--tree-size) / 1.2);
+  right: calc((var(--tree-size) / 1.2) / 3);
+  bottom: calc(var(--tree-size) / 4);
+  border-radius: 50%;
+  background: #1a4b27;
+  z-index: 4;
+}
+.ground .tree.tree1 .bottom {
+  position: absolute;
+  width: calc(var(--tree-size) / 1.2);
+  height: calc(var(--tree-size) / 1.2);
+  bottom: calc(var(--tree-size) / 1.5);
+  border-radius: 50%;
+  background: #32994e;
+  z-index: 3;
+}
+.ground .tree.tree2 {
+  --tree-size: calc(6 * 1.3vmin);
+  top: calc(-9 * 1.3vmin);
+  left: calc(50% + 9 * 1.3vmin);
+}
+.ground .tree.tree2 .top {
+  position: absolute;
+  width: calc(var(--tree-size) / 1.2);
+  height: calc(var(--tree-size) / 1.2);
+  left: calc((var(--tree-size) / 1.2) / 3);
+  bottom: calc(var(--tree-size) / 4);
+  border-radius: 50%;
+  background: #5aab61;
+  z-index: 5;
+}
+.ground .tree.tree2 .mid {
+  position: absolute;
+  width: calc(var(--tree-size) / 1.2);
+  height: calc(var(--tree-size) / 1.2);
+  right: calc((var(--tree-size) / 1.2) / 3);
+  bottom: calc(var(--tree-size) / 4);
+  border-radius: 50%;
+  background: #30694b;
+  z-index: 4;
+}
+.ground .tree.tree2 .bottom {
+  position: absolute;
+  width: calc(var(--tree-size) / 1.2);
+  height: calc(var(--tree-size) / 1.2);
+  bottom: calc(var(--tree-size) / 1.5);
+  border-radius: 50%;
+  background: #1a4b27;
+  z-index: 3;
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  <!-- Inspiration
+https://graphicriver.net/item/school-building-flat-style-vector-illustration/17365630?ref=gvector -->
+
+<!-- My Blog: https://albertwalicki.com/ -->
+
+<div class="body">
+  <div class="roof">
+    <div class="chimney chimney1"></div>
+    <div class="chimney chimney2"></div>
+    <div class="chimney chimney3"></div>
+    <div class="chimney chimney4"></div>
+  </div>
+  <div class="base">
+    <div class="section section1">
+      <div class="floor floor1">
+        <div class="miniTower">
+
+        </div>
+        <div class="windowSmall windowSmall1"></div>
+        <div class="window"></div>
+        <div class="windowSmall windowSmall2"></div>
+      </div>
+      <div class="floor floor2">
+        <div class="window"></div>
+        <div class="window"></div>
+        <div class="window"></div>
+      </div>
+      <div class="floor floor3">
+        <div class="window"></div>
+        <div class="window"></div>
+        <div class="window"></div>
+      </div>
+    </div>
+    <div class="section section2">
+      <div class="floor floor1">
+        <div class="windowSmall"></div>
+        <div class="windowPlaceholder"></div>
+        <div class="windowSmall"></div>
+      </div>
+      <div class="floor floor2">
+        <div class="window"></div>
+        <div class="windowWrapper">
+          <div class="centerWindow">
+            <span class="v"></span>
+            <span class="h h1"></span>
+            <span class="h h2"></span>
+            <span class="h h3"></span>
+          </div>
+        </div>
+        <div class="window"></div>
+      </div>
+      <div class="floor floor3">
+        <div class="window"></div>
+        <div class="doors">
+          <span></span>
+        </div>
+        <div class="window"></div>
+      </div>
+    </div>
+    <div class="section section3">
+      <div class="floor floor1">
+        <div class="miniTower">
+
+        </div>
+        <div class="windowSmall windowSmall1"></div>
+        <div class="window"></div>
+        <div class="windowSmall windowSmall2"></div>
+      </div>
+      <div class="floor floor2">
+        <div class="window"></div>
+        <div class="window"></div>
+        <div class="window"></div>
+      </div>
+      <div class="floor floor3">
+        <div class="window"></div>
+        <div class="window"></div>
+        <div class="window"></div>
+      </div>
+    </div>
+  </div>
+  <div class="front">
+    <div class="mainTower">
+      <div class="windowSmall"></div>
+      <div class="towerRoof">
+        <span class="mast"></span>
+        <span class="flag"></span>
+      </div>
+    </div>
+    <div class="triangle">
+      <div class="tr1"></div>
+      <div class="tr2"></div>
+      <div class="tr3"></div>
+      <div class="clock">
+        <span class="clockHand1"></span>
+        <span class="clockHand2"></span>
+      </div>
+    </div>
+  </div>
+  <div class="columns">
+    <div class="column">
+      <div class="top"></div>
+      <div class="bottom"></div>
+    </div>
+    <div class="column">
+      <div class="top"></div>
+      <div class="bottom"></div>
+    </div>
+    <div class="column">
+      <div class="top"></div>
+      <div class="bottom"></div>
+    </div>
+    <div class="column">
+      <div class="top"></div>
+      <div class="bottom"></div>
+    </div>
+  </div>
+  <div class="tower tower1">
+    <div class="towerBase">
+      <div class="floor floor1">
+        <div class="towerWindow">
+          <span class="window">
+            <span></span>
+            <span></span>
+          </span>
+          <span class="window">
+            <span></span>
+            <span></span>
+          </span>
+          <span class="window">
+            <span></span>
+            <span></span>
+          </span>
+          <span class="window">
+            <span></span>
+            <span></span>
+          </span>
+        </div>
+      </div>
+      <div class="floor floor2">
+        <div class="towerWindow">
+          <span class="window">
+            <span></span>
+            <span></span>
+          </span>
+          <span class="window">
+            <span></span>
+            <span></span>
+          </span>
+          <span class="window">
+            <span></span>
+            <span></span>
+          </span>
+          <span class="window">
+            <span></span>
+            <span></span>
+          </span>
+        </div>
+      </div>
+      <div class="floor floor3">
+        <div class="towerWindow">
+          <span class="window">
+            <span></span>
+            <span></span>
+          </span>
+          <span class="window">
+            <span></span>
+            <span></span>
+          </span>
+          <span class="window">
+            <span></span>
+            <span></span>
+          </span>
+          <span class="window">
+            <span></span>
+            <span></span>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="towerRoof">
+      <span class="spike"></span>
+      <span class="window"></span>
+    </div>
+  </div>
+  <div class="tower tower2">
+    <div class="towerBase">
+      <div class="floor floor1">
+        <div class="towerWindow">
+          <span class="window">
+            <span></span>
+            <span></span>
+          </span>
+          <span class="window">
+            <span></span>
+            <span></span>
+          </span>
+          <span class="window">
+            <span></span>
+            <span></span>
+          </span>
+          <span class="window">
+            <span></span>
+            <span></span>
+          </span>
+        </div>
+      </div>
+      <div class="floor floor2">
+        <div class="towerWindow">
+          <span class="window">
+            <span></span>
+            <span></span>
+          </span>
+          <span class="window">
+            <span></span>
+            <span></span>
+          </span>
+          <span class="window">
+            <span></span>
+            <span></span>
+          </span>
+          <span class="window">
+            <span></span>
+            <span></span>
+          </span>
+        </div>
+      </div>
+      <div class="floor floor3">
+        <div class="towerWindow">
+          <span class="window">
+            <span></span>
+            <span></span>
+          </span>
+          <span class="window">
+            <span></span>
+            <span></span>
+          </span>
+          <span class="window">
+            <span></span>
+            <span></span>
+          </span>
+          <span class="window">
+            <span></span>
+            <span></span>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="towerRoof">
+      <span class="spike"></span>
+      <span class="window"></span>
+    </div>
+  </div>
+  <div class="shadowWrapper">
+    <div class="shadow1"></div>
+    <div class="shadow2"></div>
+  </div>
+</div>
+<div class="ground">
+  <div class="path"></div>
+  <div class="tree tree1">
+    <div class="treeBody">
+      <div class="top"></div>
+      <div class="mid"></div>
+      <div class="bottom"></div>
+    </div>
+    <div class="trunk"></div>
+  </div>
+  <div class="tree tree2">
+    <div class="treeBody">
+      <div class="top"></div>
+      <div class="mid"></div>
+      <div class="bottom"></div>
+    </div>
+    <div class="trunk"></div>
+  </div>
+</div>
+  
+  
+  
+</body>
+
+</html>

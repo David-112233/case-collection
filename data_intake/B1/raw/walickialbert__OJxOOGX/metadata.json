@@ -1,0 +1,70 @@
+{
+  "source_id": "codepen:walickialbert/ojxoogx",
+  "author": "walickialbert",
+  "pen_id": "OJxOOGX",
+  "url": "https://codepen.io/walickialbert/pen/OJxOOGX",
+  "acquisition": "cdpn_fullpage",
+  "acquisition_url": "https://cdpn.io/walickialbert/fullpage/OJxOOGX",
+  "retrieved_at": "2026-11-19T01:11:47+00:00",
+  "license": "未单独核验；外链资源许可另查",
+  "candidate_target_tier": "T1",
+  "candidate_found_via": "public web search: occlusion and interlocking design",
+  "fetch_status": "ok",
+  "title": "CSS Art - School Building - Fully Responsive",
+  "canonical_url": "https://codepen.io/walickialbert/pen/OJxOOGX",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "3d066c1ae831fc2a4c8093fde5c5c949e98f8f645fa00c9341b442eb99394c54",
+  "source_html_sha256": "d78475a43bcb562d6e955ccf4e2f164088b1ca94044aee9c4a29acc8326fc949",
+  "analysis": {
+    "js": {
+      "has_js": false,
+      "inline_js_chars": 0,
+      "external_scripts": [],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 0,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": false,
+      "clip_path": false,
+      "css_counter": false,
+      "media_query": false
+    },
+    "external_stylesheets": [
+      "https://public.codepenassets.com/css/reset-2.0.min.css"
+    ],
+    "css_imports": [],
+    "css_chars": 19158,
+    "element_count": 191,
+    "html_chars": 27381
+  },
+  "review": {
+    "label": "学校入口与柱廊",
+    "status": "备选",
+    "reference_case": "224",
+    "evidence": "树冠局部叠盖入口白柱和窗户，山墙遮住深色主体屋顶，前后分明但仍为正视立面。只核过桌面。",
+    "visual_verified": true,
+    "surface": "Cloud Chromium, CodePen Full Page default or stated interaction; desktop only",
+    "formal_admission": false
+  }
+}
