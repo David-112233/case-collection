@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>3D Book Preview -  Pure CSS version</title>
+
+    <link rel="canonical" href="https://codepen.io/DeyJordan/pen/xbVPmmv">
+  
+  
+  
+  
+<style>
+.book3d {
+  font-family: sans-serif;
+}
+
+.book3d__3dview:has(.book3d__textured-checkbox input:checked) {
+  --book3d-page-color: #fff;
+  --book3d-cover-color: #3a4775;
+  --book3d-border: 0;
+}
+.book3d__3dview:has(.book3d__textured-checkbox input:checked):has(.book3d__jacket-checkbox input:checked) {
+  --book3d-cover-color: #100e0f;
+}
+
+.book3d__3dview {
+  --book3d-size: min(90vw, 90vh);
+
+  @media (min-width: 600px) {
+    --book3d-size: min(60vw, 60vh);
+  }
+
+  --book3d-width: calc(var(--book3d-size) * 0.67);
+  --book3d-height: var(--book3d-size);
+  --book3d-depth: calc(var(--book3d-size) * 0.125);
+
+  --book3d-cover-width: calc(var(--book3d-size) * 0.69);
+  --book3d-cover-height: calc(var(--book3d-size) * 1.025);
+  --book3d-cover-depth: calc(var(--book3d-size) * 0.015);
+
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #1b1b1c;
+  cursor: grab;
+  user-select: none;
+}
+.book3d__3dview:active { cursor: grabbing; }
+
+.book3d__container {
+  width: var(--book3d-width);
+  height: var(--book3d-height);
+  perspective: calc(var(--book3d-size) * 4);
+  position: relative;
+}
+
+.book3d__drag-info {
+  position: absolute;
+  top: -10%;
+  left: 50%;
+  white-space: nowrap;
+  transform: translateX(-50%);
+  animation: pulse 2s infinite linear;
+  transition: 0.25s;
+}
+
+@media (min-width: 600px) {
+  .book3d__drag-info {
+    transform: translate(-50%, -200%);
+  }
+}
+
+.book3d__drag-info--hidden {
+  animation: fadeOut 0.25s linear forwards;
+}
+
+.book3d__textured-checkbox {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.book3d__jacket-checkbox {
+  position: absolute;
+  top: 50px;
+  left: 20px;
+}
+
+/* BOOK */
+
+.book3d__book {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transform:
+    translateZ(-100px)
+    rotateX(calc(var(--book3d-rotX, -25) * 1deg))
+    rotateY(calc(var(--book3d-rotY, -25) * 1deg));
+  transition: 0.05s linear;
+}
+
+.book3d__page,
+.book3d__cover,
+.book3d__spine {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border: var(--book3d-border, 0) solid #000;
+}
+
+
+/* PAGES */
+
+.book3d__page--front,
+.book3d__page--back {
+  width: var(--book3d-width);
+  height: var(--book3d-height);
+}
+
+.book3d__page--left,
+.book3d__page--right {
+  width: var(--book3d-depth);
+  height: var(--book3d-height);
+}
+
+.book3d__page--top,
+.book3d__page--bottom {
+  width: var(--book3d-width);
+  height: var(--book3d-depth);
+}
+
+.book3d__page--front {
+  background-color: var(--book3d-cover-color, rgba(255, 0, 0, 0.5));
+  transform: translate(-50%, -50%) rotateY(0deg) translateZ(calc(var(--book3d-depth) / 2));
+}
+.book3d__page--right {
+  background-color: var(--book3d-page-color, rgba(0, 255, 0, 0.5));
+  transform: translate(-50%, -50%) rotateY(90deg) translateZ(calc(var(--book3d-width) / 2));
+}
+.book3d__page--back {
+  background-color: var(--book3d-cover-color, rgba(0, 0, 255, 0.5));
+  transform: translate(-50%, -50%) rotateY(180deg) translateZ(calc(var(--book3d-depth) / 2));
+}
+.book3d__page--left {
+  background-color: var(--book3d-page-color, rgba(255, 0, 255, 0.5));
+  transform: translate(-50%, -50%) rotateY(-90deg) translateZ(calc(var(--book3d-width) / 2));
+}
+.book3d__page--top {
+  background-color: var(--book3d-page-color, rgba(0, 255, 255, 0.5));
+  transform: translate(-50%, -50%) rotateX(90deg) translateZ(calc(var(--book3d-height) / 2));
+}
+.book3d__page--bottom {
+  background-color: var(--book3d-page-color, rgba(255, 255, 0, 0.5));
+  transform: translate(-50%, -50%) rotateX(-90deg) translateZ(calc(var(--book3d-height) / 2));
+}
+
+
+/* COVERS (front-side / back-side blocks) */
+
+.book3d__cover--front-side { --cover-shift: calc(var(--book3d-depth) / 2); }
+.book3d__cover--back-side { --cover-shift: calc(var(--book3d-depth) / -2); }
+
+.book3d__cover--front,
+.book3d__cover--back {
+  width: var(--book3d-cover-width);
+  height: var(--book3d-cover-height);
+}
+.book3d__cover--left,
+.book3d__cover--right {
+  width: var(--book3d-cover-depth);
+  height: var(--book3d-cover-height);
+}
+.book3d__cover--top,
+.book3d__cover--bottom {
+  width: var(--book3d-cover-width);
+  height: var(--book3d-cover-depth);
+}
+
+.book3d__cover--front {
+  background-color: var(--book3d-cover-color, rgba(255, 0, 0, 0.5));
+  transform: translate(-50%, -50%) rotateY(0deg)
+    translateZ(calc((var(--book3d-cover-depth) / 2) + var(--cover-shift)));
+}
+.book3d__cover--right {
+  background-color: var(--book3d-cover-color, rgba(0, 255, 0, 0.5));
+  transform: translate(-50%, -50%) rotateY(90deg)
+    translateZ(calc(var(--book3d-cover-width) / 2))
+    translateX(calc(var(--cover-shift) * -1));
+}
+.book3d__cover--back {
+  background-color: var(--book3d-cover-color, rgba(0, 0, 255, 0.5));
+  transform: translate(-50%, -50%) rotateY(180deg)
+    translateZ(calc((var(--book3d-cover-depth) / 2) - var(--cover-shift)));
+}
+.book3d__cover--left {
+  background-color: var(--book3d-cover-color, rgba(255, 0, 255, 0.5));
+  transform: translate(-50%, -50%) rotateY(-90deg)
+    translateZ(calc(var(--book3d-cover-width) / 2))
+    translateX(var(--cover-shift));
+}
+.book3d__cover--top {
+  background-color: var(--book3d-cover-color, rgba(0, 255, 255, 0.5));
+  transform: translate(-50%, -50%) rotateX(90deg)
+    translateZ(calc(var(--book3d-cover-height) / 2))
+    translateY(var(--cover-shift));
+}
+.book3d__cover--bottom {
+  background-color: var(--book3d-cover-color, rgba(255, 255, 0, 0.5));
+  transform: translate(-50%, -50%) rotateX(-90deg)
+    translateZ(calc(var(--book3d-cover-height) / 2))
+    translateY(calc(var(--cover-shift) * -1));
+}
+
+
+/* SPINE */
+
+.book3d__spine { --spine-pos: calc(var(--book3d-width) / 2 + 3px); }
+
+.book3d__spine--front,
+.book3d__spine--back {
+  width: var(--book3d-cover-depth);
+  height: var(--book3d-cover-height);
+}
+
+.book3d__spine--left {
+  width: calc(var(--book3d-depth) + var(--book3d-cover-depth));
+  height: var(--book3d-cover-height);
+}
+
+.book3d__spine--right {
+  width: var(--book3d-depth);
+  height: var(--book3d-cover-height);
+}
+
+.book3d__spine--top,
+.book3d__spine--bottom {
+  width: var(--book3d-cover-depth);
+  height: var(--book3d-depth);
+}
+
+.book3d__spine--front {
+  background-color: var(--book3d-cover-color, rgba(255, 0, 0, 0.5));
+  transform: translate(-50%, -50%) rotateY(0deg)
+    translateZ(calc(var(--book3d-depth) / 2))
+    translateX(calc(var(--spine-pos) * -1));
+}
+.book3d__spine--right {
+  background-color: var(--book3d-cover-color, rgba(0, 255, 0, 0.5));
+  transform: translate(-50%, -50%) rotateY(90deg)
+    translateZ(calc(var(--spine-pos) * -1));
+}
+.book3d__spine--back {
+  background-color: var(--book3d-cover-color, rgba(0, 0, 255, 0.5));
+  transform: translate(-50%, -50%) rotateY(180deg)
+    translateZ(calc(var(--book3d-depth) / 2))
+    translateX(var(--spine-pos));
+}
+.book3d__spine--left {
+  background-color: var(--book3d-cover-color, rgba(255, 0, 255, 0.5));
+  transform: translate(-50%, -50%) rotateY(-90deg)
+    translateZ(calc(var(--spine-pos) + 3px));
+}
+.book3d__spine--top {
+  background-color: var(--book3d-cover-color, rgba(0, 255, 255, 0.5));
+  transform: translate(-50%, -50%) rotateX(90deg)
+    translateZ(calc(var(--book3d-cover-height) / 2))
+    translateX(calc(var(--spine-pos) * -1));
+}
+.book3d__spine--bottom {
+  background-color: var(--book3d-cover-color, rgba(255, 255, 0, 0.5));
+  transform: translate(-50%, -50%) rotateX(-90deg)
+    translateZ(calc(var(--book3d-height) / 2))
+    translateX(calc(var(--spine-pos) * -1));
+}
+
+
+/* TEXTURES (CDN) */
+
+.book3d__3dview:has(.book3d__textured-checkbox input:checked) .book3d__cover--front-side.book3d__cover--front,
+.book3d__3dview:has(.book3d__textured-checkbox input:checked) .book3d__cover--back-side.book3d__cover--back,
+.book3d__3dview:has(.book3d__textured-checkbox input:checked) .book3d__spine--left {
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.book3d__3dview:has(.book3d__textured-checkbox input:checked):not(:has(.book3d__jacket-checkbox input:checked)) .book3d__cover--front-side.book3d__cover--front::after,
+.book3d__3dview:has(.book3d__textured-checkbox input:checked):not(:has(.book3d__jacket-checkbox input:checked)) .book3d__cover--back-side.book3d__cover--back::after,
+.book3d__3dview:has(.book3d__textured-checkbox input:checked):not(:has(.book3d__jacket-checkbox input:checked)) .book3d__spine--left::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(
+    0deg,
+    rgba(230,230,230,1) 0%,
+    rgb(52,62,90) 15%,
+    rgb(44,52,78) 35%,
+    rgba(235,235,235,1) 50%,
+    rgb(109,109,109) 77%,
+    rgba(230,230,230,1) 100%
+  );
+  background-size: 200% 200%;
+  background-repeat: repeat;
+  background-position:
+    calc(var(--book3d-rotX) * 2%)
+    calc(var(--book3d-rotY) * 2%);
+  mask-size: contain;
+  transition: 0.1s linear;
+}
+
+.book3d__3dview:has(.book3d__textured-checkbox input:checked) .book3d__cover--front-side.book3d__cover--front {
+  background-image: url("https://cdn.lalie-landry.com/3DBooks/HDD1/HDD-cover.webp");
+}
+.book3d__3dview:has(.book3d__textured-checkbox input:checked) .book3d__cover--front-side.book3d__cover--front::after {
+  mask-image: url("https://cdn.lalie-landry.com/3DBooks/HDD1/HDD-cover-mask.webp");
+}
+.book3d__3dview:has(.book3d__textured-checkbox input:checked):has(.book3d__jacket-checkbox input:checked) .book3d__cover--front-side.book3d__cover--front {
+  background-image: url("https://cdn.lalie-landry.com/3DBooks/HDD1/HDD-cover-jacket.webp");
+}
+
+.book3d__3dview:has(.book3d__textured-checkbox input:checked) .book3d__cover--back-side.book3d__cover--back {
+  background-image: url("https://cdn.lalie-landry.com/3DBooks/HDD1/HDD-back.webp");
+}
+.book3d__3dview:has(.book3d__textured-checkbox input:checked) .book3d__cover--back-side.book3d__cover--back::after {
+  mask-image: url("https://cdn.lalie-landry.com/3DBooks/HDD1/HDD-back-mask.webp");
+}
+.book3d__3dview:has(.book3d__textured-checkbox input:checked):has(.book3d__jacket-checkbox input:checked) .book3d__cover--back-side.book3d__cover--back {
+  background-image: url("https://cdn.lalie-landry.com/3DBooks/HDD1/HDD-back-jacket.webp");
+}
+
+.book3d__3dview:has(.book3d__textured-checkbox input:checked) .book3d__spine--left {
+  background-image: url("https://cdn.lalie-landry.com/3DBooks/HDD1/HDD-spine.webp");
+}
+.book3d__3dview:has(.book3d__textured-checkbox input:checked) .book3d__spine--left::after {
+  mask-image: url("https://cdn.lalie-landry.com/3DBooks/HDD1/HDD-spine-mask.webp");
+}
+.book3d__3dview:has(.book3d__textured-checkbox input:checked):has(.book3d__jacket-checkbox input:checked) .book3d__spine--left {
+  background-image: url("https://cdn.lalie-landry.com/3DBooks/HDD1/HDD-spine-jacket.webp");
+}
+
+.book3d__3dview:has(.book3d__textured-checkbox input:checked) .book3d__page--right {
+  background-image: url("https://cdn.lalie-landry.com/3DBooks/HDD1/HDD-pages-front.webp");
+  background-size: cover;
+}
+.book3d__3dview:has(.book3d__textured-checkbox input:checked) .book3d__page--top {
+  background-image: url("https://cdn.lalie-landry.com/3DBooks/HDD1/HDD-pages-up.webp");
+  background-size: cover;
+}
+.book3d__3dview:has(.book3d__textured-checkbox input:checked) .book3d__page--bottom {
+  background-image: url("https://cdn.lalie-landry.com/3DBooks/HDD1/HDD-pages-down.webp");
+  background-size: cover;
+}
+
+
+/* PREORDER SECTION */
+
+.book3d__preorder {
+  display: block;
+  width: 100%;
+}
+
+@media (min-width: 600px) {
+  .book3d__preorder {
+    display: flex;
+    align-items: flex-end;
+    gap: 20px;
+  }
+  .book3d__preorder-content {
+    flex: 1 1 100%;
+    padding: 64px;
+  }
+  .book3d__preorder-image {
+    margin: 0;
+  }
+}
+
+.book3d__preorder-image {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  margin-inline: auto;
+  margin-bottom: 20px;
+}
+
+.book3d__preorder-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(
+    -25deg,
+    #b8b8b9 0%,
+    #b8b8b9 20%,
+    #fff 25%,
+    #b8b8b9 30%,
+    #b8b8b9 100%
+  );
+  background-size: 200% 200%;
+  mask-size: contain;
+  mask-image: url("https://cdn.lalie-landry.com/3DBooks/HDD1/HDD-cover-mask.webp");
+  animation: bookLight 6s linear infinite;
+}
+
+
+/* ANIMATIONS */
+
+@keyframes bookLight {
+  0%, 50% { background-position-y: 0; }
+  55%    { background-position-y: 100%; }
+  60%, 100% { background-position-y: 200%; }
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  to { opacity: 0; }
+}
+
+/* UTILITAIRES AND GLOBAL CSS */
+
+.text-center { text-align: center; }
+.text-white { color: #fff; }
+.text-info-small { font-size: 0.85rem; opacity: 0.8; }
+.text-info { font-size: 1rem; opacity: 0.85; }
+.text-content { font-size: 1.125rem; opacity: 0.9; }
+.text-left { text-align: left; }
+
+.display-block { display: block; }
+
+.mb-6 { margin-bottom: 6px; }
+.mb-20 { margin-bottom: 20px; }
+.mb-32 { margin-bottom: 32px; }
+
+.page { width: 100%; max-width: 1200px; padding: 20px; margin: auto; }
+.page-y-space { padding-block: 40px; }
+
+.btn {
+  display: inline-block;
+  padding: 12px 20px;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn--primary {
+  background: #3a4775;
+  color: #fff;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  max-width: 100%;
+}
+
+.Me {
+  position: fixed;
+  z-index: 15;
+  bottom: 20px;
+  left: 50%;
+  color: #666;
+  transform: translateX(-50%);
+  font-weight: 700;
+  font-family: sans-serif;
+  text-align: center;
+  opacity: 0.7;
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  <div class="book3d">
+
+  <!-- 3D Viewer -->
+  <div class="book3d__3dview" id="book3d-viewer">
+    <label class="book3d__textured-checkbox text-white">
+      <input type="checkbox" checked />
+      Textured
+    </label>
+    <label class="book3d__jacket-checkbox text-white">
+      <input type="checkbox" />
+      See with jacket
+    </label>
+
+    <div class="book3d__container">
+
+      <div class="book3d__drag-info text-white text-center" id="book3d-drag-info">
+        <span class="display-block">Press and drag to explore the 3D book</span>
+      </div>
+
+      <!-- BOOK -->
+      <div class="book3d__book" id="book3d-book">
+
+        <!-- PAGES -->
+        <div class="book3d__page book3d__page--front"></div>
+        <div class="book3d__page book3d__page--back"></div>
+        <div class="book3d__page book3d__page--left"></div>
+        <div class="book3d__page book3d__page--right"></div>
+        <div class="book3d__page book3d__page--top"></div>
+        <div class="book3d__page book3d__page--bottom"></div>
+
+        <!-- COVERS (FRONT BLOCK) -->
+        <div class="book3d__cover book3d__cover--front-side book3d__cover--front"></div>
+        <div class="book3d__cover book3d__cover--front-side book3d__cover--back"></div>
+        <div class="book3d__cover book3d__cover--front-side book3d__cover--left"></div>
+        <div class="book3d__cover book3d__cover--front-side book3d__cover--right"></div>
+        <div class="book3d__cover book3d__cover--front-side book3d__cover--top"></div>
+        <div class="book3d__cover book3d__cover--front-side book3d__cover--bottom"></div>
+
+        <!-- COVERS (BACK BLOCK) -->
+        <div class="book3d__cover book3d__cover--back-side book3d__cover--front"></div>
+        <div class="book3d__cover book3d__cover--back-side book3d__cover--back"></div>
+        <div class="book3d__cover book3d__cover--back-side book3d__cover--left"></div>
+        <div class="book3d__cover book3d__cover--back-side book3d__cover--right"></div>
+        <div class="book3d__cover book3d__cover--back-side book3d__cover--top"></div>
+        <div class="book3d__cover book3d__cover--back-side book3d__cover--bottom"></div>
+
+        <!-- SPINE -->
+        <div class="book3d__spine book3d__spine--front"></div>
+        <div class="book3d__spine book3d__spine--back"></div>
+        <div class="book3d__spine book3d__spine--left"></div>
+        <div class="book3d__spine book3d__spine--right"></div>
+        <div class="book3d__spine book3d__spine--top"></div>
+        <div class="book3d__spine book3d__spine--bottom"></div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- PREORDER SECTION -->
+  <div class="book3d__preorder page page--y-space">
+
+    <div class="book3d__preorder-image">
+      <img src="https://cdn.lalie-landry.com/3DBooks/HDD1/HDD-cover.webp" alt="">
+    </div>
+
+    <div class="book3d__preorder-content">
+      <p class="mb-20">This CodePen is a demo showcasing a pure CSS 3D project (without libraries such as three.js) created for the website lalie-landry.com, a French fantasy author. Many thanks to her for allowing the publication of this CodePen.</p>
+      <p class="mb-20">I have textured the book and its silver-foiled parts using the files sent to the printer for a better visual effect. You can view the book without textures by clicking the checkbox at the top left of the page.</p>
+      <p class="mb-20">The original page is built with Vue.js and SCSS, which helps to keep the code a bit more readable.</p>
+      <a class="btn btn--primary mb-32" href="https://lalie-landry.com/l-heritiere-des-dieux-3D" target="_blank">
+        View the original page
+      </a>
+      <h1 class="text-left mb-6">L'Héritière des dieux</h1>
+      <h2 class="mb-20">Ⅰ : La Corne des Six</h2>
+      <h2 class="text-content mb-32">Hardcover Edition</h2>
+      <h3 class="text-info mb-6">Pre-orders open from November 10, 2025 to December 10, 2025.</h3>
+
+      <a class="btn btn--primary" href="https://lalie-landry.com/produit/lheritiere-des-dieux-1-la-corne-des-six-edition-reliee" target="_blank">
+        ❆ Pre-order now ❆
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<a class="Me" href="https://bit.ly/m/JordanDey" target="_top">CodePen by Jordan Dey</a>
+  
+    <script id="rendered-js" >
+const viewer = document.getElementById("book3d-viewer");
+const book = document.getElementById("book3d-book");
+const dragInfo = document.getElementById("book3d-drag-info");
+
+let autoRotate = true;
+let autoRotationAngle = { x: -25, y: -25 };
+
+let rotation = { x: -25, y: -25 };
+let isDragging = false;
+let lastPos = { x: 0, y: 0 };
+
+let hasInteracted = false;
+
+function updateRotation() {
+  book.style.setProperty("--book3d-rotX", rotation.x);
+  book.style.setProperty("--book3d-rotY", rotation.y);
+}
+
+let autoRotationInterval = setInterval(() => {
+  if (!autoRotate) return;
+
+  autoRotationAngle.y += 1;
+  rotation = { ...autoRotationAngle };
+  updateRotation();
+}, 100);
+
+function hideDragInfo() {
+  if (!hasInteracted) {
+    hasInteracted = true;
+    dragInfo.classList.add("book3d__drag-info--hidden");
+    autoRotate = false;
+  }
+}
+
+function startDrag(x, y) {
+  hideDragInfo();
+  isDragging = true;
+  lastPos.x = x;
+  lastPos.y = y;
+}
+
+function moveDrag(x, y) {
+  if (!isDragging) return;
+
+  const dx = x - lastPos.x;
+  const dy = y - lastPos.y;
+
+  const rotationSpeed = 0.3;
+  rotation.y += dx * rotationSpeed;
+  rotation.x -= dy * rotationSpeed;
+
+  updateRotation();
+
+  lastPos.x = x;
+  lastPos.y = y;
+}
+
+function endDrag() {
+  isDragging = false;
+}
+
+viewer.addEventListener("mousedown", e => startDrag(e.clientX, e.clientY));
+viewer.addEventListener("mousemove", e => moveDrag(e.clientX, e.clientY));
+viewer.addEventListener("mouseup", endDrag);
+viewer.addEventListener("mouseleave", endDrag);
+
+viewer.addEventListener("touchstart", e => {
+  const t = e.targetTouches[0];
+  startDrag(t.clientX, t.clientY);
+});
+viewer.addEventListener("touchmove", e => {
+  const t = e.targetTouches[0];
+  moveDrag(t.clientX, t.clientY);
+});
+viewer.addEventListener("touchend", endDrag);
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>
