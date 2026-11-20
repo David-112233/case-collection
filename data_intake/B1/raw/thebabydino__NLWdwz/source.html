@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>Responsive infographic banners with CSS variables</title>
+
+    <link rel="canonical" href="https://codepen.io/thebabydino/pen/NLWdwz">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  
+  
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  overflow-x: hidden;
+}
+
+body {
+  --wide: 1;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  justify-content: center;
+  padding-top: 2.5em;
+  min-height: 100vh;
+  transform-style: preserve-3d;
+  font: 1em/1.25 trebuchet ms, verdana, sans-serif;
+}
+@media (max-width: 625px) {
+  body {
+    --wide: 0 ;
+  }
+}
+@media (max-width: 480px) {
+  body {
+    --narr: 1 ;
+  }
+}
+@media (max-width: 225px) {
+  body {
+    font-size: 0.75em;
+  }
+}
+
+article {
+  --i: 0;
+  --j: calc(1 - var(--i));
+  --k: var(--narr, 0);
+  --s: calc(2*var(--i) - 1);
+  display: var(--narr, grid);
+  grid-template-rows: 2fr 3fr;
+  grid-auto-flow: column dense;
+  position: relative;
+  margin-bottom: calc(0.5em + (1 - var(--k))*(1 - var(--wide))*2.5em);
+  width: calc((1 - var(--k))*30em + var(--k)*100%);
+  height: var(--narr, 10em);
+  max-width: 100%;
+  border-radius: var(--narr, 1em);
+  transform-style: preserve-3d;
+  transform: translate(calc(var(--s)*var(--wide)*15%)) rotatey(calc(var(--s)*(1 - var(--narr, 0))*.1deg));
+  background: linear-gradient(90deg, var(--c0), var(--c1), var(--c0));
+  color: #fff;
+  counter-increment: c;
+}
+article:before {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-column: calc(2 - var(--i));
+  grid-row: 1/3;
+  margin: calc((1 - var(--k))*-0.3846153846em) calc(var(--wide)*var(--j)*-0.8076923077em) 0 calc(var(--wide)*var(--i)*-0.8076923077em);
+  border: solid 2px transparent;
+  width: 1.9230769231em;
+  height: var(--narr, 1.9230769231em);
+  border-radius: 50%;
+  box-shadow: var(--narr, calc(var(--s)*2rem) 1rem 2rem -1rem rgba(0, 0, 0, 0.15));
+  background: var(--narr, linear-gradient(#f7f3f0, #ded9d5) content-box, linear-gradient(#d8cfc6, #f4efeb) border-box);
+  color: var(--narr, var(--c0));
+  font-size: calc((1 - var(--narr, 0))*6.5em + var(--narr, 0)*2.5em);
+  content: counter(c, decimal-leading-zero);
+}
+article:after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: inherit;
+  transform-origin: 50% 100%;
+  transform: scale(0.75) translate3d(calc(var(--s)*12.5%), 0, -1px) rotate(calc(var(--s)*7.5deg)) skewx(calc(var(--s)*20deg));
+  opacity: 0.5;
+  background: rgba(0, 0, 0, 0.875);
+  filter: blur(29px);
+  content: "";
+}
+article:nth-child(2n) {
+  --i: 1 ;
+}
+
+h3, p {
+  margin: 0 calc((1 - var(--k))*2rem + var(--k)*2vw) 0.5rem;
+}
+
+h3 {
+  align-self: self-end;
+  padding-top: 0.25em;
+  font: calc((1 - var(--k))*1.75em + var(--k)*1.5em)/1.75 trebuchet ms, verdana, arial, sans-serif;
+}
+h3:before {
+  filter: grayscale(1);
+  content: attr(data-icon);
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  <article style="--c0: #d8272d; --c1: #e92526">
+  <h3 data-icon="🖱️">gingerbread</h3>
+  <p>Cake cookie lemon drops muffin sugar plum. Liquorice pudding sugar plum topping macaroon pie chocolate.</p>
+</article>
+<article style="--c0: #efb400; --c1: #f9d100">
+  <h3 data-icon="✔️">ice cream</h3>
+  <p>Cake muffin donut chocolate cake jelly sesame snaps wafer tart pie sweet roll muffin chupa chups.</p>
+</article>
+<article style="--c0: #26aeac; --c1: #7fcfcc">
+  <h3 data-icon="➕">lava cake</h3>
+  <p>Cake cookie lemon drops muffin sugar plum. Liquorice pudding sugar plum topping macaroon pie chocolate.</p>
+</article>
+<article style="--c0: #9b8675; --c1: #b8ad9b">
+  <h3 data-icon="⭐">macaroon</h3>
+  <p>Cake muffin donut chocolate cake jelly sesame snaps wafer tart pie sweet roll muffin chupa chups.</p>
+</article>
+  
+  
+  
+</body>
+
+</html>

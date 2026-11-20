@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>Responsive banners (clean markup, CSS grid &amp; variables)</title>
+
+    <link rel="canonical" href="https://codepen.io/thebabydino/pen/pBmMaJ">
+  
+  
+  
+  
+<style>
+*, :before, :after {
+  box-sizing: inherit;
+  margin: 0;
+}
+
+html {
+  --i: var(--wide, 1);
+  --ci: calc(1 - var(--i));
+  background: whitesmoke;
+}
+@media (max-width: 775px) {
+  html {
+    --wide: 0 ;
+  }
+}
+@media (max-width: 250px) {
+  html {
+    font-size: 0.75em;
+  }
+}
+@media (max-width: 185px) {
+  html {
+    font-size: 0.5em;
+  }
+}
+
+body {
+  filter: drop-shadow(0 1em 1em rgba(0, 0, 0, 0.2));
+}
+
+article {
+  --d: calc(var(--i)*4em + var(--ci)*1.375*1em);
+  box-sizing: border-box;
+  display: grid;
+  grid-gap: 0px calc(var(--i)*5em);
+  grid-template: repeat(2, max-content)/var(--d) 1fr;
+  position: relative;
+  margin: 1em auto;
+  border: solid 0.5em transparent;
+  padding: 0.125em;
+  width: calc(var(--i)*32em + var(--ci)*100%);
+  min-height: 5em;
+  border-radius: calc(var(--i)*2.5em);
+  background: radial-gradient(circle at 0 10em, rgba(0, 0, 0, calc(var(--i)*.8)) 2.5em, transparent 11.25em) border-box, linear-gradient(#dbdbdb, #fff) content-box, linear-gradient(var(--slist)) padding-box, linear-gradient(#fff, #dcdcdc) border-box;
+  font: 1.5em/1.375 trebuchet ms, verdana, sans-serif;
+  clip-path: var(--wide, inset(0 round 2.5em));
+  counter-increment: c;
+}
+article:before {
+  position: absolute;
+  top: -0.5em;
+  left: -0.5em;
+  width: 9.5em;
+  height: calc(var(--i)*5em);
+  transform-origin: 100% 100%;
+  transform: skewx(45deg);
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(#fff, #e4e4e4);
+  content: var(--wide, "");
+}
+article:after {
+  display: grid;
+  place-content: center;
+  grid-row: 1/span calc(1 + var(--i));
+  position: relative;
+  border: solid calc(var(--i)*0.5em) transparent;
+  margin: calc(var(--i)*-0.125em + var(--ci)*.25rem);
+  width: var(--d);
+  height: var(--d);
+  border-radius: 50%;
+  box-shadow: inset 0 0 1px 1px #efefef, inset 0 -0.5em rgba(0, 0, 0, 0.1);
+  background: linear-gradient(var(--slist)) padding-box, linear-gradient(#d0d0d0, #e7e7e7) border-box;
+  color: #fff;
+  text-align: center;
+  content: counter(c, decimal-leading-zero);
+}
+
+h3, p {
+  padding: 0 0.5rem;
+}
+
+h3 {
+  font-size: 1.25em;
+}
+
+p {
+  grid-column: var(--ci)/span calc(1 + var(--ci));
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  <script src="https://public.codepenassets.com/js/prefixfree-1.0.7.min.js"></script>
+
+  
+</head>
+
+<body translate="no">
+  <article style="--slist: #ebac79,#d65b56">
+  <h3>gingerbread</h3>
+  <p>Pancake muffin chocolate syrup brownie.</p>
+</article>
+<article style="--slist: #90cbb7,#2fb1a9">
+  <h3>brownie</h3>
+  <p>Cake lemon berry muffin plum macaron.</p>
+</article>
+<article style="--slist: #8a7876,#32201c">
+  <h3>ice cream</h3>
+  <p>Wafer apple tart pie muffin gingerbread.</p>
+</article>
+<article style="--slist: #a6c869,#37a65a">
+  <h3>lava cake</h3>
+  <p>Liquorice plum topping chocolate lemon.</p>
+</article>
+  
+  
+  
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+{
+  "source_id": "codepen:ehckk/wnzgyky",
+  "author": "ehckk",
+  "pen_id": "WNzGYKy",
+  "url": "https://codepen.io/ehckk/pen/WNzGYKy",
+  "acquisition": "cdpn_fullpage_cloud_browser_dom",
+  "acquisition_url": "https://cdpn.io/ehckk/fullpage/WNzGYKy",
+  "retrieved_at": "2026-11-18T15:46:21.453Z",
+  "fetch_status": "ok",
+  "title": "Simple CSS/SCSS 3D Bookshelf",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "d0779d1196214b4ec620cd4ce5be842682088b9cdd2b782dbeeb3ffc07e3fa14",
+  "source_html_sha256": "36cc72021a79227fb980af48cdf0dd77c73cf81e1a8c2202a07cbe5bc5f46c9f",
+  "analysis": {
+    "js": {
+      "has_js": false,
+      "inline_js_chars": 0,
+      "external_scripts": [],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 0,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": true,
+      "clip_path": false,
+      "css_counter": false,
+      "media_query": false
+    },
+    "external_stylesheets": [
+      "https://public.codepenassets.com/css/normalize-5.0.0.min.css"
+    ],
+    "css_imports": [],
+    "css_chars": 256701,
+    "element_count": 935,
+    "html_chars": 298152
+  },
+  "visual_review": {
+    "viewport": [
+      1180,
+      757
+    ],
+    "default_only": true,
+    "mobile_verified": false,
+    "screenshot_available": true
+  },
+  "candidate_status": "recommended_pending_user_review",
+  "license": "not separately verified"
+}
