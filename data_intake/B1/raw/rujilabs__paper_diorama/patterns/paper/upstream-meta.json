@@ -1,0 +1,29 @@
+{
+  "name": "Paper diorama build",
+  "slug": "paper",
+  "kind": "pattern",
+  "summary": "A cut-paper scene that builds back to front: layers land, upright pieces pop up on a hinge, extras arrive after. Shadow, grain and a quick variant.",
+  "category": "scene",
+  "tech": [
+    "css",
+    "svg"
+  ],
+  "tokens": [
+    "--ease-paper",
+    "--ease-out",
+    "--dur-slow",
+    "--dur-base",
+    "--stagger-paper"
+  ],
+  "trigger": "in-view",
+  "reduced_motion": "final-state",
+  "relation": "recreation",
+  "added": "2026-10-13",
+  "source": {
+    "title": "Paper diorama video prompt (\"AI city paper diorama\"), posted on Threads",
+    "author": "@dikipirasaputra",
+    "url": "https://www.threads.com/@dikipirasaputra",
+    "licence": "none stated",
+    "notes": "The source post shares an AI video prompt and the video it made. This is a CSS and SVG rebuild of the look and motion, written from scratch; no prompt text, frames or assets were copied."
+  }
+}
