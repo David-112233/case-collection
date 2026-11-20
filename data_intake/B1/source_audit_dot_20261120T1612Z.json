@@ -1,0 +1,37 @@
+{
+  "slot_utc": "2026-11-20T16:12:00Z",
+  "candidate_count": 1,
+  "total_if_verified": 278,
+  "formal_admission_excluded": true,
+  "cases": [
+    {
+      "review_no": "C278",
+      "id": "YukiyaSassa__vYewpy",
+      "url": "https://codepen.io/YukiyaSassa/pen/vYewpy",
+      "label": "分片气囊、交错吊索、双轴定角",
+      "bytes": 234006,
+      "sha256": "92ef035dd294b5304893e7b25c59be166d85884275763a7fce26fb373844cc51",
+      "git_blob_sha": "e5155155e5238bda10ad79cb0704256993a4f7db",
+      "compiled_srcdoc_verified": true,
+      "github_blob_readback_exact": true,
+      "cloud_desktop": {
+        "poses": [
+          "h5/v5",
+          "h7/v3"
+        ],
+        "propeller_running": false
+      },
+      "not_tested": [
+        "mobile",
+        "keyboard",
+        "offline_replay"
+      ]
+    }
+  ],
+  "excluded": [
+    {
+      "id": "MarkBoots__zxqPEQo",
+      "why": "existing C012"
+    }
+  ]
+}
