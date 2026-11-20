@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>The CSS portal: a true 3D scroll-driven journey</title>
+
+    <link rel="canonical" href="https://codepen.io/mysth/pen/MYaXprm">
+  
+  
+  
+  
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;700&display=swap');
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  background-color: #0a0a0a;
+  color: #f0f0f0;
+}
+
+.scroll-container {
+  height: 300vh;
+  position: relative;
+  view-timeline-name: --portal-timeline;
+}
+
+.portal {
+  height: 100vh;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  overflow: hidden;
+  perspective: 1000px;
+  contain: paint layout style;
+}
+
+.portal__scene {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: fly-through linear forwards;
+  animation-timeline: --portal-timeline;
+  will-change: transform;
+}
+
+.portal__background {
+  position: absolute;
+  inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&q=80');
+  background-size: cover;
+  background-position: center;
+  transform: translateZ(-1500px) scale(2.5);
+}
+
+@keyframes text-reveal {
+ 0% { opacity: 0; }
+ 100% { opacity: 0.94; }
+}
+
+.portal__foreground {
+  position: absolute;
+  inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=2070&q=80');
+  background-size: cover;
+  background-position: center;
+  mask-image: radial-gradient(circle at center, transparent 15%, black 15.1%);
+  transform-style: preserve-3d;
+  transform: translateZ(0px);
+}
+
+.portal__foreground::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  mask-image: radial-gradient(
+    circle at center,
+    transparent 14.5%,
+    black 15%,   
+    black 15.5%,  
+    transparent 15.6%
+  );
+  background: #222;
+  transform: translateZ(-2px);
+}
+
+.portal__foreground::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  mask-image: radial-gradient(
+    circle at center,
+    transparent 14.5%,
+    black 15%,
+    black 15.5%,
+    transparent 15.6%
+  );
+  
+  background: radial-gradient(#ffffff03, #0c7777 30%);
+  transform: translateZ(2px);
+}
+
+@keyframes fly-through {
+  from {
+    transform: translateZ(0px);
+  }
+  to {
+    transform: translateZ(1500px);
+  }
+}
+
+.after-portal-content {
+  position: absolute;
+ top: 50%;
+ left: 50%;
+ transform: translate(-50%, -50%) translateZ(0); 
+ color: #111; 
+ opacity: 0;
+ animation: text-reveal linear forwards;
+ animation-timeline: --portal-timeline;
+ /* important to prevent seeing the text at the beginning (weird race condition?) */
+ animation-range: 40% 70%;
+ width: 400px;
+}
+.after-portal-content h2 {  
+  margin-bottom: 1rem;
+  font-size: clamp(12px, 3vw, 24px);
+  line-height: clamp(12px, 3vw, 24px);
+  text-shadow: 0 1px 1px #f0f0f0;
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  <div class=scroll-container>
+  <div class=portal>
+    <div class=portal__scene>
+      <div class=portal__background>
+        <div class=after-portal-content>
+          <h2>You have arrived.</h2>
+          <p>This animation uses a true 3D CSS perspective to create a lossless zoom effect, moving the viewer through space instead of scaling images.</p>
+       </div>  
+      </div>
+      <div class=portal__foreground></div>
+    </div>
+  </div>
+</div>
+  
+  
+  
+</body>
+
+</html>

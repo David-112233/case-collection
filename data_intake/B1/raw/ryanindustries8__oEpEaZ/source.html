@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>CSS Theater Lights</title>
+
+    <link rel="canonical" href="https://codepen.io/ryanindustries8/pen/oEpEaZ">
+  
+  
+  
+  
+<style>
+html,
+body {
+	background: rgb(0,0,0);
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+	margin: 0;
+}
+
+.panel {
+	height: 100vh;
+	width: 220px;
+	position: relative;
+	display: flex;
+	justify-content: center;
+}
+
+.sconcePanelLast {
+	position: relative;
+	top: 65px;
+	width: 120px;
+	border-width: 80vh 40px 0;
+	border-style: solid;
+	border-color: rgb(232,166,53) transparent;
+	-webkit-filter: drop-shadow(0px 3px 3px rgba(0,0,0,.8));
+	filter: drop-shadow(0px 3px 3px rgba(0,0,0,.8));
+}
+
+.sconcePanelLast:before {
+	content: "";
+	position: absolute;
+	height: 0;
+	width: 30px;
+	top: calc(-80vh + -30px);
+	left: -40px;
+	border-width: 0 85px 30px;
+	border-style: solid;
+	border-color: transparent transparent rgb(232,166,53);	
+}
+
+.sconcePanelMiddle {
+	position: absolute;
+	top: 40px;
+	width: 85px;
+	border-width: 86.5vh 30px 0;
+	border-style: solid;
+	border-color: rgb(190,0,0) transparent;
+	-webkit-filter: drop-shadow(0px 3px 3px rgba(0,0,0,.75));
+	filter: drop-shadow(0px 3px 3px rgba(0,0,0,.75));
+}
+
+.sconcePanelMiddle:before {
+	content: "";
+	position: absolute;
+	height: 0;
+	width: 0;
+	top: calc(-86.5vh + -35px);
+	left: -30px;
+	border-width: 0 73px 35px;
+	border-style: solid;
+	border-color: transparent transparent rgb(190,0,0);	
+}
+
+.sconcePanelFront {
+	position: absolute;
+	width: 68px;
+	height: 82vh;
+	top: 40px;
+	background: rgb(232,166,53);
+	-webkit-box-shadow: 0px 0px 2px rgba(0,0,0,0.4), 
+							-3px 2px 8px rgba(0,0,0,.1) inset,
+							3px 2px 8px rgba(0,0,0,.1) inset, 
+							0px -5px 8px rgba(0,0,0,.1) inset;
+	-moz-box-shadow: 0px 0px 2px rgba(0,0,0,0.4), 
+							-3px 2px 8px rgba(0,0,0,.1) inset,
+							3px 2px 8px rgba(0,0,0,.1) inset, 
+							0px -5px 8px rgba(0,0,0,.1) inset;
+	box-shadow: 0px 0px 2px rgba(0,0,0,0.4), 
+							-3px 2px 8px rgba(0,0,0,.1) inset,
+							3px 2px 8px rgba(0,0,0,.1) inset, 
+							0px -5px 8px rgba(0,0,0,.1) inset;
+	-webkit-filter: drop-shadow(0px 3px 3px rgba(0,0,0,.5));
+	filter: drop-shadow(0px 3px 3px rgba(0,0,0,.5));
+}
+
+.sconce {
+	position: absolute;
+	width: 60px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	top: 50px;
+}
+
+.light {
+	position: relative;
+	width: 20px;
+	height: 0;
+	border-left: 60px solid transparent;
+	border-right: 60px solid transparent;
+	border-top: 90px solid rgba(255,215,0,0.15);
+	top: -54px;
+	-webkit-filter: drop-shadow(0px 0px 8px rgb(255,215,0));
+	filter: drop-shadow(0px 0px 8px rgb(255,215,0));
+}
+
+.light:before {
+	content: '';
+	position: absolute;
+	width: 48px;
+	height: 35px;
+	left: -14px;
+	bottom: 0px;
+	position: absolute;
+	border-bottom-left-radius: 20px;
+	border-bottom-right-radius: 20px;
+	background: -webkit-radial-gradient(rgb(255,255,183), 
+																			rgb(253,255,148), 
+																			rgb(184,127,58));
+	background: -moz-radial-gradient(rgb(255,255,183), 
+																	 rgb(253,255,148), 
+																	 rgb(184,127,58));
+	background: -o-radial-gradient(rgb(255,255,183), 
+																 rgb(253,255,148), 
+																 rgb(184,127,58));
+	background: radial-gradient(rgb(255,255,183), 
+															rgb(253,255,148), 
+															rgb(184,127,58));
+	-webkit-filter: drop-shadow(0px 3px 3px rgba(0,0,0,.7));
+	filter: drop-shadow(0px 3px 3px rgba(0,0,0,.7));
+}
+
+.light:after {
+	content: '';
+	position: absolute;
+	background: -webkit-linear-gradient(rgba(211,159,83,.3),
+																			rgba(109,73,37,0.6)),
+							-webkit-linear-gradient(-90deg,rgb(123,81,33),
+																			rgb(195,146,77),
+																			rgb(166,123,68));
+	background: -moz-linear-gradient(rgba(211,159,83,.3),
+																	 rgba(109,73,37,0.6)),
+							-moz-linear-gradient(-90deg,rgb(123,81,33),
+																	 rgb(195,146,77),
+																	 rgb(166,123,68));
+	background: -o-linear-gradient(rgba(211,159,83,.3),
+																 rgba(109,73,37,0.6)),
+							-o-linear-gradient(-90deg,rgb(123,81,33),
+																 rgb(195,146,77),
+																 rgb(166,123,68));
+	background: linear-gradient(rgba(211,159,83,.3),
+															rgba(109,73,37,0.6)),
+							linear-gradient(-90deg,rgb(123,81,33),
+															rgb(195,146,77),
+															rgb(166,123,68));
+	width: 46px;
+	height: 20px;
+	bottom: -9px;
+	right: -13px;
+	border-bottom-left-radius: 50px;
+	border-bottom-right-radius: 50px;
+}
+
+.stem {
+	position: relative;
+	background: rgb(190,0,0);
+	width: 30px;
+	height: 60px;
+	top: -37px;
+	-webkit-box-shadow: 1px 1px 3px rgba(0,0,0,0.5), 
+							0px 1px 2px rgba(0,0,0,.2) inset, 
+							0px -3px 8px rgba(0,0,0,.2) inset;
+	-moz-box-shadow: 1px 1px 3px rgba(0,0,0,0.5), 
+							0px 1px 2px rgba(0,0,0,.2) inset, 
+							0px -3px 8px rgba(0,0,0,.2) inset;
+	box-shadow: 1px 1px 3px rgba(0,0,0,0.5), 
+							0px 1px 2px rgba(0,0,0,.2) inset, 
+							0px -3px 8px rgba(0,0,0,.2) inset;
+}
+
+.stem:before {
+	content: '';
+	position: absolute;
+	background: rgb(198,144,48);
+	width: 5px;
+	height: 135px;
+	top: -10px;
+	left: 13px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	-webkit-box-shadow: 0px 0px 3px rgba(0,0,0,0.5), 
+											-1px 1px 1px rgba(0,0,0,.7) inset,
+											1px 1px 1px rgba(0,0,0,.5) inset, 
+											0px -1px 1px rgba(0,0,0,.3) inset;
+	-moz-box-shadow: 0px 0px 3px rgba(0,0,0,0.5), 
+									 -1px 1px 1px rgba(0,0,0,.7) inset,
+									 1px 1px 1px rgba(0,0,0,.5) inset, 
+									 0px -1px 1px rgba(0,0,0,.3) inset;
+	box-shadow: 0px 0px 3px rgba(0,0,0,0.5), 
+							-1px 1px 1px rgba(0,0,0,.7) inset,
+							1px 1px 1px rgba(0,0,0,.5) inset, 
+							0px -1px 1px rgba(0,0,0,.3) inset;
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  <div class="panel">
+	<div class="sconcePanelLast"></div>
+	<div class="sconcePanelMiddle"></div>
+	<div class="sconcePanelFront"></div>
+	<div class="sconce">
+		<div class="light"></div>
+		<div class="stem"></div>
+	</div>
+</div>
+
+<div class="panel">
+	<div class="sconcePanelLast"></div>
+	<div class="sconcePanelMiddle"></div>
+	<div class="sconcePanelFront"></div>
+	<div class="sconce">
+		<div class="light"></div>
+		<div class="stem"></div>
+	</div>
+</div>
+  
+  
+  
+</body>
+
+</html>
