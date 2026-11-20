@@ -1,0 +1,3 @@
+key,url,decision,tier,hits,reason,js_policy,evidence,notes,decided_on
+chanevsky__gOWXvyB,https://codepen.io/chanevsky/pen/gOWXvyB,hold,unclassified,spatial_layers,await_user_review,preserve,固定正视图中不透光的外壳与内缘压在有色玻璃外周，多个同心环逐层递进，偏心反射覆盖内环。与整机相机图案不同，是光学组件嵌套。,仅候审，未正式入库。,2026-11-20
+viktorkovalenko__QaGmNq,https://codepen.io/viktorkovalenko/pen/QaGmNq,hold,unclassified,spatial_layers,await_user_review,preserve,仅采用打开时的单帧。屏幕边框覆盖图片边缘，与键盘底座沿横向转轴形成夹角；键帽和触控板嵌于近处面板，可见底壳薄侧边。忽略循环旋转及外部屏幕照片；部分转动角度有穿面伪影。,仅候审，未正式入库。,2026-11-20
