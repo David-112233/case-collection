@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>Iris Door (hexagonal) - Pure CSS</title>
+
+    <link rel="canonical" href="https://codepen.io/josetxu/pen/RwxzwEa">
+  
+  
+  
+  
+<style>
+body {
+	margin: 0;
+	padding: 0;
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	--spd: 2s; /* change speed */	
+	--u: 0.4vmin;
+	--r1: calc(var(--u) * 4);
+	--r2: calc(var(--u) * 4.1);
+	--r3: calc(var(--u) / 12);
+	--r4: calc(var(--u) / 2.5);
+	--r5: calc(var(--u) / 2.25);
+	--r6: calc(var(--u) / 2);
+	--c0: #1a1a1a;
+	--c1: #1c1c1c;
+	--c2: #404040;
+	--c3: #525252;
+	--c4: #808080;
+	--gp: 50%/calc(var(--u) * 10) calc(var(--u) * 16.8);
+	--border-fix: var(--c0) 0 25%, #fff0 0 100%;
+	--screw1: var(--c4) var(--r3), #fff0 var(--r4);
+	--screw2: var(--c0), var(--c1) var(--r5), #fff0 var(--r6);
+	--hole1: var(--c0) var(--r1), #fff0 var(--r2) 100%;
+	--hole2: var(--c1) var(--r1), #fff0 var(--r2) 100%;
+	--hole3: var(--c4) var(--r1), #fff0 var(--r2) 100%;
+	height: 100vh;
+	background: /* border fix */ conic-gradient(from 225deg at 40% 50%, var(--border-fix)) var(--gp), conic-gradient(from 45deg at 60% 50%, var(--border-fix)) var(--gp), conic-gradient(from -45deg at 50% 24%, var(--border-fix)) var(--gp), conic-gradient(from 135deg at 50% 76%, var(--border-fix)) var(--gp), /* screws */ radial-gradient(circle at 99.5% 83.5%, var(--screw1)) var(--gp), radial-gradient(circle at 100% 84%, var(--screw2)) var(--gp), radial-gradient(circle at -0.5% 83.5%, var(--screw1)) var(--gp), radial-gradient(circle at 0% 84%, var(--screw2)) var(--gp), radial-gradient(circle at 99.5% 16.5%, var(--screw1)) var(--gp), radial-gradient(circle at 100% 17%, var(--screw2)) var(--gp), radial-gradient(circle at -0.5% 16.5%, var(--screw1)) var(--gp), radial-gradient(circle at 0% 17%, var(--screw2)) var(--gp), radial-gradient(circle at 49.5% 67.5%, var(--screw1)) var(--gp), radial-gradient(circle at 50% 68%, var(--screw2)) var(--gp), radial-gradient(circle at 49.5% 31.5%, var(--screw1)) var(--gp), radial-gradient(circle at 50% 32%, var(--screw2)) var(--gp), /* holes */ radial-gradient(circle at 100% 50%, var(--hole1)) var(--gp), radial-gradient(circle at 98% 48%, var(--hole2)) var(--gp), radial-gradient(circle at 102% 52%, var(--hole3)) var(--gp), radial-gradient(circle at 0% 50%, var(--hole1)) var(--gp), radial-gradient(circle at -2% 48%, var(--hole2)) var(--gp), radial-gradient(circle at 2% 52%, var(--hole3)) var(--gp), radial-gradient(circle at 50% 100%, var(--hole1)) var(--gp), radial-gradient(circle at 48% 98%, var(--hole2)) var(--gp), radial-gradient(circle at 52% 102%, var(--hole3)) var(--gp), radial-gradient(circle at 50% 0%, var(--hole1)) var(--gp), radial-gradient(circle at 48% -2%, var(--hole2)) var(--gp), radial-gradient(circle at 52% 2%, var(--hole3)) var(--gp), /*background*/ linear-gradient(0deg, var(--c2) 33%, #ffffff20 55% 65%, var(--c3) 70% );
+	background-color: var(--c2);
+
+
+}
+
+body:before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(180deg, #fff0 0 41.35%, #585858 41.55% 44%, #0e0e0e 44%, #1c1c1c 50%, #0e0e0e 56%, #494949 56% 58.425%, #fff0 58.475% 100%);
+	background: linear-gradient(180deg, #fff0 0 41.5%, #585858 41.6% 44%, #0e0e0e 44%, #1c1c1c 45% 55%, #0e0e0e 56%, #494949 56% 58.55%, #fff0 58.6% 100%);
+}
+
+.content {
+	width: 100vmin;
+	height: 100vmin;
+}
+
+.content:before {
+	content: "";
+	width: 70vmin;
+	height: 70vmin;
+	position: absolute;
+	left: calc(50% - 35vmin);
+	border-radius: 100%;
+	top: calc(50% - 35vmin);
+	box-shadow: 0.5vmin 0.5vmin 1vmin #0a0a0a, -0.5vmin -0.5vmin 1vmin #222;
+}
+
+.door {
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(0deg, #000, #0b102e);
+	border-radius: 100%;
+	position: relative;
+	overflow: hidden;
+	clip-path: circle(35.4% at 50% 50%);
+}
+
+.door:before {
+	content: "";
+	width: 200%;
+	height: 200%;
+	position: absolute;
+	left: -50%;
+	background-image: 
+		repeating-conic-gradient(#FFF9 0%, transparent .0004%, transparent .004%, transparent .074%), 
+		radial-gradient(ellipse at 20% 30%, #80008030, #80008020, #ffa50030, #fff0, #fff0);
+	animation: spin 500s linear 0s infinite;
+	border-radius: 100%;
+}
+
+@keyframes spin {
+	100% { transform: rotate(360deg); }
+}
+
+.door:after {
+	content: "";
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: 222;
+	box-sizing: border-box;
+	border-radius: 100%;
+	background: radial-gradient(#fff0 0 40%, #858585 calc(40% + 1px), #686868 43% 46% , #484848 50%, #3330 calc(50% + 1px) 100%);
+	filter: drop-shadow(-2px -2px 5px #0009);
+	box-shadow: -5vmin -5vmin 5vmin 10vmin #222 inset, 5vmin 5vmin 5vmin 10vmin #cdcdcd inset;
+}
+
+body:hover .panel {
+	animation-duration: 1s;
+}
+
+.panel {
+	--p: #999999;
+	--p1: #787878;
+	--p2: #4e4e4e;
+	--rin: var(--p2) 0 0.5vmin, var(--p1) calc(0.5vmin + 1px) 0.75vmin, var(--p2) calc(0.75vmin + 1px) 1.25vmin, #f000 calc(1.25vmin + 1px) 100%;
+	--con: var(--p2) 0 60deg, #fff0 0 100%;
+	--lin: #fff0 33%, var(--p1) calc(33% + 1px), #fff0 calc(33% + 2px);
+	animation: start1 var(--spd) ease-in-out 0s 1;
+	--tri: var(--p2) 0deg, var(--p) 30deg, var(--p2) 60deg, #fff0 0 100%;
+	--rad: #999999 0, #434343 0.5vmin, #fff0 calc(0.5vmin + 1px) 100%;
+	width: 57.5%;
+	height: 50%;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transition: all 2s ease 0s;
+	filter: drop-shadow(0px 0px 1px #222);
+	background: linear-gradient(120deg, var(--lin)), radial-gradient(circle at 50% 4.75vmin, var(--rin)), radial-gradient(circle at 50% 5%, var(--rad)), conic-gradient(from 150deg at 50% 7%, var(--tri)), conic-gradient(from 150deg at 50% 0%, var(--p2) 0 60deg, #fff0 0 100%);
+
+}
+
+.panel:nth-child(2) {
+	background: 
+		linear-gradient(60deg, var(--lin)),
+		radial-gradient(circle at 3.55vmin 2.35vmin, var(--rin)),  
+		radial-gradient(circle at 3% 2.5%, var(--rad)),
+		conic-gradient(from 90deg at 5% 4%, var(--tri)), 
+		conic-gradient(from -30deg at 50% 100%, var(--con));
+	left: 64.5%;
+	top: 25%;
+	animation-name: start2;
+}
+
+.panel:nth-child(3) {
+	background: 
+		linear-gradient(0deg,  var(--p1) calc(0% + 1px), #fff0 calc(0% + 2px)),
+		radial-gradient(circle at 3.55vmin 95.5%, var(--rin)), 
+		radial-gradient(circle at 3% 98%, var(--rad)),
+		conic-gradient(from 30deg at 5% 96%, var(--tri)), 
+		conic-gradient(from 150deg at 50% 0%, var(--con));
+	left: 35.5%;
+	top: -25%;
+	animation-name: start3;
+}
+
+.panel:nth-child(4) {
+	background: 
+		linear-gradient(-60deg, var(--lin)),
+		radial-gradient(circle at 50% 91%, var(--rin)), 	
+		radial-gradient(circle at 50% 96%, var(--rad)),
+		conic-gradient(from -30deg at 50% 93%, var(--tri)), 
+		conic-gradient(from -30deg at 50% 100%, var(--con));
+	top: 0;
+	left: -7.75%;
+	animation-name: start4;
+}
+.panel:nth-child(5) {  
+	background: 
+		linear-gradient(-120deg, var(--lin)),
+		radial-gradient(circle at 93.5% 95%, var(--rin)), 		
+		radial-gradient(circle at 97% 98%, var(--rad)),
+		conic-gradient(from 270deg at 95% 96%, var(--tri)), 
+		conic-gradient(from 150deg at 50% 0%, var(--con));
+	top: 25%;
+	left: -22.25%;
+	animation-name: start5;
+}
+
+.panel:nth-child(6) {
+	background: 
+		linear-gradient(-60deg, var(--lin)),
+		linear-gradient(180deg,  var(--p1) calc(0% + 1px), #fff0 calc(0% + 2px)),
+		radial-gradient(circle at 93.5% 5%, var(--rin)), 	
+		radial-gradient(circle at 97% 2.5%, var(--rad)),
+		conic-gradient(from 210deg at 95% 4%, var(--tri)), 
+		conic-gradient(from -30deg at 50% 100%, var(--p2) 60deg, #fff0 0 100%);
+	top: 75%;
+	left: 7%;
+	animation-name: start6;
+}
+
+
+
+
+.door:hover .panel:nth-child(1) {
+	left: calc(50% - 28.75% );
+}
+
+.door:hover .panel:nth-child(2) {
+	left: 50%;
+	top: 50%;
+}
+
+.door:hover .panel:nth-child(3) {
+	left: 50%;
+	top: 0;
+}
+
+.door:hover .panel:nth-child(4) {
+	left: calc(50% - 28.75%);
+	top: 0;
+}
+
+.door:hover .panel:nth-child(5) {
+	top: 0;
+	left: -7.65%;
+}
+
+.door:hover .panel:nth-child(6) {
+	left: -7.5%;
+	top: 50%;	
+}
+
+
+
+
+@keyframes start1 {
+	0% { left: calc(50% - 28.75% ); }
+	100% { left: 50%; }
+}
+
+@keyframes start2 {
+	0% { top: 50%; left: 50%; }
+	100% { top: 25%; left: 64.5%; }
+}
+
+@keyframes start3 {
+	0% { top: 0;    left: 50%; }
+	100% { top: -25%; left: 35.5%; }
+}
+
+@keyframes start4 {
+	0% { left: calc(50% - 28.75% ); }
+	100% { left: -7.75%; }
+}
+
+@keyframes start5 {
+	0% { top: 0;   left: -7.65%; }
+	100% { top: 25%; left: -22.25%; }
+}
+
+@keyframes start6 {
+	0% { top: 50%; left: -7.5%; }
+	100% { top: 75%; left: 7%; }
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  <div class="content">
+
+	<div class="door">
+		
+		<div class="panel"></div>
+		<div class="panel"></div>
+		<div class="panel"></div>
+		<div class="panel"></div>
+		<div class="panel"></div>
+		<div class="panel"></div>
+		
+	</div>
+
+</div>
+  
+  
+  
+</body>
+
+</html>
