@@ -1,0 +1,7 @@
+key,url,decision,tier,hits,reason,js_policy,evidence,notes,decided_on
+Ak-407__MYgKoME,https://codepen.io/Ak-407/pen/MYgKoME,pending_review,T1,spatial_layers,await_user_review,original_preserved,三张卡片及偏移斜线背板有层叠，但默认结构简单；折叠交互未核实，不以标题动画宣传代替效果证据。,不优先；未正式入库，未评分。,2026-11-18
+ricardoolivaalonso__NWJeBPE,https://codepen.io/ricardoolivaalonso/pen/NWJeBPE,pending_review,T1,spatial_layers,await_user_review,original_preserved,办公室完整空间中柜体、书本、桌椅、吊灯、墙面及地板遮挡关系丰富。ThreeJS/GLTF外部模型依赖；场景已可见但Loading字样残留，不能宣称完全加载成功。,备选；未正式入库，未评分。,2026-11-18
+jh3y__NWdNMBJ,https://codepen.io/jh3y/pen/NWdNMBJ,pending_review,T1,spatial_layers,await_user_review,original_preserved,双翼上下叠置，支柱贯穿翼面，机身与螺旋桨交错，背景方块云形成纵深。保留原始动画及GSAP依赖；仅默认视觉核实，不宣称点击与视差完整通过。,推荐审核；未正式入库，未评分。,2026-11-18
+ricardoolivaalonso__QWJxYXE,https://codepen.io/ricardoolivaalonso/pen/QWJxYXE,pending_review,T1,spatial_layers,await_user_review,original_preserved,倾斜多面机壳，摇杆与按钮凸起，屏幕凹面，侧面接口及落地阴影形成层叠遮挡。默认视觉已核实；拖动交互未测试。,推荐审核；未正式入库，未评分。,2026-11-18
+fossheim__xxboBzO,https://codepen.io/fossheim/pen/xxboBzO,pending_review,T1,spatial_layers,await_user_review,original_preserved,镜头多重同心环向前凸起，取景器与闪光灯嵌套凹面，底部出片槽和拨钮形成多层遮挡。正面单物体，倾斜空间弱于Switch；/script.js依赖照录，不擅自移除。,推荐审核；未正式入库，未评分。,2026-11-18
+bofengbu__JjvYZoJ,https://codepen.io/bofengbu/pen/JjvYZoJ,pending_review,T1,spatial_layers,await_user_review,original_preserved,立体蛋糕缺口显露多层夹心，表面水果与叶片相互遮挡，盘边厚度和投影形成空间关系。保留外部camera.js与原始资源；仅默认视觉核实。,推荐审核；未正式入库，未评分。,2026-11-18
