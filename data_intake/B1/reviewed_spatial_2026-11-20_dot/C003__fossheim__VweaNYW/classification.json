@@ -1,0 +1,14 @@
+{
+  "review_id": "C003",
+  "case_id": null,
+  "tier": null,
+  "spatial_feature": "卡西欧键盘、黑白键叠压",
+  "evidence": "黑键跨压白键，键床嵌入外壳，控制条滑槽/滑块/按钮与扬声器格栅有多层凹凸和遮挡；纯CSS构形。",
+  "decision": "accept",
+  "confirmation": {
+    "batch": "首轮 C001–C030",
+    "value": 1,
+    "date": "2026-11-20"
+  },
+  "qualification_note": "未分配主项目正式编号、未强定档；视觉核验范围沿用采集记录。"
+}

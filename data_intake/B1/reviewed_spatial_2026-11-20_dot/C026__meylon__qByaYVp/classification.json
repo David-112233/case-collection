@@ -1,0 +1,14 @@
+{
+  "review_id": "C026",
+  "case_id": null,
+  "tier": null,
+  "spatial_feature": "圆环凹面、错落连线",
+  "evidence": "圆环与编号凹面构成浅层嵌套，连线分布错落；缺少强前后遮挡/交错关系，默认部分说明溢出首屏。",
+  "decision": "accept",
+  "confirmation": {
+    "batch": "首轮 C001–C030",
+    "value": 1,
+    "date": "2026-11-20"
+  },
+  "qualification_note": "未分配主项目正式编号、未强定档；视觉核验范围沿用采集记录。"
+}

@@ -1,0 +1,14 @@
+{
+  "review_id": "C007",
+  "case_id": null,
+  "tier": null,
+  "spatial_feature": "分层蛋糕、夹心切面",
+  "evidence": "立体蛋糕缺口显露多层夹心，表面水果与叶片相互遮挡，盘边厚度和投影形成空间关系。保留外部camera.js与原始资源；仅默认视觉核实。",
+  "decision": "accept",
+  "confirmation": {
+    "batch": "首轮 C001–C030",
+    "value": 1,
+    "date": "2026-11-20"
+  },
+  "qualification_note": "未分配主项目正式编号、未强定档；视觉核验范围沿用采集记录。"
+}

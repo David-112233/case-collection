@@ -1,0 +1,14 @@
+{
+  "review_id": "C002",
+  "case_id": null,
+  "tier": null,
+  "spatial_feature": "iPod Nano、凹屏与滚轮",
+  "evidence": "倾斜机身、圆角侧厚、屏幕凹面、滚轮及底部接口结构；单物体空间结构。jQuery点击切换动画，外部图标及prefixfree依赖保留；仅默认状态视觉核实。",
+  "decision": "accept",
+  "confirmation": {
+    "batch": "首轮 C001–C030",
+    "value": 1,
+    "date": "2026-11-20"
+  },
+  "qualification_note": "未分配主项目正式编号、未强定档；视觉核验范围沿用采集记录。"
+}

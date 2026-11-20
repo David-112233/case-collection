@@ -1,0 +1,14 @@
+{
+  "review_id": "C014",
+  "case_id": null,
+  "tier": null,
+  "spatial_feature": "唱片机、正面浮雕",
+  "evidence": "唱片圆盘、标签、中心轴、唱臂和机壳形成细致浮雕层叠。默认唱臂位于侧边，未验证横跨唱片状态；Tone.js、字体与原JS完整保留，未测试音乐播放或按钮。",
+  "decision": "accept",
+  "confirmation": {
+    "batch": "首轮 C001–C030",
+    "value": 1,
+    "date": "2026-11-20"
+  },
+  "qualification_note": "未分配主项目正式编号、未强定档；视觉核验范围沿用采集记录。"
+}

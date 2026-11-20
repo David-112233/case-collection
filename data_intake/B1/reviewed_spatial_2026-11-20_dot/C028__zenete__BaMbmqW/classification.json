@@ -1,0 +1,14 @@
+{
+  "review_id": "C028",
+  "case_id": null,
+  "tier": null,
+  "spatial_feature": "房间吊顶、扇叶遮叠",
+  "evidence": "默认房间可见墙面/地板/顶面透视、吊顶凹槽与旋转吊扇；扇叶和轴体交叠，但家具不丰富，白色大块区域与视口裁切需复核；未全面测试动画。",
+  "decision": "accept",
+  "confirmation": {
+    "batch": "首轮 C001–C030",
+    "value": 1,
+    "date": "2026-11-20"
+  },
+  "qualification_note": "未分配主项目正式编号、未强定档；视觉核验范围沿用采集记录。"
+}

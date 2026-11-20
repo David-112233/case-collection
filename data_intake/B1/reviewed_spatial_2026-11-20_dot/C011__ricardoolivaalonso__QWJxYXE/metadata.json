@@ -1,0 +1,79 @@
+{
+  "source_id": "codepen:ricardoolivaalonso/qwjxyxe",
+  "author": "ricardoolivaalonso",
+  "pen_id": "QWJxYXE",
+  "url": "https://codepen.io/ricardoolivaalonso/pen/QWJxYXE",
+  "acquisition": "cloud_browser_cdpn_srcdoc",
+  "acquisition_url": "https://cdpn.io/ricardoolivaalonso/fullpage/QWJxYXE",
+  "retrieved_at": "2026-11-18",
+  "title": "3D Nintendo Switch - CSS Art",
+  "fetch_status": "ok",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "a74ad22e8009355e760cba73368dfcad628b29aee841de1f220a8f00ac46b762",
+  "source_html_sha256": "aa0e89e93dbbd9efcd1566d178c4595a129cae90ce84476e6fcec1a5f777bba3",
+  "analysis": {
+    "js": {
+      "has_js": true,
+      "inline_js_chars": 1443,
+      "external_scripts": [
+        "https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"
+      ],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 0,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": true,
+      "clip_path": false,
+      "css_counter": false,
+      "media_query": false
+    },
+    "external_stylesheets": [],
+    "css_imports": [],
+    "css_chars": 44261,
+    "element_count": 309,
+    "html_chars": 60293
+  },
+  "review": {
+    "status": "用户首轮审核选中",
+    "evidence": "倾斜多面机壳，摇杆与按钮凸起，屏幕凹面，侧面接口及落地阴影形成层叠遮挡。默认视觉已核实；拖动交互未测试。",
+    "visual_verified": true,
+    "formal_admission": true,
+    "scope": "仅采集仓库入库交付；主项目尚未导入"
+  },
+  "review_id": "C011",
+  "case_id": null,
+  "candidate_status": "admitted_in_collection_repo",
+  "source_archive": {
+    "repository": "David-112233/case-collection",
+    "pr": 4,
+    "commit": "fe6b79929dd36108ed795838ee29354b7d4b1bfd",
+    "path": "data_intake/B1/raw/ricardoolivaalonso__QWJxYXE"
+  },
+  "intake_date": "2026-11-20",
+  "source_original_sha256": "aa0e89e93dbbd9efcd1566d178c4595a129cae90ce84476e6fcec1a5f777bba3",
+  "source_original_note": "与原作品主体一致，已去除采集页的 CodePen console 样板；完整捕获另存 original_srcdoc.html。",
+  "js_policy": "original_preserved",
+  "js_changes": "未将原作强行改写为纯 CSS；source.html 与归档预览一致，可能包含原作脚本及外部依赖。",
+  "license": "not separately verified"
+}

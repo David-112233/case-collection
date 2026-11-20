@@ -1,0 +1,14 @@
+{
+  "review_id": "C010",
+  "case_id": null,
+  "tier": null,
+  "spatial_feature": "立体办公室、家具分层",
+  "evidence": "办公室完整空间中柜体、书本、桌椅、吊灯、墙面及地板遮挡关系丰富。ThreeJS/GLTF外部模型依赖；场景已可见但Loading字样残留，不能宣称完全加载成功。",
+  "decision": "accept",
+  "confirmation": {
+    "batch": "首轮 C001–C030",
+    "value": 1,
+    "date": "2026-11-20"
+  },
+  "qualification_note": "未分配主项目正式编号、未强定档；视觉核验范围沿用采集记录。"
+}

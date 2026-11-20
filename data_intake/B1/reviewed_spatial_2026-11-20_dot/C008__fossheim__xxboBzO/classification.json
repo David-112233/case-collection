@@ -1,0 +1,14 @@
+{
+  "review_id": "C008",
+  "case_id": null,
+  "tier": null,
+  "spatial_feature": "拍立得、凹面取景器",
+  "evidence": "镜头多重同心环向前凸起，取景器与闪光灯嵌套凹面，底部出片槽和拨钮形成多层遮挡。正面单物体，倾斜空间弱于Switch；/script.js依赖照录，不擅自移除。",
+  "decision": "accept",
+  "confirmation": {
+    "batch": "首轮 C001–C030",
+    "value": 1,
+    "date": "2026-11-20"
+  },
+  "qualification_note": "未分配主项目正式编号、未强定档；视觉核验范围沿用采集记录。"
+}

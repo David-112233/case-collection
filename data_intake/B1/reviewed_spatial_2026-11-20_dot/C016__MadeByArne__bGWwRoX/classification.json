@@ -1,0 +1,14 @@
+{
+  "review_id": "C016",
+  "case_id": null,
+  "tier": null,
+  "spatial_feature": "磁带窗口、带芯叠层",
+  "evidence": "磁带外框、标签窗、卷轴、带芯和底部斜面有嵌套遮挡，旁边标签盒投影可见。整体为正视平面构图，空间深度弱于213/224/227，不为凑数优先推荐。",
+  "decision": "accept",
+  "confirmation": {
+    "batch": "首轮 C001–C030",
+    "value": 1,
+    "date": "2026-11-20"
+  },
+  "qualification_note": "未分配主项目正式编号、未强定档；视觉核验范围沿用采集记录。"
+}
