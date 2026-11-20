@@ -1,0 +1,2 @@
+review_no,source_id,url,features,decision,qa
+C281,orchimada__orbit-explode,https://orchimada.github.io/assets/diagrams/examples/orbit-explode.html,轴向拆层、板盖二级开启、芯片露出,pending_user_review,desktop_assembled_55percent_board_closed_and_open

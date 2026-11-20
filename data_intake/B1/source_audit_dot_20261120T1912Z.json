@@ -1,0 +1,20 @@
+{
+  "slot_utc": "2026-11-20T19:12:00Z",
+  "candidate_count": 1,
+  "total_if_verified": 281,
+  "formal_admission_excluded": true,
+  "cases": [
+    {
+      "review_no": "C281",
+      "id": "orchimada__orbit-explode",
+      "url": "https://orchimada.github.io/assets/diagrams/examples/orbit-explode.html",
+      "label": "轴向拆层、板盖二级开启、芯片露出",
+      "source_git_blob": "84d552a1c0441c31be410fb5eadfc588ca266477",
+      "license_git_blob": "0a4bb5628b1fae0edfc9b3c9186c18d87d57e0ca",
+      "upstream_commit": "60e290cc0e93b3b1e801da040ee8910d19ba71c2",
+      "source_size": 14841,
+      "hosted_and_upstream_exact": true,
+      "desktop_held_states_verified": true
+    }
+  ]
+}
