@@ -1,0 +1,1761 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>NOTHING phone (1) white</title>
+
+    <link rel="canonical" href="https://codepen.io/ricardo21ferreira/pen/WNKqQvv">
+  
+  
+  
+  
+<style>
+@font-face {
+  font-family: "Ndot-55";
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("//cdn.shopify.com/s/files/1/0584/0932/0622/t/5/assets/Ndot-55.otf?v=18522138017450180331657460907");
+}
+@font-face {
+  font-family: "NType82Mono";
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("//cdn.shopify.com/s/files/1/0584/0932/0622/t/5/assets/NType82Mono-Regular.otf?v=95544947759877126221657460932");
+}
+html,
+body {
+  height: 100%;
+}
+
+* {
+  margin: 0;
+}
+
+.hidden {
+  display: none;
+}
+
+.font-ndot55 {
+  font-family: "Ndot-55", "NType82Mono" !important;
+}
+
+header {
+  padding: 5%;
+  display: none;
+}
+header h1 {
+  margin-bottom: 3px;
+}
+
+.toggle-color {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  margin-top: 10px;
+}
+.toggle-color input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.toggle-color input:checked + .slider {
+  background-color: #000;
+}
+.toggle-color input:checked + .slider:before {
+  transform: translateX(26px);
+}
+.toggle-color input:focus + .slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+.toggle-color .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+.toggle-color .slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: #fff;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+.description {
+  margin: 30px 0 10px;
+  display: flex;
+  width: 100%;
+  max-width: 492px;
+  justify-content: center;
+  gap: 20px;
+}
+.description div {
+  display: flex;
+  flex-direction: column;
+}
+.description div h1 {
+  font-weight: 400;
+}
+.description div h3 {
+  font-weight: 400;
+}
+
+#nothing-phone-1 {
+  width: 496px;
+  height: 834px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -248px;
+  margin-top: -412px;
+}
+
+.artboard {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background: #cccccc;
+  background: radial-gradient(circle, #aaaaaa 0%, #cccccc 100%);
+  overflow-y: hidden;
+}
+
+.grid-place {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.grid-place input[type=checkbox] {
+  display: none;
+}
+.grid-place .phone {
+  width: 350px;
+  height: 740px;
+  border: 1px solid #00000033;
+  background: #ededed;
+  margin-left: 144px;
+  position: relative;
+  border-radius: 44px;
+  box-shadow: inset 0px 0px 4px 4px #ddd;
+}
+.grid-place .phone.absolute {
+  position: absolute;
+  background: none;
+  left: 17px;
+  top: 44px;
+}
+.grid-place .phone.absolute div {
+  background: none !important;
+}
+.grid-place .phone .front-frame {
+  left: -144px;
+  width: 350px;
+  height: 740px;
+  background: #000;
+  position: absolute;
+  border-radius: 44px;
+  box-shadow: inset 0px 0px 1px 3px #ccc;
+}
+.grid-place .phone .front-frame .in-frame {
+  position: relative;
+  width: 320px;
+  height: 710px;
+  border: 1px solid #ffffff00;
+  left: 15px;
+  top: 15px;
+  border-radius: 32px;
+  background: #000;
+}
+.grid-place .phone .front-frame .in-frame .front-camera {
+  position: absolute;
+  top: 13px;
+  left: 15px;
+}
+.grid-place .phone .front-frame .in-frame .front-camera .e {
+  position: absolute;
+  z-index: 1;
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  top: 0px;
+  left: 7px;
+  background: #080809;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+.grid-place .phone .front-frame .in-frame .front-camera .e:before {
+  content: "";
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  border-radius: 50%;
+  top: 5px;
+  left: 5px;
+  background: #051e32;
+  filter: blur(1px);
+}
+.grid-place .phone .front-frame .in-frame .front-camera .e .f {
+  position: absolute;
+  z-index: 1;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  top: 3px;
+  left: 3px;
+  border: 2px solid #1f1f1f;
+  box-sizing: border-box;
+}
+.grid-place .phone .front-frame .in-frame .front-camera .e .f .g {
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 100px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background-image: conic-gradient(transparent 10% 20%, rgba(245, 254, 254, 0.3) 26% 29%, rgba(255, 255, 255, 0.4) 35% 40%, rgba(245, 254, 254, 0.2) 42% 45%, transparent 50% 75%, rgba(245, 254, 254, 0.1) 78% 83%, rgba(255, 255, 255, 0.4) 86% 90%, rgba(245, 254, 254, 0.2) 93% 95%, transparent 99% 110%), linear-gradient(#051e32 50%, #051e32 50%);
+  background-size: 100% 100%, 100% 100%;
+  background-repeat: no-repeat;
+  background-position: 0 0, 100% 0, 0 0;
+  box-shadow: -2px 0px 1px #051e32 inset, 1px 1px 2px -1px #000 inset, 1px 1px 4px -2px #000 inset;
+}
+.grid-place .phone .front-frame:before {
+  content: "";
+  position: absolute;
+  width: 346px;
+  height: 736px;
+  border: 1px solid #ffffffff;
+  left: 1px;
+  top: 1px;
+  border-radius: 44px;
+  box-shadow: inset 1px 1px 3px 1px #fff;
+}
+.grid-place .phone .front-frame .antenas {
+  transform: scaleX(-1);
+  height: 743px;
+  top: -2px;
+  left: -2px;
+}
+.grid-place .phone .front-frame .buttons {
+  transform: scaleX(-1);
+  left: 1px;
+}
+.grid-place .phone .out-frame {
+  position: relative;
+  width: 346px;
+  height: 736px;
+  border: 1px solid #ffffff00;
+  background: #ededed;
+  left: 1px;
+  top: 1px;
+  border-radius: 44px;
+  box-shadow: inset 1px 1px 3px 1px #bbb;
+}
+.grid-place .phone .out-frame .in-frame {
+  position: relative;
+  width: 320px;
+  height: 707px;
+  border: 1px solid #ffffff00;
+  left: 12px;
+  top: 13px;
+  border-radius: 32px;
+  box-shadow: inset -2px 2px 6px 6px rgba(0, 0, 0, 0.1);
+}
+.grid-place .phone .cameras {
+  position: absolute;
+  width: 62px;
+  height: 130px;
+  top: 31px;
+  left: 30px;
+  border-radius: 31px;
+  background: #8c939a;
+}
+.grid-place .phone .cameras:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(rgba(0, 0, 0, 0.1) 15%, transparent 16%) 0 0, radial-gradient(rgba(0, 0, 0, 0.1) 15%, transparent 16%) 8px 8px, radial-gradient(rgba(100, 100, 100, 0.2) 15%, transparent 20%) 0 1px, radial-gradient(rgba(100, 100, 100, 0.2) 15%, transparent 20%) 8px 9px;
+  background-color: rgba(255, 255, 255, 0.2);
+  background-size: 3px 3px;
+  border-radius: 31px;
+}
+.grid-place .phone .cameras .a {
+  position: absolute;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  top: 0;
+  left: 0;
+}
+.grid-place .phone .cameras .a:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  top: 7px;
+  left: 3px;
+  filter: blur(2px);
+}
+.grid-place .phone .cameras .a .b {
+  position: absolute;
+  width: 63px;
+  height: 63px;
+  border-radius: 50%;
+  top: 0;
+  left: 0;
+  border: 1px solid #55555555;
+  box-sizing: border-box;
+  background: linear-gradient(173deg, rgba(255, 255, 255, 0.5) 0%, rgba(0, 0, 0, 0.1) 49%, rgba(255, 255, 255, 0.6) 100%);
+}
+.grid-place .phone .cameras .a .b .c {
+  position: absolute;
+  width: 51px;
+  height: 51px;
+  border-radius: 50%;
+  top: 5px;
+  left: 5px;
+  background: black;
+  box-sizing: border-box;
+  box-shadow: -1px -1px 3px #ffffffaa, -1px -1px 0px #ffffff40 inset;
+}
+.grid-place .phone .cameras .a .b .c .d {
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  top: 8px;
+  left: 8px;
+}
+.grid-place .phone .cameras .a .b .c .d:before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  border-radius: 50%;
+  background: linear-gradient(173deg, rgba(12, 46, 62, 0.7) 0%, rgba(37, 75, 92, 0.6) 100%);
+  filter: blur(1px);
+}
+.grid-place .phone .cameras .a .b .c .d:after {
+  content: "";
+  position: absolute;
+  width: 27px;
+  height: 27px;
+  top: 3px;
+  left: 3px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  z-index: 0;
+}
+.grid-place .phone .cameras .a .b .c .d .e {
+  position: absolute;
+  z-index: 1;
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  top: 7px;
+  left: 7px;
+  background: #4b768f;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+.grid-place .phone .cameras .a .b .c .d .e:before {
+  content: "";
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  border-radius: 50%;
+  top: 5px;
+  left: 5px;
+  background: #051e32;
+  filter: blur(1px);
+}
+.grid-place .phone .cameras .a .b .c .d .e .f {
+  position: absolute;
+  z-index: 1;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  top: 3px;
+  left: 3px;
+  border: 2px solid #203a52;
+  box-sizing: border-box;
+}
+.grid-place .phone .cameras .a .b .c .d .e .f:before {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 8px;
+  border-radius: 50%;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  top: -3px;
+  left: -5px;
+  transform: rotate(-55deg);
+}
+.grid-place .phone .cameras .a .b .c .d .e .f:after {
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 2px;
+  border-radius: 80%;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  bottom: -4px;
+  left: -1px;
+  transform: rotate(25deg);
+}
+.grid-place .phone .cameras .a .b .c .d .e .f .g {
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 100px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background-image: conic-gradient(transparent 10% 20%, rgba(245, 254, 254, 0.3) 26% 29%, rgba(255, 255, 255, 0.6) 35% 40%, rgba(245, 254, 254, 0.2) 42% 45%, transparent 50% 75%, rgba(245, 254, 254, 0.4) 78% 83%, rgba(255, 255, 255, 0.6) 86% 90%, rgba(245, 254, 254, 0.2) 93% 95%, transparent 99% 110%), linear-gradient(#051e32 50%, #051e32 50%);
+  background-size: 100% 100%, 100% 100%;
+  background-repeat: no-repeat;
+  background-position: 0 0, 100% 0, 0 0;
+  box-shadow: -2px 0px 1px #051e32 inset, 1px 1px 2px -1px #000 inset, 1px 1px 4px -2px #000 inset;
+}
+.grid-place .phone .cameras .a:nth-child(2) {
+  bottom: 0;
+  top: auto;
+}
+.grid-place .phone .cameras .a:nth-child(2) .b .c .d {
+  width: 31px;
+  height: 31px;
+  inset: 10px;
+}
+.grid-place .phone .cameras .a:nth-child(2) .b .c .d:after {
+  width: 25px;
+  height: 25px;
+  top: 2px;
+  left: 2px;
+}
+.grid-place .phone .cameras .a:nth-child(2) .b .c .d .e {
+  background-color: #59abdb10;
+  top: 5px;
+  left: 5px;
+}
+.grid-place .phone .cameras .a:nth-child(2) .b .c .d .e .f {
+  border-color: #172f44ff;
+}
+.grid-place .phone .cameras .a:nth-child(2) .b .c .d .e .f:before {
+  border-top: 0;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  top: -4px;
+  left: -4px;
+  background-image: conic-gradient(transparent 10% 0%, rgba(245, 254, 254, 0.3) 26% 29%, rgba(255, 255, 255, 0.6) 35% 40%, rgba(0, 0, 0, 0) 42% 45%), linear-gradient(#051e32 50%, #051e32 50%);
+  background-size: 100% 100%, 100% 100%;
+  transform: rotate(28deg);
+}
+.grid-place .phone .cameras .a:nth-child(2) .b .c .d .e .f:after {
+  width: 11px;
+  height: 2px;
+  bottom: 7px;
+  left: -5px;
+  transform: rotate(140deg);
+  border-color: #000000aa;
+  border-width: 5px;
+  filter: blur(1px);
+}
+.grid-place .phone .cameras .a:nth-child(2) .b .c .d .e .f .g {
+  width: 10px;
+  height: 10px;
+}
+.grid-place .phone .antenas {
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 5px 0 24px #00000015;
+  border-radius: 44px;
+}
+.grid-place .phone .antenas i {
+  position: absolute;
+  width: 12px;
+  height: 4px;
+  box-shadow: inset -1px -1px 1px 1px rgba(0, 0, 0, 0.15);
+  border-radius: 2px;
+  background: #ffffff80;
+}
+.grid-place .phone .antenas i:nth-child(1) {
+  top: 1px;
+  left: 18%;
+}
+.grid-place .phone .antenas i:nth-child(2) {
+  top: 1px;
+  right: 18%;
+}
+.grid-place .phone .antenas i:nth-child(3) {
+  right: -3px;
+  top: 20%;
+  transform: rotate(90deg);
+}
+.grid-place .phone .antenas i:nth-child(4) {
+  right: -3px;
+  top: 78%;
+  transform: rotate(90deg);
+}
+.grid-place .phone .antenas i:nth-child(5) {
+  left: 62%;
+  bottom: 1px;
+  transform: rotate(180deg);
+}
+.grid-place .phone .antenas i:nth-child(6) {
+  left: 35%;
+  bottom: 1px;
+  transform: rotate(180deg);
+}
+.grid-place .phone .antenas i:nth-child(7) {
+  left: 31%;
+  bottom: 1px;
+  transform: rotate(180deg);
+}
+.grid-place .phone .antenas i:nth-child(8) {
+  left: -2px;
+  top: 29%;
+  transform: rotate(-90deg);
+}
+.grid-place .phone .buttons {
+  position: absolute;
+  inset: 0;
+}
+.grid-place .phone .buttons i {
+  position: absolute;
+  width: 3px;
+  height: 76px;
+  box-shadow: inset -1px -1px 1px 1px rgba(0, 0, 0, 0.25);
+  border-radius: 2px;
+  background: #ffffff80;
+}
+.grid-place .phone .buttons i:nth-child(1) {
+  top: 270px;
+  left: -2px;
+  box-shadow: inset 1px -1px 1px 1px rgba(0, 0, 0, 0.25);
+}
+.grid-place .phone .buttons i:nth-child(2) {
+  top: 206px;
+  right: -3px;
+  height: 60px;
+}
+.grid-place .phone .buttons i:nth-child(3) {
+  top: 279px;
+  right: -3px;
+  height: 60px;
+}
+.grid-place .phone .dotted-parts {
+  position: absolute;
+  inset: 0;
+}
+.grid-place .phone .dotted-parts .ab {
+  position: absolute;
+  width: 17px;
+  height: 12px;
+  background: #ededed;
+  top: 156px;
+  left: 164px;
+  box-sizing: border-box;
+  border: 0px solid #00000030;
+  border-bottom-left-radius: 2px;
+  box-shadow: inset -1px 1px 6px 0px rgba(0, 0, 0, 0.33);
+  border-bottom-right-radius: 2px;
+}
+.grid-place .phone .dotted-parts .bb {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: #eaeff0;
+  top: 78px;
+  left: 244px;
+  box-sizing: border-box;
+  border: 0px solid #00000030;
+  border-bottom-left-radius: 2px;
+  box-shadow: inset -1px 1px 6px 0px rgba(0, 0, 0, 0.33);
+  border-bottom-right-radius: 2px;
+  transform: rotate(-49deg);
+}
+.grid-place .phone .dotted-parts .a,
+.grid-place .phone .dotted-parts .b {
+  display: inline-block;
+  width: 205px;
+  height: 309px;
+  filter: drop-shadow(0px 3px 2px rgba(0, 0, 0, 0.2));
+  position: absolute;
+  left: 135px;
+  top: 19px;
+}
+.grid-place .phone .dotted-parts .a:before,
+.grid-place .phone .dotted-parts .b:before {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 371px;
+  height: 355px;
+  left: -24px;
+  top: -15px;
+  background: radial-gradient(circle at 1px 1px, rgba(0, 0, 0, 0.05) 1px, transparent 0), radial-gradient(circle at 4px 4px, rgba(0, 0, 0, 0.05) 1px, transparent 0);
+  background-color: #ededed;
+  background-size: 6px 6px;
+  clip-path: path("M 42.426229,14.513811 H 158.97971 c 0,0 4.66699,0.877631 6.23243,3.243356 1.56544,2.365726 1.70868,5.356503 1.70868,5.356503 l 0.0309,22.825352 c 0,0 0.12689,1.373341 -0.60434,2.602463 -0.73123,1.229121 -2.29045,3.244668 -2.29045,3.244668 L 82.386076,149.422 c 0,0 -1.059185,1.16247 -1.73069,1.59709 -0.671506,0.43461 -2.247932,0.95989 -2.247932,0.95989 l -48.57907,0.0191 c 0,0 -2.700796,0.21925 -4.36056,-1.44052 -1.525532,-1.54719 -1.514006,-4.19219 -1.514006,-4.19219 V 30.740799 c 0,0 0.599073,-5.508704 5.395548,-10.305179 5.900213,-5.900213 13.076863,-5.921789 13.076863,-5.921789 z");
+}
+.grid-place .phone .dotted-parts .b {
+  width: 336px;
+  height: 402px;
+  top: 50px;
+  left: 0px;
+  filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.1));
+}
+.grid-place .phone .dotted-parts .b:before {
+  position: absolute;
+  width: 340px;
+  height: 424px;
+  left: -9px;
+  top: 99px;
+  clip-path: path("M 24.853372,14.513811 H 191.85212 c 0,0 22.20333,0.207416 44.4022,6.225498 22.19888,6.018081 37.90946,15.090184 37.90946,15.090184 l -0.21449,-14.436988 c 0,0 -0.21356,-1.371167 1.47532,-3.761606 1.68886,-2.390438 3.65564,-2.748211 3.65564,-2.748211 H 343.9549 V 404.64512 l -42.89841,-0.21905 c 0,0 -1.48049,0.16617 -2.90639,1.55335 -1.42588,1.38706 -1.55624,2.80823 -1.55624,2.80823 v 5.58202 c 0,0 -0.18586,1.20816 -1.13124,2.12049 -0.94541,0.91238 -2.11307,1.02473 -2.11307,1.02473 H 142.3244 v -6.26575 c 0,0 -20.9766,-5.48329 -30.07441,-8.72044 -9.09782,-3.23715 -16.306373,-6.05675 -24.508985,-10.40541 -8.202611,-4.34867 -17.265017,-10.39756 -24.424091,-15.77666 -7.159075,-5.37909 -13.39031,-11.12838 -18.610796,-16.16777 -5.220485,-5.03938 -9.645268,-9.69585 -13.091387,-13.50441 -3.446119,-3.80852 -7.660913,-9.2744 -7.660913,-9.2744 V 14.53044 Z");
+}
+.grid-place .phone .dotted-parts .c {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 168px;
+  left: 279px;
+  border-radius: 50%;
+  box-shadow: inset 1px 2px 3px #00000050;
+  background: #ededed;
+}
+.grid-place .phone .dotted-parts .c:before {
+  content: "";
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  box-shadow: inset -1px -1px 2px #ffffff;
+}
+.grid-place .phone .dotted-parts .c i {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  top: 0px;
+  left: 36px;
+  border-radius: 50%;
+  box-shadow: inset 1px 2px 3px #00000030;
+  background: #ededed;
+}
+.grid-place .phone .dotted-parts .c i:before {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  box-shadow: inset -1px -1px 2px #ffffff60;
+}
+.grid-place .phone .dotted-parts .c i:nth-child(2) {
+  top: 17px;
+}
+.grid-place .phone .dotted-parts .c i:nth-child(3) {
+  top: 389px;
+  width: 7px;
+  height: 7px;
+  left: -3px;
+}
+.grid-place .phone .dotted-parts .d {
+  position: absolute;
+  width: 18px;
+  height: 26px;
+  top: 188px;
+  left: 15px;
+  box-sizing: border-box;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  box-shadow: inset -1px 0px 3px #00000030;
+  background: #ededed;
+}
+.grid-place .phone .dotted-parts .e {
+  position: absolute;
+  overflow: hidden;
+  height: 65px;
+  width: 65px;
+  top: 189px;
+  left: 61px;
+  transform: rotate(63deg);
+}
+.grid-place .phone .dotted-parts .e:after {
+  content: "";
+  position: absolute;
+  width: 355px;
+  height: 355px;
+  top: -147px;
+  left: 15px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  box-shadow: inset 0px 0px 3px #00000040;
+  background: #ededed;
+}
+.grid-place .phone .top-parts {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.grid-place .phone .top-parts .a {
+  position: absolute;
+  width: 24px;
+  height: 8px;
+  background: #ededed;
+  top: 156px;
+  left: 141px;
+  box-sizing: border-box;
+  border: 0px solid #00000030;
+  box-shadow: inset -1px 0px 5px -2px rgba(0, 0, 0, 0.64);
+  border-radius: 3px;
+}
+.grid-place .phone .top-parts .b {
+  position: absolute;
+  width: 83px;
+  height: 14px;
+  background: #ededed;
+  top: 149px;
+  left: 58px;
+  box-sizing: border-box;
+  border: 1px solid #00000020;
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 3px;
+}
+.grid-place .phone .top-parts .c {
+  position: absolute;
+  width: 51px;
+  height: 122px;
+  background: #ededed;
+  top: 14px;
+  left: 58px;
+  box-sizing: border-box;
+  border: 0px solid #00000020;
+  box-shadow: 3px -3px 3px -3px rgba(0, 0, 0, 0.25);
+  border-top-right-radius: 44px;
+}
+.grid-place .phone .top-parts .d {
+  position: absolute;
+  width: 29px;
+  height: 72px;
+  background: #ededed;
+  top: 62px;
+  left: 104px;
+  box-sizing: border-box;
+  border: 0px solid #00000020;
+  box-shadow: 0px 0px 4px -1px rgba(0, 0, 0, 0.45);
+  border-radius: 3px;
+}
+.grid-place .phone .top-parts .e {
+  position: absolute;
+  width: 77px;
+  height: 16px;
+  background: #ededed;
+  top: 134px;
+  left: 58px;
+  box-sizing: border-box;
+  border: 1px solid #00000020;
+  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 3px;
+}
+.grid-place .phone .top-parts .f {
+  position: absolute;
+  width: 55px;
+  height: 148px;
+  background: #ededed;
+  top: 15px;
+  left: 15px;
+  box-sizing: border-box;
+  box-shadow: -2px 0px 3px 0px rgba(0, 0, 0, 0.25);
+  border-top-left-radius: 31px;
+  border-bottom: 1px solid #00000010;
+}
+.grid-place .phone .top-parts .g {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  background: #ededed;
+  top: 69px;
+  left: 107px;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  border-bottom: 1px solid #00000010;
+}
+.grid-place .phone .top-parts .g:before {
+  position: absolute;
+  content: "";
+  width: 6px;
+  height: 6px;
+  background: #777;
+  top: 8px;
+  left: 8px;
+  border-radius: 50%;
+  display: block;
+}
+.grid-place .phone .top-parts .g:after {
+  position: absolute;
+  content: "";
+  width: 3px;
+  height: 2px;
+  background: #ddd;
+  top: 9px;
+  left: 9px;
+  filter: blur(1px);
+  transform: rotate(-45deg);
+}
+.grid-place .phone .top-parts .h {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  top: 106px;
+  left: 109px;
+  background: #ededed;
+  box-sizing: border-box;
+  box-shadow: inset -1px -1px 5px 3px rgba(0, 0, 0, 0.4);
+  border-radius: 5px;
+  border: 1px solid #00000020;
+}
+.grid-place .phone .top-parts .h:before {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  inset: 4px;
+  background: #b08306bb;
+  filter: blur(1px);
+}
+.grid-place .phone .top-parts .h:after {
+  position: absolute;
+  content: "";
+  width: 3px;
+  height: 2px;
+  background: #ddd;
+  top: 5px;
+  left: 5px;
+  filter: blur(1px);
+  transform: rotate(-45deg);
+}
+.grid-place .phone .top-parts .i {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  top: -37px;
+  left: 180px;
+  box-sizing: border-box;
+  filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+}
+.grid-place .phone .top-parts .i:before {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 205px;
+  height: 205px;
+  background-color: #ededed;
+  clip-path: path("m 100.30333,126.61833 c -35.479729,37.05741 1.28523,68.00538 1.28523,68.00538 h 50.11686 l -0.70096,-67.91635 z");
+}
+.grid-place .phone .top-parts .i i {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  top: 146px;
+  left: 115px;
+  border-radius: 50%;
+  box-shadow: inset 2px 2px 3px #00000060;
+  border: 1px solid #00000005;
+  background: #00000005;
+}
+.grid-place .phone .top-parts .i i:before {
+  content: "";
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  box-shadow: inset -2px -2px 3px #ffffff40;
+}
+.grid-place .phone .top-parts .i i:after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 6px;
+  height: 6px;
+  top: 10px;
+  left: 10px;
+  border-radius: 50%;
+  background: #33000088;
+}
+.grid-place .phone .top-parts .j {
+  position: absolute;
+  width: 19px;
+  height: 26px;
+  top: 62px;
+  left: 315px;
+  box-sizing: border-box;
+  border-top-left-radius: 5px;
+  box-shadow: -1px -1px 2px #00000020;
+  background: #ededed80;
+}
+.grid-place .phone .bottom-parts {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.grid-place .phone .bottom-parts .l {
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.2));
+}
+.grid-place .phone .bottom-parts .l:before {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 77px;
+  height: 77px;
+  top: 485px;
+  left: 9px;
+  background-color: #ededed;
+  clip-path: path("m 6.192167,0.9342 v 17.3201 h 3.093052 c 0,0 0.654363,0.0217 0.937487,0.30483 0.371462,0.37146 0.263706,1.27115 0.263706,1.27115 V 44.85934 H 40.01887 V 30.86505 L 6.270616,-2.88321 Z");
+}
+.grid-place .phone .bottom-parts .c {
+  position: absolute;
+  width: 43px;
+  height: 26px;
+  top: 571px;
+  left: 156px;
+  box-sizing: border-box;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  box-shadow: 0px -1px 3px #00000020;
+  background: #ededed;
+}
+.grid-place .phone .bottom-parts .k {
+  position: absolute;
+  width: 119px;
+  height: 81px;
+  top: 640px;
+  left: 15px;
+  box-sizing: border-box;
+  border-bottom-left-radius: 28px;
+  box-shadow: 0px -1px 3px #00000020;
+  background: #ededed;
+}
+.grid-place .phone .bottom-parts .d {
+  position: absolute;
+  width: 24px;
+  height: 18px;
+  background: #eaeff0;
+  top: 552px;
+  left: 300px;
+  box-sizing: border-box;
+  border: 0px solid #00000030;
+  box-shadow: 3px 0px 1px 1px rgba(0, 0, 0, 0.34);
+  border-radius: 3px;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 100%);
+}
+.grid-place .phone .bottom-parts .d:before {
+  content: "";
+  position: absolute;
+  width: 4px;
+  height: 18px;
+  background: #e0e0e0;
+  top: 0;
+  left: 19px;
+}
+.grid-place .phone .bottom-parts .e {
+  position: absolute;
+  width: 24px;
+  height: 18px;
+  background: #eaeff0;
+  top: 690px;
+  left: 230px;
+  box-sizing: border-box;
+  box-shadow: 3px 0px 2px 1px rgba(0, 0, 0, 0.2);
+}
+.grid-place .phone .bottom-parts .j {
+  position: absolute;
+  width: 106px;
+  height: 52px;
+  background: #eaeff0;
+  top: 589px;
+  left: 14px;
+  box-sizing: border-box;
+  border-bottom: 2px solid #00000005;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.08) 100%);
+}
+.grid-place .phone .bottom-parts .i {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  top: 187px;
+  left: 1px;
+  box-sizing: border-box;
+  filter: drop-shadow(0px 1px 0px rgba(0, 0, 0, 0.2));
+}
+.grid-place .phone .bottom-parts .i i {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #00000002;
+  top: 472px;
+  left: 149px;
+  box-sizing: border-box;
+  box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+.grid-place .phone .bottom-parts .i i:nth-child(2) {
+  top: 506px;
+  left: 148px;
+}
+.grid-place .phone .bottom-parts .i b {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  top: 0px;
+  left: 0px;
+}
+.grid-place .phone .bottom-parts .i b:before {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 469px;
+  height: 504px;
+  top: 164px;
+  left: -282px;
+  background: radial-gradient(circle at 1px 1px, rgba(0, 0, 0, 0.08) 1px, transparent 0), radial-gradient(circle at 3px 3px, rgba(0, 0, 0, 0.08) 1px, transparent 0);
+  background-color: #ccc;
+  background-size: 4px 4px;
+  clip-path: path("m 425.65983,307.07006 -21.87679,-0.0668 0.15117,49.12391 7.66992,0.2189 c 0,0 0.29724,-4.0118 3.68797,-7.24533 3.27506,-3.12321 8.10293,-3.47625 8.10293,-3.47625 l 2.62551,0.0949 6.26705,-5.96146 0.14444,-25.55833 z");
+}
+.grid-place .phone .bottom-parts .i:before {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 469px;
+  height: 504px;
+  top: 163px;
+  left: -282px;
+  background-color: #ccc;
+  clip-path: path("m 436.03467,307.12316 h -32.19184 v 52.5529 h 11.30836 c 0,0 -0.54368,-4.46957 2.48231,-7.49556 2.92275,-2.92275 7.0092,-2.54384 7.0092,-2.54384 h 11.97971 v -42.5794 z");
+}
+.grid-place .phone .bottom-parts .lines {
+  position: absolute;
+  width: 80px;
+  height: 27px;
+  top: 566px;
+  left: 0px;
+  opacity: 0.4;
+}
+.grid-place .phone .bottom-parts .lines .l1 {
+  position: absolute;
+  width: 170px;
+  height: 214px;
+  top: -60px;
+  left: 14px;
+  overflow: hidden;
+}
+.grid-place .phone .bottom-parts .lines .l1:before {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 427px;
+  height: 504px;
+  top: -150px;
+  left: -183px;
+  background-color: #e1e1e1;
+  clip-path: path("m 185.40781,176.07549 26.9085,25.7635 c 0,0 0.79101,1.02503 1.30003,2.85155 0.50902,1.82651 0.44501,3.8227 0.44501,3.8227 L 213.35704,310.377 c 0,0 1.84611,13.3393 15.68817,13.3338 13.84206,-0.01 16.13576,-13.0308 16.13576,-13.0308 v -56.6451 c 0,0 -0.55895,-8.85983 6.43006,-16.39029 6.98901,-7.53047 17.58053,-7.6203 17.58053,-7.6203 h 37.27155 v 4.17768 h -36.15606 c 0,0 -8.82014,0.26163 -15.03576,6.47728 -6.21561,6.21561 -5.99625,14.55473 -5.99625,14.55473 v 55.4932 c 0,0 -0.71663,16.9448 -20.11326,16.9448 -19.39663,0 -19.87422,-18.018 -19.87422,-18.018 V 209.01689 c 0,0 0.072,-2.09034 -0.18781,-3.1368 -0.25977,-1.04645 -1.40291,-2.79984 -1.40291,-2.79984 l -22.26492,-22.26492 v 15.02224 l 12.23792,12.78313 c 0,0 1.54229,1.42711 2.20599,2.77155 0.6637,1.34444 0.9086,2.62307 0.9086,2.62307 v 99.43669 c 0,0 3.51865,23.55837 28.62323,23.23668 25.10459,-0.32169 28.65949,-22.23239 28.65949,-22.23239 v -55.7234 c 0,0 -0.76469,-5.4482 2.88045,-10.16652 3.64514,-4.71837 11.17139,-3.88528 11.17139,-3.88528 h 38.5641 v -23.99485 h -46.75912 c 0,0 -10.77157,-0.58661 -20.03801,8.81818 -8.68675,8.81646 -8.2083,19.42813 -8.2083,19.42813 v 58.33014 c 0,0 -0.30677,6.0491 -6.52719,6.0491 -6.22042,0 -7.32889,-6.1947 -7.32889,-6.1947 l -0.15026,-106.98368 c 0,0 0.14105,-1.01457 -0.41004,-3.58108 -0.5511,-2.56651 -1.67112,-3.63243 -1.67112,-3.63243 L 185.62097,158.526 Z");
+}
+.grid-place .phone .bottom-parts .a {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  top: 187px;
+  left: 0px;
+  box-sizing: border-box;
+  filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+}
+.grid-place .phone .bottom-parts .a:before {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 427px;
+  height: 504px;
+  top: 44px;
+  left: -275px;
+  background-color: #ededed;
+  clip-path: path("m 291.32802,276.82975 -0.13076,61.82808 c 0,0 4.20851,0.23245 4.20851,3.68963 0,3.77436 -5.39723,3.13596 -5.39723,3.13596 v 118.53371 c 0,0 -0.0954,1.166 0.35987,1.6222 0.38319,0.3841 1.26769,0.315 1.26769,0.315 l 10.10465,0.022 c 0,0 3.83496,0.2217 5.06892,1.4765 1.17038,1.1901 1.31981,4.8305 1.31981,4.8305 l 0.0768,11.35198 c 0,0 -0.1018,1.0669 1.28722,2.456 1.42617,1.4261 3.37753,2.1039 3.37753,2.1039 l 41.89637,-0.062 c 0,0 5.71467,0.077 14.14499,-8.4497 7.87086,-7.961 7.93598,-13.23048 7.93598,-13.23048 l 0.55733,-81.64041 c 0,0 0.0457,-1.3119 0.91105,-1.9432 0.88365,-0.6447 2.4001,-0.5319 2.4001,-0.5319 h 30.14546 v -41.86257 h -42.78143 c 0,0 -10.40363,0.52142 -20.2633,10.3811 -9.72895,9.72895 -10.4677,17.66267 -10.4677,17.66267 v 63.4759 c 0,0 -0.0456,1.5049 -2.79855,1.5049 -2.42226,0 -2.55508,-1.4497 -2.55508,-1.4497 V 310.48259 c 0,0 -0.0354,-2.24773 -1.16336,-4.97087 -1.09057,-2.63288 -2.4045,-3.86317 -2.4045,-3.86317 l -24.45566,-22.15409 -1.61169,-1.6117 c 0,0 -0.39318,-0.44784 -0.62808,-0.62808 -0.26065,-0.2 -0.85357,-0.4928 -0.85357,-0.4928 z");
+}
+.grid-place .phone .bottom-parts .b {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  top: 187px;
+  left: 1px;
+  box-sizing: border-box;
+  filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+}
+.grid-place .phone .bottom-parts .b:before {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 485px;
+  height: 504px;
+  top: 103px;
+  left: -143px;
+  background-color: #ededed;
+  clip-path: path("m 275.75739,279.74945 -27.30158,30.15034 V 413.6892 c 0,0 0.0654,11.10534 10.30832,11.82813 8.94558,0.63125 10.68905,-8.41562 10.68905,-8.41562 v -22.72139 l 23.0139,-26.47599 c 0,0 2.71272,-3.10525 4.48605,-3.70562 0.88857,-0.30083 1.30832,-0.21577 2.0374,0.34367 1.04233,0.79981 0.98742,3.43535 0.98742,3.43535 v 59.18666 c 0,0 0.0245,0.70265 0.46763,1.17756 0.36596,0.39216 0.96186,0.41141 0.96186,0.41141 h 75.48699 c 0,0 0.74747,-0.0286 1.2326,-0.53744 0.48209,-0.50569 0.47127,-1.21505 0.47127,-1.21505 v -15.28325 c 0,0 0.0627,-7.34409 7.33956,-7.33956 7.32036,0.005 7.37292,7.19344 7.37292,7.19344 v 12.89931 c 0,0 0.13456,1.6174 1.77191,2.93369 1.40524,1.12969 3.95401,1.37534 3.95401,1.37534 h 28.99602 c 0,0 0.679,-0.16629 0.9298,-0.54294 0.35794,-0.53755 0.24357,-2.00043 0.24357,-2.00043 v -52.58052 c 0,0 0.6239,-11.17596 8.70087,-19.49703 6.87783,-7.08569 19.43027,-6.8475 19.43027,-6.8475 l 11.66716,-0.24414 c 0,0 1.55781,0.0607 2.46034,-0.60884 1.01229,-0.75101 1.07247,-2.58748 1.07247,-2.58748 v -64.10633 c 0,0 -0.1722,-0.43127 -0.33488,-0.59261 -0.13692,-0.13579 -0.51471,-0.28904 -0.51471,-0.28904 H 331.18676 c 0,0 -0.45162,-0.0583 -0.82341,0.41795 -0.2822,0.36145 -0.31659,1.12093 -0.31659,1.12093 v 7.29424 c 0,0 -0.14714,1.39326 -0.84266,2.08878 -0.73633,0.73632 -2.10362,0.77403 -2.10362,0.77403 h -22.93643 c 0,0 -1.64038,-0.0459 -2.61537,-1.02085 -1.01026,-1.01027 -0.8992,-2.61102 -0.8992,-2.61102 v -5.96123 c 0,0 -0.0848,-1.04786 -0.79288,-1.59117 -0.8108,-0.62215 -2.30744,-0.5087 -2.30744,-0.5087 h -20.71295 c 0,0 -0.35063,0.0707 -0.56033,0.27911 -0.16922,0.16821 -0.51849,0.5844 -0.51849,0.5844 z");
+}
+.grid-place .phone .bottom-parts .f {
+  position: absolute;
+  width: 20px;
+  height: 13px;
+  background: #eaeff0;
+  top: 640px;
+  left: 266px;
+  box-sizing: border-box;
+  box-shadow: inset 0px 0px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+}
+.grid-place .phone .bottom-parts .f:before {
+  content: "";
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  background: #eaeff0;
+  top: 0px;
+  left: 5px;
+  box-sizing: border-box;
+  box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+}
+.grid-place .phone .bottom-parts .g {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: #e0e0e0;
+  top: 513px;
+  left: 22px;
+  box-sizing: border-box;
+  box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.15);
+  border-radius: 5px;
+}
+.grid-place .phone .bottom-parts .h {
+  position: absolute;
+  width: 6px;
+  height: 10px;
+  background: #dfe6e4;
+  top: 704px;
+  left: 56px;
+  box-sizing: border-box;
+  box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+.grid-place .phone .bottom-parts .h:before {
+  content: "";
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: #eaeff0;
+  top: 1px;
+  left: 0px;
+  box-sizing: border-box;
+  box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+}
+.grid-place .phone .coil .a {
+  position: absolute;
+  display: block;
+  width: 40px;
+  height: 40px;
+  left: 279px;
+  top: 360px;
+  background-color: #ededed;
+}
+.grid-place .phone .coil .b {
+  display: block;
+  width: 86px;
+  height: 155px;
+  filter: drop-shadow(0px 0px 1px rgba(0, 0, 0, 0.2)) drop-shadow(0px 0px 1px #00000045);
+  position: absolute;
+  left: 17px;
+  top: 21px;
+}
+.grid-place .phone .coil .b:before {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 400px;
+  height: 370px;
+  left: -93px;
+  top: 162px;
+  background-position: 47px -5px;
+  background-image: repeating-radial-gradient(circle, #e0e0e0 0px, #ffffff 2px, #ffffff 2px, #e0e0e0 4px);
+  clip-path: path("m 394.64051,83.54457 -0.35195,96.64729 -23.722,0.23167 c 0,0 -1.64061,-0.35243 -2.90525,1.94856 -1.26464,2.30098 -0.38393,3.38507 -0.38393,3.38507 l 27.17987,32.04366 v 57.85992 c 0,0 -51.76732,79.54692 -147.22163,79.08436 -95.45431,-0.46256 -143.85964,-79.08436 -143.85964,-79.08436 V 83.0183 c 0,0 45.24497,-77.53491 145.61535,-77.53491 100.37038,0 145.64918,78.06118 145.64918,78.06118 z");
+}
+.grid-place .phone .coil .c {
+  display: block;
+  width: 86px;
+  height: 155px;
+  filter: drop-shadow(0px 0px 1px rgba(0, 0, 0, 0.1)) drop-shadow(0px 0px 1px #00000020);
+  position: absolute;
+  left: 113px;
+  top: 310px;
+}
+.grid-place .phone .coil .c:before {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 400px;
+  height: 370px;
+  left: 0;
+  top: 0;
+  background-color: #ebebeb;
+  background-size: 6px 6px;
+  clip-path: path("m 84.811666,15.052863 c 0,0 13.82263,8.75192 18.884814,24.70605 7.4365,28.53067 -9.670504,52.38677 -32.553784,58.75431 -26.75179,6.824797 -51.11342,-9.78424 -57.72019,-31.41474 -7.0998604,-29.60522 10.86815,-51.07037 30.95176,-57.4617302 15.830488,-4.8896047 30.201599,0.6453812 34.201877,2.4395222 0.716381,0.3213 0.832478,0.343735 1.130811,0.282875 0.298333,-0.06086 0.631401,-0.501717 0.631401,-0.501717 l 0.389742,-0.44612 3.807429,-4.2990202 c 0,0 1.490213,-0.75195 3.45708,-0.75195 1.966867,0 3.70724,0.94809 3.70724,0.94809 l 7.66861,6.8520202 c 0,0 0.646604,1.3138 -0.74612,2.70652 -1.39272,1.39272 -2.79083,0.66279 -2.79083,0.66279 l -8.60345,-6.56474 c 0,0 -1.185577,-0.778543 -2.549347,0.932217 -1.36377,1.71076 -0.187193,2.871953 -0.187193,2.871953 z");
+}
+.grid-place .phone .screws {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.grid-place .phone .screws i {
+  position: absolute;
+  top: 15px;
+  left: 111px;
+}
+.grid-place .phone .screws i:before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 7px;
+  width: 14px;
+  height: 14px;
+  background: #ccc;
+  border-radius: 50%;
+  border: 1px solid #00000020;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 0px 1px #00000010;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, rgba(102, 102, 102, 0.4) 100%);
+}
+.grid-place .phone .screws i:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30px;
+  height: 22px;
+  background-color: #ddd;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, #666666 100%);
+  filter: drop-shadow(0px 0px 1px rgba(0, 0, 0, 0.2)) drop-shadow(0px 0px 1px #00000045);
+  clip-path: path("m 13.851466,6.2682599 c 1.02898,-0.01 1.151031,1.7408656 2.022955,2.2456 0.878116,0.5083193 2.469715,-0.239026 2.975765,0.6404 0.494566,0.8594691 -0.91782,1.8373001 -0.92025,2.8289001 -0.002,1.0068 1.40369,1.9936 0.92025,2.8768 -0.51189,0.9351 -2.17294,0.2789 -3.09115,0.8206 -0.85882,0.5067 -1.07328,2.1788 -2.0702,2.1593 -1.00293,-0.019 -1.1244,-1.7555 -1.99586,-2.2523 -0.84388,-0.4811 -2.4159601,0.3112 -2.8613501,-0.552 -0.48407,-0.9383 1.3031501,-1.8264 1.3133401,-2.8821 0.0107,-1.1026 -1.8108701,-2.052 -1.3133401,-3.0360001 0.45046,-0.8909 2.0496601,-0.1805 2.9186201,-0.6719 0.87793,-0.4966 1.07223,-2.1726 2.10122,-2.1773 z");
+  scale: 0.8;
+}
+.grid-place .phone .screws i:nth-child(2) {
+  top: 59px;
+  left: 310px;
+}
+.grid-place .phone .screws i:nth-child(3) {
+  top: 635px;
+  left: 302px;
+}
+.grid-place .phone .screws i:nth-child(4) {
+  top: 701px;
+  left: 295px;
+}
+.grid-place .phone .screws i:nth-child(5) {
+  top: 699px;
+  left: 132px;
+}
+.grid-place .phone .screws i:nth-child(6) {
+  top: 694px;
+  left: 14px;
+}
+.grid-place .phone .screws i:nth-child(7) {
+  top: 637px;
+  left: 119px;
+}
+.grid-place .phone .screws i:nth-child(8) {
+  top: 195px;
+  left: 12px;
+}
+.grid-place .phone .nothing-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.grid-place .phone .nothing-text h2 {
+  position: absolute;
+  left: 10px;
+  top: 638px;
+  font-family: "Ndot-55", "NType82Mono" !important;
+  font-weight: 600;
+  letter-spacing: -1px;
+  color: #ccc;
+  font-size: 16px;
+  transform: rotate(-90deg);
+}
+.grid-place .phone .nothing-text p {
+  position: absolute;
+  left: 260px;
+  top: 566px;
+  font-family: "Ndot-55", "NType82Mono" !important;
+  font-weight: 600;
+  color: #bbb;
+  font-size: 6px;
+  transform: rotate(-90deg);
+  width: 100px;
+  line-height: 6px;
+}
+.grid-place .phone .nothing-text .ce {
+  position: absolute;
+  left: 237px;
+  top: 502px;
+  transform: rotate(-90deg);
+  opacity: 0.2;
+}
+.grid-place .phone .nothing-text .no-trash {
+  position: absolute;
+  left: 295px;
+  top: 633px;
+  transform: rotate(-90deg);
+  opacity: 0.15;
+  width: 30px;
+  height: 30px;
+}
+.grid-place .phone .glyphs {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.grid-place .phone .glyphs .a {
+  display: block;
+  width: 86px;
+  height: 155px;
+  filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.2)) drop-shadow(0px 0px 1px #00000055);
+  position: absolute;
+  left: 17px;
+  top: 21px;
+}
+.grid-place .phone .glyphs .a:before {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 167px;
+  height: 251px;
+  left: -76px;
+  top: -91px;
+  background-color: #ffffff;
+  background-size: 6px 6px;
+  clip-path: path("m 162.9278,132.01715 c 0.11502,0.11502 0.28927,-0.73438 0.28927,-0.73438 0,0 0.17932,-3.03501 -0.20592,-5.99242 -0.56772,-4.35829 -3.01318,-10.85843 -4.78711,-13.93099 -3.74546,-6.48736 -9.4033,-12.145204 -15.89068,-15.890691 -6.88361,-3.974266 -15.30009,-6.023623 -23.32712,-5.980095 -6.06143,0.03287 -12.0476,2.196331 -17.56495,4.706504 -3.655059,1.662906 -7.016786,4.030998 -9.995686,6.723742 -3.377629,3.05317 -6.287093,6.70063 -8.72575,10.50873 -1.062721,1.6595 -2.673194,5.14592 -3.454104,7.6352 -0.927266,2.95581 -1.030597,5.55353 -1.030597,5.55353 l 0.0306,80.70035 c 0,0 0.0524,1.70747 0.21399,2.54246 0.77966,4.02681 2.35133,8.7016 3.61843,11.7607 0.71286,1.72108 1.6602,3.36194 2.79425,4.83987 3.55236,4.62954 7.6271,8.62708 12.25668,12.17944 1.69548,1.30096 3.833827,2.58258 5.953307,3.46614 4.49181,1.87252 9.28379,3.08396 14.0986,3.79123 1.77062,0.26009 3.57705,0.17149 5.3666,0.15572 1.11352,-0.01 2.23671,0.0153 3.33706,-0.15572 2.95364,-0.45914 5.90895,-1.15615 8.66178,-2.32094 5.06593,-2.14353 9.86093,-5.04103 14.16462,-8.46689 1.52923,-1.21731 2.8639,-2.68485 4.06057,-4.23029 3.11245,-4.01957 6.0427,-8.23323 8.00857,-12.97928 1.05643,-2.55053 1.83492,-7.84879 1.83492,-7.84879 v -26.00516 c 0,0 -0.31944,-0.95721 -0.5934,-1.31423 -0.37602,-0.49016 -1.60514,-0.9267 -1.60514,-0.9267 l -7.48882,-0.0679 c 0,0 -0.78392,0.23678 -0.97073,0.56039 l -0.6701,1.16076 -0.10432,21.72083 c 0,0 -0.14076,3.4036 -0.42514,5.07832 -0.17068,1.00509 -0.40187,2.00862 -0.76523,2.96115 -0.86908,2.27827 -2.00111,4.472 -3.35181,6.50213 -1.7276,2.59662 -3.64546,5.13879 -6.01457,7.16718 -2.40267,2.05711 -5.16311,3.78823 -8.12153,4.90728 -3.85111,1.45673 -8.03739,2.31982 -12.15329,2.20811 -4.24938,-0.11533 -8.479,-1.32758 -12.40529,-2.95693 -2.81931,-1.16997 -5.46562,-2.83352 -7.79378,-4.80762 -2.4812,-2.10387 -4.573924,-4.67314 -6.412655,-7.35674 -1.422514,-2.07614 -2.698902,-4.30106 -3.516407,-6.68131 -0.617408,-1.79764 -0.840198,-4.13856 -1.005103,-5.61285 -0.195126,-1.74448 -0.188082,-3.91025 -0.188082,-3.91025 l 0.21286,-68.07033 c 0,0 -0.161923,-5.57118 0.46295,-8.2556 0.3768,-1.6187 1.167904,-3.12213 1.94801,-4.58965 1.211204,-2.2785 2.961293,-4.9319 4.215103,-6.49307 2.78404,-3.46652 5.970864,-6.35831 9.815254,-8.59177 3.59915,-2.09098 8.51267,-3.78844 12.67239,-3.93947 4.99556,-0.18139 11.24341,0.86971 15.68898,3.15563 4.36439,2.24418 8.51113,4.75156 11.84828,8.68159 2.51824,2.96564 4.75302,7.20887 5.45292,10.92479 0.2122,1.12661 0.46808,4.55866 0.46808,4.55866 0.11238,1.72047 0.10714,3.63036 0.10714,3.63036 0,0 0.18457,0.30226 0.33284,0.38385 0.23118,0.12763 0.78271,0.11922 0.78271,0.11922 l 8.88703,0.24739 c 0,0 0.80053,-0.22278 0.98265,-0.4213 z");
+}
+.grid-place .phone .glyphs .b {
+  display: block;
+  width: 86px;
+  height: 155px;
+  filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.2)) drop-shadow(0px 0px 1px #00000030);
+  position: absolute;
+  left: 17px;
+  top: 21px;
+}
+.grid-place .phone .glyphs .b:before {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 607px;
+  height: 549px;
+  left: -274px;
+  top: 108px;
+  background-color: #ffffff;
+  background-size: 6px 6px;
+  clip-path: path("m 286.06265,126.87342 c 0,0 47.26441,-73.58196 145.31859,-73.58196 92.55307,0 142.50867,67.8213 142.50867,67.8213 0,0 4.79836,2.11577 7.52294,-0.6088 3.38087,-3.38086 1.54932,-7.42524 1.54932,-7.42524 0,0 -49.49949,-71.60223 -151.66823,-71.60223 -114.63283,0 -156.94636,81.83016 -156.94636,81.83016 v 225.46812 c 0,0 44.26448,82.6885 158.13842,82.6885 108.45939,0 156.42394,-82.43045 156.42394,-82.43045 V 242.67223 c 0,0 -0.39555,-5.25639 -5.72242,-5.25639 -6.11169,0 -6.33033,5.25639 -6.33033,5.25639 v 102.83234 c 0,0 -47.50348,74.23913 -144.34463,74.23913 -99.89568,0 -147.06237,-74.23913 -147.06237,-74.23913 z");
+}
+.grid-place .phone .glyphs .c {
+  display: block;
+  width: 13px;
+  height: 112px;
+  background: #fff;
+  filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.2)) drop-shadow(0px 0px 1px #00000055);
+  position: absolute;
+  left: 263px;
+  border-radius: 7px;
+  top: 31px;
+  transform: rotate(40deg);
+}
+.grid-place .phone .glyphs .d {
+  display: block;
+  width: 13px;
+  height: 89px;
+  background: #ffffff;
+  filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.2)) drop-shadow(0px 0px 1px #00000035);
+  position: absolute;
+  left: 169px;
+  border-radius: 7px;
+  top: 593px;
+}
+.grid-place .phone .glyphs .e {
+  display: block;
+  width: 13px;
+  height: 16px;
+  background: #ffffff;
+  filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.2)) drop-shadow(0px 0px 1px #00000055);
+  position: absolute;
+  left: 169px;
+  border-radius: 7px;
+  top: 695px;
+}
+
+.call .cameras .a:before {
+  animation-duration: 800ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-name: hideShadow;
+}
+.call .glyphs > div {
+  animation-duration: 800ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+.call .glyphs .a {
+  animation-name: glyphA;
+}
+.call .glyphs .b {
+  animation-name: glyphB;
+}
+.call .glyphs .c {
+  animation-name: glyphC;
+}
+.call .glyphs .d {
+  animation-name: glyphD;
+}
+.call .glyphs .e {
+  animation-name: glyphE;
+}
+
+@keyframes hideShadow {
+  20% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+}
+@keyframes glyphE {
+  0% {
+    filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.2)) drop-shadow(0px 0px 1px #00000045);
+  }
+  5% {
+    filter: drop-shadow(0 0 10px #ffffff) drop-shadow(0 0 20px #eeeeee) drop-shadow(0 0 30px #00000005) drop-shadow(0 0 100px #00000050);
+  }
+  10% {
+    filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.2)) drop-shadow(0px 0px 1px #00000045);
+  }
+}
+@keyframes glyphD {
+  10% {
+    filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.2)) drop-shadow(0px 0px 1px #00000045);
+  }
+  15% {
+    filter: drop-shadow(0 0 10px #ffffff) drop-shadow(0 0 20px #eeeeee) drop-shadow(0 0 30px #00000005) drop-shadow(0 0 100px #00000050);
+  }
+  20% {
+    filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.2)) drop-shadow(0px 0px 1px #00000045);
+  }
+}
+@keyframes glyphA {
+  20% {
+    filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.2)) drop-shadow(0px 0px 1px #00000045);
+  }
+  25% {
+    filter: drop-shadow(0 0 10px #ffffff) drop-shadow(0 0 20px #eeeeee) drop-shadow(0 0 30px #00000005) drop-shadow(0 0 100px #00000050);
+  }
+  30% {
+    filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.2)) drop-shadow(0px 0px 1px #00000045);
+  }
+}
+@keyframes glyphC {
+  30% {
+    filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.2)) drop-shadow(0px 0px 1px #00000045);
+  }
+  35% {
+    filter: drop-shadow(0 0 10px #ffffff) drop-shadow(0 0 20px #eeeeee) drop-shadow(0 0 30px #00000005) drop-shadow(0 0 100px #00000050);
+  }
+  40% {
+    filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.2)) drop-shadow(0px 0px 1px #00000045);
+  }
+}
+@keyframes glyphB {
+  40% {
+    filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.2)) drop-shadow(0px 0px 1px #00000045);
+  }
+  45% {
+    filter: drop-shadow(0 0 10px #ffffff) drop-shadow(0 0 20px #eeeeee) drop-shadow(0 0 30px #00000005) drop-shadow(0 0 100px #00000050);
+  }
+  50% {
+    filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.2)) drop-shadow(0px 0px 1px #00000045);
+  }
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <article class="artboard" id="artboard" role="img" role="img" aria-labelledby="image-alt" aria-describedby="image-info">
+  <header>
+    <h1 id="image-alt">Nothing Phone (1)</h1>
+    <p id="image-info">
+    <address> Created by <a href="https://twitter.com/ricksdev"> Ricardo Ferreira </a>
+    </address>
+    <time datetime="2023-02-09">March 7th, 2023</time>
+    </p>
+  </header>
+  <!-- HTML of the image -->
+  <div class="grid-place" id="nothing-phone-1">
+    <label class="nothing-phone-1">
+      <input type="checkbox" checked id="glyphs" />
+      <div class="phone">
+        <div class="front-frame">
+          <div class="in-frame">
+            <div class="front-camera">
+              <div class="e">
+                <div class="f">
+                  <div class="g"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="antenas">
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+          </div>
+          <div class="buttons">
+            <i></i>
+            <i></i>
+            <i></i>
+          </div>
+        </div>
+        <div class="out-frame">
+          <div class="top-parts">
+            <div class="a"></div>
+            <div class="b"></div>
+            <div class="c"></div>
+            <div class="d"></div>
+            <div class="e"></div>
+            <div class="f"></div>
+            <div class="g"></div>
+            <div class="h"></div>
+            <div class="i">
+              <i></i>
+            </div>
+            <div class="j"></div>
+          </div>
+          <div class="bottom-parts">
+            <div class="l"></div>
+            <div class="c"></div>
+            <div class="k"></div>
+            <div class="d"></div>
+            <div class="e"></div>
+            <div class="j"></div>
+            <div class="i">
+              <i></i>
+              <i></i>
+              <b></b>
+            </div>
+            <div class="a"></div>
+            <div class="lines">
+              <div class="l1"></div>
+            </div>
+            <div class="b"></div>
+            <div class="f"></div>
+            <div class="g"></div>
+            <div class="h"></div>
+          </div>
+          <div class="dotted-parts">
+            <div class="bb"></div>
+            <div class="a"></div>
+            <div class="b"></div>
+            <div class="ab"></div>
+            <div class="c">
+              <i></i>
+              <i></i>
+              <i></i>
+            </div>
+            <div class="d"></div>
+            <div class="e"></div>
+          </div>
+          <div class="in-frame"></div>
+          <div class="coil">
+            <div class="a"></div>
+            <div class="b"></div>
+            <div class="c"></div>
+          </div>
+        </div>
+        <div class="antenas">
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+        </div>
+        <div class="buttons">
+          <i></i>
+          <i></i>
+          <i></i>
+        </div>
+        <div class="screws">
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+        </div>
+        <div class="nothing-text">
+          <h2>NOTHING</h2>
+          <p> MODEL: A063 <br> NOTHING TECHNOLOGY LIMITED <br /> 80 CHEAPSIDE, LONDON, ENGLAND <br /> EC2V 6EE </p>
+          <svg class="ce" width="300" height="300" viewBox="0 0 300 300">
+            <path style="fill:#000000;stroke-width:0.0700042" d="m 114.02954,85.253286 c -2.17397,-0.226787 -4.40862,-1.074015 -6.23039,-2.362141 -0.30802,-0.217795 -0.98736,-0.821264 -1.50966,-1.341046 -1.73849,-1.73014 -2.7077,-3.500115 -3.22867,-5.896226 -0.13334,-0.613305 -0.15636,-0.930463 -0.15636,-2.154275 0,-1.223812 0.023,-1.540968 0.15636,-2.154274 0.4941,-2.272529 1.46949,-4.107597 3.05223,-5.742327 2.14852,-2.219103 4.90116,-3.545595 8.01141,-3.860687 0.94951,-0.09619 1.43275,-0.09287 1.53618,0.01056 0.12286,0.122863 0.11956,3.790716 -0.003,3.888931 -0.0481,0.03841 -0.38678,0.09153 -0.75255,0.118049 -2.22803,0.161519 -4.10854,0.967709 -5.61542,2.407367 -2.46705,2.357007 -3.06375,5.738205 -1.53032,8.671608 0.39655,0.758593 0.88355,1.382554 1.61102,2.0641 1.42913,1.338897 3.23175,2.121421 5.3229,2.310677 0.48228,0.04365 0.91624,0.10957 0.96437,0.146495 0.12308,0.09443 0.12639,3.763338 0.003,3.886229 -0.0949,0.09487 -0.76112,0.09771 -1.6311,0.007 z m 1.15507,-1.948791 v -1.465802 l -0.33252,-0.03839 c -2.12985,-0.245891 -3.57132,-0.749523 -4.93475,-1.724128 -4.72373,-3.376631 -4.72964,-9.789589 -0.0121,-13.145235 1.38795,-0.987267 2.81075,-1.485432 4.94687,-1.732049 l 0.33252,-0.03839 V 63.6947 62.228899 h -0.21277 c -0.11702,0 -0.51867,0.03361 -0.89255,0.07469 -5.19659,0.570927 -9.37,4.176273 -10.4577,9.034245 -0.14134,0.631287 -0.1627,0.915064 -0.1627,2.161767 0,1.246703 0.0213,1.530482 0.1627,2.16177 0.48671,2.173796 1.59445,4.133956 3.20947,5.679221 0.93499,0.894603 1.82266,1.515014 2.99822,2.095518 1.63596,0.807852 3.43191,1.281658 5.02281,1.325107 l 0.33252,0.0091 z m 19.18119,1.948643 c -2.3169,-0.26049 -4.6001,-1.149019 -6.40899,-2.494121 -0.83733,-0.622644 -2.05771,-1.861473 -2.63938,-2.679269 -0.56172,-0.78976 -1.29853,-2.236888 -1.58597,-3.114934 -0.72316,-2.209051 -0.73365,-4.583933 -0.0303,-6.859087 0.24829,-0.803156 1.06474,-2.415168 1.59618,-3.151533 1.97227,-2.732773 4.9576,-4.554594 8.36841,-5.106891 1.01165,-0.163812 2.14232,-0.218657 2.27294,-0.110252 0.0915,0.07592 0.1072,0.369414 0.1072,2.000797 0,1.76108 -0.01,1.91453 -0.12251,1.946064 -0.0674,0.01883 -0.40602,0.05528 -0.75254,0.08101 -3.53068,0.262112 -6.49404,2.392837 -7.53521,5.417995 -0.24254,0.704705 -0.63041,0.632855 3.52746,0.653458 l 3.65773,0.01812 0.0187,1.855115 c 0.017,1.681964 0.008,1.863281 -0.10089,1.942618 -0.0919,0.06723 -0.92743,0.08751 -3.60644,0.08751 -2.55311,0 -3.48684,0.02127 -3.48684,0.07941 0,0.151897 0.6146,1.375622 0.90752,1.80698 0.70938,1.044591 1.9084,2.067824 3.11773,2.660636 1.17042,0.573733 2.20813,0.853022 3.53522,0.951466 0.36578,0.02713 0.70442,0.08076 0.75255,0.119168 0.12306,0.09822 0.12636,3.766069 0.003,3.888933 -0.0952,0.09523 -0.78357,0.09816 -1.5961,0.0068 z m 1.12007,-1.948643 v -1.465802 l -0.33252,-0.03823 c -0.94129,-0.108215 -1.74621,-0.266435 -2.3696,-0.465786 -2.65806,-0.850003 -4.73504,-2.785676 -5.63499,-5.251608 -0.12554,-0.343967 -0.19537,-0.645909 -0.17144,-0.741249 l 0.0404,-0.160872 3.65655,-0.01812 3.65655,-0.01812 v -1.40009 -1.400085 l -3.68467,-0.01812 c -3.06163,-0.01505 -3.69846,-0.03473 -3.76624,-0.116398 -0.0626,-0.07545 -0.0551,-0.200393 0.0324,-0.537927 0.38196,-1.474007 1.07005,-2.684123 2.13324,-3.751602 1.5253,-1.531457 3.43656,-2.432595 5.69944,-2.687226 l 0.74094,-0.08337 v -1.460485 -1.460492 l -0.22752,5.82e-4 c -0.77523,0.002 -2.19481,0.251194 -3.22442,0.566114 -4.24638,1.29882 -7.31479,4.632419 -8.14495,8.848894 -0.17236,0.875418 -0.17236,2.834811 0,3.71023 0.64964,3.299593 2.64041,6.047814 5.62279,7.762169 1.64598,0.946155 3.87327,1.595289 5.64158,1.644213 l 0.33252,0.0092 z" />
+          </svg>
+          <svg class="no-trash" width="420.487" height="427.36801" viewBox="0 0 420.487 427.36801">
+            <path d="m 242,50 h -34.999 v 5.502 h 34.999 z m -100.002,17.081 c -5.415,2.942 -9.624,6.535 -11.948,10.919 h 11.948 z m 181.711,52.358 -13.185,13.43 -0.637,6.83 h 15.825 v -20.26 z m -119,107.311 -68.126,-71.864 11.168,129.826 z m 13.475,0.177 65.129,68.592 13.516,-145.03 h -1.333 v -2.314 z m -82.916,-87.324 76.208,80.26 45.077,-45.87 h -63.552 v -24 h 73.501 v 13.875 l 28.994,-29.504 v -25.715 h 5.232 l 1.691,-18.151 h -171.375 z m 183.993,207.984 c 0.314,1.874 0.478,3.799 0.478,5.763 0,19.089 -15.474,34.562 -34.562,34.562 -13.255,0 -24.768,-7.461 -30.566,-18.413 h -84.52 v 18.055 h -22.237 v -18.101 c -2.604,-0.366 -5.102,-2.842 -5.325,-5.439 l -4.748,-55.187 -117.801,119.993 -7.042,-6.92 123.738,-125.918 -13.339,-155.069 -117.716,-124.175 v -13.675 l 116.403,122.592 -3.067,-35.654 h -14.456 v -12 h 12.719 c 0.219,-0.674 0.509,-1.462 0.89,-2.342 4.229,-9.775 12.964,-16.763 23.889,-21.734 v -7.931 h 20.505 v 1.227 c 10.683,-2.455 21.978,-3.79 32.499,-4.468 v -4.752 h 58.999 v 29.501 h -58.999 v -12.462 c -10.451,0.781 -21.987,2.208 -32.499,4.709 v 18.252 h 139.444 c -5.472,-12.912 -26.749,-18.958 -47.947,-21.699 v -12.219 c 21.275,2.637 43.143,8.586 54.121,21.438 2.929,-3.729 7.48,-6.125 12.59,-6.125 8.837,0 16,7.163 16,16 0,8.836 -7.163,16 -16,16 -2.2,0 -4.297,-0.444 -6.205,-1.248 l -1.725,18.5 h 7.986 l 105.34,-107.196 v 13.682 l -91.805,93.513 h 1.911 v 41.842 h -27.331 l -14.594,156.588 107.955,113.695 -7.162,6.797 z m -68.648,5.763 c 0,-17.718 13.331,-32.322 30.51,-34.328 l 0.99,-10.621 -70.699,-74.578 -62.56,63.724 5.157,59.953 h 96.848 c -0.162,-1.361 -0.246,-2.746 -0.246,-4.15 z m 16.588,0 c 0,9.927 8.047,17.975 17.975,17.975 9.927,0 17.975,-8.048 17.975,-17.975 0,-9.928 -8.048,-17.975 -17.975,-17.975 -9.928,0 -17.975,8.047 -17.975,17.975 z m 6.301,0 c 0,-6.447 5.227,-11.674 11.674,-11.674 6.447,0 11.674,5.227 11.674,11.674 0,6.447 -5.227,11.673 -11.674,11.673 -6.447,0 -11.674,-5.226 -11.674,-11.673 z" />
+          </svg>
+        </div>
+        <div class="glyphs">
+          <div class="a"></div>
+          <div class="b"></div>
+          <div class="c"></div>
+          <div class="d"></div>
+          <div class="e"></div>
+        </div>
+        <div class="cameras">
+          <div class="a">
+            <div class="b">
+              <div class="c">
+                <div class="d">
+                  <div class="e">
+                    <div class="f">
+                      <div class="g"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="a">
+            <div class="b">
+              <div class="c">
+                <div class="d">
+                  <div class="e">
+                    <div class="f">
+                      <div class="g"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </label>
+    <div class="description">
+      <div>
+        <h1 class="font-ndot55">NOTHING phone (1) white</h1>
+        <h3 class="font-ndot55">GLYPH INTERFACE</h3>
+      </div>
+      <label class="toggle-color">
+        <input type="checkbox">
+        <span class="slider round"></span>
+      </label>
+    </div>
+  </div>
+</article>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js'></script>
+    <script id="rendered-js" >
+// some JS to fit all screens
+$('.toggle-color input').change(function () {
+  $('.phone').toggleClass('call');
+});
+let outer = document.getElementById('nothing-phone-1'),
+wrapper = document.getElementById('artboard'),
+maxWidth = outer.clientWidth,
+maxHeight = outer.clientHeight;
+window.addEventListener("resize", resize);
+resize();
+function resize() {let scale,
+  width = window.innerWidth,
+  height = window.innerHeight,
+  isMax = width >= maxWidth && height >= maxHeight;
+  scale = Math.min(width / maxWidth, height / maxHeight);
+  outer.style.transform = isMax ? '' : 'scale(' + scale + ')';
+  wrapper.style.width = isMax ? '' : maxWidth * scale;
+  wrapper.style.height = isMax ? '' : maxHeight * scale;
+}
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>

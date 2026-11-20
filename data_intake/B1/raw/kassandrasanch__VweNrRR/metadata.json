@@ -1,0 +1,70 @@
+{
+  "source_id": "codepen:kassandrasanch/vwenrrr",
+  "author": "kassandrasanch",
+  "pen_id": "VweNrRR",
+  "url": "https://codepen.io/kassandrasanch/pen/VweNrRR",
+  "title": "CSS KitchenAid Mixer",
+  "acquisition": "cdpn_fullpage_http_srcdoc",
+  "acquisition_url": "https://cdpn.io/kassandrasanch/fullpage/VweNrRR",
+  "retrieved_at": "2026-11-20T10:19:24+00:00",
+  "fetch_status": "ok",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "2554f77872425e5a5769221408f9ac9f7f7b14b31b0795d72e4d30582219894a",
+  "source_html_sha256": "c089795c906d1215b4dd0722e6c6eff8642ebf6163179b1b5c6086684184ae23",
+  "license": "CodePen public-pen default; project-specific and external asset licenses not separately verified",
+  "analysis": {
+    "js": {
+      "has_js": true,
+      "inline_js_chars": 0,
+      "external_scripts": [
+        "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+      ],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 0,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": false,
+      "clip_path": false,
+      "css_counter": false,
+      "media_query": true
+    },
+    "external_stylesheets": [
+      "https://public.codepenassets.com/css/reset-2.0.min.css"
+    ],
+    "css_imports": [],
+    "css_chars": 24020,
+    "element_count": 25,
+    "html_chars": 26049
+  },
+  "review": {
+    "label": "搅拌机、搅拌轴入碗、支臂遮挡",
+    "evidence": "静态：上部搅拌轴到不透明碗口便被挡住；凸出的支臂横过近侧碗面并遮住局部，碗悬在下方底座上方。",
+    "visual_verified": true,
+    "surface": "Cloud Chrome CodePen Full Page iframe, desktop, no interaction",
+    "mobile_verified": false,
+    "external_dependencies_preserved": true,
+    "offline_replay_verified": false,
+    "formal_admission": false
+  }
+}
