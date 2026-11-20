@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>Animated Borromean Rings (with CSS variables)</title>
+
+    <link rel="canonical" href="https://codepen.io/pottersson/pen/WNeBLxj">
+  
+  
+  
+  
+<style>
+#content {
+  background: black;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.ring-animation {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  font-size: 5vh;
+  --half-stroke-size: 1em;
+  --x-factor: 1.1547em;
+  --anim-speed: 100ms;
+  --geometry-anim-time: calc(var(--anim-speed) * 24);
+  --glow-anim-time: 3s;
+  --glow-anim-delay: calc(var(--geometry-anim-time) - 2/3 * var(--glow-anim-time));
+  animation: ease-out both ring-animation-spin var(--geometry-anim-time), var(--glow-anim-time) ease-in-out ring-animation-glow var(--glow-anim-delay), 2s ease-in-out ring-animation-pulsate calc(var(--glow-anim-delay) + var(--glow-anim-time)) infinite alternate;
+}
+
+@keyframes ring-animation-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+@keyframes ring-animation-glow {
+  from {
+    box-shadow: 0 0 20em 4em rgba(255, 255, 255, 0);
+  }
+  67% {
+    box-shadow: 0 0 20em 4em rgba(255, 255, 255, 0.9);
+  }
+  to {
+    box-shadow: 0 0 20em 4em rgba(255, 255, 255, 0.6);
+  }
+}
+@keyframes ring-animation-pulsate {
+  from {
+    box-shadow: 0 0 20em 4em rgba(255, 255, 255, 0.6);
+  }
+  to {
+    box-shadow: 0 0 20em 4em rgba(255, 255, 255, 0.8);
+  }
+}
+.ring-animation .ring-a {
+  position: absolute;
+  transform: rotate(0);
+  --color: rgba(255, 0, 0, 1);
+}
+
+.ring-animation .ring-b {
+  position: absolute;
+  transform: rotate(120deg);
+  --color: rgba(0, 255, 0, 1);
+}
+
+.ring-animation .ring-c {
+  position: absolute;
+  transform: rotate(240deg);
+  --color: rgba(0, 0, 255, 1);
+}
+
+.ring-animation .origin-marker {
+  position: absolute;
+  border-top: 1px solid white;
+  border-left: 1px solid white;
+  height: var(--half-stroke-size);
+  width: var(--half-stroke-size);
+}
+
+/*
+  Generic stroke CSS class.
+  CSS Custom Properties ("variables") are used as a parameter-passing mechanism.
+
+  @param --half-stroke-size (from .ring-animation) - Line thickness
+  @param --half-x-factor (from .ring-animation) - .half-stroke-size / sqrt(3)
+  @param --anim-speed - Time to animate each abstract "width" unit
+
+  @param --width - Number of units wide
+  @param --top - Number of units the line should be pushed away from the origin
+  @param --left - Number of units the line should be pushed to the left of the origin
+  @param --skew-direction - Either -1 (right-leaning) or +1 (left-leaning)
+  @param --anim-delay - Total abstract "width" units that come before this one.
+*/
+.ring-animation .half-stroke {
+  position: absolute;
+  background-color: var(--color);
+  border-color: var(--color);
+  /**
+    These aren't used for positioning each element.
+    They just set the basis for positioning the rest of the stuff.
+  **/
+  top: calc(-1 * var(--border-width, 0px));
+  left: -1px;
+  box-sizing: content-box;
+  height: calc(var(--half-stroke-size) + 1px);
+  width: calc(var(--x-factor) * var(--width) + 1px);
+  transform: rotate(var(--rotate, 0deg)) translate(calc(var(--x-factor) * ( var(--left, 0) /* Correct for the bottoms of right-leaning parallelograms swinging to the right. Right-leaning (inner; direction = -1): Subtract 0 Left-leaning (outer; direction = +1): Subtract 0.5 */ + (1 - var(--skew-direction)) / 4 )), calc(var(--half-stroke-size) * var(--top, 0))) skewX(calc(30deg * var(--skew-direction)));
+  transform-origin: 1px var(--border-width, 0px);
+  animation: calc(var(--width) * var(--anim-speed) * var(--anim-scale, 1)) linear both vee-animate-width calc(var(--anim-delay) * var(--anim-speed, 0));
+}
+
+@keyframes vee-animate-width {
+  from {
+    border-left-width: 0px;
+    width: 0;
+  }
+  to {
+    /*border-width: var(--border-width, 0);*/
+    width: calc(var(--x-factor) * var(--width) + 1px);
+  }
+}
+.ring-animation .inner {
+  --skew-direction: 1;
+  /*border-bottom: 1px solid var(--color);*/
+  border-left: 1px solid var(--color);
+  border-bottom-right-radius: 0.1em;
+}
+
+.ring-animation .outer {
+  --skew-direction: -1;
+  /*border-bottom: 1px solid var(--color);*/
+  border-left: 1px solid var(--color);
+}
+
+.ring-animation .vee-0-inner {
+  --top: 0;
+  --left: 0;
+  --width: 2;
+  --rotate: 0deg;
+  --anim-delay: 0;
+}
+
+.ring-animation .vee-0-outer {
+  --top: 1;
+  --left: 0;
+  --width: 2;
+  --rotate: 0deg;
+  --anim-delay: 0;
+}
+
+.ring-animation .vee-1-inner {
+  --top: 0;
+  --left: 2;
+  --width: 2;
+  --rotate: 0deg;
+  --anim-delay: 2;
+  --anim-scale: 3/2;
+  animation-timing-function: ease-in;
+}
+
+.ring-animation .vee-1-outer {
+  --top: 1;
+  --left: 2;
+  --width: 2;
+  --rotate: 0deg;
+  --anim-delay: 2;
+  --anim-scale: 3/2;
+  animation-timing-function: ease-in;
+}
+
+.ring-animation .vee-2-inner {
+  --top: 3;
+  --left: 1.5;
+  --width: 2;
+  --rotate: -60deg;
+  --anim-delay: 5;
+}
+
+.ring-animation .vee-2-outer {
+  --top: 4;
+  --left: 1.5;
+  --width: 2;
+  --rotate: -60deg;
+  --anim-delay: 5;
+}
+
+.ring-animation .vee-3-inner {
+  --top: 4;
+  --left: -1;
+  --width: 5;
+  --rotate: -120deg;
+  --anim-delay: 7;
+}
+
+.ring-animation .vee-3-outer {
+  --top: 5;
+  --left: -1;
+  --width: 5;
+  --rotate: -120deg;
+  --anim-delay: 7;
+}
+
+.ring-animation .vee-4-inner {
+  --top: 5;
+  --left: -1.5;
+  --width: 2;
+  --rotate: -180deg;
+  --anim-delay: 12;
+}
+
+.ring-animation .vee-4-outer {
+  --top: 6;
+  --left: -1.5;
+  --width: 2;
+  --rotate: -180deg;
+  --anim-delay: 12;
+}
+
+.ring-animation .vee-5-inner {
+  --top: 2;
+  --left: -4;
+  --width: 5;
+  --rotate: -240deg;
+  --anim-delay: 14;
+}
+
+.ring-animation .vee-5-outer {
+  --top: 3;
+  --left: -4;
+  --width: 5;
+  --rotate: -240deg;
+  --anim-delay: 14;
+}
+
+.ring-animation .vee-6-inner {
+  --top: 1;
+  --left: -1.5;
+  --width: 2;
+  --rotate: -300deg;
+  --anim-delay: 19;
+}
+
+.ring-animation .vee-6-outer {
+  --top: 2;
+  --left: -1.5;
+  --width: 2;
+  --rotate: -300deg;
+  --anim-delay: 19;
+}
+
+.ring-animation .vee-7-inner {
+  --top: 0;
+  --left: -1;
+  --width: 1;
+  --rotate: 0deg;
+  --anim-delay: 21;
+  --anim-scale: 3;
+  animation-timing-function: ease-out;
+}
+
+.ring-animation .vee-7-outer {
+  --top: 1;
+  --left: -1;
+  --width: 1;
+  --rotate: 0deg;
+  --anim-delay: 21;
+  --anim-scale: 3;
+  animation-timing-function: ease-out;
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  <div id="content">Loading...</div>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/react/16.9.0/umd/react.development.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.9.0/umd/react-dom.development.js'></script>
+    <script id="rendered-js" >
+"use strict";
+const h = React.createElement;
+const circle = React.createElement.bind(React, 'circle');
+const div = React.createElement.bind(React, 'div');
+const g = React.createElement.bind(React, 'g');
+const path = React.createElement.bind(React, 'path');
+const span = React.createElement.bind(React, 'span');
+const svg = React.createElement.bind(React, 'svg');
+const SIZE = 160;
+const FACTOR = 5;
+const SQRT_3 = Math.sqrt(3);
+const X_FACTOR = FACTOR;
+const Y_FACTOR = X_FACTOR * SQRT_3;
+function x(x0) {
+    return x0 * X_FACTOR;
+}
+function y(y0) {
+    return y0 * Y_FACTOR;
+}
+class RingsAnimation extends React.Component {
+    render() {
+        const layer0 = [
+            // div({ className: 'half-stroke inner vee-0-inner' }),
+            // div({ className: 'half-stroke outer vee-0-outer' }),
+            div({ className: 'half-stroke inner vee-5-inner' }),
+            div({ className: 'half-stroke outer vee-5-outer' }),
+        ];
+        const layer1 = [
+            div({ className: 'half-stroke inner vee-1-inner' }),
+            div({ className: 'half-stroke outer vee-1-outer' }),
+        ];
+        const layer2 = [
+            div({ className: 'half-stroke inner vee-2-inner' }),
+            div({ className: 'half-stroke outer vee-2-outer' }),
+            div({ className: 'half-stroke inner vee-3-inner' }),
+            div({ className: 'half-stroke outer vee-3-outer' }),
+            div({ className: 'half-stroke inner vee-4-inner' }),
+            div({ className: 'half-stroke outer vee-4-outer' }),
+            div({ className: 'half-stroke inner vee-6-inner' }),
+            div({ className: 'half-stroke outer vee-6-outer' }),
+            div({ className: 'half-stroke inner vee-7-inner' }),
+            div({ className: 'half-stroke outer vee-7-outer' }),
+        ];
+        return (div({ className: 'ring-animation' }, div({ className: 'canvas-offset' }, div({ className: 'ring-a' }, ...layer0), div({ className: 'ring-b' }, ...layer0), div({ className: 'ring-c' }, ...layer0), div({ className: 'ring-a' }, ...layer1), div({ className: 'ring-b' }, ...layer1), div({ className: 'ring-c' }, ...layer1), div({ className: 'ring-a' }, ...layer2), div({ className: 'ring-b' }, ...layer2), div({ className: 'ring-c' }, ...layer2))));
+    }
+}
+setTimeout(() => {
+    ReactDOM.render(h(RingsAnimation), document.getElementById('content'));
+}, 200);
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>
