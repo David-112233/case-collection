@@ -1,0 +1,24 @@
+{
+  "id": "C274",
+  "slug": "blackhole",
+  "title": "Black hole",
+  "feature": "倾斜吸积盘、明暗互遮、背后光环",
+  "evidence": "暂停下近侧斜盘掠过黑色中心前部，远侧被中心遮住，竖直光环分别从中心上下露出；旋转只是纹理变化。",
+  "url": "https://css3dlab.edgarasneverdauskas.com/models/blackhole/",
+  "archive_id": "Evirtual__blackhole",
+  "source": "https://github.com/Evirtual/css-3d-lab/blob/88d044dd0c84baa94f27967f5991b7327fb44317/src/models/snippets-batch-o-blackhole.ts",
+  "source_blob": "2f631a4f56ded986661a5d9bd58fdab2c9fb54fa",
+  "upstream_commit": "88d044dd0c84baa94f27967f5991b7327fb44317",
+  "license": "MIT (snippet only)",
+  "status": "pending_user_review",
+  "visual": {
+    "desktop_viewport": [
+      1316,
+      884
+    ],
+    "author_preview_pause": "checked",
+    "mobile_tested": false,
+    "offline_replay_tested": false
+  },
+  "archive_note": "Standalone wrapper added; author CSS/HTML extracted unchanged from the pinned snippet; no author site wrapper copied."
+}

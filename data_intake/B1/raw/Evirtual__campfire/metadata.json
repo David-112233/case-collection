@@ -1,0 +1,24 @@
+{
+  "id": "C275",
+  "slug": "campfire",
+  "title": "Campfire",
+  "feature": "交叠木柴、交叉火焰、石圈落地",
+  "evidence": "暂停下木柴以不同倾角互相盖住，前方横木挡住火焰下缘，后方木柴伸到火焰背后；外围石头落于同一底面。仅评价一帧，地面转动与火苗闪烁不计。",
+  "url": "https://css3dlab.edgarasneverdauskas.com/models/campfire/",
+  "archive_id": "Evirtual__campfire",
+  "source": "https://github.com/Evirtual/css-3d-lab/blob/88d044dd0c84baa94f27967f5991b7327fb44317/src/models/snippets-batch-n-campfire.ts",
+  "source_blob": "32c4b19efbb2e05ea0b0faeb9c1fdc00e4240d03",
+  "upstream_commit": "88d044dd0c84baa94f27967f5991b7327fb44317",
+  "license": "MIT (snippet only)",
+  "status": "pending_user_review",
+  "visual": {
+    "desktop_viewport": [
+      1316,
+      884
+    ],
+    "author_preview_pause": "checked",
+    "mobile_tested": false,
+    "offline_replay_tested": false
+  },
+  "archive_note": "Standalone wrapper; author CSS unchanged; literal campfire markup expanded from the pinned data tables and template. Exact archived HTML not browser replay-tested."
+}
