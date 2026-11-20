@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Twist-up lipstick | CSS 3D Lab</title><style>
+html,body{margin:0;min-height:100%;}body{min-height:100vh;display:grid;place-items:center;background:#f4f1f8}.scene{width:100%;min-height:100vh;display:grid;place-items:center;}
+.scene {
+  /* one base unit: every length below is a multiple of it, so the lipstick is the same share of a
+     card, the editor, a full screen and a recording canvas */
+  --u: 0.33vmin;
+  perspective: calc(800 * var(--u));
+}
+
+/* the static hit area: the closed lipstick's own box. It never moves, so the hover cannot flicker
+   at its edges, and the pieces that slide apart past it keep it hovered while the pointer stays */
+.lipstick {
+  --lacquer: #2f2366;
+  display: grid;
+  place-items: center;
+  position: relative;
+  width: calc(64 * var(--u));
+  height: calc(184 * var(--u));
+  cursor: pointer;
+  outline: none;
+  transform-style: preserve-3d;
+}
+
+/* the focus ring goes round the open pair, not the closed box, since focus opens it: drawn by a
+   pseudo-element that takes no pointer, so the hit area stays the closed lipstick's box */
+.lipstick:focus-visible::before {
+  content: '';
+  position: absolute;
+  inset: calc(-8 * var(--u)) calc(-36 * var(--u));
+  border: calc(2 * var(--u)) solid #8b6cff;
+  border-radius: calc(14 * var(--u));
+  pointer-events: none;
+}
+
+/* 0 × 0 at the middle of the floor; seen a little from above. Set down 85 units so the closed
+   lipstick and the open pair (the cap held up off the collar is the tallest moment) sit centred */
+.pose {
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  transform-style: preserve-3d;
+  transform: translateY(calc(85 * var(--u))) rotateX(-14deg);
+}
+
+.pose div {
+  position: absolute;
+  transform-style: preserve-3d;
+}
+
+/* --- every cylinder: twelve strips round the axis, each lit by the angle it faces --- */
+.cyl > i {
+  --a: calc(var(--i) * 30deg);
+  /* how squarely its left and right edges face the lamp, which is 35deg round to the left */
+  --l: cos(var(--a) + 20deg);
+  --r: cos(var(--a) + 50deg);
+  position: absolute;
+  left: calc(var(--w) / -2);
+  top: var(--top);
+  width: var(--w);
+  height: var(--h);
+  background: var(--paint);
+  transform: rotateY(var(--a)) translateZ(var(--rad));
+}
+.cyl > i::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgb(255 255 255 / calc(max(0, var(--l) - 0.78) * 2.4)), rgb(255 255 255 / calc(max(0, var(--r) - 0.78) * 2.4))),
+    linear-gradient(90deg, rgb(8 4 26 / calc(0.4 - 0.4 * var(--l))), rgb(8 4 26 / calc(0.4 - 0.4 * var(--r))));
+}
+
+/* the case: radius 24, 100 tall. A gold collar on top, violet lacquer, a gold foot. The wall
+   shows its outside only; the core inside it (below) shows both sides, so from above you look
+   into the tube and see the core's far side, in the same paint. A wall strip seen from inside,
+   edge-on at the side, was sorted over the cap and left a gold pixel at the cap's edge */
+.case,
+.case-core {
+  --top: calc(-100 * var(--u));
+  --h: calc(100 * var(--u));
+  --paint:
+    linear-gradient(#ffe7b0, #ffb547 9%, #b8720f 21%, #1c1440 21% 23%, transparent 23% 95%, #b8720f 95%, #ffb547) ,
+    var(--lacquer);
+}
+.case {
+  --rad: calc(24 * var(--u));
+  --w: calc(14 * var(--u)); /* a side of the 12-gon is 12.86: the rest is overlap */
+}
+.case > i { backface-visibility: hidden; }
+/* overlap alone does not close a seam: where two strips' anti-aliased edges meet, each only
+   partly covers the same pixel, and a hairline of whatever is behind (the pink bullet) shows.
+   So a second, inner tube of the same paint stands behind the wall, turned half a strip so a
+   strip's middle backs every seam: a gap now shows the case's own colour. Radius 22.5 keeps
+   even its corners (22.5 cos 15 + 6.5 sin 15 = 23.4) inside the wall and clear of the bullet */
+.case-core {
+  --rad: calc(22.5 * var(--u));
+  --w: calc(13 * var(--u));
+}
+
+/* the rim of the tube: a gold ring laid flat on the collar, open in the middle for the bullet,
+   whose widest edges (20.52 out) pass through it as it rises: the opening is 20.7 */
+.rim {
+  position: absolute;
+  left: calc(-25 * var(--u));
+  top: calc(-25 * var(--u));
+  width: calc(50 * var(--u));
+  height: calc(50 * var(--u));
+  border-radius: 50%;
+  background: radial-gradient(closest-side, transparent calc(20.7 * var(--u)), #8a5409 calc(20.9 * var(--u)), #ffd27a calc(22.3 * var(--u)), #d1902a);
+  /* a third of a unit above the tube's top edges, not on them: a ring that touches the edges of
+     the wall and the core is cut up by the renderer's depth sort and comes out speckled */
+  transform: translateY(calc(-100.3 * var(--u))) rotateX(90deg);
+}
+
+/* --- the bullet: radius 19.5, its strips cut to the slanted plane, the cut face over them --- */
+.bullet {
+  --rad: calc(19.5 * var(--u));
+  /* a side of the 12-gon is 10.45: each strip runs 1.2 past both corners, so where two meet,
+     one's edge lies on the other's solid paint, never on its anti-aliased edge (with only a
+     sliver of overlap, both edges half-cover the same pixel and a hairline shows through). The
+     bullet gets no inner core: a core's strips would cross the cut face and crack it */
+  --w: calc(12.8 * var(--u));
+  --top: calc(-99.2 * var(--u));
+  --h: calc(79.2 * var(--u));
+  --paint: linear-gradient(#ff6aac, #e8327f 45%, #b51a5d);
+}
+.bullet > i {
+  backface-visibility: hidden;
+  clip-path: polygon(0 calc(var(--dl) * var(--u)), 100% calc(var(--dr) * var(--u)), 100% 100%, 0 100%);
+}
+
+/* the cut face: an ellipse 20.5 wide each side (just past the strips' top edges, 20.52 out) and
+   20.5 / cos 37deg along the slope, centred on the axis halfway up the cut, turned to face the
+   front left and tipped back by 90 - 37 = 53deg */
+.cut {
+  position: absolute;
+  left: calc(-20.5 * var(--u));
+  top: calc(-25.67 * var(--u));
+  width: calc(41 * var(--u));
+  height: calc(51.34 * var(--u));
+  border-radius: 50%;
+  background: radial-gradient(circle at 42% 36%, #ffb3d4, #ff4d9d 45%, #d02a72);
+  transform: translateY(calc(-84 * var(--u))) rotateY(-45deg) rotateX(53deg);
+}
+
+/* --- the cap: radius 26.5, 84 tall, its bottom 78 up, over the collar --- */
+.cap,
+.cap-core {
+  /* --dt: how far below the cap's top this tube starts (its gold line stays at the cap's 5) */
+  --top: calc(var(--dt) - 84 * var(--u));
+  --h: calc(84 * var(--u) - var(--dt));
+  --paint:
+    linear-gradient(transparent calc(5 * var(--u) - var(--dt)), #ffb547 calc(5 * var(--u) - var(--dt)) calc(6.5 * var(--u) - var(--dt)), transparent calc(6.5 * var(--u) - var(--dt)) calc(100% - 10 * var(--u)), #b8720f calc(100% - 10 * var(--u)), #ffd78a calc(100% - 6 * var(--u)), #b8720f),
+    var(--lacquer);
+}
+.cap {
+  --dt: 0px;
+  --rad: calc(26.5 * var(--u));
+  --w: calc(15.2 * var(--u));
+}
+/* the cap's own core, for the same reason: without it a seam showed the stage, the case's gold
+   collar and the pink tip inside. Radius 25.4 sits between the case's widest corners (25.0) and
+   the cap wall, and its strips are narrow, 11, so even their corners stay half a unit inside
+   the wall (25.4 cos 15 + 5.5 sin 15 = 25.95): any closer and the renderer can sort a core corner
+   in front of the wall and draw a faint line of its own. Its gaps sit behind the wall's solid
+   middles. It starts a unit below the cap's top (--dt) and shows its outside only: its edges
+   touching the lid, or its inside showing, both upset the depth sort round the lid's rim */
+.cap-core {
+  --dt: calc(1 * var(--u));
+  --rad: calc(25.4 * var(--u));
+  --w: calc(11 * var(--u));
+}
+.cap > i, .cap-core > i { backface-visibility: hidden; }
+.cap-top {
+  position: absolute;
+  left: calc(-27.5 * var(--u));
+  top: calc(-27.5 * var(--u));
+  width: calc(55 * var(--u));
+  height: calc(55 * var(--u));
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 38%, #5a4aa6, var(--lacquer) 60%, #1f1747 92%, #ffb547 93% 97%, #b8720f 98%);
+  transform: translateY(calc(-84 * var(--u))) rotateX(90deg);
+}
+
+/* soft shadows on the floor; the cap's follows it across and shows once it is down */
+.shadow {
+  position: absolute;
+  left: calc(-40 * var(--u));
+  top: calc(-40 * var(--u));
+  width: calc(80 * var(--u));
+  height: calc(80 * var(--u));
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(16 10 40 / 0.45), transparent);
+  transform: rotateX(90deg);
+}
+.cap-shadow {
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+/* --- the moves. At rest the cap sits on the collar (bottom 78 up). Closing, the delays run in
+   reverse: the cap is picked up off the floor (0s), the bullet sinks (0.5s), the cap comes
+   across (1.4s) and settles back on the collar (2.2s). The moves overlap, so no one step is a
+   jump, and the cap is never down while the bullet is: the pair never sits low and short --- */
+.lift { transition: transform 1s cubic-bezier(0.45, 0, 0.25, 1) 0.5s; }
+.cap-down {
+  transform: translateY(calc(-78 * var(--u)));
+  transition: transform 0.5s cubic-bezier(0.45, 0, 0.25, 1);
+}
+.body,
+.cap-x { transition: transform 0.9s cubic-bezier(0.45, 0, 0.25, 1) 1.4s; }
+.cap-up { transition: transform 0.45s cubic-bezier(0.3, 0, 0.2, 1) 2.2s; }
+
+/* opening: up off the collar (0s), apart (0.25s: the lipstick left, the cap right, so the pair
+   stays centred), the bullet twisting up a full turn as soon as the cap is clear of it (0.9s: by
+   then they are 46 units apart, the two radii), and the cap set down beside it (1.7s) */
+.lipstick:hover .cap-up,
+.lipstick:focus-visible .cap-up,
+.lipstick:focus-within .cap-up {
+  transform: translateY(calc(-22 * var(--u)));
+  transition-delay: 0s;
+  transition-timing-function: cubic-bezier(0.25, 0.6, 0.3, 1);
+}
+.lipstick:hover .body,
+.lipstick:focus-visible .body,
+.lipstick:focus-within .body {
+  transform: translateX(calc(-34 * var(--u)));
+  transition-delay: 0.25s;
+}
+.lipstick:hover .cap-x,
+.lipstick:focus-visible .cap-x,
+.lipstick:focus-within .cap-x {
+  transform: translateX(calc(34 * var(--u)));
+  transition-delay: 0.25s;
+}
+.lipstick:hover .cap-down,
+.lipstick:focus-visible .cap-down,
+.lipstick:focus-within .cap-down {
+  transform: translateY(calc(22 * var(--u)));
+  transition-duration: 0.75s;
+  transition-delay: 1.7s;
+}
+.lipstick:hover .cap-shadow,
+.lipstick:focus-visible .cap-shadow,
+.lipstick:focus-within .cap-shadow {
+  opacity: 1;
+  transition: opacity 0.4s 2.05s;
+}
+.lipstick:hover .lift,
+.lipstick:focus-visible .lift,
+.lipstick:focus-within .lift {
+  transform: translateY(calc(-66 * var(--u))) rotateY(360deg);
+  transition-duration: 1.4s;
+  transition-delay: 0.9s;
+}
+</style></head><body>
+<div class="scene">
+  <div class="lipstick" tabindex="0" role="img" aria-label="A lipstick: hover or focus to take the cap off and twist the bullet up">
+    <div class="pose">
+      <div class="body">
+        <b class="shadow"></b>
+        <div class="case cyl">
+          <i style="--i:0"></i>
+          <i style="--i:1"></i>
+          <i style="--i:2"></i>
+          <i style="--i:3"></i>
+          <i style="--i:4"></i>
+          <i style="--i:5"></i>
+          <i style="--i:6"></i>
+          <i style="--i:7"></i>
+          <i style="--i:8"></i>
+          <i style="--i:9"></i>
+          <i style="--i:10"></i>
+          <i style="--i:11"></i>
+        </div>
+        <div class="case-core cyl">
+          <i style="--i:0.5"></i>
+          <i style="--i:1.5"></i>
+          <i style="--i:2.5"></i>
+          <i style="--i:3.5"></i>
+          <i style="--i:4.5"></i>
+          <i style="--i:5.5"></i>
+          <i style="--i:6.5"></i>
+          <i style="--i:7.5"></i>
+          <i style="--i:8.5"></i>
+          <i style="--i:9.5"></i>
+          <i style="--i:10.5"></i>
+          <i style="--i:11.5"></i>
+        </div>
+        <b class="rim"></b>
+        <div class="lift">
+          <div class="bullet cyl">
+              <i style="--i:0; --dl:29.01; --dr:22.19"></i>
+              <i style="--i:1; --dl:23.68; --dr:14.36"></i>
+              <i style="--i:2; --dl:16.07; --dr:6.75"></i>
+              <i style="--i:3; --dl:8.23; --dr:1.41"></i>
+              <i style="--i:4; --dl:2.27; --dr:-0.23"></i>
+              <i style="--i:5; --dl:-0.23; --dr:2.27"></i>
+              <i style="--i:6; --dl:1.41; --dr:8.23"></i>
+              <i style="--i:7; --dl:6.75; --dr:16.07"></i>
+              <i style="--i:8; --dl:14.36; --dr:23.68"></i>
+              <i style="--i:9; --dl:22.19; --dr:29.01"></i>
+              <i style="--i:10; --dl:28.16; --dr:30.66"></i>
+              <i style="--i:11; --dl:30.66; --dr:28.16"></i>
+          </div>
+          <b class="cut"></b>
+        </div>
+      </div>
+      <div class="cap-x">
+        <b class="shadow cap-shadow"></b>
+        <div class="cap-up">
+          <div class="cap-down">
+            <div class="cap cyl">
+              <i style="--i:0"></i>
+              <i style="--i:1"></i>
+              <i style="--i:2"></i>
+              <i style="--i:3"></i>
+              <i style="--i:4"></i>
+              <i style="--i:5"></i>
+              <i style="--i:6"></i>
+              <i style="--i:7"></i>
+              <i style="--i:8"></i>
+              <i style="--i:9"></i>
+              <i style="--i:10"></i>
+              <i style="--i:11"></i>
+            </div>
+            <div class="cap-core cyl">
+              <i style="--i:0.5"></i>
+              <i style="--i:1.5"></i>
+              <i style="--i:2.5"></i>
+              <i style="--i:3.5"></i>
+              <i style="--i:4.5"></i>
+              <i style="--i:5.5"></i>
+              <i style="--i:6.5"></i>
+              <i style="--i:7.5"></i>
+              <i style="--i:8.5"></i>
+              <i style="--i:9.5"></i>
+              <i style="--i:10.5"></i>
+              <i style="--i:11.5"></i>
+            </div>
+            <b class="cap-top"></b>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body></html>
