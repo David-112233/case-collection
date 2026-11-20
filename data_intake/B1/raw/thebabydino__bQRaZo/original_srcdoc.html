@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>Responsive infographic with CSS variables, flexbox and clip-path</title>
+
+    <link rel="canonical" href="https://codepen.io/thebabydino/pen/bQRaZo">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><link href="https://fonts.googleapis.com/css?family=Coda" rel="stylesheet">
+  
+  
+  
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  --i: var(--wide, 1);
+  --j: calc(1 - var(--i));
+  --k: calc(1 - var(--narr, 1));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  /* test background *
+  background: 
+  	repeating-linear-gradient(-45deg, 
+  			gainsboro 0, gainsboro 2px, 
+  			transparent 0, transparent 5px);
+  /* live background */
+  background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/2017/kreator_rockharz_july_2018.jpg) 50%/cover fixed;
+  /**/
+  font: 400 1em/1.25 coda, trebuchet ms, arial, sans-serif;
+}
+body:after {
+  margin-top: 1em;
+  width: 25em;
+  height: 1.5em;
+  max-width: 100%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.35) 15%, transparent);
+  filter: blur(3px);
+  content: "";
+}
+@media (max-width: 43em) {
+  body {
+    --wide: 0 ;
+  }
+}
+@media (min-width: 270px) {
+  body {
+    --narr: 0 ;
+  }
+}
+
+p {
+  --p: var(--parity, 1);
+  --q: calc(1 - var(--p));
+  --s: calc(1 - 2*var(--p));
+  display: flex;
+  flex-direction: var(--narr, column);
+  align-items: center;
+  justify-content: center;
+  margin: calc(var(--j)*.25em) 0;
+  padding: calc(var(--i)*10em/var(--n) + var(--j)*5vw) calc(var(--i)*10em + var(--j)*2vw);
+  width: calc(var(--i)*40em + var(--j)*100%);
+  min-height: var(--wide, calc(40em/var(--n)));
+  transform: translate(calc(var(--i)*var(--s)*-1.5em));
+  background: radial-gradient(at calc(var(--q)*100%) 0, rgba(0, 0, 0, calc(.5 + var(--p)*.5)), transparent 63%) calc(var(--q)*100%) 0/65% 65% no-repeat, linear-gradient(calc(var(--s)*-90deg), hsl(23, calc(var(--q)*98%), calc(27% + var(--q)*20%)), hsl(44, calc(var(--q)*92%), 52%));
+  color: HSL(0, 0%, calc(var(--p)*100%));
+  text-align: var(--parity, right);
+  clip-path: var(--wide, circle(20em at 50% calc((.5*var(--n) - var(--idx))*40em/var(--n))));
+  counter-increment: idx;
+}
+p:before {
+  margin: 0 calc(var(--k)*var(--q)*.25em) 0 calc(var(--k)*var(--p)*.25em);
+  order: calc(var(--k)*var(--p));
+  font-size: 4em;
+  content: counter(idx, decimal-leading-zero);
+}
+p:nth-child(odd) {
+  --parity: 0 ;
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <style>:root { --n: 4 }</style>
+<p style="--idx: 0">Cake muffin donut chocolate cake jelly sesame snaps wafer tart pie sweet roll muffin chupa chups.</p>
+<p style="--idx: 1">Cake cookie lemon drops muffin sugar plum. Liquorice pudding plum topping macaroon pie chocolate.</p>
+<p style="--idx: 2">Cake muffin donut chocolate cake jelly sesame snaps wafer tart pie sweet roll muffin chupa chups.</p>
+<p style="--idx: 3">Cake cookie lemon drops muffin sugar plum. Liquorice pudding plum topping macaroon pie chocolate.</p>
+  
+  
+  
+</body>
+
+</html>

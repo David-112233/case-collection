@@ -1,0 +1,59 @@
+{
+  "source_id": "codepen:thebabydino/yvejyj",
+  "author": "thebabydino",
+  "pen_id": "YvejYj",
+  "url": "https://codepen.io/thebabydino/pen/YvejYj",
+  "acquisition": "cdpn_fullpage",
+  "acquisition_url": "https://cdpn.io/thebabydino/fullpage/YvejYj",
+  "retrieved_at": "2026-11-10T17:14:59+00:00",
+  "license": "MIT (CodePen public pen default)",
+  "fetch_status": "ok",
+  "title": "Responsive infographic with CSS variables and flexbox tricks",
+  "canonical_url": "https://codepen.io/thebabydino/pen/YvejYj",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "c3b5eaec056a507185c1b06db37e668715a58951a11af67fa04330575cc67275",
+  "source_html_sha256": "d88c131c05e0ab6ca5290368e4fd2aa9c1851114b87bb5bb6757fccfffcb550e",
+  "analysis": {
+    "js": {
+      "has_js": true,
+      "inline_js_chars": 22,
+      "external_scripts": [
+        "https://codepen.io/thebabydino/pen/evPbxv.js"
+      ],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 1,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": false,
+      "clip_path": false,
+      "css_counter": true,
+      "media_query": true
+    },
+    "external_stylesheets": [],
+    "css_imports": [],
+    "css_chars": 2533,
+    "element_count": 6,
+    "html_chars": 4840
+  }
+}

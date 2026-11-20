@@ -1,0 +1,61 @@
+{
+  "source_id": "codepen:agonbina/dqoqqo",
+  "author": "agonbina",
+  "pen_id": "DQoqqo",
+  "url": "https://codepen.io/agonbina/pen/DQoqqo",
+  "acquisition": "cdpn_fullpage",
+  "acquisition_url": "https://cdpn.io/agonbina/fullpage/DQoqqo",
+  "retrieved_at": "2026-11-10T17:16:29+00:00",
+  "license": "MIT (CodePen public pen default)",
+  "fetch_status": "ok",
+  "title": "Animated mobile app demo with CSS",
+  "canonical_url": "https://codepen.io/agonbina/pen/DQoqqo",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "914d1e1674fb5560be24812002b3a3bb27c4dd206b49e81ffd68841be282cf03",
+  "source_html_sha256": "25dee48599cd380fb9f7d63792d238d962726d0e95608ddc12fb087f74446cba",
+  "analysis": {
+    "js": {
+      "has_js": true,
+      "inline_js_chars": 0,
+      "external_scripts": [
+        "//use.edgefonts.net/source-sans-pro:n3,n4,n6,n7.js"
+      ],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 5,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": false,
+      "clip_path": false,
+      "css_counter": false,
+      "media_query": false
+    },
+    "external_stylesheets": [
+      "https://public.codepenassets.com/css/reset-2.0.min.css"
+    ],
+    "css_imports": [],
+    "css_chars": 3798,
+    "element_count": 33,
+    "html_chars": 6298
+  }
+}

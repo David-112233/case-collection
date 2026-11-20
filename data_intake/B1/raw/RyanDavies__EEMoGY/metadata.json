@@ -1,0 +1,64 @@
+{
+  "source_id": "codepen:ryandavies/eemogy",
+  "author": "RyanDavies",
+  "pen_id": "EEMoGY",
+  "url": "https://codepen.io/RyanDavies/pen/EEMoGY",
+  "acquisition": "cdpn_fullpage",
+  "acquisition_url": "https://cdpn.io/RyanDavies/fullpage/EEMoGY",
+  "retrieved_at": "2026-11-10T17:17:04+00:00",
+  "license": "MIT (CodePen public pen default)",
+  "fetch_status": "ok",
+  "title": "GSAP Floor Plan",
+  "canonical_url": "https://codepen.io/RyanDavies/pen/EEMoGY",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "dcf4beea720faf16fb75d5c59bc22ba41fa40c06228432863308d9119c64bd76",
+  "source_html_sha256": "22cc46968d7c488d35cca3f0f5f9834fd05b34a139b9a7b95bf6bc6513490c4b",
+  "analysis": {
+    "js": {
+      "has_js": true,
+      "inline_js_chars": 1970,
+      "external_scripts": [
+        "https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js",
+        "https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js",
+        "https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js",
+        "https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"
+      ],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 0,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": false,
+      "clip_path": false,
+      "css_counter": false,
+      "media_query": false
+    },
+    "external_stylesheets": [
+      "https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"
+    ],
+    "css_imports": [],
+    "css_chars": 417,
+    "element_count": 57,
+    "html_chars": 9421
+  }
+}

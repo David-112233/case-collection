@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>Isometric</title>
+
+    <link rel="canonical" href="https://codepen.io/arjun_g/pen/oNeVXyO">
+  
+  
+  
+  
+<style>
+body{
+	background: #0B384B;
+	overflow: hidden;
+}
+
+*{
+	transform-style: preserve-3d;
+}
+
+.room{
+	transform: rotateX(60deg) rotateY(0deg) rotateZ(-45deg);
+	position: relative;
+	top: 25%;
+	left: 25%;
+}
+
+.floor{
+	height: 400px;
+	width: 400px;
+	background: #ED6766;
+}
+.wall{
+	height: 300px;
+	width: 400px;
+	top: 0;
+	left: 0;
+	background: #219296;
+	position: absolute;
+	transform-origin: 0 100%;
+	transform: rotate3d(1, 0, 0, 90deg) translate3d(0, 300px, 300px);
+}
+.wall:after{
+	content: '';
+	positon: absolute;
+	background: red;
+}
+.wall.right{
+	transform: rotateX(90deg) rotateY(90deg) translate3d(-300px, 300px, 400px);
+	background: #27A7A6;
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <div class="room">
+	<div class="wall left">
+	</div>
+	<div class="floor">
+	</div>
+	<div class="wall right">
+	</div>
+</div>
+  
+  
+  
+</body>
+
+</html>

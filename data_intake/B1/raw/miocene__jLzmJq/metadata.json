@@ -1,0 +1,59 @@
+{
+  "source_id": "codepen:miocene/jlzmjq",
+  "author": "miocene",
+  "pen_id": "jLzmJq",
+  "url": "https://codepen.io/miocene/pen/jLzmJq",
+  "acquisition": "cdpn_fullpage",
+  "acquisition_url": "https://cdpn.io/miocene/fullpage/jLzmJq",
+  "retrieved_at": "2026-11-10T17:17:32+00:00",
+  "license": "MIT (CodePen public pen default)",
+  "fetch_status": "ok",
+  "title": "Pure CSS \"Biker\"",
+  "canonical_url": "https://codepen.io/miocene/pen/jLzmJq",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "f8839cc75e41dd5940ffb010494279482bab42a213c5b8c6e5bf1376fb88387c",
+  "source_html_sha256": "3c8219bb33e4789b59cdda755add411cc08fccaa6862cd68a12b7f418a6de62f",
+  "analysis": {
+    "js": {
+      "has_js": true,
+      "inline_js_chars": 113,
+      "external_scripts": [
+        "https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"
+      ],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 29,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": false,
+      "clip_path": false,
+      "css_counter": false,
+      "media_query": false
+    },
+    "external_stylesheets": [],
+    "css_imports": [],
+    "css_chars": 51425,
+    "element_count": 58,
+    "html_chars": 54972
+  }
+}

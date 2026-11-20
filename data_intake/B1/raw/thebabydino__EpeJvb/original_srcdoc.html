@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>Vertical items infographic with CSS vars, clipping and masking</title>
+
+    <link rel="canonical" href="https://codepen.io/thebabydino/pen/EpeJvb">
+  <link href="https://fonts.googleapis.com/css?family=Bubbler+One|Ubuntu" rel="stylesheet">
+<script>const ID='urfttwyOpDQ'</script>
+  
+  
+  
+<style>
+* {
+  margin: 0;
+}
+
+html {
+  font: 2vw/1.25 bubbler one, trebuchet ms, sans-serif;
+}
+
+body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  overflow-x: hidden;
+  height: 100vh;
+  background: #404042;
+}
+
+h1 {
+  order: var(--n);
+  color: #fff;
+  font-size: 5em;
+  font-weight: 900;
+  text-shadow: -1px -1px #999;
+  text-transform: uppercase;
+}
+
+p {
+  box-sizing: border-box;
+  position: relative;
+  margin: 1em 0;
+  padding: 15.25rem 7.54409rem 0 0.75rem;
+  width: 16.79409rem;
+  height: 34.76347rem;
+  text-indent: 1em;
+  filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.35));
+  counter-increment: c;
+}
+p:last-of-type {
+  margin-right: -6.79409rem;
+}
+p:before, p:after {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  border-radius: 1rem;
+}
+p:before {
+  --points: 0 0, 9.29409rem 0.04422rem, 100% 2.35191rem, 100% 100%, 8.20591rem 100%, 0.70591rem 32.45578rem;
+  padding: 0.5rem 7.29409rem 2.76347rem 0.5rem;
+  width: 9rem;
+  height: 31.5rem;
+  background: radial-gradient(circle at calc(100% + .5rem) 7.75rem, rgba(0, 0, 0, 0) calc(6.5rem - .5rem), rgba(0, 0, 0, 0.5) 6.5rem) content-box, Linear-gradient(90deg, var(--c0), var(--c1) 50%, var(--c2) 0, var(--c3) 85%, var(--c4)) content-box, linear-gradient(-72.89727deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.65));
+  font: 6.25rem/ 16rem ubuntu, trebuchet ms, verdana, arial, sans-serif;
+  color: #fff;
+  text-indent: .8125em;
+  text-shadow: 1px 1px 1px #000;
+  -webkit-clip-path: polygon(var(--points));
+  clip-path: polygon(var(--points));
+  content: counter(c);
+}
+p:after {
+  --mask: Radial-gradient(circle at 100% 8rem, transparent calc(6.5rem - 1px), red 6.5rem);
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 0.75rem;
+  width: 10rem;
+  height: 32.5rem;
+  background: Linear-gradient(90deg, #f8f8f8, #f5f5f7 50%, #eaeaec 0, #e8e8ea);
+  font-size: 2em;
+  -webkit-mask: var(--mask);
+  mask: var(--mask);
+  content: attr(data-icon);
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  <script src="https://public.codepenassets.com/js/prefixfree-1.0.7.min.js"></script>
+
+  
+</head>
+
+<body translate="no">
+  <style>:root { --n: 3 }</style>
+<h1>Infographic</h1>
+<p style="--c0: #dc1f25; --c1: #c71c22; --c2: #8f0e12; --c3: #640a0c; --c4: #9e1117" data-icon="❤️">Cake muffin donut chocolate cake jelly sesame snaps wafer tart pie sweet roll muffin chupa chups. Brownie ice cream gingerbread cookie lemon drops.</p>
+<p style="--c0: #de27c1; --c1: #de25cb; --c2: #b01289; --c3: #951574; --c4: #b51b8b" data-icon="💜">Cake cookie lemon drops muffin sugar plum. Liquorice pudding sugar plum topping macaroon pie chocolate apple pie soufflé topping dessert macaroon.</p>
+<p style="--c0: #e9ef4d; --c1: #e0e847; --c2: #aec62a; --c3: #9cb428; --c4: #bacd4d" data-icon="💚">Dessert jelly gingerbread cake soufflé chocolate cake. Apple pie chocolate bar topping donut powder muffin cake tart. Liquorice marzipan sugar plum.</p>
+  
+  
+  
+</body>
+
+</html>
