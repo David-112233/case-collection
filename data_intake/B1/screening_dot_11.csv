@@ -1,0 +1,5 @@
+key,url,decision,tier,hits,reason,js_policy,evidence,notes,decided_on
+karomancer__yLNdeXE,https://codepen.io/karomancer/pen/yLNdeXE,hold,unclassified,spatial_layers,await_user_review,original_preserved,左侧剪刀刀片交叉并遮挡布面，右侧针线与布面有前后穿插；默认画面中间面板纯蓝空白，完整性待复核，不列优先审核。,待复核；未正式入库，未评分。,2026-11-18
+shunyadezain__QWyVwep,https://codepen.io/shunyadezain/pen/QWyVwep,hold,unclassified,spatial_layers,await_user_review,original_preserved,OP-1正面机壳内嵌屏幕和键盘，旋钮与按键浮于面板，投影体现厚度。主要为正视浅浮雕，交错关系弱于参考案例；默认效果完整，未验证交互。,备选；未正式入库，未评分。,2026-11-18
+annampawl__jOZmboO,https://codepen.io/annampawl/pen/jOZmboO,accept,unclassified,spatial_layers,await_user_review,original_preserved,默认画面可见线轴和斜向牵线、机针与机身开口、布片叠过底座并垂过桌沿；卷尺亦跨越桌沿。CSS伪元素、clip-path与层级定位构成空间关系；动画时序未全面验证。,推荐审核；未正式入库，未评分。,2026-11-18
+khanhtranngoccva__BaYJGQa,https://codepen.io/khanhtranngoccva/pen/BaYJGQa,accept,unclassified,spatial_layers,await_user_review,original_preserved,透视键盘黑键跨于白键之上，琴键顶面与侧面形成实体厚度及交替遮挡；默认画面正常，保留原JS及MIDI相关外链，未测试音频、MIDI或按钮交互。,推荐审核；未正式入库，未评分。,2026-11-18
