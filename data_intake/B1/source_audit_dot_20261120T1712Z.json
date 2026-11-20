@@ -1,0 +1,26 @@
+{
+  "slot_utc": "2026-11-20T17:12:00Z",
+  "candidate_count": 1,
+  "total_if_verified": 279,
+  "formal_admission_excluded": true,
+  "cases": [
+    {
+      "review_no": "C279",
+      "id": "tlauffs__mdzzQZX",
+      "url": "https://codepen.io/tlauffs/pen/mdzzQZX",
+      "label": "凹入层板、杯架穿插、书堆叠放",
+      "original_bytes": 40596,
+      "derived_bytes": 40522,
+      "original_git_blob": "adc47bfef2f87b2944610952b8485fb33f41a305",
+      "derived_git_blob": "efc3e8b397f24601a9b92fd9a3cd41d49ff2d23d",
+      "compiled_srcdoc_verified": true,
+      "desktop_default_stable": true,
+      "not_tested": [
+        "hover",
+        "mobile",
+        "keyboard",
+        "offline_replay"
+      ]
+    }
+  ]
+}
