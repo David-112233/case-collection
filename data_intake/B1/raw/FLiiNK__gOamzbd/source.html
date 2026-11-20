@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>3D room with WASD and mouse movement</title>
+
+    <link rel="canonical" href="https://codepen.io/FLiiNK/pen/gOamzbd">
+  
+  
+  
+  
+<style>
+.dimmed {
+  opacity: 1;
+  transition: opacity 3s;
+}
+.dimmed .plane:not(.back-wall) {
+  opacity: 0.2;
+  transition: opacity 3s;
+}
+.dimmed .placard {
+  background-color: #333;
+}
+
+body {
+  overflow: hidden;
+  background-color: black;
+}
+
+.top {
+  position: absolute;
+  background-color: white;
+  top: 0px;
+  left: 0px;
+}
+
+#app {
+  perspective: 900px;
+}
+
+.camera {
+  height: 600px;
+  left: calc(50% - 50%);
+  top: 0px;
+  transform-style: preserve-3d;
+  transform: rotatey(0deg);
+}
+
+.browser {
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+  transform-style: preserve-3d;
+  transform: translatez(10px) scale(1);
+  backface-visibility: hidden;
+}
+
+.room {
+  height: 600px;
+  width: 100%;
+  position: absolute;
+  transform-style: preserve-3d;
+  transform: translatez(900px) translatey(-100px);
+}
+
+.plane {
+  background-color: green;
+  position: absolute;
+  backface-visibility: hidden;
+  box-shadow: inset 0px 0px 75px rgba(0, 0, 0, 0.3);
+  transform-style: preserve-3d;
+}
+
+.right-wall {
+  transform: rotatey(-90deg);
+  transform-origin: right center;
+  width: 1800px;
+  height: 600px;
+  right: 0px;
+  background-image: url("https://images.unsplash.com/photo-1487088678257-3a541e6e3922?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1934&q=80");
+  background-size: contain;
+}
+
+.left-wall {
+  transform: rotatey(90deg);
+  transform-origin: left center;
+  width: 1800px;
+  height: 600px;
+  background-image: url("https://images.unsplash.com/photo-1487088678257-3a541e6e3922?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1934&q=80");
+  background-size: contain;
+}
+
+.floor {
+  transform: rotatex(90deg) translateZ(0) rotatey(0deg);
+  transform-origin: center bottom;
+  width: 100%;
+  height: 1800px;
+  bottom: 0px;
+  background-image: url(https://images.unsplash.com/photo-1543445350-fe7812f731c2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1713&q=80);
+  background-size: 20%;
+}
+
+.ceiling {
+  transform: rotatex(-90deg) translateZ(0) rotatey(0deg);
+  transform-origin: center top;
+  width: 100%;
+  height: 1800px;
+  background-image: url(https://images.unsplash.com/photo-1531811027466-d90d527b4424?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1934&q=80);
+  background-size: contain;
+}
+
+.sign-one {
+  width: 100px;
+  transform: translatez(-200px);
+  position: absolute;
+  bottom: 100px;
+  left: 10px;
+}
+
+.front-wall {
+  width: 100%;
+  height: 600px;
+  background-image: url(https://images.unsplash.com/photo-1531811027466-d90d527b4424?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1934&q=80);
+  background-size: contain;
+  transform: rotatey(180deg);
+  transform-origin: center center;
+}
+
+.back-wall {
+  transform: translatez(-1800px);
+  width: 100%;
+  height: 600px;
+  background-image: url(https://images.unsplash.com/photo-1531811027466-d90d527b4424?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1934&q=80);
+  background-size: contain;
+}
+
+.sign-two {
+  width: 100px;
+  transform: translatez(-800px);
+  position: absolute;
+  top: 100px;
+  right: 300px;
+}
+
+.placards {
+  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+  transform: rotatey(180deg);
+}
+
+.placard {
+  height: 30px;
+  width: 100%;
+  background-color: white;
+  margin-bottom: 10px;
+}
+
+.wall-sign {
+  height: 100px;
+  width: 400px;
+  top: calc(50% - 50px);
+  position: absolute;
+  left: calc(50% - 200px);
+  font-size: 3rem;
+  background-color: white;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.8);
+  text-align: center;
+  line-height: 6rem;
+}
+
+.console {
+  height: 10px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background-color: white;
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  <div id="app">  
+<div class="camera" id="screen">
+
+  <div class="room" id="room">
+    <div class="ceiling plane">
+    </div>
+    <div class="floor plane">
+    </div>
+    <div class="left-wall plane">
+      <div class="wall-sign" onclick="play()">
+        Play the video
+      </div>
+    </div>
+    <div class="right-wall plane">
+    </div>
+    <div class="back-wall plane">
+      <iframe id="browser" class="browser" src="https://www.youtube.com/embed/WXuK6gekU1Y?enablejsapi=1&mute=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <div class="front-wall plane">
+    </div>
+www
+        <div class="sign-two">
+      <div class="placards">
+        <div class="placard" onclick="unmute()">Unmute</div>
+        <div class="placard" onclick="lightsOn()"> Lights On</div>
+        <div class="placard" onclick="lightsOff()"> Lights Off</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="top" id="console"></div>
+</div>
+
+<script>
+  var player;
+  
+    
+    function onPlayerReady(event) {
+  }
+  
+    function onPlayerStateChange(event) {
+  }
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player('browser', {
+        events: {
+          'onReady': onPlayerReady,
+          'onStateChange': onPlayerStateChange
+        }
+    });
+  }
+  
+  function play(){
+    player.playVideo();
+  }
+  
+  function unmute(){
+    player.unMute();
+  }
+  
+  function lightsOn(){
+    const app = document.getElementById("room");
+    app.classList.remove('dimmed');
+  }
+  
+    function lightsOff(){
+    const roooom = document.getElementById("room");
+    roooom.classList.add('dimmed');
+  }
+
+</script>
+  <script src='https://www.youtube.com/iframe_api'></script>
+    <script id="rendered-js" >
+const myPics = document.getElementById("app");
+const room = document.getElementById("screen");
+const room2 = document.getElementById("room");
+const browserWall = document.getElementById("browser");
+
+
+const screenWidth = window.innerWidth;
+
+let isActive = false;
+window.addEventListener("mousedown", e => {
+  isActive = true;
+});
+
+
+// event.offsetX, event.offsetY gives the (x,y) offset from the edge of the canvas.
+var timeout;
+window.addEventListener("mousemove", e => {
+  if (timeout) {
+    window.cancelAnimationFrame(timeout);
+  }
+  timeout = window.requestAnimationFrame(function () {
+    if (!isActive) return;
+    x = e.x;
+    y = e.y;
+    let dir = "none";
+    if (x / screenWidth < 0.25) {
+      dir = "left";
+    } else if (x / screenWidth > 0.75) {
+      dir = "right";
+    }
+
+    const rotation = x / screenWidth * 720;
+    const thing = room.style;
+    mouse.deltaX = e.x - (mouse.left || 0);
+    mouse.deltaY = e.y - (mouse.top || 0);
+
+    mouse.top = e.y;
+    mouse.left = e.x;
+    //room.style.transform = "rotatey(" + rotation + "deg) translatez(1800px)";
+  });
+});
+
+window.addEventListener("mouseleave", e => {
+  mouse.deltaX = 0;
+});
+
+
+const keys = {
+  KeyW: false };
+
+
+const position = {
+  x: 0,
+  y: 0,
+  z: 900 };
+
+
+const camera = {
+  x: 0,
+  y: 0 };
+
+
+const mouse = {
+  top: 0,
+  left: 0,
+  deltaX: 0,
+  deltaY: 0 };
+
+
+function run() {
+  update();
+  draw();
+  setTimeout(run, 20);
+  clean();
+}
+
+function update() {
+  camera.y = (camera.y - mouse.deltaY) % 360;
+  if (camera.y > 90) {
+    camera.y = 90;
+  }
+  if (camera.y < -90) {
+    camera.y = -90;
+  }
+  camera.x = (camera.x + mouse.deltaX) % 360;
+
+  const speed = keys.ShiftLeft ? 35 : 15;
+  const x = Math.sin(camera.x / 56) * speed;
+  const z = Math.cos(camera.x / 56) * speed;
+  if (keys.ControlLeft) {
+    browserWall.style.pointerEvents = 'all';
+  } else {
+    browserWall.style.pointerEvents = 'none';
+  }
+  if (keys.KeyW) {
+    position.z += z;
+    position.x -= x;
+  }
+  if (keys.KeyS) {
+    position.z -= z;
+    position.x += x;
+  }
+  if (keys.KeyD) {
+    position.z -= x;
+    position.x -= z;
+  }
+  if (keys.KeyA) {
+    position.x += z;
+    position.z += x;
+  }
+
+  if (position.z > 1750) {
+    position.z = 1750;
+  }
+
+  if (position.z < 50) {
+    position.z = 50;
+  }
+
+  if (position.x < -screenWidth / 2 + 50) {
+    position.x = -screenWidth / 2 + 50;
+  }
+
+  if (position.x > screenWidth / 2 - 50) {
+    position.x = screenWidth / 2 - 50;
+  }
+
+}
+
+function clean() {
+  mouse.deltaX = 0;
+  mouse.deltaY = 0;
+}
+
+function draw() {
+  log(JSON.stringify({ mouse, keys, position }));
+  room.style.transform = "translate3d(0px, 0px, 900px) rotateX(" + camera.y + "deg) rotatey(" + camera.x + "deg) rotatez(0deg)";
+  room2.style.transform = 'translatez(' + position.z + 'px) translatex(' + position.x + 'px) translatey(-100px)';
+}
+
+window.addEventListener("keydown", e => {
+  keys[e.code] = true;
+});
+
+window.addEventListener("keyup", e => {
+  keys[e.code] = false;
+});
+
+
+function log(text) {
+  const cons = document.getElementById("console");
+  cons.innerHTML = text;
+}
+
+run();
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>CSS-only Interactive 3D Camera</title>
+
+    <link rel="canonical" href="https://codepen.io/ufocatcher/pen/WNzXwgX">
+  
+  
+  
+  
+<style>
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.stage,
+.scene,
+.object {
+  user-select: none;
+  pointer-events: none;
+}
+
+.stage {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  /* where 7 is the qt. of cameras */
+  grid-template-rows: 1fr;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #333;
+}
+
+.scene {
+  position: absolute;
+  inset: 0 0;
+  width: 100%;
+  height: 100%;
+  perspective: 2400px;
+  perspective-origin: 0% 0%;
+  transition: all 1s;
+}
+
+.camera {
+  cursor: ew-resize;
+  pointer-events: all;
+}
+
+.camera:active ~ .scene {
+  perspective: 2000px;
+  perspective-origin: -0% -180%;
+}
+
+.camera.--1:hover ~ .scene > .object {
+  transform: rotate3d(0, 1, 0, 360deg);
+}
+
+.camera.--2:hover ~ .scene > .object {
+  transform: rotate3d(0, 1, 0, 240deg);
+}
+
+.camera.--3:hover ~ .scene > .object {
+  transform: rotate3d(0, 1, 0, 120deg);
+}
+
+.camera.--4:hover ~ .scene > .object {
+  transform: rotate3d(0, 1, 0, 0deg);
+}
+
+.camera.--5:hover ~ .scene > .object {
+  transform: rotate3d(0, 1, 0, -120deg);
+}
+
+.camera.--6:hover ~ .scene > .object {
+  transform: rotate3d(0, 1, 0, -240deg);
+}
+
+.camera.--7:hover ~ .scene > .object {
+  transform: rotate3d(0, 1, 0, -360deg);
+}
+
+.object {
+  position: absolute;
+  inset: 50% 50%;
+  transform-style: preserve-3d;
+  font-size: 20vmin;
+  will-change: transform;
+  transition: all 1s;
+}
+
+.plane {
+  width: 1em;
+  height: 1em;
+}
+
+.plane__face {
+  position: absolute;
+  border-radius: 100%;
+  width: 100%;
+  height: 100%;
+  transform: rotateX(-90deg) translateZ(0.5em) scale(10);
+  transform-origin: center center;
+  background: #ccc;
+  box-shadow: inset 0px 0px 50px 0px #333;
+  filter: blur(25px);
+  will-change: transform;
+}
+
+.cube {
+  width: 1em;
+  height: 1em;
+}
+
+.cube__face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: visible;
+  background-color: cyan;
+  opacity: 0.99;
+  will-change: transform;
+}
+
+.cube__face.--front {
+  transform: translateZ(0.5em);
+  box-shadow: inset 0px -50px 50px rgba(255, 255, 255, 0.5);
+  filter: brightness(0.7);
+}
+
+.cube__face.--back {
+  transform: rotateY(180deg) translateZ(0.5em);
+  box-shadow: inset 0px -50px 50px rgba(255, 255, 255, 0.5);
+  filter: brightness(0.7);
+}
+
+.cube__face.--right {
+  transform: rotateY(90deg) translateZ(0.5em);
+  box-shadow: inset 0px -50px 50px rgba(0, 0, 0, 0.25);
+  filter: brightness(0.5);
+}
+
+.cube__face.--left {
+  transform: rotateY(-90deg) translateZ(0.5em);
+  box-shadow: inset 0px 50px 50px rgba(255, 255, 255, 0.5),
+    inset 0px -50px 50px rgba(255, 255, 255, 0.5);
+  background: linear-gradient(180deg, cyan 0%, turquoise 100%);
+}
+
+.cube__face.--top {
+  transform: rotateX(90deg) translateZ(0.5em);
+  background: linear-gradient(90deg, cyan 0%, turquoise 100%);
+  box-shadow: inset 50px 0px 50px rgba(255, 255, 255, 0.5);
+}
+
+.cube__face.--bottom {
+  transform: rotateX(-90deg) translateZ(0.5em);
+  filter: blur(10px);
+  background: black;
+}
+
+.cube__face.--shadow {
+  transform: rotateX(-90deg) translateZ(0.5em) translateX(0.5em) scaleX(2);
+  background: linear-gradient(90deg, rgb(0, 55, 65) 0%, transparent 100%);
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <div class="stage">
+  <div class="camera --1"></div>
+  <div class="camera --2"></div>
+  <div class="camera --3"></div>
+  <div class="camera --4"></div>
+  <div class="camera --5"></div>
+  <div class="camera --6"></div>
+  <div class="camera --7"></div>
+  <div class="scene">
+    <div class="object plane">
+      <div class="plane__face"></div>
+    </div>
+    <div class="object cube">
+      <div class="cube__face --front"></div>
+      <div class="cube__face --back"></div>
+      <div class="cube__face --left"></div>
+      <div class="cube__face --right"></div>
+      <div class="cube__face --top"></div>
+      <div class="cube__face --bottom"></div>
+      <div class="cube__face --shadow"></div>
+    </div>
+  </div>
+</div>
+  
+    <script id="rendered-js" >
+/* 
+1. Hover left to right to rotate camera around scene.
+2. Click to change perspective of scene.
+3. Add more cameras for rotational granularity. 
+*/
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>

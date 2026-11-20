@@ -1,0 +1,66 @@
+{
+  "source_id": "codepen:giedr-ju/yygvejd",
+  "author": "Giedr-Ju",
+  "pen_id": "yygVejd",
+  "url": "https://codepen.io/Giedr-Ju/pen/yygVejd",
+  "acquisition": "cloud_browser_cdpn_srcdoc",
+  "acquisition_url": "https://cdpn.io/Giedr-Ju/fullpage/yygVejd",
+  "retrieved_at": "2026-11-18",
+  "title": "Origami Boat at Sea",
+  "fetch_status": "ok",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "73c2476a6d4fe3c460f48f2c25e97a84aa689aabab460d151c8396bfab9d9cc7",
+  "source_html_sha256": "c35a9634a76a6474d3fff5c0a71bb134728ac247b4ed44200e3baf82d3c6d9c6",
+  "analysis": {
+    "js": {
+      "has_js": true,
+      "inline_js_chars": 9083,
+      "external_scripts": [
+        "https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"
+      ],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 0,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": false,
+      "clip_path": false,
+      "css_counter": false,
+      "media_query": false
+    },
+    "external_stylesheets": [],
+    "css_imports": [
+      "https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap",
+      "https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+    ],
+    "css_chars": 3191,
+    "element_count": 14,
+    "html_chars": 14035
+  },
+  "review": {
+    "status": "备选",
+    "evidence": "折纸船折面与多层前后波浪互相遮挡，默认效果可见；主体由Canvas 2D绘制，含随机状态和连续动画、音效与拖动控制，稳定截图评测适配性待复核，未测试交互。",
+    "visual_verified": true,
+    "formal_admission": false
+  }
+}

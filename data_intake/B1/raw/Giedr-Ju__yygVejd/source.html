@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>Origami Boat at Sea</title>
+
+    <link rel="canonical" href="https://codepen.io/Giedr-Ju/pen/yygVejd">
+  
+  
+  
+  
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons+Outlined");
+
+:root {
+	--deep-twilight: #03045e;
+	--bright-teal-blue: #0077b6;
+	--turquoise-surf: #00b4d8;
+	--frosted-blue: #90e0ef;
+	--light-cyan: #caf0f8;
+	--almond-silk: #ffddd2;
+	--tangerine-dream: #e29578;
+	--stormy-teal: #006d77;
+	--pearl-aqua: #83c5be;
+	--alice-blue: #edf6f9;
+	--print-color: #7c2f13;
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: var(--light-cyan);
+	overflow: hidden;
+	font-family: system-ui, -apple-system, sans-serif;
+}
+
+#stage {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 32px 16px;
+	width: 100%;
+}
+
+#polaroid {
+	position: relative;
+	width: 100%;
+	max-width: 480px;
+	border-radius: 2px;
+	background: var(--alice-blue);
+	border: 18px solid var(--alice-blue);
+	overflow: hidden;
+	cursor: ew-resize;
+	user-select: none;
+	box-shadow: 0 25px 50px -12px rgba(3, 4, 94, 0.15),
+		0 12px 24px -4px rgba(0, 0, 0, 0.04);
+	transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+	display: flex;
+	flex-direction: column;
+}
+
+#polaroid:hover {
+	transform: scale(1.015) translateY(-2px);
+	box-shadow: 0 35px 65px -10px rgba(3, 4, 94, 0.22),
+		0 18px 30px -4px rgba(0, 0, 0, 0.08);
+}
+
+canvas {
+	display: block;
+	width: 100%;
+	background: var(--deep-twilight);
+	border-radius: 2px;
+}
+
+#polaroid-ui {
+	width: 100%;
+	height: 90px;
+	padding: 12px 4px 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	background: var(--alice-blue);
+}
+
+.caption-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+#caption-text {
+	font-family: "Shadows Into Light", cursive;
+	font-size: 1.8rem;
+	color: var(--print-color);
+	line-height: 1;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+#hint-details {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+	font-family: "Shadows Into Light", cursive;
+	font-size: 0.95rem;
+	color: var(--stormy-teal);
+	opacity: 0.85;
+}
+
+#audio-toggle {
+	background: transparent;
+	border: none;
+	color: var(--print-color);
+	cursor: pointer;
+	opacity: 0.6;
+	transition: opacity 0.2s, transform 0.2s;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#audio-toggle:hover {
+	opacity: 1;
+	transform: scale(1.1);
+}
+
+.icon-size {
+	font-size: 24px;
+}
+
+#toast {
+	position: fixed;
+	bottom: 24px;
+	right: 24px;
+	z-index: 50;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	background: white;
+	color: #042f2e;
+	padding: 10px 16px;
+	border-radius: 12px;
+	border: 1px solid #f1f5f9;
+	box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+		0 4px 6px -4px rgba(0, 0, 0, 0.1);
+	font-size: 0.75rem;
+	font-weight: 600;
+	opacity: 0;
+	transform: translateY(12px);
+	pointer-events: none;
+	transition: opacity 0.3s, transform 0.3s;
+}
+
+#toast.opacity-100 {
+	opacity: 1;
+}
+
+#toast.translate-y-0 {
+	transform: translateY(0);
+}
+
+#toast.opacity-0 {
+	opacity: 0;
+}
+
+#toast.translate-y-3 {
+	transform: translateY(12px);
+}
+
+#toast.pointer-events-none {
+	pointer-events: none;
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  <div id="stage">
+	<div id="polaroid">
+		<canvas id="scenery-canvas" width="500" height="400"></canvas>
+
+		<div id="polaroid-ui">
+			<div class="caption-row">
+				<span id="caption-text">gentle sea breeze...</span>
+
+				<button id="audio-toggle" title="Toggle Soundscape">
+					<span class="material-icons-outlined icon-size" id="audio-icon">
+						music_note
+					</span>
+				</button>
+			</div>
+
+			<div id="hint-details">
+				<span id="wind-reading">breeze: 12 knots</span>
+				<span id="drag-instruction">← drag to adjust →</span>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="toast">
+	<span id="toast-text">Ambient sound enabled.</span>
+</div>
+  
+    <script id="rendered-js" >
+const canvas = document.getElementById("scenery-canvas");
+const ctx = canvas.getContext("2d");
+
+const captionText = document.getElementById("caption-text");
+const windReading = document.getElementById("wind-reading");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+function showToast(text) {
+  const toast = document.getElementById("toast");
+  const toastText = document.getElementById("toast-text");
+
+  toastText.textContent = text;
+  toast.classList.remove("opacity-0", "translate-y-3", "pointer-events-none");
+  toast.classList.add("opacity-100", "translate-y-0");
+
+  setTimeout(() => {
+    toast.classList.add("opacity-0", "translate-y-3", "pointer-events-none");
+    toast.classList.remove("opacity-100", "translate-y-0");
+  }, 3000);
+}
+
+let windSpeed = 12;
+let targetWindSpeed = 12;
+let gustStrength = 0;
+
+let isMouseDown = false;
+let startX = 0;
+
+const colors = {
+  deepTwilight: "#03045e",
+  brightTealBlue: "#0077b6",
+  turquoiseSurf: "#00b4d8",
+  frostedBlue: "#90e0ef",
+  lightCyan: "#caf0f8",
+  almondSilk: "#ffddd2",
+  tangerineDream: "#e29578",
+  stormyTeal: "#006d77",
+  pearlAqua: "#83c5be",
+  aliceBlue: "#edf6f9",
+  printColor: "#7c2f13" };
+
+
+class WindWisp {
+  constructor() {
+    this.reset();
+    this.x = Math.random() * canvas.width;
+  }
+
+  reset() {
+    this.x = -100 - Math.random() * 100;
+    this.y = 30 + Math.random() * 170;
+    this.len = 25 + Math.random() * 45;
+    this.speed = 1.0 + Math.random() * 2.0;
+    this.opacity = 0.04 + Math.random() * 0.08;
+  }
+
+  update(currentWind) {
+    this.x += this.speed + currentWind * 0.18;
+    if (this.x > canvas.width + 100) this.reset();
+  }
+
+  draw(ctx) {
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(this.x, this.y);
+    ctx.lineTo(this.x + this.len, this.y);
+    ctx.strokeStyle = colors.lightCyan;
+    ctx.globalAlpha = this.opacity;
+    ctx.lineWidth = 1.0;
+    ctx.stroke();
+    ctx.restore();
+  }}
+
+
+const wisps = Array.from({ length: 15 }, () => new WindWisp());
+
+class WaveLayer {
+  constructor(yOffset, period, amplitude, speed, color) {
+    this.yOffset = yOffset;
+    this.period = period;
+    this.amplitude = amplitude;
+    this.speed = speed;
+    this.color = color;
+    this.phase = Math.random() * 100;
+  }
+
+  getHeightAt(x, time, currentWind) {
+    const waveScale = 1 + currentWind * 0.01;
+
+    return (
+      canvas.height * this.yOffset +
+      Math.sin(x * this.period + time * this.speed + this.phase) * (
+      this.amplitude * waveScale) +
+      Math.cos(x * this.period * 2.1 - time * this.speed * 1.2) * 1.5);
+
+  }
+
+  draw(ctx, time, currentWind) {
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(0, canvas.height);
+
+    for (let x = 0; x <= canvas.width + 5; x += 10) {
+      ctx.lineTo(x, this.getHeightAt(x, time, currentWind));
+    }
+
+    ctx.lineTo(canvas.width, canvas.height);
+    ctx.fillStyle = this.color;
+    ctx.fill();
+
+    ctx.restore();
+  }}
+
+
+const waveLayers = [
+new WaveLayer(0.68, 0.0035, 6, 0.01, colors.brightTealBlue),
+new WaveLayer(0.75, 0.0065, 10, -0.014, colors.turquoiseSurf),
+new WaveLayer(0.82, 0.01, 14, 0.02, colors.frostedBlue)];
+
+
+const sailboat = {
+  x: canvas.width * 0.5,
+  y: 0,
+  angle: 0,
+  targetAngle: 0,
+  scale: 3.6,
+
+  update(time, currentWind) {
+    const targetY =
+    waveLayers[1].getHeightAt(this.x, time, currentWind) - 4 * this.scale;
+
+    this.y += (targetY - this.y) * 0.3;
+
+    const step = 12;
+    const leftY = waveLayers[1].getHeightAt(this.x - step, time, currentWind);
+    const rightY = waveLayers[1].getHeightAt(this.x + step, time, currentWind);
+
+    this.targetAngle = Math.atan2(rightY - leftY, step * 2) + currentWind * 0.008;
+
+    this.angle += (this.targetAngle - this.angle) * 0.15;
+  },
+
+  draw(ctx) {
+    ctx.save();
+    ctx.translate(this.x, this.y);
+    ctx.rotate(this.angle);
+    ctx.scale(this.scale, this.scale);
+
+    ctx.strokeStyle = colors.printColor;
+    ctx.lineWidth = 1.0;
+    ctx.lineJoin = "round";
+
+    const peakX = windSpeed * 0.15;
+
+    ctx.beginPath();
+    ctx.moveTo(peakX, -28);
+    ctx.lineTo(-14, 2);
+    ctx.lineTo(0, 2);
+    ctx.closePath();
+    ctx.fillStyle = colors.almondSilk;
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(peakX, -28);
+    ctx.lineTo(14, 2);
+    ctx.lineTo(0, 2);
+    ctx.closePath();
+    ctx.fillStyle = colors.tangerineDream;
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(-36, -14);
+    ctx.lineTo(0, 2);
+    ctx.lineTo(-16, 12);
+    ctx.closePath();
+    ctx.fillStyle = colors.tangerineDream;
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(36, -14);
+    ctx.lineTo(0, 2);
+    ctx.lineTo(16, 12);
+    ctx.closePath();
+    ctx.fillStyle = colors.tangerineDream;
+    ctx.fill();
+    ctx.fillStyle = "rgba(124, 47, 19, 0.25)";
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(-16, 12);
+    ctx.lineTo(16, 12);
+    ctx.lineTo(0, 18);
+    ctx.closePath();
+    ctx.fillStyle = colors.printColor;
+    ctx.fill();
+
+    ctx.fillStyle = "rgba(0, 109, 119, 0.3)";
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.restore();
+  } };
+
+
+const polaroid = document.getElementById("polaroid");
+
+polaroid.addEventListener("mousedown", e => {
+  isMouseDown = true;
+  startX = e.clientX;
+});
+
+window.addEventListener("mousemove", e => {
+  if (!isMouseDown) return;
+
+  targetWindSpeed = Math.max(
+  2,
+  Math.min(50, targetWindSpeed + (e.clientX - startX) * 0.15));
+
+
+  startX = e.clientX;
+});
+
+window.addEventListener("mouseup", () => isMouseDown = false);
+
+canvas.addEventListener("click", () => {
+  gustStrength = 12;
+  showToast("Sea gust initiated.");
+});
+
+function getCaptionText(knots) {
+  if (knots < 8) return "calm, sleepy swells...";
+  if (knots < 18) return "gentle sea breeze...";
+  if (knots < 30) return "steady coastal draft...";
+  return "strong onshore gale!";
+}
+
+let audioCtx,
+mainVol,
+waveVol,
+windVol,
+windFilter,
+audioActive = false;
+
+function buildNoiseBuffer() {
+  const buffer = audioCtx.createBuffer(
+  1,
+  2 * audioCtx.sampleRate,
+  audioCtx.sampleRate);
+
+  const output = buffer.getChannelData(0);
+
+  let lastOut = 0.0;
+
+  for (let i = 0; i < buffer.length; i++) {
+    output[i] = (lastOut + 0.02 * (Math.random() * 2 - 1)) / 1.02;
+    lastOut = output[i];
+    output[i] *= 3.5;
+  }
+
+  return buffer;
+}
+
+function initAudio() {
+  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+  mainVol = audioCtx.createGain();
+  mainVol.gain.value = 0;
+  mainVol.connect(audioCtx.destination);
+
+  const surfSource = audioCtx.createBufferSource();
+  surfSource.buffer = buildNoiseBuffer();
+  surfSource.loop = true;
+
+  const surfFilter = audioCtx.createBiquadFilter();
+  surfFilter.type = "lowpass";
+  surfFilter.frequency.value = 220;
+
+  waveVol = audioCtx.createGain();
+  waveVol.gain.value = 0.3;
+
+  surfSource.connect(surfFilter);
+  surfFilter.connect(waveVol);
+  waveVol.connect(mainVol);
+  surfSource.start();
+
+  const windSource = audioCtx.createBufferSource();
+  windSource.buffer = buildNoiseBuffer();
+  windSource.loop = true;
+
+  windFilter = audioCtx.createBiquadFilter();
+  windFilter.type = "bandpass";
+
+  windVol = audioCtx.createGain();
+  windVol.gain.value = 0.03;
+
+  windSource.connect(windFilter);
+  windFilter.connect(windVol);
+  windVol.connect(mainVol);
+  windSource.start();
+
+  audioLoop();
+}
+
+function audioLoop() {
+  if (!audioActive) return;
+
+  const waveLfo = Math.sin(performance.now() * 0.001);
+
+  waveVol.gain.value = 0.2 + waveLfo * 0.15 + windSpeed * 0.004;
+  windFilter.frequency.value = 250 + windSpeed * 12;
+
+  requestAnimationFrame(audioLoop);
+}
+
+const audioToggle = document.getElementById("audio-toggle");
+
+audioToggle.addEventListener("click", e => {
+  e.stopPropagation();
+
+  if (!audioActive) {
+    if (!audioCtx) initAudio();else
+    audioCtx.resume();
+
+    audioActive = true;
+    mainVol.gain.value = 0.8;
+
+    document.getElementById("audio-icon").textContent = "music_off";
+    showToast("Synthesizer active.");
+  } else {
+    mainVol.gain.value = 0;
+    audioActive = false;
+
+    document.getElementById("audio-icon").textContent = "music_note";
+    showToast("Synthesizer muted.");
+  }
+});
+
+let frame = 0;
+
+function updateAndRender() {
+  frame++;
+
+  if (gustStrength > 0) gustStrength *= 0.95;
+
+  windSpeed += (targetWindSpeed - windSpeed) * 0.1;
+
+  const currentTotalWind = windSpeed + gustStrength;
+
+  windReading.textContent = `breeze: ${Math.round(currentTotalWind)} knots`;
+  captionText.textContent = getCaptionText(currentTotalWind);
+
+  const grad = ctx.createLinearGradient(0, 0, 0, canvas.height);
+  grad.addColorStop(0, colors.deepTwilight);
+  grad.addColorStop(1, colors.turquoiseSurf);
+
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  wisps.forEach(w => {
+    w.update(currentTotalWind);
+    w.draw(ctx);
+  });
+
+  sailboat.update(frame, currentTotalWind);
+
+  waveLayers[0].draw(ctx, frame, currentTotalWind);
+  sailboat.draw(ctx);
+  waveLayers[1].draw(ctx, frame, currentTotalWind);
+  waveLayers[2].draw(ctx, frame, currentTotalWind);
+
+  requestAnimationFrame(updateAndRender);
+}
+
+window.onload = updateAndRender;
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>
