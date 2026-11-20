@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>Sunset Illustration with CSS</title>
+
+    <link rel="canonical" href="https://codepen.io/aybukeceylan/pen/WNNwpqK">
+  
+  
+  
+  
+<style>
+body {
+  --outer-bg-color: linear-gradient(to bottom, rgba(254,130,94,1) 0%, rgba(252,88,84,1) 80%);
+  --sun-bg-color: #fe4550;
+  --mountain-bg-a: #f04e5a;
+  --mountain-bg-b: #fd7b6a;
+  --mountain-bg-c: #5e4663;
+  --mountain-bg-d: #fc4652;
+  --sand-shadow-a: linear-gradient(to right, rgba(202,129,121,0.68) 0%, rgba(103,69,94,0.70) 72%);
+  --sand-bg: #0f1532;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.wrapper {
+  margin: 0 auto;
+  width: 1000px;
+  height: 700px;
+  overflow: hidden;
+}
+
+.sky-bg-outer {
+  position: relative;
+  z-index: 1;
+  background: var(--outer-bg-color);
+  background-size: 100%;
+  width: 100%;
+  height: 400px;
+}
+
+.sun {
+  position: relative;
+  margin: auto;
+  top: 150px;
+  z-index: 4;
+  border-radius: 50%;
+  width: 170px;
+  height: 170px;
+  background: var(--sun-bg-color);
+}
+
+.mountain-a {
+  position: relative;
+  z-index: 4;
+  width: 54%;
+  height: 0;
+  padding-top: 160%;
+  padding-right: 100%;
+  border-radius: 100%;
+  background: var(--mountain-bg-a);
+  top: -60px;
+  left: -600px;
+  transform: skewY(20deg);
+}
+.mountain-a:after {
+  position: absolute;
+  content: "";
+  background: var(--mountain-bg-a);
+  width: 324px;
+  height: 300px;
+  z-index: 5;
+  right: 195px;
+  top: 54px;
+  transform: skew(38deg, 8deg);
+}
+
+.mountain-b {
+  position: absolute;
+  z-index: 12;
+  width: 98%;
+  height: 300px;
+  border-radius: 100%;
+  background: var(--mountain-bg-b);
+  top: 48%;
+  right: -189px;
+  transform: skewY(-32deg);
+  padding-top: 78%;
+}
+.mountain-b:before {
+  position: absolute;
+  content: "";
+  background: #fd7b6a;
+  width: 347px;
+  height: 300px;
+  z-index: 7;
+  right: 505px;
+  top: 16px;
+  transform: skew(30deg, -1deg);
+}
+.mountain-b .hidden-part {
+  position: absolute;
+  top: 15px;
+  right: 640px;
+  z-index: 10;
+  width: 100px;
+  background: var(--mountain-bg-b);
+  height: 100px;
+}
+
+.mountain-c {
+  position: absolute;
+  z-index: 8;
+  background: var(--mountain-bg-c);
+  width: 60%;
+  height: 100px;
+  top: 60%;
+  left: -350px;
+  padding-top: 80%;
+  padding-right: 20%;
+  border-radius: 100%;
+}
+.mountain-c:after {
+  content: "";
+  position: absolute;
+  background: var(--mountain-bg-c);
+  right: -62px;
+  width: 300px;
+  height: 100px;
+  z-index: 8;
+  top: 95px;
+  transform: skew(24deg, 24deg);
+}
+.mountain-c:before {
+  content: "";
+  position: absolute;
+  background: linear-gradient(to bottom, #614762 10%, #b0485a 90%);
+  width: 487px;
+  height: 117px;
+  z-index: 9;
+  top: 100px;
+  left: 348px;
+}
+.mountain-c .hidden-part {
+  position: absolute;
+  top: 84px;
+  right: -78px;
+  z-index: 9;
+  width: 0;
+  height: 0;
+  border-left: 98px solid transparent;
+  border-right: 98px solid transparent;
+  border-top: 56px solid var(--mountain-bg-a);
+  transform: skew(-12deg, -6deg);
+}
+
+.mountain-d {
+  position: absolute;
+  z-index: 13;
+  right: -181px;
+  background: var(--mountain-bg-d);
+  top: 71%;
+  width: 70%;
+  height: 100px;
+  border-radius: 100%;
+  padding-top: 20%;
+  transform: skewY(-10deg);
+}
+.mountain-d:before {
+  position: absolute;
+  content: "";
+  background: var(--mountain-bg-d);
+  width: 300px;
+  height: 100px;
+  z-index: 7;
+  right: 498px;
+  top: 50px;
+  transform: skew(8deg, -12deg);
+}
+
+.sand {
+  position: relative;
+  z-index: 5;
+  background: var(--sand-bg);
+  background-size: 100%;
+  width: 100%;
+  height: 300px;
+}
+
+.line-1 {
+  position: relative;
+  z-index: 6;
+  width: 220px;
+  height: 4px;
+  background: var(--sand-shadow-a);
+  top: 10px;
+  left: -10px;
+  border-radius: 30%;
+}
+
+.line-2 {
+  position: relative;
+  z-index: 6;
+  width: 650px;
+  height: 6px;
+  background: var(--sand-shadow-a);
+  top: 10px;
+  right: -10px;
+  float: right;
+  border-radius: 40%;
+}
+
+.shadow-1 {
+  position: relative;
+  z-index: 6;
+  background: #2a1d37;
+  width: 700px;
+  height: 100px;
+  top: 100px;
+  left: -200px;
+  border-radius: 100%;
+  transform: rotate(-2deg);
+}
+.shadow-1:before {
+  content: "";
+  position: absolute;
+  background: #2a1d37;
+  width: 100px;
+  height: 20px;
+  top: -10px;
+  left: 200px;
+}
+
+.shadow-2 {
+  position: relative;
+  z-index: 7;
+  background: linear-gradient(to left, #d94851 0%, #2a1d37 60%);
+  width: 660px;
+  height: 60px;
+  border-radius: 100%;
+  top: -50px;
+  left: -100px;
+}
+.shadow-2:after {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 30px;
+  bottom: -14px;
+  right: 0;
+  background: #2a1d37;
+  border-radius: 100%;
+  transform: rotate(2deg);
+}
+.shadow-2:before {
+  content: "";
+  position: absolute;
+  background: linear-gradient(to left, rgba(217, 72, 81, 0.37) 0%, #2a1d37 40%);
+  width: 370px;
+  height: 20px;
+  border-radius: 100%;
+  right: 250px;
+  top: 56px;
+}
+
+.shadow-3 {
+  position: relative;
+  z-index: 6;
+  background: #2a1d37;
+  width: 600px;
+  height: 60px;
+  float: right;
+  top: -100px;
+}
+
+.shadow-4 {
+  position: relative;
+  z-index: 8;
+  background: var(--sand-bg);
+  width: 600px;
+  height: 30px;
+  float: right;
+  top: -106px;
+  border-radius: 100%;
+  transform: rotate(-1deg);
+}
+.shadow-4:before {
+  content: "";
+  position: absolute;
+  background: #2a1d37;
+  left: 23px;
+  top: 25px;
+  width: 76px;
+  height: 15px;
+  border-radius: 100%;
+  transform: rotate(-7deg);
+}
+.shadow-4:after {
+  content: "";
+  position: absolute;
+  background: var(--sand-bg);
+  top: -2px;
+  width: 400px;
+  height: 20px;
+  right: 0;
+  transform: rotate(-2deg);
+}
+
+.shadow-5 {
+  position: relative;
+  z-index: 8;
+  background: #fd7b6a;
+  width: 650px;
+  height: 200px;
+  border-radius: 100%;
+  float: right;
+  top: -100px;
+  right: -200px;
+  transform: rotate(-10deg);
+}
+.shadow-5:before {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 74px;
+  background: var(--sand-bg);
+  border-radius: 100%;
+  left: -40px;
+  top: 30px;
+}
+.shadow-5:after {
+  content: "";
+  position: absolute;
+  width: 450px;
+  height: 52px;
+  left: 50px;
+  top: -4px;
+  background: #fd7b6a;
+  border-radius: 100%;
+  transform: rotate(2deg);
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  <div class="wrapper">
+  <div class="sky-bg-outer">
+    <div class="sun"></div>
+    <div class="mountain-a"></div>
+    <div class="mountain-b">
+      <div class="hidden-part"></div>
+    </div>
+    <div class="mountain-c">
+      <div class="hidden-part"></div>
+    </div>
+    <div class="mountain-d"></div>
+  </div>
+  <div class="sand">
+    <div class="line-1"></div>
+    <div class="line-2"></div>
+    <div class="shadow-1">
+      <div class="tree"></div>
+    </div>
+    <div class="shadow-2"></div>
+    <div class="shadow-3"></div>
+    <div class="shadow-4"></div>
+    <div class="shadow-5"></div>
+    <div class="shadow-5-a"></div>
+  </div>
+</div>
+  
+  
+  
+</body>
+
+</html>
