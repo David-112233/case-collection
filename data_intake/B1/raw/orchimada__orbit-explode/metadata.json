@@ -1,0 +1,42 @@
+{
+  "source_id": "github:orchimada/technical-explanatory-minimalism/assets/examples/orbit-explode.html",
+  "author": "orchimada",
+  "url": "https://orchimada.github.io/assets/diagrams/examples/orbit-explode.html",
+  "title": "Orbit / Explode",
+  "acquisition": "public_hosted_html_and_pinned_github_byte_equal",
+  "upstream_repo": "https://github.com/orchimada/technical-explanatory-minimalism",
+  "upstream_commit": "60e290cc0e93b3b1e801da040ee8910d19ba71c2",
+  "upstream_path": "assets/examples/orbit-explode.html",
+  "source_size": 14841,
+  "hosted_sha256": "5edabdebf85bb03a4d290b181db6caa7b6ba0f732338a81f93f6ec300fad6ba2",
+  "source_sha256": "5edabdebf85bb03a4d290b181db6caa7b6ba0f732338a81f93f6ec300fad6ba2",
+  "license": "MIT (verified upstream LICENSE; copyright 2026 orchimada). Google font styles and upstream preconnects linked only; assets not copied.",
+  "review": {
+    "candidate": "C281",
+    "label": "轴向拆层、板盖二级开启、芯片露出",
+    "note": "组装态斜视读数 331°；拖至 55% 存留 312°，机壳上盖与下层分离；单独按 Open board 后，55% 和 312° 不变，打开下层板盖露出处理器和连接器。已实测这些桌面持有帧；没有测试手机、键盘、离线回放。",
+    "surface": "cloud Chromium desktop",
+    "visual_verified": true,
+    "states": [
+      {
+        "explode": "assembled",
+        "orbit": "331°"
+      },
+      {
+        "explode": "55%",
+        "orbit": "312°",
+        "board": "closed"
+      },
+      {
+        "explode": "55%",
+        "orbit": "312°",
+        "board": "open"
+      }
+    ],
+    "difference_from_C057": "C057 的单个切换同时展开或复位二维 SVG 分层；本件可在同一相机与同一爆炸进度下独立开合次级板盖。",
+    "mobile_verified": false,
+    "keyboard_verified": false,
+    "offline_replay_verified": false,
+    "formal_admission": false
+  }
+}
