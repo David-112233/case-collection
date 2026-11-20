@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>Konstruktive Grafik</title>
+
+    <link rel="canonical" href="https://codepen.io/jonyablonski/pen/GorZxO">
+  <meta name="google" value="notranslate">
+  <link rel="stylesheet" href="https://public.codepenassets.com/css/reset-2.0.min.css">
+
+  
+  
+<style>
+/**
+ * Mixins
+ */
+/**
+ * Variables
+ */
+/**
+ * Animations
+ */
+@keyframes dash {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: 3000;
+  }
+}
+/**
+ * Base
+ */
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Helvetica Neue", "Helvetica", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: bold;
+}
+
+/**
+ * Gallery
+ */
+.gallery {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  opacity: 1;
+  transition: 1s opacity cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  background: #E3C205;
+  background: radial-gradient(ellipse at center, #fad608 0%, #E3C205 100%);
+}
+.gallery.fadeOut {
+  opacity: 0;
+}
+
+.gallery__body {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transform-origin: center center;
+}
+
+/**
+ * Poster
+ */
+.poster {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transform-origin: center center;
+  display: inline-block;
+  vertical-align: middle;
+}
+.poster:before, .poster:after {
+  z-index: -1;
+  position: absolute;
+  content: "";
+  bottom: 15px;
+  left: 8px;
+  width: 50%;
+  top: 80%;
+  max-width: 300px;
+  background: #777;
+  box-shadow: 0 15px 10px rgba(0, 0, 0, 0.5);
+  transform: rotate(-3deg);
+}
+.poster:after {
+  transform: rotate(3deg);
+  right: 8px;
+  left: auto;
+}
+
+.poster__content {
+  position: relative;
+  width: 500px;
+  height: 700px;
+  overflow: hidden;
+  padding: 0 1em;
+  background-color: #E3C205;
+  color: black;
+  box-shadow: 0 1px 4px 2px rgba(0, 0, 0, 0.2);
+}
+
+.poster__header {
+  width: 75%;
+  float: left;
+  margin-top: 40%;
+  overflow: hidden;
+}
+
+.poster__header-title {
+  margin-bottom: 0.3em;
+  font-size: 30px;
+}
+
+.poster__header-subtitle {
+  width: 35%;
+  float: left;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.poster__header-meta {
+  position: relative;
+  top: 0.2em;
+  width: 65%;
+  float: right;
+  font-size: 6px;
+  line-height: 1.5;
+  font-weight: bold;
+}
+.poster__header-meta li:last-child {
+  margin-top: 4px;
+}
+
+.poster__body {
+  position: relative;
+  top: 8px;
+  width: 25%;
+  float: right;
+  margin-top: 40%;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1;
+}
+.poster__body li:nth-child(3n) {
+  margin-top: 4px;
+}
+
+.poster__footer {
+  position: absolute;
+  top: 45%;
+  right: auto;
+  bottom: auto;
+  left: 73.5%;
+  font-size: 3px;
+}
+
+.poster__rules {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.poster__rules div {
+  position: absolute;
+}
+
+.smil .poster__rules div rect {
+  stroke-dasharray: 1000;
+  animation: dash 5s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite alternate;
+}
+
+.r-1 {
+  top: -50%;
+  left: 27.5%;
+  z-index: 2;
+}
+
+.r-2 {
+  bottom: -22%;
+  left: 27.5%;
+  z-index: 2;
+}
+
+.r-3 {
+  top: -26%;
+  left: -32%;
+  z-index: 1;
+}
+
+.r-4 {
+  bottom: -46%;
+  left: -32%;
+  z-index: 3;
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <!-- Gallery -->
+<main id="js-gallery" role="main" class="gallery">
+
+	<section class="gallery__body">
+
+		<!-- Poster -->
+		<div id="js-poster" class="main__gallery-poster poster">
+			<div class="poster__content">
+
+				<header class="poster__header">
+					<h1 class="poster__header-title">Konstruktive Grafik</h1>
+					<h2 class="poster__header-subtitle">Kunstgewerbe museum <br/>Zürich</h2>
+					<ul class="poster__header-meta">
+						<li>Offen: Montag 14-18</li>
+						<li>Dienstag bis Freitag 10-12, 14-18, 20-22</li>
+						<li>Samstag / Sonntag 10-12, 14-17</li>
+						<li class="last">8. März bis 6. April 1958</li>
+					</ul>
+				</header>
+
+				<ul class="poster__body">
+					<li>Arbeiten</li>
+					<li>von</li>
+					<li>Richard P. Lohse</li>
+					<li>Hans Neuburg</li>
+					<li>Carlos L. Vivarelli</li>
+				</ul>
+
+				<footer class="poster__footer">
+					<p>Credit copy that is too small to read unfortunately.</p>
+				</footer>
+
+				<div class="poster__rules">
+					<div class="r-1">
+						<svg width="500" height="500" version="1.1" xmlns="http://www.w3.org/2000/svg">
+							<rect width="500" height="500" stroke="black" fill="transparent" stroke-width="55" />
+						</svg>
+					</div>
+					<div class="r-2">
+						<svg width="500" height="500" version="1.1" xmlns="http://www.w3.org/2000/svg">
+							<rect width="500" height="500" stroke="black" fill="transparent" stroke-width="55" />
+						</svg>
+					</div>
+					<div class="r-3">
+						<svg width="500" height="500" version="1.1" xmlns="http://www.w3.org/2000/svg">
+							<rect width="500" height="500" stroke="white" fill="transparent" stroke-width="55" />
+						</svg>
+					</div>
+					<div class="r-4">
+						<svg width="500" height="500" version="1.1" xmlns="http://www.w3.org/2000/svg">
+							<rect width="500" height="500" stroke="white" fill="transparent" stroke-width="55" />
+						</svg>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<!-- Poster -->
+
+	</section>
+	<!-- .gallery__body -->
+
+</main>
+<!-- Gallery -->
+  <script src='//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js'></script>
+    <script id="rendered-js" >
+(function (window, document, undefined) {
+
+  'use strict';
+
+
+  /**
+   * Selectors
+   */
+  var body = document.body,
+  gallery = document.getElementById('js-gallery'),
+  galleryWidth = gallery.offsetWidth,
+  galleryHeight = gallery.offsetHeight,
+  poster = document.getElementById('js-poster'),
+  posterWidth = poster.offsetWidth,
+  posterHeight = poster.offsetHeight,
+  posterPadding = '50';
+
+  /**
+   * Prefixed requestAnimationFrame
+   */
+  var requestAnimationFrame = window.requestAnimationFrame ||
+  window.webkitRequestAnimationFrame ||
+  window.mozRequestAnimationFrame ||
+  window.msRequestAnimationFrame ||
+  function (callback) {
+    return setTimeout(callback, 1000 / 60);
+  };
+
+
+  /**
+   * Methods
+   */
+  var throttle = function (callback, limit) {
+    var wait = false;
+    return function () {
+      if (!wait) {
+        callback.call();
+        wait = true;
+        setTimeout(function () {
+          wait = false;
+        }, limit);
+      }
+    };
+  };
+
+  var resizePoster = function () {
+
+    // Define variable
+    var scale;
+
+    // Get values for poster dimensions
+    scale = Math.min(
+    galleryWidth / posterWidth,
+    galleryHeight / posterHeight);
+
+
+
+    // Scale Poster for larger viewports
+    poster.style[Modernizr.prefixed('transform')] = 'translate(-50%, -50%) ' + 'scale(' + scale + ')';
+
+    // Sync operation with browser
+    requestAnimationFrame(resizePoster);
+  };
+
+
+  var onResize = throttle(function () {
+
+    // Set Gallery width
+    galleryWidth = gallery.offsetWidth - posterPadding;
+
+    // Set Gallery height
+    galleryHeight = gallery.offsetHeight - posterPadding;
+
+    // Sync operation with browser
+    requestAnimationFrame(resizePoster);
+
+  }, 100);
+
+
+  /**
+   * Events/APIs/init
+   */
+
+  // Set Gallery width
+  galleryWidth = gallery.offsetWidth - posterPadding;
+
+  // Set Gallery height
+  galleryHeight = gallery.offsetHeight - posterPadding;
+
+  // Sync operation with browser
+  requestAnimationFrame(resizePoster);
+
+  // Listen for resize event
+  window.addEventListener('resize', onResize, false);
+
+})(window, document);
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>

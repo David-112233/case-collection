@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>Interactive U Subway Map</title>
+
+    <link rel="canonical" href="https://codepen.io/jywahu/pen/rzgwKG">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  
+  
+<style>
+body {
+  font-size: 16px;
+}
+
+#next, #previous {
+  cursor: pointer;
+  position: absolute;
+  transform: translateY(-90%);
+  bottom: 2%;
+  width: 25px;
+  transition: all 250ms ease;
+}
+
+@media (max-width: 800px) {
+  #next, #previous {
+    display: none;
+  }
+}
+#next {
+  cursor: pointer;
+  right: 100px;
+}
+#next:hover {
+  right: 98px;
+}
+
+#previous {
+  cursor: pointer;
+  left: 100px;
+}
+#previous:hover {
+  left: 98px;
+}
+
+#cityBoxes {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.city-info-box {
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+  padding: 5px;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  transition: all 250ms ease;
+}
+.city-info-box.active {
+  opacity: 1;
+}
+.city-info-box h2, .city-info-box h3 {
+  margin: 6px 0;
+  font-family: sans-serif;
+}
+.city-info-box h2 {
+  font-size: 1.4em;
+}
+.city-info-box h3 {
+  font-size: 1em;
+}
+.city-info-box p {
+  margin: 3px;
+  font-family: serif;
+}
+
+.map-svg {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  outline: none !important;
+}
+
+#parisToParis {
+  margin-top: 50px;
+  width: 100%;
+}
+#parisToParis .city-spot {
+  cursor: crosshair;
+  transition: all 250ms ease;
+}
+#parisToParis .city-spot.active {
+  fill: #1a1a1a;
+}
+#parisToParis .city-spot:hover {
+  fill: #1a1a1a;
+}
+
+.city-text {
+  display: none;
+}
+
+.ui-loader.ui-corner-all.ui-body-a.ui-loader-default {
+  display: none;
+}
+
+.city-text,
+.city-line {
+  display: none;
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  <div id="parisWrap" class="map-svg">
+ <svg class="u-subway-map" id="parisToParis" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 170 90"><g id="track" fill="none" stroke="#70476C"><path class="track-line" id="trackThin" stroke-width="0.8055" d="M18.108 75.444l8.7-8.7c.078-.15 9.675-11.85 27.976-11.85h54.227c.6 0 15.53.147 25.73-10.052l11.18-11.176"/><path class="track-line" id="trackThick" stroke-width="2.412" d="M15.858 73.194l8.55-8.55c.302-.45 10.5-12.978 30.376-12.978h54.227c.15 0 14.25.152 23.48-9.074l11.18-11.176"/></g><g id="cityText"><path class="city-text" id="parisStartText" d="M26.807 42.746l-.375-.528c-.375-.523-.824-.597-1.273-.148l-1.28 1.273c-.46.45-.53.977-.08 1.5l.45.676c.37.52.67.52 1.34.14l1.2-.67c.15-.08.15-.08.22.07l.3.45c.07.07.07.14 0 .22l-.83.82c-.08.07-.15.07-.15 0l-.3-.45-.83.82.37.52c.37.52.82.6 1.27.15l1.35-1.36c.45-.45.52-.98.07-1.5l-.5-.73c-.38-.53-.68-.53-1.35-.15l-1.2.75c-.15.07-.15.07-.22-.08l-.3-.38c-.08-.08-.08-.15 0-.23l.75-.75c.07-.08.07-.08.15 0l.3.37.9-.83zm-3.597 2.698l-.528-.75-1.722 1.723.523.75.45-.45 1.874 2.626-.45.45.53.75 1.72-1.724-.522-.75-.45.44-1.874-2.63.45-.45zm-4.2 4.274l.825-.824c.074-.074.074-.074.148 0l.528.75c.08.074.08.148 0 .227l-.82.83-.67-.97zm1.797-1.8c-.375-.524-.824-.6-1.273-.15l-2.398 2.4.523.75.44-.45 1.87 2.625-.45.45.52.75 1.72-1.724-.53-.75-.38.37-.6-.83.45-.46 1.72.97.97-.98-.52-.75-.45.45-1.05-.6c.3-.38.3-.83-.08-1.35l-.53-.75zm-4.796 7.05l-.6-1.723 1.35 1.047-.75.676zm2.78-.598l-3.37-2.477-1.72 1.727.53.75.38-.375 1.13 3.375-.37.375.53.75 1.57-1.578-.52-.75-.3.3-.22-.597 1.05-1.05.46.374-.37.3.53.75 1.58-1.577-.52-.75-.3.453zm-5.4 2.473c.08.074.08.152 0 .227l-.83.824-.67-.977.83-.824c.08-.074.08-.074.15 0l.53.75zm-2.93 1.277l.45-.453 1.88 2.625-.45.453.53.75 1.8-1.8-.52-.75-.52.522-.52-.75 1.13-1.125c.45-.45.53-.973.08-1.5l-.75-1.05c-.37-.524-.82-.6-1.27-.15l-2.4 2.4.6.828zm0 0"/><path class="city-text" id="rouenText" d="M86.808 80.542l-1.348-1.348-.676.45.375.374-1.58 1.05 1.2-2.55-1.13-1.125-.68.45.37.374-2.18 1.574-.38-.37-.67.46 1.34 1.35.68-.45-.38-.37 1.72-1.2-1.28 2.7.67.68 2.85-2.03.37.38.67-.37zm-4.723-2.773l1.125-.75-2.403-2.4-.67.45.374.37-2.17 1.57-.37-.38-.67.45 2.4 2.4 1.13-.75-.59-.6-.45.3-.75-.75.75-.53.98.97.68-.52-.98-.98.68-.45.75.75-.45.3.68.52zm-1.653-3.53l-1.347-1.35-.676.45.3.3-2.03 1.42c-.08.07-.15.07-.15 0l-.68-.68c-.08-.08-.08-.08 0-.15l2.03-1.43.29.3.67-.46-1.35-1.35-.68.45.37.37-2.18 1.5c-.45.3-.53.67-.15 1.05L76 75.81c.378.373.827.45 1.276.072l2.177-1.5.376.375.59-.523zm-5.7-4.35c.075-.08.154-.08.154 0l.75.75c.074.07.074.07 0 .14l-1.876 1.36c-.075.07-.15.07-.15 0l-.75-.75c-.073-.08-.073-.08 0-.15l1.876-1.35zm-1.647 2.92c.375.37.824.45 1.273.07l2.102-1.5c.45-.3.523-.68.148-1.05l-1.2-1.2c-.374-.38-.75-.45-1.272-.08l-2.102 1.5c-.45.3-.523.67-.148 1.05l1.2 1.2zm-1.125-5.92l.676.67c.074.07.074.07 0 .15l-.602.45c-.074.07-.148.07-.148 0l-.676-.68.75-.6zm1.5 1.5c.45-.3.523-.68.148-1.05l-1.95-2.03-.675.45.375.37-2.176 1.58-.375-.38-.67.45 1.42 1.42.676-.45-.45-.38.677-.45.375.37-.824 1.42.83.82.68-.45-.37-.38.45-.83c.38.3.68.23 1.13-.07l.75-.45zm0 0"/><g class="city-text" id="conflansText"><path id="conflansLineTwo" d="M125.182 2.708l-.75-1.125-2.402 2.403.45.67.374-.375 1.578 2.18-.375.38.45.68 2.397-2.39-.75-1.12-.598.6.297.45-.75.75-.523-.75.977-.97-.527-.67-.973.98-.453-.67.75-.75.3.45.528-.67zm-3.528 1.653l-1.348 1.35.45.68.374-.37 1.05 1.58-2.55-1.2-1.125 1.13.45.68.374-.37L120.9 10l-.38.372.45.67 1.35-1.344-.45-.677-.38.37-1.2-1.73 2.7 1.28.672-.67-2.026-2.85.377-.37-.377-.67zm-3.074 4.2l-.45-.67-1.5 1.5.45.68.375-.37 1.574 2.18-.38.38.45.67 1.5-1.5-.45-.67-.38.38-1.58-2.18.37-.37zm-3.523 3.6l.672-.67c.07-.08.07-.08.15 0l.45.6c.07.08.07.16 0 .16l-.68.67-.6-.75zm1.5-1.5c-.3-.45-.676-.52-1.05-.14l-1.95 1.95.45.68.374-.37 1.58 2.18-.37.38.45.68 1.43-1.43-.45-.67-.37.38-.45-.68.38-.37 1.42.82.83-.82-.45-.67-.37.37-.82-.45c.3-.37.23-.68-.07-1.12l-.52-.675zm-4.426 4.66c-.07-.07-.07-.15 0-.15l.75-.75c.08-.07.08-.07.15 0l1.35 1.88c.08.08.08.16 0 .16l-.75.75c-.07.08-.07.08-.15 0l-1.35-1.87zm2.93 1.65c.38-.37.45-.82.08-1.27l-1.5-2.1c-.3-.45-.67-.52-1.05-.14l-1.2 1.2c-.37.37-.45.75-.07 1.27l1.5 2.1c.3.45.67.52 1.05.15l1.21-1.2zm-4.72-1.2l-1.35 1.36.45.67.38-.37 1.05 1.57-2.54-1.2-1.12 1.13.45.68.38-.37 1.58 2.18-.37.38.45.68 1.35-1.35-.45-.68-.37.37-1.2-1.72 2.71 1.28.67-.67-2.02-2.85.375-.37-.37-.67zm-4.57 5.85c-.07-.08-.07-.15 0-.15l.75-.75c.08-.07.08-.07.15 0l1.36 1.88c.07.08.07.16 0 .16l-.75.75c-.07.08-.07.08-.15 0l-1.35-1.87zm2.93 1.65c.38-.37.45-.82.08-1.27l-1.5-2.1c-.3-.45-.68-.52-1.05-.14l-1.2 1.2c-.37.38-.45.75-.07 1.27l1.5 2.11c.3.45.68.52 1.05.15l1.21-1.2zm-4.28-.52l-.45-.67-1.35 1.35.46.68.3-.3.53.75-.9.91-.52-.75.3-.3-.45-.68-1.35 1.35.45.68.38-.37 1.58 2.17-.37.37.45.68 1.35-1.35-.45-.67-.3.3-.52-.75.9-.9.53.75-.3.3.45.68 1.35-1.35-.45-.67-.37.38-1.58-2.17.38-.373zm-3.22 6.67l-.75.75.6.83.75-.75-.59-.83zm-2.33-.37l-.75-1.12-2.39 2.41.45.68.37-.37 1.58 2.17-.37.38.45.68 2.4-2.39-.75-1.13-.6.6.3.46-.75.75-.52-.75.98-.98-.52-.672-.98.98-.45-.676.75-.75.3.44.53-.674zm-6.22 4.36l.9 1.27.6-.59-.45-.6.38-.37 1.5 2.18-.37.38.45.68 1.5-1.5-.45-.67-.37.38-1.5-2.17.38-.37.45.6.6-.6-.9-1.2-2.7 2.63zm.45 1.43l-.3-.45c-.3-.45-.68-.53-1.05-.15l-1.05 1.05c-.37.38-.45.75-.08 1.27l.38.6c.3.45.61.45 1.13.08l.98-.6c.08-.08.15-.08.23 0l.23.38c.07.08.07.15 0 .15l-.68.68c-.08.07-.08.07-.15 0l-.23-.37-.67.68.3.45c.3.45.68.53 1.05.15l1.12-1.12c.38-.37.45-.82.08-1.27l-.45-.6c-.3-.45-.6-.45-1.12-.07l-.97.6c-.08.07-.15.07-.23 0l-.22-.3c-.08-.07-.08-.15 0-.15l.6-.6c.07-.072.07-.072.143 0l.226.3.75-.675zm0 0"/><path id="conflansLineOne" d="M110.48 8.86l-.298-.454c-.3-.448-.676-.522-1.05-.147l-1.052 1.05c-.375.37-.45.75-.074 1.27l.375.6c.31.45.6.45 1.13.07l.98-.61c.08-.08.15-.08.23 0l.23.37c.08.08.08.15 0 .15l-.67.67c-.07.07-.07.07-.15 0l-.22-.38-.68.67.3.45c.3.45.68.52 1.05.15l1.13-1.13c.38-.38.45-.83.08-1.27l-.45-.6c-.3-.45-.6-.45-1.12-.08l-.98.59c-.07.08-.15.08-.23 0l-.22-.3c-.07-.08-.07-.16 0-.16l.6-.598c.08-.08.08-.08.15 0l.23.29.75-.67zm-3.45 1.65l-1.35 1.352.45.67.375-.375 1.05 1.58-2.55-1.205-1.125 1.125.45.677.374-.375 1.574 2.17-.375.37.45.67 1.35-1.35-.448-.68-.375.37-1.2-1.72 2.7 1.27.676-.68-2.027-2.85.37-.38-.38-.68zm-4.05 7.124l-.524-1.426 1.125.903-.6.53zm2.25-.523l-2.774-2.02-1.5 1.43.45.68.374-.37.902 2.85-.3.31.448.68 1.273-1.27-.45-.68-.222.22-.22-.52.9-.9.38.3-.29.3.45.68 1.35-1.36-.45-.67-.29.37zm-3.673 2.48l-.602.6.45.68-.75.75-1.5-2.17.374-.37-.45-.67-1.5 1.5.45.68.37-.37 1.57 2.18-.38.38.45.67 2.4-2.39-.9-1.42zm-3.453 1.73l-.75-1.12-2.398 2.4.45.68.374-.37 1.574 2.18-.375.38.45.68 1.42-1.43-.45-.68-.3.3-.53-.75.97-.97-.53-.68-.97.98-.53-.75.75-.75.3.45.52-.52zm-3.598 1.65l-1.352 1.35.45.68.374-.37 1.05 1.58-2.55-1.2-1.125 1.13.453.67.375-.37 1.58 2.18-.37.38.45.68 1.35-1.35-.45-.67-.37.37-1.2-1.73 2.7 1.27.68-.67-2.02-2.85.38-.37-.37-.67zm-4.5 5.93c-.074-.07-.074-.14 0-.14l.75-.75c.074-.08.074-.08.148 0l1.352 1.88c.074.08.074.15 0 .15l-.75.75c-.074.08-.074.08-.152 0l-1.348-1.88zm2.926 1.65c.375-.37.45-.82.074-1.27l-1.5-2.1c-.3-.44-.676-.52-1.05-.14l-1.2 1.2c-.375.37-.45.75-.074 1.28l1.5 2.1c.297.45.672.53 1.047.16l1.2-1.2zm-2.926 2.93c.375-.37.45-.82.074-1.27l-.45-.6-.675.68.375.52c.074.08.074.16 0 .16l-.676.68c-.074.08-.074.08-.148 0l-1.352-1.87c-.074-.08-.074-.15 0-.15l.676-.68c.074-.07.074-.07.148 0l.375.46.676-.67-.45-.6c-.3-.45-.68-.52-1.05-.15L86.4 31.1c-.38.37-.45.82-.08 1.27l1.5 2.1c.3.45.67.52 1.05.144L90 33.46zm0 0"/></g><path class="city-text" id="pariEndText" d="M166.01 63.07l.524-.376c.523-.375.602-.824.148-1.277l-1.273-1.273c-.45-.45-.98-.523-1.5-.074l-.68.45c-.53.374-.53.675-.15 1.35l.67 1.2c.07.148.07.148-.08.223l-.45.3c-.08.075-.15.075-.23 0l-.83-.823c-.08-.074-.08-.148 0-.148l.45-.3-.83-.825-.53.375c-.52.375-.6.824-.15 1.273l1.35 1.352c.45.45.98.523 1.5.074l.75-.52c.53-.37.53-.67.15-1.35l-.75-1.2c-.08-.15-.08-.15.07-.22l.37-.3c.07-.07.14-.07.22 0l.75.75c.08.08.08.08 0 .15l-.38.3.83.9zm-2.777-3.676l.75-.523-1.723-1.72-.75.53.45.46-2.626 1.87-.45-.45-.75.53 1.724 1.72.75-.52-.45-.45 2.626-1.87.45.45zm-4.273-4.2l.824.824c.074.074.074.074 0 .148l-.75.527c-.074.074-.148.074-.227 0l-.824-.824.977-.68zm1.8 1.8c.524-.374.6-.827.15-1.276l-2.4-2.398-.75.523.45.45-2.625 1.874-.45-.45-.75.528 1.724 1.723.75-.523-.38-.375.82-.602.45.45-.98 1.726.97.977.75-.52-.45-.45.6-1.05c.37.3.82.3 1.35-.07l.75-.52zm-7.05-4.725l1.723-.61-1.047 1.35-.676-.75zm.676 2.69l2.473-3.38-1.73-1.73-.75.52.37.37-3.38 1.12-.38-.38-.75.52 1.57 1.58.75-.53-.3-.3.6-.23 1.05 1.05-.38.45-.38-.3-.75.52 1.57 1.58.75-.53-.37-.37zm-2.55-5.4c-.075.07-.153.07-.228 0l-.824-.83.977-.68.83.82c.08.07.08.07 0 .15l-.75.53zm-1.278-2.85l.453.45-2.62 1.87-.45-.45-.75.53 1.8 1.79.75-.53-.52-.53.75-.53 1.13 1.12c.45.45.98.52 1.5.07l1.05-.75c.53-.37.6-.82.15-1.27l-2.4-2.4-.83.59zm0 0"/></g><g id="cityLines" fill="none" stroke="#70476C" stroke-width="0.603"><path class="city-line" id="parisStartLine" d="M13.085 71.62v-7.8L33.41 43.57"/><path class="city-line" id="rouenLine" d="M63.108 58.644v6.6l18.824 18.9"/><path class="city-line" id="conflansLine" d="M92.42 49.194v-7.8l24.83-24.824 12.147-12.074"/><path class="city-line" id="parisEndLine" d="M144.335 41.468v7.726l16.348 16.348"/></g><g id="stops" fill="#FFF" stroke="#70476C"><path class="city-spot active" id="parisStart" stroke-width="4.824" d="M21.182 78.82c0 4.1-3.527 7.425-7.875 7.425S5.432 82.92 5.432 78.82c0-4.103 3.527-7.427 7.875-7.427s7.875 3.325 7.875 7.426zm0 0"/><path class="city-spot" id="rouen" stroke-width="1.809" d="M68.886 53.167c0 3.023-2.454 5.477-5.477 5.477s-5.48-2.453-5.48-5.477 2.45-5.473 5.47-5.473 5.47 2.45 5.47 5.473zm0 0"/><path class="city-spot" id="conflans" stroke-width="1.809" d="M97.835 53.167c0 3.023-2.453 5.477-5.477 5.477s-5.473-2.453-5.473-5.477 2.45-5.473 5.473-5.473 5.477 2.45 5.477 5.473zm0 0"/><path class="city-spot" id="parisEnd" stroke-width="4.824" d="M152.284 32.694c0 4.1-3.527 7.426-7.875 7.426s-7.88-3.325-7.88-7.426c0-4.102 3.52-7.426 7.87-7.426s7.87 3.325 7.87 7.426zm0 0"/></g></svg>
+ <div id="previous">
+  <svg id="rightArrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 93.666 178.142"><path fill="#70476C" d="M93.666 4.142l-80.83 89.07V84.93L93.666 174l-4.342 4.142-85.17-84.93L0 89.072l4.153-4.143L89.323 0z"/></svg></div>
+ <div id="next">
+  <svg id="LeftArrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 93.666 178.142"><path fill="#70476C" d="M0 174l80.83-89.07v8.282L0 4.142 4.34 0l85.17 84.93 4.156 4.14-4.155 4.142-85.17 84.93z"/></svg>
+ </div>
+ <div id="cityBoxes">
+
+  <div class="city-info-box active" id="parisStartInfo" data-city="#parisStart">
+   <h2>Amsterdam</h2>
+   <h3>DON’T SLEEP ON</h3>
+   <p>the chance to go blokarting at the beach. YouTube it.</p>
+   <h3>WHAT WE’RE DRINKING</h3>
+   <p>A Jopen beer at De Jopenkerk, a brewery in a former church. Get there during U Time.</p>
+  </div>
+
+  <div class="city-info-box" id="rouenInfo" data-city="#rouen">
+   <h2>Haarlem</h2>
+   <h3>DON’T SLEEP ON</h3>
+   <p>the chance to go blokarting at the beach. YouTube it.</p>
+   <h3>WHAT WE’RE DRINKING</h3>
+   <p>A Jopen beer at De Jopenkerk, a brewery in a former church. Get there during U Time.</p>
+  </div>
+
+  <div class="city-info-box" id="conflansInfo" data-city="#conflans">
+   <h2>Cologne</h2>
+   <h3>NOT TO BE CONFUSED WITH</h3>
+   <p>men’s perfume, although it is pronounced the same.</p>
+   <h3>DON’T MISS THE</h3>
+   <p>Cologne Cathedral. It’s a heavenly structure constructed over more than 600 years, so you know it’s good. And it’s an included excursion.</p>
+  </div>
+	 
+  <div class="city-info-box" id="parisEndInfo" data-city="#parisEnd">
+   <h2>Bonn</h2>
+   <h3>NOT TO BE CONFUSED WITH</h3>
+   <p>men’s perfume, although it is pronounced the same.</p>
+   <h3>DON’T MISS THE</h3>
+   <p>Cologne Cathedral. It’s a heavenly structure constructed over more than 600 years, so you know it’s good. And it’s an included excursion.</p>
+  </div>
+	 
+ </div>
+</div>
+  <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js'></script>
+<script src='https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js'></script>
+    <script id="rendered-js" >
+var uSubwayMap = function (map) {
+  var citys = [];
+  var i = 0;
+  $(map).find($(".city-spot")).each(function () {
+    citys.push($(this).attr("id"));
+  });
+  var y = citys.indexOf($(map).find($(".city-spot.active")).attr("id"));
+
+  $.fn.isAfter = function (sel) {
+    return this.prevAll(sel).length !== 0;
+  };
+  $.fn.isBefore = function (sel) {
+    return this.nextAll(sel).length !== 0;
+  };
+
+  var maxHeight = Math.max.apply(null, $(map).find($('.city-info-box')).map(function () {
+    return this.clientHeight;
+  }));
+
+  $(map).find($("#cityBoxes")).css({ "height": maxHeight });
+
+  function posInfoBoxes() {
+    $(map).find($(".city-info-box.active")).nextAll().css({ "transform": "translateX(-25%)" });
+    $(map).find($(".city-info-box.active")).prevAll().css({ "transform": "translateX(25%)" });
+  }
+
+  posInfoBoxes();
+
+  function slideInNext() {
+    if ($(map).find($(".city-info-box.active")).next().length > 0 && $(map).find($(".city-info-box.active")).prev().length != 0) {
+      $(map).find($(".city-info-box.active")).nextAll().css({ "transform": "translateX(-25%)" });
+      $(map).find($(".city-info-box.active")).prevAll().css({ "transform": "translateX(25%)" });
+    } else {
+      $(map).find($(".city-info-box")).first().css({ "transform": "translateX(-25%)" }).nextAll().css({ "transform": "translateX(-25%)" });
+      $(map).find($(".city-info-box.active")).prev().css({ "transform": "translateX(25%)" });
+    }
+    $(map).find($(".city-info-box.active")).css({ "transform": "translateX(0%)" });
+  }
+
+  function slideInPrev() {
+    if ($(map).find($(".city-info-box.active")).prev().length > 0 && $(map).find($(".city-info-box.active")).next().length != 0) {
+      $(map).find($(".city-info-box.active")).nextAll().css({ "transform": "translateX(-25%)" });
+      $(map).find($(".city-info-box.active")).prevAll().css({ "transform": "translateX(25%)" });
+    } else {
+      $(map).find($(".city-info-box")).last().css({ "transform": "translateX(25%)" }).prevAll().css({ "transform": "translateX(25%)" });
+      $(map).find($(".city-info-box.active")).next().css({ "transform": "translateX(-25%)" });
+    }
+    $(map).find($(".city-info-box.active")).css({ "transform": "translateX(0%)" });
+  }
+
+  $(map).find($(".city-spot")).hover(
+  function () {
+    cityBox = "#" + $(this).attr("id") + "Info";
+    activeCityBox = $(map).find($(".city-info-box.active"));
+    if (!$(this).hasClass("active")) {
+      $(activeCityBox).removeClass("active");
+      $(cityBox).addClass("active");
+      if ($(this).isAfter(".city-spot.active")) {
+        slideInPrev();
+      } else {
+        slideInNext();
+      }
+    }
+  },
+  function () {
+    if (!$(this).hasClass("active")) {
+      $(cityBox).removeClass("active");
+      $(activeCityBox).addClass("active");
+      posInfoBoxes();
+    }
+    $(activeCityBox).css({ "transform": "translateX(0%)" });
+  });
+
+
+  $(map).find($(".city-spot")).click(function () {
+    cityBox = "#" + $(this).attr("id") + "Info";
+    activeCityBox = $(map).find($(".city-info-box.active"));
+    if (!$(this).hasClass("active")) {
+      $(map).find($(".city-spot")).removeClass("active");
+      $(activeCityBox).removeClass("active");
+      $(cityBox).addClass("active");
+      $(this).addClass("active");
+      y = citys.indexOf($(this).attr("id"));
+    }
+  });
+
+  function nextCity() {
+    if (y < citys.length - 1) {
+      $(map).find($(".city-info-box.active")).removeClass("active").first().next().addClass("active");
+      $(map).find($(".city-spot.active")).removeClass("active").first().next().addClass("active");
+      y++;
+    }
+    // else {
+    // y = 0;
+    // $(map).find($(".city-info-box")).removeClass("active").eq(y).addClass("active");
+    // $(map).find($(".city-spot")).removeClass("active").eq(y).addClass("active");
+    // }
+  }
+
+  function previousCity() {
+    if (y != 0) {
+      $(map).find($(".city-info-box.active")).removeClass("active").first().prev().addClass("active");
+      $(map).find($(".city-spot.active")).removeClass("active").first().prev().addClass("active");
+      y--;
+    }
+    // else {
+    // y = citys.length - 1;
+    // $(map).find($(".city-info-box")).removeClass("active").eq(y).addClass("active");
+    // $(map).find($(".city-spot")).removeClass("active").eq(y).addClass("active");
+    // }
+  }
+
+  $(map).find($("#next")).click(function () {
+    nextCity();
+    slideInNext();
+  });
+
+
+  $(map).find($("#previous")).click(function () {
+    previousCity();
+    slideInPrev();
+  });
+
+  $(map).on('touchstart', function (evt) {
+    evt.preventDefault();
+  });
+
+  $(map).on("swipeleft", function (e) {
+    previousCity();
+    slideInPrev();
+  });
+
+  $(map).on("swiperight", function (e) {
+    nextCity();
+    slideInNext();
+  });
+};
+
+uSubwayMap("#parisWrap");
+
+$.fn.animateMap = function (line, options) {
+  var settings = $.extend(
+  {
+    callback: function () {} },
+
+  options);
+
+  var x = 0;
+  var lengths = [];
+  $(this).each(function () {
+    var item = document.querySelectorAll(line);
+    var path = item[x];
+    var length = path.getTotalLength();
+    $(item[x]).css({
+      "stroke-dasharray": length,
+      "stroke-dashoffset": length });
+
+    if (x < item.length - 1) {
+      //$(this).fadeIn(700);
+      $(item[x]).fadeIn(700).animate({ "stroke-dashoffset": 0 }, 1500);
+      console.log(x);
+      x++;
+    } else {
+      //options.callback.call(this)
+      //console.log('long');
+      $(item[x]).fadeIn(700).animate({ "stroke-dashoffset": 0 }, 1500, function () {
+        options.callback(this);
+      });
+    }
+  });
+};
+
+// $(".city-spot").each(function(i) {
+//     $(this).delay(250 * i).fadeIn(500);
+// });
+
+// $('.track-line').animateMap('.track-line',{
+// 	callback: function() {
+
+//     }
+// });
+$('.city-line').animateMap('.city-line', {
+  callback: function () {
+    $(".city-text").fadeIn(700);
+  } });
+
+//$('.city-line').animateMap('.city-line');
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>

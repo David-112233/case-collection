@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>Subway car (F train) in pure CSS</title>
+
+    <link rel="canonical" href="https://codepen.io/danielwarren/pen/ejObVq">
+  <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding" rel="stylesheet">
+  
+  
+  
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: "Nanum Gothic Coding", monospace;
+  font-size: 11px;
+}
+
+.paper {
+  height: 50vmin;
+  width: 70vmin;
+  background: #cc0000;
+  position: relative;
+  z-index: -1000;
+}
+
+.floor {
+  position: absolute;
+  height: 4vmin;
+  width: 70vmin;
+  background: linear-gradient(to right, #222, #222, #5e5c4f);
+  right: 0vmin;
+  bottom: 0vmin;
+  z-index: -2;
+}
+
+.door-base {
+  position: absolute;
+  height: 3vmin;
+  width: 30vmin;
+  background: #6a6147;
+  border-bottom: 0.25vmin solid grey;
+  bottom: 4vmin;
+  right: 0;
+  z-index: -10;
+}
+
+.seat-container1 {
+  position: absolute;
+  width: 46vmin;
+  background: transparent;
+  top: 25vmin;
+  border-right: 1vmin solid transparent;
+  border-bottom: 13vmin solid #bda569;
+  border-radius: 0 3vmin 1vmin 0;
+}
+
+.seat-container-edge {
+  position: absolute;
+  width: 43.5vmin;
+  height: 0.25vmin;
+  background: #222;
+  top: 24.75vmin;
+  z-index: 11;
+  opacity: 0.85;
+}
+
+.seat-container2 {
+  position: absolute;
+  width: 48.75vmin;
+  background: transparent;
+  top: 36vmin;
+  border-right: 3vmin solid transparent;
+  border-bottom: 3vmin solid #bda569;
+}
+
+.seat-container3 {
+  position: absolute;
+  width: 48.75vmin;
+  background: transparent;
+  top: 38.5vmin;
+  border-bottom: 3vmin solid #bda569;
+  border-radius: 0 1vmin 1vmin 0;
+}
+
+.under-seat {
+  position: absolute;
+  width: 45vmin;
+  height: 5.5vmin;
+  background: #1c150d;
+  bottom: 3vmin;
+  z-index: -1;
+}
+
+.frame-right {
+  position: absolute;
+  width: 2vmin;
+  height: 23vmin;
+  background: linear-gradient(to right, #9e9374, #7c7157, #9e9374);
+  left: 10vmin;
+}
+
+.frame-bottom {
+  position: absolute;
+  width: 32vmin;
+  height: 2vmin;
+  background: linear-gradient(to right, #7c7157, #9e9374, #7c7157);
+  left: 10vmin;
+  top: 21vmin;
+  z-index: 2;
+}
+
+.frame-left {
+  position: absolute;
+  width: 2vmin;
+  height: 23vmin;
+  background: linear-gradient(to right, #9e9374, #7c7157, #9e9374);
+  left: 41vmin;
+}
+
+.frame-hl {
+  position: absolute;
+  width: 29vmin;
+  height: 0.2vmin;
+  background: #fff5b0;
+  left: 12vmin;
+  top: 21vmin;
+  z-index: 2;
+}
+
+.bar1 {
+  position: absolute;
+  width: 1.75vmin;
+  height: 45vmin;
+  background: linear-gradient(#fff5b0, #413b29);
+  border-left: 0.5vmin solid #8c7456;
+  border-right: 0.3vmin solid #332510;
+  right: 19.75vmin;
+  border-radius: 0 0 1vmin 1vmin;
+  z-index: 1;
+}
+
+.bar2 {
+  position: absolute;
+  width: 1.75vmin;
+  height: 7vmin;
+  background: #6b5f47;
+  border-left: 0.75vmin solid #332510;
+  border-right: 0.75vmin solid #fff5b0;
+  right: 21.75vmin;
+  top: 38.75vmin;
+  transform: rotate(-45deg);
+  border-radius: 0 0 1vmin 1vmin;
+  z-index: 0;
+}
+
+.bar3 {
+  position: absolute;
+  width: 1.2vmin;
+  height: 14vmin;
+  background: #fff5b0;
+  border-left: 0.5vmin solid #332510;
+  right: 22vmin;
+  top: 22.75vmin;
+  transform: rotate(-20deg);
+  border-radius: 1vmin 1vmin;
+  z-index: 0.5;
+}
+
+.bar-wrap {
+  position: absolute;
+  width: 2.25vmin;
+  height: 3vmin;
+  background: linear-gradient(to right, #fff5b0, #6a634b, #6a634b);
+  border-bottom: 0.25vmin solid #332510;
+  right: 19.5vmin;
+  top: 32.2vmin;
+  border-radius: 0.25vmin;
+  z-index: 1;
+}
+
+.frame-single {
+  position: absolute;
+  width: 2vmin;
+  height: 25vmin;
+  background: linear-gradient(#9e9374, #7c7157, #9e9374);
+  left: 2vmin;
+  z-index: 10;
+}
+
+.ad-frame-right {
+  position: absolute;
+  width: 1vmin;
+  height: 16vmin;
+  background: linear-gradient(to right, #9e9374, #7c7157, #9e9374);
+  border-left: 0.25vmin solid #413b29;
+  left: 33vmin;
+  z-index: 3;
+}
+
+.ad-frame-bottom {
+  position: absolute;
+  width: 16vmin;
+  height: 1vmin;
+  background: linear-gradient(to right, #7c7157, #9e9374, #7c7157);
+  box-shadow: 0vmin 0vmin 12vmin 1vmin rgba(0, 0, 0, 0.75);
+  left: 18vmin;
+  top: 16vmin;
+  z-index: 1;
+}
+
+.ad-highlight {
+  position: absolute;
+  width: 14vmin;
+  height: 0.2vmin;
+  background: #fff;
+  top: 16vmin;
+  left: 19vmin;
+  z-index: 1;
+  opacity: 0.5;
+}
+
+.ad-frame-left {
+  position: absolute;
+  width: 1vmin;
+  height: 16vmin;
+  background: linear-gradient(to right, #9e9374, #7c7157, #9e9374);
+  border-right: 0.25vmin solid #413b29;
+  left: 18vmin;
+  z-index: 1;
+}
+
+.ad {
+  position: absolute;
+  width: 15.75vmin;
+  height: 16.5vmin;
+  background: #968362;
+  left: 18vmin;
+}
+
+.add-reflect1 {
+  position: absolute;
+  width: 6vmin;
+  height: 3vmin;
+  left: 1.25vmin;
+  top: 1vmin;
+  border-radius: 50%;
+  background: transparent;
+  border-bottom: 0.5vmin solid #fff;
+  transform: skew(55deg);
+  opacity: 0.25;
+}
+
+.add-reflect2 {
+  position: absolute;
+  width: 8vmin;
+  height: 3vmin;
+  right: 0.25vmin;
+  top: 1.5vmin;
+  border-radius: 50%;
+  background: transparent;
+  border-top: 0.5vmin solid #fff;
+  transform: skew(20deg);
+  opacity: 0.4;
+}
+
+.back-wall {
+  position: absolute;
+  width: 45vmin;
+  height: 26vmin;
+  background: #999;
+  z-index: -2;
+}
+
+.back-wall-top {
+  position: absolute;
+  width: 45vmin;
+  height: 10vmin;
+  background: linear-gradient(#413b29, #fff, #fff, #f4f05c);
+  z-index: 0;
+}
+
+.back-wall-bottom {
+  position: absolute;
+  width: 45vmin;
+  height: 17vmin;
+  background: #222;
+  top: 10vmin;
+  z-index: 0;
+}
+
+.back-wall-bottom:after {
+  content: " ";
+  position: absolute;
+  width: 40vmin;
+  height: 15vmin;
+  background: #222;
+  border-radius: 40%;
+  background: transparent;
+  border-top: 5vmin dashed #222;
+  top: -3vmin;
+  z-index: 0;
+}
+
+.back-wall-hl {
+  position: absolute;
+  width: 40vmin;
+  height: 15vmin;
+  background: #222;
+  border-radius: 20%;
+  background: transparent;
+  border-top: 4vmin dashed #fff;
+  top: 6vmin;
+  z-index: 1;
+  opacity: 0.25;
+}
+
+.back-wall-bottom:before {
+  content: " ";
+  position: absolute;
+  width: 45vmin;
+  height: 15vmin;
+  background: #222;
+  border-radius: 10%;
+  background: transparent;
+  border-top: 2vmin solid #777;
+  top: -2vmin;
+  z-index: -10;
+}
+
+.back-wall-container {
+  display: flex;
+  opacity: 0.95;
+}
+
+.stripe {
+  width: 0.75vmin;
+  height: 30vmin;
+  background: linear-gradient(#fff5b0, #413b29, #fff5b0, #222);
+  opacity: 0.2;
+}
+
+.back-wall-container .stripe:nth-child(odd) {
+  background: linear-gradient(#413b29, #fff5b0, #413b29, #222);
+  opacity: 0.7;
+}
+
+.door {
+  position: absolute;
+  width: 23.5vmin;
+  height: 43vmin;
+  background: linear-gradient(#efb884, #594e39, #3a3325);
+  border-bottom: 0.24vmin solid #222;
+  right: 0;
+  z-index: -2;
+}
+
+.door-panel-left {
+  position: absolute;
+  width: 2vmin;
+  height: 44vmin;
+  background: linear-gradient(#9e9374, #7c7157, #9e9374);
+  right: 23.5vmin;
+  z-index: -2;
+}
+
+.door-window-left {
+  position: absolute;
+  width: 14.5vmin;
+  height: 20.5vmin;
+  background: linear-gradient(#8b795f, #8b795f, #ffffeb);
+  right: 7vmin;
+  border-radius: 0 0 3.75vmin 4.75vmin;
+  border-bottom: 0.25vmin solid #222;
+}
+
+.door-window-left2 {
+  position: absolute;
+  width: 12vmin;
+  height: 20vmin;
+  background: #312805;
+  border: 0.25vmin solid rgba(33, 4, 0, 0.5);
+  border-radius: 0 0 2.25vmin 2.25vmin;
+  right: 0.75vmin;
+}
+
+.door-window-left2:after {
+  content: " ";
+  position: absolute;
+  width: 11vmin;
+  height: 19.75vmin;
+  background: linear-gradient(#ffffeb, #8b795f, #ffffeb, #6b5f47);
+  border-radius: 0 0 2vmin 2vmin;
+  top: -0.5vmin;
+}
+
+.door-window-glass {
+  position: absolute;
+  width: 10vmin;
+  height: 19vmin;
+  background: linear-gradient(to top, #3c416c, #130f17);
+  border-radius: 0 0 2vmin 2vmin;
+  right: 8.9vmin;
+}
+
+.door-divider {
+  position: absolute;
+  width: 2vmin;
+  height: 43vmin;
+  background: #2e2625;
+  right: 3.5vmin;
+}
+
+.door-window-right {
+  position: absolute;
+  width: 1.5vmin;
+  height: 20vmin;
+  background: linear-gradient(#8b795f, #8b795f, #ffffeb, #666);
+  border-left: 0.5vmin solid rgba(33, 4, 0, 0.5);
+  border-radius: 0 0 0 2.25vmin;
+  right: 0vmin;
+}
+
+.door-sign {
+  position: absolute;
+  width: 10vmin;
+  height: 1.25vmin;
+  background: #000;
+  right: 8.75vmin;
+  top: 22vmin;
+}
+
+.door-sign:after {
+  content: " ";
+  position: absolute;
+  width: 9vmin;
+  height: 0.15vmin;
+  background: #fff;
+  left: 0.5vmin;
+  top: 0.2vmin;
+  opacity: 0.5;
+}
+
+.seat1-bottom {
+  position: absolute;
+  width: 10.25vmin;
+  height: 2.5vmin;
+  background: #c13d20;
+  bottom: 11vmin;
+  left: 2.15vmin;
+  transform: skew(-55deg);
+}
+
+.seat1-bottom:after {
+  content: " ";
+  position: absolute;
+  height: 2.5vmin;
+  width: 4vmin;
+  background: #c13d20;
+  left: -2vmin;
+  transform: skew(55deg);
+}
+
+.seat1-top {
+  position: absolute;
+  width: 14.2vmin;
+  height: 11vmin;
+  background: #c13d20;
+  bottom: 13.5vmin;
+  border-radius: 0 1vmin 0 0;
+}
+
+.seat2-bottom {
+  position: absolute;
+  width: 8vmin;
+  height: 2.5vmin;
+  background: #d2601c;
+  bottom: 11vmin;
+  left: 18.25vmin;
+  transform: skew(-50deg);
+}
+
+.seat2-bottom:after {
+  content: " ";
+  position: absolute;
+  height: 2.5vmin;
+  width: 5vmin;
+  background: #d2601c;
+  left: -5vmin;
+  transform: skew(0deg);
+}
+
+.seat2-bottom:before {
+  content: " ";
+  position: absolute;
+  height: 2.5vmin;
+  width: 5.2vmin;
+  background: #d2601c;
+  left: 6vmin;
+  transform: skew(50deg);
+}
+
+.seat2-top {
+  position: absolute;
+  width: 14.5vmin;
+  height: 11vmin;
+  background: #d2601c;
+  bottom: 13.5vmin;
+  left: 15vmin;
+  border-radius: 1vmin 1vmin 0 0;
+}
+
+.seat3-bottom {
+  position: absolute;
+  width: 10vmin;
+  height: 2.5vmin;
+  background: #c84222;
+  bottom: 11vmin;
+  left: 35.25vmin;
+  transform: skew(0deg);
+}
+
+.seat3-bottom:after {
+  content: " ";
+  position: absolute;
+  height: 2.5vmin;
+  width: 6vmin;
+  background: #c84222;
+  left: -5vmin;
+  transform: skew(0deg);
+}
+
+.seat3-bottom:before {
+  content: " ";
+  position: absolute;
+  height: 2.5vmin;
+  width: 6vmin;
+  background: #c84222;
+  left: 5.45vmin;
+  transform: skew(50deg);
+}
+
+.seat3-top {
+  position: absolute;
+  width: 13vmin;
+  height: 11vmin;
+  background: #c84222;
+  bottom: 13.5vmin;
+  left: 30.25vmin;
+  border-radius: 1vmin 0 0 0;
+}
+
+.seat3-top:after {
+  content: " ";
+  position: absolute;
+  width: 3vmin;
+  height: 12vmin;
+  background: #c84222;
+  left: 11.5vmin;
+  transform: skew(5deg);
+  border-radius: 0 1vmin 0 0;
+}
+
+.seat-hl-left {
+  position: absolute;
+  width: 13vmin;
+  height: 3vmin;
+  border-bottom: 0.5vmin solid #fff;
+  background: transparent;
+  border-radius: 50%;
+  bottom: 12.5vmin;
+  opacity: 0.6;
+}
+
+.seat-hl-middle {
+  position: absolute;
+  width: 13.5vmin;
+  height: 3vmin;
+  border-bottom: 0.5vmin solid #fff;
+  background: transparent;
+  border-radius: 50%;
+  left: 15.25vmin;
+  bottom: 12.5vmin;
+  opacity: 0.6;
+  transform: skew(-25deg);
+}
+
+.seat-hl-right {
+  position: absolute;
+  width: 13.5vmin;
+  height: 3vmin;
+  border-bottom: 0.5vmin solid #fff;
+  background: transparent;
+  border-radius: 50%;
+  bottom: 12.5vmin;
+  left: 31vmin;
+  opacity: 0.6;
+}
+
+.seat-hl2-left {
+  position: absolute;
+  width: 12vmin;
+  height: 3vmin;
+  border-top: 0.5vmin solid #fff;
+  background: transparent;
+  border-radius: 50%;
+  top: 28vmin;
+  transform: rotate(15deg);
+  opacity: 0.25;
+}
+
+.seat-hl2-left:after {
+  content: " ";
+  position: absolute;
+  width: 12vmin;
+  height: 3vmin;
+  border-top: 0.5vmin solid #fff;
+  background: transparent;
+  border-radius: 50%;
+  top: 1vmin;
+  transform: rotate(-10deg);
+  opacity: 0.25;
+}
+
+.seat-hl2-left:before {
+  content: " ";
+  position: absolute;
+  width: 13vmin;
+  height: 5vmin;
+  background: #222;
+  border-radius: 50%;
+  top: 3vmin;
+  right: -2vmin;
+  transform: rotate(-10deg);
+  opacity: 0.35;
+}
+
+.seat-bottom-h {
+  position: absolute;
+  width: 11vmin;
+  height: 0.75vmin;
+  background: linear-gradient(to right, transparent, #fff, #fff, transparent);
+  bottom: 11.5vmin;
+  left: 15vmin;
+  opacity: 0.5;
+}
+
+.seat-bottom-h2 {
+  position: absolute;
+  width: 11vmin;
+  height: 0.75vmin;
+  background: linear-gradient(to right, transparent, #fff, #fff, transparent);
+  bottom: 11.5vmin;
+  left: 33vmin;
+  opacity: 0.5;
+}
+
+.seat-bottom-h3 {
+  position: absolute;
+  width: 11vmin;
+  height: 0.75vmin;
+  background: linear-gradient(to right, transparent, #fff, #fff, transparent);
+  bottom: 11.5vmin;
+  opacity: 0.25;
+}
+
+.seat-hl2-middle {
+  position: absolute;
+  width: 12vmin;
+  height: 3vmin;
+  border-top: 0.5vmin solid #fff;
+  background: transparent;
+  border-radius: 50%;
+  top: 28vmin;
+  left: 15.25vmin;
+  transform: rotate(12deg);
+  opacity: 0.25;
+}
+
+.seat-hl2-middle:after {
+  content: " ";
+  position: absolute;
+  width: 12vmin;
+  height: 3vmin;
+  border-top: 0.5vmin solid #fff;
+  background: transparent;
+  border-radius: 50%;
+  top: 1vmin;
+  transform: rotate(-10deg);
+  opacity: 0.25;
+}
+
+.seat-hl2-middle:before {
+  content: " ";
+  position: absolute;
+  width: 13vmin;
+  height: 5vmin;
+  background: #222;
+  border-radius: 50%;
+  top: 3vmin;
+  right: -2.5vmin;
+  transform: rotate(-10deg);
+  opacity: 0.35;
+}
+
+.seat-hl2-right {
+  position: absolute;
+  width: 12vmin;
+  height: 3vmin;
+  border-top: 0.5vmin solid #fff;
+  background: transparent;
+  border-radius: 50%;
+  top: 28vmin;
+  left: 31vmin;
+  transform: rotate(10deg);
+  opacity: 0.25;
+}
+
+.seat-hl2-right:after {
+  content: " ";
+  position: absolute;
+  width: 12vmin;
+  height: 3vmin;
+  border-top: 0.5vmin solid #fff;
+  background: transparent;
+  border-radius: 50%;
+  top: 1vmin;
+  transform: rotate(-5deg);
+  opacity: 0.25;
+}
+
+.seat-hl2-right:before {
+  content: " ";
+  position: absolute;
+  width: 14vmin;
+  height: 5vmin;
+  background: #222;
+  border-radius: 50%;
+  top: 3vmin;
+  right: -2.5vmin;
+  transform: rotate(-10deg);
+  opacity: 0.35;
+}
+
+.seat-hl3 {
+  position: absolute;
+  width: 46vmin;
+  height: 0.25vmin;
+  background: #fff;
+  bottom: 13.75vmin;
+  opacity: 0.25;
+}
+
+.seat-container-shadow {
+  position: absolute;
+  width: 48.5vmin;
+  height: 2.1vmin;
+  background: #655230;
+  bottom: 8.5vmin;
+}
+
+.seat-tri-1 {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 0.75vmin solid transparent;
+  border-right: 0.75vmin solid transparent;
+  border-top: 10vmin solid #bda569;
+  top: 25.5vmin;
+  left: 13.95vmin;
+  z-index: 10;
+}
+
+.seat-tri-2 {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 0.75vmin solid transparent;
+  border-right: 0.75vmin solid transparent;
+  border-top: 10vmin solid #bda569;
+  top: 25.5vmin;
+  left: 29.17vmin;
+  z-index: 10;
+}
+
+.bar-slot {
+  position: absolute;
+  width: 2vmin;
+  height: 2vmin;
+  background: #766c55;
+  border-bottom: 0.25vmin solid #222;
+  border-radius: 50%;
+  left: 44.1vmin;
+  top: 22.5vmin;
+  z-index: -1;
+}
+
+.ac-vent1 {
+  position: absolute;
+  width: 10vmin;
+  height: 3.5vmin;
+  background: #000;
+  bottom: 4vmin;
+}
+
+.ac-vent2 {
+  position: absolute;
+  width: 15vmin;
+  height: 3.5vmin;
+  background: #000;
+  bottom: 4vmin;
+  left: 11.75vmin;
+}
+
+.ac-vent3 {
+  position: absolute;
+  width: 15vmin;
+  height: 3.5vmin;
+  background: #000;
+  bottom: 4vmin;
+  left: 28.5vmin;
+}
+
+.door-reflection {
+  position: absolute;
+  height: 10vmin;
+  width: 8vmin;
+  background: linear-gradient(to top, transparent, #3a3325);
+  border-top: 1vmin solid #000;
+  left: 1.25vmin;
+  top: 3vmin;
+}
+
+.reflect-ad {
+  position: absolute;
+  height: 3vmin;
+  width: 10vmin;
+  background: #fff;
+  left: 0vmin;
+  opacity: 0.25;
+}
+
+.reflect-ad2 {
+  position: absolute;
+  height: 2vmin;
+  width: 10vmin;
+  background: #cc0000;
+  left: 0;
+  bottom: 0;
+}
+
+.door-reflection-window {
+  position: absolute;
+  height: 10vmin;
+  width: 5vmin;
+  background: linear-gradient(to top, transparent, #000);
+  border-radius: 1.5vmin 1.5vmin 0 0;
+  left: 1vmin;
+  top: 2vmin;
+}
+
+.door-reflection-reflection {
+  position: absolute;
+  height: 10vmin;
+  width: 3.5vmin;
+  background: linear-gradient(to top, transparent, #3c416c);
+  border-radius: 1vmin 1vmin 0 0;
+  left: 0.75vmin;
+  top: 0.5vmin;
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <div class="paper">
+  <div class="frame-right"></div>
+  <div class="frame-bottom"></div>
+  <div class="frame-hl"></div>
+  <div class="frame-left"></div>
+  <div class="frame-single"></div>
+  <div class="bar1"></div>
+  <div class="bar2"></div>
+  <div class="bar3"></div>
+  <div class="bar-slot"></div>
+  <div class="ad-frame-left"></div>
+  <div class="ad-frame-bottom"></div>
+  <div class="ad-frame-right"></div>
+  <div class="ad">
+    <?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+       viewBox="0 0 250 350" style="enable-background:new 0 0 250 350;" xml:space="preserve">
+    <style type="text/css">
+      .st0{fill:#BF1F47;stroke:#FFFFFF;stroke-miterlimit:10;}
+      .st1{fill:none;}
+      .st2{fill:#FFFFFF;}
+      .st3{font-family:'Facit-Bold';}
+      .st4{font-size:25px;}
+      .st5{font-family:'Facit-BoldItalic';}
+    </style>
+    <rect x="0" y="0" class="st0" width="250" height="261.9"/>
+    <rect x="20.2" y="13.2" class="st1" width="195.9" height="252"/>
+    <text transform="matrix(1 0 0 1 20.2222 32.2778)"><tspan x="0" y="0" class="st2 st3 st4">175 sqft LOFT</tspan><tspan x="0" y="30" class="st2 st3 st4">HUGE! </tspan><tspan x="0" y="60" class="st2 st3 st4">Great light!</tspan><tspan x="0" y="90" class="st2 st3 st4">4th FL walkup!</tspan><tspan x="0" y="120" class="st2 st3 st4">(exercise!)</tspan><tspan x="0" y="210" class="st2 st5 st4">Only $5,600/mo</tspan></text>
+    <polygon class="st2" points="201.6,183 208.5,184.3 203.2,189 204.1,196 198,192.4 191.6,195.4 193.2,188.5 188.4,183.4 
+      195.4,182.7 198.8,176.6 "/>
+    <polygon class="st2" points="47.1,183 54,184.3 48.7,189 49.5,196 43.5,192.4 37.1,195.4 38.6,188.5 33.8,183.4 40.8,182.7 
+      44.2,176.6 "/>
+    <polygon class="st2" points="128.2,183 135.1,184.3 129.8,189 130.7,196 124.6,192.4 118.2,195.4 119.7,188.5 114.9,183.4 
+      121.9,182.7 125.3,176.6 "/>
+    </svg>
+    <div class="add-reflect1"></div>
+    <div class="add-reflect2"></div>
+  </div>
+  <div class="ad-highlight"></div>
+  <div class="back-wall-reflect"></div>
+  <div class="back-wall">
+    <div class="back-wall-top"></div>
+    <div class="back-wall-bottom"></div>
+    <div class="back-wall-hl"></div>
+    <div class="back-wall-container">
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+       <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+       <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+      <div class="stripe"></div>
+    </div>
+  </div>
+  <div class="bar-wrap"></div>
+  <div class="door"></div>
+  <div class="door-panel-left"></div>
+  <div class="door-window-left">
+    <div class="door-window-left2"></div>
+  </div>
+  <div class="door-window-glass">
+    <div class="reflect-ad">
+      <div class="reflect-ad2"></div>
+    </div>
+    <div class="door-reflection">
+      <div class="door-reflection-window">
+        <div class="door-reflection-reflection"></div>
+      </div>
+    </div>
+  </div>
+  <div class="door-divider"></div>
+  <div class="door-window-right"></div>
+  <div class="door-sign"></div>
+  <div class="floor"></div>
+  <div class="door-base"></div>
+  <div class="seat-container1"></div>
+  <div class="seat-container2"></div>
+  <div class="seat-container3"></div>
+  <div class="seat1-top"></div>
+  <div class="seat1-bottom"></div>
+  <div class="seat2-top"></div>
+  <div class="seat2-bottom"></div>
+  <div class="seat3-top"></div>
+  <div class="seat3-bottom"></div>
+  <div class="seat-hl-left"></div>
+  <div class="seat-hl-middle"></div>
+  <div class="seat-hl-right"></div>
+  <div class="seat-hl2-left"></div>
+  <div class="seat-hl2-middle"></div>
+  <div class="seat-hl2-right"></div>
+  <div class="seat-hl3"></div>
+  <div class="seat-container-shadow"></div>
+  <div class="seat-container-edge"></div>
+  <div class="seat-tri-1"></div>
+  <div class="seat-tri-2"></div>
+  <div class="under-seat"></div>
+  <div class="seat-bottom-h"></div>
+  <div class="seat-bottom-h2"></div>
+  <div class="seat-bottom-h3"></div>
+  <div class="ac-vent1"></div>
+  <div class="ac-vent2"></div>
+  <div class="ac-vent3"></div>
+</div>
+<p>F Train | NYC</p>
+  
+  
+  
+</body>
+
+</html>

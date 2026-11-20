@@ -1,0 +1,10 @@
+key,url,decision,tier,hits,reason,js_policy,evidence,notes,decided_on
+mike-schultz__Xgeapr,https://codepen.io/mike-schultz/pen/Xgeapr,hold,unclassified,spatial_layers,await_user_review,preserve,云端实见倾斜面和点击 Toggle 3D 后的正视面。稠密彩色线路并行、交汇，亮点压在线上；评拓扑和视角两态，不比对变化中的亮点精确位置。,优先，对照 224/227；仅候审，未正式入库。,2026-11-19
+danielwarren__ejObVq,https://codepen.io/danielwarren/pen/ejObVq,hold,unclassified,spatial_layers,await_user_review,preserve,首屏静态画面实见座垫与靠背、栏杆覆盖座椅边角、墙窗与门窗框层层包围、玻璃后方条纹；仅评静态关系。,优先，对照 224；仅候审，未正式入库。,2026-11-19
+ales_codes__KKWONwe,https://codepen.io/ales_codes/pen/KKWONwe,hold,unclassified,spatial_layers,await_user_review,preserve,等待素材显示后实见大幅右图被斜边切入，半透明黑色斜板又压在图像上，霓虹标题与青色标签保持前景；按稳定首版画面评，不要求素材完全离线。,优先，对照 213/227；仅候审，未正式入库。,2026-11-19
+cee-r__pLRwbb,https://codepen.io/cee-r/pen/pLRwbb,hold,unclassified,spatial_layers,await_user_review,preserve,首屏实见深色前景珊瑚压住中景水草、鱼影与远处岩层，不同色阶和轮廓建立深度；首屏可判叠层，未测试视差交互。,优先，对照 224；仅候审，未正式入库。,2026-11-19
+adevandry__dyjQopP,https://codepen.io/adevandry/pen/dyjQopP,hold,unclassified,spatial_layers,await_user_review,preserve,首屏实见近坡遮住仙人掌基部、岩峰切过日轮轮廓且较淡远峰依次后退；首屏可评静态景深，未验证滚动视差。,候选，对照 224；仅候审，未正式入库。,2026-11-19
+bteare__GbRJwo,https://codepen.io/bteare/pen/GbRJwo,hold,unclassified,spatial_layers,await_user_review,preserve,实见三盆成形后的画面：近处盆缘盖住根部、土面停在盆口以内、仙人掌枝叶彼此覆盖；仅考察定格构图，未点 Replay 验证。,候选，对照 224；仅候审，未正式入库。,2026-11-19
+jonyablonski__GorZxO,https://codepen.io/jonyablonski/pen/GorZxO,hold,unclassified,spatial_layers,await_user_review,preserve,黄色静态海报中白色回折条明确盖过黑色纵条，右端折角与背景和纸边形成分区；层级清楚但只有一处主要交叉。,轻量候选，对照 213/227；仅候审，未正式入库。,2026-11-19
+jywahu__rzgwKG,https://codepen.io/jywahu/pen/rzgwKG,hold,unclassified,spatial_layers,await_user_review,preserve,实见紫色双轨被多个站点圆截断并恢复，斜向站名从圆边引出且不覆盖轨线；下方与站点组合为信息界面。点击右箭头未确认后续切换，不作交互通过结论。,候选，对照 213；仅候审，未正式入库。,2026-11-19
+emilieparks__MmEqxX,https://codepen.io/emilieparks/pen/MmEqxX,hold,unclassified,spatial_layers,await_user_review,preserve,源码将各容器的土层与容器框分开，植物入缸后放在二者之间，支持拖入安排；桌面仅实见标题，外链 SVG 未显示，未验证实际拖拽或层叠。单列，不计入 8 个实见候选。,仅源码备选，对照 224；仅候审，未正式入库。,2026-11-19
