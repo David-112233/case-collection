@@ -1,0 +1,44 @@
+{
+  "slot": "20261120T2212Z",
+  "candidate_count": 1,
+  "main_base": "579a36be2f08539608811a4174eb1623c2b2f430",
+  "candidates": [
+    {
+      "review_id": "C283",
+      "key": "Evirtual__bookshelf",
+      "title": "Bookshelf in pure CSS",
+      "url": "https://css3dlab.edgarasneverdauskas.com/models/bookshelf/",
+      "upstream": "https://github.com/Evirtual/css-3d-lab/blob/main/src/models/snippets-batch-i.ts#L434",
+      "license": "MIT (model snippet only)",
+      "license_url": "https://github.com/Evirtual/css-3d-lab/blob/main/LICENSES/MIT-snippets.txt",
+      "tags": [
+        "单册抽离",
+        "前后遮挡",
+        "层板承托"
+      ],
+      "js_policy": "none",
+      "user_review_status": "await_user_review",
+      "source_notes": "Exact published CSS and HTML snippet fields, not the licensed-separately site shell. Extracted from upstream field values; matched browser author one-file export inner HTML/CSS by lengths 958/6564 and FNV-1a 2897d48b/49f34bb8. Offline convenience source.html adds only viewport/stage framing and system font fallback. No JS or model dependencies.",
+      "browser": {
+        "environment": "cloud Chrome remote",
+        "default": "Five standing books, rear panel, shelf board front/end faces and contact visible.",
+        "held": "Keyboard focus on cyan Perspective book (Tab through third slot) pulls forward and rotates front cover into near plane, obscuring the left neighboring books and part of shelf. Remaining slots stay put. Verified two settled poses in author preview."
+      },
+      "near_duplicates": [
+        "C034 ehckk static multi-tier shelf, no hover or focus",
+        "C279 tlauffs recessed shelves and stacked items, no independent protrude-and-turn state in evidence",
+        "C282 DeyJordan single book jacket styling; no shelf or cross-book depth change"
+      ],
+      "sha256": {
+        "original.css": "f4ad4dd79e0ad3049e6f83d3250d1908e3e796509c43feee27fef1a34bec3879",
+        "source.html": "55cdb5b02adcb471f341c946e7fe4710fab1137847daaf9f3d4aa874858748ba",
+        "LICENSE.txt": "d2649b04d59e4e479f2e363dd160565fa8b3a59b7fe1fd6446beed675e856e42",
+        "original.html": "4c495aadc6d7323c858dee2fae822907523b527af45c308e830590c2db02a5bb"
+      }
+    }
+  ],
+  "not_counted": [
+    "LYxMWQN – exact claim already in main candidates_dot_01.csv",
+    "Origamio – separately pending; outside this slot"
+  ]
+}

@@ -1,0 +1,186 @@
+.scene {
+  /* one base unit: every length below is a multiple of it, so the shelf is the same share of a
+     card, the editor, a full screen and a recording canvas */
+  --u: 0.31vmin;
+  perspective: calc(800 * var(--u));
+}
+
+/* one plane seen at an angle; its slots are coplanar, so only they catch the pointer */
+.shelf {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  gap: calc(3 * var(--u));
+  padding: 0 calc(12 * var(--u));
+  pointer-events: none;
+  transform-style: preserve-3d;
+  /* turned, the shelf reaches further out on the right than on the left, and a pulled-out book
+     further still: move it left by that much, so it is centred */
+  translate: calc(-15 * var(--u)) 0;
+  transform: rotateX(-16deg) rotateY(-28deg);
+}
+
+/* the back of the bookcase, behind the books (they are 72 units deep) */
+.shelf::before {
+  content: '';
+  position: absolute;
+  inset: calc(-18 * var(--u)) calc(-6 * var(--u)) 0;
+  border-radius: calc(6 * var(--u)) calc(6 * var(--u)) 0 0;
+  background: linear-gradient(180deg, #1c1f3c, #262650);
+  transform: translateZ(calc(-80 * var(--u)));
+}
+
+/* the board: its top (laid flat), its front edge and its right end */
+.board, .edge, .end {
+  position: absolute;
+  left: calc(-6 * var(--u));
+}
+
+.board {
+  right: calc(-6 * var(--u));
+  bottom: 0;
+  height: calc(90 * var(--u));
+  background: linear-gradient(0deg, #b77a33, #6e4520);
+  transform-origin: 50% 100%;
+  transform: translateZ(calc(10 * var(--u))) rotateX(90deg);
+}
+
+.edge {
+  top: 100%;
+  right: calc(-6 * var(--u));
+  height: calc(10 * var(--u));
+  background: #d9953f;
+  transform: translateZ(calc(10 * var(--u)));
+}
+
+.end {
+  top: 100%;
+  left: calc(100% + 6 * var(--u));
+  width: calc(90 * var(--u));
+  height: calc(10 * var(--u));
+  background: #8a5a28;
+  transform-origin: 0 50%;
+  transform: translateZ(calc(10 * var(--u))) rotateY(90deg);
+}
+
+/* a slot is exactly the book's spine at rest, and never moves */
+.slot {
+  position: relative;
+  flex: none;
+  /* --t and --h come from the style attribute as plain numbers; the unit is the model's */
+  width: calc(var(--t) * var(--u));
+  height: calc(var(--h) * var(--u));
+  outline: none;
+  cursor: pointer;
+  pointer-events: auto;
+  transform-style: preserve-3d;
+}
+
+/* the book turns around its own middle, 36 units behind the spine */
+.book {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  transform-style: preserve-3d;
+  transform-origin: 50% 50% calc(-36 * var(--u));
+  translate: 0 0 0;
+  rotate: y 0deg;
+  /* going back: turn straight first, then slide in */
+  transition:
+    translate 0.4s cubic-bezier(0.3, 0.7, 0.4, 1) 0.35s,
+    rotate 0.35s ease-in-out;
+}
+
+/* only the last slot that reads as hovered comes out: a pointer only ever hovers one, but a
+   pose check forces :hover on all of them, and five books out at once is a pose no visitor
+   can make (every book in the air, turned into its neighbour, the shelf left behind) */
+.slot:hover:not(:has(~ .slot:hover)) .book,
+.slot:focus-visible .book {
+  /* the book that is out is drawn over its neighbours' slots, so it catches the pointer itself:
+     otherwise moving onto it hovers the slot behind it and swaps it for a neighbour */
+  pointer-events: auto;
+  /* out further than the book is deep (72 units), so it is clear of its neighbours before it turns */
+  translate: 0 calc(-5 * var(--u)) calc(86 * var(--u));
+  rotate: y -36deg;
+  /* coming out: slide all the way first, then turn */
+  transition:
+    translate 0.4s cubic-bezier(0.3, 0.7, 0.4, 1),
+    rotate 0.5s cubic-bezier(0.3, 1.2, 0.5, 1) 0.4s;
+}
+
+/* every face is exactly the size it is given: the front cover's padding and the page block's
+   border are inside it (border-box), so the covers are the spine's height and the pages' depth, and
+   nothing sticks out past the page block. The frame is the whole page, so no site stylesheet sets
+   this for the model: it says it itself */
+.book i {
+  position: absolute;
+  top: 0;
+  box-sizing: border-box;
+  height: 100%;
+}
+
+/* the spine */
+.book i:nth-child(1) {
+  left: 0;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: calc(2 * var(--u));
+  background:
+    linear-gradient(180deg, transparent calc(10 * var(--u)), rgb(255 255 255 / 0.55) calc(10 * var(--u)) calc(12 * var(--u)), transparent calc(12 * var(--u)) calc(100% - 12 * var(--u)), rgb(255 255 255 / 0.55) calc(100% - 12 * var(--u)) calc(100% - 10 * var(--u)), transparent 0),
+    linear-gradient(90deg, color-mix(in srgb, var(--c) 60%, #000), var(--c) 30%, var(--c) 65%, color-mix(in srgb, var(--c) 70%, #000));
+  color: #fff;
+  /* a dark halo round the white words, so they read on the brightest spines and covers too: on the
+     teal and the amber they were 1.6:1 */
+  text-shadow: 0 0 calc(1 * var(--u)) rgb(0 0 0 / 0.75), 0 0 calc(3 * var(--u)) rgb(0 0 0 / 0.55);
+  font-size: calc(8 * var(--u));
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  writing-mode: vertical-rl;
+  backface-visibility: hidden;
+}
+
+/* back cover: hinged on the spine's left edge, turned to face left */
+.book i:nth-child(2) {
+  left: calc(-72 * var(--u));
+  width: calc(72 * var(--u));
+  background: color-mix(in srgb, var(--c) 55%, #000);
+  transform-origin: 100% 50%;
+  transform: rotateY(-90deg);
+}
+
+/* front cover: hinged on the right edge, turned to face right */
+.book i:nth-child(3) {
+  left: 100%;
+  display: grid;
+  place-items: center;
+  width: calc(72 * var(--u));
+  padding: calc(8 * var(--u));
+  border-radius: 0 calc(3 * var(--u)) calc(3 * var(--u)) 0;
+  background:
+    radial-gradient(circle at 50% 36%, rgb(255 255 255 / 0.35) 0 calc(12 * var(--u)), transparent calc(13 * var(--u))),
+    linear-gradient(160deg, color-mix(in srgb, var(--c) 85%, #fff), color-mix(in srgb, var(--c) 70%, #000));
+  color: #fff;
+  text-shadow: 0 0 calc(1 * var(--u)) rgb(0 0 0 / 0.75), 0 0 calc(3 * var(--u)) rgb(0 0 0 / 0.55); /* see the spine */
+  font-size: calc(9 * var(--u));
+  text-align: center;
+  transform-origin: 0 50%;
+  transform: rotateY(90deg);
+  backface-visibility: hidden;
+}
+
+/* the top of the page block, laid flat, running back from the spine */
+.book i:nth-child(4) {
+  top: calc(-72 * var(--u));
+  left: 0;
+  width: 100%;
+  height: calc(72 * var(--u));
+  border: solid color-mix(in srgb, var(--c) 70%, #000);
+  border-width: 0 calc(2 * var(--u)) calc(2 * var(--u));
+  background: repeating-linear-gradient(90deg, #f3ecdc 0 calc(2 * var(--u)), #d9cfb8 calc(2 * var(--u)) calc(3 * var(--u)));
+  transform-origin: 50% 100%;
+  transform: rotateX(90deg);
+}
