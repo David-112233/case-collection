@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>Intertwined Rings</title>
+
+    <link rel="canonical" href="https://codepen.io/towc/pen/WbQLva">
+  
+  
+  
+  
+<style>
+html {
+  background: #111;
+  overflow: hidden;
+}
+
+#wrapper {
+  position: relative;
+  height: 0px;
+  width: 0px;
+  left: 50%;
+  top: 50vh;
+}
+
+.itemwrapper {
+  position: absolute;
+  top: -25px;
+  height: 50px;
+  width: 200px;
+  transform-origin: 0% 50%;
+}
+
+.item {
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  box-shadow: inset 3px -3px 10px rgba(0, 0, 0, 0.8);
+}
+.item.red {
+  background-color: red;
+}
+.item.green {
+  background-color: green;
+}
+.item.blue {
+  background-color: blue;
+}
+.item.white {
+  background-color: white;
+}
+.item.yellow {
+  background-color: yellow;
+}
+
+.itemwrapper:nth-of-type(1) {
+  transform: rotate(20deg);
+}
+.itemwrapper:nth-of-type(1) .item:nth-of-type(1) {
+  animation: swirl 2s infinite -444ms ease-in-out;
+}
+.itemwrapper:nth-of-type(1) .item:nth-of-type(2) {
+  animation: swirl 2s infinite -777ms ease-in-out;
+}
+.itemwrapper:nth-of-type(1) .item:nth-of-type(3) {
+  animation: swirl 2s infinite -1110ms ease-in-out;
+}
+.itemwrapper:nth-of-type(1) .item:nth-of-type(4) {
+  animation: swirl 2s infinite -1443ms ease-in-out;
+}
+.itemwrapper:nth-of-type(1) .item:nth-of-type(5) {
+  animation: swirl 2s infinite -1776ms ease-in-out;
+}
+
+.itemwrapper:nth-of-type(2) {
+  transform: rotate(40deg);
+}
+.itemwrapper:nth-of-type(2) .item:nth-of-type(1) {
+  animation: swirl 2s infinite -555ms ease-in-out;
+}
+.itemwrapper:nth-of-type(2) .item:nth-of-type(2) {
+  animation: swirl 2s infinite -888ms ease-in-out;
+}
+.itemwrapper:nth-of-type(2) .item:nth-of-type(3) {
+  animation: swirl 2s infinite -1221ms ease-in-out;
+}
+.itemwrapper:nth-of-type(2) .item:nth-of-type(4) {
+  animation: swirl 2s infinite -1554ms ease-in-out;
+}
+.itemwrapper:nth-of-type(2) .item:nth-of-type(5) {
+  animation: swirl 2s infinite -1887ms ease-in-out;
+}
+
+.itemwrapper:nth-of-type(3) {
+  transform: rotate(60deg);
+}
+.itemwrapper:nth-of-type(3) .item:nth-of-type(1) {
+  animation: swirl 2s infinite -666ms ease-in-out;
+}
+.itemwrapper:nth-of-type(3) .item:nth-of-type(2) {
+  animation: swirl 2s infinite -999ms ease-in-out;
+}
+.itemwrapper:nth-of-type(3) .item:nth-of-type(3) {
+  animation: swirl 2s infinite -1332ms ease-in-out;
+}
+.itemwrapper:nth-of-type(3) .item:nth-of-type(4) {
+  animation: swirl 2s infinite -1665ms ease-in-out;
+}
+.itemwrapper:nth-of-type(3) .item:nth-of-type(5) {
+  animation: swirl 2s infinite -1998ms ease-in-out;
+}
+
+.itemwrapper:nth-of-type(4) {
+  transform: rotate(80deg);
+}
+.itemwrapper:nth-of-type(4) .item:nth-of-type(1) {
+  animation: swirl 2s infinite -777ms ease-in-out;
+}
+.itemwrapper:nth-of-type(4) .item:nth-of-type(2) {
+  animation: swirl 2s infinite -1110ms ease-in-out;
+}
+.itemwrapper:nth-of-type(4) .item:nth-of-type(3) {
+  animation: swirl 2s infinite -1443ms ease-in-out;
+}
+.itemwrapper:nth-of-type(4) .item:nth-of-type(4) {
+  animation: swirl 2s infinite -1776ms ease-in-out;
+}
+.itemwrapper:nth-of-type(4) .item:nth-of-type(5) {
+  animation: swirl 2s infinite -2109ms ease-in-out;
+}
+
+.itemwrapper:nth-of-type(5) {
+  transform: rotate(100deg);
+}
+.itemwrapper:nth-of-type(5) .item:nth-of-type(1) {
+  animation: swirl 2s infinite -888ms ease-in-out;
+}
+.itemwrapper:nth-of-type(5) .item:nth-of-type(2) {
+  animation: swirl 2s infinite -1221ms ease-in-out;
+}
+.itemwrapper:nth-of-type(5) .item:nth-of-type(3) {
+  animation: swirl 2s infinite -1554ms ease-in-out;
+}
+.itemwrapper:nth-of-type(5) .item:nth-of-type(4) {
+  animation: swirl 2s infinite -1887ms ease-in-out;
+}
+.itemwrapper:nth-of-type(5) .item:nth-of-type(5) {
+  animation: swirl 2s infinite -2220ms ease-in-out;
+}
+
+.itemwrapper:nth-of-type(6) {
+  transform: rotate(120deg);
+}
+.itemwrapper:nth-of-type(6) .item:nth-of-type(1) {
+  animation: swirl 2s infinite -999ms ease-in-out;
+}
+.itemwrapper:nth-of-type(6) .item:nth-of-type(2) {
+  animation: swirl 2s infinite -1332ms ease-in-out;
+}
+.itemwrapper:nth-of-type(6) .item:nth-of-type(3) {
+  animation: swirl 2s infinite -1665ms ease-in-out;
+}
+.itemwrapper:nth-of-type(6) .item:nth-of-type(4) {
+  animation: swirl 2s infinite -1998ms ease-in-out;
+}
+.itemwrapper:nth-of-type(6) .item:nth-of-type(5) {
+  animation: swirl 2s infinite -2331ms ease-in-out;
+}
+
+.itemwrapper:nth-of-type(7) {
+  transform: rotate(140deg);
+}
+.itemwrapper:nth-of-type(7) .item:nth-of-type(1) {
+  animation: swirl 2s infinite -1110ms ease-in-out;
+}
+.itemwrapper:nth-of-type(7) .item:nth-of-type(2) {
+  animation: swirl 2s infinite -1443ms ease-in-out;
+}
+.itemwrapper:nth-of-type(7) .item:nth-of-type(3) {
+  animation: swirl 2s infinite -1776ms ease-in-out;
+}
+.itemwrapper:nth-of-type(7) .item:nth-of-type(4) {
+  animation: swirl 2s infinite -2109ms ease-in-out;
+}
+.itemwrapper:nth-of-type(7) .item:nth-of-type(5) {
+  animation: swirl 2s infinite -2442ms ease-in-out;
+}
+
+.itemwrapper:nth-of-type(8) {
+  transform: rotate(160deg);
+}
+.itemwrapper:nth-of-type(8) .item:nth-of-type(1) {
+  animation: swirl 2s infinite -1221ms ease-in-out;
+}
+.itemwrapper:nth-of-type(8) .item:nth-of-type(2) {
+  animation: swirl 2s infinite -1554ms ease-in-out;
+}
+.itemwrapper:nth-of-type(8) .item:nth-of-type(3) {
+  animation: swirl 2s infinite -1887ms ease-in-out;
+}
+.itemwrapper:nth-of-type(8) .item:nth-of-type(4) {
+  animation: swirl 2s infinite -2220ms ease-in-out;
+}
+.itemwrapper:nth-of-type(8) .item:nth-of-type(5) {
+  animation: swirl 2s infinite -2553ms ease-in-out;
+}
+
+.itemwrapper:nth-of-type(9) {
+  transform: rotate(180deg);
+}
+.itemwrapper:nth-of-type(9) .item:nth-of-type(1) {
+  animation: swirl 2s infinite -1332ms ease-in-out;
+}
+.itemwrapper:nth-of-type(9) .item:nth-of-type(2) {
+  animation: swirl 2s infinite -1665ms ease-in-out;
+}
+.itemwrapper:nth-of-type(9) .item:nth-of-type(3) {
+  animation: swirl 2s infinite -1998ms ease-in-out;
+}
+.itemwrapper:nth-of-type(9) .item:nth-of-type(4) {
+  animation: swirl 2s infinite -2331ms ease-in-out;
+}
+.itemwrapper:nth-of-type(9) .item:nth-of-type(5) {
+  animation: swirl 2s infinite -2664ms ease-in-out;
+}
+
+.itemwrapper:nth-of-type(10) {
+  transform: rotate(200deg);
+}
+.itemwrapper:nth-of-type(10) .item:nth-of-type(1) {
+  animation: swirl 2s infinite -1443ms ease-in-out;
+}
+.itemwrapper:nth-of-type(10) .item:nth-of-type(2) {
+  animation: swirl 2s infinite -1776ms ease-in-out;
+}
+.itemwrapper:nth-of-type(10) .item:nth-of-type(3) {
+  animation: swirl 2s infinite -2109ms ease-in-out;
+}
+.itemwrapper:nth-of-type(10) .item:nth-of-type(4) {
+  animation: swirl 2s infinite -2442ms ease-in-out;
+}
+.itemwrapper:nth-of-type(10) .item:nth-of-type(5) {
+  animation: swirl 2s infinite -2775ms ease-in-out;
+}
+
+.itemwrapper:nth-of-type(11) {
+  transform: rotate(220deg);
+}
+.itemwrapper:nth-of-type(11) .item:nth-of-type(1) {
+  animation: swirl 2s infinite -1554ms ease-in-out;
+}
+.itemwrapper:nth-of-type(11) .item:nth-of-type(2) {
+  animation: swirl 2s infinite -1887ms ease-in-out;
+}
+.itemwrapper:nth-of-type(11) .item:nth-of-type(3) {
+  animation: swirl 2s infinite -2220ms ease-in-out;
+}
+.itemwrapper:nth-of-type(11) .item:nth-of-type(4) {
+  animation: swirl 2s infinite -2553ms ease-in-out;
+}
+.itemwrapper:nth-of-type(11) .item:nth-of-type(5) {
+  animation: swirl 2s infinite -2886ms ease-in-out;
+}
+
+.itemwrapper:nth-of-type(12) {
+  transform: rotate(240deg);
+}
+.itemwrapper:nth-of-type(12) .item:nth-of-type(1) {
+  animation: swirl 2s infinite -1665ms ease-in-out;
+}
+.itemwrapper:nth-of-type(12) .item:nth-of-type(2) {
+  animation: swirl 2s infinite -1998ms ease-in-out;
+}
+.itemwrapper:nth-of-type(12) .item:nth-of-type(3) {
+  animation: swirl 2s infinite -2331ms ease-in-out;
+}
+.itemwrapper:nth-of-type(12) .item:nth-of-type(4) {
+  animation: swirl 2s infinite -2664ms ease-in-out;
+}
+.itemwrapper:nth-of-type(12) .item:nth-of-type(5) {
+  animation: swirl 2s infinite -2997ms ease-in-out;
+}
+
+.itemwrapper:nth-of-type(13) {
+  transform: rotate(260deg);
+}
+.itemwrapper:nth-of-type(13) .item:nth-of-type(1) {
+  animation: swirl 2s infinite -1776ms ease-in-out;
+}
+.itemwrapper:nth-of-type(13) .item:nth-of-type(2) {
+  animation: swirl 2s infinite -2109ms ease-in-out;
+}
+.itemwrapper:nth-of-type(13) .item:nth-of-type(3) {
+  animation: swirl 2s infinite -2442ms ease-in-out;
+}
+.itemwrapper:nth-of-type(13) .item:nth-of-type(4) {
+  animation: swirl 2s infinite -2775ms ease-in-out;
+}
+.itemwrapper:nth-of-type(13) .item:nth-of-type(5) {
+  animation: swirl 2s infinite -3108ms ease-in-out;
+}
+
+.itemwrapper:nth-of-type(14) {
+  transform: rotate(280deg);
+}
+.itemwrapper:nth-of-type(14) .item:nth-of-type(1) {
+  animation: swirl 2s infinite -1887ms ease-in-out;
+}
+.itemwrapper:nth-of-type(14) .item:nth-of-type(2) {
+  animation: swirl 2s infinite -2220ms ease-in-out;
+}
+.itemwrapper:nth-of-type(14) .item:nth-of-type(3) {
+  animation: swirl 2s infinite -2553ms ease-in-out;
+}
+.itemwrapper:nth-of-type(14) .item:nth-of-type(4) {
+  animation: swirl 2s infinite -2886ms ease-in-out;
+}
+.itemwrapper:nth-of-type(14) .item:nth-of-type(5) {
+  animation: swirl 2s infinite -3219ms ease-in-out;
+}
+
+.itemwrapper:nth-of-type(15) {
+  transform: rotate(300deg);
+}
+.itemwrapper:nth-of-type(15) .item:nth-of-type(1) {
+  animation: swirl 2s infinite -1998ms ease-in-out;
+}
+.itemwrapper:nth-of-type(15) .item:nth-of-type(2) {
+  animation: swirl 2s infinite -2331ms ease-in-out;
+}
+.itemwrapper:nth-of-type(15) .item:nth-of-type(3) {
+  animation: swirl 2s infinite -2664ms ease-in-out;
+}
+.itemwrapper:nth-of-type(15) .item:nth-of-type(4) {
+  animation: swirl 2s infinite -2997ms ease-in-out;
+}
+.itemwrapper:nth-of-type(15) .item:nth-of-type(5) {
+  animation: swirl 2s infinite -3330ms ease-in-out;
+}
+
+.itemwrapper:nth-of-type(16) {
+  transform: rotate(320deg);
+}
+.itemwrapper:nth-of-type(16) .item:nth-of-type(1) {
+  animation: swirl 2s infinite -2109ms ease-in-out;
+}
+.itemwrapper:nth-of-type(16) .item:nth-of-type(2) {
+  animation: swirl 2s infinite -2442ms ease-in-out;
+}
+.itemwrapper:nth-of-type(16) .item:nth-of-type(3) {
+  animation: swirl 2s infinite -2775ms ease-in-out;
+}
+.itemwrapper:nth-of-type(16) .item:nth-of-type(4) {
+  animation: swirl 2s infinite -3108ms ease-in-out;
+}
+.itemwrapper:nth-of-type(16) .item:nth-of-type(5) {
+  animation: swirl 2s infinite -3441ms ease-in-out;
+}
+
+.itemwrapper:nth-of-type(17) {
+  transform: rotate(340deg);
+}
+.itemwrapper:nth-of-type(17) .item:nth-of-type(1) {
+  animation: swirl 2s infinite -2220ms ease-in-out;
+}
+.itemwrapper:nth-of-type(17) .item:nth-of-type(2) {
+  animation: swirl 2s infinite -2553ms ease-in-out;
+}
+.itemwrapper:nth-of-type(17) .item:nth-of-type(3) {
+  animation: swirl 2s infinite -2886ms ease-in-out;
+}
+.itemwrapper:nth-of-type(17) .item:nth-of-type(4) {
+  animation: swirl 2s infinite -3219ms ease-in-out;
+}
+.itemwrapper:nth-of-type(17) .item:nth-of-type(5) {
+  animation: swirl 2s infinite -3552ms ease-in-out;
+}
+
+.itemwrapper:nth-of-type(18) {
+  transform: rotate(360deg);
+}
+.itemwrapper:nth-of-type(18) .item:nth-of-type(1) {
+  animation: swirl 2s infinite -2331ms ease-in-out;
+}
+.itemwrapper:nth-of-type(18) .item:nth-of-type(2) {
+  animation: swirl 2s infinite -2664ms ease-in-out;
+}
+.itemwrapper:nth-of-type(18) .item:nth-of-type(3) {
+  animation: swirl 2s infinite -2997ms ease-in-out;
+}
+.itemwrapper:nth-of-type(18) .item:nth-of-type(4) {
+  animation: swirl 2s infinite -3330ms ease-in-out;
+}
+.itemwrapper:nth-of-type(18) .item:nth-of-type(5) {
+  animation: swirl 2s infinite -3663ms ease-in-out;
+}
+
+@keyframes swirl {
+  0% {
+    transform: scale(1) translateX(60px);
+    z-index: 2;
+  }
+  25% {
+    z-index: 1;
+  }
+  50% {
+    transform: scale(2) translateX(60px);
+  }
+  75% {
+    z-index: 3;
+  }
+  100% {
+    transform: scale(1) translateX(60px);
+    z-index: 2;
+  }
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <div id='wrapper'>
+  <div class='itemwrapper'>
+    <div class='item red'></div>
+    <div class='item green'></div>
+    <div class='item blue'></div>
+    <div class='item white'></div>
+    <div class='item yellow'></div>
+  </div>
+  <div class='itemwrapper'>
+    <div class='item red'></div>
+    <div class='item green'></div>
+    <div class='item blue'></div>
+    <div class='item white'></div>
+    <div class='item yellow'></div>
+  </div>
+  <div class='itemwrapper'>
+    <div class='item red'></div>
+    <div class='item green'></div>
+    <div class='item blue'></div>
+    <div class='item white'></div>
+    <div class='item yellow'></div>
+  </div>
+  <div class='itemwrapper'>
+    <div class='item red'></div>
+    <div class='item green'></div>
+    <div class='item blue'></div>
+    <div class='item white'></div>
+    <div class='item yellow'></div>
+  </div>
+  <div class='itemwrapper'>
+    <div class='item red'></div>
+    <div class='item green'></div>
+    <div class='item blue'></div>
+    <div class='item white'></div>
+    <div class='item yellow'></div>
+  </div>
+  <div class='itemwrapper'>
+    <div class='item red'></div>
+    <div class='item green'></div>
+    <div class='item blue'></div>
+    <div class='item white'></div>
+    <div class='item yellow'></div>
+  </div>
+  <div class='itemwrapper'>
+    <div class='item red'></div>
+    <div class='item green'></div>
+    <div class='item blue'></div>
+    <div class='item white'></div>
+    <div class='item yellow'></div>
+  </div>
+  <div class='itemwrapper'>
+    <div class='item red'></div>
+    <div class='item green'></div>
+    <div class='item blue'></div>
+    <div class='item white'></div>
+    <div class='item yellow'></div>
+  </div>
+  <div class='itemwrapper'>
+    <div class='item red'></div>
+    <div class='item green'></div>
+    <div class='item blue'></div>
+    <div class='item white'></div>
+    <div class='item yellow'></div>
+  </div>
+  <div class='itemwrapper'>
+    <div class='item red'></div>
+    <div class='item green'></div>
+    <div class='item blue'></div>
+    <div class='item white'></div>
+    <div class='item yellow'></div>
+  </div>
+  <div class='itemwrapper'>
+    <div class='item red'></div>
+    <div class='item green'></div>
+    <div class='item blue'></div>
+    <div class='item white'></div>
+    <div class='item yellow'></div>
+  </div>
+  <div class='itemwrapper'>
+    <div class='item red'></div>
+    <div class='item green'></div>
+    <div class='item blue'></div>
+    <div class='item white'></div>
+    <div class='item yellow'></div>
+  </div>
+  <div class='itemwrapper'>
+    <div class='item red'></div>
+    <div class='item green'></div>
+    <div class='item blue'></div>
+    <div class='item white'></div>
+    <div class='item yellow'></div>
+  </div>
+  <div class='itemwrapper'>
+    <div class='item red'></div>
+    <div class='item green'></div>
+    <div class='item blue'></div>
+    <div class='item white'></div>
+    <div class='item yellow'></div>
+  </div>
+  <div class='itemwrapper'>
+    <div class='item red'></div>
+    <div class='item green'></div>
+    <div class='item blue'></div>
+    <div class='item white'></div>
+    <div class='item yellow'></div>
+  </div>
+  <div class='itemwrapper'>
+    <div class='item red'></div>
+    <div class='item green'></div>
+    <div class='item blue'></div>
+    <div class='item white'></div>
+    <div class='item yellow'></div>
+  </div>
+  <div class='itemwrapper'>
+    <div class='item red'></div>
+    <div class='item green'></div>
+    <div class='item blue'></div>
+    <div class='item white'></div>
+    <div class='item yellow'></div>
+  </div>
+  <div class='itemwrapper'>
+    <div class='item red'></div>
+    <div class='item green'></div>
+    <div class='item blue'></div>
+    <div class='item white'></div>
+    <div class='item yellow'></div>
+  </div>
+</div>
+  
+  
+  
+</body>
+
+</html>
