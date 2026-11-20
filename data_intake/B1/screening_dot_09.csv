@@ -1,0 +1,5 @@
+key,url,decision,tier,hits,reason,js_policy,evidence,notes,decided_on
+MarkBoots__zxqPEQo,https://codepen.io/MarkBoots/pen/zxqPEQo,accept,unclassified,spatial_layers,await_user_review,original_preserved,棋盘厚度、多面棋子前后互遮和投影形成明显透视深度。默认旋转开启，CSS preserve-3d及clip-path；仅默认视觉核实，未测试关闭旋转。,推荐审核；未正式入库，未评分。,2026-11-18
+dustindwayne__bGyYoar,https://codepen.io/dustindwayne/pen/bGyYoar,hold,unclassified,spatial_layers,await_user_review,original_preserved,唱片圆盘、标签、中心轴、唱臂和机壳形成细致浮雕层叠。默认唱臂位于侧边，未验证横跨唱片状态；Tone.js、字体与原JS完整保留，未测试音乐播放或按钮。,备选；未正式入库，未评分。,2026-11-18
+hkkcngz__RjLrJJ,https://codepen.io/hkkcngz/pen/RjLrJJ,accept,unclassified,spatial_layers,await_user_review,original_preserved,红色机壳斜面、下陷键盘和错排键帽、后部滚筒及杆件形成前后层叠。CSS多段动画含fall-away；截图仅验证一个时刻，不能视为稳定静态案例。,推荐审核；未正式入库，未评分。,2026-11-18
+aaroniker__XWWPbep,https://codepen.io/aaroniker/pen/XWWPbep,hold,unclassified,spatial_layers,await_user_review,original_preserved,蓝色打字机小图标含滚筒与机身前后遮挡，源码含纸张与键盘动画；默认视觉已核实但构成简单，空间复杂度明显低于目标参考，不为凑数量推荐。,不优先；未正式入库，未评分。,2026-11-18

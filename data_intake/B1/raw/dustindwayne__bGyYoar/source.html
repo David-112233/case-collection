@@ -1,0 +1,4228 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>CSS Record Player</title>
+
+    <link rel="canonical" href="https://codepen.io/dustindwayne/pen/bGyYoar">
+  
+  <link rel="stylesheet" href="https://public.codepenassets.com/css/normalize-5.0.0.min.css">
+
+  
+  
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Bungee&family=Teko:wght@300..700&display=swap");
+body {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  background-color: #5b505b;
+  overflow: hidden;
+}
+.highlight {
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background: repeating-conic-gradient(rgba(255,255,255,0.15) 15%, transparent 20%, rgba(255,255,255,0.15) 30%, transparent 40%, rgba(255,255,255,0.15) 65%);
+  mask: radial-gradient(transparent 20%, #000 25%);
+  z-index: 5;
+  scale: 1.5;
+}
+.rplayer {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: 450px;
+  width: 450px;
+  border-radius: 20px;
+  background-image: linear-gradient(270deg, #010101, #212121);
+  box-shadow: inset 2px 2px 3px rgba(255,255,255,0.325), inset -2px -2px 3px rgba(255,255,255,0.325), 0 0 15px rgba(0,0,0,0.85);
+}
+.rplayer .logo {
+  height: 35px;
+  width: 125px;
+  position: absolute;
+  color: #ddd;
+  left: 43px;
+  top: 20px;
+  font-size: 18px;
+  font-family: 'bungee';
+}
+.rplayer .logo:after {
+  content: 'record players';
+  font-size: 8px;
+  position: absolute;
+  left: 1px;
+  bottom: 7px;
+  width: 100%;
+  word-wrap: none;
+}
+.rplayer .logo:before {
+  content: 'D';
+  position: absolute;
+  font-size: 31px;
+  left: -23px;
+  top: -4px;
+  transform: scaleX(-1);
+}
+.rplayer .power {
+  width: 50px;
+  height: 20px;
+  position: absolute;
+  font-size: 8px;
+  color: #ddd;
+  bottom: 15px;
+  right: 45px;
+  display: grid;
+  place-items: center;
+}
+.rplayer .power:before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  position: absolute;
+  border-radius: 50%;
+  background-color: var(--pwlight);
+  left: 0;
+  top: 7px;
+}
+.rplayer .power:after {
+  content: '';
+  width: 5px;
+  height: 5px;
+  position: absolute;
+  border-radius: 50%;
+  background-color: var(--pwlight);
+  filter: blur(3px);
+  left: 0;
+  top: 7px;
+}
+.rplayer .power .pbutton {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  position: absolute;
+  right: -35px;
+  margin-bottom: 5px;
+  background-color: #222;
+  display: grid;
+  cursor: pointer;
+  place-items: center;
+  box-shadow: inset 1px 1px 1px rgba(255,255,255,0.125), inset -1px -1px 1px rgba(255,255,255,0.125);
+}
+.rplayer .power .pbutton:after {
+  content: '';
+  height: 10px;
+  width: 10px;
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  z-index: 0;
+}
+.rplayer .power .pbutton:before {
+  content: '';
+  height: 6px;
+  width: 2px;
+  margin-bottom: 7px;
+  border: 2px solid #000;
+  border-radius: 2px;
+  position: absolute;
+  background-color: #ccc;
+  z-index: 5;
+}
+.rplayer .power p {
+  position: absolute;
+  text-transform: uppercase;
+}
+.rplayer .knob {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  height: 40px;
+  width: 40px;
+  background-color: #222;
+  border-radius: 50%;
+  bottom: 20px;
+  left: 30px;
+  transform: rotate(-110deg);
+  user-select: none;
+  box-shadow: inset 1px 1px 1px rgba(255,255,255,0.125), inset -1px -1px 1px rgba(255,255,255,0.125);
+  z-index: 99;
+}
+.rplayer .knob p {
+  height: 40px;
+  width: 40px;
+  display: grid;
+  place-items: center;
+  color: #ddd;
+  font-size: 18px;
+  font-family: 'Teko';
+  position: absolute;
+  transform: rotate(110deg);
+  z-index: 0;
+}
+.rplayer .knob .spindiv {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  border-radius: 50%;
+  transform: rotate(0deg);
+}
+.rplayer .knob .spindiv .selnotch {
+  position: absolute;
+  width: 2px;
+  height: 4px;
+  background-color: rgba(255,255,255,0.55);
+  top: 2px;
+}
+.rplayer .notch {
+  rotate: -80deg;
+  bottom: 36px;
+  left: 50px;
+}
+.n9 {
+  position: absolute;
+  transform: rotate(-202.5deg) translate(0, 30px);
+  width: 3px;
+  border-radius: 25%;
+  height: 2px;
+  background-color: #ddd;
+}
+.n9:after {
+  bottom: -10px;
+  content: '1';
+  width: 10px;
+  height: 10px;
+  left: -5px;
+  position: absolute;
+  transform: rotatez(180deg);
+  font-size: 6px;
+  color: #ddd;
+}
+.tonebar {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  top: 75px;
+  right: 45px;
+  z-index: 99;
+  transform: rotate(0deg);
+  filter: drop-shadow(0 0 5px rgba(0,0,0,0.9));
+}
+.tonebar .arm {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background-color: #222;
+  border-radius: 50%;
+  z-index: 10;
+  box-shadow: inset 2px 2px 5px rgba(255,255,255,0.125), inset -2px -2px 5px rgba(255,255,255,0.125);
+}
+.tonebar .bar {
+  width: 10px;
+  height: 350px;
+  position: absolute;
+  background-image: linear-gradient(90deg, #808080, #c0c0c0, #808080);
+  top: -45px;
+  z-index: 5;
+  display: flex;
+  border-radius: 5px 5px 0 0;
+  align-items: center;
+  justify-content: center;
+}
+.tonebar .bar:after {
+  content: '';
+  width: 20px;
+  height: 30px;
+  bottom: 0;
+  border-radius: 5px;
+  position: absolute;
+  background-color: #222;
+  box-shadow: inset 1px 1px 1px rgba(255,255,255,0.125), inset -1px -1px 1px rgba(255,255,255,0.125);
+}
+.clickme {
+  position: absolute;
+  bottom: -50px;
+  right: 55px;
+  color: #fff;
+  font-size: 24px;
+  font-family: 'Teko';
+  transition: all 0.7s;
+}
+.clickme:after {
+  content: 'Click Me';
+  position: absolute;
+  width: 105px;
+  text-transform: uppercase;
+}
+.clickme:before {
+  content: '\2191';
+  position: absolute;
+  width: 50px;
+  top: -30px;
+  font-size: 24px;
+  left: 25px;
+  animation: point 0.25s linear infinite alternate;
+}
+.record {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background-image: linear-gradient(315deg, #010101, #212121);
+  display: grid;
+  place-items: center;
+  position: relative;
+  box-shadow: -1px -1px 1px rgba(255,255,255,0.125), 1px 1px 1px rgba(255,255,255,0.025);
+  transition: all 1s;
+  box-shadow: 0 0 5px rgba(0,0,0,0.5);
+  scale: 1.5;
+}
+.record .track {
+  border-radius: 50%;
+  position: absolute;
+  box-shadow: inset -1px -1px 1px rgba(255,255,255,0.075), inset 1px 1px 1px rgba(255,255,255,0.055);
+}
+.record .t40 {
+  width: 110px;
+  height: 110px;
+}
+.record .t39 {
+  width: 113px;
+  height: 113px;
+}
+.record .t38 {
+  width: 116px;
+  height: 116px;
+}
+.record .t37 {
+  width: 119px;
+  height: 119px;
+}
+.record .t36 {
+  width: 122px;
+  height: 122px;
+}
+.record .t35 {
+  width: 125px;
+  height: 125px;
+}
+.record .t34 {
+  width: 128px;
+  height: 128px;
+}
+.record .t33 {
+  width: 131px;
+  height: 131px;
+}
+.record .t32 {
+  width: 134px;
+  height: 134px;
+}
+.record .t31 {
+  width: 137px;
+  height: 137px;
+}
+.record .t30 {
+  width: 140px;
+  height: 140px;
+}
+.record .t29 {
+  width: 143px;
+  height: 143px;
+}
+.record .t28 {
+  width: 146px;
+  height: 146px;
+}
+.record .t27 {
+  width: 149px;
+  height: 149px;
+}
+.record .t26 {
+  width: 152px;
+  height: 152px;
+}
+.record .t25 {
+  width: 155px;
+  height: 155px;
+}
+.record .t24 {
+  width: 158px;
+  height: 158px;
+}
+.record .t23 {
+  width: 161px;
+  height: 161px;
+}
+.record .t22 {
+  width: 164px;
+  height: 164px;
+}
+.record .t21 {
+  width: 167px;
+  height: 167px;
+}
+.record .t20 {
+  width: 170px;
+  height: 170px;
+}
+.record .t19 {
+  width: 173px;
+  height: 173px;
+}
+.record .t18 {
+  width: 176px;
+  height: 176px;
+}
+.record .t17 {
+  width: 179px;
+  height: 179px;
+}
+.record .t16 {
+  width: 182px;
+  height: 182px;
+}
+.record .t15 {
+  width: 185px;
+  height: 185px;
+}
+.record .t14 {
+  width: 188px;
+  height: 188px;
+}
+.record .t13 {
+  width: 191px;
+  height: 191px;
+}
+.record .t12 {
+  width: 194px;
+  height: 194px;
+}
+.record .t11 {
+  width: 197px;
+  height: 197px;
+}
+.record .t10 {
+  width: 200px;
+  height: 200px;
+}
+.record .t9 {
+  width: 203px;
+  height: 203px;
+}
+.record .t8 {
+  width: 206px;
+  height: 206px;
+}
+.record .t7 {
+  width: 209px;
+  height: 209px;
+}
+.record .t6 {
+  width: 212px;
+  height: 212px;
+}
+.record .t5 {
+  width: 215px;
+  height: 215px;
+}
+.record .t4 {
+  width: 218px;
+  height: 218px;
+}
+.record .t3 {
+  width: 221px;
+  height: 221px;
+}
+.record .t2 {
+  width: 224px;
+  height: 224px;
+}
+.record .t1 {
+  width: 227px;
+  height: 227px;
+}
+.record .label {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  background-image: radial-gradient(#f0a 58%, #6f8faf 59%, #6f8faf 63%, #f0a 65%, #f0a 67%);
+  box-shadow: -1px -1px 1px rgba(255,255,255,0.375), 1px 1px 1px rgba(255,255,255,0.255);
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+.record .label .borderc {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid rgba(111,143,175,0.867);
+}
+.record .label .hole {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  left: 34.5px;
+  border-radius: 50%;
+  background: radial-gradient(#c0c0c0, #808080);
+  box-shadow: inset -1px -1px 1px rgba(0,0,0,0.375), inset 1px 1px 1px rgba(0,0,0,0.255);
+}
+.record .label .labeltext {
+  display: grid;
+  place-items: center;
+  position: relative;
+  height: 75px;
+  width: 75px;
+  text-transform: uppercase;
+}
+.record .label .text1 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-18deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text2 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-36deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text3 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-54deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text4 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-72deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text5 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-90deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text6 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-108deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text7 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-126deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text8 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-144deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text9 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-162deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text10 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-180deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text11 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-198deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text12 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-216deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text13 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-234deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text14 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-252deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text15 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-270deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.n8 {
+  position: absolute;
+  transform: rotate(-180deg) translate(0, 30px);
+  width: 3px;
+  border-radius: 25%;
+  height: 3px;
+  background-color: #ddd;
+}
+.n8:after {
+  bottom: -10px;
+  content: '2';
+  width: 10px;
+  height: 10px;
+  left: -5px;
+  position: absolute;
+  transform: rotatez(180deg);
+  font-size: 6px;
+  color: #ddd;
+}
+.tonebar {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  top: 75px;
+  right: 45px;
+  z-index: 99;
+  transform: rotate(0deg);
+  filter: drop-shadow(0 0 5px rgba(0,0,0,0.9));
+}
+.tonebar .arm {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background-color: #222;
+  border-radius: 50%;
+  z-index: 10;
+  box-shadow: inset 2px 2px 5px rgba(255,255,255,0.125), inset -2px -2px 5px rgba(255,255,255,0.125);
+}
+.tonebar .bar {
+  width: 10px;
+  height: 350px;
+  position: absolute;
+  background-image: linear-gradient(90deg, #808080, #c0c0c0, #808080);
+  top: -45px;
+  z-index: 5;
+  display: flex;
+  border-radius: 5px 5px 0 0;
+  align-items: center;
+  justify-content: center;
+}
+.tonebar .bar:after {
+  content: '';
+  width: 20px;
+  height: 30px;
+  bottom: 0;
+  border-radius: 5px;
+  position: absolute;
+  background-color: #222;
+  box-shadow: inset 1px 1px 1px rgba(255,255,255,0.125), inset -1px -1px 1px rgba(255,255,255,0.125);
+}
+.clickme {
+  position: absolute;
+  bottom: -50px;
+  right: 55px;
+  color: #fff;
+  font-size: 24px;
+  font-family: 'Teko';
+  transition: all 0.7s;
+}
+.clickme:after {
+  content: 'Click Me';
+  position: absolute;
+  width: 105px;
+  text-transform: uppercase;
+}
+.clickme:before {
+  content: '\2191';
+  position: absolute;
+  width: 50px;
+  top: -30px;
+  font-size: 24px;
+  left: 25px;
+  animation: point 0.25s linear infinite alternate;
+}
+.record {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background-image: linear-gradient(315deg, #010101, #212121);
+  display: grid;
+  place-items: center;
+  position: relative;
+  box-shadow: -1px -1px 1px rgba(255,255,255,0.125), 1px 1px 1px rgba(255,255,255,0.025);
+  transition: all 1s;
+  box-shadow: 0 0 5px rgba(0,0,0,0.5);
+  scale: 1.5;
+}
+.record .track {
+  border-radius: 50%;
+  position: absolute;
+  box-shadow: inset -1px -1px 1px rgba(255,255,255,0.075), inset 1px 1px 1px rgba(255,255,255,0.055);
+}
+.record .t40 {
+  width: 110px;
+  height: 110px;
+}
+.record .t39 {
+  width: 113px;
+  height: 113px;
+}
+.record .t38 {
+  width: 116px;
+  height: 116px;
+}
+.record .t37 {
+  width: 119px;
+  height: 119px;
+}
+.record .t36 {
+  width: 122px;
+  height: 122px;
+}
+.record .t35 {
+  width: 125px;
+  height: 125px;
+}
+.record .t34 {
+  width: 128px;
+  height: 128px;
+}
+.record .t33 {
+  width: 131px;
+  height: 131px;
+}
+.record .t32 {
+  width: 134px;
+  height: 134px;
+}
+.record .t31 {
+  width: 137px;
+  height: 137px;
+}
+.record .t30 {
+  width: 140px;
+  height: 140px;
+}
+.record .t29 {
+  width: 143px;
+  height: 143px;
+}
+.record .t28 {
+  width: 146px;
+  height: 146px;
+}
+.record .t27 {
+  width: 149px;
+  height: 149px;
+}
+.record .t26 {
+  width: 152px;
+  height: 152px;
+}
+.record .t25 {
+  width: 155px;
+  height: 155px;
+}
+.record .t24 {
+  width: 158px;
+  height: 158px;
+}
+.record .t23 {
+  width: 161px;
+  height: 161px;
+}
+.record .t22 {
+  width: 164px;
+  height: 164px;
+}
+.record .t21 {
+  width: 167px;
+  height: 167px;
+}
+.record .t20 {
+  width: 170px;
+  height: 170px;
+}
+.record .t19 {
+  width: 173px;
+  height: 173px;
+}
+.record .t18 {
+  width: 176px;
+  height: 176px;
+}
+.record .t17 {
+  width: 179px;
+  height: 179px;
+}
+.record .t16 {
+  width: 182px;
+  height: 182px;
+}
+.record .t15 {
+  width: 185px;
+  height: 185px;
+}
+.record .t14 {
+  width: 188px;
+  height: 188px;
+}
+.record .t13 {
+  width: 191px;
+  height: 191px;
+}
+.record .t12 {
+  width: 194px;
+  height: 194px;
+}
+.record .t11 {
+  width: 197px;
+  height: 197px;
+}
+.record .t10 {
+  width: 200px;
+  height: 200px;
+}
+.record .t9 {
+  width: 203px;
+  height: 203px;
+}
+.record .t8 {
+  width: 206px;
+  height: 206px;
+}
+.record .t7 {
+  width: 209px;
+  height: 209px;
+}
+.record .t6 {
+  width: 212px;
+  height: 212px;
+}
+.record .t5 {
+  width: 215px;
+  height: 215px;
+}
+.record .t4 {
+  width: 218px;
+  height: 218px;
+}
+.record .t3 {
+  width: 221px;
+  height: 221px;
+}
+.record .t2 {
+  width: 224px;
+  height: 224px;
+}
+.record .t1 {
+  width: 227px;
+  height: 227px;
+}
+.record .label {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  background-image: radial-gradient(#f0a 58%, #6f8faf 59%, #6f8faf 63%, #f0a 65%, #f0a 67%);
+  box-shadow: -1px -1px 1px rgba(255,255,255,0.375), 1px 1px 1px rgba(255,255,255,0.255);
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+.record .label .borderc {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid rgba(111,143,175,0.867);
+}
+.record .label .hole {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  left: 34.5px;
+  border-radius: 50%;
+  background: radial-gradient(#c0c0c0, #808080);
+  box-shadow: inset -1px -1px 1px rgba(0,0,0,0.375), inset 1px 1px 1px rgba(0,0,0,0.255);
+}
+.record .label .labeltext {
+  display: grid;
+  place-items: center;
+  position: relative;
+  height: 75px;
+  width: 75px;
+  text-transform: uppercase;
+}
+.record .label .text1 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-18deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text2 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-36deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text3 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-54deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text4 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-72deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text5 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-90deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text6 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-108deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text7 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-126deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text8 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-144deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text9 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-162deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text10 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-180deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text11 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-198deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text12 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-216deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text13 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-234deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text14 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-252deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text15 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-270deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.n7 {
+  position: absolute;
+  transform: rotate(-157.5deg) translate(0, 30px);
+  width: 3px;
+  border-radius: 25%;
+  height: 4px;
+  background-color: #ddd;
+}
+.n7:after {
+  bottom: -10px;
+  content: '3';
+  width: 10px;
+  height: 10px;
+  left: -5px;
+  position: absolute;
+  transform: rotatez(180deg);
+  font-size: 6px;
+  color: #ddd;
+}
+.tonebar {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  top: 75px;
+  right: 45px;
+  z-index: 99;
+  transform: rotate(0deg);
+  filter: drop-shadow(0 0 5px rgba(0,0,0,0.9));
+}
+.tonebar .arm {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background-color: #222;
+  border-radius: 50%;
+  z-index: 10;
+  box-shadow: inset 2px 2px 5px rgba(255,255,255,0.125), inset -2px -2px 5px rgba(255,255,255,0.125);
+}
+.tonebar .bar {
+  width: 10px;
+  height: 350px;
+  position: absolute;
+  background-image: linear-gradient(90deg, #808080, #c0c0c0, #808080);
+  top: -45px;
+  z-index: 5;
+  display: flex;
+  border-radius: 5px 5px 0 0;
+  align-items: center;
+  justify-content: center;
+}
+.tonebar .bar:after {
+  content: '';
+  width: 20px;
+  height: 30px;
+  bottom: 0;
+  border-radius: 5px;
+  position: absolute;
+  background-color: #222;
+  box-shadow: inset 1px 1px 1px rgba(255,255,255,0.125), inset -1px -1px 1px rgba(255,255,255,0.125);
+}
+.clickme {
+  position: absolute;
+  bottom: -50px;
+  right: 55px;
+  color: #fff;
+  font-size: 24px;
+  font-family: 'Teko';
+  transition: all 0.7s;
+}
+.clickme:after {
+  content: 'Click Me';
+  position: absolute;
+  width: 105px;
+  text-transform: uppercase;
+}
+.clickme:before {
+  content: '\2191';
+  position: absolute;
+  width: 50px;
+  top: -30px;
+  font-size: 24px;
+  left: 25px;
+  animation: point 0.25s linear infinite alternate;
+}
+.record {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background-image: linear-gradient(315deg, #010101, #212121);
+  display: grid;
+  place-items: center;
+  position: relative;
+  box-shadow: -1px -1px 1px rgba(255,255,255,0.125), 1px 1px 1px rgba(255,255,255,0.025);
+  transition: all 1s;
+  box-shadow: 0 0 5px rgba(0,0,0,0.5);
+  scale: 1.5;
+}
+.record .track {
+  border-radius: 50%;
+  position: absolute;
+  box-shadow: inset -1px -1px 1px rgba(255,255,255,0.075), inset 1px 1px 1px rgba(255,255,255,0.055);
+}
+.record .t40 {
+  width: 110px;
+  height: 110px;
+}
+.record .t39 {
+  width: 113px;
+  height: 113px;
+}
+.record .t38 {
+  width: 116px;
+  height: 116px;
+}
+.record .t37 {
+  width: 119px;
+  height: 119px;
+}
+.record .t36 {
+  width: 122px;
+  height: 122px;
+}
+.record .t35 {
+  width: 125px;
+  height: 125px;
+}
+.record .t34 {
+  width: 128px;
+  height: 128px;
+}
+.record .t33 {
+  width: 131px;
+  height: 131px;
+}
+.record .t32 {
+  width: 134px;
+  height: 134px;
+}
+.record .t31 {
+  width: 137px;
+  height: 137px;
+}
+.record .t30 {
+  width: 140px;
+  height: 140px;
+}
+.record .t29 {
+  width: 143px;
+  height: 143px;
+}
+.record .t28 {
+  width: 146px;
+  height: 146px;
+}
+.record .t27 {
+  width: 149px;
+  height: 149px;
+}
+.record .t26 {
+  width: 152px;
+  height: 152px;
+}
+.record .t25 {
+  width: 155px;
+  height: 155px;
+}
+.record .t24 {
+  width: 158px;
+  height: 158px;
+}
+.record .t23 {
+  width: 161px;
+  height: 161px;
+}
+.record .t22 {
+  width: 164px;
+  height: 164px;
+}
+.record .t21 {
+  width: 167px;
+  height: 167px;
+}
+.record .t20 {
+  width: 170px;
+  height: 170px;
+}
+.record .t19 {
+  width: 173px;
+  height: 173px;
+}
+.record .t18 {
+  width: 176px;
+  height: 176px;
+}
+.record .t17 {
+  width: 179px;
+  height: 179px;
+}
+.record .t16 {
+  width: 182px;
+  height: 182px;
+}
+.record .t15 {
+  width: 185px;
+  height: 185px;
+}
+.record .t14 {
+  width: 188px;
+  height: 188px;
+}
+.record .t13 {
+  width: 191px;
+  height: 191px;
+}
+.record .t12 {
+  width: 194px;
+  height: 194px;
+}
+.record .t11 {
+  width: 197px;
+  height: 197px;
+}
+.record .t10 {
+  width: 200px;
+  height: 200px;
+}
+.record .t9 {
+  width: 203px;
+  height: 203px;
+}
+.record .t8 {
+  width: 206px;
+  height: 206px;
+}
+.record .t7 {
+  width: 209px;
+  height: 209px;
+}
+.record .t6 {
+  width: 212px;
+  height: 212px;
+}
+.record .t5 {
+  width: 215px;
+  height: 215px;
+}
+.record .t4 {
+  width: 218px;
+  height: 218px;
+}
+.record .t3 {
+  width: 221px;
+  height: 221px;
+}
+.record .t2 {
+  width: 224px;
+  height: 224px;
+}
+.record .t1 {
+  width: 227px;
+  height: 227px;
+}
+.record .label {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  background-image: radial-gradient(#f0a 58%, #6f8faf 59%, #6f8faf 63%, #f0a 65%, #f0a 67%);
+  box-shadow: -1px -1px 1px rgba(255,255,255,0.375), 1px 1px 1px rgba(255,255,255,0.255);
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+.record .label .borderc {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid rgba(111,143,175,0.867);
+}
+.record .label .hole {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  left: 34.5px;
+  border-radius: 50%;
+  background: radial-gradient(#c0c0c0, #808080);
+  box-shadow: inset -1px -1px 1px rgba(0,0,0,0.375), inset 1px 1px 1px rgba(0,0,0,0.255);
+}
+.record .label .labeltext {
+  display: grid;
+  place-items: center;
+  position: relative;
+  height: 75px;
+  width: 75px;
+  text-transform: uppercase;
+}
+.record .label .text1 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-18deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text2 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-36deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text3 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-54deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text4 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-72deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text5 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-90deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text6 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-108deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text7 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-126deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text8 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-144deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text9 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-162deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text10 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-180deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text11 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-198deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text12 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-216deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text13 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-234deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text14 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-252deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text15 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-270deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.n6 {
+  position: absolute;
+  transform: rotate(-135deg) translate(0, 30px);
+  width: 3px;
+  border-radius: 25%;
+  height: 5px;
+  background-color: #ddd;
+}
+.n6:after {
+  bottom: -10px;
+  content: '4';
+  width: 10px;
+  height: 10px;
+  left: -5px;
+  position: absolute;
+  transform: rotatez(180deg);
+  font-size: 6px;
+  color: #ddd;
+}
+.tonebar {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  top: 75px;
+  right: 45px;
+  z-index: 99;
+  transform: rotate(0deg);
+  filter: drop-shadow(0 0 5px rgba(0,0,0,0.9));
+}
+.tonebar .arm {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background-color: #222;
+  border-radius: 50%;
+  z-index: 10;
+  box-shadow: inset 2px 2px 5px rgba(255,255,255,0.125), inset -2px -2px 5px rgba(255,255,255,0.125);
+}
+.tonebar .bar {
+  width: 10px;
+  height: 350px;
+  position: absolute;
+  background-image: linear-gradient(90deg, #808080, #c0c0c0, #808080);
+  top: -45px;
+  z-index: 5;
+  display: flex;
+  border-radius: 5px 5px 0 0;
+  align-items: center;
+  justify-content: center;
+}
+.tonebar .bar:after {
+  content: '';
+  width: 20px;
+  height: 30px;
+  bottom: 0;
+  border-radius: 5px;
+  position: absolute;
+  background-color: #222;
+  box-shadow: inset 1px 1px 1px rgba(255,255,255,0.125), inset -1px -1px 1px rgba(255,255,255,0.125);
+}
+.clickme {
+  position: absolute;
+  bottom: -50px;
+  right: 55px;
+  color: #fff;
+  font-size: 24px;
+  font-family: 'Teko';
+  transition: all 0.7s;
+}
+.clickme:after {
+  content: 'Click Me';
+  position: absolute;
+  width: 105px;
+  text-transform: uppercase;
+}
+.clickme:before {
+  content: '\2191';
+  position: absolute;
+  width: 50px;
+  top: -30px;
+  font-size: 24px;
+  left: 25px;
+  animation: point 0.25s linear infinite alternate;
+}
+.record {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background-image: linear-gradient(315deg, #010101, #212121);
+  display: grid;
+  place-items: center;
+  position: relative;
+  box-shadow: -1px -1px 1px rgba(255,255,255,0.125), 1px 1px 1px rgba(255,255,255,0.025);
+  transition: all 1s;
+  box-shadow: 0 0 5px rgba(0,0,0,0.5);
+  scale: 1.5;
+}
+.record .track {
+  border-radius: 50%;
+  position: absolute;
+  box-shadow: inset -1px -1px 1px rgba(255,255,255,0.075), inset 1px 1px 1px rgba(255,255,255,0.055);
+}
+.record .t40 {
+  width: 110px;
+  height: 110px;
+}
+.record .t39 {
+  width: 113px;
+  height: 113px;
+}
+.record .t38 {
+  width: 116px;
+  height: 116px;
+}
+.record .t37 {
+  width: 119px;
+  height: 119px;
+}
+.record .t36 {
+  width: 122px;
+  height: 122px;
+}
+.record .t35 {
+  width: 125px;
+  height: 125px;
+}
+.record .t34 {
+  width: 128px;
+  height: 128px;
+}
+.record .t33 {
+  width: 131px;
+  height: 131px;
+}
+.record .t32 {
+  width: 134px;
+  height: 134px;
+}
+.record .t31 {
+  width: 137px;
+  height: 137px;
+}
+.record .t30 {
+  width: 140px;
+  height: 140px;
+}
+.record .t29 {
+  width: 143px;
+  height: 143px;
+}
+.record .t28 {
+  width: 146px;
+  height: 146px;
+}
+.record .t27 {
+  width: 149px;
+  height: 149px;
+}
+.record .t26 {
+  width: 152px;
+  height: 152px;
+}
+.record .t25 {
+  width: 155px;
+  height: 155px;
+}
+.record .t24 {
+  width: 158px;
+  height: 158px;
+}
+.record .t23 {
+  width: 161px;
+  height: 161px;
+}
+.record .t22 {
+  width: 164px;
+  height: 164px;
+}
+.record .t21 {
+  width: 167px;
+  height: 167px;
+}
+.record .t20 {
+  width: 170px;
+  height: 170px;
+}
+.record .t19 {
+  width: 173px;
+  height: 173px;
+}
+.record .t18 {
+  width: 176px;
+  height: 176px;
+}
+.record .t17 {
+  width: 179px;
+  height: 179px;
+}
+.record .t16 {
+  width: 182px;
+  height: 182px;
+}
+.record .t15 {
+  width: 185px;
+  height: 185px;
+}
+.record .t14 {
+  width: 188px;
+  height: 188px;
+}
+.record .t13 {
+  width: 191px;
+  height: 191px;
+}
+.record .t12 {
+  width: 194px;
+  height: 194px;
+}
+.record .t11 {
+  width: 197px;
+  height: 197px;
+}
+.record .t10 {
+  width: 200px;
+  height: 200px;
+}
+.record .t9 {
+  width: 203px;
+  height: 203px;
+}
+.record .t8 {
+  width: 206px;
+  height: 206px;
+}
+.record .t7 {
+  width: 209px;
+  height: 209px;
+}
+.record .t6 {
+  width: 212px;
+  height: 212px;
+}
+.record .t5 {
+  width: 215px;
+  height: 215px;
+}
+.record .t4 {
+  width: 218px;
+  height: 218px;
+}
+.record .t3 {
+  width: 221px;
+  height: 221px;
+}
+.record .t2 {
+  width: 224px;
+  height: 224px;
+}
+.record .t1 {
+  width: 227px;
+  height: 227px;
+}
+.record .label {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  background-image: radial-gradient(#f0a 58%, #6f8faf 59%, #6f8faf 63%, #f0a 65%, #f0a 67%);
+  box-shadow: -1px -1px 1px rgba(255,255,255,0.375), 1px 1px 1px rgba(255,255,255,0.255);
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+.record .label .borderc {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid rgba(111,143,175,0.867);
+}
+.record .label .hole {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  left: 34.5px;
+  border-radius: 50%;
+  background: radial-gradient(#c0c0c0, #808080);
+  box-shadow: inset -1px -1px 1px rgba(0,0,0,0.375), inset 1px 1px 1px rgba(0,0,0,0.255);
+}
+.record .label .labeltext {
+  display: grid;
+  place-items: center;
+  position: relative;
+  height: 75px;
+  width: 75px;
+  text-transform: uppercase;
+}
+.record .label .text1 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-18deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text2 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-36deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text3 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-54deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text4 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-72deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text5 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-90deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text6 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-108deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text7 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-126deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text8 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-144deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text9 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-162deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text10 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-180deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text11 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-198deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text12 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-216deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text13 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-234deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text14 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-252deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text15 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-270deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.n5 {
+  position: absolute;
+  transform: rotate(-112.5deg) translate(0, 30px);
+  width: 3px;
+  border-radius: 25%;
+  height: 6px;
+  background-color: #ddd;
+}
+.n5:after {
+  bottom: -10px;
+  content: '5';
+  width: 10px;
+  height: 10px;
+  left: -5px;
+  position: absolute;
+  transform: rotatez(180deg);
+  font-size: 6px;
+  color: #ddd;
+}
+.tonebar {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  top: 75px;
+  right: 45px;
+  z-index: 99;
+  transform: rotate(0deg);
+  filter: drop-shadow(0 0 5px rgba(0,0,0,0.9));
+}
+.tonebar .arm {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background-color: #222;
+  border-radius: 50%;
+  z-index: 10;
+  box-shadow: inset 2px 2px 5px rgba(255,255,255,0.125), inset -2px -2px 5px rgba(255,255,255,0.125);
+}
+.tonebar .bar {
+  width: 10px;
+  height: 350px;
+  position: absolute;
+  background-image: linear-gradient(90deg, #808080, #c0c0c0, #808080);
+  top: -45px;
+  z-index: 5;
+  display: flex;
+  border-radius: 5px 5px 0 0;
+  align-items: center;
+  justify-content: center;
+}
+.tonebar .bar:after {
+  content: '';
+  width: 20px;
+  height: 30px;
+  bottom: 0;
+  border-radius: 5px;
+  position: absolute;
+  background-color: #222;
+  box-shadow: inset 1px 1px 1px rgba(255,255,255,0.125), inset -1px -1px 1px rgba(255,255,255,0.125);
+}
+.clickme {
+  position: absolute;
+  bottom: -50px;
+  right: 55px;
+  color: #fff;
+  font-size: 24px;
+  font-family: 'Teko';
+  transition: all 0.7s;
+}
+.clickme:after {
+  content: 'Click Me';
+  position: absolute;
+  width: 105px;
+  text-transform: uppercase;
+}
+.clickme:before {
+  content: '\2191';
+  position: absolute;
+  width: 50px;
+  top: -30px;
+  font-size: 24px;
+  left: 25px;
+  animation: point 0.25s linear infinite alternate;
+}
+.record {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background-image: linear-gradient(315deg, #010101, #212121);
+  display: grid;
+  place-items: center;
+  position: relative;
+  box-shadow: -1px -1px 1px rgba(255,255,255,0.125), 1px 1px 1px rgba(255,255,255,0.025);
+  transition: all 1s;
+  box-shadow: 0 0 5px rgba(0,0,0,0.5);
+  scale: 1.5;
+}
+.record .track {
+  border-radius: 50%;
+  position: absolute;
+  box-shadow: inset -1px -1px 1px rgba(255,255,255,0.075), inset 1px 1px 1px rgba(255,255,255,0.055);
+}
+.record .t40 {
+  width: 110px;
+  height: 110px;
+}
+.record .t39 {
+  width: 113px;
+  height: 113px;
+}
+.record .t38 {
+  width: 116px;
+  height: 116px;
+}
+.record .t37 {
+  width: 119px;
+  height: 119px;
+}
+.record .t36 {
+  width: 122px;
+  height: 122px;
+}
+.record .t35 {
+  width: 125px;
+  height: 125px;
+}
+.record .t34 {
+  width: 128px;
+  height: 128px;
+}
+.record .t33 {
+  width: 131px;
+  height: 131px;
+}
+.record .t32 {
+  width: 134px;
+  height: 134px;
+}
+.record .t31 {
+  width: 137px;
+  height: 137px;
+}
+.record .t30 {
+  width: 140px;
+  height: 140px;
+}
+.record .t29 {
+  width: 143px;
+  height: 143px;
+}
+.record .t28 {
+  width: 146px;
+  height: 146px;
+}
+.record .t27 {
+  width: 149px;
+  height: 149px;
+}
+.record .t26 {
+  width: 152px;
+  height: 152px;
+}
+.record .t25 {
+  width: 155px;
+  height: 155px;
+}
+.record .t24 {
+  width: 158px;
+  height: 158px;
+}
+.record .t23 {
+  width: 161px;
+  height: 161px;
+}
+.record .t22 {
+  width: 164px;
+  height: 164px;
+}
+.record .t21 {
+  width: 167px;
+  height: 167px;
+}
+.record .t20 {
+  width: 170px;
+  height: 170px;
+}
+.record .t19 {
+  width: 173px;
+  height: 173px;
+}
+.record .t18 {
+  width: 176px;
+  height: 176px;
+}
+.record .t17 {
+  width: 179px;
+  height: 179px;
+}
+.record .t16 {
+  width: 182px;
+  height: 182px;
+}
+.record .t15 {
+  width: 185px;
+  height: 185px;
+}
+.record .t14 {
+  width: 188px;
+  height: 188px;
+}
+.record .t13 {
+  width: 191px;
+  height: 191px;
+}
+.record .t12 {
+  width: 194px;
+  height: 194px;
+}
+.record .t11 {
+  width: 197px;
+  height: 197px;
+}
+.record .t10 {
+  width: 200px;
+  height: 200px;
+}
+.record .t9 {
+  width: 203px;
+  height: 203px;
+}
+.record .t8 {
+  width: 206px;
+  height: 206px;
+}
+.record .t7 {
+  width: 209px;
+  height: 209px;
+}
+.record .t6 {
+  width: 212px;
+  height: 212px;
+}
+.record .t5 {
+  width: 215px;
+  height: 215px;
+}
+.record .t4 {
+  width: 218px;
+  height: 218px;
+}
+.record .t3 {
+  width: 221px;
+  height: 221px;
+}
+.record .t2 {
+  width: 224px;
+  height: 224px;
+}
+.record .t1 {
+  width: 227px;
+  height: 227px;
+}
+.record .label {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  background-image: radial-gradient(#f0a 58%, #6f8faf 59%, #6f8faf 63%, #f0a 65%, #f0a 67%);
+  box-shadow: -1px -1px 1px rgba(255,255,255,0.375), 1px 1px 1px rgba(255,255,255,0.255);
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+.record .label .borderc {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid rgba(111,143,175,0.867);
+}
+.record .label .hole {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  left: 34.5px;
+  border-radius: 50%;
+  background: radial-gradient(#c0c0c0, #808080);
+  box-shadow: inset -1px -1px 1px rgba(0,0,0,0.375), inset 1px 1px 1px rgba(0,0,0,0.255);
+}
+.record .label .labeltext {
+  display: grid;
+  place-items: center;
+  position: relative;
+  height: 75px;
+  width: 75px;
+  text-transform: uppercase;
+}
+.record .label .text1 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-18deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text2 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-36deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text3 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-54deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text4 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-72deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text5 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-90deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text6 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-108deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text7 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-126deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text8 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-144deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text9 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-162deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text10 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-180deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text11 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-198deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text12 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-216deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text13 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-234deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text14 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-252deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text15 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-270deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.n4 {
+  position: absolute;
+  transform: rotate(-90deg) translate(0, 30px);
+  width: 3px;
+  border-radius: 25%;
+  height: 7px;
+  background-color: #ddd;
+}
+.n4:after {
+  bottom: -10px;
+  content: '6';
+  width: 10px;
+  height: 10px;
+  left: -5px;
+  position: absolute;
+  transform: rotatez(180deg);
+  font-size: 6px;
+  color: #ddd;
+}
+.tonebar {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  top: 75px;
+  right: 45px;
+  z-index: 99;
+  transform: rotate(0deg);
+  filter: drop-shadow(0 0 5px rgba(0,0,0,0.9));
+}
+.tonebar .arm {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background-color: #222;
+  border-radius: 50%;
+  z-index: 10;
+  box-shadow: inset 2px 2px 5px rgba(255,255,255,0.125), inset -2px -2px 5px rgba(255,255,255,0.125);
+}
+.tonebar .bar {
+  width: 10px;
+  height: 350px;
+  position: absolute;
+  background-image: linear-gradient(90deg, #808080, #c0c0c0, #808080);
+  top: -45px;
+  z-index: 5;
+  display: flex;
+  border-radius: 5px 5px 0 0;
+  align-items: center;
+  justify-content: center;
+}
+.tonebar .bar:after {
+  content: '';
+  width: 20px;
+  height: 30px;
+  bottom: 0;
+  border-radius: 5px;
+  position: absolute;
+  background-color: #222;
+  box-shadow: inset 1px 1px 1px rgba(255,255,255,0.125), inset -1px -1px 1px rgba(255,255,255,0.125);
+}
+.clickme {
+  position: absolute;
+  bottom: -50px;
+  right: 55px;
+  color: #fff;
+  font-size: 24px;
+  font-family: 'Teko';
+  transition: all 0.7s;
+}
+.clickme:after {
+  content: 'Click Me';
+  position: absolute;
+  width: 105px;
+  text-transform: uppercase;
+}
+.clickme:before {
+  content: '\2191';
+  position: absolute;
+  width: 50px;
+  top: -30px;
+  font-size: 24px;
+  left: 25px;
+  animation: point 0.25s linear infinite alternate;
+}
+.record {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background-image: linear-gradient(315deg, #010101, #212121);
+  display: grid;
+  place-items: center;
+  position: relative;
+  box-shadow: -1px -1px 1px rgba(255,255,255,0.125), 1px 1px 1px rgba(255,255,255,0.025);
+  transition: all 1s;
+  box-shadow: 0 0 5px rgba(0,0,0,0.5);
+  scale: 1.5;
+}
+.record .track {
+  border-radius: 50%;
+  position: absolute;
+  box-shadow: inset -1px -1px 1px rgba(255,255,255,0.075), inset 1px 1px 1px rgba(255,255,255,0.055);
+}
+.record .t40 {
+  width: 110px;
+  height: 110px;
+}
+.record .t39 {
+  width: 113px;
+  height: 113px;
+}
+.record .t38 {
+  width: 116px;
+  height: 116px;
+}
+.record .t37 {
+  width: 119px;
+  height: 119px;
+}
+.record .t36 {
+  width: 122px;
+  height: 122px;
+}
+.record .t35 {
+  width: 125px;
+  height: 125px;
+}
+.record .t34 {
+  width: 128px;
+  height: 128px;
+}
+.record .t33 {
+  width: 131px;
+  height: 131px;
+}
+.record .t32 {
+  width: 134px;
+  height: 134px;
+}
+.record .t31 {
+  width: 137px;
+  height: 137px;
+}
+.record .t30 {
+  width: 140px;
+  height: 140px;
+}
+.record .t29 {
+  width: 143px;
+  height: 143px;
+}
+.record .t28 {
+  width: 146px;
+  height: 146px;
+}
+.record .t27 {
+  width: 149px;
+  height: 149px;
+}
+.record .t26 {
+  width: 152px;
+  height: 152px;
+}
+.record .t25 {
+  width: 155px;
+  height: 155px;
+}
+.record .t24 {
+  width: 158px;
+  height: 158px;
+}
+.record .t23 {
+  width: 161px;
+  height: 161px;
+}
+.record .t22 {
+  width: 164px;
+  height: 164px;
+}
+.record .t21 {
+  width: 167px;
+  height: 167px;
+}
+.record .t20 {
+  width: 170px;
+  height: 170px;
+}
+.record .t19 {
+  width: 173px;
+  height: 173px;
+}
+.record .t18 {
+  width: 176px;
+  height: 176px;
+}
+.record .t17 {
+  width: 179px;
+  height: 179px;
+}
+.record .t16 {
+  width: 182px;
+  height: 182px;
+}
+.record .t15 {
+  width: 185px;
+  height: 185px;
+}
+.record .t14 {
+  width: 188px;
+  height: 188px;
+}
+.record .t13 {
+  width: 191px;
+  height: 191px;
+}
+.record .t12 {
+  width: 194px;
+  height: 194px;
+}
+.record .t11 {
+  width: 197px;
+  height: 197px;
+}
+.record .t10 {
+  width: 200px;
+  height: 200px;
+}
+.record .t9 {
+  width: 203px;
+  height: 203px;
+}
+.record .t8 {
+  width: 206px;
+  height: 206px;
+}
+.record .t7 {
+  width: 209px;
+  height: 209px;
+}
+.record .t6 {
+  width: 212px;
+  height: 212px;
+}
+.record .t5 {
+  width: 215px;
+  height: 215px;
+}
+.record .t4 {
+  width: 218px;
+  height: 218px;
+}
+.record .t3 {
+  width: 221px;
+  height: 221px;
+}
+.record .t2 {
+  width: 224px;
+  height: 224px;
+}
+.record .t1 {
+  width: 227px;
+  height: 227px;
+}
+.record .label {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  background-image: radial-gradient(#f0a 58%, #6f8faf 59%, #6f8faf 63%, #f0a 65%, #f0a 67%);
+  box-shadow: -1px -1px 1px rgba(255,255,255,0.375), 1px 1px 1px rgba(255,255,255,0.255);
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+.record .label .borderc {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid rgba(111,143,175,0.867);
+}
+.record .label .hole {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  left: 34.5px;
+  border-radius: 50%;
+  background: radial-gradient(#c0c0c0, #808080);
+  box-shadow: inset -1px -1px 1px rgba(0,0,0,0.375), inset 1px 1px 1px rgba(0,0,0,0.255);
+}
+.record .label .labeltext {
+  display: grid;
+  place-items: center;
+  position: relative;
+  height: 75px;
+  width: 75px;
+  text-transform: uppercase;
+}
+.record .label .text1 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-18deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text2 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-36deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text3 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-54deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text4 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-72deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text5 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-90deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text6 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-108deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text7 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-126deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text8 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-144deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text9 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-162deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text10 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-180deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text11 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-198deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text12 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-216deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text13 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-234deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text14 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-252deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text15 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-270deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.n3 {
+  position: absolute;
+  transform: rotate(-67.5deg) translate(0, 30px);
+  width: 3px;
+  border-radius: 25%;
+  height: 8px;
+  background-color: #ddd;
+}
+.n3:after {
+  bottom: -10px;
+  content: '7';
+  width: 10px;
+  height: 10px;
+  left: -5px;
+  position: absolute;
+  transform: rotatez(180deg);
+  font-size: 6px;
+  color: #ddd;
+}
+.tonebar {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  top: 75px;
+  right: 45px;
+  z-index: 99;
+  transform: rotate(0deg);
+  filter: drop-shadow(0 0 5px rgba(0,0,0,0.9));
+}
+.tonebar .arm {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background-color: #222;
+  border-radius: 50%;
+  z-index: 10;
+  box-shadow: inset 2px 2px 5px rgba(255,255,255,0.125), inset -2px -2px 5px rgba(255,255,255,0.125);
+}
+.tonebar .bar {
+  width: 10px;
+  height: 350px;
+  position: absolute;
+  background-image: linear-gradient(90deg, #808080, #c0c0c0, #808080);
+  top: -45px;
+  z-index: 5;
+  display: flex;
+  border-radius: 5px 5px 0 0;
+  align-items: center;
+  justify-content: center;
+}
+.tonebar .bar:after {
+  content: '';
+  width: 20px;
+  height: 30px;
+  bottom: 0;
+  border-radius: 5px;
+  position: absolute;
+  background-color: #222;
+  box-shadow: inset 1px 1px 1px rgba(255,255,255,0.125), inset -1px -1px 1px rgba(255,255,255,0.125);
+}
+.clickme {
+  position: absolute;
+  bottom: -50px;
+  right: 55px;
+  color: #fff;
+  font-size: 24px;
+  font-family: 'Teko';
+  transition: all 0.7s;
+}
+.clickme:after {
+  content: 'Click Me';
+  position: absolute;
+  width: 105px;
+  text-transform: uppercase;
+}
+.clickme:before {
+  content: '\2191';
+  position: absolute;
+  width: 50px;
+  top: -30px;
+  font-size: 24px;
+  left: 25px;
+  animation: point 0.25s linear infinite alternate;
+}
+.record {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background-image: linear-gradient(315deg, #010101, #212121);
+  display: grid;
+  place-items: center;
+  position: relative;
+  box-shadow: -1px -1px 1px rgba(255,255,255,0.125), 1px 1px 1px rgba(255,255,255,0.025);
+  transition: all 1s;
+  box-shadow: 0 0 5px rgba(0,0,0,0.5);
+  scale: 1.5;
+}
+.record .track {
+  border-radius: 50%;
+  position: absolute;
+  box-shadow: inset -1px -1px 1px rgba(255,255,255,0.075), inset 1px 1px 1px rgba(255,255,255,0.055);
+}
+.record .t40 {
+  width: 110px;
+  height: 110px;
+}
+.record .t39 {
+  width: 113px;
+  height: 113px;
+}
+.record .t38 {
+  width: 116px;
+  height: 116px;
+}
+.record .t37 {
+  width: 119px;
+  height: 119px;
+}
+.record .t36 {
+  width: 122px;
+  height: 122px;
+}
+.record .t35 {
+  width: 125px;
+  height: 125px;
+}
+.record .t34 {
+  width: 128px;
+  height: 128px;
+}
+.record .t33 {
+  width: 131px;
+  height: 131px;
+}
+.record .t32 {
+  width: 134px;
+  height: 134px;
+}
+.record .t31 {
+  width: 137px;
+  height: 137px;
+}
+.record .t30 {
+  width: 140px;
+  height: 140px;
+}
+.record .t29 {
+  width: 143px;
+  height: 143px;
+}
+.record .t28 {
+  width: 146px;
+  height: 146px;
+}
+.record .t27 {
+  width: 149px;
+  height: 149px;
+}
+.record .t26 {
+  width: 152px;
+  height: 152px;
+}
+.record .t25 {
+  width: 155px;
+  height: 155px;
+}
+.record .t24 {
+  width: 158px;
+  height: 158px;
+}
+.record .t23 {
+  width: 161px;
+  height: 161px;
+}
+.record .t22 {
+  width: 164px;
+  height: 164px;
+}
+.record .t21 {
+  width: 167px;
+  height: 167px;
+}
+.record .t20 {
+  width: 170px;
+  height: 170px;
+}
+.record .t19 {
+  width: 173px;
+  height: 173px;
+}
+.record .t18 {
+  width: 176px;
+  height: 176px;
+}
+.record .t17 {
+  width: 179px;
+  height: 179px;
+}
+.record .t16 {
+  width: 182px;
+  height: 182px;
+}
+.record .t15 {
+  width: 185px;
+  height: 185px;
+}
+.record .t14 {
+  width: 188px;
+  height: 188px;
+}
+.record .t13 {
+  width: 191px;
+  height: 191px;
+}
+.record .t12 {
+  width: 194px;
+  height: 194px;
+}
+.record .t11 {
+  width: 197px;
+  height: 197px;
+}
+.record .t10 {
+  width: 200px;
+  height: 200px;
+}
+.record .t9 {
+  width: 203px;
+  height: 203px;
+}
+.record .t8 {
+  width: 206px;
+  height: 206px;
+}
+.record .t7 {
+  width: 209px;
+  height: 209px;
+}
+.record .t6 {
+  width: 212px;
+  height: 212px;
+}
+.record .t5 {
+  width: 215px;
+  height: 215px;
+}
+.record .t4 {
+  width: 218px;
+  height: 218px;
+}
+.record .t3 {
+  width: 221px;
+  height: 221px;
+}
+.record .t2 {
+  width: 224px;
+  height: 224px;
+}
+.record .t1 {
+  width: 227px;
+  height: 227px;
+}
+.record .label {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  background-image: radial-gradient(#f0a 58%, #6f8faf 59%, #6f8faf 63%, #f0a 65%, #f0a 67%);
+  box-shadow: -1px -1px 1px rgba(255,255,255,0.375), 1px 1px 1px rgba(255,255,255,0.255);
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+.record .label .borderc {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid rgba(111,143,175,0.867);
+}
+.record .label .hole {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  left: 34.5px;
+  border-radius: 50%;
+  background: radial-gradient(#c0c0c0, #808080);
+  box-shadow: inset -1px -1px 1px rgba(0,0,0,0.375), inset 1px 1px 1px rgba(0,0,0,0.255);
+}
+.record .label .labeltext {
+  display: grid;
+  place-items: center;
+  position: relative;
+  height: 75px;
+  width: 75px;
+  text-transform: uppercase;
+}
+.record .label .text1 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-18deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text2 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-36deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text3 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-54deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text4 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-72deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text5 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-90deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text6 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-108deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text7 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-126deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text8 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-144deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text9 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-162deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text10 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-180deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text11 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-198deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text12 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-216deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text13 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-234deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text14 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-252deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text15 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-270deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.n2 {
+  position: absolute;
+  transform: rotate(-45deg) translate(0, 30px);
+  width: 3px;
+  border-radius: 25%;
+  height: 9px;
+  background-color: #ddd;
+}
+.n2:after {
+  bottom: -10px;
+  content: '8';
+  width: 10px;
+  height: 10px;
+  left: -5px;
+  position: absolute;
+  transform: rotatez(180deg);
+  font-size: 6px;
+  color: #ddd;
+}
+.tonebar {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  top: 75px;
+  right: 45px;
+  z-index: 99;
+  transform: rotate(0deg);
+  filter: drop-shadow(0 0 5px rgba(0,0,0,0.9));
+}
+.tonebar .arm {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background-color: #222;
+  border-radius: 50%;
+  z-index: 10;
+  box-shadow: inset 2px 2px 5px rgba(255,255,255,0.125), inset -2px -2px 5px rgba(255,255,255,0.125);
+}
+.tonebar .bar {
+  width: 10px;
+  height: 350px;
+  position: absolute;
+  background-image: linear-gradient(90deg, #808080, #c0c0c0, #808080);
+  top: -45px;
+  z-index: 5;
+  display: flex;
+  border-radius: 5px 5px 0 0;
+  align-items: center;
+  justify-content: center;
+}
+.tonebar .bar:after {
+  content: '';
+  width: 20px;
+  height: 30px;
+  bottom: 0;
+  border-radius: 5px;
+  position: absolute;
+  background-color: #222;
+  box-shadow: inset 1px 1px 1px rgba(255,255,255,0.125), inset -1px -1px 1px rgba(255,255,255,0.125);
+}
+.clickme {
+  position: absolute;
+  bottom: -50px;
+  right: 55px;
+  color: #fff;
+  font-size: 24px;
+  font-family: 'Teko';
+  transition: all 0.7s;
+}
+.clickme:after {
+  content: 'Click Me';
+  position: absolute;
+  width: 105px;
+  text-transform: uppercase;
+}
+.clickme:before {
+  content: '\2191';
+  position: absolute;
+  width: 50px;
+  top: -30px;
+  font-size: 24px;
+  left: 25px;
+  animation: point 0.25s linear infinite alternate;
+}
+.record {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background-image: linear-gradient(315deg, #010101, #212121);
+  display: grid;
+  place-items: center;
+  position: relative;
+  box-shadow: -1px -1px 1px rgba(255,255,255,0.125), 1px 1px 1px rgba(255,255,255,0.025);
+  transition: all 1s;
+  box-shadow: 0 0 5px rgba(0,0,0,0.5);
+  scale: 1.5;
+}
+.record .track {
+  border-radius: 50%;
+  position: absolute;
+  box-shadow: inset -1px -1px 1px rgba(255,255,255,0.075), inset 1px 1px 1px rgba(255,255,255,0.055);
+}
+.record .t40 {
+  width: 110px;
+  height: 110px;
+}
+.record .t39 {
+  width: 113px;
+  height: 113px;
+}
+.record .t38 {
+  width: 116px;
+  height: 116px;
+}
+.record .t37 {
+  width: 119px;
+  height: 119px;
+}
+.record .t36 {
+  width: 122px;
+  height: 122px;
+}
+.record .t35 {
+  width: 125px;
+  height: 125px;
+}
+.record .t34 {
+  width: 128px;
+  height: 128px;
+}
+.record .t33 {
+  width: 131px;
+  height: 131px;
+}
+.record .t32 {
+  width: 134px;
+  height: 134px;
+}
+.record .t31 {
+  width: 137px;
+  height: 137px;
+}
+.record .t30 {
+  width: 140px;
+  height: 140px;
+}
+.record .t29 {
+  width: 143px;
+  height: 143px;
+}
+.record .t28 {
+  width: 146px;
+  height: 146px;
+}
+.record .t27 {
+  width: 149px;
+  height: 149px;
+}
+.record .t26 {
+  width: 152px;
+  height: 152px;
+}
+.record .t25 {
+  width: 155px;
+  height: 155px;
+}
+.record .t24 {
+  width: 158px;
+  height: 158px;
+}
+.record .t23 {
+  width: 161px;
+  height: 161px;
+}
+.record .t22 {
+  width: 164px;
+  height: 164px;
+}
+.record .t21 {
+  width: 167px;
+  height: 167px;
+}
+.record .t20 {
+  width: 170px;
+  height: 170px;
+}
+.record .t19 {
+  width: 173px;
+  height: 173px;
+}
+.record .t18 {
+  width: 176px;
+  height: 176px;
+}
+.record .t17 {
+  width: 179px;
+  height: 179px;
+}
+.record .t16 {
+  width: 182px;
+  height: 182px;
+}
+.record .t15 {
+  width: 185px;
+  height: 185px;
+}
+.record .t14 {
+  width: 188px;
+  height: 188px;
+}
+.record .t13 {
+  width: 191px;
+  height: 191px;
+}
+.record .t12 {
+  width: 194px;
+  height: 194px;
+}
+.record .t11 {
+  width: 197px;
+  height: 197px;
+}
+.record .t10 {
+  width: 200px;
+  height: 200px;
+}
+.record .t9 {
+  width: 203px;
+  height: 203px;
+}
+.record .t8 {
+  width: 206px;
+  height: 206px;
+}
+.record .t7 {
+  width: 209px;
+  height: 209px;
+}
+.record .t6 {
+  width: 212px;
+  height: 212px;
+}
+.record .t5 {
+  width: 215px;
+  height: 215px;
+}
+.record .t4 {
+  width: 218px;
+  height: 218px;
+}
+.record .t3 {
+  width: 221px;
+  height: 221px;
+}
+.record .t2 {
+  width: 224px;
+  height: 224px;
+}
+.record .t1 {
+  width: 227px;
+  height: 227px;
+}
+.record .label {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  background-image: radial-gradient(#f0a 58%, #6f8faf 59%, #6f8faf 63%, #f0a 65%, #f0a 67%);
+  box-shadow: -1px -1px 1px rgba(255,255,255,0.375), 1px 1px 1px rgba(255,255,255,0.255);
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+.record .label .borderc {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid rgba(111,143,175,0.867);
+}
+.record .label .hole {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  left: 34.5px;
+  border-radius: 50%;
+  background: radial-gradient(#c0c0c0, #808080);
+  box-shadow: inset -1px -1px 1px rgba(0,0,0,0.375), inset 1px 1px 1px rgba(0,0,0,0.255);
+}
+.record .label .labeltext {
+  display: grid;
+  place-items: center;
+  position: relative;
+  height: 75px;
+  width: 75px;
+  text-transform: uppercase;
+}
+.record .label .text1 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-18deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text2 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-36deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text3 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-54deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text4 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-72deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text5 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-90deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text6 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-108deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text7 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-126deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text8 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-144deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text9 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-162deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text10 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-180deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text11 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-198deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text12 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-216deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text13 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-234deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text14 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-252deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text15 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-270deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.n1 {
+  position: absolute;
+  transform: rotate(-22.5deg) translate(0, 30px);
+  width: 3px;
+  border-radius: 25%;
+  height: 10px;
+  background-color: #ddd;
+}
+.n1:after {
+  bottom: -10px;
+  content: '9';
+  width: 10px;
+  height: 10px;
+  left: -5px;
+  position: absolute;
+  transform: rotatez(180deg);
+  font-size: 6px;
+  color: #ddd;
+}
+.tonebar {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  top: 75px;
+  right: 45px;
+  z-index: 99;
+  transform: rotate(0deg);
+  filter: drop-shadow(0 0 5px rgba(0,0,0,0.9));
+}
+.tonebar .arm {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background-color: #222;
+  border-radius: 50%;
+  z-index: 10;
+  box-shadow: inset 2px 2px 5px rgba(255,255,255,0.125), inset -2px -2px 5px rgba(255,255,255,0.125);
+}
+.tonebar .bar {
+  width: 10px;
+  height: 350px;
+  position: absolute;
+  background-image: linear-gradient(90deg, #808080, #c0c0c0, #808080);
+  top: -45px;
+  z-index: 5;
+  display: flex;
+  border-radius: 5px 5px 0 0;
+  align-items: center;
+  justify-content: center;
+}
+.tonebar .bar:after {
+  content: '';
+  width: 20px;
+  height: 30px;
+  bottom: 0;
+  border-radius: 5px;
+  position: absolute;
+  background-color: #222;
+  box-shadow: inset 1px 1px 1px rgba(255,255,255,0.125), inset -1px -1px 1px rgba(255,255,255,0.125);
+}
+.clickme {
+  position: absolute;
+  bottom: -50px;
+  right: 55px;
+  color: #fff;
+  font-size: 24px;
+  font-family: 'Teko';
+  transition: all 0.7s;
+}
+.clickme:after {
+  content: 'Click Me';
+  position: absolute;
+  width: 105px;
+  text-transform: uppercase;
+}
+.clickme:before {
+  content: '\2191';
+  position: absolute;
+  width: 50px;
+  top: -30px;
+  font-size: 24px;
+  left: 25px;
+  animation: point 0.25s linear infinite alternate;
+}
+.record {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background-image: linear-gradient(315deg, #010101, #212121);
+  display: grid;
+  place-items: center;
+  position: relative;
+  box-shadow: -1px -1px 1px rgba(255,255,255,0.125), 1px 1px 1px rgba(255,255,255,0.025);
+  transition: all 1s;
+  box-shadow: 0 0 5px rgba(0,0,0,0.5);
+  scale: 1.5;
+}
+.record .track {
+  border-radius: 50%;
+  position: absolute;
+  box-shadow: inset -1px -1px 1px rgba(255,255,255,0.075), inset 1px 1px 1px rgba(255,255,255,0.055);
+}
+.record .t40 {
+  width: 110px;
+  height: 110px;
+}
+.record .t39 {
+  width: 113px;
+  height: 113px;
+}
+.record .t38 {
+  width: 116px;
+  height: 116px;
+}
+.record .t37 {
+  width: 119px;
+  height: 119px;
+}
+.record .t36 {
+  width: 122px;
+  height: 122px;
+}
+.record .t35 {
+  width: 125px;
+  height: 125px;
+}
+.record .t34 {
+  width: 128px;
+  height: 128px;
+}
+.record .t33 {
+  width: 131px;
+  height: 131px;
+}
+.record .t32 {
+  width: 134px;
+  height: 134px;
+}
+.record .t31 {
+  width: 137px;
+  height: 137px;
+}
+.record .t30 {
+  width: 140px;
+  height: 140px;
+}
+.record .t29 {
+  width: 143px;
+  height: 143px;
+}
+.record .t28 {
+  width: 146px;
+  height: 146px;
+}
+.record .t27 {
+  width: 149px;
+  height: 149px;
+}
+.record .t26 {
+  width: 152px;
+  height: 152px;
+}
+.record .t25 {
+  width: 155px;
+  height: 155px;
+}
+.record .t24 {
+  width: 158px;
+  height: 158px;
+}
+.record .t23 {
+  width: 161px;
+  height: 161px;
+}
+.record .t22 {
+  width: 164px;
+  height: 164px;
+}
+.record .t21 {
+  width: 167px;
+  height: 167px;
+}
+.record .t20 {
+  width: 170px;
+  height: 170px;
+}
+.record .t19 {
+  width: 173px;
+  height: 173px;
+}
+.record .t18 {
+  width: 176px;
+  height: 176px;
+}
+.record .t17 {
+  width: 179px;
+  height: 179px;
+}
+.record .t16 {
+  width: 182px;
+  height: 182px;
+}
+.record .t15 {
+  width: 185px;
+  height: 185px;
+}
+.record .t14 {
+  width: 188px;
+  height: 188px;
+}
+.record .t13 {
+  width: 191px;
+  height: 191px;
+}
+.record .t12 {
+  width: 194px;
+  height: 194px;
+}
+.record .t11 {
+  width: 197px;
+  height: 197px;
+}
+.record .t10 {
+  width: 200px;
+  height: 200px;
+}
+.record .t9 {
+  width: 203px;
+  height: 203px;
+}
+.record .t8 {
+  width: 206px;
+  height: 206px;
+}
+.record .t7 {
+  width: 209px;
+  height: 209px;
+}
+.record .t6 {
+  width: 212px;
+  height: 212px;
+}
+.record .t5 {
+  width: 215px;
+  height: 215px;
+}
+.record .t4 {
+  width: 218px;
+  height: 218px;
+}
+.record .t3 {
+  width: 221px;
+  height: 221px;
+}
+.record .t2 {
+  width: 224px;
+  height: 224px;
+}
+.record .t1 {
+  width: 227px;
+  height: 227px;
+}
+.record .label {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  background-image: radial-gradient(#f0a 58%, #6f8faf 59%, #6f8faf 63%, #f0a 65%, #f0a 67%);
+  box-shadow: -1px -1px 1px rgba(255,255,255,0.375), 1px 1px 1px rgba(255,255,255,0.255);
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+.record .label .borderc {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid rgba(111,143,175,0.867);
+}
+.record .label .hole {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  left: 34.5px;
+  border-radius: 50%;
+  background: radial-gradient(#c0c0c0, #808080);
+  box-shadow: inset -1px -1px 1px rgba(0,0,0,0.375), inset 1px 1px 1px rgba(0,0,0,0.255);
+}
+.record .label .labeltext {
+  display: grid;
+  place-items: center;
+  position: relative;
+  height: 75px;
+  width: 75px;
+  text-transform: uppercase;
+}
+.record .label .text1 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-18deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text2 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-36deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text3 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-54deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text4 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-72deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text5 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-90deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text6 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-108deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text7 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-126deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text8 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-144deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text9 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-162deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text10 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-180deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text11 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-198deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text12 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-216deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text13 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-234deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text14 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-252deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+.record .label .text15 {
+  color: #fff;
+  position: absolute;
+  transform: rotate(-270deg) translate(0, 20px) rotateZ(180deg);
+  font-family: 'Teko';
+  font-size: 12px;
+}
+:root {
+  --pwlight: #f00;
+}
+@-moz-keyframes spin {
+  to {
+    rotate: 360deg;
+  }
+}
+@-webkit-keyframes spin {
+  to {
+    rotate: 360deg;
+  }
+}
+@-o-keyframes spin {
+  to {
+    rotate: 360deg;
+  }
+}
+@keyframes spin {
+  to {
+    rotate: 360deg;
+  }
+}
+@-moz-keyframes movebar {
+  0% {
+    transform: rotate(0deg);
+  }
+  2% {
+    transform: rotate(17deg);
+  }
+  90% {
+    transform: rotate(34deg);
+  }
+  100% {
+    transform: rotate(17deg);
+  }
+}
+@-webkit-keyframes movebar {
+  0% {
+    transform: rotate(0deg);
+  }
+  2% {
+    transform: rotate(17deg);
+  }
+  90% {
+    transform: rotate(34deg);
+  }
+  100% {
+    transform: rotate(17deg);
+  }
+}
+@-o-keyframes movebar {
+  0% {
+    transform: rotate(0deg);
+  }
+  2% {
+    transform: rotate(17deg);
+  }
+  90% {
+    transform: rotate(34deg);
+  }
+  100% {
+    transform: rotate(17deg);
+  }
+}
+@keyframes movebar {
+  0% {
+    transform: rotate(0deg);
+  }
+  2% {
+    transform: rotate(17deg);
+  }
+  90% {
+    transform: rotate(34deg);
+  }
+  100% {
+    transform: rotate(17deg);
+  }
+}
+@-moz-keyframes mb1 {
+  from {
+    transform: rotate(17deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+@-webkit-keyframes mb1 {
+  from {
+    transform: rotate(17deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+@-o-keyframes mb1 {
+  from {
+    transform: rotate(17deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+@keyframes mb1 {
+  from {
+    transform: rotate(17deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+@-moz-keyframes point {
+  to {
+    top: -40px;
+  }
+}
+@-webkit-keyframes point {
+  to {
+    top: -40px;
+  }
+}
+@-o-keyframes point {
+  to {
+    top: -40px;
+  }
+}
+@keyframes point {
+  to {
+    top: -40px;
+  }
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  <div class="rplayer">
+  <div class="highlight"></div>
+  <div class="logo">
+    dustin's
+  </div>
+  <div class="knob">
+    <div class="spindiv">
+      <div class="selnotch"></div>
+    </div>
+    <p>
+      VOL
+    </p>
+  </div>
+  <div class="notch n9"></div>
+  <div class="notch n8"></div>
+  <div class="notch n7"></div>
+  <div class="notch n6"></div>
+  <div class="notch n5"></div>
+  <div class="notch n4"></div>
+  <div class="notch n3"></div>
+  <div class="notch n2"></div>
+  <div class="notch n1"></div>
+  <div class="tonebar">
+    <div class="arm"></div>
+    <div class="bar"></div>
+  </div>
+  <div class="power">
+    <div class="pbutton"></div>
+    <div class="light"></div>
+    <p>
+      Power
+    </p>
+  </div>
+  <div class="record">
+    <div class="track t1"></div>
+    <div class="track t2"></div>
+    <div class="track t3"></div>
+    <div class="track t4"></div>
+    <div class="track t5"></div>
+    <div class="track t6"></div>
+    <div class="track t7"></div>
+    <div class="track t8"></div>
+    <div class="track t9"></div>
+    <div class="track t10"></div>
+    <div class="track t11"></div>
+    <div class="track t12"></div>
+    <div class="track t13"></div>
+    <div class="track t14"></div>
+    <div class="track t15"></div>
+    <div class="track t16"></div>
+    <div class="track t17"></div>
+    <div class="track t18"></div>
+    <div class="track t19"></div>
+    <div class="track t20"></div>
+    <div class="track t21"></div>
+    <div class="track t22"></div>
+    <div class="track t23"></div>
+    <div class="track t24"></div>
+    <div class="track t25"></div>
+    <div class="track t26"></div>
+    <div class="track t27"></div>
+    <div class="track t28"></div>
+    <div class="track t29"></div>
+    <div class="track t30"></div>
+    <div class="track t31"></div>
+    <div class="track t32"></div>
+    <div class="track t33"></div>
+    <div class="track t34"></div>
+    <div class="track t35"></div>
+    <div class="track t36"></div>
+    <div class="track t37"></div>
+    <div class="track t38"></div>
+    <div class="track t39"></div>
+    <div class="track t40"></div>
+    <div class="label">
+      <div class="hole"></div>
+      <div class="borderc"></div>
+      <div class="labeltext">
+        <p class="text1">
+          m
+        </p>
+        <p class="text2">
+          u
+        </p>
+        <p class="text3">
+          b
+        </p>
+        <p class="text4">
+          l
+        </p>
+        <p class="text5">
+          a
+        </p>
+        <p class="text6">
+          
+        </p>
+        <p class="text7">
+          d
+        </p>
+        <p class="text8">
+          n
+        </p>
+        <p class="text9">
+          a
+        </p>
+        <p class="text10">
+          b
+        </p>
+        <p class="text11">
+          
+        </p>
+        <p class="text12">
+          l
+        </p>
+        <p class="text13">
+          o
+        </p>
+        <p class="text14">
+          o
+        </p>
+        <p class="text15">
+          c
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="clickme"></div>
+</div>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/tone/15.1.2/Tone.js'></script>
+    <script id="rendered-js" >
+const pwr = document.querySelector('.pbutton');
+const vol = document.querySelector('.knob');
+const voln = document.querySelector('.spindiv');
+const tb = document.querySelector('.tonebar');
+const rec = document.querySelector('.record');
+const powerlight = document.querySelector('.light');
+const notch = document.querySelectorAll('.notch');
+const clickme = document.querySelector('.clickme');
+
+let playing = 0;
+document.documentElement.style.setProperty('--pwlight', 'rgba(255,255,255,.5)');
+pwr.addEventListener('click', () => {
+  if (playing === 0) {
+    tb.style.animation = 'movebar 100s linear infinite';
+    tb.style.transform = 'rotate(17deg)';
+    rec.style.animation = 'spin 5s linear infinite';
+    document.documentElement.style.setProperty('--pwlight', 'red');
+    clickme.style.opacity = '0';
+    playing = 1;
+    playRockLoop();
+  } else {
+    tb.style.animation = 'mb1 3s linear forwards';
+    rec.style.animationPlayState = 'paused';
+    document.documentElement.style.setProperty('--pwlight', 'rgba(255,255,255,.5)');
+    playing = 0;
+    stopRockLoop();
+    clickme.style.opacity = '1';
+  }
+});
+
+notch.forEach((n, index) => {
+  n.addEventListener('click', () => {
+    let angle = index * 23;
+    console.log(index);
+    voln.style.transform = `rotate(${angle}deg)`;
+  });
+});
+
+
+let rockLoop;
+let startDelay = 1000; // 1 second delay
+
+function playRockLoop() {
+  // Create synths for bass, lead, pads, and melody
+  const bassSynth = new Tone.PolySynth(Tone.Synth).toDestination();
+  const leadSynth = new Tone.PolySynth(Tone.Synth, {
+    oscillator: { type: "square" },
+    envelope: { attack: 0.01, decay: 0.2, sustain: 0.5, release: 0.1 } }).
+  toDestination();
+  const padSynth = new Tone.PolySynth(Tone.FMSynth, {
+    harmonicity: 3.5,
+    modulationIndex: 10,
+    envelope: { attack: 0.5, release: 2, sustain: 1, decay: 0.5 } }).
+  toDestination();
+  const melodySynth = new Tone.PolySynth(Tone.Synth, {
+    oscillator: { type: "sawtooth" },
+    envelope: { attack: 0.1, decay: 0.2, sustain: 0.4, release: 0.8 } }).
+  toDestination();
+
+  // Create drums
+  const kick = new Tone.MembraneSynth({ pitchDecay: 0.05 }).toDestination();
+  const snare = new Tone.NoiseSynth({ noise: { type: "white" }, envelope: { attack: 0.001, decay: 0.2, sustain: 0.1, release: 0.03 } }).toDestination();
+  const hats = new Tone.NoiseSynth({ noise: { type: "white" }, envelope: { attack: 0.001, decay: 0.05, sustain: 0.1, release: 0.02 } }).toDestination();
+
+  // Set the tempo and time signature
+  Tone.Transport.bpm.value = 120;
+  Tone.Transport.timeSignature = [4, 4];
+
+  // Define the rock loop
+  rockLoop = new Tone.Loop(time => {
+    // Intro drum pattern
+    const introPattern = [
+    ["8n", "8n", "8n", "8n", "8n", "8n", "8n", "8n"], // Snare drum roll
+    ["4n", null, "4n", null, "4n", null, "4n", "4n"] // Kick kick snare, kick kick, snare, kick kick kick
+    ];
+
+    for (let i = 0; i < introPattern[0].length; i++) {if (window.CP.shouldStopExecution(0)) break;
+      if (introPattern[0][i]) {
+        snare.triggerAttackRelease(introPattern[0][i], time + i * 0.125);
+      }
+      if (introPattern[1][i]) {
+        kick.triggerAttackRelease(introPattern[1][i], time + i * 0.125);
+      }
+      hats.triggerAttackRelease("16n", time + i * 0.125); // Add hi-hats
+    }
+
+    // Main loop
+    window.CP.exitedLoop(0);kick.triggerAttackRelease("C2", "4n", time + 2);
+    snare.triggerAttackRelease("8n", time + 2.5);
+    hats.triggerAttackRelease("8n", time + 2);
+    hats.triggerAttackRelease("8n", time + 2.25);
+    hats.triggerAttackRelease("8n", time + 2.5);
+    hats.triggerAttackRelease("8n", time + 2.75);
+
+    // Bass line
+    bassSynth.triggerAttackRelease("C2", "4n", time + 2);
+    bassSynth.triggerAttackRelease("F2", "4n", time + 2.5);
+    bassSynth.triggerAttackRelease("C2", "8n", time + 3);
+    bassSynth.triggerAttackRelease("G2", "8n", time + 3.25);
+
+    // Lead melody
+    leadSynth.triggerAttackRelease("C4", "4n", time + 2);
+    leadSynth.triggerAttackRelease("F3", "4n", time + 2.5);
+    leadSynth.triggerAttackRelease("G3", "8n", time + 3);
+    leadSynth.triggerAttackRelease("C4", "8n", time + 3.25);
+
+    // Pad chords
+    padSynth.triggerAttackRelease("C3", "4n", time + 2);
+    padSynth.triggerAttackRelease("F3", "4n", time + 2.5);
+    padSynth.triggerAttackRelease("G3", "8n", time + 3);
+    padSynth.triggerAttackRelease("C4", "8n", time + 3.25);
+
+    // Synth melody
+    melodySynth.triggerAttackRelease("E4", "16n", time + 2);
+    melodySynth.triggerAttackRelease("G4", "16n", time + 2.125);
+    melodySynth.triggerAttackRelease("C5", "16n", time + 2.25);
+    melodySynth.triggerAttackRelease("B4", "16n", time + 2.375);
+    melodySynth.triggerAttackRelease("A4", "16n", time + 2.5);
+    melodySynth.triggerAttackRelease("G4", "16n", time + 2.625);
+    melodySynth.triggerAttackRelease("E4", "16n", time + 2.75);
+    melodySynth.triggerAttackRelease("C4", "16n", time + 2.875);
+    melodySynth.triggerAttackRelease("G3", "16n", time + 3);
+    melodySynth.triggerAttackRelease("E4", "16n", time + 3.125);
+    melodySynth.triggerAttackRelease("C4", "16n", time + 3.25);
+    melodySynth.triggerAttackRelease("G4", "16n", time + 3.375);
+    melodySynth.triggerAttackRelease("C5", "16n", time + 3.5);
+    melodySynth.triggerAttackRelease("G4", "16n", time + 3.625);
+    melodySynth.triggerAttackRelease("E4", "16n", time + 3.75);
+    melodySynth.triggerAttackRelease("C4", "16n", time + 3.875);
+  }, "4m").start("+.5");
+
+  // Start the transport with the specified delay
+  Tone.Transport.start(`+${startDelay / 1000}`);
+}
+
+function stopRockLoop() {
+  // Stop the transport and cancel scheduled events
+  Tone.Transport.stop();
+  Tone.Transport.cancel();
+
+  // Dispose the loop
+  rockLoop.dispose();
+}
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>
