@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>Our Team Landing Page Design</title>
+
+    <link rel="canonical" href="https://codepen.io/abhndv/pen/LgeNom">
+  
+  
+  
+  
+<style>
+@import url('https://fonts.googleapis.com/css?family=Kaushan+Script');
+body
+{
+  text-align:center;
+  font-family: cursive;
+}
+.our-team-head
+{
+	width:100%;
+	display:flex;
+	align-items:center;
+}
+.our-team-head h1
+{
+  font-family: 'Kaushan Script', cursive;
+	margin-top:15%;
+	text-align:left;
+	width:37%;
+	padding-left:2%;
+	font-size:60pt;
+	color: #333;
+	text-shadow: 
+					 0 0 5px rgba(0,0,0,.05),
+					0 1px 3px rgba(0,0,0,.10),
+					0 3px 5px rgba(0,0,0,.10),
+				   0 5px 10px rgba(0,0,0,.10),
+				  0 10px 10px rgba(0,0,0,.10);
+}
+
+
+.our-team-support-image
+{
+	top:5%;
+	left:23%;
+	height:400px;
+	width:15%;
+	position: absolute;
+	margin-top:100px;
+	margin-left:100px;
+	-ms-transform: skew(-30deg,0deg);
+	-webkit-transform: skew(-30deg,0deg);
+	transform: skew(-30deg,0deg);
+	overflow: hidden;
+	
+}
+
+.our-team-support-image-inner
+{ 
+	position: absolute;
+	left:-230px;
+	width:660px;
+	height: 500px;  
+	-ms-transform: skew(30deg,0deg);
+	-webkit-transform: skew(30deg,0deg);
+	transform: skew(30deg,0deg);
+	background-image: url(https://images.pexels.com/photos/1153213/pexels-photo-1153213.jpeg?auto=compress&cs=tinysrgb&h=650&w=940);
+	background-size:cover;
+
+}
+
+.our-team-design-image
+{
+	top:5%;
+	left:43%;
+	height:400px;
+	width:15%;
+	position: absolute;
+	margin-top:100px;
+	margin-left:100px;
+	-ms-transform: skew(-30deg,0deg);
+	-webkit-transform: skew(-30deg,0deg);
+	transform: skew(-30deg,0deg);
+	overflow: hidden;
+}
+
+.our-team-design-image-inner
+{ 
+	position: absolute;
+	left:-240px;
+  top:-10px;
+	width:660px;
+	height: 500px;  
+	-ms-transform: skew(30deg,0deg);
+	-webkit-transform: skew(30deg,0deg);
+	transform: skew(30deg,0deg);
+	background-image: url(https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&h=650&w=940);
+	background-size:cover;
+}
+
+
+.our-team-developer-image
+{
+	top:5%;
+	left:63%;
+	height:400px;
+	width:15%;
+	position: absolute;
+	margin-top:100px;
+	margin-left:100px;
+	-ms-transform: skew(-30deg,0deg);
+	-webkit-transform: skew(-30deg,0deg);
+	transform: skew(-30deg,0deg);
+	overflow: hidden;
+
+}
+.our-team-support-image-inner::after,
+.our-team-design-image-inner::after,
+.our-team-developer-image-inner::after
+{
+	content: '';
+	transition:all 0.5s linear;
+}
+.our-team-developer-image-inner
+{ 
+	position: absolute;
+	left:-220px;
+	width:660px;
+	height: 500px;  
+	-ms-transform: skew(30deg,0deg);
+	-webkit-transform: skew(30deg,0deg);
+	transform: skew(30deg,0deg);
+	background-image: url(https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&h=650&w=940);
+	background-size:cover;
+}
+.our-team-support-image:hover .our-team-support-image-inner::after
+{
+  display: block;
+  position: relative;
+  background:#000;
+  width: 100%;
+  height:100%;
+  opacity:0.6;
+  content: '';
+}
+.our-team-support-image:hover .content-details
+{
+    color: #fff;
+    position: absolute;
+    transform: skewX(30deg);
+	top:25%;
+}
+
+.our-team-design-image:hover .our-team-design-image-inner::after
+{
+  display: block;
+  position: relative;
+  background:#000;
+  width: 100%;
+  height:100%;
+  opacity:0.6;
+  content: '';
+
+}
+.our-team-design-image:hover .content-details
+{
+    color: #fff;
+    position: absolute;
+    transform: skewX(30deg);
+	top:25%;
+}
+
+.our-team-developer-image:hover .our-team-developer-image-inner::after
+{
+  display: block;
+  position: relative;
+  background:#000;
+  width: 100%;
+  height:100%;
+  opacity:0.6;
+  content: '';
+
+}
+.our-team-developer-image:hover .content-details
+{
+    color: #fff;
+    position: absolute;
+    transform: skewX(30deg);
+	top:25%;
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <!------------------------------------
+ LIVE VERSION LINK:
+https://codepen.io/abhinanduN/full/LgeNom
+--------------------------------------->
+<div class="our-team-inner">
+		<div class="our-team-head">
+			<h1>meet our team...</h1>
+			<div class="our-team-support-image">
+				<div class="our-team-support-image-inner"></div>
+				<div class="content-details fadeIn-top">
+					<h3>Support Team</h3>
+					<p>This is a short description</p>
+				</div>
+			</div>
+			<div class="our-team-design-image">
+				<div class="our-team-design-image-inner"></div>
+				<div class="content-details fadeIn-top">
+					<h3>Designers</h3>
+					<p>This is a short description</p>
+				</div>
+			</div>
+			<div class="our-team-developer-image">
+				<div class="our-team-developer-image-inner"></div>
+				<div class="content-details fadeIn-top">
+					<h3>Developers</h3>
+					<p>This is a short description</p>
+				</div>
+			</div>
+		
+		</div>
+		
+	</div>
+  
+    <script id="rendered-js" >
+/*   VIEW ON FULL SCREEN    */
+/*  LIVE VERSION LINK:
+https://codepen.io/abhinanduN/full/LgeNom
+*/
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>

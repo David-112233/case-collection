@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>Editorial Layout: The Architecture of Silence</title>
+
+    <link rel="canonical" href="https://codepen.io/GemmaCroad/pen/bNeEKKq">
+  
+  
+  
+  
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #fafafa;
+  color: #1a1a1a;
+  line-height: 1.6;
+  padding: 4rem 2rem;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.masthead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px solid #1a1a1a;
+  padding-bottom: 2rem;
+  margin-bottom: 4rem;
+}
+
+.masthead h1 {
+  font-size: 0.875rem;
+  font-weight: 300;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+.masthead time {
+  font-size: 0.875rem;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 3rem;
+  margin-bottom: 6rem;
+}
+
+.hero h2 {
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 300;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  margin-bottom: 2rem;
+}
+
+.hero-text {
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  font-weight: 300;
+  line-height: 1.5;
+  color: #525252;
+  max-width: 40rem;
+}
+
+.hero-meta {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 1rem;
+  font-size: 0.875rem;
+  font-weight: 300;
+}
+
+.hero-meta p:last-child {
+  color: #737373;
+}
+
+.featured {
+  margin-bottom: 6rem;
+}
+
+.image-placeholder {
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(135deg, #e5e5e5 0%, #f5f5f5 100%);
+  margin-bottom: 0.75rem;
+  overflow: hidden;
+}
+
+.image-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(100%) contrast(0.85) brightness(1.1);
+}
+
+.caption {
+  font-size: 0.75rem;
+  color: #a3a3a3;
+  letter-spacing: 0.05em;
+}
+
+.body-content {
+  display: grid;
+  grid-template-columns: 1fr 4fr 2fr;
+  gap: 3rem;
+  margin-bottom: 6rem;
+}
+
+.section-label {
+  font-size: 0.75rem;
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #a3a3a3;
+  position: sticky;
+  top: 2rem;
+  align-self: start;
+}
+
+.body-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  font-size: 1.125rem;
+  font-weight: 300;
+  line-height: 1.8;
+}
+
+.body-text p:first-child {
+  font-size: 1.5rem;
+  line-height: 1.6;
+  color: #262626;
+}
+
+.body-text p {
+  color: #404040;
+}
+
+.sidebar {
+  background: #f5f5f5;
+  padding: 2rem;
+  position: sticky;
+  top: 2rem;
+  align-self: start;
+}
+
+.sidebar h3 {
+  font-size: 0.75rem;
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.sidebar li {
+  font-size: 0.875rem;
+  font-weight: 300;
+  color: #525252;
+  line-height: 1.6;
+}
+
+.quote-section {
+  padding: 6rem 0;
+  margin: 6rem 0;
+  border-top: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+blockquote {
+  max-width: 60rem;
+  margin: 0 auto;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 300;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: #262626;
+}
+
+.quote-attribution {
+  font-size: 0.875rem;
+  color: #737373;
+  margin-top: 1.5rem;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+}
+
+.two-column {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  gap: 3rem;
+  margin-bottom: 6rem;
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+}
+
+.column-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.8;
+  color: #404040;
+}
+
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 6rem;
+}
+
+.grid-image {
+  aspect-ratio: 3 / 4;
+  background: linear-gradient(180deg, #e5e5e5 0%, #f5f5f5 100%);
+  overflow: hidden;
+}
+
+.grid-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(100%) contrast(0.85) brightness(1.1);
+}
+
+.grid-image:nth-child(2) {
+  background: linear-gradient(180deg, #e5e5e5 0%, #fafafa 100%);
+}
+
+footer {
+  border-top: 1px solid #1a1a1a;
+  padding-top: 2rem;
+  margin-top: 6rem;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  font-weight: 300;
+}
+
+footer p:first-child {
+  color: #737373;
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  <div class="container">
+  <header class="masthead">
+    <h1>The Quarterly</h1>
+    <time>Issue 04 — Winter 2026</time>
+  </header>
+
+  <section class="hero">
+    <div>
+      <h2>The Architecture<br>of Silence</h2>
+      <p class="hero-text">How negative space shapes modern design philosophy and influences contemporary creative practice</p>
+    </div>
+    <div class="hero-meta">
+      <p>By Eleanor Chen</p>
+      <p>Photography by Marcus Webb</p>
+    </div>
+  </section>
+
+  <section class="featured">
+    <div class="image-placeholder">
+      <img src="https://assets.codepen.io/406785/c-cai-kqgbwrLr4sE-unsplash.jpg" alt="Spatial composition study">
+    </div>
+    <p class="caption">Figure 01 — Spatial composition study, 2025</p>
+  </section>
+
+  <section class="body-content">
+    <div class="section-label">Introduction</div>
+    <div class="body-text">
+      <p>In the pursuit of visual clarity, what we choose to omit becomes as crucial as what we include. This fundamental principle guides contemporary design thinking.</p>
+      <p>The intentional use of empty space - what designers call negative space or white space—creates rhythm, hierarchy, and breathing room within compositions. It allows elements to exist without competing for attention, establishing a visual language that speaks through restraint rather than abundance.</p>
+      <p>Throughout history, masters of various disciplines have understood this principle. Japanese aesthetics celebrate ma, the meaningful void. Minimalist composers explore silence as counterpoint to sound. Architects design with light and air as tangible materials.</p>
+    </div>
+    <aside class="sidebar">
+      <h3>Key Concepts</h3>
+      <ul>
+        <li>• Negative space as active element</li>
+        <li>• Visual hierarchy through spacing</li>
+        <li>• Rhythm and pacing in layout</li>
+        <li>• Material reduction strategies</li>
+      </ul>
+    </aside>
+  </section>
+
+  <section class="quote-section">
+    <blockquote>
+      "Perfection is achieved not when there is nothing more to add, but when there is nothing left to take away."
+    </blockquote>
+    <p class="quote-attribution">— Antoine de Saint-Exupéry</p>
+  </section>
+
+  <section class="two-column">
+    <div class="section-label">Practice</div>
+    <div class="columns">
+      <div class="column-text">
+        <p>Implementing these principles requires discipline and confidence. The designer must resist the urge to fill every available space, trusting that emptiness serves a purpose beyond mere aesthetics.</p>
+        <p>Consider the page spread: generous margins frame the content, line spacing allows text to breathe, paragraph breaks create natural pauses. Each decision about spacing influences how readers engage with information.</p>
+      </div>
+      <div class="column-text">
+        <p>Digital interfaces present unique challenges. Screen real estate feels precious, stakeholders request more features, analytics drive density. Yet the most successful platforms maintain spatial generosity.</p>
+        <p>The lesson remains consistent across media: clarity emerges from selective focus, enhanced by the strategic use of nothing at all.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="image-grid">
+    <div class="grid-image">
+      <img src="https://assets.codepen.io/406785/augustine-wong-oebTM5wHTfw-unsplash.jpg" alt="Grid image 1">
+    </div>
+    <div class="grid-image">
+      <img src="https://assets.codepen.io/406785/h-co-3oOR7B2inwc-unsplash.jpg" alt="Grid image 2">
+    </div>
+    <div class="grid-image">
+      <img src="https://assets.codepen.io/406785/bharath-kumar-rqIyJozwdTc-unsplash.jpg" alt="Grid image 3">
+    </div>
+  </section>
+
+  <footer>
+    <p>Continue reading in Issue 05</p>
+    <p>thequarterly.com</p>
+  </footer>
+</div>
+  
+  
+  
+</body>
+
+</html>

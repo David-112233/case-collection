@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>Cutout collage grid</title>
+
+    <link rel="canonical" href="https://codepen.io/Enrichr-Dev/pen/PwpXBgV">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Parkinsans:wght@400;500;600;700;800&family=Instrument+Sans:wght@400;500;600&family=Fira+Code:wght@400;500&display=swap">
+  
+  
+  
+<style>
+/* Cutout collage grid · from the Enrichr Library: https://enrichr.dev/elements/cutout-collage-grid.html */
+html, body { margin: 0; min-height: 100%; background: #0c1e18; }
+#enrichr-root { min-height: 100vh; }
+#enrichr-root > * { min-height: 100vh; }
+
+/* Enrichr Library · https://enrichr.dev */
+.ef-ccg { width: 100%; container-type: inline-size; }
+.ef-ccg__wrap { box-sizing: border-box; width: 100%; min-height: 16rem; padding: clamp(0.6rem, 3cqi, 1.6rem); border-radius: 1rem; display: flex; align-items: center; justify-content: center; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+.ef-ccg__grid { width: 100%; max-width: 46rem; display: grid; gap: clamp(0.25rem, 1.2cqi, 0.6rem); grid-template-columns: repeat(11, 1fr); grid-template-rows: repeat(8, 1fr); aspect-ratio: 11 / 8; }
+.ef-ccg__tile { position: relative; overflow: hidden; will-change: transform; }
+.ef-ccg__art { position: absolute; inset: -10%; will-change: transform; }
+.ef-ccg__t1 { grid-area: 1 / 1 / 5 / 5; clip-path: circle(50% at 50% 50%); }
+.ef-ccg__t2 { grid-area: 1 / 5 / 9 / 8; clip-path: inset(0 round 999px 999px 0 0); }
+.ef-ccg__t3 { grid-area: 1 / 8 / 5 / 12; clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); }
+.ef-ccg__t4 { grid-area: 5 / 1 / 9 / 5; clip-path: inset(0 round 12% 12% 12% 12% / 16% 16% 16% 16%); display: flex; flex-direction: column; justify-content: flex-end; padding: 8%; box-sizing: border-box; }
+.ef-ccg__t5 { grid-area: 5 / 8 / 9 / 12; clip-path: polygon(25% 3%, 75% 3%, 100% 50%, 75% 97%, 25% 97%, 0 50%); }
+.ef-ccg__title { position: relative; margin: 0; font-size: clamp(0.8rem, 5.2cqi, 2rem); font-weight: 800; line-height: 1; letter-spacing: -0.02em; }
+.ef-ccg__sub { position: relative; margin: 0.4em 0 0; font-size: clamp(0.5rem, 1.9cqi, 0.8rem); letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.7; }
+@container (max-width: 34rem) {
+  .ef-ccg__grid { grid-template-columns: repeat(6, 1fr); grid-template-rows: repeat(9, 1fr); aspect-ratio: 6 / 9; }
+  .ef-ccg__t1 { grid-area: 1 / 1 / 4 / 4; }
+  .ef-ccg__t3 { grid-area: 1 / 4 / 4 / 7; }
+  .ef-ccg__t2 { grid-area: 4 / 1 / 10 / 3; }
+  .ef-ccg__t4 { grid-area: 4 / 3 / 7 / 7; }
+  .ef-ccg__t5 { grid-area: 7 / 3 / 10 / 7; }
+  .ef-ccg__title { font-size: clamp(0.8rem, 7cqi, 1.6rem); }
+  .ef-ccg__sub { font-size: 0.5rem; }
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  <div id="enrichr-root">
+<div class="ef-ccg">
+  <div class="ef-ccg__wrap">
+    <div class="ef-ccg__grid">
+      <div class="ef-ccg__tile ef-ccg__t1" data-d="1"><div class="ef-ccg__art" aria-hidden="true"></div></div>
+      <div class="ef-ccg__tile ef-ccg__t2" data-d="1.6"><div class="ef-ccg__art" aria-hidden="true"></div></div>
+      <div class="ef-ccg__tile ef-ccg__t3" data-d="0.8"><div class="ef-ccg__art" aria-hidden="true"></div></div>
+      <div class="ef-ccg__tile ef-ccg__t4" data-d="0.5"><div class="ef-ccg__art" aria-hidden="true"></div><p class="ef-ccg__title"></p><p class="ef-ccg__sub"></p></div>
+      <div class="ef-ccg__tile ef-ccg__t5" data-d="1.3"><div class="ef-ccg__art" aria-hidden="true"></div></div>
+    </div>
+  </div>
+</div>
+</div>
+  
+    <script id="rendered-js" >
+// Enrichr Library · https://enrichr.dev
+// Cutout collage grid: an editorial layout of CSS grid tiles cut into a circle, an arch, a diamond, a rounded card and a hexagon with clip-path.
+// The artwork is drawn with CSS gradients. On pointer move each tile drifts by its own depth while the art inside slides the other way,
+// so the cutouts feel like windows. Reduced motion and touch screens show the still layout. The grid reflows for narrow containers.
+// mount(root, { background, colorA, colorB, ink, title, subtitle, parallax (0-2) })
+function mount(root, o) {
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var wrap = root.querySelector(".ef-ccg__wrap");
+  var tiles = Array.prototype.slice.call(root.querySelectorAll(".ef-ccg__tile"));
+  var arts = tiles.map(function (t) {return t.querySelector(".ef-ccg__art");});
+  var depths = tiles.map(function (t) {return parseFloat(t.getAttribute("data-d")) || 1;});
+  var title = root.querySelector(".ef-ccg__title");
+  var sub = root.querySelector(".ef-ccg__sub");
+  var opts = {},raf = 0,visible = true,io = null,tx = 0,ty = 0,cx = 0,cy = 0;
+
+  // Enrichr puzzle-piece artwork, inline so the code stays portable. piece(i, accent) returns an aria-hidden SVG string, a different piece per card.
+  var PIECES = [["1513.7 1453.9 322.3 322.3", "M1821 1761.2h-292.3v-111.6c0-8 6.5-14.5 14.5-14.5 4.2 0 8.2 1.9 11 5.1 7.8 8.6 19.7 13.6 32.7 11.9 16.8-2.3 30.1-16 32-32.7 2.5-22.6-15.1-41.6-37.1-41.6-11 0-20.9 4.7-27.7 12.3-2.8 3.1-6.7 4.9-10.9 4.9-8 0-14.5-6.4-14.5-14.4v-111.7h292.3v111.7c0 8-6.4 14.4-14.5 14.4-4.2 0-8.1-1.8-10.9-5-7.9-8.6-19.7-13.6-32.7-11.9-16.8 2.2-30.1 15.9-32 32.7-2.5 22.6 15.1 41.6 37.1 41.6 11 0 20.8-4.8 27.7-12.3 2.8-3.1 6.7-5 10.8-5 8.1 0 14.5 6.5 14.5 14.5z"],
+  ["1423.36 860.8 503.07 322.3", "M1821 875.8v111.6c0 8 6.5 14.5 14.5 14.5 4.2 0 8.1-1.9 10.9-5 6.8-7.5 16.7-12.3 27.7-12.3 22 0 39.6 19 37.1 41.6-1.9 16.7-15.2 30.5-32 32.7-13 1.7-24.8-3.3-32.7-11.9-2.8-3.2-6.8-5-11-5-8 0-14.5 6.4-14.5 14.4v111.7h-111.6c-8 0-14.5-6.5-14.5-14.5 0-4.2 1.9-8.2 5-11 8.7-7.9 13.7-19.7 12-32.7-2.3-16.8-16-30.1-32.8-32-22.5-2.5-41.5 15.1-41.5 37.1 0 11 4.7 20.9 12.3 27.7 3.1 2.8 4.9 6.7 4.9 10.8v0.1c0 8-6.4 14.5-14.5 14.5h-111.6v-111.7c0-8-6.4-14.4-14.5-14.4-4.1 0-8 1.8-10.8 4.9-6.9 7.6-16.7 12.3-27.7 12.3-22 0-39.6-19-37.1-41.6 1.9-16.7 15.2-30.4 32-32.7 13-1.7 24.8 3.3 32.7 11.9 2.8 3.2 6.7 5.1 10.9 5.1 8.1 0 14.5-6.5 14.5-14.5v-111.6z"],
+  ["1513.7 166.86 322.3 503.06", "M1528.7 564.5v-111.6c0-8 6.5-14.5 14.5-14.5 4.2 0 8.2 1.9 11 5 7.8 8.7 19.7 13.7 32.7 11.9 16.8-2.2 30.1-15.9 32-32.7 2.5-22.5-15.1-41.5-37.1-41.5-11 0-20.9 4.7-27.7 12.3-2.8 3.1-6.7 4.9-10.9 4.9-8 0-14.5-6.5-14.5-14.5v-111.6h111.6c8.1 0 14.5-6.5 14.5-14.5 0-4.1-1.8-8.1-4.9-10.9-7.6-6.8-12.3-16.6-12.3-27.6 0-22 19-39.6 41.5-37.1 16.8 1.8 30.5 15.2 32.8 32 1.7 12.9-3.3 24.8-12 32.7-3.1 2.8-5 6.7-5 10.9 0 8 6.5 14.5 14.5 14.5h111.6v111.6c0 8-6.4 14.5-14.5 14.5-4.2 0-8.1-1.9-10.9-5-7.9-8.7-19.7-13.6-32.7-11.9-16.8 2.2-30.1 15.9-32 32.7-2.5 22.5 15.1 41.6 37.1 41.6 11 0 20.8-4.8 27.7-12.3 2.8-3.1 6.7-5 10.8-5 8.1 0 14.5 6.5 14.5 14.5v111.6h-111.6c-8 0-14.5 6.5-14.5 14.5 0 4.2 1.9 8.1 5 10.9 7.5 6.8 12.3 16.7 12.3 27.7 0 22-19 39.5-41.6 37.1-16.8-1.9-30.5-15.3-32.7-32-1.7-13 3.3-24.9 11.9-32.7 3.1-2.9 5-6.8 5-11 0-8-6.4-14.5-14.5-14.5z"]];
+  var PLACE = [[52, -16, 80, 14], [-24, 34, 96, -22], [46, 26, 74, 32], [-8, -20, 84, -12], [58, 38, 92, 24], [4, 18, 78, -32]]; // left %, top %, width %, rotate deg
+  var PCOL = [["#2f7d5b", 0.95], ["#0c1e18", 0.8], ["ACC", 0.9], ["#c6f26b", 0.85], ["#0a6b46", 0.95], ["#fbf8f1", 0.85]];
+  function piece(i, accent, sx, ox) {
+    var p = PIECES[i % 3],q = PLACE[i % 6],c = PCOL[i % 6],k = sx || 1,o = ox || 0;
+    return '<span class="ef-ccg__pc" aria-hidden="true" style="position:absolute;left:' + (o + q[0] * k).toFixed(1) + '%;top:' + q[1] + '%;width:' + (q[2] * k).toFixed(1) + '%;transform:rotate(' + q[3] + 'deg);color:' + (c[0] === "ACC" ? accent : c[0]) + ';opacity:' + c[1] + ';pointer-events:none"><svg viewBox="' + p[0] + '" aria-hidden="true" focusable="false" style="display:block;width:100%;height:auto"><path fill="currentColor" d="' + p[1] + '"/></svg></span>';
+  }
+  function paintArt() {
+    var a = opts.colorA,b = opts.colorB,c = "#fbf8f1",d = opts.ink;
+    arts[0].style.background = "repeating-conic-gradient(from 0deg at 50% 50%, " + a + " 0 10deg, " + d + " 10deg 20deg)";
+    arts[1].style.background = "radial-gradient(circle at 50% 30%, " + b + " 0 16%, transparent 16.4%), repeating-linear-gradient(180deg, " + a + " 0 18px, " + c + " 18px 26px)";
+    arts[2].style.background = "radial-gradient(circle, " + d + " 0 3px, transparent 3.5px) 0 0 / 16px 16px, " + b;
+    arts[3].style.background = d;
+    arts[4].style.background = "repeating-radial-gradient(circle at 50% 50%, " + b + " 0 12px, " + a + " 12px 24px)";
+    tiles[3].style.color = c;
+    arts.forEach(function (el, i) {
+      var old = el.querySelector(".ef-ccg__pc");
+      if (old) el.removeChild(old);
+      el.insertAdjacentHTML("beforeend", piece(i + 1, b));
+    });
+    tiles[0].style.background = tiles[1].style.background = tiles[2].style.background = tiles[4].style.background = "transparent";
+  }
+  function paint() {
+    var k = opts.parallax;
+    for (var i = 0; i < tiles.length; i++) {
+      var dd = depths[i] * k;
+      tiles[i].style.transform = "translate3d(" + (cx * dd * 5).toFixed(2) + "px," + (cy * dd * 5).toFixed(2) + "px,0)";
+      arts[i].style.transform = "translate3d(" + (-cx * dd * 14).toFixed(2) + "px," + (-cy * dd * 14).toFixed(2) + "px,0)";
+    }
+  }
+  function frame() {
+    raf = 0;
+    cx += (tx - cx) * 0.08;cy += (ty - cy) * 0.08;
+    paint();
+    if (Math.abs(tx - cx) > 0.001 || Math.abs(ty - cy) > 0.001) wake();
+  }
+  function wake() {if (!raf && visible && !reduce) raf = requestAnimationFrame(frame);}
+  function move(e) {
+    if (e.pointerType === "touch") return;
+    var r = wrap.getBoundingClientRect();
+    tx = ((e.clientX - r.left) / r.width - 0.5) * 2;
+    ty = ((e.clientY - r.top) / r.height - 0.5) * 2;
+    wake();
+  }
+  function leave() {tx = 0;ty = 0;wake();}
+  function update(next) {
+    opts = Object.assign({ background: "#fbf8f1", colorA: "#005236", colorB: "#e6ff55", ink: "#0c1e18", title: "Cut, paste, compose", subtitle: "Collage layout", parallax: 1 }, opts, next || {});
+    wrap.style.background = opts.background;
+    title.textContent = opts.title;
+    sub.textContent = opts.subtitle;
+    sub.style.color = opts.colorB;
+    paintArt();
+    paint();
+  }
+  update(o);
+  if (!reduce) {
+    wrap.addEventListener("pointermove", move);
+    wrap.addEventListener("pointerleave", leave);
+    if ("IntersectionObserver" in window) {
+      io = new IntersectionObserver(function (en) {visible = en[0].isIntersecting;if (visible) wake();else {cancelAnimationFrame(raf);raf = 0;}});
+      io.observe(wrap);
+    }
+  }
+  return {
+    update: update,
+    destroy: function () {
+      cancelAnimationFrame(raf);raf = 0;
+      if (io) io.disconnect();
+      wrap.removeEventListener("pointermove", move);
+      wrap.removeEventListener("pointerleave", leave);
+    } };
+
+}
+
+// Start it with the Library's default settings. Change any of these to taste;
+// the full list, with sliders, is on https://enrichr.dev/elements/cutout-collage-grid.html
+var enrichr = mount(document.getElementById("enrichr-root"), {
+  "background": "#fbf8f1",
+  "colorA": "#005236",
+  "colorB": "#e6ff55",
+  "title": "Cut, paste, compose",
+  "parallax": 1 });
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>

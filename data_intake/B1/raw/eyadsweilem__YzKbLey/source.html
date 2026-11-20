@@ -1,0 +1,3790 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>CSS only castle</title>
+
+    <link rel="canonical" href="https://codepen.io/eyadsweilem/pen/YzKbLey">
+  
+  
+  
+  
+<style>
+@import url("https://fonts.googleapis.com/css?family=Chakra+Petch");
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* mixins */
+/* colors */
+/* primary colors */
+/* secondary colors */
+/* white colors */
+/* green colors */
+/* brown colors */
+/* red colors */
+/* blue colors */
+/* special colors */
+/* opacity colors */
+/* alert color */
+/* font sizes */
+/* headings font sizes */
+h1 {
+  font-size: 50px;
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  h1 {
+    font-size: 45px;
+  }
+}
+@media (max-width: 425px) {
+  h1 {
+    font-size: 43px;
+  }
+}
+
+h2 {
+  font-size: 40px;
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  h2 {
+    font-size: 35px;
+  }
+}
+@media (max-width: 425px) {
+  h2 {
+    font-size: 32px;
+  }
+}
+
+h3 {
+  font-size: 35px;
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  h3 {
+    font-size: 30px;
+  }
+}
+@media (max-width: 425px) {
+  h3 {
+    font-size: 28px;
+  }
+}
+
+h4 {
+  font-size: 27px;
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  h4 {
+    font-size: 25px;
+  }
+}
+@media (max-width: 425px) {
+  h4 {
+    font-size: 24px;
+  }
+}
+@media (min-width: 320px) and (max-width: 375px) {
+  h4 {
+    font-size: 22px;
+  }
+}
+
+h5 {
+  font-size: 23.5px;
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  h5 {
+    font-size: 20px;
+  }
+}
+@media (max-width: 425px) {
+  h5 {
+    font-size: 18px;
+  }
+}
+
+h6 {
+  font-size: 21px;
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  h6 {
+    font-size: 19px;
+  }
+}
+@media (max-width: 425px) {
+  h6 {
+    font-size: 17px;
+  }
+}
+
+/* parapgraph font size */
+p {
+  letter-spacing: 0.7px;
+  font-size: 16.5px;
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  p {
+    font-size: 14px;
+  }
+}
+@media (max-width: 991px) {
+  p {
+    font-size: 14px;
+  }
+}
+@media (max-width: 425px) {
+  p {
+    font-size: 12px;
+  }
+}
+
+.inner {
+  position: relative;
+  width: 1080px;
+  margin: 0 auto;
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  .inner {
+    width: 870px;
+  }
+}
+@media (max-width: 991px) {
+  .inner {
+    width: auto;
+  }
+}
+
+/* placeholders */
+.intro .main-layer .castle .walls .tower .flag, .intro .main-layer .castle .left-build .contain .flag, .intro .main-layer .castle .right-build .contain .flag, .intro .main-layer .castle .tall-tower .flag {
+  position: relative;
+  display: block;
+  width: 3px;
+  height: 50px;
+  background-color: #2f3640;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .walls .tower .flag, .intro .main-layer .castle .left-build .contain .flag, .intro .main-layer .castle .right-build .contain .flag, .intro .main-layer .castle .tall-tower .flag {
+    width: 2px;
+    height: 44px;
+  }
+}
+.intro .main-layer .castle .walls .tower .flag::before, .intro .main-layer .castle .left-build .contain .flag::before, .intro .main-layer .castle .right-build .contain .flag::before, .intro .main-layer .castle .tall-tower .flag::before {
+  content: "";
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background-color: #2f3640;
+  bottom: -2px;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .walls .tower .flag::before, .intro .main-layer .castle .left-build .contain .flag::before, .intro .main-layer .castle .right-build .contain .flag::before, .intro .main-layer .castle .tall-tower .flag::before {
+    width: 2px;
+  }
+}
+.intro .main-layer .castle .walls .tower .flag::after, .intro .main-layer .castle .left-build .contain .flag::after, .intro .main-layer .castle .right-build .contain .flag::after, .intro .main-layer .castle .tall-tower .flag::after {
+  content: "";
+  position: absolute;
+  width: 25px;
+  height: 20px;
+  top: 4px;
+  left: 3px;
+  background-color: #fd9644;
+  -webkit-clip-path: polygon(100% 50%, 0 0, 0 100%);
+  clip-path: polygon(100% 50%, 0 0, 0 100%);
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .walls .tower .flag::after, .intro .main-layer .castle .left-build .contain .flag::after, .intro .main-layer .castle .right-build .contain .flag::after, .intro .main-layer .castle .tall-tower .flag::after {
+    width: 16px;
+    height: 13px;
+    left: 2px;
+  }
+}
+
+/* body style */
+body, html {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  background-color: #ffeaa7;
+  height: 100%;
+  font-family: "Chakra Petch", sans-serif;
+  overflow-x: hidden;
+}
+@media (max-width: 425px) {
+  body {
+    overflow-x: hidden;
+  }
+}
+
+/* some style for the row class */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.intro {
+  position: relative;
+  height: 650px;
+  background-color: #ffeaa7;
+  border-bottom: 5px solid #4b4b4b;
+  display: flex;
+  align-items: flex-end;
+  /* end layer2 */
+  /* end layer */
+}
+.intro .mycontainer {
+  position: relative;
+  width: 1280px;
+  margin: 0 auto;
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  .intro .mycontainer {
+    width: 1000px;
+  }
+}
+@media (max-width: 991px) {
+  .intro .mycontainer {
+    width: 750px;
+  }
+}
+@media (max-width: 425px) {
+  .intro .mycontainer {
+    width: 375px;
+  }
+}
+@media (min-width: 320px) and (max-width: 375px) {
+  .intro .mycontainer {
+    width: 310px;
+  }
+}
+.intro .layer6 {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 130%;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  top: -200px;
+  overflow: hidden;
+}
+.intro .layer6 .line {
+  display: block;
+  position: relative;
+  -webkit-transform: translateX(-1280px);
+  transform: translateX(-1280px);
+  -webit-animation: moving-cloud linear 60s infinite;
+  animation: moving-cloud linear 60s infinite;
+}
+@media (max-width: 991px) {
+  .intro .layer6 .line {
+    -webkit-transform: translateX(-1000px);
+    transform: translateX(-1000px);
+    -webit-animation: moving-cloud-tablet linear 60s infinite;
+    animation: moving-cloud-tablet linear 60s infinite;
+  }
+}
+@media (max-width: 425px) {
+  .intro .layer6 .line {
+    -webkit-transform: translateX(-375px);
+    transform: translateX(-375px);
+    -webit-animation: moving-cloud-phone linear 60s infinite;
+    animation: moving-cloud-phone linear 60s infinite;
+  }
+}
+.intro .layer6 .line .cloud1, .intro .layer6 .line .cloud3, .intro .layer6 .line .cloud2 {
+  position: relative;
+  display: inline-block;
+  -webkit-transform: translateX(435px);
+  transform: translateX(435px);
+}
+@media (max-width: 425px) {
+  .intro .layer6 .line .cloud1, .intro .layer6 .line .cloud3, .intro .layer6 .line .cloud2 {
+    -webkit-transform: translateX(158px);
+    transform: translateX(158px);
+  }
+}
+.intro .layer6 .line .cloud1 .part1, .intro .layer6 .line .cloud3 .part1, .intro .layer6 .line .cloud2 .part1 {
+  display: block;
+  width: 160px;
+  height: 10px;
+  border-radius: 15px;
+  background-color: white;
+}
+@media (max-width: 425px) {
+  .intro .layer6 .line .cloud1 .part1, .intro .layer6 .line .cloud3 .part1, .intro .layer6 .line .cloud2 .part1 {
+    width: 69px;
+    height: 6px;
+  }
+}
+.intro .layer6 .line .cloud1 .part2, .intro .layer6 .line .cloud3 .part2, .intro .layer6 .line .cloud2 .part2 {
+  position: relative;
+  display: block;
+  width: 60px;
+  height: 10px;
+  background-color: white;
+  margin-left: 65px;
+}
+@media (max-width: 425px) {
+  .intro .layer6 .line .cloud1 .part2, .intro .layer6 .line .cloud3 .part2, .intro .layer6 .line .cloud2 .part2 {
+    width: 41px;
+    height: 6px;
+    margin-left: 23px;
+  }
+}
+.intro .layer6 .line .cloud1 .part2::after, .intro .layer6 .line .cloud3 .part2::after, .intro .layer6 .line .cloud2 .part2::after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 40px;
+  height: 10px;
+  border-radius: 15px;
+  background-color: #ffeaa7;
+  right: -33px;
+}
+@media (max-width: 425px) {
+  .intro .layer6 .line .cloud1 .part2::after, .intro .layer6 .line .cloud3 .part2::after, .intro .layer6 .line .cloud2 .part2::after {
+    height: 6px;
+  }
+}
+.intro .layer6 .line .cloud1 .part2::before, .intro .layer6 .line .cloud3 .part2::before, .intro .layer6 .line .cloud2 .part2::before {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 40px;
+  height: 10px;
+  border-radius: 15px;
+  background-color: #ffeaa7;
+  left: -33px;
+}
+@media (max-width: 425px) {
+  .intro .layer6 .line .cloud1 .part2::before, .intro .layer6 .line .cloud3 .part2::before, .intro .layer6 .line .cloud2 .part2::before {
+    height: 6px;
+  }
+}
+.intro .layer6 .line .cloud1 .part3, .intro .layer6 .line .cloud3 .part3, .intro .layer6 .line .cloud2 .part3 {
+  position: relative;
+  display: block;
+  width: 240px;
+  height: 10px;
+  border-radius: 15px;
+  background-color: white;
+  margin-left: 15px;
+}
+@media (max-width: 425px) {
+  .intro .layer6 .line .cloud1 .part3, .intro .layer6 .line .cloud3 .part3, .intro .layer6 .line .cloud2 .part3 {
+    width: 121px;
+    height: 6px;
+  }
+}
+.intro .layer6 .line .cloud2 {
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+}
+.intro .layer6 .line .cloud2 .part1 {
+  width: 190px;
+  height: 20px;
+  margin-left: 47px;
+}
+@media (max-width: 425px) {
+  .intro .layer6 .line .cloud2 .part1 {
+    width: 112px;
+    height: 10px;
+  }
+}
+.intro .layer6 .line .cloud2 .part2 {
+  width: 98px;
+  height: 20px;
+  margin-left: 100px;
+}
+.intro .layer6 .line .cloud2 .part2::after {
+  height: 20px;
+  right: -27px;
+}
+.intro .layer6 .line .cloud2 .part2::before {
+  height: 20px;
+  left: -27px;
+}
+@media (max-width: 425px) {
+  .intro .layer6 .line .cloud2 .part2 {
+    width: 63px;
+    height: 10px;
+    margin-left: 63px;
+  }
+  .intro .layer6 .line .cloud2 .part2:after {
+    height: 10px;
+  }
+  .intro .layer6 .line .cloud2 .part2:before {
+    height: 10px;
+  }
+}
+.intro .layer6 .line .cloud2 .part3 {
+  height: 20px;
+  width: 355px;
+}
+@media (max-width: 425px) {
+  .intro .layer6 .line .cloud2 .part3 {
+    width: 233px;
+    height: 10px;
+  }
+}
+.intro .layer6 .line .cloud3 {
+  -webkit-transform: translateX(600px);
+  transform: translateX(600px);
+}
+@media (max-width: 425px) {
+  .intro .layer6 .line .cloud3 {
+    -webkit-transform: translateX(221px);
+    transform: translateX(221px);
+  }
+}
+@media (max-width: 425px) {
+  .intro .layer6 .line .cloud3 .part2 {
+    margin-left: 28px;
+  }
+}
+.intro .layer6 .line .cloud3 .part3 {
+  margin-left: 61px;
+}
+@media (max-width: 425px) {
+  .intro .layer6 .line .cloud3 .part3 {
+    margin-left: 31px;
+  }
+}
+.intro .layer5 {
+  position: absolute;
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+  height: 100%;
+  padding: 0 0 0 101px;
+  margin: 0;
+  list-style: none;
+}
+@media (max-width: 991px) {
+  .intro .layer5 {
+    padding-left: 131px;
+  }
+}
+@media (max-width: 425px) {
+  .intro .layer5 {
+    padding-left: 24px;
+  }
+}
+.intro .layer5 .tree {
+  position: relative;
+  margin-right: 44px;
+}
+@media (max-width: 425px) {
+  .intro .layer5 .tree {
+    margin-right: 0;
+  }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  .intro .layer5 .tree:nth-child(9) {
+    display: none;
+  }
+  .intro .layer5 .tree:nth-child(10) {
+    display: none;
+  }
+  .intro .layer5 .tree:nth-child(11) {
+    display: none;
+  }
+}
+@media (max-width: 991px) {
+  .intro .layer5 .tree:nth-child(6) {
+    display: none;
+  }
+  .intro .layer5 .tree:nth-child(7) {
+    display: none;
+  }
+  .intro .layer5 .tree:nth-child(8) {
+    display: none;
+  }
+  .intro .layer5 .tree:nth-child(9) {
+    display: none;
+  }
+  .intro .layer5 .tree:nth-child(10) {
+    display: none;
+  }
+  .intro .layer5 .tree:nth-child(11) {
+    display: none;
+  }
+}
+@media (max-width: 425px) {
+  .intro .layer5 .tree:nth-child(6) {
+    display: block;
+  }
+  .intro .layer5 .tree:nth-child(7) {
+    display: block;
+  }
+  .intro .layer5 .tree:nth-child(8) {
+    display: block;
+  }
+  .intro .layer5 .tree:nth-child(9) {
+    display: block;
+  }
+  .intro .layer5 .tree:nth-child(10) {
+    display: block;
+  }
+}
+@media (min-width: 320px) and (max-width: 375px) {
+  .intro .layer5 .tree:nth-child(9) {
+    display: none;
+  }
+  .intro .layer5 .tree:nth-child(10) {
+    display: none;
+  }
+}
+.intro .layer5 .tree .leaf {
+  display: block;
+  margin: 0 auto;
+  background-color: #f6e58d;
+  -webkit-clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+.intro .layer5 .tree .leaf.l1 {
+  width: 37px;
+  height: 27px;
+  -webkit-transform: translateY(42px);
+  transform: translateY(42px);
+}
+@media (max-width: 425px) {
+  .intro .layer5 .tree .leaf.l1 {
+    width: 12px;
+    height: 6px;
+    -webkit-transform: translateY(10px);
+    transform: translateY(10px);
+  }
+}
+.intro .layer5 .tree .leaf.l2 {
+  width: 47px;
+  height: 37px;
+  -webkit-transform: translateY(23px);
+  transform: translateY(23px);
+}
+@media (max-width: 425px) {
+  .intro .layer5 .tree .leaf.l2 {
+    width: 22px;
+    height: 12px;
+    -webkit-transform: translateY(8px);
+    transform: translateY(8px);
+  }
+}
+.intro .layer5 .tree .leaf.l3 {
+  width: 57px;
+  height: 47px;
+}
+@media (max-width: 425px) {
+  .intro .layer5 .tree .leaf.l3 {
+    width: 32px;
+    height: 22px;
+  }
+}
+.intro .layer5 .tree .main-branch {
+  display: block;
+  width: 25px;
+  height: 200px;
+  margin: 0 auto;
+  background-color: #f6e58d;
+}
+@media (max-width: 425px) {
+  .intro .layer5 .tree .main-branch {
+    width: 7px;
+    height: 169px;
+  }
+}
+.intro .layer4 {
+  position: absolute;
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+  height: 100%;
+  padding: 0 0 0 51px;
+  margin: 0;
+  list-style: none;
+}
+@media (max-width: 991px) {
+  .intro .layer4 {
+    padding-left: 83px;
+  }
+}
+@media (max-width: 425px) {
+  .intro .layer4 {
+    padding-left: 38px;
+  }
+}
+.intro .layer4 .tree {
+  position: relative;
+  margin-right: 33px;
+}
+@media (max-width: 425px) {
+  .intro .layer4 .tree {
+    margin-right: 22px;
+  }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  .intro .layer4 .tree:nth-child(10) {
+    display: none;
+  }
+  .intro .layer4 .tree:nth-child(11) {
+    display: none;
+  }
+  .intro .layer4 .tree:nth-child(12) {
+    display: none;
+  }
+}
+@media (max-width: 991px) {
+  .intro .layer4 .tree:nth-child(7) {
+    display: none;
+  }
+  .intro .layer4 .tree:nth-child(8) {
+    display: none;
+  }
+  .intro .layer4 .tree:nth-child(9) {
+    display: none;
+  }
+  .intro .layer4 .tree:nth-child(10) {
+    display: none;
+  }
+  .intro .layer4 .tree:nth-child(11) {
+    display: none;
+  }
+  .intro .layer4 .tree:nth-child(12) {
+    display: none;
+  }
+}
+@media (max-width: 425px) {
+  .intro .layer4 .tree:nth-child(6) {
+    display: none;
+  }
+}
+@media (min-width: 320px) and (max-width: 375px) {
+  .intro .layer4 .tree:nth-child(5) {
+    display: none;
+  }
+}
+.intro .layer4 .tree .leaf {
+  display: block;
+  margin: 0 auto;
+  background-color: #fad390;
+  -webkit-clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+.intro .layer4 .tree .leaf.l1 {
+  width: 47px;
+  height: 37px;
+  -webkit-transform: translateY(48px);
+  transform: translateY(48px);
+}
+@media (max-width: 425px) {
+  .intro .layer4 .tree .leaf.l1 {
+    width: 22px;
+    height: 12px;
+    -webkit-transform: translateY(20px);
+    transform: translateY(20px);
+  }
+}
+.intro .layer4 .tree .leaf.l2 {
+  width: 57px;
+  height: 47px;
+  -webkit-transform: translateY(28px);
+  transform: translateY(28px);
+}
+@media (max-width: 425px) {
+  .intro .layer4 .tree .leaf.l2 {
+    width: 32px;
+    height: 22px;
+    -webkit-transform: translateY(13px);
+    transform: translateY(13px);
+  }
+}
+.intro .layer4 .tree .leaf.l3 {
+  width: 67px;
+  height: 57px;
+}
+@media (max-width: 425px) {
+  .intro .layer4 .tree .leaf.l3 {
+    width: 42px;
+    height: 32px;
+  }
+}
+.intro .layer4 .tree .main-branch {
+  display: block;
+  width: 25px;
+  height: 160px;
+  margin: 0 auto;
+  background-color: #fad390;
+}
+@media (max-width: 425px) {
+  .intro .layer4 .tree .main-branch {
+    width: 8px;
+    height: 144px;
+  }
+}
+.intro .layer3 {
+  position: absolute;
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+@media (max-width: 991px) {
+  .intro .layer3 {
+    padding-left: 31px;
+  }
+}
+@media (max-width: 425px) {
+  .intro .layer3 {
+    padding-left: 0;
+  }
+}
+@media (min-width: 320px) and (max-width: 375px) {
+  .intro .layer3 {
+    padding-left: 2px;
+  }
+}
+.intro .layer3 .tree {
+  position: relative;
+  margin-right: 23px;
+}
+@media (max-width: 425px) {
+  .intro .layer3 .tree {
+    margin-right: 11px;
+  }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  .intro .layer3 .tree:nth-child(11) {
+    display: none;
+  }
+  .intro .layer3 .tree:nth-child(12) {
+    display: none;
+  }
+  .intro .layer3 .tree:nth-child(13) {
+    display: none;
+  }
+}
+@media (max-width: 991px) {
+  .intro .layer3 .tree:nth-child(8) {
+    display: none;
+  }
+  .intro .layer3 .tree:nth-child(9) {
+    display: none;
+  }
+  .intro .layer3 .tree:nth-child(10) {
+    display: none;
+  }
+  .intro .layer3 .tree:nth-child(11) {
+    display: none;
+  }
+  .intro .layer3 .tree:nth-child(12) {
+    display: none;
+  }
+  .intro .layer3 .tree:nth-child(13) {
+    display: none;
+  }
+}
+@media (max-width: 425px) {
+  .intro .layer3 .tree:nth-child(7) {
+    display: none;
+  }
+}
+@media (min-width: 320px) and (max-width: 375px) {
+  .intro .layer3 .tree:nth-child(6) {
+    display: none;
+  }
+}
+.intro .layer3 .tree .leaf {
+  display: block;
+  margin: 0 auto;
+  background-color: #f5cd79;
+  -webkit-clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+.intro .layer3 .tree .leaf.l1 {
+  width: 57px;
+  height: 47px;
+  -webkit-transform: translateY(67px);
+  transform: translateY(67px);
+}
+@media (max-width: 425px) {
+  .intro .layer3 .tree .leaf.l1 {
+    width: 32px;
+    height: 22px;
+    -webkit-transform: translateY(32px);
+    transform: translateY(32px);
+  }
+}
+.intro .layer3 .tree .leaf.l2 {
+  width: 67px;
+  height: 57px;
+  -webkit-transform: translateY(37px);
+  transform: translateY(37px);
+}
+@media (max-width: 425px) {
+  .intro .layer3 .tree .leaf.l2 {
+    width: 42px;
+    height: 32px;
+    -webkit-transform: translateY(20px);
+    transform: translateY(20px);
+  }
+}
+.intro .layer3 .tree .leaf.l3 {
+  width: 77px;
+  height: 67px;
+}
+@media (max-width: 425px) {
+  .intro .layer3 .tree .leaf.l3 {
+    width: 52px;
+    height: 42px;
+  }
+}
+.intro .layer3 .tree .main-branch {
+  display: block;
+  width: 25px;
+  height: 120px;
+  margin: 0 auto;
+  background-color: #f5cd79;
+}
+@media (max-width: 425px) {
+  .intro .layer3 .tree .main-branch {
+    width: 7px;
+    height: 118px;
+  }
+}
+.intro .layer2 {
+  /*display: none;*/
+  position: absolute;
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  /* end tree1 */
+  /* end skull */
+  /* end sword */
+}
+.intro .layer2 .tree1 {
+  position: relative;
+}
+@media (max-width: 991px) {
+  .intro .layer2 .tree1 {
+    display: none;
+  }
+}
+.intro .layer2 .tree1 .leaf {
+  position: relative;
+  display: block;
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(to right, #616f39 50%, #a7d129 50%);
+  -webkit-clip-path: ellipse(25% 50% at 50% 50%);
+  clip-path: ellipse(25% 50% at 50% 50%);
+}
+.intro .layer2 .tree1 .leaf::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: #616f39;
+  -webkit-clip-path: polygon(100% 50%, 0 0, 0 100%);
+  clip-path: polygon(100% 50%, 0 0, 0 100%);
+  left: 48px;
+  top: 15px;
+}
+.intro .layer2 .tree1 .leaf .big-c {
+  position: absolute;
+  display: block;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.2);
+  left: 43px;
+  top: 44px;
+}
+.intro .layer2 .tree1 .leaf .mid-c {
+  position: absolute;
+  display: block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background-color: #a7d129;
+  left: 35px;
+  top: 35px;
+}
+.intro .layer2 .tree1 .leaf .mid-c:nth-of-type(2) {
+  left: 29px;
+  top: 60px;
+}
+.intro .layer2 .tree1 .leaf .small-c {
+  position: absolute;
+  display: block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #a7d129;
+  left: 39px;
+  top: 9px;
+}
+.intro .layer2 .tree1 .mid-branch {
+  position: relative;
+  display: block;
+  width: 10px;
+  height: 40px;
+  background-color: #3d3d3d;
+  margin: 0 auto;
+}
+.intro .layer2 .tree1 .mid-branch::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 3px;
+  background-color: #3d3d3d;
+  top: 12px;
+  right: -7px;
+  -webkit-transform: rotate(-40deg);
+  transform: rotate(-40deg);
+}
+.intro .layer2 .tree1 .mid-branch::before {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 3px;
+  background-color: #3d3d3d;
+  top: 19px;
+  left: -7px;
+  -webkit-transform: rotate(40deg);
+  transform: rotate(40deg);
+}
+.intro .layer2 .skull {
+  position: relative;
+}
+@media (max-width: 425px) {
+  .intro .layer2 .skull {
+    display: none;
+  }
+}
+.intro .layer2 .skull .horns {
+  display: block;
+  position: relative;
+  background: transparent;
+  width: 20px;
+  height: 15px;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  margin: 0 auto;
+  transform: translateY(8px);
+  box-shadow: inset -4px 0 #b2bec3, inset 4px 0 #b2bec3;
+}
+.intro .layer2 .skull .horns::after {
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: #ffeaa7;
+  top: 0;
+  left: 9px;
+}
+.intro .layer2 .skull .head {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 20px;
+  height: 18px;
+  border-radius: 50%;
+  margin: 0 auto;
+  background-color: #b2bec3;
+  -webkit-transform: translateY(3px);
+  transform: translateY(3px);
+}
+.intro .layer2 .skull .head .eye {
+  display: block;
+  position: relative;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: #2d3436;
+  margin: 0 3px;
+}
+.intro .layer2 .skull .jaw {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  position: relative;
+  width: 10px;
+  height: 6px;
+  background-color: #b2bec3;
+  margin: 0 auto;
+}
+.intro .layer2 .skull .jaw .line {
+  position: relative;
+  display: block;
+  width: 1px;
+  height: 5px;
+  background-color: #2d3436;
+  margin: 0 1px;
+}
+.intro .layer2 .sword {
+  position: relative;
+  margin-left: 4px;
+}
+@media (max-width: 425px) {
+  .intro .layer2 .sword {
+    display: none;
+  }
+}
+.intro .layer2 .sword .last {
+  display: block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #b2bec3;
+  margin: 0 auto;
+  -webkit-transform: translateY(3px);
+  transform: translateY(3px);
+}
+.intro .layer2 .sword .handle {
+  display: block;
+  width: 3px;
+  height: 10px;
+  background-color: #3d3d3d;
+  margin: 0 auto;
+  -webkit-transform: translateY(3px);
+  transform: translateY(3px);
+}
+.intro .layer2 .sword .safe {
+  display: block;
+  width: 8px;
+  height: 4px;
+  border: 1px solid #2d3436;
+  border-bottom: 0;
+  -webkit-transform: translateY(3px);
+  transform: translateY(3px);
+}
+.intro .layer2 .sword .blade {
+  display: block;
+  width: 4px;
+  height: 32px;
+  margin: 0 auto;
+  background-color: #b2bec3;
+}
+.intro .layer2 .tree2 {
+  position: relative;
+  margin-left: 10px;
+  display: flex;
+  align-items: flex-end;
+}
+@media (max-width: 991px) {
+  .intro .layer2 .tree2 {
+    display: none;
+  }
+}
+.intro .layer2 .tree2 .leaf {
+  display: block;
+  width: 11px;
+  margin-left: 6px;
+  background-color: #ff8264;
+  border-top-right-radius: 13px;
+  border-top-left-radius: 13px;
+}
+.intro .layer2 .tree2 .leaf:nth-child(1) {
+  height: 40px;
+}
+.intro .layer2 .tree2 .leaf:nth-child(2) {
+  height: 50px;
+}
+.intro .layer2 .tree2 .leaf:nth-child(3) {
+  height: 30px;
+}
+.intro .layer2 .tree3 {
+  position: relative;
+  margin-left: 25px;
+}
+@media (max-width: 991px) {
+  .intro .layer2 .tree3 {
+    display: none;
+  }
+}
+.intro .layer2 .tree3 .leaf {
+  display: block;
+  height: 15px;
+  border-radius: 30px;
+  background-color: #ff8264;
+  margin: 3px auto;
+}
+.intro .layer2 .tree3 .leaf:nth-child(1) {
+  width: 30px;
+}
+.intro .layer2 .tree3 .leaf:nth-child(2) {
+  width: 40px;
+}
+.intro .layer2 .tree3 .leaf:nth-child(3) {
+  width: 60px;
+}
+.intro .layer2 .tree3 .leaf:nth-child(4) {
+  width: 40px;
+}
+.intro .layer2 .tree3 .leaf:nth-child(5) {
+  width: 30px;
+  margin-bottom: 0;
+}
+.intro .layer2 .tree3 .mid-branch {
+  display: block;
+  width: 4px;
+  height: 35px;
+  margin: 0 auto;
+  background-color: #3d3d3d;
+}
+.intro .layer2 .grass {
+  position: relative;
+  display: flex;
+}
+@media (max-width: 991px) {
+  .intro .layer2 .grass {
+    display: none;
+  }
+}
+.intro .layer2 .grass .leaf {
+  display: block;
+  width: 20px;
+  height: 10px;
+  background-color: #A3CB38;
+  margin-right: 5px;
+  -webkit-clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+.intro .layer2 .tree4 {
+  position: relative;
+  margin-left: 25px;
+}
+@media (max-width: 425px) {
+  .intro .layer2 .tree4 {
+    display: none;
+  }
+}
+.intro .layer2 .tree4 .rounded-sb {
+  display: flex;
+  position: relative;
+  width: 60px;
+  -webkit-transform: translateY(36px);
+  transform: translateY(36px);
+}
+.intro .layer2 .tree4 .rounded-sb .leaf {
+  display: block;
+  width: 25%;
+  height: 13px;
+  border-radius: 50%;
+  background-color: #616f39;
+}
+.intro .layer2 .tree4 .bush {
+  position: relative;
+  display: block;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(to top, #616f39 50%, rgba(104, 109, 224, 0) 50%);
+}
+.intro .layer2 .tree4 .bush .leaf {
+  position: absolute;
+  display: block;
+  width: 6px;
+  height: 6px;
+  background-color: #a7d129;
+  -webkit-clip-path: polygon(50% 100%, 0 0, 100% 0);
+  clip-path: polygon(50% 100%, 0 0, 100% 0);
+}
+.intro .layer2 .tree4 .bush .leaf:nth-child(1) {
+  left: 44px;
+  bottom: 16px;
+}
+.intro .layer2 .tree4 .bush .leaf:nth-child(2) {
+  left: 34px;
+  bottom: 6px;
+}
+.intro .layer2 .tree4 .bush .leaf:nth-child(3) {
+  left: 15px;
+  bottom: 20px;
+}
+.intro .layer2 .tree4 .bush .leaf:nth-child(4) {
+  left: 21px;
+  bottom: 4px;
+}
+.intro .layer2 .tree4 .bush .leaf:nth-child(5) {
+  left: 28px;
+  bottom: 17px;
+}
+.intro .layer2 .tree4 .bush .leaf:nth-child(6) {
+  left: 8px;
+  bottom: 12px;
+}
+.intro .layer2 .tree4 .mid-branch {
+  display: block;
+  width: 8px;
+  height: 13px;
+  margin: 0 auto;
+  background-color: #3d3d3d;
+}
+.intro .main-layer {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  /* end tree1 */
+  /* end tree2 */
+  /* end tree3 */
+  /* end tree4 */
+  /* end tree5 */
+  /* end tree6 */
+  /* end tree7 */
+}
+.intro .main-layer .tree1 {
+  display: flex;
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  .intro .main-layer .tree1 {
+    display: none;
+  }
+}
+@media (max-width: 991px) {
+  .intro .main-layer .tree1 {
+    display: none;
+  }
+}
+.intro .main-layer .tree1 .left-branches, .intro .main-layer .tree1 .right-branches {
+  display: block;
+}
+.intro .main-layer .tree1 .left-branches .branch, .intro .main-layer .tree1 .right-branches .branch {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background-color: #2d3436;
+  margin: 15px 0;
+  -webkit-transform: rotate(-40deg);
+  transform: rotate(-40deg);
+  -webkit-transform-origin: 100% 0;
+  transform-origin: 100% 0;
+}
+.intro .main-layer .tree1 .stick {
+  display: block;
+  height: 120px;
+  width: 3px;
+  background-color: #2d3436;
+}
+.intro .main-layer .tree1 .right-branches .branch {
+  -webkit-transform: rotate(40deg);
+  transform: rotate(40deg);
+  -webkit-transform-origin: 0 100%;
+  transform-origin: 0 100%;
+}
+.intro .main-layer .tree2 {
+  position: relative;
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  .intro .main-layer .tree2 {
+    display: none;
+  }
+}
+@media (max-width: 991px) {
+  .intro .main-layer .tree2 {
+    display: none;
+  }
+}
+.intro .main-layer .tree2 .leaf1 {
+  display: block;
+  height: 8px;
+  width: 15px;
+  border-top-left-radius: 35px;
+  border-top-right-radius: 35px;
+  background-color: #616f39;
+  margin: 0 auto;
+  box-shadow: inset -8px 0 rgba(0, 0, 0, 0.2);
+}
+.intro .main-layer .tree2 .leaf2 {
+  display: block;
+  height: 15px;
+  width: 40px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  background-color: #616f39;
+  margin: 0 auto;
+  box-shadow: inset -8px 0 rgba(0, 0, 0, 0.2);
+}
+.intro .main-layer .tree2 .leaf3 {
+  display: block;
+  height: 25px;
+  width: 60px;
+  border-radius: 15px;
+  background-color: #616f39;
+  box-shadow: inset -8px 0 rgba(0, 0, 0, 0.2);
+}
+.intro .main-layer .tree2 .stick {
+  display: block;
+  height: 30px;
+  width: 8px;
+  background-color: #3d3d3d;
+  margin: 0 auto;
+}
+.intro .main-layer .tree2 .ground {
+  display: block;
+  width: 45px;
+  height: 3px;
+  background-color: #616f39;
+  margin: 0 auto;
+}
+.intro .main-layer .tree3 {
+  position: relative;
+  margin-left: 5px;
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  .intro .main-layer .tree3 {
+    display: none;
+  }
+}
+@media (max-width: 991px) {
+  .intro .main-layer .tree3 {
+    display: none;
+  }
+}
+.intro .main-layer .tree3 .right-branch {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.intro .main-layer .tree3 .right-branch .bush {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  background-color: #a7d129;
+  border-radius: 50%;
+  right: -9px;
+  top: 38px;
+}
+.intro .main-layer .tree3 .right-branch .bush .leaf {
+  display: block;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.intro .main-layer .tree3 .middle-branch {
+  position: relative;
+  display: block;
+}
+.intro .main-layer .tree3 .middle-branch .bush {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  padding: 8px;
+  background-color: #616f39;
+}
+.intro .main-layer .tree3 .middle-branch .bush .leaf {
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin: 0 6px;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.intro .main-layer .tree3 .middle-branch .stick {
+  display: block;
+  height: 144px;
+  width: 8px;
+  background-color: #3d3d3d;
+  margin: 0 auto;
+}
+.intro .main-layer .tree4 {
+  display: flex;
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  .intro .main-layer .tree4 {
+    display: none;
+  }
+}
+@media (max-width: 991px) {
+  .intro .main-layer .tree4 {
+    display: none;
+  }
+}
+.intro .main-layer .tree4 .left-branches, .intro .main-layer .tree4 .tree1 .right-branches, .intro .main-layer .tree1 .tree4 .right-branches {
+  display: block;
+  position: relative;
+  padding-top: 50px;
+}
+.intro .main-layer .tree4 .left-branches .bush, .intro .main-layer .tree4 .tree1 .right-branches .bush, .intro .main-layer .tree1 .tree4 .right-branches .bush {
+  position: absolute;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 90px;
+  height: 90px;
+  background-color: #A3CB38;
+  border-radius: 50%;
+  left: -29px;
+  top: -8px;
+  padding: 9px;
+}
+.intro .main-layer .tree4 .left-branches .bush .leaf, .intro .main-layer .tree4 .tree1 .right-branches .bush .leaf, .intro .main-layer .tree1 .tree4 .right-branches .bush .leaf {
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin: 0 9px;
+  background: rgba(0, 0, 0, 0.2);
+}
+.intro .main-layer .tree4 .left-branches .branch, .intro .main-layer .tree4 .tree1 .right-branches .branch, .intro .main-layer .tree1 .tree4 .right-branches .branch {
+  position: relative;
+  display: block;
+  width: 40px;
+  height: 2px;
+  background-color: #3d3d3d;
+}
+.intro .main-layer .tree4 .middle-branch {
+  display: block;
+  position: relative;
+}
+.intro .main-layer .tree4 .middle-branch .bush {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  background-color: #616f39;
+  border-radius: 50%;
+  top: -60px;
+  right: -27px;
+}
+.intro .main-layer .tree4 .middle-branch .bush .leaf {
+  display: block;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.2);
+}
+.intro .main-layer .tree4 .middle-branch .stick {
+  display: block;
+  position: relative;
+  width: 8px;
+  height: 142px;
+  background-color: #3d3d3d;
+  z-index: 4;
+}
+.intro .main-layer .tree4 .right-branches {
+  display: block;
+  position: relative;
+}
+.intro .main-layer .tree4 .right-branches .bush {
+  position: absolute;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #a7d129;
+  top: -34px;
+  right: -54px;
+  padding: 8px;
+}
+.intro .main-layer .tree4 .right-branches .bush .leaf {
+  display: block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.2);
+  margin: 0 8px;
+}
+.intro .main-layer .tree4 .right-branches .branch {
+  position: relative;
+  display: block;
+  width: 40px;
+  height: 30px;
+  border-bottom: 2px solid #3d3d3d;
+  border-right: 2px solid #3d3d3d;
+}
+.intro .main-layer .tree4 .right-branches .branch::after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 25px;
+  height: 12px;
+  border-bottom: 2px solid #3d3d3d;
+  border-right: 2px solid #3d3d3d;
+  right: -26px;
+  top: 5px;
+}
+.intro .main-layer .tree5 {
+  display: flex;
+  margin-left: 15px;
+}
+@media (max-width: 991px) {
+  .intro .main-layer .tree5 {
+    display: none;
+  }
+}
+.intro .main-layer .tree5 .left-branch {
+  display: block;
+  position: relative;
+  padding-top: 60px;
+}
+.intro .main-layer .tree5 .left-branch .bush {
+  position: absolute;
+  display: block;
+  width: 25px;
+  height: 25px;
+  border-radius: 5px;
+  background-color: #756c83;
+  top: 28px;
+  left: -10px;
+}
+.intro .main-layer .tree5 .left-branch .branch {
+  position: relative;
+  display: block;
+  width: 27px;
+  height: 3px;
+  background-color: #3d3d3d;
+  -webkit-transform: rotate(40deg);
+  transform: rotate(40deg);
+  -webkit-transform-origin: 100% 0;
+  transform-origin: 100% 0;
+}
+.intro .main-layer .tree5 .left-branch .branch::before {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 2px;
+  height: 3px;
+  background-color: #3d3d3d;
+  right: -2px;
+}
+.intro .main-layer .tree5 .middle-branch {
+  display: block;
+  position: relative;
+}
+.intro .main-layer .tree5 .middle-branch .bush {
+  position: absolute;
+  display: block;
+  width: 33px;
+  height: 33px;
+  border-radius: 8px;
+  background-color: #756c83;
+  left: -15px;
+  top: -21px;
+}
+.intro .main-layer .tree5 .middle-branch .branch {
+  position: relative;
+  display: block;
+  width: 3px;
+  height: 86px;
+  background-color: #3d3d3d;
+}
+.intro .main-layer .tree5 .right-branch {
+  display: block;
+  position: relative;
+  padding-top: 40px;
+}
+.intro .main-layer .tree5 .right-branch .bush {
+  position: absolute;
+  display: block;
+  width: 25px;
+  height: 25px;
+  border-radius: 5px;
+  background-color: #756c83;
+  top: 0;
+  right: 0;
+}
+.intro .main-layer .tree5 .right-branch .branch {
+  position: relative;
+  display: block;
+  width: 45px;
+  height: 3px;
+  background-color: #3d3d3d;
+  -webkit-transform: rotate(-40deg);
+  transform: rotate(-40deg);
+  -webkit-transform-origin: 0 100%;
+  transform-origin: 0 100%;
+}
+.intro .main-layer .tree6 {
+  display: flex;
+  margin-left: 10px;
+}
+@media (max-width: 991px) {
+  .intro .main-layer .tree6 {
+    display: none;
+  }
+}
+.intro .main-layer .tree6 .left-branch {
+  display: block;
+  position: relative;
+}
+.intro .main-layer .tree6 .left-branch .bush {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background-color: #a7d129;
+  top: -65px;
+  right: -86px;
+}
+.intro .main-layer .tree6 .left-branch .bush .leaf {
+  display: block;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.2);
+}
+.intro .main-layer .tree6 .middle-branch {
+  display: block;
+  position: relative;
+}
+.intro .main-layer .tree6 .middle-branch .bush {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: #a7d129;
+  top: -100px;
+  left: -47px;
+  padding: 11px;
+}
+.intro .main-layer .tree6 .middle-branch .bush .leaf {
+  display: block;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.2);
+}
+.intro .main-layer .tree6 .middle-branch .branch {
+  position: relative;
+  display: block;
+  width: 8px;
+  height: 90px;
+  background-color: #3d3d3d;
+}
+.intro .main-layer .tree6 .right-branch {
+  display: block;
+  position: relative;
+  padding-top: 40px;
+}
+.intro .main-layer .tree6 .right-branch .bush {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #A3CB38;
+  top: -38px;
+  right: -37px;
+}
+.intro .main-layer .tree6 .right-branch .bush .leaf {
+  display: block;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.2);
+}
+.intro .main-layer .tree6 .right-branch .branch {
+  position: relative;
+  display: block;
+  width: 45px;
+  height: 5px;
+  background-color: #3d3d3d;
+  -webkit-transform: rotate(-40deg);
+  transform: rotate(-40deg);
+  -webkit-transform-origin: 0 100%;
+  transform-origin: 0 100%;
+}
+.intro .main-layer .tree7 {
+  display: flex;
+  margin-left: 30px;
+}
+@media (max-width: 991px) {
+  .intro .main-layer .tree7.t1 {
+    display: none;
+  }
+  .intro .main-layer .tree7.t2 {
+    display: none;
+  }
+}
+@media (max-width: 425px) {
+  .intro .main-layer .tree7.t3 {
+    display: none;
+  }
+}
+.intro .main-layer .tree7 .left-branches, .intro .main-layer .tree7 .tree1 .right-branches, .intro .main-layer .tree1 .tree7 .right-branches {
+  position: relative;
+  display: block;
+  padding-top: 15px;
+}
+.intro .main-layer .tree7 .left-branches .bush, .intro .main-layer .tree7 .tree1 .right-branches .bush, .intro .main-layer .tree1 .tree7 .right-branches .bush {
+  position: absolute;
+  display: block;
+  width: 50px;
+  height: 40px;
+  background-color: #A3CB38;
+  -webkit-clip-path: polygon(50% 100%, 0 0, 100% 0);
+  clip-path: polygon(50% 100%, 0 0, 100% 0);
+  top: 0;
+}
+.intro .main-layer .tree7 .left-branches .bush.b1, .intro .main-layer .tree7 .tree1 .right-branches .bush.b1, .intro .main-layer .tree1 .tree7 .right-branches .bush.b1 {
+  left: -13px;
+}
+.intro .main-layer .tree7 .left-branches .bush.b2, .intro .main-layer .tree7 .tree1 .right-branches .bush.b2, .intro .main-layer .tree1 .tree7 .right-branches .bush.b2 {
+  left: 7px;
+}
+.intro .main-layer .tree7 .left-branches .branch1, .intro .main-layer .tree7 .left-branches .branch2, .intro .main-layer .tree7 .tree1 .right-branches .branch1, .intro .main-layer .tree7 .tree1 .right-branches .branch2, .intro .main-layer .tree1 .tree7 .right-branches .branch1, .intro .main-layer .tree1 .tree7 .right-branches .branch2 {
+  position: relative;
+  display: block;
+  margin-bottom: 5px;
+  width: 20px;
+  height: 3px;
+  background-color: #3d3d3d;
+  -webkit-transform: rotate(40deg);
+  transform: rotate(40deg);
+  -webkit-transform-origin: 100% 0;
+  transform-origin: 100% 0;
+}
+.intro .main-layer .tree7 .left-branches .branch1::before, .intro .main-layer .tree7 .left-branches .branch2::before, .intro .main-layer .tree7 .tree1 .right-branches .branch1::before, .intro .main-layer .tree7 .tree1 .right-branches .branch2::before, .intro .main-layer .tree1 .tree7 .right-branches .branch1::before, .intro .main-layer .tree1 .tree7 .right-branches .branch2::before {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 2px;
+  height: 3px;
+  background-color: #3d3d3d;
+  right: -2px;
+}
+.intro .main-layer .tree7 .middle-branches {
+  position: relative;
+  display: block;
+}
+.intro .main-layer .tree7 .middle-branches .bush {
+  position: absolute;
+  display: block;
+  width: 70px;
+  height: 50px;
+  background-color: #A3CB38;
+  -webkit-clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  top: -49px;
+  left: -33px;
+}
+.intro .main-layer .tree7 .middle-branches .branch {
+  position: relative;
+  display: block;
+  width: 3px;
+  height: 70px;
+  background-color: #3d3d3d;
+}
+.intro .main-layer .tree7 .right-branches {
+  display: block;
+  position: relative;
+  padding-top: 15px;
+}
+.intro .main-layer .tree7 .right-branches .branch1, .intro .main-layer .tree7 .right-branches .branch2 {
+  display: block;
+  margin-bottom: 5px;
+  width: 20px;
+  height: 3px;
+  background-color: #3d3d3d;
+  -webkit-transform: rotate(-40deg);
+  transform: rotate(-40deg);
+  -webkit-transform-origin: 0 100%;
+  transform-origin: 0 100%;
+}
+.intro .main-layer .castle {
+  display: block;
+  position: relative;
+  margin-left: 40px;
+  width: 593px;
+  /* end base */
+  /* end tall tower */
+  /* end right-build */
+  /* end left-build */
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle {
+    width: 150px;
+    margin: 0 auto;
+  }
+}
+.intro .main-layer .castle .base {
+  display: block;
+  width: 250px;
+  height: 240px;
+  margin: 0 auto;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .base {
+    width: 150px;
+    height: 175px;
+  }
+}
+.intro .main-layer .castle .base .roof {
+  display: block;
+  height: 12%;
+  background-color: #2d3436;
+  -webkit-clip-path: polygon(10% 0, 90% 0, 100% 100%, 0% 100%);
+  clip-path: polygon(10% 0, 90% 0, 100% 100%, 0% 100%);
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .base .roof {
+    height: 9%;
+  }
+}
+.intro .main-layer .castle .base .roof .edge {
+  display: block;
+  width: 20%;
+  height: 100%;
+  background: #636e72;
+  -webkit-clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+.intro .main-layer .castle .base .body {
+  position: relative;
+  display: block;
+  height: 88%;
+  background: linear-gradient(to right, #ee5a24 20%, #d35400 20%);
+  padding: 10px;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .base .body {
+    height: 91%;
+    padding: 6px;
+  }
+}
+.intro .main-layer .castle .base .body .window {
+  display: block;
+  width: 30px;
+  height: 6px;
+  background: linear-gradient(to right, #636e72 20%, #2d3436 20%);
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .base .body .window {
+    width: 17px;
+    height: 4px;
+  }
+}
+.intro .main-layer .castle .base .body .wall {
+  position: absolute;
+  display: block;
+  width: 40%;
+  height: 100px;
+  top: 15px;
+  right: 0;
+  background-color: #222;
+}
+.intro .main-layer .castle .tall-tower {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  z-index: 1;
+}
+.intro .main-layer .castle .tall-tower .flag {
+  margin: 0 auto;
+}
+.intro .main-layer .castle .tall-tower .top {
+  display: block;
+  width: 112px;
+  height: 70px;
+  background: linear-gradient(to right, #353b48 50%, #2f3640 50%);
+  margin: 0 auto;
+  -webkit-clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .tall-tower .top {
+    width: 63px;
+    height: 45px;
+  }
+}
+.intro .main-layer .castle .tall-tower .roof {
+  display: block;
+  width: 140px;
+  height: 4px;
+  background-color: #f5cd79;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .tall-tower .roof {
+    width: 90px;
+    height: 3px;
+  }
+}
+.intro .main-layer .castle .tall-tower .bind-roof {
+  display: block;
+  width: 112px;
+  height: 20px;
+  margin: 0 auto;
+  background: linear-gradient(to right, #ff9f43 50%, #e15f41 50%);
+  -webkit-clip-path: polygon(0 0, 100% 0, 90% 100%, 10% 100%);
+  clip-path: polygon(0 0, 100% 0, 90% 100%, 10% 100%);
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .tall-tower .bind-roof {
+    width: 63px;
+    height: 13px;
+  }
+}
+.intro .main-layer .castle .tall-tower .bind-roof .inner {
+  display: block;
+  width: 51%;
+  margin: 0 auto;
+  height: 100%;
+  background: linear-gradient(to right, #fd9644 50%, #ee5a24 50%);
+  -webkit-clip-path: polygon(0 0, 100% 0, 90% 100%, 10% 100%);
+  clip-path: polygon(0 0, 100% 0, 90% 100%, 10% 100%);
+}
+.intro .main-layer .castle .tall-tower .body {
+  display: flex;
+  width: 90px;
+  height: 280px;
+  margin: 0 auto;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .tall-tower .body {
+    width: 50px;
+    height: 221px;
+  }
+}
+.intro .main-layer .castle .tall-tower .body .part {
+  position: relative;
+  display: block;
+  width: 25%;
+}
+.intro .main-layer .castle .tall-tower .body .part:nth-child(1) {
+  background-color: #feca57;
+}
+.intro .main-layer .castle .tall-tower .body .part:nth-child(1) .window {
+  box-shadow: inset 2px 0 #636e72;
+}
+.intro .main-layer .castle .tall-tower .body .part:nth-child(1) .brick {
+  display: block;
+  position: absolute;
+  width: 10px;
+  height: 5px;
+  border-radius: 8px;
+  background-color: #fd9644;
+  top: 15px;
+  left: 6px;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .tall-tower .body .part:nth-child(1) .brick {
+    width: 7px;
+    height: 3px;
+    left: 3px;
+  }
+}
+.intro .main-layer .castle .tall-tower .body .part:nth-child(1) .brick:nth-child(2) {
+  top: 70px;
+}
+.intro .main-layer .castle .tall-tower .body .part:nth-child(2) {
+  background-color: #ff9f43;
+}
+.intro .main-layer .castle .tall-tower .body .part:nth-child(2) .window {
+  box-shadow: inset 2px 0 #636e72;
+}
+.intro .main-layer .castle .tall-tower .body .part:nth-child(2) .brick {
+  display: block;
+  position: absolute;
+  width: 12px;
+  height: 5px;
+  border-radius: 8px;
+  background-color: #EE5A24;
+  top: 62px;
+  left: 9px;
+}
+.intro .main-layer .castle .tall-tower .body .part:nth-child(3) {
+  background-color: #fd9644;
+}
+.intro .main-layer .castle .tall-tower .body .part:nth-child(3) .window {
+  box-shadow: inset -2px 0 #636e72;
+}
+.intro .main-layer .castle .tall-tower .body .part:nth-child(3) .brick {
+  display: block;
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #EE5A24;
+  top: 15px;
+  left: 6px;
+}
+.intro .main-layer .castle .tall-tower .body .part:nth-child(3) .brick:nth-child(2) {
+  width: 10px;
+  border-radius: 8px;
+  top: 117px;
+}
+.intro .main-layer .castle .tall-tower .body .part:nth-child(4) {
+  background-color: #EE5A24;
+}
+.intro .main-layer .castle .tall-tower .body .part:nth-child(4) .window {
+  box-shadow: inset -2px 0 #636e72;
+}
+.intro .main-layer .castle .tall-tower .body .part .window {
+  position: relative;
+  display: block;
+  width: 10px;
+  height: 17px;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  margin: 35px auto;
+  background-color: #3d3d3d;
+  border-bottom: 3px solid #ffeaa7;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .tall-tower .body .part .window {
+    width: 5px;
+    height: 10px;
+    border-bottom-width: 2px;
+  }
+}
+.intro .main-layer .castle .tall-tower .body .part .window::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  width: 10px;
+  height: 4px;
+  background: rgba(0, 0, 0, 0.2);
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .tall-tower .body .part .window::after {
+    width: 5px;
+    bottom: -5px;
+  }
+}
+.intro .main-layer .castle .right-build {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding-right: 86px;
+  z-index: 1;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .right-build {
+    padding: 0;
+    right: -31px;
+  }
+}
+.intro .main-layer .castle .right-build .contain .flag {
+  margin-left: 55px;
+  height: 60px;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .right-build .contain .flag {
+    height: 40px;
+  }
+}
+.intro .main-layer .castle .right-build .contain .roof {
+  position: relative;
+  display: block;
+  width: 180px;
+  height: 40px;
+  background: #2f3640;
+  border-bottom: 2px solid #2d3436;
+  -webkit-clip-path: polygon(20% 0, 80% 0, 100% 100%, 0% 100%);
+  clip-path: polygon(20% 0, 80% 0, 100% 100%, 0% 100%);
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .right-build .contain .roof {
+    width: 90px;
+    height: 26px;
+  }
+}
+.intro .main-layer .castle .right-build .contain .roof .edge {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+  height: 100%;
+  background: #353b48;
+  -webkit-clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  padding-top: 10px;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .right-build .contain .roof .edge {
+    padding-top: 3px;
+  }
+}
+.intro .main-layer .castle .right-build .contain .roof .edge .window {
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #222;
+  box-shadow: inset 2px 0 #636e72;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .right-build .contain .roof .edge .window {
+    width: 7px;
+    height: 7px;
+  }
+}
+.intro .main-layer .castle .right-build .contain .roof .window-set {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 29px;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .right-build .contain .roof .window-set {
+    padding-right: 11px;
+  }
+}
+.intro .main-layer .castle .right-build .contain .roof .window-set .window {
+  position: relative;
+  display: block;
+  width: 13px;
+  height: 17px;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  margin: 0 7px;
+  background-color: #222;
+  box-shadow: inset -2px 0 #636e72;
+  border: 2px solid #333333;
+  border-bottom: 0;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .right-build .contain .roof .window-set .window {
+    width: 7px;
+    height: 8px;
+    margin: 0 4px;
+    border: 0;
+  }
+}
+.intro .main-layer .castle .right-build .contain .roof .window-set .window::before {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 17px;
+  background: linear-gradient(to bottom left, #353b48 50%, #2f3640 50%);
+  left: -15px;
+  top: -2px;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .right-build .contain .roof .window-set .window::before {
+    width: 7px;
+    height: 8px;
+    left: -8px;
+    top: -1px;
+  }
+}
+.intro .main-layer .castle .right-build .contain .roof .window-set .window::after {
+  content: "";
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  left: -3px;
+  top: -2px;
+  border-left: 2px solid #353b48;
+  border-top: 2px solid #353b48;
+}
+.intro .main-layer .castle .right-build .contain .roof-line {
+  display: block;
+  width: 180px;
+  height: 5px;
+  background: linear-gradient(to right, #353b48 40%, #2f3640 40%);
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .right-build .contain .roof-line {
+    width: 90px;
+    height: 3px;
+  }
+}
+.intro .main-layer .castle .right-build .contain .body {
+  display: flex;
+  width: 180px;
+  height: 150px;
+  background: linear-gradient(to right, #ff9f43 40%, #fd9644 40%);
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .right-build .contain .body {
+    width: 90px;
+    height: 104px;
+  }
+}
+.intro .main-layer .castle .right-build .contain .body .window-set {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 5px;
+  width: 40%;
+  height: 70%;
+  margin-top: 9px;
+}
+.intro .main-layer .castle .right-build .contain .body .window-set:nth-child(1) .window {
+  box-shadow: inset 2px 0 #636e72;
+}
+.intro .main-layer .castle .right-build .contain .body .window-set:nth-child(2) .window {
+  box-shadow: inset -2px 0 #636e72;
+}
+.intro .main-layer .castle .right-build .contain .body .window-set .window {
+  position: relative;
+  display: block;
+  width: 8px;
+  height: 13px;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  margin: 0 3px;
+  background-color: #3d3d3d;
+  border-bottom: 3px solid #ffeaa7;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .right-build .contain .body .window-set .window {
+    width: 4px;
+    height: 9px;
+    margin: 0 1px;
+    border-bottom-width: 2px;
+  }
+}
+.intro .main-layer .castle .right-build .contain .body .window-set .window::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  width: 8px;
+  height: 4px;
+  background: rgba(0, 0, 0, 0.2);
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .right-build .contain .body .window-set .window::after {
+    width: 4px;
+    bottom: -5px;
+  }
+}
+.intro .main-layer .castle .left-build {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  padding-left: 155px;
+  z-index: 1;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .left-build {
+    padding: 0;
+    left: -20px;
+  }
+}
+.intro .main-layer .castle .left-build .contain .flag {
+  margin-left: 50px;
+  height: 60px;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .left-build .contain .flag {
+    height: 40px;
+  }
+}
+.intro .main-layer .castle .left-build .contain .roof {
+  display: block;
+  position: relative;
+  width: 120px;
+  height: 45px;
+  background: linear-gradient(to right, #353b48 30%, #2f3640 30%);
+  border-bottom: 2px solid #2d3436;
+  -webkit-clip-path: polygon(30% 0, 70% 0, 100% 100%, 0% 100%);
+  clip-path: polygon(30% 0, 70% 0, 100% 100%, 0% 100%);
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .left-build .contain .roof {
+    width: 80px;
+    height: 30px;
+  }
+}
+.intro .main-layer .castle .left-build .contain .roof .window-set {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 29px;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .left-build .contain .roof .window-set {
+    padding-right: 19px;
+  }
+}
+.intro .main-layer .castle .left-build .contain .roof .window-set .window {
+  position: relative;
+  display: block;
+  width: 17px;
+  height: 21px;
+  border-top-right-radius: 7px;
+  border-top-left-radius: 7px;
+  margin: 0 7px;
+  background-color: #222;
+  box-shadow: inset -2px 0 #636e72;
+  border: 2px solid #333333;
+  border-bottom: 0;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .left-build .contain .roof .window-set .window {
+    width: 7px;
+    height: 10px;
+    border: 0;
+  }
+}
+.intro .main-layer .castle .left-build .contain .roof .window-set .window::before {
+  content: "";
+  position: absolute;
+  width: 17px;
+  height: 21px;
+  background: linear-gradient(to bottom left, #353b48 50%, #2f3640 50%);
+  left: -19px;
+  top: -1px;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .left-build .contain .roof .window-set .window::before {
+    width: 7px;
+    height: 10px;
+    left: -9px;
+  }
+}
+.intro .main-layer .castle .left-build .contain .roof .window-set .window::after {
+  content: "";
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  left: -2px;
+  top: -1px;
+  border-left: 2px solid #353b48;
+  border-top: 2px solid #353b48;
+}
+.intro .main-layer .castle .left-build .contain .roof-line {
+  display: block;
+  width: 120px;
+  height: 5px;
+  background: linear-gradient(to right, #353b48 30%, #2f3640 30%);
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .left-build .contain .roof-line {
+    width: 80px;
+    height: 3px;
+  }
+}
+.intro .main-layer .castle .left-build .contain .body {
+  position: relative;
+  display: flex;
+  width: 120px;
+  height: 140px;
+  background: linear-gradient(to right, #ff9f43 30%, #fd9644 30%);
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .left-build .contain .body {
+    width: 80px;
+    height: 88px;
+  }
+}
+.intro .main-layer .castle .left-build .contain .body .window-set:nth-child(1) {
+  display: block;
+  width: 30%;
+  padding: 5px 3px;
+}
+.intro .main-layer .castle .left-build .contain .body .window-set:nth-child(1) .window {
+  position: relative;
+  display: block;
+  width: 12px;
+  height: 18px;
+  border-top-right-radius: 7px;
+  border-top-left-radius: 7px;
+  margin: 20px auto;
+  margin-top: 8px;
+  background-color: #3d3d3d;
+  border-bottom: 3px solid #ffeaa7;
+  box-shadow: inset 2px 0 #636e72;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .left-build .contain .body .window-set:nth-child(1) .window {
+    width: 6px;
+    height: 10px;
+    margin: 8px auto 13px auto;
+  }
+}
+.intro .main-layer .castle .left-build .contain .body .window-set:nth-child(1) .window::after {
+  content: "";
+  position: absolute;
+  bottom: -9px;
+  width: 12px;
+  height: 6px;
+  background: rgba(0, 0, 0, 0.2);
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .left-build .contain .body .window-set:nth-child(1) .window::after {
+    width: 6px;
+    height: 2px;
+    bottom: -6px;
+  }
+}
+.intro .main-layer .castle .left-build .contain .body .window-set:nth-child(2) {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 70%;
+  height: 63%;
+  padding: 5px 3px;
+}
+.intro .main-layer .castle .left-build .contain .body .window-set:nth-child(2) .window {
+  position: relative;
+  display: block;
+  width: 12px;
+  height: 18px;
+  border-top-right-radius: 7px;
+  border-top-left-radius: 7px;
+  margin: 8px 5px 11px 5px;
+  margin-top: 8px;
+  background-color: #3d3d3d;
+  border-bottom: 3px solid #ffeaa7;
+  box-shadow: inset -2px 0 #636e72;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .left-build .contain .body .window-set:nth-child(2) .window {
+    width: 6px;
+    height: 10px;
+    margin: 7px 5px -3px 5px;
+  }
+}
+.intro .main-layer .castle .left-build .contain .body .window-set:nth-child(2) .window::after {
+  content: "";
+  position: absolute;
+  bottom: -9px;
+  width: 12px;
+  height: 6px;
+  background: rgba(0, 0, 0, 0.2);
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .left-build .contain .body .window-set:nth-child(2) .window::after {
+    width: 6px;
+    height: 2px;
+    bottom: -6px;
+  }
+}
+.intro .main-layer .castle .walls {
+  position: absolute;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  z-index: 1;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .walls {
+    left: -47px;
+  }
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .walls .wall1 {
+    display: none;
+  }
+}
+.intro .main-layer .castle .walls .wall1 .half-wall {
+  display: block;
+  width: 38px;
+  height: 6px;
+  background-color: #fd9644;
+}
+.intro .main-layer .castle .walls .wall1 .wall {
+  position: relative;
+  display: block;
+  width: 65px;
+  height: 60px;
+  background-color: #fd9644;
+  padding: 25px 0 0 30px;
+}
+.intro .main-layer .castle .walls .wall1 .wall .brick {
+  display: block;
+  width: 19px;
+  height: 8px;
+  background-color: #D35400;
+  border-radius: 6px;
+}
+.intro .main-layer .castle .walls .wall1 .wall::after {
+  content: "";
+  position: absolute;
+  width: 15px;
+  height: 60px;
+  background-color: #fd9644;
+  right: -11px;
+  top: 0;
+}
+.intro .main-layer .castle .walls .tower {
+  margin-left: 1px;
+  position: relative;
+}
+.intro .main-layer .castle .walls .tower .lone-bricks .brick {
+  position: absolute;
+  display: block;
+  height: 3px;
+  width: 13px;
+  background-color: #fd9644;
+  border-radius: 16px;
+  z-index: 1;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .walls .tower .lone-bricks .brick {
+    width: 9px;
+    height: 2px;
+  }
+}
+.intro .main-layer .castle .walls .tower .lone-bricks .brick.b1 {
+  top: 76px;
+  left: 10px;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .walls .tower .lone-bricks .brick.b1 {
+    top: 58px;
+    left: 5px;
+  }
+}
+.intro .main-layer .castle .walls .tower .lone-bricks .brick.b2 {
+  top: 85px;
+  left: 17px;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .walls .tower .lone-bricks .brick.b2 {
+    top: 63px;
+    left: 8px;
+  }
+}
+.intro .main-layer .castle .walls .tower .lone-bricks .brick.b3 {
+  top: 157px;
+  left: 20px;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .walls .tower .lone-bricks .brick.b3 {
+    top: 110px;
+    left: 8px;
+  }
+}
+.intro .main-layer .castle .walls .tower .lone-bricks .brick.b4 {
+  top: 180px;
+  left: 26px;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .walls .tower .lone-bricks .brick.b4 {
+    top: 126px;
+    left: 13px;
+  }
+}
+.intro .main-layer .castle .walls .tower .lone-bricks .brick.b5 {
+  top: 187px;
+  left: 20px;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .walls .tower .lone-bricks .brick.b5 {
+    top: 130px;
+    left: 8px;
+  }
+}
+.intro .main-layer .castle .walls .tower .lone-bricks .brick.b6 {
+  top: 213px;
+  left: 16px;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .walls .tower .lone-bricks .brick.b6 {
+    top: 147px;
+    left: 9px;
+  }
+}
+.intro .main-layer .castle .walls .tower .flag {
+  margin: 0 auto;
+}
+.intro .main-layer .castle .walls .tower .brick-top {
+  display: flex;
+  justify-content: center;
+  width: 98px;
+  height: 14px;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .walls .tower .brick-top {
+    width: 50px;
+    height: 9px;
+  }
+}
+.intro .main-layer .castle .walls .tower .brick-top .brick {
+  display: block;
+  width: 24px;
+}
+.intro .main-layer .castle .walls .tower .brick-top .brick:nth-child(1) {
+  background: linear-gradient(to right, #feca57 70%, #fd9644 70%);
+}
+.intro .main-layer .castle .walls .tower .brick-top .brick:nth-child(2) {
+  background: linear-gradient(to right, #feca57 50%, #ee5a24 50%);
+  margin: 0 13px;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .walls .tower .brick-top .brick:nth-child(2) {
+    margin: 0 7px;
+  }
+}
+.intro .main-layer .castle .walls .tower .brick-top .brick:nth-child(3) {
+  background: linear-gradient(to right, #d35400 30%, #ee5a24 30%);
+}
+.intro .main-layer .castle .walls .tower .top {
+  display: block;
+  width: 98px;
+  height: 30px;
+  background: linear-gradient(to right, #feca57 50%, #ee5a24 50%);
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .walls .tower .top {
+    width: 50px;
+    height: 15px;
+  }
+}
+.intro .main-layer .castle .walls .tower .bind-wall {
+  display: block;
+  position: relative;
+  width: 98px;
+  height: 15px;
+  background: linear-gradient(to right, #ff9f43 50%, #d35400 50%);
+  -webkit-clip-path: polygon(0 0, 100% 0, 91% 100%, 9% 100%);
+  clip-path: polygon(0 0, 100% 0, 91% 100%, 9% 100%);
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .walls .tower .bind-wall {
+    width: 50px;
+    height: 10px;
+  }
+}
+.intro .main-layer .castle .walls .tower .body {
+  position: relative;
+  display: flex;
+  width: 80px;
+  height: 120px;
+  background: linear-gradient(to right, #feca57 50%, #ee5a24 50%);
+  padding: 5px 6px;
+  margin: 0 auto;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .walls .tower .body {
+    width: 40px;
+    height: 81px;
+    padding: 5px 0;
+  }
+}
+.intro .main-layer .castle .walls .tower .body .window {
+  position: relative;
+  display: block;
+  width: 17px;
+  height: 23px;
+  border-top-right-radius: 9px;
+  border-top-left-radius: 9px;
+  margin: 8px 5px 11px 5px;
+  background-color: #3d3d3d;
+  border-bottom: 3px solid #ffeaa7;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .walls .tower .body .window {
+    width: 8px;
+    height: 10px;
+  }
+}
+.intro .main-layer .castle .walls .tower .body .window::after {
+  content: "";
+  position: absolute;
+  bottom: -9px;
+  width: 16px;
+  height: 6px;
+  background: rgba(0, 0, 0, 0.2);
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .walls .tower .body .window::after {
+    width: 8px;
+    height: 3px;
+    bottom: -6px;
+  }
+}
+.intro .main-layer .castle .walls .tower .body .window:nth-child(1) {
+  margin-right: 13px;
+  box-shadow: inset 3px 0 #636e72;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .walls .tower .body .window:nth-child(1) {
+    margin-right: 7px;
+  }
+}
+.intro .main-layer .castle .walls .tower .body .window:nth-child(2) {
+  margin-left: 13px;
+  box-shadow: inset -3px 0 #636e72;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .walls .tower .body .window:nth-child(2) {
+    margin-left: 7px;
+  }
+}
+.intro .main-layer .castle .walls .mid-wall {
+  position: relative;
+}
+.intro .main-layer .castle .walls .mid-wall .lone-bricks .brick {
+  position: absolute;
+  display: block;
+  width: 13px;
+  height: 4px;
+  border-radius: 16px;
+  background-color: #fd9644;
+  z-index: 1;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .walls .mid-wall .lone-bricks .brick {
+    width: 8px;
+    height: 2px;
+  }
+}
+.intro .main-layer .castle .walls .mid-wall .lone-bricks .brick:nth-child(1) {
+  top: 22px;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .walls .mid-wall .lone-bricks .brick:nth-child(1) {
+    top: 6px;
+  }
+}
+.intro .main-layer .castle .walls .mid-wall .lone-bricks .brick:nth-child(2) {
+  top: 40px;
+  left: 24px;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .walls .mid-wall .lone-bricks .brick:nth-child(2) {
+    top: 16px;
+    left: 12px;
+  }
+}
+.intro .main-layer .castle .walls .mid-wall .lone-bricks .brick:nth-child(3) {
+  top: 28px;
+  left: 40px;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .walls .mid-wall .lone-bricks .brick:nth-child(3) {
+    top: 10px;
+    left: 25px;
+  }
+}
+.intro .main-layer .castle .walls .mid-wall .lone-bricks .brick:nth-child(4) {
+  top: 23px;
+  left: 60px;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .walls .mid-wall .lone-bricks .brick:nth-child(4) {
+    top: 5px;
+    left: 39px;
+  }
+}
+.intro .main-layer .castle .walls .mid-wall .lone-bricks .brick:nth-child(5) {
+  top: 20px;
+  left: 108px;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .walls .mid-wall .lone-bricks .brick:nth-child(5) {
+    top: 25px;
+    left: 35px;
+  }
+}
+.intro .main-layer .castle .walls .mid-wall .lone-bricks .brick:nth-child(6) {
+  top: 22px;
+  right: 93px;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .walls .mid-wall .lone-bricks .brick:nth-child(6) {
+    top: 22px;
+    right: 51px;
+  }
+}
+.intro .main-layer .castle .walls .mid-wall .lone-bricks .brick:nth-child(7) {
+  top: 54px;
+  right: 67px;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .walls .mid-wall .lone-bricks .brick:nth-child(7) {
+    top: 8px;
+    right: 30px;
+  }
+}
+.intro .main-layer .castle .walls .mid-wall .lone-bricks .brick:nth-child(8) {
+  top: 40px;
+  right: 49px;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .walls .mid-wall .lone-bricks .brick:nth-child(8) {
+    top: 16px;
+    right: 18px;
+  }
+}
+.intro .main-layer .castle .walls .mid-wall .lone-bricks .brick:nth-child(9) {
+  top: 30px;
+  right: 20px;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .walls .mid-wall .lone-bricks .brick:nth-child(9) {
+    top: 30px;
+    right: 31px;
+  }
+}
+.intro .main-layer .castle .walls .mid-wall .lone-bricks .brick:nth-child(10) {
+  top: 15px;
+  right: 42px;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .walls .mid-wall .lone-bricks .brick:nth-child(10) {
+    top: 15px;
+    right: 42px;
+  }
+}
+.intro .main-layer .castle .walls .mid-wall .lone-bricks .brick:nth-child(11) {
+  top: 56px;
+  left: 77px;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .walls .mid-wall .lone-bricks .brick:nth-child(11) {
+    top: 6px;
+    left: 97px;
+  }
+}
+.intro .main-layer .castle .walls .mid-wall .lone-bricks .brick:nth-child(12) {
+  top: 50px;
+  right: 5px;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .walls .mid-wall .lone-bricks .brick:nth-child(12) {
+    top: 30px;
+    right: 131px;
+  }
+}
+.intro .main-layer .castle .walls .mid-wall .lined-bricks {
+  display: flex;
+  position: relative;
+  width: 313px;
+  height: 6px;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .walls .mid-wall .lined-bricks {
+    display: none;
+  }
+}
+.intro .main-layer .castle .walls .mid-wall .lined-bricks .brick {
+  position: relative;
+  display: block;
+  width: 7%;
+  margin-right: 3%;
+  background: linear-gradient(to right, #fdcb6e 70%, #d35400 70%);
+}
+.intro .main-layer .castle .walls .mid-wall .lined-bricks .brick::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 2px;
+  background-color: #D35400;
+  bottom: 0;
+  right: -9px;
+}
+.intro .main-layer .castle .walls .mid-wall .main {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  width: 313px;
+  height: 58px;
+  background-color: #fdcb6e;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .walls .mid-wall .main {
+    width: 151px;
+    height: 37px;
+  }
+}
+.intro .main-layer .castle .walls .mid-wall .main::before {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 30px;
+  height: 65px;
+  top: -7px;
+  left: -27px;
+  background-color: #fdcb6e;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .walls .mid-wall .main::before {
+    width: 30px;
+    height: 44px;
+    left: -15px;
+  }
+}
+.intro .main-layer .castle .walls .mid-wall .main::after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 30px;
+  height: 65px;
+  top: -7px;
+  right: -27px;
+  background-color: #fdcb6e;
+  border-right: 1px solid #fd9644;
+  z-index: 2;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .walls .mid-wall .main::after {
+    width: 30px;
+    height: 44px;
+    right: -15px;
+  }
+}
+.intro .main-layer .castle .walls .mid-wall .main .gate {
+  display: block;
+  position: relative;
+  width: 50px;
+  height: 40px;
+  border-top-right-radius: 25px;
+  border-top-left-radius: 25px;
+  background-color: #3d3d3d;
+  box-shadow: inset 4px 0 #636e72;
+  padding: 7px 13px;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .walls .mid-wall .main .gate {
+    width: 27px;
+    height: 22px;
+    padding: 4px 5px;
+  }
+}
+.intro .main-layer .castle .walls .mid-wall .main .gate .stair {
+  display: block;
+  position: relative;
+  border-radius: 15px;
+  background-color: #636e72;
+  height: 3px;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .walls .mid-wall .main .gate .stair {
+    height: 1px;
+  }
+}
+.intro .main-layer .castle .walls .mid-wall .main .gate .stair:nth-child(1) {
+  width: 20px;
+  margin: 0 0 3px 3px;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .walls .mid-wall .main .gate .stair:nth-child(1) {
+    width: 10px;
+  }
+}
+.intro .main-layer .castle .walls .mid-wall .main .gate .stair:nth-child(2) {
+  width: 23px;
+  margin: 0 0 3px 0;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .walls .mid-wall .main .gate .stair:nth-child(2) {
+    width: 12px;
+  }
+}
+.intro .main-layer .castle .walls .mid-wall .main .gate .stair:nth-child(3) {
+  width: 20px;
+  margin: 0 0 3px 7px;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .walls .mid-wall .main .gate .stair:nth-child(3) {
+    width: 12px;
+  }
+}
+.intro .main-layer .castle .walls .mid-wall .main .gate .stair:nth-child(4) {
+  width: 14px;
+  margin: 0 0 3px 0;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .walls .mid-wall .main .gate .stair:nth-child(4) {
+    width: 9px;
+  }
+}
+.intro .main-layer .castle .walls .mid-wall .main .gate .stair:nth-child(5) {
+  width: 20px;
+  margin: 0 0 3px 3px;
+}
+@media (max-width: 425px) {
+  .intro .main-layer .castle .walls .mid-wall .main .gate .stair:nth-child(5) {
+    width: 12px;
+  }
+}
+
+/* end intro */
+/* intro animation */
+@-webkit-keyframes "moving-cloud" {
+  0% {
+    transform: translateX(-1280px);
+    -webkit-transform: translateX(-1280px);
+  }
+  100% {
+    transform: translateX(1280px);
+    -webkit-transform: translateX(1280px);
+  }
+}
+@-webkit-keyframes "moving-cloud-tablet" {
+  0% {
+    transform: translateX(-1000px);
+    -webkit-transform: translateX(-1000px);
+  }
+  100% {
+    transform: translateX(1000px);
+    -webkit-transform: translateX(1000px);
+  }
+}
+@-webkit-keyframes "moving-cloud-phone" {
+  0% {
+    transform: translateX(-375px);
+    -webkit-transform: translateX(-375px);
+  }
+  100% {
+    transform: translateX(375px);
+    -webkit-transform: translateX(375px);
+  }
+}
+/* end intro animation */
+</style>
+
+  </head>
+
+<body translate="no">
+  <!-- start intro -->
+<section class="intro">
+    <div class="mycontainer">
+        <ul class="layer6">
+            <li class="line">
+                <span class="cloud1">
+                    <span class="part1"></span>
+                    <span class="part2"></span>
+                    <span class="part3"></span>                            
+                </span>
+            </li>
+            <li class="line">
+                <span class="cloud2">
+                    <span class="part1"></span>
+                    <span class="part2"></span>
+                    <span class="part3"></span>                            
+                </span>
+            </li> 
+            <li class="line">
+                <span class="cloud3">
+                    <span class="part1"></span>
+                    <span class="part2"></span>
+                    <span class="part3"></span>                            
+                </span>
+            </li>                     
+        </ul>
+        <ul class="layer5">
+            <li class="tree">
+                <span class="leaf l1"></span>
+                <span class="leaf l2"></span>
+                <span class="leaf l3"></span>
+                <span class="main-branch"></span>
+            </li>
+            <li class="tree">
+                <span class="leaf l1"></span>
+                <span class="leaf l2"></span>
+                <span class="leaf l3"></span>
+                <span class="main-branch"></span>
+            </li>
+            <li class="tree">
+                <span class="leaf l1"></span>
+                <span class="leaf l2"></span>
+                <span class="leaf l3"></span>
+                <span class="main-branch"></span>
+            </li>
+            <li class="tree">
+                <span class="leaf l1"></span>
+                <span class="leaf l2"></span>
+                <span class="leaf l3"></span>
+                <span class="main-branch"></span>
+            </li>
+            <li class="tree">
+                <span class="leaf l1"></span>
+                <span class="leaf l2"></span>
+                <span class="leaf l3"></span>
+                <span class="main-branch"></span>
+            </li>
+            <li class="tree">
+                <span class="leaf l1"></span>
+                <span class="leaf l2"></span>
+                <span class="leaf l3"></span>
+                <span class="main-branch"></span>
+            </li>
+            <li class="tree">
+                <span class="leaf l1"></span>
+                <span class="leaf l2"></span>
+                <span class="leaf l3"></span>
+                <span class="main-branch"></span>
+            </li>
+            <li class="tree">
+                <span class="leaf l1"></span>
+                <span class="leaf l2"></span>
+                <span class="leaf l3"></span>
+                <span class="main-branch"></span>
+            </li>
+            <li class="tree">
+                <span class="leaf l1"></span>
+                <span class="leaf l2"></span>
+                <span class="leaf l3"></span>
+                <span class="main-branch"></span>
+            </li>
+            <li class="tree">
+                <span class="leaf l1"></span>
+                <span class="leaf l2"></span>
+                <span class="leaf l3"></span>
+                <span class="main-branch"></span>
+            </li>
+            <li class="tree">
+                <span class="leaf l1"></span>
+                <span class="leaf l2"></span>
+                <span class="leaf l3"></span>
+                <span class="main-branch"></span>
+            </li>
+        </ul>                
+        <ul class="layer4">
+            <li class="tree">
+                <span class="leaf l1"></span>
+                <span class="leaf l2"></span>
+                <span class="leaf l3"></span>
+                <span class="main-branch"></span>
+            </li>
+            <li class="tree">
+                <span class="leaf l1"></span>
+                <span class="leaf l2"></span>
+                <span class="leaf l3"></span>
+                <span class="main-branch"></span>
+            </li>
+            <li class="tree">
+                <span class="leaf l1"></span>
+                <span class="leaf l2"></span>
+                <span class="leaf l3"></span>
+                <span class="main-branch"></span>
+            </li>
+            <li class="tree">
+                <span class="leaf l1"></span>
+                <span class="leaf l2"></span>
+                <span class="leaf l3"></span>
+                <span class="main-branch"></span>
+            </li>
+            <li class="tree">
+                <span class="leaf l1"></span>
+                <span class="leaf l2"></span>
+                <span class="leaf l3"></span>
+                <span class="main-branch"></span>
+            </li> 
+            <li class="tree">
+                <span class="leaf l1"></span>
+                <span class="leaf l2"></span>
+                <span class="leaf l3"></span>
+                <span class="main-branch"></span>
+            </li> 
+            <li class="tree">
+                <span class="leaf l1"></span>
+                <span class="leaf l2"></span>
+                <span class="leaf l3"></span>
+                <span class="main-branch"></span>
+            </li> 
+            <li class="tree">
+                <span class="leaf l1"></span>
+                <span class="leaf l2"></span>
+                <span class="leaf l3"></span>
+                <span class="main-branch"></span>
+            </li> 
+            <li class="tree">
+                <span class="leaf l1"></span>
+                <span class="leaf l2"></span>
+                <span class="leaf l3"></span>
+                <span class="main-branch"></span>
+            </li> 
+            <li class="tree">
+                <span class="leaf l1"></span>
+                <span class="leaf l2"></span>
+                <span class="leaf l3"></span>
+                <span class="main-branch"></span>
+            </li> 
+            <li class="tree">
+                <span class="leaf l1"></span>
+                <span class="leaf l2"></span>
+                <span class="leaf l3"></span>
+                <span class="main-branch"></span>
+            </li> 
+            <li class="tree">
+                <span class="leaf l1"></span>
+                <span class="leaf l2"></span>
+                <span class="leaf l3"></span>
+                <span class="main-branch"></span>
+            </li>                     
+        </ul>
+        <ul class="layer3">
+            <li class="tree">
+                <span class="leaf l1"></span>
+                <span class="leaf l2"></span>
+                <span class="leaf l3"></span>
+                <span class="main-branch"></span>
+            </li>
+            <li class="tree">
+                <span class="leaf l1"></span>
+                <span class="leaf l2"></span>
+                <span class="leaf l3"></span>
+                <span class="main-branch"></span>
+            </li>
+            <li class="tree">
+                <span class="leaf l1"></span>
+                <span class="leaf l2"></span>
+                <span class="leaf l3"></span>
+                <span class="main-branch"></span>
+            </li>
+            <li class="tree">
+                <span class="leaf l1"></span>
+                <span class="leaf l2"></span>
+                <span class="leaf l3"></span>
+                <span class="main-branch"></span>
+            </li>
+            <li class="tree">
+                <span class="leaf l1"></span>
+                <span class="leaf l2"></span>
+                <span class="leaf l3"></span>
+                <span class="main-branch"></span>
+            </li>
+            <li class="tree">
+                <span class="leaf l1"></span>
+                <span class="leaf l2"></span>
+                <span class="leaf l3"></span>
+                <span class="main-branch"></span>
+            </li>
+            <li class="tree">
+                <span class="leaf l1"></span>
+                <span class="leaf l2"></span>
+                <span class="leaf l3"></span>
+                <span class="main-branch"></span>
+            </li>
+            <li class="tree">
+                <span class="leaf l1"></span>
+                <span class="leaf l2"></span>
+                <span class="leaf l3"></span>
+                <span class="main-branch"></span>
+            </li>
+            <li class="tree">
+                <span class="leaf l1"></span>
+                <span class="leaf l2"></span>
+                <span class="leaf l3"></span>
+                <span class="main-branch"></span>
+            </li>
+            <li class="tree">
+                <span class="leaf l1"></span>
+                <span class="leaf l2"></span>
+                <span class="leaf l3"></span>
+                <span class="main-branch"></span>
+            </li>
+            <li class="tree">
+                <span class="leaf l1"></span>
+                <span class="leaf l2"></span>
+                <span class="leaf l3"></span>
+                <span class="main-branch"></span>
+            </li>
+            <li class="tree">
+                <span class="leaf l1"></span>
+                <span class="leaf l2"></span>
+                <span class="leaf l3"></span>
+                <span class="main-branch"></span>
+            </li>
+            <li class="tree">
+                <span class="leaf l1"></span>
+                <span class="leaf l2"></span>
+                <span class="leaf l3"></span>
+                <span class="main-branch"></span>
+            </li>
+        </ul>
+        <ul class="layer2">
+            <li class="tree1">
+                <span class="leaf">
+                    <span class="big-c"></span>
+                    <span class="mid-c"></span>
+                    <span class="mid-c"></span>
+                    <span class="small-c"></span>
+                </span>
+                <span class="mid-branch"></span>
+            </li>
+            <li class="skull">
+                <span class="horns"></span>
+                <span class="head">
+                    <span class="eye"></span>
+                    <span class="eye"></span>
+                </span>
+                <span class="jaw">
+                    <span class="line"></span>
+                    <span class="line"></span>
+                    <span class="line"></span>
+                </span>
+            </li>
+            <li class="sword">
+                <span class="last"></span>
+                <span class="handle"></span>
+                <span class="safe"></span>
+                <span class="blade"></span>
+            </li>
+            <li class="tree2">
+                <span class="leaf"></span>
+                <span class="leaf"></span>
+                <span class="leaf"></span>
+            </li> 
+            <li class="tree3">
+                <span class="leaf"></span>
+                <span class="leaf"></span>
+                <span class="leaf"></span>
+                <span class="leaf"></span>
+                <span class="leaf"></span>
+                <span class="mid-branch"></span>
+            </li>
+            <li class="grass">
+                <span class="leaf"></span>
+                <span class="leaf"></span>
+                <span class="leaf"></span>
+                <span class="leaf"></span>
+                <span class="leaf"></span>
+                <span class="leaf"></span>
+                <span class="leaf"></span>
+                <span class="leaf"></span>
+                <span class="leaf"></span>
+                <span class="leaf"></span>
+            </li>
+            <li class="tree4">
+                <span class="rounded-sb">
+                    <span class="leaf"></span>
+                    <span class="leaf"></span>
+                    <span class="leaf"></span>
+                    <span class="leaf"></span>
+                </span>
+                <span class="bush">
+                    <span class="leaf"></span>
+                    <span class="leaf"></span>
+                    <span class="leaf"></span>
+                    <span class="leaf"></span>
+                    <span class="leaf"></span>
+                    <span class="leaf"></span>
+                </span>
+                <span class="mid-branch"></span>
+            </li>
+        </ul>
+        <ul class="main-layer">
+            <li class="tree1">
+                <span class="left-branches">
+                    <span class="branch"></span>
+                    <span class="branch"></span>
+                    <span class="branch"></span>
+                </span>
+                <span class="stick"></span>
+                <span class="right-branches">
+                    <span class="branch"></span>
+                    <span class="branch"></span>
+                    <span class="branch"></span>                            
+                </span>
+            </li>
+            <li class="tree2">
+                <span class="leaf1"></span>
+                <span class="leaf2"></span>
+                <span class="leaf3"></span>
+                <span class="stick"></span>
+                <span class="ground"></span>
+            </li>
+            <li class="tree3">
+                <span class="right-branch">
+                    <span class="bush">
+                        <span class="leaf"></span>
+                    </span>
+                </span>
+                <span class="middle-branch">
+                    <span class="bush">
+                        <span class="leaf"></span>
+                        <span class="leaf"></span>
+                        <span class="leaf"></span>
+                        <span class="leaf"></span>
+                        <span class="leaf"></span>
+                        <span class="leaf"></span>
+                        <span class="leaf"></span>
+                        <span class="leaf"></span>
+                    </span>
+                    <span class="stick"></span>
+                </span>
+            </li>
+            <li class="tree4">
+                <span class="left-branches">
+                    <span class="bush">
+                        <span class="leaf"></span>
+                        <span class="leaf"></span>
+                        <span class="leaf"></span>
+                        <span class="leaf"></span>
+                        <span class="leaf"></span>
+                        <span class="leaf"></span>
+                        <span class="leaf"></span>
+                        <span class="leaf"></span>                                
+                    </span>
+                    <span class="branch"></span>
+                </span>
+                <span class="middle-branch">
+                    <span class="bush">
+                        <span class="leaf"></span>
+                    </span>
+                    <span class="stick"></span>
+                </span>
+                <span class="right-branches">
+                    <span class="bush">
+                        <span class="leaf"></span>
+                        <span class="leaf"></span>
+                        <span class="leaf"></span>
+                        <span class="leaf"></span>
+                        <span class="leaf"></span>
+                        <span class="leaf"></span>
+                        <span class="leaf"></span>
+                    </span>
+                    <span class="branch"></span>
+                </span>
+            </li>
+            <li class="tree5">
+                <span class="left-branch">
+                    <span class="bush"></span>
+                    <span class="branch"></span>
+                </span>
+                <span class="middle-branch">
+                    <span class="bush"></span>
+                    <span class="branch"></span>
+                </span>
+                <span class="right-branch">
+                    <span class="bush"></span>
+                    <span class="branch"></span>
+                </span>
+            </li> 
+            <li class="tree6">
+                <span class="left-branch">
+                    <span class="bush">
+                        <span class="leaf"></span>
+                    </span>
+                </span>
+                <span class="middle-branch">
+                    <span class="bush">
+                        <span class="leaf"></span>                           
+                    </span>
+                    <span class="branch"></span>
+                </span>
+                <span class="right-branch">
+                    <span class="bush">
+                        <span class="leaf"></span>
+                    </span>
+                    <span class="branch"></span>
+                </span>
+            </li>
+            <li class="tree7 t1">
+                <span class="left-branches">
+                    <span class="bush b1"></span>
+                    <span class="bush b2"></span>
+                    <span class="branch1"></span>
+                    <span class="branch2"></span>
+                </span>
+                <span class="middle-branches">
+                    <span class="bush"></span>
+                    <span class="branch"></span>
+                </span>
+                <span class="right-branches">
+                    <span class="branch1"></span>
+                    <span class="branch2"></span>                            
+                </span>
+            </li>
+            <li class="tree7 t2">
+                <span class="left-branches">
+                    <span class="bush b1"></span>
+                    <span class="bush b2"></span>
+                    <span class="branch1"></span>
+                    <span class="branch2"></span>
+                </span>
+                <span class="middle-branches">
+                    <span class="bush"></span>
+                    <span class="branch"></span>
+                </span>
+                <span class="right-branches">
+                    <span class="branch1"></span>
+                    <span class="branch2"></span>                            
+                </span>
+            </li>
+            <li class="tree7 t3">
+                <span class="left-branches">
+                    <span class="bush b1"></span>
+                    <span class="bush b2"></span>
+                    <span class="branch1"></span>
+                    <span class="branch2"></span>
+                </span>
+                <span class="middle-branches">
+                    <span class="bush"></span>
+                    <span class="branch"></span>
+                </span>
+                <span class="right-branches">
+                    <span class="branch1"></span>
+                    <span class="branch2"></span>                            
+                </span>
+            </li>
+            <li class="castle">
+                <span class="tall-tower">
+                    <span>
+                        <span class="flag"></span>
+                        <span class="top"></span>
+                        <span class="roof"></span>
+                        <span class="bind-roof">
+                            <span class="inner"></span>
+                        </span>
+                        <span class="body">
+                            <span class="part">
+                                <span class="brick"></span>
+                                <span class="brick"></span>
+                                <span class="window"></span>
+                                <span class="window"></span>
+                            </span>
+                            <span class="part">
+                                <span class="brick"></span>
+                                <span class="window"></span>
+                                <span class="window"></span>
+                                <span class="window"></span>
+                            </span>
+                            <span class="part">
+                                <span class="brick"></span>
+                                <span class="brick"></span>
+                                <span class="window"></span>
+                                <span class="window"></span>
+                                <span class="window"></span>
+                            </span>
+                            <span class="part">
+                                <span class="window"></span>
+                                <span class="window"></span>
+                            </span>
+                        </span>                                
+                    </span>
+                </span>  
+                <span class="right-build">
+                    <span class="contain">
+                        <span class="flag"></span>
+                        <span class="roof">
+                            <span class="window-set">
+                                <span class="window"></span>
+                                <span class="window"></span>
+                                <span class="window"></span>
+                            </span>
+                            <span class="edge">
+                                <span class="window"></span>
+                            </span>
+                        </span>
+                        <span class="roof-line"></span>
+                        <span class="body">
+                            <span class="window-set">
+                                <span class="window"></span>
+                                <span class="window"></span>
+                                <span class="window"></span>
+                                <span class="window"></span>
+                                <span class="window"></span>
+                                <span class="window"></span>
+                                <span class="window"></span>
+                                <span class="window"></span>
+                                <span class="window"></span>
+                                <span class="window"></span>
+                                <span class="window"></span>
+                                <span class="window"></span>
+                            </span>
+                            <span class="window-set">
+                                <span class="window"></span>
+                                <span class="window"></span>
+                                <span class="window"></span>
+                                <span class="window"></span>
+                                <span class="window"></span>
+                                <span class="window"></span>
+                                <span class="window"></span>
+                                <span class="window"></span>
+                                <span class="window"></span>
+                                <span class="window"></span>
+                                <span class="window"></span>
+                                <span class="window"></span>
+                            </span>
+                        </span>
+                    </span>
+                </span>
+                <span class="left-build">
+                    <span class="contain">
+                        <span class="flag"></span>
+                        <span class="roof">
+                            <span class="window-set">
+                                <span class="window"></span>
+                            </span>
+                        </span>
+                        <span class="roof-line"></span>                                
+                        <span class="body">
+                            <span class="window-set">
+                                <span class="window"></span>
+                                <span class="window"></span>
+                            </span>
+                            <span class="window-set">
+                                <span class="window"></span>
+                                <span class="window"></span> 
+                                <span class="window"></span>
+                                <span class="window"></span>
+                                <span class="window"></span>
+                                <span class="window"></span>                                           
+                            </span>
+                        </span>
+                    </span>
+                </span>
+                <span class="walls">
+                    <span class="wall1">
+                        <span class="half-wall"></span>
+                        <span class="wall">
+                            <span class="brick"></span>
+                        </span>
+                    </span>
+                    <span class="tower">
+                        <span class="lone-bricks">
+                            <span class="brick b1"></span>
+                            <span class="brick b2"></span>
+                            <span class="brick b3"></span>
+                            <span class="brick b4"></span>
+                            <span class="brick b5"></span>
+                            <span class="brick b6"></span>
+                        </span>
+                        <span class="flag"></span>
+                        <span class="brick-top">
+                            <span class="brick"></span>
+                            <span class="brick"></span>
+                            <span class="brick"></span>
+                        </span>
+                        <span class="top"></span>
+                        <span class="bind-wall"></span>
+                        <span class="body">
+                            <span class="window"></span>
+                            <span class="window"></span>
+                        </span>
+                    </span>
+                    <span class="mid-wall">
+                        <span class="lone-bricks">
+                            <span class="brick"></span>
+                            <span class="brick"></span>
+                            <span class="brick"></span>
+                            <span class="brick"></span>
+                            <span class="brick"></span>
+                            <span class="brick"></span>
+                            <span class="brick"></span>
+                            <span class="brick"></span>
+                            <span class="brick"></span>
+                            <span class="brick"></span>
+                            <span class="brick"></span>
+                            <span class="brick"></span>
+                        </span>
+                        <span class="lined-bricks">
+                            <span class="brick"></span>
+                            <span class="brick"></span>
+                            <span class="brick"></span>
+                            <span class="brick"></span>
+                            <span class="brick"></span>
+                            <span class="brick"></span>
+                            <span class="brick"></span>
+                            <span class="brick"></span>
+                            <span class="brick"></span>
+                            <span class="brick"></span>
+                        </span>
+                        <span class="main">
+                            <span class="gate">
+                                <span class="stair"></span>
+                                <span class="stair"></span>
+                                <span class="stair"></span>
+                                <span class="stair"></span>
+                                <span class="stair"></span>
+                            </span>
+                        </span>
+                    </span>
+                    <span class="tower">
+                        <span class="lone-bricks">
+                            <span class="brick b1"></span>
+                            <span class="brick b2"></span>
+                            <span class="brick b3"></span>
+                            <span class="brick b4"></span>
+                            <span class="brick b5"></span>
+                            <span class="brick b6"></span>
+                        </span>
+                        <span class="flag"></span>
+                        <span class="brick-top">
+                            <span class="brick"></span>
+                            <span class="brick"></span>
+                            <span class="brick"></span>
+                        </span>
+                        <span class="top"></span>
+                        <span class="bind-wall"></span>
+                        <span class="body">
+                            <span class="window"></span>
+                            <span class="window"></span>
+                        </span>
+                    </span>                            
+                </span>
+                <span class="base">
+                    <span class="roof">
+                        <span class="edge"></span>
+                    </span>
+                    <span class="body">
+                        <span class="window"></span>
+                        <span class="wall"></span>
+                    </span>
+                </span>
+            </li>
+        </ul><!-- end layer -->
+    </div> <!-- end my container -->
+</section>
+<!-- end intro -->
+  
+  
+  
+</body>
+
+</html>

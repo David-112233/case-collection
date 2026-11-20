@@ -1,0 +1,67 @@
+{
+  "source_id": "codepen:alessiomarcone/jjybzwm",
+  "author": "alessiomarcone",
+  "pen_id": "JjyBzwm",
+  "url": "https://codepen.io/alessiomarcone/pen/JjyBzwm",
+  "acquisition": "cdpn_fullpage",
+  "acquisition_url": "https://cdpn.io/alessiomarcone/fullpage/JjyBzwm",
+  "retrieved_at": "2026-11-16T13:42:31+00:00",
+  "license": "MIT (CodePen public pen default)",
+  "candidate_target_tier": "T1",
+  "candidate_found_via": "websearch-2026-11-16-complex-webpage",
+  "fetch_status": "ok",
+  "title": "7 Fantastic Landing Pages Design Ideas",
+  "canonical_url": "https://codepen.io/alessiomarcone/pen/JjyBzwm",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "e873d7da4e9b1f9a240f17e58ced38c5a4a39ce400d309f029fc17eec117d89c",
+  "source_html_sha256": "ea5ea15b7387a5c331aae5228de8483e669f1234348e4f12aac23c8c65f59499",
+  "analysis": {
+    "js": {
+      "has_js": true,
+      "inline_js_chars": 0,
+      "external_scripts": [
+        "https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js",
+        "https://code.jquery.com/jquery-3.2.1.slim.min.js",
+        "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js",
+        "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      ],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 0,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": false,
+      "clip_path": false,
+      "css_counter": false,
+      "media_query": false
+    },
+    "external_stylesheets": [],
+    "css_imports": [
+      "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300",
+      "https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@700&family=Questrial&display=swap"
+    ],
+    "css_chars": 7340,
+    "element_count": 123,
+    "html_chars": 25571
+  }
+}

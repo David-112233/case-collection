@@ -1,0 +1,64 @@
+{
+  "source_id": "codepen:turkaysenur/zepxeym",
+  "author": "TurkAysenur",
+  "pen_id": "ZEpxeYm",
+  "url": "https://codepen.io/TurkAysenur/pen/ZEpxeYm",
+  "acquisition": "cdpn_fullpage",
+  "acquisition_url": "https://cdpn.io/TurkAysenur/fullpage/ZEpxeYm",
+  "retrieved_at": "2026-11-16T13:18:32+00:00",
+  "license": "MIT (CodePen public pen default)",
+  "fetch_status": "ok",
+  "title": "Glassmorphism Creative Cloud App Redesign",
+  "canonical_url": "https://codepen.io/TurkAysenur/pen/ZEpxeYm",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "fcf2b4507152585e9cfe522d215f3a6ffbfdbfef7baca130842cfb5e01942497",
+  "source_html_sha256": "32ab4bab23ae727b8c8dec2fa59af7659f290fa558904f6c794745df748d45fb",
+  "analysis": {
+    "js": {
+      "has_js": true,
+      "inline_js_chars": 1814,
+      "external_scripts": [
+        "https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js",
+        "https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"
+      ],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 0,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": true,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": false,
+      "clip_path": false,
+      "css_counter": false,
+      "media_query": true
+    },
+    "external_stylesheets": [
+      "https://public.codepenassets.com/css/normalize-5.0.0.min.css"
+    ],
+    "css_imports": [
+      "https://fonts.googleapis.com/css2?family=Poppins:wght@200"
+    ],
+    "css_chars": 17237,
+    "element_count": 224,
+    "html_chars": 44529
+  }
+}
