@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>Folding layout 3D</title>
+
+    <link rel="canonical" href="https://codepen.io/Enrichr-Dev/pen/OPprwwa">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Parkinsans:wght@400;500;600;700;800&family=Instrument+Sans:wght@400;500;600&family=Fira+Code:wght@400;500&display=swap">
+  
+  
+  
+<style>
+/* Folding layout 3D · from the Enrichr Library: https://enrichr.dev/elements/folding-layout-3d.html */
+html, body { margin: 0; min-height: 100%; background: #0c1e18; }
+#enrichr-root { min-height: 100vh; }
+#enrichr-root > * { min-height: 100vh; }
+/* This demo follows the page scroll, so the page gets room to scroll above and below it. */
+.enrichr-scroll-hint { box-sizing: border-box; height: 55vh; margin: 0; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 2rem; color: #fbf8f1; opacity: .75; font: 600 .95rem/1 'Parkinsans', system-ui, sans-serif; letter-spacing: .1em; text-transform: uppercase; }
+.enrichr-scroll-hint::after { content: "\2193"; margin-left: .5em; }
+.enrichr-scroll-end { height: 100vh; }
+
+/* Enrichr Library · https://enrichr.dev */
+.ef-fold { overflow: hidden; container-type: inline-size; width: 100%; padding: 1.2rem 1rem 1rem; box-sizing: border-box; font-family: "Helvetica Neue", Arial, "Segoe UI", system-ui, sans-serif; background: var(--ef-fold-bg, #0c1e18); color: #fbf8f1; }
+.ef-fold__view { position: relative; height: var(--ef-fh, 20rem); perspective: 1100px; perspective-origin: 50% 40%; }
+.ef-fold__stack { position: relative; width: 100%; height: var(--ef-ph, 5rem); transform-style: preserve-3d; will-change: transform; }
+.ef-fold__p { position: relative; width: 100%; height: var(--ef-ph, 5rem); transform-origin: 50% 0; transform-style: preserve-3d; will-change: transform; }
+.ef-fold__p > .ef-fold__p { position: absolute; left: 0; top: 100%; }
+.ef-fold__face { position: absolute; inset: 0; overflow: hidden; backface-visibility: hidden; background: var(--ef-fold-a, #005236); }
+.ef-fold__art { position: absolute; left: 0; width: 100%; height: calc(var(--ef-ph, 5rem) * var(--ef-n, 4)); background: radial-gradient(circle at 78% 30%, var(--ef-fold-b, #e6ff55) 0 14%, transparent 14.5%), radial-gradient(circle at 20% 90%, rgba(255, 255, 255, 0.18) 0 28%, transparent 28.5%), linear-gradient(160deg, var(--ef-fold-a, #005236), #0c1e18 95%); }
+.ef-fold__word { position: absolute; left: 6%; bottom: 8%; right: 6%; font-size: clamp(2rem, 17cqw, 7rem); font-weight: 900; line-height: 0.9; letter-spacing: -0.04em; text-transform: uppercase; color: #fbf8f1; }
+.ef-fold__word em { font-style: normal; color: var(--ef-fold-b, #e6ff55); }
+.ef-fold__shade { position: absolute; inset: 0; pointer-events: none; background: #000; opacity: 0; }
+.ef-fold__p[data-up] .ef-fold__shade { background: #fff; }
+.ef-fold__ctl { display: flex; align-items: center; gap: 0.8rem; margin-top: 0.9rem; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.ef-fold__rng { flex: 1; min-width: 0; accent-color: var(--ef-fold-b, #e6ff55); height: 1.6rem; }
+.ef-fold__rng:focus-visible { outline: 2px solid var(--ef-fold-b, #e6ff55); outline-offset: 3px; }
+.ef-fold__sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+@media (prefers-reduced-motion: reduce) { .ef-fold__stack, .ef-fold__p { transition: none !important; } }
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <p class="enrichr-scroll-hint" aria-hidden="true">Scroll down</p>
+<div id="enrichr-root">
+<div class="ef-fold">
+  <div class="ef-fold__view"><div class="ef-fold__stack"></div></div>
+  <label class="ef-fold__ctl"><span class="ef-fold__lab">Fold</span><input class="ef-fold__rng" type="range" min="0" max="100" step="1" value="0" aria-label="Fold amount"></label>
+</div>
+</div>
+<div class="enrichr-scroll-end" aria-hidden="true"></div>
+  
+    <script id="rendered-js" >
+// Enrichr Library · https://enrichr.dev
+// Folding layout 3D: a stack of panels hinged to each other like a concertina. Each panel is nested inside the one above
+// (transform-origin at the hinge), so rotateX on the whole chain folds the stack in CSS 3D. Fold amount follows scroll
+// (flat in the middle of the screen, folded as it enters and leaves) or the slider under the stack.
+// mount(root, { panels (2-8), foldAngle (max degrees per hinge), height (flat stack height px), word (text across the panels),
+//               manual (0 = follow scroll, 1-100 = fixed fold %), colorA, colorB })
+function mount(root, o) {
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var box = root.querySelector(".ef-fold");
+  var view = root.querySelector(".ef-fold__view");
+  var stack = root.querySelector(".ef-fold__stack");
+  var rng = root.querySelector(".ef-fold__rng");
+  var opts = {},panels = [],raf = 0,visible = true,io = null;
+  var fold = 0,target = 0,lastP = -1,held = false,lastDrawn = -1;
+
+  function render() {
+    stack.textContent = "";
+    var n = Math.max(2, Math.min(8, Math.round(opts.panels)));
+    box.style.setProperty("--ef-n", n);
+    box.style.setProperty("--ef-fh", opts.height + "px");
+    box.style.setProperty("--ef-ph", (opts.height / n).toFixed(2) + "px");
+    box.style.setProperty("--ef-fold-a", opts.colorA);
+    box.style.setProperty("--ef-fold-b", opts.colorB);
+    var parent = stack;
+    panels = [];
+    for (var i = 0; i < n; i++) {
+      var p = document.createElement("div");
+      p.className = "ef-fold__p";
+      if (i % 2) p.setAttribute("data-up", "");
+      var face = document.createElement("div");face.className = "ef-fold__face";face.setAttribute("aria-hidden", "true");
+      var art = document.createElement("div");art.className = "ef-fold__art";art.style.top = "calc(var(--ef-ph) * " + -i + ")";
+      var w = document.createElement("div");w.className = "ef-fold__word";
+      var words = String(opts.word).split(/\s+/);
+      w.textContent = "";
+      words.forEach(function (t, k) {
+        if (k) w.appendChild(document.createElement("br"));
+        var s = document.createElement(k === words.length - 1 && words.length > 1 ? "em" : "span");s.textContent = t;w.appendChild(s);
+      });
+      art.appendChild(w);
+      var sh = document.createElement("div");sh.className = "ef-fold__shade";
+      face.appendChild(art);face.appendChild(sh);p.appendChild(face);
+      parent.appendChild(p);
+      panels.push({ el: p, shade: sh });
+      parent = p;
+    }
+    var sr = document.createElement("span");sr.className = "ef-fold__sr";sr.textContent = opts.word;
+    stack.appendChild(sr);
+    lastDrawn = -1;
+    apply(fold);
+  }
+  function apply(f) {
+    if (Math.abs(f - lastDrawn) < 0.0005) return;
+    lastDrawn = f;
+    var n = panels.length,th = f * Math.min(85, opts.foldAngle) * Math.PI / 180,deg = th * 180 / Math.PI;
+    panels.forEach(function (p, i) {
+      var rel = i === 0 ? deg : i % 2 ? -2 * deg : 2 * deg;
+      p.el.style.transform = "rotateX(" + rel.toFixed(2) + "deg)";
+      var s = Math.sin(th);
+      p.shade.style.opacity = (i % 2 ? 0.16 * s : 0.5 * s).toFixed(3);
+    });
+    var flat = opts.height,proj = flat * Math.cos(th);
+    stack.style.transform = "translateY(" + ((flat - proj) / 2).toFixed(1) + "px)";
+    rng.value = String(Math.round(f * 100));
+    rng.setAttribute("aria-valuetext", Math.round(f * 100) + "% folded");
+  }
+  function scrollFold() {
+    if (opts.manual > 0) return opts.manual / 100;
+    var r = box.getBoundingClientRect(),vh = window.innerHeight || 800;
+    var c = (r.top + r.height / 2) / vh;
+    var d = Math.abs(c - 0.5) - 0.1;
+    var t = Math.min(1, Math.max(0, d / 0.42));
+    return t * t * (3 - 2 * t);
+  }
+  function tick() {
+    raf = requestAnimationFrame(tick);
+    if (!visible) return;
+    var s = window.scrollY;
+    if (Math.abs(s - lastP) > 0.5) {if (lastP >= 0) held = false;lastP = s;}
+    if (!held && !reduce) target = scrollFold();
+    fold += (target - fold) * (reduce ? 1 : 0.14);
+    if (Math.abs(target - fold) < 0.001) fold = target;
+    apply(fold);
+  }
+  function onInput() {held = true;target = Number(rng.value) / 100;fold = target;apply(fold);}
+  function update(next) {
+    opts = Object.assign({ panels: 4, foldAngle: 70, height: 320, word: "Fold out", manual: 0, colorA: "#005236", colorB: "#e6ff55" }, opts, next || {});
+    ["panels", "foldAngle", "height", "manual"].forEach(function (k) {opts[k] = Number(opts[k]);});
+    held = false;
+    target = reduce ? opts.manual > 0 ? opts.manual / 100 : 0 : scrollFold();
+    fold = target;
+    render();
+  }
+  rng.addEventListener("input", onInput);
+  update(o);
+  if (!reduce && "IntersectionObserver" in window) {io = new IntersectionObserver(function (e) {visible = e[0].isIntersecting;});io.observe(box);}
+  raf = requestAnimationFrame(tick);
+  return { update: update, destroy: function () {cancelAnimationFrame(raf);if (io) io.disconnect();rng.removeEventListener("input", onInput);} };
+}
+
+// Start it with the Library's default settings. Change any of these to taste;
+// the full list, with sliders, is on https://enrichr.dev/elements/folding-layout-3d.html
+var enrichr = mount(document.getElementById("enrichr-root"), {
+  "panels": 4,
+  "foldAngle": 70,
+  "height": 320,
+  "word": "Fold out",
+  "manual": 0,
+  "colorA": "#005236",
+  "colorB": "#e6ff55" });
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>
