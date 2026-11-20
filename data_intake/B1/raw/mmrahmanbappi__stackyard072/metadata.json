@@ -1,0 +1,14 @@
+{
+  "key": "mmrahmanbappi__stackyard072",
+  "url": "https://mmrahmanbappi.github.io/100-css-designs/08-3d-depth/072-isometric/demo.html",
+  "upstream": "https://github.com/mmrahmanbappi/100-css-designs/blob/fba40b6748ca58ed147bbf4d6de74c3bceaee60a/08-3d-depth/072-isometric/demo.html",
+  "revision": "fba40b6748ca58ed147bbf4d6de74c3bceaee60a",
+  "title": "CSS 等轴仓储首屏",
+  "evidence": "云端桌面默认帧：多色箱体顶面与立面同向投影，左前高箱挡住后方矮层一部分，地面网格与传送带平面贴合。不看传送带的纹理循环；未验证窄屏或按钮。",
+  "decision": "hold",
+  "visual_environment": "cloud Chromium desktop",
+  "licence": "MIT",
+  "entry": "source.html",
+  "archive_notes": "Original HTML unchanged; externally hosted font.",
+  "date": "2026-11-20"
+}
