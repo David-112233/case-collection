@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>Fold and Unfold CSS Animation</title>
+
+    <link rel="canonical" href="https://codepen.io/cballenar/pen/mdKwxjx">
+  
+  <link rel="stylesheet" href="https://public.codepenassets.com/css/normalize-5.0.0.min.css">
+
+  
+  
+<style>
+/* =============================================================================
+ * Invitation Container
+ * =============================================================================
+ * These Styles have been modified after uploading them to squarespace to
+ * account for multiple issues introduced by their cascading styles. Such as:
+ * - calc() not properly working. I think the CSS gets mangled.
+ * - margin-top being overwritten. They have a rule that zeroes the mt, you need
+ *   the following format to overrule it .gparent .parent element:first-child()
+ *
+ */
+.invitation {
+  --width: 33vw;
+  --height: calc(0.7727 * var(--width));
+  --paper-angle: 35deg;
+  --paper-adjustment: 0.78;
+  position: relative;
+  margin: auto;
+  background: #1d1d28;
+  font-family: sans-serif;
+  overflow: hidden;
+}
+.invitation img {
+  display: block;
+}
+.invitation .frame {
+  height: 100vh;
+  margin-right: -1em;
+  overflow-y: scroll;
+}
+.invitation .frame::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 16em;
+  border-radius: 100%;
+  box-shadow: 0 36em 20em #cbe9ff3d;
+  background: transparent;
+  position: fixed;
+  left: 0;
+  bottom: 32em;
+  pointer-events: none;
+}
+.invitation .paper {
+  margin: 33vh auto;
+}
+.invitation .paper,
+.invitation .fold,
+.invitation .next-fold,
+.invitation .inner {
+  width: var(--width);
+  height: var(--height);
+  transform-style: preserve-3d;
+}
+.invitation .fold > .inner {
+  position: relative;
+  backface-visibility: hidden;
+  transform: translateZ(-1px);
+}
+.invitation .fold .exterior, .invitation .fold .interior {
+  position: absolute;
+  backface-visibility: hidden;
+}
+.invitation .fold .exterior {
+  transform: rotateX(180deg);
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  padding: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.invitation .fold .side.dark-background {
+  background-color: #375dd3;
+  color: #e0f3ff;
+}
+.invitation .fold img {
+  width: 100%;
+  height: 100%;
+}
+.invitation .fold .copy-wrapper {
+  font-weight: 300;
+  font-size: 1.4vw;
+}
+.invitation .fold-00 {
+  transform-origin: bottom center;
+  transform: rotateX(-180deg) translateY(100%);
+}
+.invitation .next-fold > .fold {
+  transform: rotateX(180deg);
+  transform-origin: top center;
+}
+.invitation .next-fold > .fold > .next-fold {
+  opacity: 0;
+}
+.invitation .paper {
+  transition: transform 0.4s ease-in-out;
+}
+.invitation .fold,
+.invitation .inner {
+  transition: transform 1s ease;
+}
+.invitation [data-step="1"] .paper,
+.invitation [data-step="2"] .paper,
+.invitation [data-step="3"] .paper,
+.invitation [data-step="4"] .paper,
+.invitation [data-step="5"] .paper {
+  transform: rotateY(var(--paper-angle)) scaleY(var(--paper-adjustment));
+}
+.invitation [data-step="1"] .fold.fold-00,
+.invitation [data-step="2"] .fold.fold-00,
+.invitation [data-step="3"] .fold.fold-00,
+.invitation [data-step="4"] .fold.fold-00,
+.invitation [data-step="5"] .fold.fold-00 {
+  transform: rotateX(2deg) translateY(0%);
+}
+.invitation [data-step="1"] .fold.fold-00 > .next-fold > .fold > .next-fold,
+.invitation [data-step="2"] .fold.fold-00 > .next-fold > .fold > .next-fold,
+.invitation [data-step="3"] .fold.fold-00 > .next-fold > .fold > .next-fold,
+.invitation [data-step="4"] .fold.fold-00 > .next-fold > .fold > .next-fold,
+.invitation [data-step="5"] .fold.fold-00 > .next-fold > .fold > .next-fold {
+  opacity: 1;
+}
+.invitation [data-step="1"] .fold.fold-01,
+.invitation [data-step="2"] .fold.fold-01,
+.invitation [data-step="3"] .fold.fold-01,
+.invitation [data-step="4"] .fold.fold-01,
+.invitation [data-step="5"] .fold.fold-01 {
+  transform: rotateX(-4deg);
+}
+.invitation [data-step="1"] .fold.fold-01 > .next-fold > .fold > .next-fold,
+.invitation [data-step="2"] .fold.fold-01 > .next-fold > .fold > .next-fold,
+.invitation [data-step="3"] .fold.fold-01 > .next-fold > .fold > .next-fold,
+.invitation [data-step="4"] .fold.fold-01 > .next-fold > .fold > .next-fold,
+.invitation [data-step="5"] .fold.fold-01 > .next-fold > .fold > .next-fold {
+  opacity: 1;
+}
+.invitation [data-step="2"] .fold.fold-02,
+.invitation [data-step="3"] .fold.fold-02,
+.invitation [data-step="4"] .fold.fold-02,
+.invitation [data-step="5"] .fold.fold-02 {
+  transform: rotateX(4deg);
+}
+.invitation [data-step="2"] .fold.fold-02 > .next-fold > .fold > .next-fold,
+.invitation [data-step="3"] .fold.fold-02 > .next-fold > .fold > .next-fold,
+.invitation [data-step="4"] .fold.fold-02 > .next-fold > .fold > .next-fold,
+.invitation [data-step="5"] .fold.fold-02 > .next-fold > .fold > .next-fold {
+  opacity: 1;
+}
+.invitation [data-step="3"] .fold.fold-03,
+.invitation [data-step="4"] .fold.fold-03,
+.invitation [data-step="5"] .fold.fold-03 {
+  transform: rotateX(-4deg);
+}
+.invitation [data-step="3"] .fold.fold-03 > .next-fold > .fold > .next-fold,
+.invitation [data-step="4"] .fold.fold-03 > .next-fold > .fold > .next-fold,
+.invitation [data-step="5"] .fold.fold-03 > .next-fold > .fold > .next-fold {
+  opacity: 1;
+}
+.invitation [data-step="4"] .fold.fold-04,
+.invitation [data-step="5"] .fold.fold-04 {
+  transform: rotateX(4deg);
+}
+.invitation [data-step="4"] .fold.fold-04 > .next-fold > .fold > .next-fold,
+.invitation [data-step="5"] .fold.fold-04 > .next-fold > .fold > .next-fold {
+  opacity: 1;
+}
+.invitation .fold > .inner .exterior.envelope-back {
+  transform: rotateX(180deg) rotateZ(180deg);
+}
+.invitation .side.interior::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background: linear-gradient(15deg, rgba(0, 0, 0, 0.2) 0%, transparent 50%), linear-gradient(15deg, transparent 70%, rgba(255, 255, 255, 0.1) 100%);
+  box-shadow: inset 0 -2px 4px rgba(0, 0, 0, 0.05), inset 0 2px 4px rgba(255, 255, 255, 0.05);
+  transition: 0s box-shadow ease;
+}
+.invitation [data-step="0"] .fold-00 .side.interior::after,
+.invitation [data-step="1"] .fold-01 .side.interior::after,
+.invitation [data-step="2"] .fold-02 .side.interior::after,
+.invitation [data-step="3"] .fold-03 .side.interior::after {
+  transition: 1.6s box-shadow ease;
+  box-shadow: inset 3px -2px 2px #121a21;
+}
+.invitation nav {
+  font-size: 0.625em;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+}
+.invitation nav .position-indicator {
+  position: absolute;
+  height: 5em;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  right: 2em;
+}
+.invitation nav .position-indicator:first-child {
+  margin-top: auto;
+}
+.invitation nav .position-indicator span {
+  display: block;
+}
+.invitation nav .position-indicator span:nth-child(2) {
+  color: transparent;
+  text-shadow: initial;
+  position: relative;
+}
+.invitation nav .position-indicator span:nth-child(2)::after {
+  content: "";
+  width: 0;
+  height: 3em;
+  position: absolute;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border-right: 1px solid rgba(255, 255, 255, 0.6);
+  transform: rotateZ(45deg);
+}
+.invitation nav .position-indicator span:first-child {
+  margin-left: -0.75em;
+}
+.invitation nav .position-indicator span:last-child {
+  margin-right: -1.125em;
+}
+.invitation nav .position-indicator span:first-child,
+.invitation nav .position-indicator span:last-child {
+  transform: scale(1.25);
+}
+.invitation nav .scroll-indicator {
+  position: absolute;
+  width: 8em;
+  margin: auto;
+  left: 0;
+  right: 0;
+  bottom: 2em;
+  transition: 0.1s 0.6s opacity ease, 0.4s 0.4s bottom ease;
+}
+.invitation nav .scroll-indicator::after {
+  content: "";
+  display: block;
+  width: 2em;
+  height: 2em;
+  position: absolute;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-width: 0 1px 1px 0;
+  transform: rotateZ(45deg);
+  top: -4.5em;
+  left: 0;
+  right: 0;
+  margin: auto;
+  animation: 2s 0.25s scrollMe ease-in-out alternate infinite;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
+}
+.invitation nav .scroll-indicator.is-invisible {
+  opacity: 0;
+  bottom: 0;
+  pointer-events: none;
+  transition: 0.3s opacity ease, 0.4s bottom ease;
+}
+@keyframes scrollMe {
+  0% {
+    transform: rotateZ(45deg);
+  }
+  100% {
+    transform: rotateZ(45deg) translateX(1em) translateY(1em);
+  }
+}
+.invitation .color-picker {
+  position: fixed;
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  <div class="invitation">
+    <div class="frame" data-step="0">
+        <div class="paper">
+
+            <div class="fold fold-00">
+                <div class="inner">
+                    <div class="side exterior dark-background"><div class="copy-wrapper">
+                        Welcome to the world of Tomorrow!
+                    </div></div>
+                    <div class="side interior"><div class="img-wrapper"><img src="https://via.placeholder.com/660x510/ff6f00/fff" /></div></div>
+                </div>
+
+                <div class="next-fold">
+                    <div class="fold fold-01">
+                        <div class="inner">
+                            <div class="side exterior dark-background envelope-back"><div class="copy-wrapper">
+                                Cool! Just like in Star Trek!<br /><strong>Ow!</strong>
+                            </div></div>
+                            <div class="side interior"><div class="img-wrapper"><img src="https://via.placeholder.com/660x510/c71000/fff" /></div></div>
+                        </div>
+
+                        <div class="next-fold">
+                            <div class="fold fold-02">
+                                <div class="inner">
+                                    <div class="side exterior dark-background"><div class="copy-wrapper">
+                                        &ndash; Good afternoon, sir. Name?
+                                        <br />&ndash; Uh, Fry.
+                                        <br />&ndash; I'm Leela. Now, it's New Year's Eve so I'd like to decide your fate quickly and get out of here.
+                                        <br />&ndash; Can I ask you a question?
+                                    </div></div>
+                                    <div class="side interior"><div class="img-wrapper"><img src="https://via.placeholder.com/660x510/8a4198/fff" /></div></div>
+                                </div>
+
+                                <div class="next-fold">
+                                    <div class="fold fold-03">
+                                        <div class="inner">
+                                            <div class="side exterior dark-background"><div class="copy-wrapper">
+                                                &ndash; As long as it's not about my eye.
+                                                <br />&ndash; Uh...
+                                                <br />&ndash; Is it about my eye?
+                                                <br />&ndash; Sort of.
+                                                <br />&ndash; Just ask the question.
+                                                <br />&ndash; What's with the eye?
+                                            </div></div>
+                                            <div class="side interior"><div class="img-wrapper"><img src="https://via.placeholder.com/660x510/5a9599/fff" /></div></div>
+                                        </div>
+
+                                        <div class="next-fold">
+                                            <div class="fold fold-04">
+                                                <div class="inner">
+
+                                                    <div class="side exterior dark-background"><div class="copy-wrapper">
+                                                        &ndash; My God! A million years!
+                                                        <br />&ndash; I'm sure this must be very upsetting for you.
+                                                        <br />&ndash; Y'know, I guess it should be but, actually, I'm glad. I had nothing to live for in my old life. I was broke, I had a humiliating job and I was beginning to suspect my girlfriend might be cheating on me.
+                                                        <br />&ndash; Well, at least here you'll be treated with dignity. Now strip naked and get on the probulator.
+                                                    </div></div>
+                                                    <div class="side interior"><div class="img-wrapper"><img src="https://via.placeholder.com/660x510/ff95a8/fff" /></div></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav>
+        <div class="position-indicator">
+            <span>1</span>
+            <span>/</span>
+            <span>5</span>
+        </div>
+        <label class="scroll-indicator">Scroll to Learn More</label>
+    </nav>
+</div>
+  
+    <script id="rendered-js" >
+function invitationInitialize(context) {
+  const frame = context.querySelector('.frame');
+  const paper = context.querySelector('.paper');
+  const foldHeight = paper.offsetHeight * .78;
+  let animationOffset = foldHeight * 0.25; // first scroll happens 1/4 fold earlier.
+
+  // set total paper height based on number of folds + offset
+  paper.style = `height: ${foldHeight * 5 + animationOffset}px;`;
+
+  function unfold() {
+    const scrollDistance = frame.scrollTop;
+    const folds = context.querySelectorAll('.fold');
+
+    let highestLevel = 1;
+    for (let i = 0; i < folds.length; i++) {if (window.CP.shouldStopExecution(0)) break;
+      const stepThreshold = i * foldHeight - animationOffset;
+
+      if (scrollDistance > stepThreshold) {
+        frame.dataset.step = i;
+        highestLevel = i + 1;
+      }
+    }
+
+    // Set position indicator
+    window.CP.exitedLoop(0);const positionIndicator = context.querySelector('.position-indicator span:first-child');
+    positionIndicator.innerHTML = highestLevel;
+
+    // Determine when to hide the scroll indicator
+    const scrollIndicator = context.querySelector('.scroll-indicator');
+    if (scrollDistance > animationOffset) {
+      scrollIndicator.classList.add('is-invisible');
+    } else {
+      scrollIndicator.classList.remove('is-invisible');
+    }
+  }
+
+  frame.addEventListener("scroll", unfold);
+}
+
+const invitation = document.querySelector('.invitation');
+if (invitation) invitationInitialize(invitation);
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>
