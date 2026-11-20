@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>Petals (CSS Art)</title>
+
+    <link rel="canonical" href="https://codepen.io/kevinnewcombe/pen/MYKdjKX">
+  
+  
+  
+  
+<style>
+@property --hue-offset {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 20;
+}
+
+@property --hue {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0;
+}
+
+@property --rotation {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: -135deg;
+}
+
+:root {
+  --petal-size: calc((calc(100vmin - 40px) * 0.5) - 1px);
+}
+
+body {
+  background-color: rgb(25, 25, 25);
+  overflow: hidden;
+  height: 100vh;
+  animation: 60s linear infinite hueOffset;
+}
+
+div{
+  --amt: calc(var(--i) / 20);
+  --hue: calc(var(--amt) * 30 + var(--hue-offset));
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--petal-size);
+  height: var(--petal-size);
+  border-radius: 0 100%;
+  border: calc(var(--petal-size) / 10) solid hsla(var(--hue), 100%, 50%, 1);
+  background-color: hsla(var(--hue), 100%, 50%, 0.1);
+  mix-blend-mode: soft-light;
+  transform: translate(-50%, -50%) rotate(calc(var(--rotation) + var(--amt) * 180deg ));
+  animation: 300s linear infinite rotation;
+  &:nth-child(odd){
+    animation-direction: reverse;
+  }
+}
+
+@keyframes hueOffset {
+  from{
+    --hue-offset: 20;
+  }
+  to{
+    --hue-offset: 380;
+  }
+}
+
+@keyframes rotation {
+  0% {
+    --rotation: 0deg;
+  }
+  100% {
+    --rotation: 360deg;
+  }
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  <div style="--i:0"></div>
+<div style="--i:1"></div>
+<div style="--i:2"></div>
+<div style="--i:3"></div>
+<div style="--i:4"></div>
+<div style="--i:5"></div>
+<div style="--i:6"></div>
+<div style="--i:7"></div>
+<div style="--i:8"></div>
+<div style="--i:9"></div>
+<div style="--i:10"></div>
+<div style="--i:11"></div>
+<div style="--i:12"></div>
+<div style="--i:13"></div>
+<div style="--i:14"></div>
+<div style="--i:15"></div>
+<div style="--i:16"></div>
+<div style="--i:17"></div>
+<div style="--i:18"></div>
+<div style="--i:19"></div>
+  
+  
+  
+</body>
+
+</html>

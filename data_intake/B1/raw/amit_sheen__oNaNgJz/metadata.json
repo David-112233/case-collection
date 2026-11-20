@@ -1,0 +1,68 @@
+{
+  "source_id": "codepen:amit_sheen/onangjz",
+  "author": "amit_sheen",
+  "pen_id": "oNaNgJz",
+  "url": "https://codepen.io/amit_sheen/pen/oNaNgJz",
+  "acquisition": "cdpn_fullpage",
+  "acquisition_url": "https://cdpn.io/amit_sheen/fullpage/oNaNgJz",
+  "retrieved_at": "2026-11-20T02:10:31+00:00",
+  "license": "未单独核验；外链资源许可另查",
+  "fetch_status": "ok",
+  "title": "3 Cubes in 3D (CSS only)",
+  "canonical_url": "https://codepen.io/amit_sheen/pen/oNaNgJz",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "00a479c245d4701a6765530d2ade43e356cc1674896ca8d5b98eadd66841e966",
+  "source_html_sha256": "4ac2c215258d1c91e629cd65daa3beee0be5892609373b380a4a46996809ede9",
+  "analysis": {
+    "js": {
+      "has_js": true,
+      "inline_js_chars": 0,
+      "external_scripts": [
+        "https://assets.codepen.io/1948355/twitterButton-2.1.0.js"
+      ],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 5,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": true,
+      "clip_path": true,
+      "css_counter": false,
+      "media_query": false
+    },
+    "external_stylesheets": [],
+    "css_imports": [],
+    "css_chars": 4359,
+    "element_count": 26,
+    "html_chars": 5767
+  },
+  "review": {
+    "label": "三立方体逐段摇摆",
+    "status": "备选",
+    "reference_case": "224/227",
+    "evidence": "实看倾斜近似整列、上块倾斜而下两块更直的两个瞬间；粉红、紫、蓝三块垂叠，底座、方块接缝与投影可辨。源码局部动效 6 秒、场景 78 秒，不能拿两次随手截图归因于单一动作；取图需固定相机和相位。不定义为积木分离或物理模拟。",
+    "visual_verified": true,
+    "surface": "Cloud Chrome, cdpn.io public preview, 1331×894 desktop including preview banner; no mobile check",
+    "formal_admission": false
+  }
+}

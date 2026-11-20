@@ -1,0 +1,4 @@
+key,url,decision,tier,hits,reason,js_policy,evidence,notes,decided_on
+amit_sheen__bGQgGOx,https://codepen.io/amit_sheen/pen/bGQgGOx,hold,unclassified,spatial_layers,await_user_review,preserve,实际预览两次观察：轮辐、前后两组支撑腿与中轴构成立体结构，前腿遮过下方部分吊舱；若干彩色吊舱绕中轴变换位置且舱底仍朝下。源码轮架、吊舱使用 60 秒正反向旋转并随场景旋转，影子另有 30 秒轨道。属于连续动效，未实测周期或控件，无固定默认帧；选能看清前腿与吊舱的固定代表帧。,优先，对照 224/227；仅候审，未正式入库。,2026-11-20
+amit_sheen__oNaNgJz,https://codepen.io/amit_sheen/pen/oNaNgJz,hold,unclassified,spatial_layers,await_user_review,preserve,实看倾斜近似整列、上块倾斜而下两块更直的两个瞬间；粉红、紫、蓝三块垂叠，底座、方块接缝与投影可辨。源码局部动效 6 秒、场景 78 秒，不能拿两次随手截图归因于单一动作；取图需固定相机和相位。不定义为积木分离或物理模拟。,备选，对照 224/227；仅候审，未正式入库。,2026-11-20
+kevinnewcombe__MYKdjKX,https://codepen.io/kevinnewcombe/pen/MYKdjKX,hold,unclassified,spatial_layers,await_user_review,preserve,实看半透明红橙花瓣沿周向重叠，边缘在交点留下格纹、中央实色圆遮住花瓣中心，近环叠色更亮。二维透明叠色，不是真实穿插；源码含 60 秒色相及 300 秒旋转，未计时，需固定代表帧。,备选，对照 213/224；仅候审，未正式入库。,2026-11-20

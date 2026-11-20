@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>3 Cubes in 3D (CSS only)</title>
+
+    <link rel="canonical" href="https://codepen.io/amit_sheen/pen/oNaNgJz">
+  
+  
+  
+  
+<style>
+*, *::before, *::after {
+  padding: 0;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #000;
+  color: #fff;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  perspective: 75em;
+  overflow: hidden;
+}
+body *:not(:empty) {
+  transform-style: preserve-3d;
+}
+
+.scene {
+  position: relative;
+  animation: sceneRotate 78s infinite linear;
+}
+@keyframes sceneRotate {
+  from {
+    transform: rotateX(-15deg) rotateY(0deg);
+  }
+  to {
+    transform: rotateX(-15deg) rotateY(360deg);
+  }
+}
+
+.floor {
+  position: absolute;
+  inset: -50em;
+  background-color: #777;
+  background-image: radial-gradient(#0000, #000 50em), repeating-linear-gradient(45deg, #fff1, #0001, #fff1 2em), repeating-linear-gradient(-45deg, #fff1, #0001, #fff1 2em);
+  transform: rotateX(90deg) translateZ(calc(-6.4em - 1px));
+}
+.floor::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 14.8em;
+  height: 14.8em;
+  box-shadow: 0 0 2em #0007;
+  transform: translate(-50%, -50%);
+}
+
+.stage {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 12em;
+  height: 12em;
+  transform: translate3d(-50%, -50%, 1.4em);
+  background: inherit;
+  box-shadow: 0 0 1em #0007 inset;
+}
+.stage > div {
+  position: absolute;
+  left: -1.5em;
+  top: 50%;
+  width: 15em;
+  height: 2.1em;
+  background: inherit;
+  box-shadow: inherit;
+  clip-path: polygon(1.5em 0, 13.5em 0, 100% 100%, 0 100%);
+  transform-origin: top;
+  transform: rotateZ(var(--rz, 0deg)) translateY(6em) rotateX(-45deg);
+}
+.stage > div:nth-child(1) {
+  --rz: 0deg;
+}
+.stage > div:nth-child(2) {
+  --rz: 90deg;
+}
+.stage > div:nth-child(3) {
+  --rz: 180deg;
+}
+.stage > div:nth-child(4) {
+  --rz: 270deg;
+}
+.stage::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 6em;
+  height: 6em;
+  background-color: #0003;
+  filter: blur(0.5em);
+  animation: shadow 6s infinite ease-in-out;
+}
+@keyframes shadow {
+  0%, 95%, 100% {
+    transform: translate(-0.5em, -0.5em);
+  }
+  20%, 25% {
+    transform: translate(-5.5em, -0.5em);
+  }
+  45%, 50% {
+    transform: translate(-5.5em, -5.5em);
+  }
+  70%, 75% {
+    transform: translate(-0.5em, -5.5em);
+  }
+}
+
+.bottomCube, .midCube, .topCube {
+  position: absolute;
+  background-color: hsla(var(--hue, 0), 75%, 75%, 0.5);
+  background-image: repeating-linear-gradient(45deg, #fff1, #0001, #fff1 1em), repeating-linear-gradient(-45deg, #fff1, #0001, #fff1 1em);
+  box-shadow: 0 0 1em hsl(var(--hue, 0), 90%, 10%) inset;
+}
+
+.bottomCube {
+  --hue: 320;
+  left: 0;
+  top: 0;
+  width: 5em;
+  height: 5em;
+  transform-origin: bottom left;
+  animation: bottomCube 6s infinite ease-in-out;
+}
+@keyframes bottomCube {
+  0% {
+    transform: none;
+  }
+  20%, 25% {
+    transform: rotateZ(-90deg);
+  }
+  45%, 50% {
+    transform: rotateZ(-90deg) rotateY(90deg);
+  }
+  70%, 75% {
+    transform: rotateZ(-90deg) rotateY(90deg) rotateX(-90deg);
+  }
+  95%, 100% {
+    transform: rotateZ(-90deg) rotateY(90deg) rotateX(-90deg) rotateZ(-90deg);
+  }
+}
+
+.midCube {
+  --hue: 280;
+  inset: 0;
+  transform-origin: bottom right;
+  animation: midCube 6s infinite ease-in-out;
+}
+@keyframes midCube {
+  0%, 2% {
+    transform: none;
+  }
+  23%, 27% {
+    transform: rotateY(180deg);
+  }
+  48%, 52% {
+    transform: rotateY(180deg) rotateZ(-180deg);
+  }
+  73%, 77% {
+    transform: rotateY(180deg) rotateZ(-180deg) rotateX(180deg);
+  }
+  98%, 100% {
+    transform: rotateY(180deg) rotateZ(-180deg) rotateX(180deg) rotateY(180deg);
+  }
+}
+
+.topCube {
+  --hue: 240;
+  inset: 0;
+  transform-origin: top left;
+  animation: topCube 6s infinite ease-in-out;
+}
+@keyframes topCube {
+  0%, 5% {
+    transform: none;
+  }
+  25%, 30% {
+    transform: rotateY(-180deg);
+  }
+  50%, 55% {
+    transform: rotateY(-180deg) rotateZ(-180deg);
+  }
+  75%, 80% {
+    transform: rotateY(-180deg) rotateZ(-180deg) rotateX(-180deg);
+  }
+  100% {
+    transform: rotateY(-180deg) rotateZ(-180deg) rotateX(-180deg) rotateY(-180deg);
+  }
+}
+
+i {
+  position: absolute;
+  inset: 0;
+  background: inherit;
+  box-shadow: inherit;
+}
+i:nth-child(1) {
+  transform: rotateX(90deg);
+  transform-origin: top;
+}
+i:nth-child(2) {
+  transform: rotateX(-90deg);
+  transform-origin: bottom;
+}
+i:nth-child(3) {
+  transform: rotateY(-90deg);
+  transform-origin: left;
+}
+i:nth-child(4) {
+  transform: rotateY(90deg);
+  transform-origin: right;
+}
+i:nth-child(5) {
+  transform: translateZ(5em);
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  <div class="scene">
+  <div class="floor">
+    <div class="stage">
+      <div></div><div></div><div></div><div></div>
+    </div>
+  </div>
+  <div class="bottomCube">
+    <i>
+      <div class="midCube">
+        <i></i><i></i><i></i><i></i><i>
+        <div class="topCube">
+          <i></i><i></i><i></i><i></i><i></i>
+        </div>
+        </i>
+      </div>
+    </i><i></i><i></i><i></i><i></i>
+  </div>
+</div>
+  <script src='https://assets.codepen.io/1948355/twitterButton-2.1.0.js'></script>
+  
+  
+</body>
+
+</html>
