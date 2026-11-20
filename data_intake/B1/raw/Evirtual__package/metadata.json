@@ -1,0 +1,12 @@
+{
+  "id": "Evirtual__package",
+  "url": "https://css3dlab.edgarasneverdauskas.com/models/package/",
+  "upstream": "https://github.com/Evirtual/css-3d-lab/blob/88d044dd0c84baa94f27967f5991b7327fb44317/src/models/snippets-batch-b.ts",
+  "upstream_revision": "88d044dd0c84baa94f27967f5991b7327fb44317",
+  "upstream_blob_sha": "8e96aba5c2a5873c525f00163c81a4f946ef3029",
+  "licence": "MIT snippet; included repository notice",
+  "status": "hold",
+  "review_id": "C273",
+  "visual_check": "云端作者桌面 1316×884。闭合盖片完全藏住卡片；指针留在预览内部直至打开，正面盒壁位于卡片下方的内部空间之前，卡片位于前壁和后铰链盖片之间，背部盖片被卡片部分叠住。不评价闲置摇摆、过渡时序；未测试暂停、键盘、移动端或离线回放。",
+  "format": "Original snippet HTML/CSS in minimal preview wrapper; exact upstream module is commit-pinned."
+}
