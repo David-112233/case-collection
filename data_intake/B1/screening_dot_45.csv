@@ -1,0 +1,2 @@
+key,url,decision,tier,hits,reason,js_policy,evidence,notes,decided_on
+Enrichr-Dev__gbmZjKd,https://codepen.io/Enrichr-Dev/pen/gbmZjKd,hold,unclassified,spatial_layers,await_user_review,preserve,云端 1331×894 编辑器内预览实看：中央卡正对镜头呈完整宽矩形，左右邻卡侧转投影明显变窄；尝试点右键后见中央编号变化，但源码默认 2200ms 自动轮转，未隔离按键的独立效果。可以用一帧看环形位置与投影宽度，不把自动变换视为可保持两态。作者单独发布组件及文档；使用作评测需留意作品公开程度。,候选，对照 213 / 227；仅候审，未正式入库。,2026-11-20
