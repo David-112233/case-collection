@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>3D Book with Exploded View</title>
+
+    <link rel="canonical" href="https://codepen.io/jh3y/pen/ZEOzNbm">
+  
+  <link rel="stylesheet" href="https://public.codepenassets.com/css/normalize-5.0.0.min.css">
+
+  
+  
+<style>
+* {
+  box-sizing: border-box;
+}
+:root {
+  --primary: #24b792;
+  --secondary: #0b847a;
+  --tertiary: #20a281;
+  --exploded: 1;
+  --start-x: -32;
+  --start-y: -42;
+}
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #161339;
+}
+.scene {
+  perspective: 800px;
+  transform-style: preserve-3d;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.plane {
+  height: 2vmin;
+  width: 14.8vmin;
+  transform-style: preserve-3d;
+  transform: scale(var(--scale, 2)) rotateX(calc(var(--start-x) * 1deg)) rotateY(calc(var(--start-y) * 1deg)) rotateX(90deg) rotateX(calc(var(--x, 0) * 1deg)) rotateY(calc(var(--y, 0) * 1deg)) rotateZ(calc(var(--z, 0) * 1deg));
+  animation: spin 2s infinite linear var(--state, paused);
+}
+.cuboid {
+  --width: 15;
+  --height: 10;
+  --depth: 4;
+  height: calc(var(--depth) * 1vmin);
+  width: calc(var(--width) * 1vmin);
+  transform-style: preserve-3d;
+  position: absolute;
+  font-size: 1rem;
+  transform: translate3d(0, 0, 5vmin);
+}
+.cuboid > div:nth-of-type(1) {
+  height: calc(var(--height) * 1vmin);
+  width: 100%;
+  transform-origin: 50% 50%;
+  transform: rotateX(-90deg);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotateX(-90deg) translate3d(0, 0, calc((var(--depth) / 2) * 1vmin));
+}
+.cuboid > div:nth-of-type(2) {
+  height: calc(var(--height) * 1vmin);
+  width: 100%;
+  transform-origin: 50% 50%;
+  transform: translate(-50%, -50%) rotateX(-90deg) rotateY(180deg) translate3d(0, 0, calc((var(--depth) / 2) * 1vmin));
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+.cuboid > div:nth-of-type(3) {
+  height: calc(var(--height) * 1vmin);
+  width: calc(var(--depth) * 1vmin);
+  transform: translate(-50%, -50%) rotateX(-90deg) rotateY(90deg) translate3d(0, 0, calc((var(--width) / 2) * 1vmin));
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+.cuboid > div:nth-of-type(4) {
+  height: calc(var(--height) * 1vmin);
+  width: calc(var(--depth) * 1vmin);
+  transform: translate(-50%, -50%) rotateX(-90deg) rotateY(-90deg) translate3d(0, 0, calc((var(--width) / 2) * 1vmin));
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+.cuboid > div:nth-of-type(5) {
+  height: calc(var(--depth) * 1vmin);
+  width: calc(var(--width) * 1vmin);
+  transform: translate(-50%, -50%) translate3d(0, 0, calc((var(--height) / 2) * 1vmin));
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+.cuboid > div:nth-of-type(6) {
+  height: calc(var(--depth) * 1vmin);
+  width: calc(var(--width) * 1vmin);
+  transform: translate(-50%, -50%) translate3d(0, 0, calc((var(--height) / 2) * -1vmin)) rotateX(180deg);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+.book div {
+  transition: transform 0.25s;
+}
+.book__cover {
+  --height: 21;
+  --width: 14.8;
+  --depth: 0.2;
+  top: 50%;
+  left: 50%;
+}
+.book__cover div {
+  background-color: var(--primary);
+  background-size: cover;
+}
+.book__cover--front {
+  transform: translate3d(-50%, calc(((var(--exploded) * 5) + 1.1) * 1vmin), 0);
+}
+.book__cover--front div:nth-of-type(1) {
+  background-image: url("https://assets.codepen.io/605876/How+to+Move+Things+with+CSS+-+Cover.png");
+}
+.book__cover--rear {
+  transform: translate3d(-50%, calc(((var(--exploded) * -5) - 1.1) * 1vmin), 0);
+}
+.book__cover--rear div:nth-of-type(2) {
+  background-image: url("https://assets.codepen.io/605876/How+to+Move+Things+with+CSS+-+Rear.png");
+}
+.book__cover div:nth-of-type(3),
+.book__cover div:nth-of-type(4) {
+  background-image: linear-gradient(var(--tertiary) 80.1%, var(--secondary) 80.1%);
+}
+.book__cover div:nth-of-type(6) {
+  background-color: var(--secondary);
+}
+.book__pages {
+  --height: 20.5;
+  --width: 14.4;
+  --depth: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+}
+.book__pages div:nth-of-type(3),
+.book__pages div:nth-of-type(4) {
+  background: repeating-linear-gradient(90deg, #b3b3b3 1px 2px, transparent 2px 4px), #f2f2f2;
+}
+.book__pages div:nth-of-type(5),
+.book__pages div:nth-of-type(6) {
+  background: repeating-linear-gradient(0deg, #b3b3b3 1px 2px, transparent 2px 4px), #f2f2f2;
+}
+.book__spine {
+  --height: 21;
+  --depth: 2.2;
+  --width: 0.1;
+  left: 0;
+  top: 50%;
+  transform: translate3d(calc((var(--exploded) * 5) * -1vmin), -50%, 0);
+}
+.book__spine div:not(.avatar__holder) {
+  background: var(--tertiary);
+}
+.book__spine div:not(.avatar__holder):nth-of-type(4) {
+  background: linear-gradient(var(--tertiary) 80.1%, var(--secondary) 80.1%);
+}
+.avatar__holder {
+  width: 1.5vmin;
+  height: 1.5vmin;
+  border-radius: 50%;
+  background-color: #fff;
+  position: absolute;
+  top: 90%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.avatar__holder img {
+  height: 75%;
+}
+@keyframes spin {
+  from {
+    transform: scale(var(--scale, 2)) rotateX(calc(var(--start-x) * 1deg)) rotateY(calc(var(--start-y) * 1deg)) rotateX(90deg) rotateX(calc(var(--x, 0) * 1deg)) rotateY(calc(var(--y, 0) * 1deg)) rotateZ(calc(var(--z, 0) * 1deg));
+  }
+  to {
+    transform: scale(var(--scale, 2)) rotateX(calc(var(--start-x) * 1deg)) rotateY(calc(var(--start-y) * 1deg)) rotateX(90deg) rotateX(calc(var(--x, 0) * 1deg)) rotateY(calc(var(--y, 0) * 1deg)) rotateZ(calc(var(--z, 0) * 1deg)) rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+  }
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  <div class="scene">
+  <div class="plane">
+    <div class="book">
+      <div class="cuboid book__cover book__cover--front">
+        <div class="cuboid__side"></div>
+        <div class="cuboid__side"></div>
+        <div class="cuboid__side"></div>
+        <div class="cuboid__side"></div>
+        <div class="cuboid__side"></div>
+        <div class="cuboid__side"></div>
+      </div>
+      <div class="cuboid book__cover book__cover--rear">
+        <div class="cuboid__side"></div>
+        <div class="cuboid__side"></div>
+        <div class="cuboid__side"></div>
+        <div class="cuboid__side"></div>
+        <div class="cuboid__side"></div>
+        <div class="cuboid__side"></div>
+      </div>
+      <div class="cuboid book__spine">
+        <div class="cuboid__side"></div>
+        <div class="cuboid__side"></div>
+        <div class="cuboid__side"></div>
+        <div class="cuboid__side"></div>
+        <div class="cuboid__side"></div>
+        <div class="cuboid__side"></div>
+      </div>
+      <div class="cuboid book__spine">
+        <div class="cuboid__side"></div>
+        <div class="cuboid__side"></div>
+        <div class="cuboid__side"></div>
+        <div class="cuboid__side">
+          <div class="avatar__holder"><img src="https://assets.codepen.io/605876/avatar.png"/></div>
+        </div>
+        <div class="cuboid__side"></div>
+        <div class="cuboid__side"></div>
+      </div>
+      <div class="cuboid book__pages">
+        <div class="cuboid__side"></div>
+        <div class="cuboid__side"></div>
+        <div class="cuboid__side"></div>
+        <div class="cuboid__side"></div>
+        <div class="cuboid__side"></div>
+        <div class="cuboid__side"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.7/dat.gui.min.js'></script>
+    <script id="rendered-js" >
+const {
+  dat: { GUI } } =
+window;
+
+const CONFIG = {
+  x: 0,
+  y: 0,
+  z: 0,
+  spin: false,
+  scale: 2,
+  exploded: true };
+
+
+const UPDATE = () => {
+  document.documentElement.style.setProperty('--x', CONFIG.x);
+  document.documentElement.style.setProperty('--y', CONFIG.y);
+  document.documentElement.style.setProperty('--z', CONFIG.z);
+  document.documentElement.style.setProperty('--scale', CONFIG.scale);
+  document.documentElement.style.setProperty(
+  '--state',
+  CONFIG.spin ? 'running' : 'paused');
+
+  document.documentElement.style.setProperty(
+  '--exploded',
+  CONFIG.exploded ? 1 : 0);
+
+};
+
+const CONTROLLER = new GUI();
+const ROTATION = CONTROLLER.addFolder('Rotate');
+ROTATION.add(CONFIG, 'x', 0, 360, 1).
+name('X').
+onChange(UPDATE);
+ROTATION.add(CONFIG, 'y', 0, 360, 1).
+name('Y').
+onChange(UPDATE);
+ROTATION.add(CONFIG, 'z', 0, 360, 1).
+name('Z').
+onChange(UPDATE);
+CONTROLLER.add(CONFIG, 'exploded').
+name('Exploded').
+onChange(UPDATE);
+CONTROLLER.add(CONFIG, 'spin').
+name('Spin').
+onChange(UPDATE);
+CONTROLLER.add(CONFIG, 'scale', 0.5, 5, 0.1).
+name('Scale').
+onChange(UPDATE);
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>
