@@ -1,0 +1,17 @@
+{
+  "key": "kentchangdesign__VrgoWY",
+  "review_id": "C293",
+  "author": "Kent Chang",
+  "url": "https://codepen.io/kentchangdesign/pen/VrgoWY",
+  "tags": [
+    "视窗遮罩",
+    "流程分叉",
+    "纵向展开"
+  ],
+  "review_status": "await_user_review",
+  "browser_evidence": "作者公开编辑器验证：紧凑态 400px 的范围和上下淡出遮住后续节点，左侧圆形开关展开为 1100px，淡出取消，新增多级流程节点和分支箭头可见。是视窗遮罩，不是实体三维遮挡。",
+  "license": "MIT",
+  "license_scope": "Public CodePen MIT applies to author code. jQuery 3.2.1 then Snap.svg 0.5.1 remain ordered CDN URL references; not vendored. Source wrapper links unchanged author HTML and CodePen compiled CSS/JS.",
+  "js_policy": "preserve",
+  "entrypoint": "source.html"
+}

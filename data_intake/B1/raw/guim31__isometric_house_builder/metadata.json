@@ -1,0 +1,17 @@
+{
+  "key": "guim31__isometric_house_builder",
+  "review_id": "C292",
+  "author": "guim31",
+  "url": "https://guim31.github.io/isometric-house-builder/",
+  "tags": [
+    "屋面咬合",
+    "檐口遮窗",
+    "平面轴测对照"
+  ],
+  "review_status": "await_user_review",
+  "browser_evidence": "作者原站选择 Provençal farmhouse 后，稳定双栏同时给出 L 形足迹与轴测实景；两翼屋面在内角相接，檐口遮住窗户上部，池子退在近翼后面。仅验证模板、默认轴测和单独渲染视图。",
+  "license": "MIT",
+  "license_scope": "Exact published MIT runtime pinned to upstream ea5d4a791ad9bdfed769c2d1876024778260749a. License and 43 deployed runtime files are listed in runtime-manifest.json. Optional help/docs are not part of the tested runtime archive. Open index.html on a static HTTP server; ES modules are JavaScript.",
+  "js_policy": "preserve",
+  "entrypoint": "index.html"
+}

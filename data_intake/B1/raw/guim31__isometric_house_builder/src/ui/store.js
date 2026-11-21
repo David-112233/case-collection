@@ -1,0 +1,412 @@
+/**
+ * Application state: the model, the current selection, undo/redo and autosave.
+ *
+ * The model is treated as immutable — every change produces a new object. That
+ * is what makes undo a one-liner and lets the renderer skip work by comparing
+ * references.
+ */
+
+import { normalise, newId, makeBuilding, fitOpening, limitBreach } from '../core/model.js';
+import { saveLocal } from '../io/project.js';
+import { moveBody, rotateBody, mirrorBody, duplicateBody } from '../core/bodies.js';
+import { t, formatCount } from '../i18n/index.js';
+
+const HISTORY_LIMIT = 80;
+
+/** The model list each kind of selectable item lives in. A volume is not one. */
+const LISTS = { opening: 'openings', fixture: 'fixtures', roofItem: 'roofItems', prop: 'props' };
+
+export class Store {
+  constructor(model) {
+    this.model = normalise(model);
+    this.past = [];
+    this.future = [];
+    this.selection = null; // { type: 'opening'|'roofItem'|'prop', id }
+    this.tool = 'paint';
+    this.listeners = new Set();
+    this.saveTimer = null;
+    this.lastEditAt = 0;
+    this.activeId = null;
+    this.saveFailed = false;
+    this.onSaveError = null;
+    this.onLimit = null;
+    this.onNotice = null;
+    // An open gesture: every edit until it ends is one history entry.
+    this.gesture = null;
+  }
+
+  /** A short message for the user — a refusal, say — through the page's toast. */
+  notify(message) {
+    this.onNotice?.(message);
+  }
+
+  /**
+   * Group every edit until `endGesture` into one history entry, however long
+   * the gesture lasts. Coalescing alone is bounded in time: a stroke paused
+   * for a second in the middle undid in two halves.
+   */
+  beginGesture() {
+    this.gesture = { pushed: false, future: [...this.future] };
+  }
+
+  endGesture() {
+    if (!this.gesture) return;
+    this.gesture = null;
+    this.commit();
+  }
+
+  /**
+   * Abandon the gesture under way: the model goes back to what it was when
+   * the gesture began, with nothing left in the history and the redo stack as
+   * it was. Returns whether anything had to be undone.
+   */
+  cancelGesture() {
+    const g = this.gesture;
+    this.gesture = null;
+    if (!g?.pushed) return false;
+    const entry = this.past.pop();
+    this.future = g.future;
+    this.model = { ...entry.model, camera: this.model.camera };
+    this.lastEditAt = 0;
+    this.emit('model');
+    return true;
+  }
+
+  subscribe(fn) {
+    this.listeners.add(fn);
+    return () => this.listeners.delete(fn);
+  }
+
+  emit(reason) {
+    for (const fn of this.listeners) fn(this, reason);
+    clearTimeout(this.saveTimer);
+    this.saveTimer = setTimeout(() => this.save(), 400);
+  }
+
+  save() {
+    clearTimeout(this.saveTimer);
+    this.saveTimer = null;
+    const ok = saveLocal(this.model);
+    // Said once, not at every change: private browsing or a full storage
+    // otherwise loses the work at the next reload without a word.
+    if (!ok && !this.saveFailed) this.onSaveError?.();
+    this.saveFailed = !ok;
+  }
+
+  /**
+   * Write a pending save now. The page calls it as it is hidden or closed:
+   * the last change before closing the tab fell inside the delay, and was
+   * lost.
+   */
+  flush() {
+    if (this.saveTimer) this.save();
+  }
+
+  /**
+   * Apply a change.
+   *
+   * `coalesce` merges consecutive edits of the same kind into one history
+   * entry, so dragging a slider or painting a stroke undoes as a single step
+   * rather than fifty.
+   */
+  update(fn, { coalesce = null, silent = false, reason = 'model' } = {}) {
+    const next = typeof fn === 'function' ? fn(this.model) : fn;
+    if (!next || next === this.model) return;
+    // The ceilings a file is cut down to on opening apply to editing too: the
+    // edit that would cross one is refused, and said, rather than accepted
+    // and silently taken back at the next reload.
+    const grows = next.buildings !== this.model.buildings || next.props !== this.model.props
+      || next.openings !== this.model.openings || next.roofItems !== this.model.roofItems
+      || next.fixtures !== this.model.fixtures
+      || next.views !== this.model.views;
+    if (!silent && grows) {
+      const breach = limitBreach(next);
+      if (breach && !limitBreach(this.model)) {
+        this.onLimit?.(t('store.limit', { what: t(`limit.${breach.key}`, { max: formatCount(breach.max) }) }));
+        return;
+      }
+    }
+    if (!silent) {
+      const now = Date.now();
+      const last = this.past[this.past.length - 1];
+      // Coalescing is bounded in time: one continuous gesture merges into a
+      // single undo step, but returning to the same control after a pause
+      // starts a fresh one — undo then rewinds the latest gesture, not every
+      // adjustment ever made with that slider.
+      const merge = this.gesture ? this.gesture.pushed
+        : coalesce && last && last.coalesce === coalesce && now - this.lastEditAt < 900;
+      if (this.gesture) this.gesture.pushed = true;
+      if (!merge) {
+        this.past.push({ model: this.model, coalesce });
+        if (this.past.length > HISTORY_LIMIT) this.past.shift();
+      }
+      this.future.length = 0;
+      this.lastEditAt = now;
+    }
+    this.model = next;
+    this.emit(reason);
+  }
+
+  /**
+   * Move the camera, outside the history.
+   *
+   * Looking is not editing. With the camera in the history, undoing a change
+   * and then turning the house to check the result emptied « Rétablir » — the
+   * one moment it was wanted — and undo spent its steps rewinding orbits. The
+   * camera is still part of the model, so it is saved with the project and a
+   * saved view still carries one; it simply never makes an entry, and undo and
+   * redo leave it where it is.
+   */
+  setCamera(patch) {
+    const cur = this.model.camera;
+    const next = { ...cur, ...(typeof patch === 'function' ? patch(cur) : patch) };
+    if (Object.keys(next).every((k) => next[k] === cur[k])) return;
+    // Said as such, so the page redraws only what shows the camera: rebuilding
+    // the plan and the whole inspector at every frame of an orbit is what a
+    // turn used to cost.
+    this.update({ ...this.model, camera: next }, { silent: true, reason: 'camera' });
+  }
+
+  /** Start over on `model`, with an empty history: nothing to undo back into. */
+  reset(model) {
+    this.model = normalise(model);
+    this.past = [];
+    this.future = [];
+    this.selection = null;
+    this.gesture = null;
+    this.emit('model');
+  }
+
+  /** End a coalescing run, so the next edit starts a fresh history entry. */
+  commit() {
+    const last = this.past[this.past.length - 1];
+    if (last) last.coalesce = null;
+  }
+
+  undo() {
+    const entry = this.past.pop();
+    if (!entry) return;
+    this.future.push({ model: this.model });
+    this.restore(entry.model);
+  }
+
+  redo() {
+    const entry = this.future.pop();
+    if (!entry) return;
+    this.past.push({ model: this.model, coalesce: null });
+    this.restore(entry.model);
+  }
+
+  /**
+   * Bring back a model from the history, keeping the camera of the moment —
+   * and ending any coalescing run: the next edit after an undo is a new step,
+   * not a continuation of whichever entry of the same kind is now on top.
+   */
+  restore(model) {
+    this.model = { ...model, camera: this.model.camera };
+    const last = this.past[this.past.length - 1];
+    if (last) last.coalesce = null;
+    this.lastEditAt = 0;
+    this.emit('model');
+  }
+
+  get canUndo() { return this.past.length > 0; }
+  get canRedo() { return this.future.length > 0; }
+
+  select(selection) {
+    const same = JSON.stringify(selection) === JSON.stringify(this.selection);
+    if (same) return;
+    this.selection = selection;
+    this.emit('selection');
+  }
+
+  setTool(tool) {
+    if (this.tool === tool) return;
+    this.tool = tool;
+    if (tool !== 'select') this.selection = null;
+    this.emit('tool');
+  }
+
+  /**
+   * The building being edited. Painting goes into it, and the inspector shows
+   * its roof. Falls back to the first volume so there is always a target.
+   */
+  get activeBuildingId() {
+    const ids = this.model.buildings.map((b) => b.id);
+    return ids.includes(this.activeId) ? this.activeId : ids[0];
+  }
+
+  get activeBuilding() {
+    return this.model.buildings.find((b) => b.id === this.activeBuildingId) || null;
+  }
+
+  setActiveBuilding(id) {
+    if (this.activeId === id) return;
+    this.activeId = id;
+    this.emit('selection');
+  }
+
+  /**
+   * Patch the active building. `patch` may be a function of the building as it
+   * stands, for a change that builds on its current value — a closure over the
+   * building as it was when a control was drawn would undo every other edit
+   * made since.
+   */
+  patchBuilding(patch, coalesce) {
+    const id = this.activeBuildingId;
+    this.update((m) => ({
+      ...m,
+      buildings: m.buildings.map((b) => (b.id === id
+        ? { ...b, ...(typeof patch === 'function' ? patch(b) : patch) } : b)),
+    }), { coalesce });
+  }
+
+  /** Patch the active building's roof. */
+  patchRoof(patch, coalesce) {
+    const id = this.activeBuildingId;
+    this.update((m) => ({
+      ...m,
+      buildings: m.buildings.map((b) => (b.id === id ? { ...b, roof: { ...b.roof, ...patch } } : b)),
+    }), { coalesce });
+  }
+
+  /** Add an empty volume and make it the one being painted into. */
+  addBuilding() {
+    const b = makeBuilding({ id: newId('b', this.model), name: t('default.body', { n: this.model.buildings.length + 1 }) });
+    this.update((m) => ({ ...m, buildings: [...m.buildings, b] }));
+    this.activeId = b.id;
+    this.emit('selection');
+    return b.id;
+  }
+
+  /**
+   * Remove a volume, along with what lived on it: the openings on its walls
+   * and the items on its roof — left behind, those fell to the ground or onto
+   * whichever roof was next drawn under them.
+   */
+  removeBuilding(id) {
+    if (this.model.buildings.length <= 1) return;
+    const gone = this.model.buildings.find((b) => b.id === id);
+    const cells = new Set(gone ? gone.cells : []);
+    const cs = this.model.grid?.cellSize || 1;
+    this.update((m) => ({
+      ...m,
+      buildings: m.buildings.filter((b) => b.id !== id),
+      openings: m.openings.filter((o) => !cells.has(o.edge.split(',').slice(0, 2).join(','))),
+      fixtures: m.fixtures.filter((o) => !cells.has(o.edge.split(',').slice(0, 2).join(','))),
+      roofItems: m.roofItems.filter((it) => !cells.has(`${Math.floor(it.x / cs)},${Math.floor(it.y / cs)}`)),
+    }));
+    this.activeId = null;
+    this.emit('selection');
+  }
+
+  /**
+   * Move, turn, mirror or duplicate a whole body — its openings, roof items
+   * and shed slope along with it. Refused, and said, when the result would
+   * overlap another body. Returns whether the model changed.
+   */
+  moveBuilding(id, di, dj, coalesce = null) {
+    const next = moveBody(this.model, id, di, dj);
+    if (!next) { this.notify(t('store.noRoom')); return false; }
+    this.update(next, { coalesce });
+    return next !== this.model;
+  }
+
+  rotateBuilding(id) {
+    return this.transformBuilding(rotateBody(this.model, id), t('store.noRoomTurn'));
+  }
+
+  mirrorBuilding(id) {
+    return this.transformBuilding(mirrorBody(this.model, id), t('store.noRoomMirror'));
+  }
+
+  transformBuilding(next, refusal) {
+    if (!next) { this.notify(refusal); return false; }
+    const before = this.model;
+    this.update(next);
+    return this.model !== before;
+  }
+
+  duplicateBuilding(id) {
+    const out = duplicateBody(this.model, id, (name) => t('default.copy', { name }));
+    if (!out) { this.notify(t('store.noRoomCopy')); return null; }
+    const before = this.model;
+    this.update(out.model);
+    if (this.model === before) return null;
+    this.activeId = out.id;
+    this.select({ type: 'building', id: out.id });
+    this.emit('selection');
+    return out.id;
+  }
+
+  /** The currently selected item, or null. */
+  get selected() {
+    if (!this.selection) return null;
+    const list = LISTS[this.selection.type];
+    if (!list) return null;
+    return (this.model[list] || []).find((it) => it.id === this.selection.id) || null;
+  }
+
+  /**
+   * Patch the selected item. `patch` may be a function of the item and the
+   * model as they stand, for an edit that depends on them — an opening put
+   * back on its wall after being widened, for one.
+   */
+  patchSelected(patch, coalesce) {
+    const sel = this.selection;
+    if (!sel) return;
+    const list = LISTS[sel.type];
+    if (!list) return;
+    this.update((m) => ({
+      ...m,
+      [list]: m[list].map((it) => (it.id !== sel.id ? it
+        : { ...it, ...(typeof patch === 'function' ? patch(it, m) : patch) })),
+    }), { coalesce });
+  }
+
+  /** Clone the selected item, nudged aside so the copy is visibly distinct. */
+  duplicateSelected() {
+    const sel = this.selection;
+    if (!sel) return;
+    if (sel.type === 'building') { this.duplicateBuilding(sel.id); return; }
+    const list = LISTS[sel.type];
+    if (!list) return;
+    const src = (this.model[list] || []).find((it) => it.id === sel.id);
+    if (!src) return;
+    let copy = { ...src, id: newId(sel.type[0], this.model) };
+    if (sel.type === 'opening') {
+      // Beside the original, and still whole on the same wall.
+      copy = fitOpening(this.model, { ...copy, offset: (src.offset ?? 0.5) + (src.width ?? 1.2) + 0.2 });
+    } else if (sel.type === 'fixture') {
+      // Along the same wall, an arm's length away.
+      copy = fitOpening(this.model, { ...copy, offset: (src.offset ?? 0.5) + 0.8 });
+    } else if (sel.type === 'roofItem') {
+      // On the same roof when there is room beside it: a copy nudged off the
+      // eaves fell to the ground, or landed on the neighbour's roof.
+      const cs = this.model.grid?.cellSize || 1;
+      const owner = (x, y) => this.model.buildings.find((b) => b.cells.includes(`${Math.floor(x / cs)},${Math.floor(y / cs)}`));
+      const home = owner(src.x, src.y);
+      const step = Math.max(src.w ?? 1, src.d ?? 1) + 0.25;
+      const spots = [[step, 0], [-step, 0], [0, step], [0, -step], [1.5, 0]];
+      const [dx, dy] = spots.find(([ax, ay]) => home && owner(src.x + ax, src.y + ay) === home) || [1.5, 0];
+      copy.x = src.x + dx;
+      copy.y = src.y + dy;
+    } else copy.x = (src.x ?? 0) + 1.5;
+    this.update((m) => ({ ...m, [list]: [...m[list], copy] }));
+    this.select({ type: sel.type, id: copy.id });
+  }
+
+  /**
+   * Remove the selected item. Returns whether anything was removed: a selected
+   * volume is left alone — a stray key press should not take a whole building
+   * with it, and the inspector has its own button for that.
+   */
+  deleteSelected() {
+    const sel = this.selection;
+    const list = sel && LISTS[sel.type];
+    if (!list) return false;
+    this.update((m) => ({ ...m, [list]: m[list].filter((it) => it.id !== sel.id) }));
+    this.select(null);
+    return true;
+  }
+}
