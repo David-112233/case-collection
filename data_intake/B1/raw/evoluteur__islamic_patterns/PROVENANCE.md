@@ -1,0 +1,8 @@
+# Islamic Patterns
+- Author: Olivier Giulieri (evoluteur).
+- Author deployment: https://evoluteur.github.io/islamic-patterns/
+- Exact upstream revision: https://github.com/evoluteur/islamic-patterns/tree/6b3815b6757c0ec0f286741a16c4bb22f169078d
+- MIT license retained unchanged. 18 upstream files (including four original icon/background PNGs) match their Git blob hashes at that revision; all three JS modules present, along with all deployed HTML and style dependencies including the switchable themes. Upstream README illustrations and development-only files were not necessary for the runtime and are excluded.
+- The original index.html retains the author's Google Overpass font and optional Google tag/analytics URL; remote font and scripts are not vendored and their own licenses are not covered by the archive. They are separate from the local SVG renderer. Offline output was not browser-tested. No export tested.
+- Verified author browser states: default Twelve-point rosettes, 4.6.12 tiling, 62-degree contact angle, Zellige coloring, Interlaced selected; Animate off. Cream bands alternately cover/split another band at crossings and enclose blue star-rosette and green star voids. Select Bands to compare exactly the same paths and colors, now without foreground bridge segments. Select Interlaced to restore the over-under ordering. The Bands state was verified at https://evoluteur.github.io/islamic-patterns/?st=bands.
+- Not a 3D model or simulated cloth; foreground order is drawn by repainting short SVG overpass segments last. Distinct from C056's orthogonal glitch weave, C151's three-way thick-band rotation, and C285's discrete three-loop Borromean link: the same steady stars and palette persist while the contact ordering itself is toggled.

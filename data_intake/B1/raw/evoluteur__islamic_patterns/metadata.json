@@ -1,0 +1,17 @@
+{
+  "key": "evoluteur__islamic_patterns",
+  "author": "Olivier Giulieri",
+  "url": "https://evoluteur.github.io/islamic-patterns/",
+  "tags": [
+    "星形留空",
+    "带纹交织",
+    "层序切换"
+  ],
+  "review_status": "await_user_review",
+  "browser_evidence": "作者站默认十二尖星花铺排、62°、Zellige、动画关闭。白色窄带在相邻交点轮流覆盖另一条带，围出星形空隙。点击 Bands 后同一几何与配色保持，交点上下遮挡消失；切回 Interlaced 恢复。为 SVG 可见层序，不是物理布料或立体旋转。",
+  "license": "MIT",
+  "license_scope": "18 unchanged files at 6b3815b6757c0ec0f286741a16c4bb22f169078d matched to author Git blobs, with exact LICENSE and own theme/icon assets. Original Google font and optional analytics remain external references, not vendored. Offline not tested.",
+  "js_policy": "preserve",
+  "entrypoint": "index.html",
+  "review_id": "C300"
+}
