@@ -1,0 +1,41 @@
+{
+  "slot": "20261121T0412Z",
+  "candidate_count": 2,
+  "main_base": "579a36be2f08539608811a4174eb1623c2b2f430",
+  "candidates": [
+    {
+      "key": "aledebarba__019055ff-5172-7bcd-89ef-16c7e39ef484",
+      "review_id": "C294",
+      "author": "Alexandre CMC Souza",
+      "url": "https://codepen.io/editor/aledebarba/pen/019055ff-5172-7bcd-89ef-16c7e39ef484?panel=details",
+      "tags": [
+        "抽屉开合",
+        "前沿遮挡",
+        "内壁纵深"
+      ],
+      "review_status": "await_user_review",
+      "browser_evidence": "云端浏览器中打开作者公开预览，BEARS 与 FOODS 双抽屉默认红色关闭、黄色打开；点红色抽屉并等短暂过渡后，红色保持开启、黄色关闭。近侧前沿挡住抽屉内底部，倾斜侧壁与后壁围出纵深并框住浮出的图标。该组互斥状态无需持续播放。",
+      "license": "MIT",
+      "license_scope": "MIT notice from the public author editor Details panel. index.pen.html, style.css, and empty script.js are exact CodePen-native downloads; no external assets, import, or authored JS. source.html is a separate local wrapper. See PROVENANCE.md and SHA256SUMS.",
+      "js_policy": "none",
+      "entrypoint": "source.html"
+    },
+    {
+      "key": "lenasta92579651__KKXbqWz",
+      "review_id": "C295",
+      "author": "Lena Stanley",
+      "url": "https://codepen.io/lenasta92579651/pen/KKXbqWz",
+      "tags": [
+        "盒壳分离",
+        "内衬翻开",
+        "垫面遮住戒圈"
+      ],
+      "review_status": "await_user_review",
+      "browser_evidence": "作者公开编辑器中闭合态遮住全部内件；点红色盒盖，等盒壳分离并稳定后，两层内面朝相反方向展开。暗色近沿压住橙色垫面下缘，垫面遮住金色戒圈下段，蓝色宝石在后衬前。只有闪光明暗循环，结构不动。",
+      "license": "MIT",
+      "license_scope": "Public CodePen MIT applies to authored panes, copied from UI and checked against the clipboard by byte length and FNV-1a-32. original.js is one comment; authored behavior is CSS. The existing Google Fonts Mochiy Pop P One stylesheet stays referenced, not vendored. Separate local wrapper. No offline verification.",
+      "js_policy": "none",
+      "entrypoint": "source.html"
+    }
+  ]
+}
