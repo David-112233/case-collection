@@ -1,0 +1,28 @@
+{
+  "key": "SusCasasola__mLREVP",
+  "review_id": "C290",
+  "author": "SusCasasola",
+  "url": "https://codepen.io/SusCasasola/pen/mLREVP",
+  "tags": [
+    "阶梯交接",
+    "透空孔洞",
+    "前后错位"
+  ],
+  "review_status": "await_user_review",
+  "browser_evidence": "作者编辑器默认画面见金色折叠阶梯的多个平面接合并围出透空孔洞，人物与阶梯相接。星星会闪但阶梯本体定形。",
+  "dedup": "区别于 C284 实体整体转视显隙，C280 开放墙梯。",
+  "license": "MIT",
+  "license_scope": "Original pen author code MIT. Compass Sass imports are build-time and emitted by CodePen; Poppins stays linked. Monument Valley inspiration credited in provenance.",
+  "js_policy": "none",
+  "source_difference": "Working wrapper links unchanged CodePen-generated CSS; author fields and provenance retained separately.",
+  "sha256": {
+    "original.pug": "62b6619464d3eb9b2e1706502f2fbe33309e14dda56b03912cf51e1388eeb46b",
+    "PROVENANCE.md": "a9d88bee6ad9874987f4625aaee8b5fc73155d15f4befe1e07297040f08787ef",
+    "SHA256SUMS": "51a9b4c1fd678080b91f75eaf07bf6e71a91c648b1b1874ed6ac2c4e38dbb263",
+    "compiled.html": "92a62f735a54b4c90cdab25dd67d014a8951d6d394c5a1264d38c41412f0892f",
+    "source.html": "a641b8adb789f1d4f2a9f41e50925e71e5046079dede0ba9f54595f5c141f2e2",
+    "original.js": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "original.sass": "10ccf6ddfeeeb2a5fac230441a54f3d0aa8e7205f31b716d18d5f663094ee007",
+    "compiled.css": "7db57e8b133721f312b70b28e77327bdb602aa0d178c4d51522abba96cee6ff0"
+  }
+}
