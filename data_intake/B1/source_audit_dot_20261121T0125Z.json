@@ -1,0 +1,87 @@
+{
+  "slot_utc": "2026-11-21T01:25:00Z",
+  "standalone_approval_recovery": true,
+  "candidate_count": 1,
+  "formal_admission_excluded": true,
+  "cases": [
+    {
+      "review_no": "C289",
+      "id": "hannesgao__origamio",
+      "url": "https://origamio.hannesgao.workers.dev/",
+      "label": "折纸层片交叠、翼部错边、折痕对照",
+      "entry": "index.html",
+      "runtime_provenance": {
+        "project_repository": "https://github.com/hannesgao/Origamio",
+        "release_reference": "https://github.com/hannesgao/Origamio/releases/tag/v0.2.0",
+        "release_commit": "e148d79b64c15255a9380b7d53563d1446ae6ee5",
+        "release_zip_sha256": "e7210fc54d2c8aa88605603c57b7ba67482c57c716d839c5ff96588655a9eaf6",
+        "release_note": "The official release ZIP has different HTML/CSS/main resource hashes than the deployed app, and is not copied as a substitute. Both displayed v0.2.0. This package preserves the deployed files listed, not a claimed reproducible Vite build.",
+        "three_notice_source": "https://github.com/mrdoob/three.js/blob/r186/LICENSE",
+        "three_package_version_in_release_lockfile": "0.186.1",
+        "three_notice_caveat": "The fetched bundled JS includes Three.js; package lock from release records 0.186.1; exact independently reproducible dependency version for differing live deployment not established."
+      },
+      "files": [
+        {
+          "path": "index.html",
+          "git_blob": "01dfe9f4acb3144e6f839bd8b255748bfdbf2c1c",
+          "bytes": 2219
+        },
+        {
+          "path": "original_hosted.html",
+          "git_blob": "01dfe9f4acb3144e6f839bd8b255748bfdbf2c1c",
+          "bytes": 2219
+        },
+        {
+          "path": "assets/index-1BHLV_FR.js",
+          "git_blob": "69b91b7382cac8bc202885060fa3f7570df08be7",
+          "bytes": 678617
+        },
+        {
+          "path": "assets/index-BGiJaPQ4.css",
+          "git_blob": "90aa0c9bc311718f1f2b9887b3ed8b32f3c75916",
+          "bytes": 24975
+        },
+        {
+          "path": "assets/solve.worker-DR1iGxh3.js",
+          "git_blob": "cdcdb85fdc92587967cca4f0dd38cdbb8c32e354",
+          "bytes": 22777
+        },
+        {
+          "path": "assets/de-BfkvP9GC.js",
+          "git_blob": "75c2ae77b1f555ad8abc12954abdeef58942dc39",
+          "bytes": 12400
+        },
+        {
+          "path": "assets/ja-SDeWIKLO.js",
+          "git_blob": "aa3d7d18dba211b226638d5ad487a697f2d5e3a1",
+          "bytes": 12904
+        },
+        {
+          "path": "assets/zh-CmQk6sli.js",
+          "git_blob": "7d5b7c760f3973d7ff31a49083f37d8cd33ecb77",
+          "bytes": 10921
+        },
+        {
+          "path": "apple-touch-icon.png",
+          "git_blob": "21688a17d07ef284e15467b8941c66baac290a31",
+          "bytes": 1178
+        },
+        {
+          "path": "og.png",
+          "git_blob": "8dafebc36b21e5544a5d6cb65a5efbdedccd43ef",
+          "bytes": 57857
+        },
+        {
+          "path": "LICENSE",
+          "git_blob": "3cd4141f2a93b7f5f8406ded4f413de0cac9d4ec",
+          "bytes": 1067
+        },
+        {
+          "path": "LICENSE-THREE",
+          "git_blob": "8ada2a5f982916b0ba4b7a0aa7de347587e745d7",
+          "bytes": null
+        }
+      ]
+    }
+  ]
+}
