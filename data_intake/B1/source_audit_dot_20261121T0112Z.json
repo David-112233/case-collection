@@ -1,0 +1,106 @@
+{
+  "slot": "20261121T0112Z",
+  "candidate_count": 2,
+  "main_base": "579a36be2f08539608811a4174eb1623c2b2f430",
+  "candidates": [
+    {
+      "key": "nazarboyko__XJpwmZa",
+      "review_id": "C287",
+      "author": "Nazar Boyko",
+      "url": "https://codepen.io/nazarboyko/pen/XJpwmZa",
+      "tags": [
+        "锅沿遮挡",
+        "内壁包围",
+        "汤料叠放"
+      ],
+      "review_status": "await_user_review",
+      "browser_evidence": "公开编辑器的作者预览，烹煮开场结束后见近锅沿挡住下方汤面，远锅沿和内壁围住深色汤底，土豆、甜菜、酸奶油各自分层，锅体遮住把手内侧。只评定形构图，不评残余蒸汽和气泡。",
+      "dedup": "纯CSS食品容器深度；不同于单片可独立拉出的切片。",
+      "license": "MIT",
+      "license_scope": "MIT expressly declared in author CSS © 2026. Original public editor HTML and CSS copied via CodePen editor; exact field fingerprints validated, JS editor empty. source.html wraps unchanged field contents in a minimal standalone document. No alternate Full Page route tested.",
+      "js_policy": "none",
+      "sha256": {
+        "original.html": "877d1fe4bea31a8de3d75a2ca3fa2b226718d6dd1f24b9b0342696e300b31024",
+        "original.css": "64095f6945c48def21df83ff9c1d25b7d1a6de3cbb97eb2d50612ae3137fec47",
+        "source.html": "722ffc2c7dade4cedca84414b19c602b6cdcfbdbe31e39ae65cfaa27adb2b64b"
+      }
+    },
+    {
+      "source_id": "codepen:jh3y/kkvgogj",
+      "author": "Jhey Tompkins",
+      "pen_id": "KKVGoGJ",
+      "url": "https://codepen.io/jh3y/pen/KKVGoGJ",
+      "acquisition": "cdpn_fullpage",
+      "acquisition_url": "https://cdpn.io/jh3y/fullpage/KKVGoGJ",
+      "retrieved_at": "2026-11-21T00:49:58+00:00",
+      "license": "MIT",
+      "fetch_status": "ok",
+      "title": "CSS is cake 🍰 (Tap the slices! 👇)",
+      "canonical_url": "https://codepen.io/jh3y/pen/KKVGoGJ",
+      "codepen_console_shim_removed": 1,
+      "original_srcdoc_sha256": "c950a48971ca97bbde64b7119fe09392f1ed366420943c19550dfd5f4a276550",
+      "source_html_sha256": "d1efebe44126ad7f04f58ce412cd4861a5d7bff595cd0419847470269a2ce4ee",
+      "analysis": {
+        "js": {
+          "has_js": true,
+          "inline_js_chars": 62,
+          "external_scripts": [
+            "https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"
+          ],
+          "inline_event_handlers": 0,
+          "has_gsap": false,
+          "has_scroll_trigger": false,
+          "has_intersection_observer": false
+        },
+        "css": {
+          "has_animation_timeline": false,
+          "has_animation_range": false,
+          "has_view_timeline": false,
+          "has_scroll_timeline": false,
+          "has_scroll_function": false,
+          "has_view_function": false,
+          "has_sticky": false,
+          "keyframes_count": 9,
+          "scroll_snap": false,
+          "scroll_state_query": false,
+          "scroll_marker": false,
+          "container_query": false,
+          "subgrid": false,
+          "anchor_positioning": false,
+          "has_selector": false,
+          "checked_selector": true,
+          "target_selector": false,
+          "at_property": false,
+          "view_transition": false,
+          "transform_3d": true,
+          "clip_path": false,
+          "css_counter": false,
+          "media_query": false
+        },
+        "external_stylesheets": [
+          "https://public.codepenassets.com/css/normalize-5.0.0.min.css"
+        ],
+        "css_imports": [],
+        "css_chars": 43883,
+        "element_count": 76,
+        "html_chars": 47515
+      },
+      "key": "jh3y__KKVGoGJ",
+      "review_id": "C288",
+      "tags": [
+        "切片抬升",
+        "缺口显露",
+        "切面转向"
+      ],
+      "review_status": "await_user_review",
+      "browser_evidence": "作者公开编辑器云端实测，默认六片闭合，选中第四片后整片抬起旋转，粉色切面和相邻缺口清楚。避免外侧转场区域，空白点击可合回。",
+      "dedup": "区别于 C007 固定切面；近重复 WNGeRpO 不计。",
+      "license_scope": "Public CodePen MIT applies to author code. Optional sixth-slice linked avatar and CodePen platform assets remain references only; not vendored. Pug/Stylus compiled original and shim-only derived copy. JS content comment-only.",
+      "js_policy": "none",
+      "sha256": {
+        "original_srcdoc.html": "c950a48971ca97bbde64b7119fe09392f1ed366420943c19550dfd5f4a276550",
+        "source.html": "d1efebe44126ad7f04f58ce412cd4861a5d7bff595cd0419847470269a2ce4ee"
+      }
+    }
+  ]
+}

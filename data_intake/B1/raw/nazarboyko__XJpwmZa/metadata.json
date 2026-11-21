@@ -1,0 +1,22 @@
+{
+  "key": "nazarboyko__XJpwmZa",
+  "review_id": "C287",
+  "author": "Nazar Boyko",
+  "url": "https://codepen.io/nazarboyko/pen/XJpwmZa",
+  "tags": [
+    "锅沿遮挡",
+    "内壁包围",
+    "汤料叠放"
+  ],
+  "review_status": "await_user_review",
+  "browser_evidence": "公开编辑器的作者预览，烹煮开场结束后见近锅沿挡住下方汤面，远锅沿和内壁围住深色汤底，土豆、甜菜、酸奶油各自分层，锅体遮住把手内侧。只评定形构图，不评残余蒸汽和气泡。",
+  "dedup": "纯CSS食品容器深度；不同于单片可独立拉出的切片。",
+  "license": "MIT",
+  "license_scope": "MIT expressly declared in author CSS © 2026. Original public editor HTML and CSS copied via CodePen editor; exact field fingerprints validated, JS editor empty. source.html wraps unchanged field contents in a minimal standalone document. No alternate Full Page route tested.",
+  "js_policy": "none",
+  "sha256": {
+    "original.html": "877d1fe4bea31a8de3d75a2ca3fa2b226718d6dd1f24b9b0342696e300b31024",
+    "original.css": "64095f6945c48def21df83ff9c1d25b7d1a6de3cbb97eb2d50612ae3137fec47",
+    "source.html": "722ffc2c7dade4cedca84414b19c602b6cdcfbdbe31e39ae65cfaa27adb2b64b"
+  }
+}
