@@ -1,0 +1,6 @@
+.dorfwelt { position: relative; overflow: hidden; isolation: isolate; background: #18323c; }
+.dorfwelt canvas { display: block; width: 100%; height: 100%; pointer-events: none; }
+.dorfwelt__pause { position: absolute; z-index: 4; right: 14px; top: 14px; box-sizing: border-box; width: 44px; height: 44px; min-width: 44px; min-height: 44px; aspect-ratio: 1; display: grid; place-items: center; padding: 0; color: #fff4dc; background: #132630; border: 1px solid #e7e5c55c; border-radius: 50%; cursor: pointer; font: 13px/1 system-ui, sans-serif; }
+.dorfwelt__pause:hover { background: #132630e6; }
+.dorfwelt__pause:focus-visible { outline: 2px solid #ffde9d; outline-offset: 3px; }
+.dorfwelt__pause[hidden] { display: none !important; }

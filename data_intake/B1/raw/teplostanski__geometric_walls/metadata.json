@@ -1,0 +1,17 @@
+{
+  "key": "teplostanski__geometric_walls",
+  "author": "Igor Teplostanski",
+  "url": "https://geometric-walls.teplostanski.me/",
+  "tags": [
+    "斜墙遮挡",
+    "折面相接",
+    "前景阴影"
+  ],
+  "review_status": "await_user_review",
+  "browser_evidence": "作者站默认静态构图中，浅色斜墙在 T 形交界挡住后方锈红色墙的一部分，褐色三角折面在墙脚接住暗色楔形影子，灰色地面在前、蓝色天空在后。CSS 渐变模拟空间，不是可转动的 3D 模型。",
+  "license": "GPL-3.0",
+  "license_scope": "Exact original index.html and favicon.svg at upstream 00f7144c66cad719f4b104b56be238c469308d38; full upstream LICENSE included. Inline CSS confirmed against deployed page. No image/script needed by drawing; original root-relative favicon optionally served from hosting root.",
+  "js_policy": "none",
+  "entrypoint": "index.html",
+  "review_id": "C296"
+}

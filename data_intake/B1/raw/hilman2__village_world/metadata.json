@@ -1,0 +1,18 @@
+{
+  "key": "hilman2__village_world",
+  "author": "hilman2",
+  "url": "https://hilman2.github.io/village-world/",
+  "tags": [
+    "拱桥跨河",
+    "村落错落",
+    "双层山脊"
+  ],
+  "review_status": "await_user_review",
+  "browser_evidence": "作者原站右上暂停后点 Spring morning，保持暂停。前景桥面挡住河道的一段，桥拱下仍露水；村屋和小路远近错落，草坡、树线与深浅两道山脊自前向后遮叠。画面为 Canvas 2D，非三维漫游。",
+  "license": "MIT",
+  "license_scope": "Upstream c539f151fd9957ed781a0c9c307921687c17e0ee; MIT covers source and generated artwork per exact upstream CREDITS.md and LICENSE. Original runtime and source/build files included. Browser deployed resource references match archived runtime paths, offline not tested.",
+  "js_policy": "preserve",
+  "entrypoint": "index.html",
+  "review_id": "C298",
+  "catalog_difference": "不同于 C197 的轴测梁体与透明体素水面、C234 的无限循环城市视差及 C264 的茶田剪纸山脊层；这里是可由作者按钮暂停的正视全景，河道从桥后穿至前景，前后两岸聚落、树线和山体同时可辨。"
+}
