@@ -1,0 +1,14 @@
+{
+  "review_id": "C034",
+  "case_id": null,
+  "tier": null,
+  "spatial_feature": "彩虹书架、书脊深度",
+  "evidence": "彩虹书架、书脊深度。沿用候选归档的桌面默认画面核验；不新增交互、移动端或离线核验结论。",
+  "decision": "accept",
+  "confirmation": {
+    "batch": "追加审核 C031–C050",
+    "value": 1,
+    "date": "2026-11-21"
+  },
+  "qualification_note": "未分配主项目正式编号、未强定档；视觉核验范围沿用采集记录。"
+}

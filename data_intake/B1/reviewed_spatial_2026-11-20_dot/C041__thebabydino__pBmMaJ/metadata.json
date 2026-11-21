@@ -1,0 +1,88 @@
+{
+  "source_id": "codepen:thebabydino/pbmmaj",
+  "author": "thebabydino",
+  "pen_id": "pBmMaJ",
+  "url": "https://codepen.io/thebabydino/pen/pBmMaJ",
+  "acquisition": "cdpn_fullpage_cloud_browser_dom",
+  "acquisition_url": "https://cdpn.io/thebabydino/fullpage/pBmMaJ",
+  "retrieved_at": "2026-11-18T15:43:21.845Z",
+  "fetch_status": "ok",
+  "title": "Responsive banners (clean markup, CSS grid & variables)",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "29b08c780c1f9301994d4b2c33fd2a0c3c850b6329727781e5e1d41f685aca59",
+  "source_html_sha256": "d7f18d2aa59ab437e122242094d3c9e7de67df4d5c78f741d1d36d86e207f682",
+  "analysis": {
+    "js": {
+      "has_js": true,
+      "inline_js_chars": 0,
+      "external_scripts": [
+        "https://public.codepenassets.com/js/prefixfree-1.0.7.min.js"
+      ],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 0,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": false,
+      "clip_path": true,
+      "css_counter": true,
+      "media_query": true
+    },
+    "external_stylesheets": [],
+    "css_imports": [],
+    "css_chars": 2133,
+    "element_count": 12,
+    "html_chars": 3669
+  },
+  "visual_review": {
+    "viewport": [
+      1180,
+      757
+    ],
+    "default_only": true,
+    "mobile_verified": false,
+    "screenshot_available": true
+  },
+  "candidate_status": "admitted_in_collection_repo",
+  "license": "not separately verified",
+  "review": {
+    "status": "用户追加审核选中",
+    "evidence": "斜切编号条、圆标压层。沿用候选归档的桌面默认画面核验；不新增交互、移动端或离线核验结论。",
+    "visual_verified": true,
+    "formal_admission": true,
+    "scope": "仅采集仓库交付；主项目尚未导入"
+  },
+  "review_id": "C041",
+  "case_id": null,
+  "source_archive": {
+    "repository": "David-112233/case-collection",
+    "pr": 10,
+    "commit": "c295c34b901f0623cb3c0a8178a1dfb43f320fb9",
+    "path": "data_intake/B1/raw/thebabydino__pBmMaJ"
+  },
+  "intake_date": "2026-11-21",
+  "source_original_sha256": "d7f18d2aa59ab437e122242094d3c9e7de67df4d5c78f741d1d36d86e207f682",
+  "source_original_note": "保留原归档预览；与本文件夹 source.html 字节一致。完整捕获另存 original_srcdoc.html。",
+  "js_policy": "original_preserved",
+  "js_changes": "不改写归档预览或原始捕获，保留原作脚本及外部依赖。"
+}

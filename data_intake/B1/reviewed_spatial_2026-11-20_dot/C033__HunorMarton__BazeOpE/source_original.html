@@ -1,0 +1,2759 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>MC Escher Cube 23150 with CSS only</title>
+
+    <link rel="canonical" href="https://codepen.io/HunorMarton/pen/BazeOpE">
+  
+  
+  
+  
+<style>
+@charset "UTF-8";
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background-color: #141518;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  overflow: hidden;
+  animation-duration: 3s;
+  animation-name: zoom-out;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes zoom-out {
+  from {
+    transform: scale(2);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+.frame {
+  border: 120px solid #141518;
+  width: 1176px;
+  height: 864px;
+}
+
+.row {
+  display: flex;
+  position: relative;
+  left: -42px;
+  top: -36px;
+  z-index: -1;
+}
+.row:nth-child(2n) {
+  margin-left: 42px;
+}
+
+.cube-holder {
+  width: 84px;
+  height: 72px;
+}
+
+.inverse-cube {
+  width: inherit;
+  height: inherit;
+  transform-origin: center center;
+  transform-style: preserve-3d;
+  transform: rotateX(-35deg) rotateY(-45deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.inverse-cube .side {
+  position: absolute;
+}
+
+/*
+
+  ╱│╲
+ ╱ │ ╲
+│ ╱ ╲ │
+│╱   ╲│
+ ╲   ╱
+  ╲ ╱
+
+*/
+/*
+
+  ╱│╲
+  ╲│╱
+
+*/
+/*
+
+  ▘
+
+*/
+/*
+
+   ╱│╲
+ ╱  │  ╲
+│  ╱ ╲  │
+│╱     ╲│
+ ╲     ╱
+   ╲ ╱
+
+*/
+/*
+
+   ╱│╲
+ ╱ ╱ ╲ ╲
+│ │╲ ╱│ │
+│╱ ╲│╱ ╲│
+ ╲     ╱
+   ╲ ╱
+
+*/
+/*
+
+   ╱│╲
+ ╱  │  ╲
+│  ╱ ╱╲ │
+│╱ ╱   ╱│
+ ╲│╲ ╱ ╱
+   ╲│╱
+
+*/
+/*
+
+   ╱│╲
+ ╱  │  ╲
+│╱ ╲ ╲  │
+│╲ ╱│  ╲│
+ ╲│╱   ╱
+   ╲ ╱
+
+*/
+/*
+
+   ╱│╲ ╱│╲
+ ╱  │ │ │  ╲
+│  ╱ ╲│╱ ╲  │╲
+│╱         ╲│  ╲
+ ╲             ╱
+   ╲         ╱
+     ╲     ╱
+       ╲ ╱
+*/
+/*
+
+   ╱│╲
+  │╱ ╲ ╲
+   ╲ ╱│ │
+    │╱ ╲│
+
+
+
+*/
+.row:nth-child(4n-3) .cube-holder:nth-child(3n-2) .inverse-cube .side:nth-child(1) {
+  transform: rotateX(90deg) translateZ(-30px);
+  background: #9c3131;
+  width: 60px;
+  height: 60px;
+}
+.row:nth-child(4n-3) .cube-holder:nth-child(3n-2) .inverse-cube .side:nth-child(2) {
+  transform: translateZ(-30px);
+  background: #d5bb97;
+  width: 60px;
+  height: 60px;
+}
+.row:nth-child(4n-3) .cube-holder:nth-child(3n-2) .inverse-cube .side:nth-child(3) {
+  transform: rotateY(90deg) rotateZ(90deg) translateZ(-30px);
+  background: #000103;
+  width: 60px;
+  height: 60px;
+}
+.row:nth-child(4n-3) .cube-holder:nth-child(3n-2) .inverse-cube .side:nth-child(1)::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 30px;
+  height: 30px;
+  background: linear-gradient(45deg, #000103 0%, #000103 50%, #d5bb97 50%, #d5bb97 100%);
+}
+
+.row:nth-child(4n-3) .cube-holder:nth-child(6n-4) .inverse-cube .side:nth-child(1) {
+  transform: rotateX(90deg) translateX(30px) translateY(-30px) translateZ(-30px);
+  background: #9c3131;
+  width: 120px;
+  height: 120px;
+}
+.row:nth-child(4n-3) .cube-holder:nth-child(6n-4) .inverse-cube .side:nth-child(2) {
+  transform: translateX(-15px) translateZ(-30px);
+  background: #d5bb97;
+  width: 30px;
+  height: 60px;
+}
+.row:nth-child(4n-3) .cube-holder:nth-child(6n-4) .inverse-cube .side:nth-child(3) {
+  transform: rotateY(90deg) translateX(45px);
+  background: #000103;
+  width: 30px;
+  height: 60px;
+}
+.row:nth-child(4n-3) .cube-holder:nth-child(6n-4) .inverse-cube .side:nth-child(4) {
+  transform: translateX(30px) translateZ(-60px);
+  background: #d5bb97;
+  width: 60px;
+  height: 60px;
+}
+.row:nth-child(4n-3) .cube-holder:nth-child(6n-4) .inverse-cube .side:nth-child(5) {
+  transform: rotateY(90deg) translateZ(-30px);
+  background: #000103;
+  width: 60px;
+  height: 60px;
+}
+
+.row:nth-child(4n-3) .cube-holder:nth-child(6n-1) .inverse-cube .side:nth-child(1) {
+  transform: rotateX(90deg) translateX(30px) translateY(-30px) translateZ(-30px);
+  background: repeating-linear-gradient(90deg, #867a63, #867a63 1px, #aa9f8c 1px, #aa9f8c 2px);
+  width: 120px;
+  height: 120px;
+}
+.row:nth-child(4n-3) .cube-holder:nth-child(6n-1) .inverse-cube .side:nth-child(2) {
+  transform: translateX(-15px) translateZ(-30px);
+  background: #d5bb97;
+  width: 30px;
+  height: 60px;
+}
+.row:nth-child(4n-3) .cube-holder:nth-child(6n-1) .inverse-cube .side:nth-child(3) {
+  transform: rotateY(90deg) translateX(45px);
+  background: #000103;
+  width: 30px;
+  height: 60px;
+}
+.row:nth-child(4n-3) .cube-holder:nth-child(6n-1) .inverse-cube .side:nth-child(4) {
+  transform: translateX(30px) translateZ(-60px);
+  background: #d5bb97;
+  width: 60px;
+  height: 60px;
+}
+.row:nth-child(4n-3) .cube-holder:nth-child(6n-1) .inverse-cube .side:nth-child(5) {
+  transform: rotateY(90deg) translateZ(-30px);
+  background: #000103;
+  width: 60px;
+  height: 60px;
+}
+.row:nth-child(4n-3) .cube-holder:nth-child(6n-1) .inverse-cube .side:nth-child(4)::after {
+  content: "";
+  position: absolute;
+  left: 7.5px;
+  top: 15px;
+  width: 12px;
+  height: 24px;
+  background: linear-gradient(-45deg, #867a63 0%, #867a63 33%, #000103 33%, #000103 100%);
+}
+
+.row:nth-child(4n-3) .cube-holder:nth-child(3n-0) .inverse-cube .side:nth-child(1) {
+  transform: translateZ(-30px);
+  background: #d5bb97;
+  width: 60px;
+  height: 60px;
+}
+.row:nth-child(4n-3) .cube-holder:nth-child(3n-0) .inverse-cube .side:nth-child(2) {
+  transform: rotateY(90deg) translateX(15px) translateY(-15px) translateZ(-30px);
+  background: #000103;
+  width: 30px;
+  height: 30px;
+}
+.row:nth-child(4n-3) .cube-holder:nth-child(3n-0) .inverse-cube .side:nth-child(3) {
+  transform: rotateX(90deg) translateX(-15px) translateY(-15px);
+  background: #9c3131;
+  width: 30px;
+  height: 30px;
+}
+.row:nth-child(4n-3) .cube-holder:nth-child(3n-0) .inverse-cube .side:nth-child(4) {
+  transform: rotateY(90deg) translateX(15px) translateY(15px);
+  background: #000103;
+  width: 30px;
+  height: 30px;
+}
+
+.row:nth-child(4n-2) .cube-holder:nth-child(6n-4) .inverse-cube .side:nth-child(1),
+.row:nth-child(4n-2) .cube-holder:nth-child(6n-0) .inverse-cube .side:nth-child(1) {
+  transform: rotateX(90deg) translateZ(-30px);
+  background: repeating-linear-gradient(90deg, #867a63, #867a63 1px, #aa9f8c 1px, #aa9f8c 2px);
+  width: 60px;
+  height: 60px;
+}
+.row:nth-child(4n-2) .cube-holder:nth-child(6n-4) .inverse-cube .side:nth-child(2),
+.row:nth-child(4n-2) .cube-holder:nth-child(6n-0) .inverse-cube .side:nth-child(2) {
+  transform: translateZ(-30px);
+  background: #d5bb97;
+  width: 60px;
+  height: 60px;
+}
+.row:nth-child(4n-2) .cube-holder:nth-child(6n-4) .inverse-cube .side:nth-child(3),
+.row:nth-child(4n-2) .cube-holder:nth-child(6n-0) .inverse-cube .side:nth-child(3) {
+  transform: rotateY(90deg) rotateZ(90deg) translateZ(-30px);
+  background: #000103;
+  width: 60px;
+  height: 60px;
+}
+
+.row:nth-child(4n-2) .cube-holder:nth-child(6n-3) .inverse-cube .side:nth-child(1),
+.row:nth-child(4n-2) .cube-holder:nth-child(6n-1) .inverse-cube .side:nth-child(1) {
+  transform: rotateX(90deg) translateZ(-30px);
+  background: #9c3131;
+  width: 60px;
+  height: 60px;
+}
+.row:nth-child(4n-2) .cube-holder:nth-child(6n-3) .inverse-cube .side:nth-child(2),
+.row:nth-child(4n-2) .cube-holder:nth-child(6n-1) .inverse-cube .side:nth-child(2) {
+  transform: translateZ(-30px);
+  background: #d5bb97;
+  width: 60px;
+  height: 60px;
+}
+.row:nth-child(4n-2) .cube-holder:nth-child(6n-3) .inverse-cube .side:nth-child(3),
+.row:nth-child(4n-2) .cube-holder:nth-child(6n-1) .inverse-cube .side:nth-child(3) {
+  transform: rotateY(90deg) rotateZ(90deg) translateZ(-30px);
+  background: #000103;
+  width: 60px;
+  height: 60px;
+}
+
+.row:nth-child(4n-2) .cube-holder:nth-child(6n-5) .inverse-cube .side:nth-child(1) {
+  transform: rotateX(90deg) translateZ(-30px);
+  background: repeating-linear-gradient(90deg, #867a63, #867a63 1px, #aa9f8c 1px, #aa9f8c 2px);
+  width: 60px;
+  height: 60px;
+}
+.row:nth-child(4n-2) .cube-holder:nth-child(6n-5) .inverse-cube .side:nth-child(2) {
+  transform: translateZ(-30px);
+  background: #d5bb97;
+  width: 60px;
+  height: 60px;
+}
+.row:nth-child(4n-2) .cube-holder:nth-child(6n-5) .inverse-cube .side:nth-child(3) {
+  transform: rotateY(90deg) rotateZ(90deg) translateZ(-30px);
+  background: #000103;
+  width: 60px;
+  height: 60px;
+}
+.row:nth-child(4n-2) .cube-holder:nth-child(6n-5) .inverse-cube .side:nth-child(1)::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 30px;
+  height: 30px;
+  background: linear-gradient(45deg, #000103 0%, #000103 50%, #d5bb97 50%, #d5bb97 100%);
+}
+.row:nth-child(4n-2) .cube-holder:nth-child(6n-5) .inverse-cube .side:nth-child(4) {
+  transform: rotateX(90deg) translateX(-15px) translateY(-15px);
+  background: #9c3131;
+  width: 30px;
+  height: 30px;
+}
+.row:nth-child(4n-2) .cube-holder:nth-child(6n-5) .inverse-cube .side:nth-child(5) {
+  transform: translateX(-15px) translateY(15px);
+  background: #d5bb97;
+  width: 30px;
+  height: 30px;
+}
+.row:nth-child(4n-2) .cube-holder:nth-child(6n-5) .inverse-cube .side:nth-child(6) {
+  transform: rotateY(90deg) translateX(15px) translateY(15px);
+  background: #000103;
+  width: 30px;
+  height: 30px;
+}
+
+.row:nth-child(4n-2) .cube-holder:nth-child(6n-2) .inverse-cube .side:nth-child(1) {
+  transform: rotateX(90deg) translateZ(-30px);
+  background: repeating-linear-gradient(90deg, #867a63, #867a63 1px, #aa9f8c 1px, #aa9f8c 2px);
+  width: 60px;
+  height: 60px;
+}
+.row:nth-child(4n-2) .cube-holder:nth-child(6n-2) .inverse-cube .side:nth-child(2) {
+  transform: translateZ(-30px);
+  background: #d5bb97;
+  width: 60px;
+  height: 60px;
+}
+.row:nth-child(4n-2) .cube-holder:nth-child(6n-2) .inverse-cube .side:nth-child(3) {
+  transform: rotateY(90deg) rotateZ(90deg) translateZ(-30px);
+  background: #000103;
+  width: 60px;
+  height: 60px;
+}
+.row:nth-child(4n-2) .cube-holder:nth-child(6n-2) .inverse-cube .side:nth-child(4) {
+  transform: rotateX(90deg) translateX(-15px) translateY(-15px);
+  background: #9c3131;
+  width: 30px;
+  height: 30px;
+}
+.row:nth-child(4n-2) .cube-holder:nth-child(6n-2) .inverse-cube .side:nth-child(5) {
+  transform: translateX(-15px) translateY(15px);
+  background: #d5bb97;
+  width: 30px;
+  height: 30px;
+}
+.row:nth-child(4n-2) .cube-holder:nth-child(6n-2) .inverse-cube .side:nth-child(6) {
+  transform: rotateY(90deg) translateX(15px) translateY(15px);
+  background: #000103;
+  width: 30px;
+  height: 30px;
+}
+
+.row:nth-child(4n-1) .cube-holder:nth-child(3n-2) .inverse-cube .side:nth-child(1) {
+  transform: rotateX(90deg) translateZ(-30px);
+  background: repeating-linear-gradient(90deg, #867a63, #867a63 1px, #aa9f8c 1px, #aa9f8c 2px);
+  width: 60px;
+  height: 60px;
+}
+.row:nth-child(4n-1) .cube-holder:nth-child(3n-2) .inverse-cube .side:nth-child(2) {
+  transform: translateZ(-30px);
+  background: #d5bb97;
+  width: 60px;
+  height: 60px;
+}
+.row:nth-child(4n-1) .cube-holder:nth-child(3n-2) .inverse-cube .side:nth-child(3) {
+  transform: rotateY(90deg) rotateZ(90deg) translateZ(-30px);
+  background: #000103;
+  width: 60px;
+  height: 60px;
+}
+
+.row:nth-child(4n-1) .cube-holder:nth-child(3n-1) .inverse-cube .side:nth-child(1) {
+  transform: rotateX(90deg) translateZ(-30px);
+  background: #9c3131;
+  width: 60px;
+  height: 60px;
+}
+.row:nth-child(4n-1) .cube-holder:nth-child(3n-1) .inverse-cube .side:nth-child(2) {
+  transform: translateZ(-30px);
+  background: #d5bb97;
+  width: 60px;
+  height: 60px;
+}
+.row:nth-child(4n-1) .cube-holder:nth-child(3n-1) .inverse-cube .side:nth-child(3) {
+  transform: rotateY(90deg) rotateZ(90deg) translateZ(-30px);
+  background: #000103;
+  width: 60px;
+  height: 60px;
+}
+
+.row:nth-child(4n-1) .cube-holder:nth-child(3n-0) .inverse-cube .side:nth-child(1) {
+  transform: rotateX(90deg) translateZ(-30px);
+  background: repeating-linear-gradient(90deg, #867a63, #867a63 1px, #aa9f8c 1px, #aa9f8c 2px);
+  width: 60px;
+  height: 60px;
+}
+.row:nth-child(4n-1) .cube-holder:nth-child(3n-0) .inverse-cube .side:nth-child(2) {
+  transform: translateZ(-30px);
+  background: #d5bb97;
+  width: 60px;
+  height: 60px;
+}
+.row:nth-child(4n-1) .cube-holder:nth-child(3n-0) .inverse-cube .side:nth-child(3) {
+  transform: rotateY(90deg) rotateZ(90deg) translateZ(-30px);
+  background: #000103;
+  width: 60px;
+  height: 60px;
+}
+.row:nth-child(4n-1) .cube-holder:nth-child(3n-0) .inverse-cube .side:nth-child(3) {
+  background: repeating-linear-gradient(90deg, #867a63, #867a63 1px, #aa9f8c 1px, #aa9f8c 2px);
+}
+.row:nth-child(4n-1) .cube-holder:nth-child(3n-0) .inverse-cube .side:nth-child(2)::after {
+  content: "";
+  position: absolute;
+  left: 7.5px;
+  top: 15px;
+  width: 12px;
+  height: 24px;
+  background: linear-gradient(-45deg, #867a63 0%, #867a63 33%, #000103 33%, #000103 100%);
+}
+.row:nth-child(4n-1) .cube-holder:nth-child(3n-0) .inverse-cube .side:nth-child(4) {
+  transform: rotateX(90deg) translateX(15px);
+  background: #9c3131;
+  width: 30px;
+  height: 60px;
+}
+.row:nth-child(4n-1) .cube-holder:nth-child(3n-0) .inverse-cube .side:nth-child(5) {
+  transform: translateX(15px) translateY(15px) translateZ(30px);
+  background: #d5bb97;
+  width: 30px;
+  height: 30px;
+}
+.row:nth-child(4n-1) .cube-holder:nth-child(3n-0) .inverse-cube .side:nth-child(5)::after {
+  content: "";
+  position: absolute;
+  left: 7.5px;
+  top: 15px;
+  width: 12px;
+  height: 24px;
+  background: linear-gradient(-45deg, #867a63 0%, #867a63 33%, #000103 33%, #000103 100%);
+}
+.row:nth-child(4n-1) .cube-holder:nth-child(3n-0) .inverse-cube .side:nth-child(6) {
+  transform: rotateY(90deg) translateY(15px) translateZ(30px);
+  background: #000103;
+  width: 60px;
+  height: 30px;
+}
+
+.row:nth-child(4n-0) .cube-holder:nth-child(6n-5) .inverse-cube .side:nth-child(1) {
+  transform: rotateX(90deg) translateZ(-30px);
+  background: repeating-linear-gradient(90deg, #867a63, #867a63 1px, #aa9f8c 1px, #aa9f8c 2px);
+  width: 60px;
+  height: 60px;
+}
+.row:nth-child(4n-0) .cube-holder:nth-child(6n-5) .inverse-cube .side:nth-child(2) {
+  transform: translateZ(-30px);
+  background: #d5bb97;
+  width: 60px;
+  height: 60px;
+}
+.row:nth-child(4n-0) .cube-holder:nth-child(6n-5) .inverse-cube .side:nth-child(3) {
+  transform: rotateY(90deg) rotateZ(90deg) translateZ(-30px);
+  background: #000103;
+  width: 60px;
+  height: 60px;
+}
+
+.row:nth-child(4n-0) .cube-holder:nth-child(6n-4) .inverse-cube .side:nth-child(1) {
+  transform: rotateX(90deg) translateZ(-30px);
+  background: #9c3131;
+  width: 60px;
+  height: 60px;
+}
+.row:nth-child(4n-0) .cube-holder:nth-child(6n-4) .inverse-cube .side:nth-child(2) {
+  transform: translateZ(-30px);
+  background: #d5bb97;
+  width: 60px;
+  height: 60px;
+}
+.row:nth-child(4n-0) .cube-holder:nth-child(6n-4) .inverse-cube .side:nth-child(3) {
+  transform: rotateY(90deg) rotateZ(90deg) translateZ(-30px);
+  background: #000103;
+  width: 60px;
+  height: 60px;
+}
+
+.row:nth-child(4n-0) .cube-holder:nth-child(6n-3) .inverse-cube .side:nth-child(1) {
+  transform: rotateX(90deg) translateZ(-30px);
+  background: repeating-linear-gradient(90deg, #867a63, #867a63 1px, #aa9f8c 1px, #aa9f8c 2px);
+  width: 60px;
+  height: 60px;
+}
+.row:nth-child(4n-0) .cube-holder:nth-child(6n-3) .inverse-cube .side:nth-child(2) {
+  transform: translateZ(-30px);
+  background: #d5bb97;
+  width: 60px;
+  height: 60px;
+}
+.row:nth-child(4n-0) .cube-holder:nth-child(6n-3) .inverse-cube .side:nth-child(3) {
+  transform: rotateY(90deg) rotateZ(90deg) translateZ(-30px);
+  background: #000103;
+  width: 60px;
+  height: 60px;
+}
+.row:nth-child(4n-0) .cube-holder:nth-child(6n-3) .inverse-cube .side:nth-child(4) {
+  transform: rotateX(90deg) translateX(-15px) translateY(15px);
+  background: #9c3131;
+  width: 30px;
+  height: 30px;
+}
+.row:nth-child(4n-0) .cube-holder:nth-child(6n-3) .inverse-cube .side:nth-child(5) {
+  transform: translateX(-15px) translateY(15px) translateZ(30px);
+  background: #d5bb97;
+  width: 30px;
+  height: 30px;
+}
+.row:nth-child(4n-0) .cube-holder:nth-child(6n-3) .inverse-cube .side:nth-child(6) {
+  transform: rotateY(90deg) translateX(-15px) translateY(15px);
+  background: #000103;
+  width: 30px;
+  height: 30px;
+}
+
+.row:nth-child(4n-0) .cube-holder:nth-child(6n-2) .inverse-cube .side:nth-child(1) {
+  transform: rotateX(90deg) translateZ(-30px);
+  background: #9c3131;
+  width: 60px;
+  height: 60px;
+}
+.row:nth-child(4n-0) .cube-holder:nth-child(6n-2) .inverse-cube .side:nth-child(2) {
+  transform: translateZ(-30px);
+  background: #d5bb97;
+  width: 60px;
+  height: 60px;
+}
+.row:nth-child(4n-0) .cube-holder:nth-child(6n-2) .inverse-cube .side:nth-child(3) {
+  transform: rotateY(90deg) rotateZ(90deg) translateZ(-30px);
+  background: #000103;
+  width: 60px;
+  height: 60px;
+}
+.row:nth-child(4n-0) .cube-holder:nth-child(6n-2) .inverse-cube .side:nth-child(1)::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 30px;
+  height: 30px;
+  background: linear-gradient(45deg, #000103 0%, #000103 50%, #d5bb97 50%, #d5bb97 100%);
+}
+
+.row:nth-child(4n-0) .cube-holder:nth-child(6n-1) .inverse-cube .side:nth-child(1) {
+  transform: rotateX(90deg) translateZ(-30px);
+  background: #9c3131;
+  width: 60px;
+  height: 60px;
+}
+.row:nth-child(4n-0) .cube-holder:nth-child(6n-1) .inverse-cube .side:nth-child(2) {
+  transform: translateZ(-30px);
+  background: #d5bb97;
+  width: 60px;
+  height: 60px;
+}
+.row:nth-child(4n-0) .cube-holder:nth-child(6n-1) .inverse-cube .side:nth-child(3) {
+  transform: rotateY(90deg) rotateZ(90deg) translateZ(-30px);
+  background: #000103;
+  width: 60px;
+  height: 60px;
+}
+
+.row:nth-child(4n-0) .cube-holder:nth-child(6n-0) .inverse-cube .side:nth-child(1) {
+  transform: rotateX(90deg) translateZ(-30px);
+  background: #9c3131;
+  width: 60px;
+  height: 60px;
+}
+.row:nth-child(4n-0) .cube-holder:nth-child(6n-0) .inverse-cube .side:nth-child(2) {
+  transform: translateZ(-30px);
+  background: #d5bb97;
+  width: 60px;
+  height: 60px;
+}
+.row:nth-child(4n-0) .cube-holder:nth-child(6n-0) .inverse-cube .side:nth-child(3) {
+  transform: rotateY(90deg) rotateZ(90deg) translateZ(-30px);
+  background: #000103;
+  width: 60px;
+  height: 60px;
+}
+.row:nth-child(4n-0) .cube-holder:nth-child(6n-0) .inverse-cube .side:nth-child(4) {
+  transform: rotateX(90deg) translateX(-15px) translateY(15px);
+  background: repeating-linear-gradient(90deg, #867a63, #867a63 1px, #aa9f8c 1px, #aa9f8c 2px);
+  width: 30px;
+  height: 30px;
+}
+.row:nth-child(4n-0) .cube-holder:nth-child(6n-0) .inverse-cube .side:nth-child(5) {
+  transform: translateX(-15px) translateY(15px) translateZ(30px);
+  background: #d5bb97;
+  width: 30px;
+  height: 30px;
+}
+.row:nth-child(4n-0) .cube-holder:nth-child(6n-0) .inverse-cube .side:nth-child(6) {
+  transform: rotateY(90deg) translateX(-15px) translateY(15px);
+  background: #000103;
+  width: 30px;
+  height: 30px;
+}
+
+#youtube,
+#youtube-card {
+  display: none;
+}
+
+@media (min-height: 425px) {
+  /** Youtube logo by https://codepen.io/alvaromontoro */
+  #youtube {
+    z-index: 2;
+    display: block;
+    width: 100px;
+    height: 70px;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: red;
+    border-radius: 50%/11%;
+    transform: scale(0.8);
+    transition: transform 0.5s;
+  }
+
+  #youtube:hover,
+#youtube:focus {
+    transform: scale(0.9);
+  }
+
+  #youtube::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 7.5%;
+    left: -6%;
+    width: 112%;
+    height: 85%;
+    background: red;
+    border-radius: 9%/50%;
+  }
+
+  #youtube::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 20px;
+    left: 40px;
+    width: 45px;
+    height: 30px;
+    border: 15px solid transparent;
+    box-sizing: border-box;
+    border-left: 30px solid white;
+  }
+
+  #youtube span {
+    font-size: 0;
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+  }
+
+  #youtube:hover + #youtube-card {
+    display: block;
+    position: absolute;
+    bottom: 12px;
+    right: 10px;
+    padding: 25px 130px 25px 25px;
+    width: 300px;
+    background-color: white;
+  }
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  <div class="container">
+  <div class="frame">
+    <div class="row">
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+      <div class="cube-holder">
+        <div class="inverse-cube">
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+          <div class="side"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><a id="youtube" href="https://youtu.be/cNqgatGqvC8" target="_top"><span>See how it was made</span></a>
+<div id="youtube-card">How to create 3D patterns with CSS transform</div>
+  
+    <script id="rendered-js" >
+/*
+
+If you want to know how this pen was made, check out this video, that explains 3D transformations in CSS, creating patterns with selectors, using Pug instead of HTML and using mixins in SCSS: 
+
+https://www.youtube.com/watch?v=cNqgatGqvC8
+
+Follow me on twitter for more: https://twitter.com/HunorBorbely
+
+*/
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>

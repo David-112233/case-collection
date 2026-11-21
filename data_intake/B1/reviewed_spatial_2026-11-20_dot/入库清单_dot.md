@@ -1,10 +1,10 @@
-# 空间关系案例 · 首轮入库 C001–C030
+# 空间关系案例 · 入库清单 C001–C050
 
-**16 个标 1 案例已整理，14 个标 0 的原作链接留在 [二轮备选](二轮备选_dot.md)。** 仅包含这 30 个审核结果，后续候选未改变。
+**27 个标 1 案例已整理，23 个标 0 的原作链接留在 [二轮备选](二轮备选_dot.md)。** 本次只追加 C031–C050 的审核结果，前 30 个已交付目录与决定不变。
 
-复制本目录下带 `Cxxx__` 的 16 个案例文件夹即可。`Cxxx` 是审核编号，不是主项目正式编号；此次未改动主项目或占用其编号。
+带 `Cxxx__` 的目录可复制到本地；`Cxxx` 是审核编号，不是主项目正式编号。每例保留原始捕获 `original_srcdoc.html`、归档预览 `source.html` 和 `source_original.html`、来源与核验范围 `metadata.json`、审核结果 `classification.json`。预览可能依赖外链；未修改主项目，不含题目、GT 或评分规则。
 
-每例包含 `original_srcdoc.html`（原始捕获）、`source_original.html`（移除 CodePen 控制台样板的归档）、`source.html`（原归档预览，保留作品脚本和外链）、`metadata.json`（来源与原核验范围）和 `classification.json`（空间特点与首轮审核结果）。此批不包含题目、GT、评分规则或离线可用性保证。
+## 首轮 C001–C030（16）
 
 - **C002** · [案例文件夹](C002__RaduBratan__mdPrWmo/) · iPod Nano、凹屏与滚轮 · <https://codepen.io/RaduBratan/pen/mdPrWmo>
 - **C003** · [案例文件夹](C003__fossheim__VweaNYW/) · 卡西欧键盘、黑白键叠压 · <https://codepen.io/fossheim/pen/VweaNYW>
@@ -22,3 +22,17 @@
 - **C026** · [案例文件夹](C026__meylon__qByaYVp/) · 圆环凹面、错落连线 · <https://codepen.io/meylon/pen/qByaYVp>
 - **C028** · [案例文件夹](C028__zenete__BaMbmqW/) · 房间吊顶、扇叶遮叠 · <https://codepen.io/zenete/pen/BaMbmqW>
 - **C029** · [案例文件夹](C029__alvaromontoro__zxvqodP/) · 四工位办公室、隔板交错 · <https://codepen.io/alvaromontoro/pen/zxvqodP>
+
+## 追加审核 C031–C050（11）
+
+- **C032** · [案例文件夹](C032__kevinleclair1__XJgQrr/) · 交织五环、前后交替 · <https://codepen.io/kevinleclair1/pen/XJgQrr>
+- **C033** · [案例文件夹](C033__HunorMarton__BazeOpE/) · 埃舍尔方块、桥面穿插 · <https://codepen.io/HunorMarton/pen/BazeOpE>
+- **C034** · [案例文件夹](C034__ehckk__WNzGYKy/) · 彩虹书架、书脊深度 · <https://codepen.io/ehckk/pen/WNzGYKy>
+- **C036** · [案例文件夹](C036__jh3y__XWdQBRx/) · 立体工作室、室内遮挡 · <https://codepen.io/jh3y/pen/XWdQBRx>
+- **C037** · [案例文件夹](C037__lynnandtonic__PoZpjOr/) · 折痕海报、纸面光影 · <https://codepen.io/lynnandtonic/pen/PoZpjOr>
+- **C038** · [案例文件夹](C038__ricardoolivaalonso__RwBZMGB/) · 开盖随身听、内腔层次 · <https://codepen.io/ricardoolivaalonso/pen/RwBZMGB>
+- **C039** · [案例文件夹](C039__thebabydino__NLWdwz/) · 圆片信息图、编号叠盖 · <https://codepen.io/thebabydino/pen/NLWdwz>
+- **C040** · [案例文件夹](C040__thebabydino__eQvWLB/) · 彩色折纸条、交替折角 · <https://codepen.io/thebabydino/pen/eQvWLB>
+- **C041** · [案例文件夹](C041__thebabydino__pBmMaJ/) · 斜切编号条、圆标压层 · <https://codepen.io/thebabydino/pen/pBmMaJ>
+- **C042** · [案例文件夹](C042__ykadosh__bGKgxbe/) · 机械键盘、错排立体键帽 · <https://codepen.io/ykadosh/pen/bGKgxbe>
+- **C048** · [案例文件夹](C048__agathaco__JaGQPr/) · 夜景灯塔、光束与远山 · <https://codepen.io/agathaco/pen/JaGQPr>

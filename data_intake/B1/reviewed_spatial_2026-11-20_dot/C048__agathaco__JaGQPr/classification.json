@@ -1,0 +1,14 @@
+{
+  "review_id": "C048",
+  "case_id": null,
+  "tier": null,
+  "spatial_feature": "夜景灯塔、光束与远山",
+  "evidence": "灯塔前景、扫过天空的光束、交叠的远山、水面构成前后层；默认画面可见，持续动画的完整周期未验证。",
+  "decision": "accept",
+  "confirmation": {
+    "batch": "追加审核 C031–C050",
+    "value": 1,
+    "date": "2026-11-21"
+  },
+  "qualification_note": "未分配主项目正式编号、未强定档；视觉核验范围沿用采集记录。"
+}
