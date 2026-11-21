@@ -1,0 +1,4 @@
+Alexandre CMC Souza (aledebarba), “Fast Dial inside a drawer”.
+https://codepen.io/editor/aledebarba/pen/019055ff-5172-7bcd-89ef-16c7e39ef484?panel=details
+Each of index.pen.html, style.css, and empty script.js is an exact original file from the visible editor's file-tab Download command. The public Details panel displays MIT and the author/copyright notice, reproduced in LICENSE.txt. No external URLs or CSS imports found in originals.
+First two-frame benchmark: use top visible paired drawers marked BEARS and FOODS. Initially FOODS is open and red BEARS closed. Click BEARS and let CSS settle; BEARS stays open with three visible bear icons and FOODS closes. Open tray has angled side and back faces; the near front face blocks the lower contents. The first visible row is radio-style exclusive; subsequent rows are other behaviors, not necessary for capture.
