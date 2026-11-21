@@ -1,0 +1,60 @@
+{
+  "slot": "20261121T0512Z",
+  "candidate_count": 3,
+  "main_base": "579a36be2f08539608811a4174eb1623c2b2f430",
+  "candidates": [
+    {
+      "key": "teplostanski__geometric_walls",
+      "author": "Igor Teplostanski",
+      "url": "https://geometric-walls.teplostanski.me/",
+      "tags": [
+        "斜墙遮挡",
+        "折面相接",
+        "前景阴影"
+      ],
+      "review_status": "await_user_review",
+      "browser_evidence": "作者站默认静态构图中，浅色斜墙在 T 形交界挡住后方锈红色墙的一部分，褐色三角折面在墙脚接住暗色楔形影子，灰色地面在前、蓝色天空在后。CSS 渐变模拟空间，不是可转动的 3D 模型。",
+      "license": "GPL-3.0",
+      "license_scope": "Exact original index.html and favicon.svg at upstream 00f7144c66cad719f4b104b56be238c469308d38; full upstream LICENSE included. Inline CSS confirmed against deployed page. No image/script needed by drawing; original root-relative favicon optionally served from hosting root.",
+      "js_policy": "none",
+      "entrypoint": "index.html",
+      "review_id": "C296"
+    },
+    {
+      "key": "Abhishek_Mallick__isometric_pc_case",
+      "author": "Abhishek Mallick",
+      "url": "https://isometric.buildlab.in/components/pc-case/",
+      "tags": [
+        "透明侧板",
+        "显卡抽出",
+        "机箱内外遮挡"
+      ],
+      "review_status": "await_user_review",
+      "browser_evidence": "作者原站默认关机，透明侧板后可见内件分层。点击玻璃右上空位，等到 Side panel off，再点侧板左缘旁的横向显卡，等到 Graphics card out。显卡部分跨出机箱前沿并处在滑开玻璃后面，前风扇、内部隔层和底仓保持不动。无需开机。",
+      "license": "MIT",
+      "license_scope": "19 unchanged upstream files pinned at 2b71b961241a4bcbda03544186572e41a8e07d45, verified against upstream Git blobs; exact license includes both copyright notices. Archived Isometric Engine and PC Case source closure and metadata only, not a standalone HTML demo. Live deployment commit is not known and source archive was not built/tested. See ARCHIVE-NOTES.md.",
+      "js_policy": "preserve",
+      "entrypoint": "original/registry/isometric/ui/isometric/pc-case.tsx",
+      "runtime_type": "source_component_not_standalone",
+      "review_id": "C297"
+    },
+    {
+      "key": "hilman2__village_world",
+      "author": "hilman2",
+      "url": "https://hilman2.github.io/village-world/",
+      "tags": [
+        "拱桥跨河",
+        "村落错落",
+        "双层山脊"
+      ],
+      "review_status": "await_user_review",
+      "browser_evidence": "作者原站右上暂停后点 Spring morning，保持暂停。前景桥面挡住河道的一段，桥拱下仍露水；村屋和小路远近错落，草坡、树线与深浅两道山脊自前向后遮叠。画面为 Canvas 2D，非三维漫游。",
+      "license": "MIT",
+      "license_scope": "Upstream c539f151fd9957ed781a0c9c307921687c17e0ee; MIT covers source and generated artwork per exact upstream CREDITS.md and LICENSE. Original runtime and source/build files included. Browser deployed resource references match archived runtime paths, offline not tested.",
+      "js_policy": "preserve",
+      "entrypoint": "index.html",
+      "review_id": "C298",
+      "catalog_difference": "不同于 C197 的轴测梁体与透明体素水面、C234 的无限循环城市视差及 C264 的茶田剪纸山脊层；这里是可由作者按钮暂停的正视全景，河道从桥后穿至前景，前后两岸聚落、树线和山体同时可辨。"
+    }
+  ]
+}

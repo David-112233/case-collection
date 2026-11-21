@@ -1,0 +1,13 @@
+{
+  "name": "village-world",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Animated village and weather landscape for Canvas 2D",
+  "license": "MIT",
+  "repository": { "type": "git", "url": "https://github.com/hilman2/village-world.git" },
+  "homepage": "https://hilman2.github.io/village-world/",
+  "exports": { ".": "./dorfwelt.js", "./state": "./state.js", "./style.css": "./style.css" },
+  "files": ["dorfwelt.js", "state.js", "layout.js", "style.css", "README.md", "CREDITS.md", "LICENSE"],
+  "scripts": { "build": "node build.mjs", "test": "node --test test/*.test.js" }
+}

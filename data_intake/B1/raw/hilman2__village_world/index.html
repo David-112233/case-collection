@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Village World · Demo</title>
+  <meta name="description" content="An animated Canvas 2D village with adjustable weather, seasons, daylight and moon phases.">
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./demo.css">
+  <script src="./demo.bundle.js" defer></script>
+</head>
+<body>
+  <main>
+    <header><div><p>KIRCHDORF · 48° 27′ N</p><h1>Village World<span> / </span><small>Demo</small></h1></div><a href="https://github.com/hilman2/village-world#usage">Usage ↗</a></header>
+    <div class="scene-wrap"><div id="scene"></div><div class="caption"><span id="caption">Autumn evening</span><span id="clock">18:45</span></div></div>
+    <nav aria-label="Scenes"><button type="button" data-preset="autumn-evening" aria-pressed="true">Autumn evening</button><button type="button" data-preset="summer-night" aria-pressed="false">Summer night</button><button type="button" data-preset="autumn-fog" aria-pressed="false">Autumn fog</button><button type="button" data-preset="winter-snow" aria-pressed="false">Winter snow</button><button type="button" data-preset="spring-morning" aria-pressed="false">Spring morning</button><button type="button" data-preset="summer-storm" aria-pressed="false">Summer storm</button></nav>
+    <form id="controls">
+      <label>Season<select id="season"><option value="4.3">Spring</option><option value="7.1">Summer</option><option value="10.2" selected>Autumn</option><option value="1.5">Winter</option></select></label>
+      <label>Weather<select id="weather"><option value="clear">Clear</option><option value="fair">Fair</option><option value="cloudy">Cloudy</option><option value="overcast">Overcast</option><option value="fog">Fog</option><option value="rain-forecast">Rain forecast, observed dry</option><option value="rain">Rain</option><option value="storm">Thunderstorm</option><option value="snow">Snow</option><option value="sleet">Sleet</option></select></label>
+      <label>Time of day <output id="time-label">18:45</output><input id="time" type="range" min="0" max="23.99" value="18.75" step=".05"></label>
+      <label>Moon phase <output id="moon-label">65 %</output><input id="moon" type="range" min="0" max="1" value=".35" step=".01"></label>
+      <label>Wind <output id="wind-label">2 m/s</output><input id="wind" type="range" min="0" max="25" value="2" step=".5"></label>
+      <label>Observed rain <output id="rain-label">0 mm/h</output><input id="rain" type="range" min="0" max="25" value="0" step=".1"></label>
+      <label>Snow cover <output id="snow-label">0 cm</output><input id="snow" type="range" min="0" max="15" value="0" step=".5"></label>
+      <label class="toggle"><input id="tour" type="checkbox"> Play day cycle</label>
+    </form>
+    <footer><span>Simulation · Canvas 2D</span><a href="https://github.com/hilman2/village-world/blob/main/CREDITS.md">Credits &amp; license ↗</a></footer>
+  </main>
+</body>
+</html>
