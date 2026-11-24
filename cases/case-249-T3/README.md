@@ -2,7 +2,7 @@
 
 来源：<https://codepen.io/ricardoolivaalonso/pen/RwBZMGB>（作者 ricardoolivaalonso，CodePen 公开作品，默认 MIT 许可）
 
-当前阶段：`admitted`（入库于 2026-11-24），归属 duet。阶段以 [registry.csv](../registry.csv) 为准。
+当前阶段：`input_draft`（入库于 2026-11-24），归属 duet。阶段以 [registry.csv](../registry.csv) 为准。
 
 - 审核编号：C038；档位：T3（**暂定**，依据入库时的来源源码；`ground_truth.html` 完成后按 GT 的驱动方式重新判定，必要时用 `registry.py retier` 改名）。
 - 特色：开盖随身听、内腔层次
@@ -37,3 +37,8 @@
 - **疑点（默认照来源，未改）：** 播放态何时结束取决于音频长度；音频加载失败时 `play()` 被拒，`ended` 不会触发，页面会一直停在播放态。见 `input_problem.md`。
 - **档位复核：** GT 有“点击后进入并保持播放态”（按键、仓门、声波条保持到音频结束），按难度模型 v2.1 为 **T3**，与暂定一致，目录名不变。
 - **自检：** 见 [review_20261124/](review_20261124/)。`state_view.html` 是自检辅助页：在同源 iframe 里打开 GT 并自动点击指定元素，供只能截图的云端浏览器查看点击后的状态，不属于 GT。
+- **渲染核对：** 已用云端浏览器经 raw.githack.com 在 1280、500 宽下核对默认态和播放态，渲染正常，GT 不需要再改；音频播放与“播完自动复原”没能在云端核实（脚本点击被自动播放策略拦下的可能性大），待本地运行 `gt_selfcheck.py`。详见 [static_check.md](review_20261124/static_check.md)。
+
+## input 草稿（2026-11-24，duet）
+
+[input.json](input.json) 由 GT 和渲染截图写出，等用户审核 GT 与 input。需要用户定的事（播放态结束方式、音乐去留、声波条静止帧、播放键提示闪烁）和取舍见 [input_problem.md](input_problem.md)。
