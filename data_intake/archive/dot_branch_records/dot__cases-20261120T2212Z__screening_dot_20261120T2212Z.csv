@@ -1,0 +1,2 @@
+key,url,decision,tier,hits,reason,js_policy,evidence,notes,decided_on
+Evirtual__bookshelf,https://css3dlab.edgarasneverdauskas.com/models/bookshelf/,hold,unclassified,spatial_layers,await_user_review,none,同一固定视角，单册从层板抽离后旋转至前景，遮住左侧邻册。初始、键盘焦点两帧已实测。,仅候审，不入主分支；单册抽离、前后遮挡、层板承托,2026-11-20

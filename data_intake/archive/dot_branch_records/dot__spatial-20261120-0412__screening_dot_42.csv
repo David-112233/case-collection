@@ -1,0 +1,3 @@
+key,url,decision,tier,hits,reason,js_policy,evidence,notes,decided_on
+Amir-Amar__QwLmoYB,https://codepen.io/Amir-Amar/pen/QwLmoYB,hold,unclassified,spatial_layers,await_user_review,preserve,两次实看：列车横穿 X 形桁架桥，近端黑色边界遮住部分机车/车厢，车轮连杆与车身相叠，后方山坡遮住月轮下缘。连续动效，建议选机车全露与机车被端部局部遮挡的两帧，不是稳定开关。,优先，对照 224 / 213；仅候审，未正式入库。,2026-11-20
+maja127__poJzzEe,https://codepen.io/maja127/pen/poJzzEe,hold,unclassified,spatial_layers,await_user_review,preserve,两次实看杯碗轮廓保持不动，浅蓝发光波面曲率变化，后帧可见两条波线；蓝色液体始终裁在圆弧碗体内，细柄和椭圆杯底套叠。二维裁切和半透明叠层，不是三维液体模拟，取两代表帧。,备选，对照 213；仅候审，未正式入库。,2026-11-20

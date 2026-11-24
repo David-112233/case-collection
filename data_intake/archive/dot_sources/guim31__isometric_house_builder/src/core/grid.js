@@ -1,0 +1,261 @@
+/**
+ * The footprint lives on an integer grid of cells. Everything else — walls,
+ * roof, openings — is derived from it, so this module is the single source of
+ * truth for "what shape is the house".
+ */
+
+export const key = (i, j) => `${i},${j}`;
+export const parseKey = (k) => k.split(',').map(Number);
+
+export function bounds(cells) {
+  let i0 = Infinity, j0 = Infinity, i1 = -Infinity, j1 = -Infinity;
+  for (const k of cells) {
+    const [i, j] = parseKey(k);
+    if (i < i0) i0 = i;
+    if (j < j0) j0 = j;
+    if (i > i1) i1 = i;
+    if (j > j1) j1 = j;
+  }
+  if (!Number.isFinite(i0)) return { i0: 0, j0: 0, i1: -1, j1: -1, w: 0, d: 0, empty: true };
+  return { i0, j0, i1, j1, w: i1 - i0 + 1, d: j1 - j0 + 1, empty: false };
+}
+
+/**
+ * Sides of a cell, given as the edge walked so that extruding it upward
+ * produces an outward-facing wall.
+ *
+ *   a -> b is the ground edge; the wall quad is (a0, b0, b1, a1).
+ */
+export const SIDES = {
+  S: { d: [0, -1], a: (i, j) => [i, j], b: (i, j) => [i + 1, j] },
+  E: { d: [1, 0], a: (i, j) => [i + 1, j], b: (i, j) => [i + 1, j + 1] },
+  N: { d: [0, 1], a: (i, j) => [i + 1, j + 1], b: (i, j) => [i, j + 1] },
+  W: { d: [-1, 0], a: (i, j) => [i, j + 1], b: (i, j) => [i, j] },
+};
+
+export const SIDE_NAMES = ['S', 'E', 'N', 'W'];
+
+/** Every cell edge that faces the outside world — i.e. every exterior wall. */
+export function boundaryEdges(cells) {
+  const out = [];
+  for (const k of cells) {
+    const [i, j] = parseKey(k);
+    for (const side of SIDE_NAMES) {
+      const s = SIDES[side];
+      if (cells.has(key(i + s.d[0], j + s.d[1]))) continue;
+      out.push({ i, j, side, id: `${i},${j},${side}`, a: s.a(i, j), b: s.b(i, j), n: s.d });
+    }
+  }
+  out.sort((p, q) => p.id.localeCompare(q.id));
+  return out;
+}
+
+/**
+ * Straight exterior wall runs: contiguous same-side edges merged into one
+ * segment. This is what a dimension label should measure — nobody wants one
+ * cote per metre of wall.
+ */
+export function boundaryRuns(cells) {
+  const groups = new Map();
+  for (const e of boundaryEdges(cells)) {
+    const horiz = e.side === 'S' || e.side === 'N';
+    const g = `${e.side}:${horiz ? e.j : e.i}`;
+    if (!groups.has(g)) groups.set(g, []);
+    groups.get(g).push(e);
+  }
+  const runs = [];
+  for (const [g, list] of groups) {
+    const side = g[0];
+    const horiz = side === 'S' || side === 'N';
+    list.sort((p, q) => (horiz ? p.i - q.i : p.j - q.j));
+    let start = 0;
+    for (let k = 1; k <= list.length; k++) {
+      const prev = horiz ? list[k - 1].i : list[k - 1].j;
+      const cur = k < list.length ? (horiz ? list[k].i : list[k].j) : NaN;
+      if (cur !== prev + 1) {
+        const seg = list.slice(start, k);
+        const lo = horiz ? seg[0].i : seg[0].j;
+        const hi = horiz ? seg[seg.length - 1].i : seg[seg.length - 1].j;
+        const first = seg[0];
+        const ids = seg.map((x) => x.id);
+        runs.push(horiz
+          ? { side, cells: seg.length, n: first.n, a: [lo, first.a[1]], b: [hi + 1, first.a[1]], ids }
+          : { side, cells: seg.length, n: first.n, a: [first.a[0], lo], b: [first.a[0], hi + 1], ids });
+        start = k;
+      }
+    }
+  }
+  return runs;
+}
+
+/**
+ * Cover the footprint with maximal rectangles.
+ *
+ * The roof is built as the upper envelope of one hip roof per rectangle, so
+ * this decomposition is what decides where ridges and valleys fall. Maximal
+ * rectangles are allowed to overlap: overlap costs nothing in an upper
+ * envelope and yields far more natural ridge lines than a disjoint partition.
+ */
+export function decomposeRects(cells) {
+  const b = bounds(cells);
+  if (b.empty) return [];
+  const W = b.w, D = b.d;
+  const filled = new Uint8Array(W * D);
+  for (const k of cells) {
+    const [i, j] = parseKey(k);
+    filled[(j - b.j0) * W + (i - b.i0)] = 1;
+  }
+  const at = (x, y) => (x >= 0 && y >= 0 && x < W && y < D ? filled[y * W + x] : 0);
+
+  // Prefix sums make "is this rectangle entirely filled" an O(1) test.
+  const ps = new Int32Array((W + 1) * (D + 1));
+  const P = (x, y) => ps[y * (W + 1) + x];
+  for (let y = 0; y < D; y++) {
+    for (let x = 0; x < W; x++) {
+      ps[(y + 1) * (W + 1) + (x + 1)] = at(x, y) + P(x + 1, y) + P(x, y + 1) - P(x, y);
+    }
+  }
+  const full = (x0, y0, x1, y1) => {
+    const area = (x1 - x0 + 1) * (y1 - y0 + 1);
+    return P(x1 + 1, y1 + 1) - P(x0, y1 + 1) - P(x1 + 1, y0) + P(x0, y0) === area;
+  };
+
+  /*
+   * Every maximal rectangle, by the histogram method: for each row taken as
+   * the top, the column heights of filled cells below it, and a stack that
+   * pops each rectangle as wide as it can be for its height. Those cannot grow
+   * sideways or upwards; one test settles downwards.
+   *
+   * Trying every corner pair instead cost the fourth power of the side: a
+   * 200 × 200 footprint froze the tab for fifteen seconds, at every reload,
+   * since the project is saved as soon as it opens.
+   */
+  const maximal = [];
+  const hgt = new Int32Array(W + 1);
+  for (let y = D - 1; y >= 0; y--) {
+    // hgt[x]: filled cells from row y upwards (towards larger y).
+    for (let x = 0; x < W; x++) hgt[x] = at(x, y) ? hgt[x] + 1 : 0;
+    hgt[W] = 0;
+    const stack = []; // [start x, height]
+    for (let x = 0; x <= W; x++) {
+      let start = x;
+      while (stack.length && stack[stack.length - 1][1] >= hgt[x]) {
+        const [sx, h] = stack.pop();
+        start = sx;
+        // Equal heights are one rectangle, emitted once by the last pop.
+        if (h > hgt[x] && h > 0) {
+          const x0 = sx, x1 = x - 1, y0 = y, y1 = y + h - 1;
+          if (!(y0 > 0 && full(x0, y0 - 1, x1, y0 - 1))) {
+            maximal.push({ x0, y0, x1, y1, area: (x1 - x0 + 1) * h });
+          }
+        }
+      }
+      stack.push([start, hgt[x]]);
+    }
+  }
+  // The order the exhaustive enumeration produced, so that rectangles of
+  // equal area are chosen exactly as before — and a roof is drawn exactly as
+  // it was.
+  maximal.sort((p, q) => p.y0 - q.y0 || p.x0 - q.x0 || p.y1 - q.y1 || p.x1 - q.x1);
+
+  // Greedily keep the biggest rectangles until every cell is covered.
+  maximal.sort((p, q) => q.area - p.area);
+  const covered = new Uint8Array(W * D);
+  let count = 0;
+  const chosen = [];
+  const total = cells.size;
+  for (const r of maximal) {
+    if (count >= total) break;
+    let gains = 0;
+    for (let y = r.y0; y <= r.y1; y++) {
+      for (let x = r.x0; x <= r.x1; x++) if (!covered[y * W + x]) gains++;
+    }
+    if (!gains) continue;
+    for (let y = r.y0; y <= r.y1; y++) {
+      for (let x = r.x0; x <= r.x1; x++) {
+        if (!covered[y * W + x]) { covered[y * W + x] = 1; count++; }
+      }
+    }
+    chosen.push({
+      x0: r.x0 + b.i0, y0: r.y0 + b.j0,
+      x1: r.x1 + b.i0 + 1, y1: r.y1 + b.j0 + 1, // exclusive upper bound, in world units
+    });
+  }
+  return chosen;
+}
+
+/**
+ * Split a cell set into its connected parts (4-neighbourhood).
+ *
+ * Used when migrating a single painted footprint into separate buildings: a
+ * shed drawn away from the house is already a distinct volume, it simply had
+ * no way of saying so.
+ */
+export function connectedComponents(cells) {
+  const seen = new Set();
+  const parts = [];
+  for (const start of cells) {
+    if (seen.has(start)) continue;
+    const stack = [start];
+    const part = [];
+    seen.add(start);
+    while (stack.length) {
+      const c = stack.pop();
+      part.push(c);
+      const [i, j] = parseKey(c);
+      for (const n of [key(i + 1, j), key(i - 1, j), key(i, j + 1), key(i, j - 1)]) {
+        if (cells.has(n) && !seen.has(n)) { seen.add(n); stack.push(n); }
+      }
+    }
+    parts.push(part.sort());
+  }
+  parts.sort((a, b) => b.length - a.length);
+  return parts;
+}
+
+/** Rectangle of cells, inclusive, as a Set of keys. */
+export function rectCells(i0, j0, i1, j1) {
+  const out = new Set();
+  const [a, b] = i0 <= i1 ? [i0, i1] : [i1, i0];
+  const [c, d] = j0 <= j1 ? [j0, j1] : [j1, j0];
+  for (let j = c; j <= d; j++) for (let i = a; i <= b; i++) out.add(key(i, j));
+  return out;
+}
+
+/**
+ * How far the straight wall an edge belongs to runs, measured along that
+ * edge's own axis and in metres.
+ *
+ * Boundary edges are one cell long, which is a fact about the grid and not
+ * about the house. A user placing a window reasons about the wall — "eighty
+ * centimetres from the corner" — and had to reason about the cell instead,
+ * with the odd result that a value of 0 landed the window astride a cell
+ * boundary somewhere in the middle of the facade. Both ends of the run are
+ * returned so a position can be expressed from the corner that starts it.
+ */
+export function edgeRunExtent(cells, edgeId, cs = 1) {
+  return runExtents(cells, cs).get(edgeId) || null;
+}
+
+/**
+ * The same for every boundary edge at once: edge id -> { lo, hi }. The renderer
+ * and the inspector both ask, and must get the same wall — a recess bounded by
+ * a looser definition than the slider's carved across a courtyard into the
+ * facade of the next wing.
+ */
+export function runExtents(cells, cs = 1) {
+  const out = new Map();
+  const byId = new Map(boundaryEdges(cells).map((e) => [e.id, e]));
+  for (const run of boundaryRuns(cells)) {
+    for (const id of run.ids) {
+      const e = byId.get(id);
+      // Edges are unit segments on the grid, so this difference is already a
+      // unit vector and the dot products below are lengths.
+      const u = [e.b[0] - e.a[0], e.b[1] - e.a[1]];
+      const along = (p) => ((p[0] - e.a[0]) * u[0] + (p[1] - e.a[1]) * u[1]) * cs;
+      const sA = along(run.a), sB = along(run.b);
+      out.set(id, { lo: Math.min(sA, sB), hi: Math.max(sA, sB) });
+    }
+  }
+  return out;
+}
