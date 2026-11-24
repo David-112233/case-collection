@@ -4,7 +4,7 @@
 
 当前阶段见 [registry.csv](../registry.csv)（入库于 2026-11-24），归属 duet。阶段以 [registry.csv](../registry.csv) 为准。
 
-- 审核编号：C028；档位：T1（**暂定**，依据入库时的来源源码；`ground_truth.html` 完成后按 GT 的驱动方式重新判定，必要时用 `registry.py retier` 改名）。
+- 审核编号：C028；档位：T1（入库时按来源源码暂定为 T2，GT 完成后复核改为 T1，见下文“档位复核”）。
 - 特色：房间吊顶、扇叶遮叠
 
 | 文件 | 说明 |
