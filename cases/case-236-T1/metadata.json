@@ -62,7 +62,7 @@
     "scope": "仅采集仓库入库交付；主项目尚未导入"
   },
   "review_id": "C011",
-  "case_id": "case-236-T3",
+  "case_id": "case-236-T1",
   "candidate_status": "admitted_in_collection_repo",
   "source_archive": {
     "repository": "David-112233/case-collection",

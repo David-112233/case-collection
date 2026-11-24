@@ -1,7 +1,7 @@
 {
   "review_id": "C011",
-  "case_id": "case-236-T3",
-  "tier": "T3",
+  "case_id": "case-236-T1",
+  "tier": "T1",
   "spatial_feature": "Switch机身、按键凹凸",
   "evidence": "倾斜多面机壳，摇杆与按钮凸起，屏幕凹面，侧面接口及落地阴影形成层叠遮挡。默认视觉已核实；拖动交互未测试。",
   "decision": "accept",
@@ -11,8 +11,8 @@
     "date": "2026-11-20"
   },
   "qualification_note": "未分配主项目正式编号、未强定档；视觉核验范围沿用采集记录。",
-  "tier_basis": "拖动、滚轮改变模型角度与缩放并保持（JS）（按难度模型 v2.1 的驱动方式判定；JS 驱动按等价的 CSS 驱动类比）",
+  "tier_basis": "GT 固定在来源初始视角，去掉了按住拖动改变角度、右键拖动平移、滚轮缩放；画面无任何动态，也没有交互，按难度模型 v2.1 为 T1",
   "tier_assigned_by": "Claude，本地入库时（2026-11-24），待用户抽查",
-  "tier_status": "provisional_from_source",
-  "tier_note": "入库时按来源源码暂定；ground_truth.html（准静态）完成后按 GT 重新判定"
+  "tier_status": "reviewed_after_gt",
+  "tier_note": "2026-11-24 duet 按 GT 复核，由暂定 T3 改为 T1（3D 场景按统一做法固定初始视角，参照 case-235）"
 }

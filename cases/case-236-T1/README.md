@@ -4,7 +4,7 @@
 
 当前阶段：`gt_ready`（入库于 2026-11-24），归属 duet。阶段以 [registry.csv](../registry.csv) 为准。
 
-- 审核编号：C011；档位：T3（**暂定**，依据入库时的来源源码；`ground_truth.html` 完成后按 GT 的驱动方式重新判定，必要时用 `registry.py retier` 改名）。
+- 审核编号：C011；档位：T1（入库时按来源源码暂定为 T3，GT 完成后复核改为 T1，见下文）。
 - 特色：Switch机身、按键凹凸
 
 | 文件 | 说明 |
@@ -30,5 +30,5 @@
 
 - **静止状态：** 来源初始视角，即 `.main` 的 CSS 原值 `perspective(2000vmin) rotateX(66deg) rotateZ(30deg) translateZ(-8vmin)`。来源打开后、用户按下鼠标之前就是这个画面；脚本里的 `moveModel()` 只在拖动或滚轮时才写入新的变换，所以删除脚本不改变初始画面。没有另选角度。
 - **保留的交互：** 无。
-- **档位复核：** GT 没有任何动态和交互，按难度模型 v2.1 为 T1，与入库暂定的 T3 不同，用 `registry.py retier` 改为 T1。
+- **档位复核：** GT 没有任何动态和交互，按难度模型 v2.1 为 T1，与入库暂定的 T3 不同，已用 `registry.py retier` 改为 T1（目录名随之改为 `case-236-T1`），`classification.json` 的 `tier_status`、`tier_basis`、`tier_note` 已手动同步。
 - **自检：** 见 [review_20261124/static_check.md](review_20261124/static_check.md)；本地可运行 `review_20261124/gt_check.py` 补截图与测量。
