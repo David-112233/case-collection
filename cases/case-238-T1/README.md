@@ -2,7 +2,7 @@
 
 来源：<https://codepen.io/MadeByArne/pen/bGWwRoX>（作者 MadeByArne，CodePen 公开作品，默认 MIT 许可）
 
-当前阶段：`gt_ready`（入库于 2026-11-24），归属 duet。阶段以 [registry.csv](../registry.csv) 为准。
+当前阶段：`input_draft`（入库于 2026-11-24），归属 duet。阶段以 [registry.csv](../registry.csv) 为准。
 
 - 审核编号：C016；档位：T1（**暂定**，依据入库时的来源源码；`ground_truth.html` 完成后按 GT 的驱动方式重新判定，必要时用 `registry.py retier` 改名）。
 - 特色：磁带窗口、带芯叠层
@@ -28,4 +28,8 @@
 - **来源本身就是静态的：** 没有动画、过渡、悬停或脚本，所以不需要选静止状态。HTML 末尾作者多写的两个 `</div>` 浏览器会忽略，保留原样。
 - **保留的外部资源：** Google Fonts 的 Gochi Hand（手写体）。
 - **档位复核：** 无动态、无交互，按难度模型 v2.1 为 T1，与入库暂定一致，不改名。
-- **自检：** 见 [review_20261124/static_check.md](review_20261124/static_check.md)。
+- **自检：** 已用云端浏览器经 raw.githack.com 在 1280、500 两个宽度截图核对，500 宽下来源与 GT 一样会横向滚动，见 [review_20261124/static_check.md](review_20261124/static_check.md)。
+
+## input 草稿（2026-11-24，duet）
+
+[input.json](input.json) 由 GT 写出，等用户审核 GT 与 input。写与不写的取舍和待定问题见 [input_problem.md](input_problem.md)。
