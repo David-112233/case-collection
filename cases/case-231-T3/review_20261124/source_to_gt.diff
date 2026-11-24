@@ -1,0 +1,143 @@
+--- source.html	2026-11-24 09:39:01.015511945 +0000
++++ ground_truth.html	2026-11-24 09:59:46.990381125 +0000
+@@ -4,25 +4,11 @@
+ <head>
+   
+   <meta charset="UTF-8">
+-  
+-
+-    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+-
+-    <meta name="apple-mobile-web-app-title" content="CodePen">
+-
+-    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+-
+-    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+-
+-
+ 
+-  
+-    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+ 
++  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+ 
+   <title>3D Radio </title>
+-
+-    <link rel="canonical" href="https://codepen.io/ricardoolivaalonso/pen/ExPpgqG">
+   
+   
+   
+@@ -602,7 +588,6 @@
+ }
+ .button--cta:hover .button__front {
+   background-color: #ff6f04;
+-  transition: 0.1s;
+   cursor: pointer;
+ }
+ .button--cta .button__front {
+@@ -632,7 +617,6 @@
+   height: 50%;
+   bottom: 0;
+   transform: translateZ(5vw) rotateX(-20deg);
+-  transition: 0.2s;
+ }
+ 
+ .cover-b {
+@@ -790,17 +774,8 @@
+ }
+ 
+ /****************/
+-.is-radio-active {
+-  animation: radio 0.6s infinite alternate ease-in-out;
+-}
+-
+-.is-shadow-active {
+-  animation: shadow 0.6s infinite alternate ease-in-out;
+-}
+-
+ .is-button-active {
+   transform: translateY(-0.4vw) translateZ(0.5vw) rotateX(-10deg);
+-  transition: 0.1s;
+ }
+ .is-button-active .button__front {
+   background-color: #f96a00;
+@@ -808,60 +783,13 @@
+ 
+ .is-cover-active {
+   transform: translateZ(5vw);
+-  transition: 0.2s;
+-}
+-
+-.is-circle-active {
+-  animation: circle 0.2s infinite alternate 1s;
+ }
+ 
+-/****************/
+-@keyframes radio {
+-  0%, 85% {
+-    transform: perspective(10000px) rotateX(80deg) rotateZ(40deg) translateZ(-9vw) rotateY(0deg);
+-  }
+-  30%, 50%, 80% {
+-    transform: perspective(10000px) rotateX(80deg) rotateZ(40deg) translateZ(-8.8vw) rotateY(-2deg);
+-  }
+-  60%, 100% {
+-    transform: perspective(10000px) rotateX(80deg) rotateZ(40deg) translateZ(-8.8vw) rotateY(2deg);
+-  }
+-}
+-@keyframes shadow {
+-  0%, 85% {
+-    height: 400%;
+-    left: 0%;
+-  }
+-  30%, 50%, 80% {
+-    height: 410%;
+-    left: 3%;
+-  }
+-  60%, 100% {
+-    height: 400%;
+-    left: 0%;
+-  }
+-}
+-@keyframes circle {
+-  0%, 10%, 30%, 50%, 80% {
+-    background-size: 0.9vw 0.9vw;
+-  }
+-  20%, 70%, 90%, 100% {
+-    background-size: 0.91vw 0.91vw;
+-  }
+-}
+ </style>
+ 
+   </head>
+ 
+-<body translate="no">
+-  <!DOCTYPE html>
+-<html lang="es" dir="ltr">
+-  <head>
+-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+-    <meta charset="utf-8">
+-    <link rel="stylesheet" type="text/css" href="main.css">
+-  </head>
+-  <body>
++<body>
+     <audio id="audio">
+       <source src="https://raw.githubusercontent.com/ricardoolivaalonso/recursos/master/asiatic-a/song.mp3" type="audio/mpeg">
+     </audio>
+@@ -979,9 +907,6 @@
+         <div class="cassete__bottom face"></div>
+       </div>
+     </div>
+-    <script src="main.js"></script>
+-  </body>
+-</html>
+   
+     <script id="rendered-js" >
+ /*
+@@ -1026,7 +951,6 @@
+ buttonCta.addEventListener("click", radioPlaying);
+ soff.addEventListener("click", radioPlaying);
+ son.addEventListener("click", radioPlaying);
+-//# sourceURL=pen.js
+   </script>
+ 
+   
