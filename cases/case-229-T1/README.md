@@ -14,5 +14,21 @@
 | `source_original.html` | 修改前的来源副本；入库时与 `source.html` 相同，GT 改动后二者会不同，**不要因为相同而删除** |
 | `metadata.json` | 来源、哈希、采集记录 |
 | `classification.json` | 档位与入库依据 |
+| `ground_truth.html` | 准静态参考页（见下文“GT 相对来源的改动”） |
+| `review_20261124/` | GT 自检：静态检查、来源差异、本地渲染脚本 |
 
-下一步由 duet 按顺序做（见 [cases/README.md](../README.md)）：① 以 `source.html` 为基础改造 `ground_truth.html`（尽量尊重源码，改成准静态、无动画、只保留简单交互）并自检；② 由 GT 写出 `input.json`；③ 停下，等用户审核 GT 与 input；④ 用户通过后才写 `rules_drafts/manual_v1/`。
+## GT 相对来源的改动（2026-11-24，duet）
+
+`ground_truth.html` 以 `source.html` 为基础，只删 CodePen 样板，结构、样式数值、文案、字体引用都不动。完整差异见 [review_20261124/source_to_gt.diff](review_20261124/source_to_gt.diff)。
+
+| 改动 | 原因 |
+|---|---|
+| 删除 CodePen 头部样板：apple-touch-icon、`apple-mobile-web-app-title`、favicon、mask-icon、canonical | 与作品和评分无关（用户同意删除） |
+| `<body translate="no">` 改为 `<body>` | CodePen 预览页加的属性，与评分无关 |
+
+- **静止状态：** 来源本身没有动画、过渡、脚本和交互，GT 就是来源的唯一画面，不需要选静止帧。作者的注释（教程链接、赞助链接）保留。
+- **保留的交互：** 无（来源没有）。
+- **外部资源：** 只有作者在 HTML 里引用的 Google Fonts Montserrat 800（用于 “CASIO PT-1” 标志）。从本环境请求字体 CSS 与拉丁子集 woff2 均返回 200；浏览器内是否实际应用未核实。
+- **窄屏：** 机身固定 960px 宽，来源没有窄屏适配，375 宽视口下会横向溢出；GT 保持原样，input 只面向桌面宽屏。
+- **档位复核：** GT 没有任何动态，按难度模型 v2.1 为 T1，与入库暂定一致，不改名。
+- **自检：** 本环境装不了浏览器，只完成了静态检查和按 CSS 推算的几何；渲染自检脚本已备好，待本地运行。见 [review_20261124/static_check.md](review_20261124/static_check.md)。
