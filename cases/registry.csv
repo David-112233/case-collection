@@ -5,7 +5,7 @@ case-230-T1,glennphilp__DBLzOW,T1,duet,input_draft,2026-11-24,等用户审核 GT
 case-231-T3,ricardoolivaalonso__ExPpgqG,T3,duet,input_draft,2026-11-24,等用户审核 GT 与 input；云端无浏览器，外观由 CSS 推算，待本地运行 review_20261124/gt_check.py 核对（见 input_problem.md）,pending
 case-232-T2,Ak-407__MYgKoME,T2,duet,input_draft,2026-11-24,input 已由 GT 写出，等用户审核；外观由 CSS 推算待本地渲染核对,pending
 case-233-T3,bofengbu__JjvYZoJ,T3,duet,input_draft,2026-11-24,等用户审核 GT 与 input；外部 CSS 与 camera.js 未核实，外观由内联 CSS 推算，渲染自检待本地运行 review_20261124/gt_check.py；说明面板留不留待定（删则改 T1），见 input_problem.md,pending
-case-234-T1,fossheim__xxboBzO,T1,duet,input_draft,2026-11-24,input 已由 GT 写出，等用户审核；外观由 CSS 推算待本地渲染核对；/script.js 未核验，无交互与 T1 档位待用户确认,pending
+case-234-T1,fossheim__xxboBzO,T1,duet,input_draft,2026-11-24,input 已由 GT 写出并经云端渲染核对（改四处外观描述），等用户审核；/script.js 已核实不存在，T1 成立,pending
 case-235-T1,ricardoolivaalonso__NWJeBPE,T1,duet,input_draft,2026-11-24,input 已由 GT 写出，等用户审核；外观依据目标图与模型投影，待本地渲染核对；交互全删（T1）、屏幕黑底、竖屏裁切待用户确认,pending
 case-236-T1,ricardoolivaalonso__QWJxYXE,T1,duet,input_draft,2026-11-24,input 已由 GT 写出，等用户审核；已经 raw.githack.com 渲染核对；无交互，已 retier 为 T1,pending
 case-237-T3,dustindwayne__bGyYoar,T3,duet,input_draft,2026-11-24,input 已由 GT 写出，等用户审核；默认状态已渲染核对，播放状态按源码推算待本地截图；动态价值主要在唱片旋转，已去掉,pending

@@ -24,7 +24,7 @@
 | 改动 | 原因 |
 |---|---|
 | 删除 CodePen 样板：apple-touch-icon、`apple-mobile-web-app-title`、favicon、mask-icon、canonical；`<body translate="no">` 改为 `<body>` | 与作品和评分无关（用户同意删除） |
-| 删除内嵌文档里的 `<link rel="stylesheet" href="/style.css">` 和 `<script src="/script.js" defer></script>` | 相对路径，离开 CodePen 后加载不到。样式已全部内联在 `<style>` 里；`/script.js` 内容**未核验**，按推断它在 CodePen 上也不存在（理由见 [static_check.md](review_20261124/static_check.md)），删掉不改变画面 |
+| 删除内嵌文档里的 `<link rel="stylesheet" href="/style.css">` 和 `<script src="/script.js" defer></script>` | 相对路径，离开 CodePen 后加载不到。样式已全部内联在 `<style>` 里；已在 CodePen 原作页面核实 JS 面板为空，`/script.js` 并不存在，删掉不改变画面（见 [static_check.md](review_20261124/static_check.md)） |
 
 - **未改但需要知道的地方：** 作者把一整份 HTML 文档粘进了 HTML 面板，`<body>` 里还嵌着一层 `<!DOCTYPE html><html><head>…<body>`。浏览器会忽略多出的 `html`、`head`、`body` 标签，画面不受影响；为尊重源码保留原样。`.sensor` 的 `backround-size` 拼写错误、几处被渐变盖住的 `background-color: red`、两个空的 `div`（`.title`、`.type`）也保持原样。
 - **静止状态：** 来源本身没有动画、过渡、悬停样式或脚本，GT 不需要固定静止状态，画面就是来源的唯一状态。
@@ -34,12 +34,12 @@
 
 ## 档位复核
 
-GT 无任何动态：无动画、无过渡、无悬停或点击效果。按难度模型 v2.1 为 **T1**，与目录名一致，不需要 retier。前提是 `/script.js` 确实不存在或不带交互；若用户知道原作有脚本交互，档位需重判。
+GT 无任何动态：无动画、无过渡、无悬停或点击效果。按难度模型 v2.1 为 **T1**，与目录名一致，不需要 retier。已核实原作 JS 面板为空，T1 不受影响。
 
 ## GT 自检
 
-见 [review_20261124/static_check.md](review_20261124/static_check.md)。**截图和测量没做成**：云端环境没有可用的浏览器。渲染自检脚本 [review_20261124/gt_check.py](review_20261124/gt_check.py) 已备好，可在本地运行。画面描述来自样式推算，尚未经渲染验证。
+见 [review_20261124/static_check.md](review_20261124/static_check.md)。已用云端浏览器在 1280 与 500 宽渲染核对，画面与 input 相符（改了四处描述）。本地 Playwright 测量脚本 [review_20261124/gt_check.py](review_20261124/gt_check.py) 未运行，可选补做。
 
 ## input 草稿（2026-11-24，duet）
 
-[input.json](input.json) 由 GT 写出，问题与取舍见 [input_problem.md](input_problem.md)。外观描述由 CSS 推算，待本地渲染核对；`/script.js` 未核验，“无交互”与 T1 档位待用户确认。阶段 `input_draft`：等用户审核 GT 与 input，规则草稿和 `generation_prompt.txt` 尚未写。
+[input.json](input.json) 由 GT 写出，问题与取舍见 [input_problem.md](input_problem.md)。外观描述已对照渲染截图核对；`/script.js` 已核实不存在，“无交互”与 T1 成立。阶段 `input_draft`：等用户审核 GT 与 input，规则草稿和 `generation_prompt.txt` 尚未写。
