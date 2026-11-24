@@ -1,7 +1,7 @@
 {
   "review_id": "C007",
-  "case_id": "case-233-T2",
-  "tier": "T2",
+  "case_id": "case-233-T3",
+  "tier": "T3",
   "spatial_feature": "分层蛋糕、夹心切面",
   "evidence": "立体蛋糕缺口显露多层夹心，表面水果与叶片相互遮挡，盘边厚度和投影形成空间关系。保留外部camera.js与原始资源；仅默认视觉核实。",
   "decision": "accept",
@@ -11,8 +11,8 @@
     "date": "2026-11-20"
   },
   "qualification_note": "未分配主项目正式编号、未强定档；视觉核验范围沿用采集记录。",
-  "tier_basis": "关键帧时间动画，JS 仅在加载时启动相机旋转（按难度模型 v2.1 的驱动方式判定；JS 驱动按等价的 CSS 驱动类比）",
+  "tier_basis": "GT 去掉了 camera.js 的拖拽相机与自动旋转，剩下唯一的动态是右上角 How to? 链接打开说明面板、面板保持打开直到点关闭（按标记推断为 :target，样式在 howto.css，未核实）。点击进入可保持的状态，按难度模型 v2.1 为 T3",
   "tier_assigned_by": "Claude，本地入库时（2026-11-24），待用户抽查",
-  "tier_status": "provisional_from_source",
-  "tier_note": "入库时按来源源码暂定；ground_truth.html（准静态）完成后按 GT 重新判定"
+  "tier_status": "reviewed_after_gt",
+  "tier_note": "2026-11-24 duet 按 GT 复核，由暂定 T2 改为 T3。若用户决定删掉 How to? 面板，GT 无任何动态，应改为 T1"
 }
