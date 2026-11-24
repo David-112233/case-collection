@@ -2,7 +2,7 @@
 
 由 `data_intake/tools/registry.py render-index` 生成，**不要手写**。状态来源是 [registry.csv](registry.csv)。
 
-阶段分布：admitted 7，gt_ready 3，input_draft 17
+阶段分布：admitted 6，gt_ready 4，input_draft 17
 
 | 案例 | 档位 | 来源 | 特色 | 阶段 | 处理者 | 更新 | 用户审核 | 备注 |
 |---|---|---|---|---|---|---|---|---|
@@ -16,7 +16,7 @@
 | [case-235-T1](case-235-T1/) | T1 | [ricardoolivaalonso__NWJeBPE](https://codepen.io/ricardoolivaalonso/pen/NWJeBPE) | 立体办公室、家具分层 | input_draft | duet | 2026-11-24 | pending | input 已由 GT 写出，等用户审核；外观依据目标图与模型投影，待本地渲染核对；交互全删（T1）、屏幕黑底、竖屏裁切待用户确认 |
 | [case-236-T1](case-236-T1/) | T1 | [ricardoolivaalonso__QWJxYXE](https://codepen.io/ricardoolivaalonso/pen/QWJxYXE) | Switch机身、按键凹凸 | input_draft | duet | 2026-11-24 | pending | input 已由 GT 写出，等用户审核；已经 raw.githack.com 渲染核对；无交互，已 retier 为 T1 |
 | [case-237-T3](case-237-T3/) | T3 | [dustindwayne__bGyYoar](https://codepen.io/dustindwayne/pen/bGyYoar) | 唱片机、正面浮雕 | input_draft | duet | 2026-11-24 | pending | input 已由 GT 写出，等用户审核；默认状态已渲染核对，播放状态按源码推算待本地截图；动态价值主要在唱片旋转，已去掉 |
-| [case-238-T1](case-238-T1/) | T1 | [MadeByArne__bGWwRoX](https://codepen.io/MadeByArne/pen/bGWwRoX) | 磁带窗口、带芯叠层 | admitted | duet | 2026-11-24 | pending |  |
+| [case-238-T1](case-238-T1/) | T1 | [MadeByArne__bGWwRoX](https://codepen.io/MadeByArne/pen/bGWwRoX) | 磁带窗口、带芯叠层 | gt_ready | duet | 2026-11-24 | pending | 来源本身静态，GT 只删 CodePen 样板；复核仍为 T1 |
 | [case-239-T2](case-239-T2/) | T2 | [RaduBratan__MWyKrRZ](https://codepen.io/RaduBratan/pen/MWyKrRZ) | 立体磁带、卷轴与投影 | admitted | duet | 2026-11-24 | pending |  |
 | [case-240-T1](case-240-T1/) | T1 | [shunyadezain__QWyVwep](https://codepen.io/shunyadezain/pen/QWyVwep) | 合成器面板、旋钮浮雕 | input_draft | duet | 2026-11-24 | pending | 等用户审核 GT 与 input；已经 raw.githack 渲染核对；待定：网格单位写法、字体名（见 input_problem.md） |
 | [case-241-T1](case-241-T1/) | T1 | [meylon__qByaYVp](https://codepen.io/meylon/pen/qByaYVp) | 圆环凹面、错落连线 | input_draft | duet | 2026-11-24 | pending | 等用户审核 GT 与 input；已经 raw.githack 渲染核对；待定：992px 以下横排是否写入、像素尺寸（见 input_problem.md） |

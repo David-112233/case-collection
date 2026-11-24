@@ -9,7 +9,7 @@ case-234-T1,fossheim__xxboBzO,T1,duet,input_draft,2026-11-24,input 已由 GT 写
 case-235-T1,ricardoolivaalonso__NWJeBPE,T1,duet,input_draft,2026-11-24,input 已由 GT 写出，等用户审核；外观依据目标图与模型投影，待本地渲染核对；交互全删（T1）、屏幕黑底、竖屏裁切待用户确认,pending
 case-236-T1,ricardoolivaalonso__QWJxYXE,T1,duet,input_draft,2026-11-24,input 已由 GT 写出，等用户审核；已经 raw.githack.com 渲染核对；无交互，已 retier 为 T1,pending
 case-237-T3,dustindwayne__bGyYoar,T3,duet,input_draft,2026-11-24,input 已由 GT 写出，等用户审核；默认状态已渲染核对，播放状态按源码推算待本地截图；动态价值主要在唱片旋转，已去掉,pending
-case-238-T1,MadeByArne__bGWwRoX,T1,duet,admitted,2026-11-24,,pending
+case-238-T1,MadeByArne__bGWwRoX,T1,duet,gt_ready,2026-11-24,来源本身静态，GT 只删 CodePen 样板；复核仍为 T1,pending
 case-239-T2,RaduBratan__MWyKrRZ,T2,duet,admitted,2026-11-24,,pending
 case-240-T1,shunyadezain__QWyVwep,T1,duet,input_draft,2026-11-24,等用户审核 GT 与 input；已经 raw.githack 渲染核对；待定：网格单位写法、字体名（见 input_problem.md）,pending
 case-241-T1,meylon__qByaYVp,T1,duet,input_draft,2026-11-24,等用户审核 GT 与 input；已经 raw.githack 渲染核对；待定：992px 以下横排是否写入、像素尺寸（见 input_problem.md）,pending
