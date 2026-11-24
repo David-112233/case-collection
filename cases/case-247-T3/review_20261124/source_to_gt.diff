@@ -1,5 +1,5 @@
 --- source.html	2026-11-24 09:39:01.021335916 +0000
-+++ ground_truth.html	2026-11-24 10:31:42.918651764 +0000
++++ ground_truth.html	2026-11-24 10:33:08.035031612 +0000
 @@ -4,25 +4,10 @@
  <head>
    
@@ -148,7 +148,23 @@
  <div class="scene__wrapper">
    <div class="scene">
      <div class="plane">
-@@ -1931,17 +1865,6 @@
+@@ -1693,7 +1627,6 @@
+             <div class="cuboid__side"></div>
+             <div class="cuboid__side"></div>
+             <div class="cuboid__side">
+-              <iframe src="https://css-tricks.com"></iframe>
+             </div>
+             <div class="cuboid__side"></div>
+             <div class="cuboid__side"></div>
+@@ -1703,7 +1636,6 @@
+             <div class="cuboid__side"></div>
+             <div class="cuboid__side"></div>
+             <div class="cuboid__side">
+-              <iframe src="https://jhey.dev"></iframe>
+             </div>
+             <div class="cuboid__side"></div>
+             <div class="cuboid__side"></div>
+@@ -1931,17 +1863,6 @@
    </div>
  </div>
    
