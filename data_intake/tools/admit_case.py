@@ -5,7 +5,8 @@
 
 Refuses when: the key is not status=selected in ledger/review.csv, pending/<KEY>/ lacks a source file or its hashes
 do not match metadata.json, the tier is missing, or the target directory already exists.
-Number = highest case number in cases/registry.csv (at least 227) + 1. Tier is fixed at admission and never renamed.
+Number = highest case number in cases/registry.csv (at least 227) + 1. The tier is provisional (judged from the source);
+it is re-checked once the quasi-static ground truth exists, and registry.py retier can still rename the directory until the user approves the input.
 Files created (same set as main-repo case-227): README.md, classification.json, metadata.json, original_srcdoc.html,
 source.html, source_original.html. After --apply: registry.csv row, review.csv row updated, pending/<KEY>/ removed.
 """
@@ -73,7 +74,7 @@ def build_readme(p: dict, cls: dict) -> str:
 
 当前阶段：`admitted`（入库于 {registry.today()}），归属 duet。阶段以 [registry.csv](../registry.csv) 为准。
 
-- 审核编号：{row.get('c_id') or '-'}；档位：{p['tier']}（{cls.get('tier_basis', '依据见 classification.json')}）。
+- 审核编号：{row.get('c_id') or '-'}；档位：{p['tier']}（**暂定**，依据入库时的来源源码：{cls.get('tier_basis', '见 classification.json')}；`ground_truth.html` 完成后按 GT 的驱动方式重新判定，必要时用 `registry.py retier` 改名）。
 - 特色：{row.get('feature') or '-'}
 
 | 文件 | 说明 |
@@ -84,7 +85,7 @@ def build_readme(p: dict, cls: dict) -> str:
 | `metadata.json` | 来源、哈希、采集记录 |
 | `classification.json` | 档位与入库依据 |
 
-待 duet 补：`input.json`、`ground_truth.html`、`rules_drafts/manual_v1/`、GT 自检记录（见 [cases/README.md](../README.md)）。
+下一步由 duet 按顺序做（见 [cases/README.md](../README.md)）：① 以 `source.html` 为基础改造 `ground_truth.html`（尽量尊重源码，改成准静态、无动画、只保留简单交互）并自检；② 由 GT 写出 `input.json`；③ 停下，等用户审核 GT 与 input；④ 用户通过后才写 `rules_drafts/manual_v1/`。
 """
 
 

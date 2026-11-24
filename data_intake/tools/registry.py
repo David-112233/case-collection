@@ -4,9 +4,16 @@
     python data_intake/tools/registry.py set-stage CASE_ID STAGE [--note TEXT]
     python data_intake/tools/registry.py set-owner CASE_ID OWNER
     python data_intake/tools/registry.py set-user-review CASE_ID pending|accepted|rejected --by-user "<the user's own words>"
+    python data_intake/tools/registry.py retier CASE_ID T1..T6 [--apply]
 
-Stages only move forward (admitted -> input_draft -> gt_ready -> rules_draft -> ready_for_review -> frozen -> synced).
-Moving backward requires --note with the reason. user_review may only be changed on the user's explicit instruction.
+Order of work: source.html -> quasi-static ground_truth.html -> input.json (written from the GT) -> user reviews GT and input
+-> eval rules -> user reviews rules -> freeze -> sync. Stages (they only move forward):
+  admitted -> gt_ready -> input_draft (duet stops, waits for the user) -> input_approved (user only) -> rules_draft
+  -> ready_for_review (duet stops, waits for the user) -> frozen -> synced (both local).
+Moving backward requires --note with the reason. input_approved needs --by-user "<the user's words>"; frozen and synced need
+--local; rules_draft and later cannot be reached before input_approved. user_review may only be changed on the user's
+explicit instruction. The tier in the directory name is provisional until the GT exists: retier renames the case directory
+and is allowed only while the stage is admitted, gt_ready or input_draft (dry run unless --apply).
 """
 import csv
 import json
@@ -18,7 +25,9 @@ REPO = Path(__file__).resolve().parents[2]
 CASES = REPO / "cases"
 REGISTRY = CASES / "registry.csv"
 FIELDS = ["case_id", "source_key", "tier", "owner", "stage", "updated", "note", "user_review"]
-STAGES = ["admitted", "input_draft", "gt_ready", "rules_draft", "ready_for_review", "frozen", "synced"]
+STAGES = ["admitted", "gt_ready", "input_draft", "input_approved", "rules_draft", "ready_for_review", "frozen", "synced"]
+LOCAL_ONLY = {"frozen", "synced"}
+RETIER_OK = {"admitted", "gt_ready", "input_draft"}
 OWNERS = {"duet", "dot", "claude", "codex"}
 REVIEWS = {"pending", "accepted", "rejected"}
 
@@ -80,6 +89,38 @@ def render_index() -> None:
     print(f"INDEX.md rendered: {len(rows)} cases")
 
 
+def retier(rows: list[dict], case_id: str, tier: str, apply: bool) -> None:
+    import re
+    if not re.fullmatch(r"T[1-6]", tier):
+        sys.exit("tier must be T1..T6")
+    row = find(rows, case_id)
+    if row["stage"] not in RETIER_OK or row["user_review"] == "accepted":
+        sys.exit(f"refused: the tier can only change while the stage is {sorted(RETIER_OK)} (now {row['stage']})")
+    new_id = re.sub(r"-T\d$", f"-{tier}", case_id)
+    if new_id == case_id:
+        sys.exit("tier unchanged")
+    old_dir, new_dir = CASES / case_id, CASES / new_id
+    if new_dir.exists():
+        sys.exit(f"refused: {new_dir} already exists")
+    print(("APPLY" if apply else "DRY RUN"), f"{case_id} -> {new_id}: rename directory, update registry row, replace the id inside README.md, metadata.json, classification.json")
+    if not apply:
+        print("nothing written (add --apply)")
+        return
+    old_dir.rename(new_dir)
+    for name in ("README.md", "metadata.json", "classification.json"):
+        f = new_dir / name
+        if f.exists():
+            text = f.read_text(encoding="utf-8").replace(case_id, new_id)
+            if name == "README.md":
+                text = text.replace(f"档位：{case_id[-2:]}", f"档位：{tier}")
+            if name == "classification.json":
+                text = text.replace(f'"tier": "{case_id[-2:]}"', f'"tier": "{tier}"')
+            f.write_text(text, encoding="utf-8", newline=chr(10))
+    row.update(case_id=new_id, tier=tier, updated=today(), note=(row["note"] + f" | 档位由 {case_id[-2:]} 改为 {tier}（按 GT 重新判定）").strip(" |"))
+    write(rows)
+    render_index()
+
+
 def main() -> int:
     args = sys.argv[1:]
     if not args:
@@ -95,11 +136,23 @@ def main() -> int:
         if new not in STAGES:
             sys.exit(f"stage must be one of {STAGES}")
         note = args[args.index("--note") + 1] if "--note" in args else ""
-        if STAGES.index(new) < STAGES.index(row["stage"]) and not note:
+        cur_i, new_i, gate = STAGES.index(row["stage"]), STAGES.index(new), STAGES.index("input_approved")
+        if new_i < cur_i and not note:
             sys.exit("moving a stage backward needs --note with the reason")
+        if new == "input_approved":
+            if "--by-user" not in args or not args[args.index("--by-user") + 1].strip():
+                sys.exit("input_approved can only be set on the user's explicit instruction: pass --by-user \"<user's words>\"")
+            note = (note + " | " if note else "") + "用户通过 GT 与 input：" + args[args.index("--by-user") + 1].strip()
+        if new_i > gate and cur_i < gate:
+            sys.exit("refused: the user has not approved the GT and input yet (stage input_approved comes first)")
+        if new in LOCAL_ONLY and "--local" not in args:
+            sys.exit(f"{new} is done locally by the user or Claude: pass --local")
         row.update(stage=new, updated=today())
         if note:
             row["note"] = note
+    elif cmd == "retier" and len(args) >= 3:
+        retier(rows, args[1], args[2], "--apply" in args)
+        return 0
     elif cmd == "set-owner" and len(args) == 3:
         if args[2] not in OWNERS:
             sys.exit(f"owner must be one of {sorted(OWNERS)}")

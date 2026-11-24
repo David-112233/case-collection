@@ -23,13 +23,24 @@
 
 两者共同禁止：改 `reference/`；改对方的案例目录或批次文件；重判对方认领的作品。认领规则见 [data_intake/README.md](data_intake/README.md)：先认领并推送，成功后才抓取和判断，先到先得。工具都在 `data_intake/tools/`（`claim.py`、`decide.py`、`peek.py`、`triage.py`、`shot.py`、`registry.py`、`admit_case.py`）。
 
-## 4. 案例加工要求（duet）
+## 4. 案例加工（duet）
 
-- 范围：`input.json`、`ground_truth.html`（以来源 `source.html` 为基础，只做必要的最小修改并在 README 写明）、GT 自检记录、`rules_drafts/manual_v1/eval_rules.json`、生成 Prompt、`input_problem.md`。步骤和方法见 [input-sharpening](reference/skills/input-sharpening/SKILL.md) 与 [eval-rules-refinement](reference/skills/eval-rules-refinement/SKILL.md)；完成态样板见 `reference/examples_finished/`。
-- input 写作：只写结果，不写实现手段；部件清单进 `functional_requirements`，视角、位置、外观进 `layout_constraints`。
-- 规则：Requirement 来源是 `input.json` 加基本常识（DEC-037）；常识条目须标 `source: common_sense` 和理由，不得引入新的业务内容或具体样式数值；GT 只用于锚点绑定与自测，**不得反推新增要求**。
-- 写完用 `python scripts/case_tools/check_rules.py cases/case-NNN-TX` 自检。
-- **终点是 `ready_for_review`。** 不写 `FREEZE_v*.json`，不写 accepted，不生成模型输出，不评分。用户在本地审核后，由用户指示下一步。
+**顺序（用户确认的正确流程）：来源源码 → 准静态的 GT → 由 GT 写出 input → 用户审核 → 规则草稿 → 用户审核 → 本地冻结。** 不是先写 input 再做 GT。
+
+1. **`ground_truth.html`**：以案例目录里的 `source.html` 为基础，**尽量尊重源码**（结构、样式、文案、素材与字体引用、版式都不动），改造成**准静态**：
+   - 没有动画：持续或自动播放的 CSS 动画与过渡、JS 动画循环、自动轮播、跑马灯、自动播放的视频或 GIF 都去掉；动画元素固定在一个有代表性的静止状态，写明选了哪个状态、为什么。
+   - 只保留简单交互：悬停、聚焦、点击展开或折叠、菜单与开关、简单的状态切换。
+   - 如果这个作品的价值主要在动画或复杂交互（拖拽、物理、游戏规则、实时或随机数据），**不要硬改**，在案例 README 报告并停下问用户。
+   - 每处改动和原因写进案例 README 的“GT 相对来源的改动”；GT 自检（Playwright 双视口截图与测量）放 `review_<日期>/`。
+2. **复核档位**：入库时的档位是按来源源码暂定的。GT 完成后按 GT 的驱动方式重新判定（无动态 T1；悬停只改自身 T2；点击保持状态或悬停驱动其他元素 T3…）。与目录名不同就用 `registry.py retier`（只在用户通过 input 之前允许）。
+3. **`input.json`**：由 GT 写出，只写 GT 里确实有的、可判定的效果；只写结果，不写实现手段；部件清单进 `functional_requirements`，视角、位置、外观进 `layout_constraints`。
+4. **停下**：把阶段设为 `input_draft`，等用户审核 GT 与 input。用户通过后由用户指示；阶段 `input_approved` 只能在用户原话下设置。
+5. **规则草稿**（用户通过 input 之后才做）：`rules_drafts/manual_v1/eval_rules.json` 与生成 Prompt，格式见 `reference/examples_finished/`，写完运行 `python scripts/case_tools/check_rules.py cases/case-NNN-TX` 自检。规则的来源是 `input.json` 加基本常识（DEC-037），常识条目标 `source: common_sense` 和理由，不得引入新的业务内容或具体样式数值；**规则不得直接以 GT 为来源**，GT 只用于锚点绑定与自测。完成后阶段设为 `ready_for_review`，停下等用户。
+6. 此后的冻结、生成模型输出、评分都不在云端做。
+
+方法可参考 [input-sharpening](reference/skills/input-sharpening/SKILL.md)、[eval-rules-refinement](reference/skills/eval-rules-refinement/SKILL.md)，但前者写的是“改写已有 input”的流程，**新案例的顺序以本节为准**。
+
+**duet 不做：** 写 `FREEZE_v*.json`、宣布 accepted、生成模型输出、评分、调用付费 API、改他人案例目录、改 `reference/`、改 `user_review`。
 
 ## 5. 硬规则（摘自主项目，不得改口径）
 

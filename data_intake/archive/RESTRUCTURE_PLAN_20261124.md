@@ -1,5 +1,7 @@
 # case-collection 仓库整理与 Duet 案例工作区方案（定稿 v3，已执行）
 
+> **更正（2026-11-24，用户纠正）：** 本文 §5.3 和 §6 里“先写 input、再做 GT”的加工顺序**是错的**。正确顺序是：**来源源码 → 准静态 GT（尽量尊重源码，无动画，只保留简单交互）→ 由 GT 写出 input → 用户审核 → 规则草稿 → 用户审核 → 本地冻结**；入库时的档位只是暂定，GT 完成后复核。现行规则见 `AGENTS.md` 第 4 节与 `cases/README.md`，本文其余部分保留作历史记录。
+
 日期：2026-11-24　撰写：Claude　状态：**已由 Claude 在本地全部执行（阶段 0–5），未推送前 dot、duet 不需要再做整理**
 适用对象：dot、duet（按新结构工作）。**本文第 6 节的步骤已经执行完毕，保留作历史记录**；现行规则以 `AGENTS.md`、`data_intake/README.md`、`cases/README.md` 为准。本文件在主仓库 `project_state/handoffs/` 也有一份，内容相同；dot 执行完毕后把本文件移入 `data_intake/archive/`。
 

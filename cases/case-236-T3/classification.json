@@ -12,5 +12,7 @@
   },
   "qualification_note": "未分配主项目正式编号、未强定档；视觉核验范围沿用采集记录。",
   "tier_basis": "拖动、滚轮改变模型角度与缩放并保持（JS）（按难度模型 v2.1 的驱动方式判定；JS 驱动按等价的 CSS 驱动类比）",
-  "tier_assigned_by": "Claude，本地入库时（2026-11-24），待用户抽查"
+  "tier_assigned_by": "Claude，本地入库时（2026-11-24），待用户抽查",
+  "tier_status": "provisional_from_source",
+  "tier_note": "入库时按来源源码暂定；ground_truth.html（准静态）完成后按 GT 重新判定"
 }
