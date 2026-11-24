@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>IKEA - KALLFRONT</title>
+
+    <link rel="canonical" href="https://codepen.io/ricardo21ferreira/pen/eYjQNex">
+  
+  
+  
+  
+<style>
+* {
+  margin: 0;
+}
+
+header {
+  padding: 5%;
+  display: none;
+}
+header h1 {
+  margin-bottom: 3px;
+}
+
+.artboard {
+  width: 100vw;
+  height: 100vh;
+  min-height: 100vh;
+  background: #fff;
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+.artboard .wall {
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #888888 9%, #7c7875 34%, #7a7774 49%, #797775 68%, #56514d 100%);
+  opacity: 0.6;
+}
+.artboard .wall:before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  background: radial-gradient(1000px 115% at 50% 80%, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0) 90%);
+}
+.artboard .wall:after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  background: radial-gradient(600px 115% at 35% 80%, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0) 80%);
+}
+.artboard .kallfront {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  margin-left: -270px;
+  z-index: 2;
+}
+.artboard .kallfront .wire {
+  position: absolute;
+  left: 266px;
+  bottom: 314px;
+}
+.artboard .kallfront .wire i {
+  width: 5px;
+  height: 80px;
+  display: block;
+  background: linear-gradient(90deg, black 22%, #282828 67%, black 92%);
+  margin-bottom: 0px;
+}
+.artboard .kallfront .wire i:nth-child(even) {
+  transform: rotate(-1deg);
+}
+.artboard .kallfront .wire i:nth-child(odd) {
+  transform: rotate(1deg);
+}
+.artboard .kallfront .holder {
+  width: 95px;
+  height: 62px;
+  display: block;
+  position: absolute;
+  top: 46px;
+  left: 220px;
+}
+.artboard .kallfront .holder:before {
+  content: "";
+  width: 92px;
+  height: 12px;
+  border-radius: 100%;
+  background: #000;
+  display: block;
+  position: absolute;
+  top: -6px;
+  left: 2px;
+}
+.artboard .kallfront .holder:after {
+  content: "";
+  width: 92px;
+  height: 12px;
+  border-radius: 100%;
+  background: #000;
+  display: block;
+  position: absolute;
+  bottom: -6px;
+  left: 2px;
+}
+.artboard .kallfront .holder .ovf {
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  overflow-x: hidden;
+  left: 0;
+  top: 0;
+}
+.artboard .kallfront .holder .ovf .c1 {
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  background: radial-gradient(30px 61px at center, rgba(255, 255, 255, 0) 50%, black 50%);
+  left: -50%;
+}
+.artboard .kallfront .holder .ovf .c2 {
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  background: radial-gradient(30px 61px at center, rgba(255, 255, 255, 0) 50%, black 50%);
+  left: 50%;
+}
+.artboard .kallfront .holder .ovf .light {
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  background: radial-gradient(40px 120px at 50% 80%, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 50%);
+}
+.artboard .kallfront .holder .ovf .light:before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  background: radial-gradient(25px 80px at 30% 80%, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 50%);
+  position: absolute;
+  left: 0;
+}
+.artboard .kallfront .half-sphere {
+  width: 128px;
+  height: 70px;
+  display: block;
+  position: absolute;
+  top: 101px;
+  left: 204px;
+  background: #000;
+  border-top-left-radius: 45px;
+  border-top-right-radius: 45px;
+  overflow: hidden;
+}
+.artboard .kallfront .half-sphere:before {
+  content: "";
+  width: 50px;
+  height: 50px;
+  display: block;
+  position: absolute;
+  border: 20px solid rgba(255, 255, 255, 0.2);
+  position: absolute;
+  border-radius: 50%;
+  left: 25px;
+  top: 20px;
+  filter: blur(10px);
+}
+.artboard .kallfront .half-sphere:after {
+  content: "";
+  width: 50px;
+  height: 50px;
+  display: block;
+  position: absolute;
+  border: 20px solid rgba(0, 0, 0, 0.8);
+  border-top: 0;
+  border-top: 0;
+  position: absolute;
+  border-radius: 50%;
+  left: 0px;
+  top: 10px;
+  filter: blur(10px);
+}
+.artboard .kallfront .inside-half-sphere {
+  position: absolute;
+  width: 124px;
+  height: 128px;
+  display: block;
+  top: 105px;
+  left: 204px;
+  background: #000;
+  border-radius: 50%;
+  border: 2px solid #444;
+  perspective: 260px;
+  transform: rotateX(80deg);
+  background: radial-gradient(75% 150% at 50% -50%, #a19577 0%, #000000 100%);
+}
+.artboard .kallfront .lamp {
+  width: 340px;
+  height: 279px;
+  position: absolute;
+  top: 159px;
+  overflow: hidden;
+  border-radius: 50%;
+  left: 100px;
+}
+.artboard .kallfront .lamp .bulb {
+  position: absolute;
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  top: -11px;
+  left: 122px;
+  background: linear-gradient(170deg, rgba(167, 152, 125, 0.8) 0%, rgba(139, 123, 95, 0.6) 20%, rgba(211, 180, 124, 0.1) 50%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0) 100%);
+  box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.1) inset, 0 2px 6px rgba(0, 0, 0, 0.1), 0 -4px 8px -1px rgba(0, 0, 0, 0.3) inset;
+}
+.artboard .kallfront .lamp .bulb .mirror {
+  position: absolute;
+  width: 108px;
+  height: 28px;
+  display: block;
+  top: 33px;
+  overflow: hidden;
+  left: -2px;
+  filter: blur(1px);
+}
+.artboard .kallfront .lamp .bulb .mirror:before {
+  content: "";
+  width: 52px;
+  height: 45px;
+  display: block;
+  position: absolute;
+  border: 8px solid rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  left: 13px;
+  top: -15px;
+}
+.artboard .kallfront .lamp .bulb .mirror:after {
+  content: "";
+  width: 28px;
+  height: 33px;
+  display: block;
+  position: absolute;
+  border: 10px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  left: 23px;
+  top: -11px;
+}
+.artboard .kallfront .lamp .bulb .center {
+  position: absolute;
+  width: 10px;
+  height: 30px;
+  left: 40px;
+  border-radius: 2px;
+  background: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 0 0 rgba(220, 206, 169, 0.5) inset, 0 2px 2px rgba(220, 206, 169, 0.5), 0 -4px 8px -1px rgba(220, 206, 169, 0.8) inset;
+}
+.artboard .kallfront .lamp .bulb .center:before {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 6px;
+  left: -2px;
+  top: 28px;
+  border-radius: 2px;
+  background: rgba(0, 0, 0, 0.2);
+  border-top: 2px solid #ffffff66;
+  border-bottom: 1px solid #ffffffbb;
+  box-shadow: 0 1px 0 0 rgba(211, 180, 124, 0.3) inset, 0 2px 6px rgba(211, 180, 124, 0.2), 0 -4px 8px -1px rgba(211, 180, 124, 0.6) inset;
+}
+.artboard .kallfront .lamp .filament {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  top: 27px;
+  left: -5px;
+}
+.artboard .kallfront .lamp .filament i {
+  position: absolute;
+  width: 2px;
+  height: 25px;
+  border-radius: 2px;
+  background-color: #fff;
+  box-shadow: 0 0 7px 3px #dccea9aa, 0 0 10px 6px #dccea9aa, 0 0 40px 4px #dccea9aa;
+}
+.artboard .kallfront .lamp .filament i:nth-child(1) {
+  left: 48px;
+  top: 7px;
+  box-shadow: 0;
+}
+.artboard .kallfront .lamp .filament i:nth-child(2) {
+  left: 42px;
+  top: 7px;
+  transform: rotate(22deg) scale(0.8);
+}
+.artboard .kallfront .lamp .filament i:nth-child(3) {
+  left: 55px;
+  top: 7px;
+  transform: rotate(-22deg) scale(0.8);
+}
+.artboard .kallfront .lamp .filament i:nth-child(4) {
+  left: 55px;
+  top: 7px;
+  transform: rotate(22deg);
+}
+.artboard .kallfront .lamp .filament i:nth-child(5) {
+  left: 42px;
+  top: 7px;
+  transform: rotate(-22deg);
+}
+.artboard .kallfront .beans {
+  width: 539px;
+  height: 356px;
+  display: block;
+  perspective: 1000px;
+  perspective-origin: 50% 33%;
+  transform-style: preserve-3d;
+}
+.artboard .kallfront .beans.back {
+  position: absolute;
+  left: 0px;
+  perspective: 1000px;
+  perspective-origin: 50% 33%;
+  transform: rotateY(180deg);
+}
+.artboard .kallfront .beans.back > div:nth-child(1) {
+  scale: 0.98;
+  left: 20px;
+}
+.artboard .kallfront .beans.back > div:nth-child(2) {
+  scale: 0.97;
+}
+.artboard .kallfront .beans.back > div:nth-child(3) {
+  scale: 0.96;
+}
+.artboard .kallfront .beans.back > div:nth-child(4) {
+  scale: 0.95;
+}
+.artboard .kallfront .beans.back > div:nth-child(5) {
+  scale: 0.92;
+}
+.artboard .kallfront .beans.back > div:nth-child(6) {
+  scale: 0.89;
+}
+.artboard .kallfront .beans.back > div:nth-child(7) {
+  scale: 0.89;
+}
+.artboard .kallfront .beans.back > div:nth-child(8) {
+  scale: 0.9;
+  left: 264px;
+  top: 1px;
+}
+.artboard .kallfront .beans.back > div:nth-child(9) {
+  scale: 0.89;
+}
+.artboard .kallfront .beans.back > div:nth-child(10) {
+  scale: 0.89;
+}
+.artboard .kallfront .beans.back > div:nth-child(11) {
+  scale: 0.92;
+}
+.artboard .kallfront .beans.back > div:nth-child(12) {
+  scale: 0.95;
+}
+.artboard .kallfront .beans.back > div:nth-child(13) {
+  scale: 0.96;
+}
+.artboard .kallfront .beans.back > div:nth-child(14) {
+  scale: 0.97;
+}
+.artboard .kallfront .beans.back > div:nth-child(15) {
+  scale: 0.98;
+  right: 20px;
+}
+.artboard .kallfront .beans.back > div:nth-child(16) {
+  scale: 0.9;
+}
+.artboard .kallfront .beans.back > div:nth-child(17) {
+  scale: 0.9;
+}
+.artboard .kallfront .beans.back i {
+  border-top-color: #000;
+}
+.artboard .kallfront .beans > div {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 236px;
+  height: 340px;
+  transform-style: preserve-3d;
+  perspective: 300px;
+}
+.artboard .kallfront .beans > div:nth-child(1) {
+  left: 0;
+  top: 0;
+}
+.artboard .kallfront .beans > div:nth-child(2) {
+  left: 25px;
+  top: -3px;
+  transform: rotateY(40deg);
+  scale: 1.04;
+}
+.artboard .kallfront .beans > div:nth-child(3) {
+  left: 43px;
+  top: -3px;
+  transform: rotateY(50deg);
+  scale: 1.06;
+}
+.artboard .kallfront .beans > div:nth-child(4) {
+  left: 65px;
+  top: -3px;
+  transform: rotateY(60deg);
+  scale: 1.07;
+}
+.artboard .kallfront .beans > div:nth-child(5) {
+  left: 86px;
+  top: -3px;
+  transform: rotateY(70deg);
+  scale: 1.08;
+}
+.artboard .kallfront .beans > div:nth-child(5) i {
+  border-width: 5px;
+}
+.artboard .kallfront .beans > div:nth-child(6) {
+  left: 114px;
+  top: -3px;
+  transform: rotateY(85deg);
+  scale: 1.09;
+}
+.artboard .kallfront .beans > div:nth-child(6) i {
+  border-width: 6px;
+}
+.artboard .kallfront .beans > div:nth-child(7) {
+  left: 115px;
+  top: -3px;
+  transform: rotateY(85deg);
+  scale: 1.09;
+}
+.artboard .kallfront .beans > div:nth-child(7) i {
+  border-width: 6px;
+}
+.artboard .kallfront .beans > div:nth-child(8) {
+  left: 260px;
+  top: 13px;
+  transform: rotateY(0deg);
+  scale: 1.08;
+  width: 2px;
+  background-color: #000;
+  border-radius: 10px;
+}
+.artboard .kallfront .beans > div:nth-child(8) i {
+  display: none;
+}
+.artboard .kallfront .beans > div:nth-child(9) {
+  left: 167px;
+  top: -3px;
+  transform: rotateY(95deg);
+  scale: 1.09;
+}
+.artboard .kallfront .beans > div:nth-child(9) i {
+  border-width: 6px;
+}
+.artboard .kallfront .beans > div:nth-child(10) {
+  left: 166px;
+  top: -3px;
+  transform: rotateY(95deg);
+  scale: 1.09;
+}
+.artboard .kallfront .beans > div:nth-child(10) i {
+  border-width: 6px;
+}
+.artboard .kallfront .beans > div:nth-child(11) {
+  left: 192px;
+  top: -3px;
+  transform: rotateY(101deg);
+  scale: 1.08;
+}
+.artboard .kallfront .beans > div:nth-child(11) i {
+  border-width: 5px;
+}
+.artboard .kallfront .beans > div:nth-child(12) {
+  left: 227px;
+  top: -3px;
+  transform: rotateY(112deg);
+  scale: 1.07;
+}
+.artboard .kallfront .beans > div:nth-child(13) {
+  left: 251px;
+  top: -3px;
+  transform: rotateY(123deg);
+  scale: 1.06;
+}
+.artboard .kallfront .beans > div:nth-child(14) {
+  left: 268px;
+  top: -3px;
+  transform: rotateY(132deg);
+  scale: 1.04;
+}
+.artboard .kallfront .beans > div:nth-child(15) {
+  right: 0;
+  left: auto;
+  top: 0;
+  transform: rotateY(180deg);
+}
+.artboard .kallfront .beans > div:nth-child(16) {
+  left: 96px;
+  top: -3px;
+  transform: rotateY(77deg);
+  scale: 1.09;
+}
+.artboard .kallfront .beans > div:nth-child(16) i {
+  border-width: 6px;
+}
+.artboard .kallfront .beans > div:nth-child(17) {
+  left: 209px;
+  top: -3px;
+  transform: rotateY(105deg);
+  scale: 1.09;
+}
+.artboard .kallfront .beans > div:nth-child(17) i {
+  border-width: 6px;
+}
+.artboard .kallfront .beans > div i {
+  position: absolute;
+  border: 4px solid transparent;
+  display: inline-block;
+  width: 200px;
+  height: 150px;
+  border-radius: 50% 50% 50% 50%;
+  border-top-color: #000;
+  border-bottom-color: transparent;
+}
+.artboard .kallfront .beans > div i:nth-child(1) {
+  width: 324px;
+  height: 196px;
+  transform: rotate(-52deg);
+  top: 52px;
+  left: -33px;
+}
+.artboard .kallfront .beans > div i:nth-child(2) {
+  width: 121px;
+  height: 151px;
+  transform: rotate(142deg);
+  top: 184px;
+  left: 5px;
+  border-radius: 72% 66%;
+}
+.artboard .kallfront .beans > div i:nth-child(3) {
+  width: 188px;
+  height: 158px;
+  transform: rotate(-127deg);
+  top: 153px;
+  left: -18px;
+  border-radius: 41% 78%;
+}
+.artboard .kallfront .beans > div i:nth-child(4) {
+  width: 61px;
+  height: 11px;
+  transform: rotate(97deg);
+  top: 241px;
+  left: 99px;
+  border-radius: 0;
+}
+.artboard .kallfront .beans > div i:nth-child(5) {
+  width: 103px;
+  height: 78px;
+  transform: rotate(-80deg);
+  top: 135px;
+  left: 138px;
+  border-radius: 10% 105%;
+}
+.artboard .kallfront .beans > div i:nth-child(6) {
+  width: 52px;
+  height: 78px;
+  transform: rotate(-39deg);
+  top: 122px;
+  left: 197px;
+  border-radius: 5%;
+}
+.artboard .kallfront .beans > div i:nth-child(7) {
+  width: 94px;
+  height: 71px;
+  transform: rotate(18deg);
+  top: 10px;
+  left: 127px;
+  border-radius: 92% 60%;
+}
+.artboard .kallfront .beans > div i:nth-child(8) {
+  width: 89px;
+  height: 76px;
+  transform: rotate(106deg);
+  top: 30px;
+  left: 152px;
+  border-radius: 112% 60%;
+}
+.artboard .kallfront .beans > div i:nth-child(9) {
+  width: 21px;
+  height: 14px;
+  transform: rotate(64deg);
+  top: 36px;
+  left: 205px;
+  border-radius: 0;
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <article class="artboard" id="artboard" role="img" role="img" aria-labelledby="image-alt" aria-describedby="image-info">
+  <header>
+    <h1 id="image-alt">IKEA - KALLFRONT</h1>
+    <p id="image-info">
+      <address>
+        Created by 
+        <a href="https://twitter.com/ricksdev">
+          Ricardo Ferreira
+        </a> 
+      </address>
+      on 
+      <time datetime="2023-02-02">Fabruary 2nd, 2023</time>
+    </p>
+  </header>
+  <!-- HTML of the image -->
+  <div class="wall"></div>
+  <div class="kallfront" id="kallfront" role="img" aria-label="IKEA KALLFRONT">
+    <div class="beans back">
+      <div><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><!-- 1 -->
+      <div><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><!-- 2 -->
+      <div><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><!-- 3 -->
+      <div><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><!-- 4 -->
+      <div><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><!-- 5 -->
+      <div><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><!-- 6 -->
+      <div><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><!-- 7 -->
+      <div><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><!-- 8 middle -->
+      <div><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><!-- 9 -->
+      <div><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><!-- 10 -->
+      <div><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><!-- 11 -->
+      <div><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><!-- 12 -->
+      <div><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><!-- 13 -->
+      <div><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><!-- 14 -->
+      <div><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><!-- 15 -->
+      <div><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><!-- 16 -->
+      <div><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><!-- 17 -->
+    </div>
+    
+    
+    <div class="half-sphere"></div>
+    <div class="inside-half-sphere"></div>
+    <div class="lamp">
+      <div class="bulb">
+        <div class="mirror"></div>
+        <div class="center"></div>
+        <div class="filament">
+          <i></i><i></i><i></i><i></i><i></i>
+        </div>
+      </div>
+    </div>
+    <div class="wire">
+      <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+    </div>
+    <div class="holder">
+      <div class="t1"></div>
+      <div class="ovf">
+        <div class="c1"></div>
+        <div class="c2"></div>
+        <div class="light"></div>
+      </div>
+      <div class="t2"></div>
+    </div>
+    
+    <div class="beans front">
+      <div><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><!-- 1 -->
+      <div><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><!-- 2 -->
+      <div><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><!-- 3 -->
+      <div><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><!-- 4 -->
+      <div><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><!-- 5 -->
+      <div><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><!-- 6 -->
+      <div><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><!-- 7 -->
+      <div><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><!-- 8 middle -->
+      <div><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><!-- 9 -->
+      <div><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><!-- 10 -->
+      <div><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><!-- 11 -->
+      <div><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><!-- 12 -->
+      <div><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><!-- 13 -->
+      <div><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><!-- 14 -->
+      <div><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><!-- 15 -->
+    </div>
+  </div>
+</article>
+  
+    <script id="rendered-js" >
+/* js just for scaling and make it kind of responsive */
+let outer = document.getElementById('kallfront'),
+wrapper = document.getElementById('artboard'),
+maxWidth = outer.clientWidth + 100,
+maxHeight = outer.clientHeight + 100;
+window.addEventListener("resize", resize);
+resize();
+function resize() {let scale,
+  width = window.innerWidth,
+  height = window.innerHeight,
+  isMax = width >= maxWidth && height >= maxHeight;
+  scale = Math.min(width / maxWidth, height / maxHeight);
+  outer.style.transform = isMax ? '' : 'scale(' + scale + ')';
+  wrapper.style.width = isMax ? '' : maxWidth * scale;
+  wrapper.style.height = isMax ? '' : maxHeight * scale;
+}
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>

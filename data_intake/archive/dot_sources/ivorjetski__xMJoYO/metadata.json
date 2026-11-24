@@ -1,0 +1,27 @@
+{
+  "key": "ivorjetski__xMJoYO",
+  "review_id": "C291",
+  "author": "Ben Evans",
+  "url": "https://codepen.io/ivorjetski/pen/xMJoYO",
+  "tags": [
+    "透明杯体",
+    "前后错叠",
+    "水线折光线索"
+  ],
+  "review_status": "await_user_review",
+  "browser_evidence": "作者编辑器默认静物画面中，杯口和水位线为两条不同椭圆，杯前高光跨过水位，完整柠檬位于杯后而切半柠檬位于右前方，桌面反射另成一层。",
+  "dedup": "光学绘画线索，不是折射模拟。区别于不透明锅沿包围。",
+  "license": "MIT",
+  "license_scope": "Original pen author code MIT. JS is comments only; SCSS random texture is pinned by CodePen emitted CSS.",
+  "js_policy": "none",
+  "source_difference": "Working wrapper links unchanged CodePen-generated CSS; author fields and provenance retained separately.",
+  "sha256": {
+    "original.html": "656b01943158cbf0e9230e957b25925fc3f7972de2ae4950099d23811c17b79b",
+    "PROVENANCE.md": "7eeef969d53bc4269c4d7d41e174f3d696f986acc60f6d756514802ca3a7af9a",
+    "SHA256SUMS": "21a81cd0a3e23b0372ec3d92f1b738e53a352545ce9605bbe15974ab81cdba47",
+    "source.html": "c2e8d43b9b92c2abc39992a895ed2eae7c83b0fdc77e7013af47a97243b9f7df",
+    "original.scss": "7253a2c0f689bde9254be914ae1f8f19ba18404dd2a41e41da0423a0a8c77939",
+    "original.js": "f2bd5fc615b45b3fc7a61781268955aff16a0fc814f4a22e88a134a1bede6e17",
+    "compiled.css": "d3577d0e6ccd5a3f6e12b526fe603ef89e6c066ce221bcaef034f128fc6785ba"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "key": "rujilabs__paper_diorama",
+  "url": "https://motion.rujilabs.com/patterns/paper/",
+  "upstream": "https://github.com/rujilabs/motion-patterns/tree/9165e0b97a392ff8915ab797f0363b209fca44c9/patterns/paper",
+  "revision": "9165e0b97a392ff8915ab797f0363b209fca44c9",
+  "title": "茶田剪纸山景",
+  "evidence": "云端桌面看见一次入场后成形的最终构图：山脊挡住太阳下部，屋和树位于数层坡面之间，深绿近坡和条纹茶田压在下边缘。完整层叠无需看动画；云朵有轻微持续漂移，不评其相位。源站说明源于第三方 AI 视频提示词的再创作，与同作者 paper diorama hero 同系列不另计。",
+  "decision": "hold",
+  "visual_environment": "cloud Chromium desktop",
+  "licence": "MIT",
+  "entry": "patterns/paper/index.html",
+  "archive_notes": "Original source tree with relevant CSS/JS; favicon and font referenced by upstream not vendored.",
+  "date": "2026-11-20"
+}

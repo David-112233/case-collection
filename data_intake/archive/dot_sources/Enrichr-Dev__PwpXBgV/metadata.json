@@ -1,0 +1,63 @@
+{
+  "source_id": "codepen:enrichr-dev/pwpxbgv",
+  "author": "Enrichr-Dev",
+  "pen_id": "PwpXBgV",
+  "url": "https://codepen.io/Enrichr-Dev/pen/PwpXBgV",
+  "acquisition": "cdpn_fullpage",
+  "acquisition_url": "https://cdpn.io/Enrichr-Dev/fullpage/PwpXBgV",
+  "retrieved_at": "2026-11-16T13:19:57+00:00",
+  "license": "MIT (CodePen public pen default)",
+  "candidate_target_tier": "T1",
+  "candidate_found_via": "websearch-2026-11-16-traditional-layout",
+  "fetch_status": "ok",
+  "title": "Cutout collage grid",
+  "canonical_url": "https://codepen.io/Enrichr-Dev/pen/PwpXBgV",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "cbe64ec30f345861cc699f3ec84a5a7b055abf09cb795fa76344d31a4d3ce7c2",
+  "source_html_sha256": "595cb2ba8488e08f3108afdc869d064b8e8c3cb6c086a3fc5aad90c53d1153f2",
+  "analysis": {
+    "js": {
+      "has_js": true,
+      "inline_js_chars": 7534,
+      "external_scripts": [
+        "https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"
+      ],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": true
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 0,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": true,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": false,
+      "clip_path": true,
+      "css_counter": false,
+      "media_query": false
+    },
+    "external_stylesheets": [
+      "https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Parkinsans:wght@400;500;600;700;800&family=Instrument+Sans:wght@400;500;600&family=Fira+Code:wght@400;500&display=swap"
+    ],
+    "css_imports": [],
+    "css_chars": 2330,
+    "element_count": 20,
+    "html_chars": 12007
+  }
+}

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>Brutalism with some dots and border effects (CSS vars included)</title>
+
+    <link rel="canonical" href="https://codepen.io/GeoffreyCrofte/pen/OJXJWOd">
+  
+  <link rel="stylesheet" href="https://public.codepenassets.com/css/normalize-5.0.0.min.css">
+
+  
+  
+<style>
+/**
+ * Dot pattern
+ */
+.panel::before,
+.input-container::before {
+  content: "";
+  position: absolute;
+  top: var(--dot-offset, 1em);
+  left: var(--dot-offset, 1em);
+  right: var(--dot-offset-neg, -1em);
+  bottom: var(--dot-offset-neg, -1em);
+  background: transparent radial-gradient(circle, var(--dot-color, rgba(0, 0, 0, 0.75)), transparent 1px);
+  background-size: 4px 4px;
+}
+
+/**
+ * Panels
+ */
+.panel {
+  position: relative;
+  width: 400px;
+  max-width: 100%;
+  margin: 2em auto 3em;
+}
+.panel div {
+  position: relative;
+  z-index: 1;
+}
+.panel-header {
+  padding: 16px;
+  border: 1px solid #242a49;
+  background-color: #eee5ff;
+  font-family: "messina", sans-serif;
+  font-weight: bold;
+}
+.panel-header h1 {
+  color: var(--brandcolor);
+  margin: 0;
+  font-size: 1em;
+}
+.panel-content {
+  padding: 16px;
+  background-color: #ffffff;
+  border: 1px solid #242a49;
+  border-top-color: #242a49;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top: 0;
+}
+
+/**
+ * Full section
+ */
+.full {
+  padding: 16px;
+  background: var(--brandcolor);
+  text-align: center;
+  color: white;
+  font-weight: bold;
+}
+.full form {
+  display: inline-flex;
+  align-items: center;
+}
+.full label {
+  margin-right: 8px;
+}
+.full input {
+  position: relative;
+  border: 0;
+  padding: 1em;
+}
+.full .input-container {
+  position: relative;
+  margin-right: 1em;
+  --dot-color: rgba(255,255,255,1);
+  --dot-offset: .5em;
+  --dot-offset-neg: -.5em;
+}
+
+button {
+  --transition: all .275s;
+  --border-color: white;
+  --background: var(--brandcolor);
+  position: relative;
+  padding: 0;
+  border: 0;
+  background: var(--background);
+  transition: var(--transition);
+}
+button span {
+  position: relative;
+  display: block;
+  padding: 14px;
+  border: 1px solid var(--border-color);
+  background: var(--background);
+  color: var(--border-color);
+  font-weight: bold;
+  z-index: 1;
+  transition: var(--transition);
+}
+button::before, button::after {
+  content: "";
+  position: absolute;
+  background: var(--background);
+  border: 1px solid var(--border-color);
+  transition: var(--transition);
+}
+button::after {
+  top: 2px;
+  left: 2px;
+  right: -3px;
+  bottom: -3px;
+}
+button::before {
+  top: 5px;
+  left: 5px;
+  right: -6px;
+  bottom: -6px;
+}
+button:hover, button:focus {
+  transform: translateY(-2px) translateX(-2px);
+}
+button:hover::before, button:focus::before {
+  transform: translateY(2px) translateX(2px);
+}
+button:hover::after, button:focus::after {
+  transform: translateY(1px) translateX(1px);
+}
+button.reversed {
+  --background: white;
+  --border-color: var(--brandcolor);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body, html {
+  --brandcolor: #6600ff;
+  background: #f3f2f1;
+  line-height: 1.55;
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  <div class="panel">
+	<div class="panel-header">
+		<h1>This is a title</h1>
+	</div>
+	<div class="panel-content">
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto odit consequatur consequuntur commodi assumenda inventore, quisquam voluptate, perspiciatis ullam, eius ab laudantium placeat? Eos dolore repellendus dicta, nostrum repellat alias.
+	</div>
+</div>
+
+<section class="full">
+	<form action="#">
+		<label for="search">Search site</label>
+		<span class="input-container">
+			<input type="search" name="search" id="search">
+		</span>
+		<button type="submit">
+			<span>Search</span>
+		</button>
+	</form>
+</section>
+
+<p style="text-align: center; margin-top: 40px;">
+	<button type="button"><span>Send love</span></button><br>
+</p>
+
+<p style="text-align: center; margin-top: 40px;">
+	<button class="reversed" type="button"><span>Send love</span></button>
+</p>
+
+<p style="text-align: center; margin-top: 80px;font-size: .75em;">Style inspired from <a href="https://themarkup.org/blacklight/">Backlight</a></p>
+  
+  
+  
+</body>
+
+</html>

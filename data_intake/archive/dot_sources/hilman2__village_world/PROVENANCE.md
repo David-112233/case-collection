@@ -1,0 +1,7 @@
+# Village World
+- Author account and deployer: hilman2.
+- Demo: https://hilman2.github.io/village-world/
+- Source: https://github.com/hilman2/village-world/tree/c539f151fd9957ed781a0c9c307921687c17e0ee
+- MIT covers code and generated artwork as explicitly confirmed in upstream CREDITS.md; no third-party images. Both unchanged documents are included.
+- Exact source, builder and deployment files were fetched at the pinned commit and checked against each upstream Git blob object; README, screenshots, tests, and dotfiles are not runtime dependencies and are excluded. Deployed HTML was checked in the cloud browser to reference ./style.css, ./demo.css, and ./demo.bundle.js; these are included unchanged. The demo has no external runtime resource dependencies (external anchors lead to documentation only). A separate author-authored demo.js is only for rebuild and not loaded by index.html. Local/offline rendering not tested.
+- Verified capture sequence: in demo, click top-right “Pause animation”, then click “Spring morning” and return scroll to the image. Button remained “Resume animation”, preset was selected, and stable light made relationships clear. In front, the bridge deck crosses and hides part of the stream; water is visible again through the bridge arch. In the middle, smaller/larger houses and access paths cluster at distinct depths; nearer fields/forested hills cut into mountain silhouettes, with two lightness-separated ridges behind. Browser screenshot taken after successful pause and preset change; no screenshot bundled.

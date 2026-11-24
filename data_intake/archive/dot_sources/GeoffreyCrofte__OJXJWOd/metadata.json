@@ -1,0 +1,59 @@
+{
+  "source_id": "codepen:geoffreycrofte/ojxjwod",
+  "author": "GeoffreyCrofte",
+  "pen_id": "OJXJWOd",
+  "url": "https://codepen.io/GeoffreyCrofte/pen/OJXJWOd",
+  "acquisition": "cdpn_fullpage",
+  "acquisition_url": "https://cdpn.io/GeoffreyCrofte/fullpage/OJXJWOd",
+  "retrieved_at": "2026-11-10T17:14:05+00:00",
+  "license": "MIT (CodePen public pen default)",
+  "fetch_status": "ok",
+  "title": "Brutalism with some dots and border effects (CSS vars included)",
+  "canonical_url": "https://codepen.io/GeoffreyCrofte/pen/OJXJWOd",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "5fcc35126d40cd7f056fad6535fb28cf146c9aa1e4136b9923f5cb7939fd5cac",
+  "source_html_sha256": "015ac0d94ff990b20ae2fb29833904c7b7bbc978a682a9221495de02b7e19d0e",
+  "analysis": {
+    "js": {
+      "has_js": false,
+      "inline_js_chars": 0,
+      "external_scripts": [],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 0,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": false,
+      "clip_path": false,
+      "css_counter": false,
+      "media_query": false
+    },
+    "external_stylesheets": [
+      "https://public.codepenassets.com/css/normalize-5.0.0.min.css"
+    ],
+    "css_imports": [],
+    "css_chars": 2679,
+    "element_count": 20,
+    "html_chars": 4762
+  }
+}

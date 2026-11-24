@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>Website #09</title>
+
+    <link rel="canonical" href="https://codepen.io/saiyjano/pen/JoKXgwy">
+  
+  
+  
+  
+<style>
+/* ―――――― [ SCHRIFTARTEN ] ―――――― */
+@charset "UTF-8";
+
+/* —————————— < RESET > —————————— */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	background: #f0f0f0;
+	font: 105% Calibri;
+	text-align: justify;
+	color: #211f1d;
+	margin: 0px auto;
+}
+
+a {
+	text-decoration: none;
+	transition: all 0.5s ease-in-out;
+}
+
+p {
+	margin: 0 auto 20px;
+}
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
+
+.spacer {
+	clear: both;
+}
+
+b,
+strong {
+	color: #af95ae;
+}
+
+i,
+em {
+	color: #612d39;
+}
+
+u {
+	text-decoration: none;
+	border-bottom: 2px solid #74513f;
+}
+
+/* MAIN
+----------------------------------------------------- */
+#container {
+	margin: 170px auto 40px;
+	width: 900px;
+	background: #ffffff;
+	z-index: 2;
+	height: calc(100vh - 170px - 40px);
+	padding: 5px 10px;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+#top {
+	padding: 0px;
+	width: 900px;
+	height: 170px;
+	background: #fff;
+	position: fixed;
+	display: flex;
+	flex-direction: row;
+	top: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	padding: 10px;
+	border-top: 10px solid #612d39;
+}
+
+#top a {
+	text-align: center;
+	text-decoration: none;
+	color: #74513f;
+	background: #dfdfdf;
+	padding: 2px 4px;
+	text-transform: uppercase;
+	transition: all 0.2s ease-in-out;
+	box-sizing: border-box;
+	float: left;
+	width: 98%;
+	margin: 1px 2px;
+}
+
+#top a:hover {
+	color: #dfdfdf;
+	background: #74513f;
+}
+
+#header {
+	margin: 0px auto;
+	width: 400px;
+	height: 150px;
+	background: #dcdcdc url(https://i.ibb.co/m529FTNF/default.png);
+}
+
+/* SIDEBAR
+----------------------------------------------------- */
+
+#affis {
+	width: 200px;
+	height: 150px;
+	margin: 0px 10px;
+	color: #031118;
+	background: #f8f8f8;
+	padding: 5px;
+	text-transform: uppercase;
+}
+
+#welcome {
+	width: 250px;
+	height: 150px;
+	margin: 0 auto;
+	padding: 5px;
+	background: #f8f8f8;
+	font-size:11pt;
+}
+
+#welcome h1 {
+	color:#af95ae;
+	background: #74513f;
+	padding:5px 5px;
+	text-transform:uppercase;
+	font-size:10pt;
+	font-weight:normal;
+	text-align:center;
+	margin:0px 0px 3px;
+	letter-spacing:3px;
+}
+
+/* CONTENT
+----------------------------------------------------- */
+#content {
+	height: 100%;
+	width: 70%;
+	margin: 0 auto 10px;
+	overflow: auto;
+	scrollbar-width: thin;
+	flex: 1 1 70%;
+}
+
+#content .box {
+	margin: 0 auto 20px;
+	padding: 10px;
+}
+
+blockquote {
+  border-left: 4px solid #c1c1c1;
+  margin: 10px 20px;
+  padding-left: 10px;
+  color: #606060;
+  font-style: italic;
+}
+
+#content h1 {
+	color: #af95ae;
+	font-size: 20px;
+	letter-spacing: 3px;
+	text-decoration: none;
+	font-weight: normal;
+	padding: 0px 10px 0px 0px;
+	height: 24px;
+	text-align: right;
+	line-height: 24px;
+	text-transform: uppercase;
+	margin: 0px;
+}
+
+#content h2 {
+	color:#74513f;
+	padding:2px 0px;
+	text-transform:uppercase;
+	font-size:10pt;
+	font-weight:normal;
+	text-align:center;
+	margin:0px 0px 3px;
+	letter-spacing:3px;
+}
+
+#content h2 a {
+	color:#74513f;
+}
+
+#content b {
+	color: #4E4E4E;
+}
+
+#content strong {
+	color: #757575;
+}
+
+#content i {
+	color: #787878;
+}
+
+#content u {
+	text-decoration: none;
+	border-bottom: 2px solid #7E8185;
+}
+
+#content a {
+	color: #612d39;
+}
+
+#content a:hover {
+	color: #211f1d;
+}
+
+
+/* FOOTER
+----------------------------------------------------- */
+#footer {
+	position: fixed;
+	bottom: 0;
+	left: 50%;
+	width: 900px;
+	height: 40px;
+	font-size: 10pt;
+	text-align: center;
+	margin: 0;
+	padding: 10px;
+	background: #612d39;
+	color: #ffffff;
+	letter-spacing: 5px;
+	word-spacing: 10px;
+	text-transform: uppercase;
+	z-index: 10;
+	transform: translateX(-50%);
+}
+
+/* NAVIGATION
+----------------------------------------------------- */
+#navigation {
+	width: 30%;
+	margin: 20px auto;
+	padding: 5px;
+	background: #ffffff;
+	clear: both;
+	flex: 1 1 30%;
+}
+
+#navigation a.nav {
+	text-align: center;
+	text-decoration: none;
+	color: #74513f;
+	background: #dfdfdf;
+	padding: 2px 4px;
+	text-transform: uppercase;
+	transition: all 0.2s ease-in-out;
+	box-sizing: border-box;
+	display: inline-block;
+	width: 47.48%;
+	margin: 1px 2px;
+	vertical-align: top;
+}
+
+#navigation a.nav:hover {
+	color: #dfdfdf;
+	background: #74513f;
+}
+
+
+#navigation #box {
+	padding: 10px;
+	width: 100%;
+	clear: both;
+	border-bottom: 1px solid #d7d7d7;
+	margin-bottom: 20px;
+}
+
+#navigation h1 {
+	color:#211f1d;
+	background: #af95ae;
+	padding:10px 5px;
+	text-transform:uppercase;
+	font-size:11pt;
+	font-weight:normal;
+	text-align:center;
+	margin:0px 0px 3px;
+	letter-spacing:3px;
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <main id="container">
+		<header id="top">
+
+			<div id="welcome">
+				<h1>Header</h1>
+				<p>
+					Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+					nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
+					erat, sed diam voluptua.
+				</p>
+			</div>
+
+			<div id="affis">
+				<a href="">Link</a>
+				<a href="">Link</a>
+				<a href="">Link</a>
+				<a href="">Link</a>
+				<a href="">Link</a>
+			</div>
+
+			<div id="header"></div>
+		</header>
+
+		<article id="content">
+			<div class="box">
+				<h1>Header 1</h1>
+				<p>
+					Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+					nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
+					erat, sed diam voluptua. At vero eos et accusam et justo duo
+					dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
+					sanctus est Lorem ipsum dolor sit amet.
+				</p>
+				<p style="text-align: center">
+					<b>Bold</b>, <i>Italic</i> <u>Underline</u>, <a href="#">Link</a>
+				</p>
+			</div>
+
+			<div class="box">
+				<h1>Header 1</h1>
+				<h2>Header 2</h2>
+
+				<blockquote>
+					Blockquote<br />
+					Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
+					commodo ligula eget dolor. Aenean massa. Cum sociis natoque
+					penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+					Donec quam felis, ultricies nec, pellentesque eu, pretium quis,
+					sem. Nulla consequat massa quis enim. Donec pede justo, fringilla
+					vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut,
+					imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede
+					mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum
+					semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula,
+					porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem
+					ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus
+					viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean
+					imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper
+					ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus,
+					tellus eget condimentum rhoncus, sem quam semper libero, sit amet
+					adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus
+					pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt
+					tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam
+					quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis
+					leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis
+					magna.
+				</blockquote>
+
+				Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
+				commodo ligula eget dolor. Aenean massa. Cum sociis natoque
+				penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+				Donec quam felis, ultricies nec, pellentesque eu, pretium quis,
+				sem. Nulla consequat massa quis enim. Donec pede justo, fringilla
+				vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut,
+				imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede
+				mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum
+				semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula,
+				porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem
+				ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus
+				viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean
+				imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper
+				ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus,
+				tellus eget condimentum rhoncus, sem quam semper libero, sit amet
+				adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus
+				pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt
+				tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam
+				quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis
+				leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis
+				magna.
+			</div>
+		</article>
+
+		<aside id="navigation">
+			<div id="box">
+				<h1>Textbox</h1>
+				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+				diam nonumy eirmod tempor invidunt ut labore et dolore magna
+				aliquyam erat, sed diam voluptua.
+		</div>
+
+		<div id="box">
+			<h1>Menu 1</h1>
+			<a href="#" class="nav">Link</a>
+			<a href="#" class="nav">Link</a>
+			<a href="#" class="nav">Link</a>
+			<a href="#" class="nav">Link</a>
+		</div>
+
+		<div id="box">
+			<h1>Menu 2</h1>
+			<a href="#" class="nav">Link</a>
+			<a href="#" class="nav">Link</a>
+			<a href="#" class="nav">Link</a>
+			<a href="#" class="nav">Link</a>
+		</div>
+
+		</aside>
+
+		<footer id="footer">
+			© Your Website
+		</footer>
+
+	</main>
+  
+  
+  
+</body>
+
+</html>

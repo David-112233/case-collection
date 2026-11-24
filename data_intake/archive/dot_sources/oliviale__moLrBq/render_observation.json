@@ -1,0 +1,18 @@
+{
+  "source_url": "https://codepen.io/oliviale/pen/moLrBq",
+  "viewed_url": "https://cdpn.io/oliviale/fullpage/moLrBq",
+  "actual_url_unchanged": true,
+  "method": "Cloud Chrome browser, normal online navigation; no Referer override",
+  "browser_version": null,
+  "screenshot": "render_1180x757.png",
+  "screenshot_size": [
+    1180,
+    757
+  ],
+  "observation": "Floor plan visibly rendered below a Referer warning. Walls, door arcs, furniture, room labels and slanted balcony were visible. Lower edge of the scene exceeds this viewport.",
+  "not_verified": [
+    "375px layout",
+    "full lower edge",
+    "other candidates"
+  ]
+}

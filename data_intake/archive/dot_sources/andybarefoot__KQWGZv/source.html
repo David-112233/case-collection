@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>CSS Grid Ribbon layout</title>
+
+    <link rel="canonical" href="https://codepen.io/andybarefoot/pen/KQWGZv">
+  <link href="https://fonts.googleapis.com/css?family=Bungee|Bungee+Inline" rel="stylesheet">
+  <link rel="stylesheet" href="https://public.codepenassets.com/css/reset-2.0.min.css">
+
+  
+  
+<style>
+body {
+  background-color: #33658A;
+  color: #1A2830;
+  font-family: 'Bungee', cursive;
+}
+
+h1{
+  margin: auto;
+  margin-top: 100px;
+  display: grid;
+  width: 300px;
+  grid-auto-rows: 60px;
+  font-size: 3em;
+}
+
+h1>span{
+  background-color: #C60F0F;
+  line-height: 60px;
+  text-align: center;
+  transform: skewY(11deg);
+}
+
+h1>span:nth-child(2n){
+  background-color: #FE4E00;
+  transform: skewY(-11deg);
+  z-index: 1;
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  <h1 data-splitting>CSS Grid Ribbon Layout</h1>
+  <script src='https://unpkg.com/splitting/dist/splitting.min.js'></script>
+    <script id="rendered-js" >
+const results = Splitting();
+results[0].el.insertBefore(document.createElement("span"), results[0].el.children[0]);
+results[0].el.appendChild(document.createElement("span"));
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>

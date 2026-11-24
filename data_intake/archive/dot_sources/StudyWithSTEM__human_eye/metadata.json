@@ -1,0 +1,17 @@
+{
+  "key": "StudyWithSTEM__human_eye",
+  "author": "StudyWithSTEM",
+  "url": "https://studywithstem.github.io/tools/biology/human-eye/index.html",
+  "tags": [
+    "眼球剖面",
+    "眼壁三层",
+    "晶状体前后关系"
+  ],
+  "review_status": "await_user_review",
+  "browser_evidence": "在作者原站关闭 ANIMATE、保留 LABELS，比较 Distant object 与 Close object 两个静止状态。角膜在虹膜及晶状体前方；远近模式下镜片弧度有区别；后侧巩膜、脉络膜、视网膜三层嵌套，延伸至视神经出口。为示意画，非按比例解剖测量。",
+  "license": "MIT",
+  "license_scope": "Two unchanged upstream Git blobs (original standalone HTML and exact MIT repository license) at d96bfea9f21d3ae1d668222db35ae2d3fea255b6. Inline eyes SVG/CSS/JS preserved. Original external Google font/analytics and site-relative optional favicon were not vendored. Serve original entrypoint statically. Archive replay and offline were not tested.",
+  "js_policy": "preserve",
+  "entrypoint": "original/tools/biology/human-eye/index.html",
+  "review_id": "C299"
+}

@@ -1,0 +1,68 @@
+{
+  "source_id": "codepen:viktorkovalenko/qagmnq",
+  "author": "viktorkovalenko",
+  "pen_id": "QaGmNq",
+  "url": "https://codepen.io/viktorkovalenko/pen/QaGmNq",
+  "title": "MacBook - 3D animation in CSS only",
+  "acquisition": "cdpn_fullpage_http_srcdoc",
+  "acquisition_url": "https://cdpn.io/viktorkovalenko/fullpage/QaGmNq",
+  "retrieved_at": "2026-11-20T12:13:54+00:00",
+  "fetch_status": "ok",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "a7636ba5cdc6a581e793486698f06450a113f6de74dcf0f8c07aa6c9fbeff576",
+  "source_html_sha256": "5ff7703afe9da124095b148ff244de62145360f806482e68a1ce765565e423f4",
+  "license": "CodePen public-pen default; project-specific and external asset licenses not separately verified",
+  "analysis": {
+    "js": {
+      "has_js": false,
+      "inline_js_chars": 0,
+      "external_scripts": [],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 3,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": true,
+      "clip_path": false,
+      "css_counter": false,
+      "media_query": false
+    },
+    "external_stylesheets": [
+      "https://public.codepenassets.com/css/normalize-5.0.0.min.css"
+    ],
+    "css_imports": [],
+    "css_chars": 16215,
+    "element_count": 146,
+    "html_chars": 25485
+  },
+  "review": {
+    "label": "笔记本翻盖、转轴嵌合、屏键转折",
+    "evidence": "仅采用打开时的单帧。屏幕边框覆盖图片边缘，与键盘底座沿横向转轴形成夹角；键帽和触控板嵌于近处面板，可见底壳薄侧边。忽略循环旋转及外部屏幕照片；部分转动角度有穿面伪影。",
+    "visual_verified": true,
+    "surface": "Cloud Chrome CodePen Full Page iframe at 1331x894; photo lens static desktop frame; laptop coherent open frame only",
+    "mobile_verified": false,
+    "external_dependencies_preserved": true,
+    "offline_replay_verified": false,
+    "formal_admission": false
+  }
+}

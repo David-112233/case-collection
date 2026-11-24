@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>Infographic with CSS grid and variables</title>
+
+    <link rel="canonical" href="https://codepen.io/thebabydino/pen/pZBxVz">
+  <link href="https://fonts.googleapis.com/css?family=Oswald:300" rel="stylesheet">
+  
+  
+  
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  --wide: 1;
+  --p: var(--narr, 0);
+  --q: calc(1 - var(--p));
+  display: grid;
+  grid-template-columns: repeat(calc(var(--wide) + 1), 1fr);
+  grid-gap: calc(var(--p)*.5em) 2.5em;
+  padding: 0 calc(var(--q)*.75em);
+  background: #bdc5c8;
+}
+@media (max-width: 768px) {
+  body {
+    --wide: 0 ;
+  }
+}
+@media (max-width: 400px) {
+  body {
+    --narr: 1 ;
+  }
+}
+
+article {
+  --i: var(--parity, 0);
+  --j: calc(1 - var(--i));
+  --s: calc(1 - 2*var(--i));
+  box-sizing: border-box;
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: 0.5em 4em;
+  justify-self: var(--parity, self-end);
+  position: relative;
+  padding: calc(.5*var(--q)*2.25em + var(--p)*4em) 0 1.125em;
+  width: calc(var(--q)*22.5em + var(--p)*100%);
+  min-height: 11.25em;
+  transform: translatey(calc(var(--wide)*var(--i)*.3125*11.25em));
+  transform-style: preserve-3d;
+  background: radial-gradient(at calc(var(--j)*100%), rgba(0, 0, 0, 0.43), transparent 70%) calc(var(--j)*100%) 50%/calc(var(--q)*.625em) 105% no-repeat;
+  font: 1em/1.25 oswald, sans-serif;
+  counter-increment: c;
+}
+article:before {
+  position: absolute;
+  right: calc(var(--q)*(var(--i)*100% - var(--i)*4.5em));
+  bottom: calc(var(--q)*50%);
+  width: calc(var(--q)*4.5em + var(--p)*100%);
+  height: calc(var(--q)*9em + var(--p)*100%);
+  border-radius: 0.75em 0.75em 0 0;
+  transform-origin: calc(var(--j)*100%) 100%;
+  transform: rotate(calc(var(--s)*var(--q)*-90deg)) translate3d(calc(var(--s)*var(--q)*50%), 0, -1px);
+  background: linear-gradient(#fff 2em, var(--slist));
+  font-size: 2em;
+  line-height: 2;
+  text-align: center;
+  filter: drop-shadow(calc(var(--s)*var(--q)*-.25em) -0.25em 0.5em rgba(0, 0, 0, 0.5));
+  content: counter(c, decimal-leading-zero) " STEP";
+}
+article:after {
+  grid-column: calc(1 + var(--i));
+  grid-row: 1/span calc(2 - var(--p));
+  align-self: center;
+  font-size: 3em;
+  text-align: center;
+  filter: grayscale(1);
+  content: attr(data-icon);
+}
+article:nth-of-type(2n) {
+  --parity: 1;
+}
+
+h3, p {
+  box-sizing: border-box;
+  padding: 0.125em 0.625rem;
+  text-align: var(--narr, var(--parity, right));
+  color: #fff;
+}
+
+h3 {
+  align-self: center;
+  text-transform: uppercase;
+}
+
+p {
+  grid-column: calc(1 + var(--j)*var(--q))/span calc(1 + var(--p));
+  grid-row: 2;
+}
+</style>
+
+  <script src="https://public.codepenassets.com/js/prefixfree-1.0.7.min.js"></script>
+
+  
+</head>
+
+<body translate="no">
+  <article data-icon="📊" style="--slist: #9274b7 0, #3b4a8d">
+  <h3>gingerbread</h3>
+  <p>Cake muffin donut chocolate cake jelly sesame snaps wafer tart pie sweet roll muffin chupa chups.</p>
+</article>
+<article data-icon="⚙️" style="--slist: #d14498 0, #91287d">
+  <h3>brownie</h3>
+  <p>Cake cookie lemon drops muffin sugar plum. Liquorice pudding sugar plum topping macaroon pie chocolate.</p>
+</article>
+<article data-icon="🏠" style="--slist: #f6671f 0, #c01b1c">
+  <h3>ice cream</h3>
+  <p>Cake muffin donut chocolate cake jelly sesame snaps wafer tart pie sweet roll muffin chupa chups.</p>
+</article>
+<article data-icon="💡" style="--slist: #fec22f 0, #ea9826">
+  <h3>lava cake</h3>
+  <p>Cake cookie lemon drops muffin sugar plum. Liquorice pudding sugar plum topping macaroon pie chocolate.</p>
+</article>
+<article data-icon="⏰" style="--slist: #cfdc45 0, #89b343">
+  <h3>macaroon</h3>
+  <p>Cake muffin donut chocolate cake jelly sesame snaps wafer tart pie sweet roll muffin chupa chups.</p>
+</article>
+<article data-icon="🎯" style="--slist: #6fc6a9 0, #058ba9">
+  <h3>chocolate</h3>
+  <p>Cake cookie lemon drops muffin sugar plum. Liquorice pudding sugar plum topping macaroon pie chocolate.</p>
+</article>
+  
+  
+  
+</body>
+
+</html>

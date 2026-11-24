@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>Fashion Shop Landing Page Example</title>
+
+    <link rel="canonical" href="https://codepen.io/leonam-silva-de-souza/pen/eYqyKoG">
+  
+  
+  
+  
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+:root{
+    --header-height: 3rem;
+
+    --first-color: #010a43;
+    --second-color: #ffc2c2;
+    --white-color: #ffffff;
+
+    --body-font: 'Tinos', serif;
+    --h1-font-size: 2.3rem;
+    --h2-font-size: 2.3rem;
+    --normal-font-size: .93rem;
+    --big-font-size: 5rem;
+    --smaller-font-size: .75rem;
+
+    --z-back: -10;
+    --z-normal: 1;
+    --z-tooltip: 10;
+    --z-fixed: 100;
+    --z-modal: 1000;
+}
+
+
+*, *::after, *::before{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+}
+
+body{
+    margin: var(--header-height) 0 0 0;
+    font-family: var(--body-font);
+    font-weight: initial;
+    overflow: hidden;
+}
+
+h1, h2{
+    font-weight: initial;
+}
+
+img{
+    max-width: 100%;
+    height: auto;
+}
+
+p{ font-size: var(--normal-font-size);}
+
+.bd-grid{
+    max-width: 100%;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.l-header{
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: var(--first-color);
+    color: var(--white-color);
+    z-index: var(--z-fixed);
+}
+
+.nav{
+    height: var(--header-height);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+}
+
+    .nav-list{ text-align: center;}
+    .nav-item{ margin-bottom: 2rem;}
+
+    .nav-link{
+        padding: 0.5rem;
+        color: var(--white-color);
+    }
+
+    .nav-logo{ color: var(--white-color);}
+
+    .nav-toggle{
+        font-size: 2rem;
+        cursor: pointer;
+    }
+
+    .nav-icon-cart{
+        font-size: 1.3rem;
+        text-align: right;
+    }
+
+
+.home{
+    position: relative;
+    display: grid;
+    grid-template-rows: 3fr 1fr;
+    height: calc(100vh - var(--header-height));
+}
+
+    .home-primary{
+        width: 0;
+        background-color: var(--first-color);
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .home-title{
+        font-size: var(--h1-font-size);
+        writing-mode: vertical-rl;
+        transform: rotate(180deg);
+        color: var(--white-color);
+    }
+
+    .home-img{
+        width: 235px;
+        height: auto;
+    }
+
+    .home-secondary{
+        width: 0;
+        background-color: var(--second-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+    }
+
+    .home-scroll{
+        position: absolute;
+        left: 0;
+        bottom: 15%;
+        font-size: var(--smaller-font-size);
+        transform: rotate(270deg);
+        color: var(--first-color);
+    }
+
+        .home-scroll::after{
+            content: '';
+            position: absolute;
+            top: 45%;
+            left: -10%;
+            width: 38px;
+            height: 1px;
+            background-color: var(--first-color);
+            margin-left: -2.5rem;
+        }
+    
+    .home-year{
+        font-size: var(--big-font-size);
+        -webkit-text-stroke: 2.3px var(--first-color);
+        color: transparent;
+    }
+
+@media screen and (min-width: 768px){
+    :root{
+    --h1-font-size: 4.5rem;
+    --h2-font-size: 3.56rem;
+    --normal-font-size: 1rem;
+    --big-font-size: 10rem;
+    --smaller-font-size: .813rem;
+    }
+
+    body{ margin: 0;}
+    .l-header{ background-color: transparent;}
+
+    .nav{
+        display: grid;
+        grid-template-columns: 3fr 4fr 1fr;
+    }
+
+        .nav-list{ display: flex;}
+
+        .nav-item{
+            margin-right: 5rem;
+            margin-bottom: 0;
+        }
+
+        .nav-toggle{ display: none;}
+
+    .home{
+        grid-template-columns: 4fr 3fr;
+        grid-template-rows: 1fr;
+        height: 100vh;
+    }
+
+        .home-primary{ justify-content: center; }
+
+        .home-img img{
+            position: absolute;
+            width: 361px;
+            top: 5%;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            z-index: var(--z-normal);
+        }
+
+        .home-scroll{ color: var(--white-color); }
+            .home-scroll::after{ background-color: var(--white-color);}
+
+        .home-year{
+            writing-mode: vertical-rl;
+            margin-left: 5rem;
+        }
+}
+
+@media screen and (min-width: 1200px){
+    .bd-grid{
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media screen and (max-width: 768px){
+    .nav-menu{
+        position: fixed;
+        top: var(--header-height);
+        left: -100%;
+        background-color: rgba(1, 10, 67, .8);
+        width: 80%;
+        height: 100vh;
+        margin: auto;
+        padding: 2rem;
+        z-index: var(--z-fixed);
+        transition: .5s;
+    }
+
+    .show{ left: 0; }
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Fashion Landing Page</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <header class="l-header">
+            <nav class="nav bd-grid">
+                <div class="nav-toggle" id="nav-toggle">
+                    <ion-icon name="reorder-two-outline"></ion-icon>
+                </div>
+                <div>
+                    <a href="#" class="nav-logo">Fashion</a>
+                </div>
+
+                <div class="nav-menu" id="nav-menu">
+                    <ul class="nav-list">
+                        <li class="nav-item"><a href="#" class="nav-link">Home</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link">Women</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link">Men</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link">Explore</a></li>
+                    </ul>
+                </div>
+                <div class="nav-icon-cart">
+                    <ion-icon name="cart-outline"></ion-icon>
+                </div>
+            </nav>
+        </header>
+
+        <main class="main-bg">
+            <div class="home">
+                <div class="home-primary">
+                    <h1 class="home-title">Fashion Online <br> Store</h1>
+
+                    <div class="home-img">
+                        <img src="https://i.postimg.cc/DZ1cPsWw/img-home.jpg" alt="image">
+                    </div>
+                </div>
+
+                <div class="home-secondary">
+                    <a href="#about" class="home-scroll">SCROLL DOWN</a>
+                    <span class="home-year">2024</span>
+                </div>
+            </div>
+        </main>
+
+        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+        <script src="main.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+        <script>
+            /*HOME PRIMARY*/
+            TweenMax.to(".home-primary", 2, {
+                width: "100%",
+                ease: Expo.easeInOut
+            })
+            gsap.from('.home-title', {opacity: 0, duration: 2, delay: 1.5, y: 100})
+            gsap.from('.home-img img', {opacity: 0, duration: 2, delay: 1.5, y: -100})
+
+            /*HOME SECONDARY*/
+            TweenMax.to(".home-secondary", 2, {
+                width: "100%",
+                ease: Expo.easeInOut
+            })
+            gsap.from('.home-scroll', {opacity: 0, duration: 3, x: -100})
+            gsap.from('.home-year', {opacity: -1, duration: 1.5, delay: 1.5, x: 100})
+        </script>
+    </body>
+</html>
+  
+    <script id="rendered-js" >
+//Showing Menu
+
+const showMenu = (toggleId, navId) => {
+  const toggle = document.getElementById(toggleId);
+  const nav = document.getElementById(navId);
+
+  if (toggle && nav) {
+    toggle.addEventListener('click', () => {
+      nav.classList.toggle('show');
+    });
+  };
+};
+
+showMenu('nav-toggle', 'nav-menu');
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>CSS Shapes, Columns and Clipping</title>
+
+    <link rel="canonical" href="https://codepen.io/mandymichael/pen/xzyrGa">
+  <link href="https://fonts.googleapis.com/css?family=PT+Serif:400,700,700i|Spirax" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://public.codepenassets.com/css/normalize-5.0.0.min.css">
+
+  
+  
+<style>
+@charset "UTF-8";
+body {
+  background: #ce6f75;
+  font-family: "PT Serif", serif;
+  padding: 2rem;
+}
+
+h1 {
+  background: #ca66ac url(https://images.unsplash.com/photo-1464982326199-86f32f81b211?ixlib=rb-0.3.5&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjE0NTg5fQ&s=2ff8b46004acf88415bb98bb42238e9c);
+  background-size: 50% 200%;
+  background-position: bottom;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: "Spirax", cursive;
+  font-size: 15vw;
+  position: relative;
+  text-align: left;
+  margin: 0;
+  line-height: 1.2;
+}
+h1::before {
+  content: "Kylie Timpani";
+  text-align: center;
+  position: absolute;
+  z-index: -1;
+}
+
+.position {
+  font-size: 7vw;
+  text-align: right;
+  margin: 0 0 1rem 0;
+  color: #f6d6b5;
+  text-transform: uppercase;
+}
+
+div {
+  max-width: 800px;
+  margin: 0 auto;
+  color: #313157;
+}
+
+.question {
+  width: 50%;
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #663a70;
+  border-bottom: 5px solid #663a70;
+}
+.question.full {
+  width: 55%;
+}
+.question.wide {
+  width: 100%;
+}
+
+.questions {
+  border-bottom: dotted 2px #663a70;
+  margin-bottom: 2rem;
+}
+@media screen and (min-width: 768px) {
+  .questions {
+    -moz-columns: 2;
+         columns: 2;
+    height: 510px;
+  }
+}
+.questions.full {
+  -moz-columns: unset;
+       columns: unset;
+  width: 90%;
+  margin: 0;
+  border-bottom: none;
+}
+.questions.three-col {
+  -moz-columns: unset;
+       columns: unset;
+  height: auto;
+  margin-top: 6rem;
+  border-bottom: none;
+  position: relative;
+}
+@media screen and (min-width: 768px) {
+  .questions.three-col {
+    -moz-columns: 3;
+         columns: 3;
+  }
+}
+
+.triangle-left {
+  width: 280px;
+  height: 280px;
+  shape-outside: polygon(55% 0, 0 105%, 105% 100%);
+  float: left;
+  clip-path: polygon(50% 0, 0 100%, 100% 100%);
+  background: #ca66ac url(https://images.unsplash.com/photo-1464982326199-86f32f81b211?ixlib=rb-0.3.5&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjE0NTg5fQ&s=2ff8b46004acf88415bb98bb42238e9c);
+  background-size: cover;
+}
+.triangle-left.locked {
+  position: relative;
+  clip-path: polygon(1% 0px, -1px 100.36%, 98.21% 100.36%);
+  shape-outside: polygon(4.93% -9px, 0px 103.93%, 105.72% 102.5%);
+}
+.triangle-left.locked .inner {
+  clip-path: polygon(5% 21px, 12px 100.4%, 98.41% 100.79%);
+}
+
+.overlay {
+  bottom: 0;
+  left: 0;
+  clip-path: polygon(50% 0, 0 100%, 100% 100%);
+  width: 100%;
+  height: 200%;
+  background: #de8f87;
+  position: absolute;
+  mix-blend-mode: overlay;
+  transform: rotate(180deg);
+}
+.overlay.offset {
+  transform: rotate(0);
+  bottom: 200%;
+  z-index: -1;
+}
+
+.inner {
+  clip-path: polygon(50% 0, 0 100%, 100% 100%);
+  width: 90%;
+  height: 90%;
+  background: #ce6f75;
+  top: 50%;
+  position: relative;
+  transform: translateY(-50%);
+}
+
+.inner2 {
+  background: #cbc2a3;
+  position: absolute;
+  mix-blend-mode: overlay;
+}
+
+.inner3 {
+  background: #cbc2a3;
+  position: absolute;
+  mix-blend-mode: overlay;
+  bottom: 0;
+  top: 100%;
+}
+
+.triangle-right {
+  width: 300px;
+  height: 250px;
+  clip-path: polygon(50% 100%, 0 0, 100% 0);
+  shape-outside: polygon(50% 100%, 0 0, 100% 0);
+  float: right;
+  background: #ca66ac url(https://images.unsplash.com/photo-1464982326199-86f32f81b211?ixlib=rb-0.3.5&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjE0NTg5fQ&s=2ff8b46004acf88415bb98bb42238e9c);
+  background-size: cover;
+  position: relative;
+}
+
+blockquote {
+  font-size: 1.2em;
+  font-weight: 700;
+  font-style: italic;
+  margin-left: 1rem;
+  page-break-inside: avoid;
+  -moz-column-break-inside: avoid;
+       break-inside: avoid;
+  display: block;
+}
+blockquote::before {
+  content: "“";
+  font-size: 5em;
+  transform: translate(-55px, -20px);
+  position: absolute;
+}
+
+p {
+  margin: 0 0 20px 0;
+  line-height: 1.35;
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <div>
+	<h1>Elit Bibendum</h1>
+	<p class="position">Etiam</p>
+
+	<p class="question">Vestibulum id ligula porta felis euismod semper?</p>
+	<div class="questions">
+		<div class="triangle-left">
+			<div class="inner"></div>
+			<div class="inner inner2"></div>
+		</div>
+
+		<div class="inner inner2"></div>
+		<p>
+			Donec ullamcorper nulla non metus auctor fringilla. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
+
+		<p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</p>
+
+		<p>Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur purus sit amet fermentum. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+
+		<blockquote>Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</blockquote>
+		<p>
+			Nullam quis risus eget urna mollis ornare vel eu leo. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
+
+		<p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Donec id elit non mi porta gravida at eget metus.</p>
+
+		<p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Sed posuere consectetur est at lobortis.</p>
+
+		<p>Curabitur blandit tempus porttitor. Curabitur blandit tempus porttitor. Sed posuere consectetur est at lobortis. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</p>
+	</div>
+
+	<div class="questions full">
+
+		<p class="question full">Cras mattis consectetur purus sit amet fermentum.</p>
+		<div class="triangle-right">
+			<div class="inner"></div>
+			<div class="inner inner2"></div>
+		</div>
+		<p>Nulla vitae elit libero, a pharetra augue. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Maecenas sed diam eget risus varius blandit sit amet non magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur
+			ridiculus mus. Etiam porta sem malesuada magna mollis euismod. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
+		<div class="triangle-left locked">
+			<div class="inner inner2"></div>
+		</div>
+		<p>Etiam porta sem malesuada magna mollis euismod. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Aenean lacinia bibendum nulla sed consectetur. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
+			Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Vestibulum id ligula porta felis euismod semper.</p>
+
+		<p>Cras mattis consectetur purus sit amet fermentum. Nullam quis risus eget urna mollis ornare vel eu leo.</p>
+
+		<blockquote> Amet Condimentum Ornare, Fusce dapibus, tellus ac cursus commodos.</blockquote>
+
+	</div>
+
+	<div class="questions three-col">
+
+		<p class="question wide">Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur. Nullam quis risus eget urna mollis ornare veo?</p>
+
+		<p>Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Curabitur blandit tempus porttitor. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Nullam id dolor id nibh ultricies vehicula ut id elit. Praesent
+			commodo cursus magna, vel scelerisque nisl consectetur et. Curabitur blandit tempus porttitor.</p>
+	<div class="overlay"></div>
+	<div class="overlay offset"></div>
+
+		<p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Cras justo odio, dapibus ac facilisis in,
+			egestas eget quam. Aenean lacinia bibendum nulla sed consectetur.</p>
+		<blockquote>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</blockquote>
+	</div>
+	
+</div>
+  
+  
+  
+</body>
+
+</html>

@@ -1,0 +1,306 @@
+{
+  "commit": "ea5d4a791ad9bdfed769c2d1876024778260749a",
+  "files": [
+    {
+      "path": "LICENSE",
+      "bytes": 1070,
+      "sha256": "adda4afc5aa938c56d98013bb288263fd9f2d4a598f6ed010ceb0490f9cfb790",
+      "git_blob": "83bbd873defbd053aec787bdec484fe78df2b299",
+      "url": "https://guim31.github.io/isometric-house-builder/LICENSE"
+    },
+    {
+      "path": "index.html",
+      "bytes": 18819,
+      "sha256": "7c9b47566bc50fb2a42c36ea11e6a2765221c25cce9725525d684a09bad9fa0c",
+      "git_blob": "e7fa515ed3f7f97721b44f55defcbaabd139dbf7",
+      "url": "https://guim31.github.io/isometric-house-builder/index.html"
+    },
+    {
+      "path": "src/core/bodies.js",
+      "bytes": 8418,
+      "sha256": "f2b750ac125886c5ba13c1040d4ea440dbb623d3179fa5a2d8d7d02b2ced3f91",
+      "git_blob": "e894f7a5fad36a18cef2131f6c0acf01162692cb",
+      "url": "https://guim31.github.io/isometric-house-builder/src/core/bodies.js"
+    },
+    {
+      "path": "src/core/focus.js",
+      "bytes": 7761,
+      "sha256": "c27d32a1bed4225073a719934f0418bbac0ebf404216a67f1c93d79de8832fd6",
+      "git_blob": "919ab375e6464e6d0ec783259b7f6ad5b5526277",
+      "url": "https://guim31.github.io/isometric-house-builder/src/core/focus.js"
+    },
+    {
+      "path": "src/core/grid.js",
+      "bytes": 9605,
+      "sha256": "1b2eb2c24bda460f592e0e3016ed73d8e4334dda2c0cc231501050e1a53b005f",
+      "git_blob": "70c7e64eff788015288fae689878b188e5625a37",
+      "url": "https://guim31.github.io/isometric-house-builder/src/core/grid.js"
+    },
+    {
+      "path": "src/core/iso.js",
+      "bytes": 10491,
+      "sha256": "6ea77549900a5d0bbc8b99f9238cee83e0bf552c63de2b577ca1efdac18fca32",
+      "git_blob": "99bfc3a3021b4e649c2c69ea5d73944b6bb5ae04",
+      "url": "https://guim31.github.io/isometric-house-builder/src/core/iso.js"
+    },
+    {
+      "path": "src/core/mesh.js",
+      "bytes": 9095,
+      "sha256": "5cf410190d2d6639e157a2541daa64da3e85541e523590e748a6d3a9b99bfd9f",
+      "git_blob": "de5ce3a698ac83a63b9a6c36f23e72a715559a9d",
+      "url": "https://guim31.github.io/isometric-house-builder/src/core/mesh.js"
+    },
+    {
+      "path": "src/core/model.js",
+      "bytes": 42270,
+      "sha256": "390e0fc9ae7a036671a4cfc72676e4d6a2ba5142aac1947fbc9c431df8afc65a",
+      "git_blob": "4a5d61736c50d84b2411d6e65fb19c347c8fedcc",
+      "url": "https://guim31.github.io/isometric-house-builder/src/core/model.js"
+    },
+    {
+      "path": "src/core/palette.js",
+      "bytes": 13413,
+      "sha256": "a928e320544c42b256ae95585e06b56d50a3f69bde9ef728639bdb2f62cec14e",
+      "git_blob": "c903083fc6ecf433cb9c98f708207625dc2e27e2",
+      "url": "https://guim31.github.io/isometric-house-builder/src/core/palette.js"
+    },
+    {
+      "path": "src/core/props.js",
+      "bytes": 25980,
+      "sha256": "9e507153caec318b2d857351445e8a8ebbb773957e583d030b4e7f48df3550d0",
+      "git_blob": "73124cef893e6aec958802ab86be766c2590f67d",
+      "url": "https://guim31.github.io/isometric-house-builder/src/core/props.js"
+    },
+    {
+      "path": "src/core/roof.js",
+      "bytes": 7563,
+      "sha256": "e560881f954e26d7fc766926635497f1a594a88b99610eedc8de75d50c73a501",
+      "git_blob": "a172ee1bf62424755586d0868252aea6e0aaccf0",
+      "url": "https://guim31.github.io/isometric-house-builder/src/core/roof.js"
+    },
+    {
+      "path": "src/core/scene.js",
+      "bytes": 22127,
+      "sha256": "e70b539a1f09704f62252e3663b7191e2f1e165d164beb00d0285b78e5a43910",
+      "git_blob": "1fd52f9cf679f9943f1d38a2e96ac076e8ddd60e",
+      "url": "https://guim31.github.io/isometric-house-builder/src/core/scene.js"
+    },
+    {
+      "path": "src/data/presets.js",
+      "bytes": 13625,
+      "sha256": "e2f43dc3bbae98f9e113a7bb6efad30dc628b34d2809b34bda52bdc5d992ddca",
+      "git_blob": "aee2058da153d37b3ead68638a1cf16621a64f50",
+      "url": "https://guim31.github.io/isometric-house-builder/src/data/presets.js"
+    },
+    {
+      "path": "src/i18n/en.js",
+      "bytes": 28278,
+      "sha256": "fca370488ecd5558c8929d0ee0225926bee5cd08e09084447f78d93199c64b0c",
+      "git_blob": "03175e1f7bfa9645249d74ce3bfe930d090c9a1d",
+      "url": "https://guim31.github.io/isometric-house-builder/src/i18n/en.js"
+    },
+    {
+      "path": "src/i18n/fr.js",
+      "bytes": 30343,
+      "sha256": "2eccb5329c997c463d05cf5e67c056bcee40ea461fb748fd1b68854a8f97db6c",
+      "git_blob": "752a33c41fefdd25bcb8d87f06d511ea0277d558",
+      "url": "https://guim31.github.io/isometric-house-builder/src/i18n/fr.js"
+    },
+    {
+      "path": "src/i18n/index.js",
+      "bytes": 5620,
+      "sha256": "002427b3475222e8b15ac18cb23aa127a358bb0b2cc4fd1cf50d3cbfed21fcbd",
+      "git_blob": "0370f8fef8c33ecc8158dc67be251f4cc9361a87",
+      "url": "https://guim31.github.io/isometric-house-builder/src/i18n/index.js"
+    },
+    {
+      "path": "src/io/export.js",
+      "bytes": 7129,
+      "sha256": "1f31f878f955bb8b1883c0703c893f967de1985ae48151f699eca0ffd144c98a",
+      "git_blob": "0f7739a3804069f1e79cd5f5b530eaef42b5be95",
+      "url": "https://guim31.github.io/isometric-house-builder/src/io/export.js"
+    },
+    {
+      "path": "src/io/files.js",
+      "bytes": 668,
+      "sha256": "33eeb70872866d97ff555e338e3c520142f70d8df64e6bfe72bba65e54f90a4c",
+      "git_blob": "66e541f622a30535ceeb2d6ee40ee681fca4b9d3",
+      "url": "https://guim31.github.io/isometric-house-builder/src/io/files.js"
+    },
+    {
+      "path": "src/io/project.js",
+      "bytes": 7485,
+      "sha256": "e83e222b8b6abc1b13a2c2b5e326edac0530250c498cdfe65f10e65b464684ab",
+      "git_blob": "939a7b86273841c6f61cb80552805073d5b3e84e",
+      "url": "https://guim31.github.io/isometric-house-builder/src/io/project.js"
+    },
+    {
+      "path": "src/io/zip.js",
+      "bytes": 4227,
+      "sha256": "885cb6c05ec86e3caf96819738f87c60c284de5952d684080d3bc77310a945d5",
+      "git_blob": "39dab9a232466031fb85cd708732f6723ad4eb6e",
+      "url": "https://guim31.github.io/isometric-house-builder/src/io/zip.js"
+    },
+    {
+      "path": "src/main.js",
+      "bytes": 27104,
+      "sha256": "cef6f2bb4b851f2adc9bc76e0d6f16238752589e83d13b9f74ca7ea6ed44d4a8",
+      "git_blob": "61a2729bfa83af41c0d1f9933d3e8647af275f72",
+      "url": "https://guim31.github.io/isometric-house-builder/src/main.js"
+    },
+    {
+      "path": "src/render/hit.js",
+      "bytes": 17048,
+      "sha256": "306a74faa19ce709e862578fda934c32bfd8a3aaf3708dc4e207610f672c6842",
+      "git_blob": "fcfd2d9a351d47dc960acc3bbe35673403247cb6",
+      "url": "https://guim31.github.io/isometric-house-builder/src/render/hit.js"
+    },
+    {
+      "path": "src/render/svg.js",
+      "bytes": 36347,
+      "sha256": "990a86d845b8f612956ffebe239c0658eddfc7cac819f836a7c881faa5ffb9e1",
+      "git_blob": "2da5239cfecbc7a7fabec9705f9a47711a956dca",
+      "url": "https://guim31.github.io/isometric-house-builder/src/render/svg.js"
+    },
+    {
+      "path": "src/render/texture.js",
+      "bytes": 8865,
+      "sha256": "d54af867e62a79fb94a199818de40928e3ad36b4fe3e50de0c6bf45e96c61ae5",
+      "git_blob": "96e7f2fb5eb83d9bd5898dffc359847e84c24ebf",
+      "url": "https://guim31.github.io/isometric-house-builder/src/render/texture.js"
+    },
+    {
+      "path": "src/ui/actions.js",
+      "bytes": 10306,
+      "sha256": "c1c170861982d9a1871a5336f2ed284be0cdc7c36fd753a081bbd56e37811ff3",
+      "git_blob": "8318c750a2301fae74eca0fb36067fee4e367698",
+      "url": "https://guim31.github.io/isometric-house-builder/src/ui/actions.js"
+    },
+    {
+      "path": "src/ui/dialogs.js",
+      "bytes": 3905,
+      "sha256": "b4d026032afd3c4f80908de1e8c30cd92e582edb6efd87aef93925a6b2834feb",
+      "git_blob": "f7469b2452dabb85a650b5bf36cab96890d04870",
+      "url": "https://guim31.github.io/isometric-house-builder/src/ui/dialogs.js"
+    },
+    {
+      "path": "src/ui/export-dialog.js",
+      "bytes": 11756,
+      "sha256": "e26f2d4ef44d3b9f38e7009f85aca8cb967e9a5afe89eaad3b4232e8103acd5b",
+      "git_blob": "d8f80af2aa8f43ae46677adc7c49069bef7c6697",
+      "url": "https://guim31.github.io/isometric-house-builder/src/ui/export-dialog.js"
+    },
+    {
+      "path": "src/ui/gallery.js",
+      "bytes": 3263,
+      "sha256": "682597996a6dd700b5019f2d182b0e2574897861e272466f08faf168d4d3232f",
+      "git_blob": "29880993ef0d2a3dcf61a018859d70fa43b45b5b",
+      "url": "https://guim31.github.io/isometric-house-builder/src/ui/gallery.js"
+    },
+    {
+      "path": "src/ui/icons.js",
+      "bytes": 4857,
+      "sha256": "5a806e4cddb8c28fa3cdc9cab4440a45df7c7e817bc2c5f100cb08bce76954e0",
+      "git_blob": "62d07e7c39d66dd9b1ebf19cb8f1a5a61c1c3f53",
+      "url": "https://guim31.github.io/isometric-house-builder/src/ui/icons.js"
+    },
+    {
+      "path": "src/ui/layout.js",
+      "bytes": 7165,
+      "sha256": "51e97529a2adb8903b52ca8f94c94ba3392190fea24525604aa0cfed090632f7",
+      "git_blob": "a4e19b528530102d9a5e8ab0ac56d9040afdde9c",
+      "url": "https://guim31.github.io/isometric-house-builder/src/ui/layout.js"
+    },
+    {
+      "path": "src/ui/naming.js",
+      "bytes": 1782,
+      "sha256": "688d797b127141837be4dca9cfa3f6468d9c3e6de112387911faf517358649de",
+      "git_blob": "5dd9c23ece4b08ef5f1ffabed19e5d4ed3f8ba9d",
+      "url": "https://guim31.github.io/isometric-house-builder/src/ui/naming.js"
+    },
+    {
+      "path": "src/ui/numeric.js",
+      "bytes": 1878,
+      "sha256": "5137100826388a6c72da3f5fcb5625a7c66d0f6ae9d4c25027e1cd8b011ca0e4",
+      "git_blob": "a8b3d1f09647eb859e858fe175a0ed58441c69a1",
+      "url": "https://guim31.github.io/isometric-house-builder/src/ui/numeric.js"
+    },
+    {
+      "path": "src/ui/panels.js",
+      "bytes": 53676,
+      "sha256": "99e21580470373d885c20a0d98001a84becdd908c4c7eb228101dd47393406e8",
+      "git_blob": "16b11382556944ab99632b21a4c790feb98d71b3",
+      "url": "https://guim31.github.io/isometric-house-builder/src/ui/panels.js"
+    },
+    {
+      "path": "src/ui/plan-edit.js",
+      "bytes": 9260,
+      "sha256": "01c389d8e0cd08c6118c470074a7e76abc19992db72dc33907cf0203bbe0bd9d",
+      "git_blob": "caadaf87f1a49130f4022bd48c3d6c1b001e8767",
+      "url": "https://guim31.github.io/isometric-house-builder/src/ui/plan-edit.js"
+    },
+    {
+      "path": "src/ui/plan.js",
+      "bytes": 50559,
+      "sha256": "db2d219e228ba2c49c7cd2307b63b00ebf7f66d8d7177b7fd267054fa9232732",
+      "git_blob": "a8b0fa0841cc884c178c1c4ed6d0e430402d4222",
+      "url": "https://guim31.github.io/isometric-house-builder/src/ui/plan.js"
+    },
+    {
+      "path": "src/ui/prefs.js",
+      "bytes": 3358,
+      "sha256": "23bf95044134f4284268055170726bdff530d729a283f1577aed3457b2ec4414",
+      "git_blob": "7ae256accf99a31efa23ede65620989e3ecc4f19",
+      "url": "https://guim31.github.io/isometric-house-builder/src/ui/prefs.js"
+    },
+    {
+      "path": "src/ui/store.js",
+      "bytes": 14772,
+      "sha256": "1ce354f1c037bfd7044bc369e4475f34010666fcde23fdc3388bc202b85babdc",
+      "git_blob": "cf28e26a21d3f1b0c4aece67e38deadf5c5fdbdf",
+      "url": "https://guim31.github.io/isometric-house-builder/src/ui/store.js"
+    },
+    {
+      "path": "src/ui/texts.js",
+      "bytes": 5175,
+      "sha256": "0ec9f29414e589e1ba42cba9beeb4fb952fdd50610318fadd403af7ab4851366",
+      "git_blob": "0457b055d8a779d27c18ec6029be366cee3dc91c",
+      "url": "https://guim31.github.io/isometric-house-builder/src/ui/texts.js"
+    },
+    {
+      "path": "src/ui/toolbar.js",
+      "bytes": 4387,
+      "sha256": "899ed7b4d317df2dbc61beda1e86f3a4e336b8ef30139d84b553c83e6f21bc1e",
+      "git_blob": "0c42e6a0dd2cbea62ab8c052bb6ee2d771ce4dc1",
+      "url": "https://guim31.github.io/isometric-house-builder/src/ui/toolbar.js"
+    },
+    {
+      "path": "src/ui/viewport.js",
+      "bytes": 25938,
+      "sha256": "06b693d37b92715045c465e94a11162bd51b0347ef881c18bf3d53ee81e34d16",
+      "git_blob": "74708085821b4208a1e5ead1d9c3535662911c48",
+      "url": "https://guim31.github.io/isometric-house-builder/src/ui/viewport.js"
+    },
+    {
+      "path": "src/ui/words.js",
+      "bytes": 331,
+      "sha256": "e7379ac99cdd9bc097fc83a69afed0865ab58ba8a06ab5912c8a243e0221920a",
+      "git_blob": "fb462ff9f6342e025f980e211ab5525eddf3588f",
+      "url": "https://guim31.github.io/isometric-house-builder/src/ui/words.js"
+    },
+    {
+      "path": "src/version.js",
+      "bytes": 217,
+      "sha256": "e939e66cb895a2c394a9ad20918ce91b6fa4693e71e8fdde6e17c800273150f1",
+      "git_blob": "2ab39a77b4cb242b23f1ab7e8c2c4b3c9f50a618",
+      "url": "https://guim31.github.io/isometric-house-builder/src/version.js"
+    },
+    {
+      "path": "styles.css",
+      "bytes": 44615,
+      "sha256": "69d22258e7239c37d1fee1fbb7fe9ea267805f01ac3e9054a6da00766be818a2",
+      "git_blob": "84c030ead8efd9a63c1845cb497ab97332e7c133",
+      "url": "https://guim31.github.io/isometric-house-builder/styles.css"
+    }
+  ]
+}

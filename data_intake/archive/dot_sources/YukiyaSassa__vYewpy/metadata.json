@@ -1,0 +1,36 @@
+{
+  "source_id": "codepen:yukiyasassa/vyewpy",
+  "author": "Yukiya Sassa (YukiyaSassa)",
+  "pen_id": "vYewpy",
+  "url": "https://codepen.io/YukiyaSassa/pen/vYewpy",
+  "title": "Pure CSS 3D Air Ship",
+  "acquisition": "codepen_live_compiled_iframe_srcdoc",
+  "acquisition_url": "https://cdpn.io/YukiyaSassa/fullpage/vYewpy?anon=true&view=",
+  "retrieved_at": "2026-11-20T15:54:05Z",
+  "fetch_status": "ok",
+  "original_srcdoc_sha256": "92ef035dd294b5304893e7b25c59be166d85884275763a7fce26fb373844cc51",
+  "source_html_sha256": "92ef035dd294b5304893e7b25c59be166d85884275763a7fce26fb373844cc51",
+  "git_blob_sha": "e5155155e5238bda10ad79cb0704256993a4f7db",
+  "byte_count": 234006,
+  "codepen_console_shim_removed": 0,
+  "license": "MIT for public Pen authored code per CodePen policy; external brand assets and font are linked, not copied.",
+  "license_policy": "https://blog.codepen.io/docs/pens/licensing/",
+  "review": {
+    "candidate": "C278",
+    "label": "分片气囊、交错吊索、双轴定角",
+    "visual_verified": true,
+    "surface": "Cloud Chromium desktop rendered CodePen full-page iframe",
+    "evidence": "螺旋桨保持关闭，默认 h5/v5 观察侧面；再点横向第 7、纵向第 3 个圆点，观察稳定斜视 h7/v3。带状气囊表面透视压缩，吊索前后交错，尾部转轴周围的叶片分层显现。切换过渡约 2 秒（CSS 源码）。",
+    "mobile_verified": false,
+    "keyboard_verified": false,
+    "offline_replay_verified": false,
+    "formal_admission": false
+  },
+  "source_observations": {
+    "balloon_facets": 342,
+    "hull_facets": 342,
+    "script_tags": 0,
+    "external_css": "Google Fonts Quicksand; controller typography only",
+    "external_platform_assets": "CodePen favicon links"
+  }
+}

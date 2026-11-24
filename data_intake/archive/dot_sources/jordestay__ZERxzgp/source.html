@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>Computer Paper</title>
+
+    <link rel="canonical" href="https://codepen.io/jordestay/pen/ZERxzgp">
+  
+  
+  
+  
+<style>
+body {
+	background-image: url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.fM41_djz9HSLniH9fMZCpwHaEK%26pid%3DApi&f=1&ipt=dcf783ef701e19bba848cbd792269e4496c2f21976dd1c5e61c08299f3d07b1b&ipo=images");
+}
+.holes-r {
+	background: radial-gradient(
+		ellipse at center,
+		#4d9fbc 0%,
+		gray 30%,
+		transparent 30%
+	);
+	background-size: 35px 35px;
+	background-repeat: repeat-y;
+	background-position: 5px center;
+	width: 150px;
+}
+.holes-l {
+	background: radial-gradient(
+		ellipse at center,
+		#4d9fbc 0%,
+		gray 30%,
+		transparent 30%
+	);
+	background-size: 35px 35px;
+	background-repeat: repeat-y;
+	background-position: 5px center;
+	width: 50px;
+}
+:hover {
+	cursor: url("data:image/x-icon;base64,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A70aBgPnGgYD5wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABoGA+caBgPnAP+I/wD/iP8A8v//APL//wCq//8Aqv//BxLr/wcS6/8aBgO9GgYD5xoGA+cAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGgYD5xoGA+cA/4j/APL//wDy//8Aqv//AKr//wcS6/8HEuv/GgYDvRoGA+caBgPnAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaBgPnGgYD5wDy//8A8v//AKr//wCq//8HEuv/BxLr/xoGA70aBgPnGgYD5wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABoGA+caBgPnAPL//wCq//8Aqv//BxLr/wcS6/8aBgO9GgYD5xoGA+cAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGgYD5xoGA+cAqv//AKr//wcS6/8HEuv/GgYDvRoGA+caBgPnAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaBgPnGgYD5wCq//8HEuv/BxLr/xoGA70aBgPnGgYD5wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABoGA+caBgPnBxLr/wcS6/8aBgO9GgYD5xoGA+cAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGgYD5xoGA+cHEuv/GgYDvRoGA+caBgPnAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaBgPnGgYD5xoGA70aBgPnGgYD5wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABoGA+caBgPnGgYD5xoGA+cAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGgYD5xoGA+caBgPnAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA///j////wP///8B//x+Af/8PgP//BwD//wMB//8AAf//AAP//wAD//8ACAf/AAAH/wAAB/8AAAf/AAAP/wAAH/8AAD//AAB//wAA//8AAf//AAP//wAH//8AD///AB///wA///8Af///AP///wH///8D////B////w////8f//8="),
+		auto;
+}
+* {
+	padding: 0;
+	margin: 0;
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	font-family: sans-serif;
+	padding: 10px;
+	color: black;
+}
+#container {
+	background-color: white;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	width: 85%;
+	overflow: hidden;
+	margin: 10px auto;
+	sa
+}
+
+#container h1,
+h2 {
+	clear: both;
+	text-align: center;
+	padding: 5px 0;
+}
+
+h3 {
+	padding: 0 0 10px 0;
+}
+
+marquee {
+	text-shadow: 2px 2px 5px #ffa8ae;
+}
+
+.post {
+	width: 90%;
+	margin: 0 auto;
+	background-color: white;
+	margin: 30px auto;
+	margin-top: 0px;
+	padding: 15px;
+}
+
+.post p {
+	padding: 10px;
+}
+
+ul {
+	padding: 0 20px;
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  <div id="container" class="holes-r holes-l">
+	<div class="post">
+		<marquee>
+			<h2>Rounded Corners in "Just" 40 Lines of Code</h2>
+		</marquee>
+		<div id="header">
+			<h1>
+				<blink>Y2K</blink>
+			</h1>
+			<ul class="nav">
+				<li><a href="#">Home</a></li>
+				<li><a href="#">About</a></li>
+				<li><a href="#">Portfolio</a></li>
+				<li><a href="#">Contact</a></li>
+			</ul>
+		</div>
+		<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore nostrum vero minima minus delectus, magni facere velit mollitia!</p>
+		<p>
+		<h3>Design Inspiration for this Week's Challenge</h3>
+		<ul>
+			<li><a href="https://www.smashingmagazine.com/2008/02/45-more-excellent-blog-designs/">45 More Excellent Blog Designs</a> from Smashing Magazine, 2008</li>
+			<li><a href="https://www.webdesignmuseum.org/flash-websites/page/2/style/Grunge,Y2K%20Aesthetic,Paper">Grunge, y2k aesthetic, and paper texture designs from 2000-2009</a> at the Web Design Museum</li>
+			<li><a href="https://thefwa.com/cases/flowers-feed-the-soul">Flowers Feed the Soul</a> at The Favorite Website Awards, 2006</li>
+		</ul>
+		</p>
+		<p> Iusto cumque quasi ratione modi fugiat necessitatibus corporis, magnam, veniam molestias voluptatum expedita dolorum, ullam recusandae optio officiis molestiae quidem provident porro architecto hic perferendis consequuntur dicta. Dolorem laboriosam ipsa ipsum minus minima quibusdam quam sunt nulla eaque neque et soluta explicabo deleniti dolore, dolor quia est nam eos, quod, optio quis. Velit in animi harum quidem amet tenetur dignissimos quis recusandae sunt corrupti error rem vero, quae libero veritatis asperiores voluptates.</p>
+		<h3>Fire Up Photoshop, It's Skeumorphin' Time</h3>
+		<p>Cupiditate odit laborum exercitationem ut veniam enim, aut officia aspernatur, cumque ipsam voluptatibus neque architecto voluptatum! Doloremque voluptate dolore pariatur illum aliquid sed minima autem sunt! Aspernatur rem doloremque enim magnam, cupiditate beatae, quae ea odio eius ducimus vel fuga esse dolorum ut commodi consequuntur! Similique in animi rem minus dicta impedit quaerat nemo! Tempore, in. Ut veniam temporibus, ratione iste odio ipsa consectetur blanditiis repellat maxime? Facilis nisi eius voluptatem.</p>
+		<p>Totam aspernatur dolores sunt, cumque corporis mollitia explicabo eveniet numquam consequuntur facere possimus distinctio ratione voluptatum tempore beatae! Eligendi quas quae aliquam quasi sapiente? Ad dolor mollitia, facilis veniam necessitatibus possimus quam illo nihil nostrum beatae voluptatem consequuntur recusandae odio itaque sit culpa porro obcaecati harum nobis accusantium et incidunt? Quam voluptatem voluptas aliquid asperiores, aspernatur voluptatibus ex atque nihil fuga nesciunt sit accusantium nisi magni doloribus!</p>
+		<h3>If your web design doesn't have a paper texture, is it really design?</h3>
+		<p> Laboriosam cumque quam delectus earum voluptatibus aliquam perspiciatis maxime minima ipsum repellendus magnam dolorum ad provident, alias inventore sit quo reiciendis ex odio. Quae est distinctio atque officiis id soluta impedit eius odio deserunt modi. Odit unde labore error cupiditate, dicta soluta repellendus esse adipisci molestias culpa numquam quae itaque voluptatum, officia voluptatem saepe placeat nihil, dolor dolores omnis aut? Eveniet unde blanditiis recusandae eaque voluptate voluptas fugit neque veniam! Earum cumque itaque maxime hic illo unde eius architecto omnis nisi ab ea repudiandae magnam delectus sunt tempore placeat aperiam, facere possimus numquam soluta quidem deserunt dolores voluptates. Consectetur provident deserunt quis! Quidem nemo ullam expedita a rem dolor modi sit aliquam, vitae adipisci quibusdam consequatur voluptates, voluptatem consectetur at ex commodi facere molestias natus repellat ipsa. Eius maxime, est, accusamus aspernatur laudantium, quam fuga unde consequuntur non corrupti iste eligendi. Omnis, accusantium accusamus? Hic aspernatur error ullam, nostrum molestiae beatae cumque facilis quo voluptatem. Suscipit eligendi magnam adipisci.</p>
+		<p>Molestias commodi quaerat debitis eos voluptas voluptatum corporis nisi libero magnam facilis sapiente tempora eligendi, nulla asperiores sunt blanditiis sequi aperiam molestiae! Quo tenetur vitae voluptatibus corrupti necessitatibus neque nulla a, accusantium repellat provident. Exercitationem maiores nam animi dolore impedit provident vero debitis libero ducimus necessitatibus rerum quisquam esse ex, doloremque voluptatem quam aliquid. Repudiandae, numquam! Fugiat aut ad ipsa explicabo ut laboriosam molestiae corrupti quidem! Quis natus blanditiis iusto facilis odit!</p>
+		<h3>Here comes CSS3!</h3>
+		<p>Molestias commodi quaerat debitis eos voluptas voluptatum corporis nisi libero magnam facilis sapiente tempora eligendi, nulla asperiores sunt blanditiis sequi aperiam molestiae! Quo tenetur vitae voluptatibus corrupti necessitatibus neque nulla a, accusantium repellat provident. Exercitationem maiores nam animi dolore impedit provident vero debitis libero ducimus necessitatibus rerum quisquam esse ex, doloremque voluptatem quam aliquid. Repudiandae, numquam! Fugiat aut ad ipsa explicabo ut laboriosam molestiae corrupti quidem! Quis natus blanditiis iusto facilis odit!</p>
+	</div>
+	<div class="flair1" role="presentation"></div>
+	<div class="flair2" role="presentation"></div>
+	<div class="flair3" role="presentation"></div>
+	<div class="flair4" role="presentation"></div>
+	<div class="flair5" role="presentation"></div>
+	<div class="extra6" role="presentation"></div>
+	<span class="bl"></span><span class="br"></span>
+</div>
+
+<script type="module">
+	import cursoreffects from 'https://unpkg.com/cursor-effects@latest/dist/esm.js';
+	new cursoreffects.trailingCursor();
+</script>
+  
+  
+  
+</body>
+
+</html>

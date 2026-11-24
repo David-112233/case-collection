@@ -1,0 +1,64 @@
+{
+  "source_id": "codepen:andybarefoot/kqwgzv",
+  "author": "andybarefoot",
+  "pen_id": "KQWGZv",
+  "url": "https://codepen.io/andybarefoot/pen/KQWGZv",
+  "acquisition": "cdpn_fullpage",
+  "acquisition_url": "https://cdpn.io/andybarefoot/fullpage/KQWGZv",
+  "retrieved_at": "2026-11-16T13:20:44+00:00",
+  "license": "MIT (CodePen public pen default)",
+  "candidate_target_tier": "T1",
+  "candidate_found_via": "websearch-2026-11-16-traditional-layout",
+  "fetch_status": "ok",
+  "title": "CSS Grid Ribbon layout",
+  "canonical_url": "https://codepen.io/andybarefoot/pen/KQWGZv",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "54507d2476b041668839ad0b678be6b3ba70e20a25068698433720e42118e59d",
+  "source_html_sha256": "098c6e126023cf98e67b93d2276267b1e8d243e2119c60f38c7ae3ffc366b8bd",
+  "analysis": {
+    "js": {
+      "has_js": true,
+      "inline_js_chars": 195,
+      "external_scripts": [
+        "https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js",
+        "https://unpkg.com/splitting/dist/splitting.min.js"
+      ],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 0,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": false,
+      "clip_path": false,
+      "css_counter": false,
+      "media_query": false
+    },
+    "external_stylesheets": [
+      "https://public.codepenassets.com/css/reset-2.0.min.css"
+    ],
+    "css_imports": [],
+    "css_chars": 418,
+    "element_count": 3,
+    "html_chars": 2031
+  }
+}

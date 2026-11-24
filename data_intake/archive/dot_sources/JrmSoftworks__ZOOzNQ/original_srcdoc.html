@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>CSS 3D Transform - Folding</title>
+
+    <link rel="canonical" href="https://codepen.io/JrmSoftworks/pen/ZOOzNQ">
+  
+  
+  
+  
+<style>
+.container {
+  display: inline-block;
+  margin-left: 10px;
+  width: 200px;
+  height: 200px;
+  position: relative;
+  perspective: 800px;
+  margin-top: 50px;
+}
+
+.container > div {
+  float: left;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transform-style: preserve-3d;
+  transition: transform 1.5s;
+  z-index: 0;
+}
+
+.front {
+  display: block;
+  width:100%;
+  height: 100%;
+  position: absolute;
+  margin: 0;
+  font-size: 175px;
+  text-align: center;
+  
+  backface-visibility: hidden;
+}
+
+.front {
+  background-color: red;
+}
+
+.flip-button {
+  margin-top: 10px;
+  position: absolute;
+  bottom: -35px;
+}
+
+.card > div, .card > svg, .long-diamond > div, .long-diamond > svg {
+	position: absolute;
+}
+
+.card .triangle,
+.card .rect,
+.card .corner-to-quad,
+.card .long-diamond {
+	width: 100%;
+	height: 100%;
+	transform-style: preserve-3d;
+}
+
+.triangle .moving-triangle,
+.rect .moving-rect
+.corner-to-quad .moving-corner-to-quad  {
+	outline: 1px solid transparent;
+}
+
+.static-triangle {
+	border-bottom: 200px solid red;
+    border-left: 200px solid transparent;
+    bottom: 0;
+    height: 0;
+    left: 0;
+    position: absolute;
+    transform-origin: center center 0;
+    width: 0;
+}
+
+.moving-triangle {
+	border-bottom: 141px solid transparent;
+    border-right: 141px solid red;
+    border-top: 141px solid transparent;
+    bottom: 0;
+    left: -70.24%;
+    position: absolute;
+    transform: rotateZ(45deg) rotateY(0deg);
+    transform-origin: 100% 100% 0;
+    transition: transform 1.5s ease 0s, border-right-color 1.5s ease 0s;
+}
+
+.card.animate .triangle .moving-triangle {
+	transform: rotateZ(45deg) rotateY(179deg);
+	border-right-color: #D20000;
+}
+
+.card .triangle.tr-to-bl {
+	transform-origin: 50% 50% 0;
+	transform: rotate(90deg);
+}
+
+.card .triangle.br-to-tl {
+	transform-origin: 50% 50% 0;
+	transform: rotate(180deg);
+}
+
+.card .triangle.bl-to-tr {
+	transform-origin: 50% 50% 0;
+	transform: rotate(-90deg);
+}
+
+.static-rect {
+	background-color: red;
+    bottom: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50%;
+}
+
+.moving-rect {
+  position: absolute;
+  background-color: red;
+  width: 50%;
+  height: 100%;
+  transform-origin: 100% 0% 0;
+  transition: transform 1.5s ease 0s, background-color 1.5s ease 0s;
+  transform: rotateY(0deg);
+}
+
+.card.animate .rect .moving-rect {
+   background-color: #d20000;
+   transform: rotateY(179deg);
+   transition: transform 1.5s ease 0s, background-color 1.5s ease 0s;
+}
+
+.card .rect.r-to-l {
+  transform: rotate(180deg);
+}
+
+.card .rect.t-to-b {
+  transform: rotate(90deg);
+}
+
+.card .rect.b-to-t {
+  transform: rotate(-90deg);
+}
+
+.static-corner-to-quad {
+	
+}
+
+.static-corner-to-quad polygon {
+	fill: red;
+	stroke: red;
+}
+
+.moving-corner-to-quad {
+	height: 109%;
+    left: -16.2%;
+    overflow: visible;
+    position: absolute;
+    top: -11.3%;
+    transform: rotate(22.5deg);
+    transform-origin: 50% 50% 0;
+}
+
+.moving-corner-to-quad polyline {
+	fill: red;
+    overflow: visible;
+    transform: rotateY(0deg);
+    transform-origin: 100% 0 0;
+    transition: transform 1.5s ease 0s, fill 1.5s ease 0s;
+}
+
+.card.animate .moving-corner-to-quad > polyline {
+	transform: rotateY(180deg);
+	fill: #D20000;
+}
+
+.card .corner-to-quad.tr-to-q4,
+.card .corner-to-quad.br-to-q1 {
+	transform: rotate(90deg);
+} 
+
+.card .corner-to-quad.br-to-q3,
+.card .corner-to-quad.bl-to-q4 {
+	transform: rotate(180deg);
+}
+
+.card .corner-to-quad.bl-to-q2,
+.card .corner-to-quad.tl-to-q3 {
+	transform: rotate(-90deg);
+}
+
+.card .corner-to-quad.tr-to-q2 .static-corner-to-quad,
+.card .corner-to-quad.br-to-q1 .static-corner-to-quad,
+.card .corner-to-quad.bl-to-q4 .static-corner-to-quad,
+.card .corner-to-quad.tl-to-q3 .static-corner-to-quad {
+	right: -16.5%;
+	left: auto;
+	transform: rotateY(180deg);
+}
+
+.card .corner-to-quad.tr-to-q2 .moving-corner-to-quad,
+.card .corner-to-quad.br-to-q1 .moving-corner-to-quad,
+.card .corner-to-quad.bl-to-q4 .moving-corner-to-quad,
+.card .corner-to-quad.tl-to-q3 .moving-corner-to-quad {
+
+	right: -16.2% !important;
+	left: auto;
+	transform: rotateY(180deg) rotate(22.5deg);
+}
+
+.long-diamond > svg {
+	fill: red;
+}
+
+
+
+
+
+
+/* EXPERIMENTAL */
+
+
+
+#diamond-fold, #diamond-fold-blank {
+	height: 109%;
+    left: -16.5%;
+    overflow: visible;
+    position: absolute;
+    top: -11.3%;
+    transform: rotate(22.5deg);
+    transform-origin: 50% 50% 0;
+}
+
+#diamond-fold-blank {
+	fill: white;
+	left: -16.75%;
+    top: -11.75%;
+}
+
+#diamond-fold-blank > polyline {
+	stroke: white;
+}
+
+#diamond-fold polyline {
+	fill: red;
+	overflow: visible;
+    transform: rotateY(0deg);
+    transform-origin: 100% 0 0;
+	transition: transform 1.5s, fill 1.5s;
+}
+
+.card.animate #diamond-fold > polyline {
+	transform: rotateY(180deg);
+	fill: #D20000;
+}
+
+.card.diamond-tr-to-c,
+.card.diamond.rs.br-to-c {
+	transform: rotate(90deg);
+}
+
+.card.diamond-br-to-c,
+.card.diamond.rs.bl-to-c {
+	transform: rotate(180deg);
+}
+
+.card.diamond-bl-to-c,
+.card.diamond.rs.tl-to-c {
+	transform: rotate(270deg);
+}
+
+
+.card.diamond.rs #diamond-fold,
+.card.diamond.rs #diamond-fold-blank {
+	right: -16.5%;
+	left: auto;
+	transform: rotateY(180deg) rotate(22.5deg);
+}
+
+.card.diamond.rs #diamond-fold {
+	right: -16.3% !important;
+}
+
+
+
+.card.compound {
+
+}
+
+.card.compound .background-layer,
+.card.compound .static-layer,
+.card.compound .moving-layer {
+	height: 100%;
+    width: 100%;
+	position: absolute;
+}
+
+.card.compound .background-layer {
+
+}
+
+.card.compound .static-layer {
+	
+}
+
+.card.compound .static-layer > .card {
+	transition: none !important;
+	height: 100%;
+    position: absolute;
+    width: 100%;
+}
+
+.card.compound .static-layer > .card > div {
+    position: absolute;
+}
+
+.card.compound .moving-layer {
+
+}
+
+
+
+/*
+
+#diamond-fold-shadow {
+	fill: #D20000;
+    height: 109%;
+    position: absolute;
+    transform: rotateZ(22.5deg) rotateY(-180deg) translateX(-50%) translateY(-4%);
+}
+
+#diamond-fold-shadow polyline {
+	transform: scaleX(0);
+	opacity: 0.0;
+	z-index: 1;
+    transform-origin: 100% 50% 0;
+	transition: transform 800ms, opacity 800ms;
+}
+
+.card.animate #diamond-fold-shadow > polyline {
+	transition: transform 650ms, opacity 650ms;
+	transition-delay: 300ms; 
+	transform: scaleX(1);
+	opacity: 1.0;
+	z-index: 2;
+}
+
+.card.animate #diamond-fold-blank > polyline {
+	transition: stroke-width 0s;
+	transition-delay: 1.0s;
+	stroke: white;
+    stroke-width: 8px;
+}*/
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <div class="container">
+  <div id="triangle1" class="card">
+    <div class="triangle tl-to-br">
+      <div class="static-triangle"></div>
+      <div class="moving-triangle"></div>
+    </div>
+  </div>
+  <button class="flip-button" onclick="$('#triangle1').addClass('animate')">Fold</button>
+  <button class="flip-button" style="right:0;" onclick="$('#triangle1').removeClass('animate')">Unfold</button>
+</div>
+<div class="container">
+  <div class="card" id="triangle2">
+    <div class="triangle tr-to-bl">
+      <div class="static-triangle"></div>
+      <div class="moving-triangle"></div>
+    </div>  
+  </div>
+  <button class="flip-button" onclick="$('#triangle2').addClass('animate')">Fold</button>
+  <button class="flip-button" style="right:0;" onclick="$('#triangle2').removeClass('animate')">Unfold</button>
+</div>
+
+<div class="container">
+  <div class="card" id="triangle3">
+    <div class="triangle br-to-tl">
+      <div class="static-triangle"></div>
+      <div class="moving-triangle"></div>
+    </div>  
+  </div>
+  <button class="flip-button" onclick="$('#triangle3').addClass('animate')">Fold</button>
+  <button class="flip-button" style="right:0;" onclick="$('#triangle3').removeClass('animate')">Unfold</button>
+</div>
+
+<div class="container">
+  <div class="card" id="triangle4">
+    <div class="triangle bl-to-tr">
+      <div class="static-triangle"></div>
+      <div class="moving-triangle"></div>
+    </div>  
+  </div>
+  <button class="flip-button" onclick="$('#triangle4').addClass('animate')">Fold</button>
+  <button class="flip-button" style="right:0;" onclick="$('#triangle4').removeClass('animate')">Unfold</button>
+</div>
+
+<div class="container">
+  <div class="card" id="rect1">
+    <div class="rect l-to-r">
+      <div class="static-rect"></div>
+	  <div class="moving-rect"></div>
+    </div>
+  </div> 
+  <button class="flip-button" onclick="$('#rect1').addClass('animate')">Fold</button>
+  <button class="flip-button" style="right:0;" onclick="$('#rect1').removeClass('animate')">Unfold</button>
+</div>
+
+<div class="container">
+  <div class="card" id="rect2">
+    <div class="rect r-to-l">
+      <div class="static-rect"></div>
+	  <div class="moving-rect"></div>
+    </div>
+  </div>
+  <button class="flip-button" onclick="$('#rect2').addClass('animate')">Fold</button>
+  <button class="flip-button" style="right:0;" onclick="$('#rect2').removeClass('animate')">Unfold</button>
+</div>
+
+<div class="container">
+  <div class="card" id="rect3">
+    <div class="rect t-to-b">
+      <div class="static-rect"></div>
+      <div class="moving-rect"></div>
+    </div>
+  </div> 
+  <button class="flip-button" onclick="$('#rect3').addClass('animate')">Fold</button>
+  <button class="flip-button" style="right:0;" onclick="$('#rect3').removeClass('animate')">Unfold</button>
+</div>
+
+<div class="container">
+  <div class="card" id="rect4">
+    <div class="rect b-to-t">
+      <div class="static-rect"></div>
+      <div class="moving-rect"></div>
+    </div>
+  </div> 
+  <button class="flip-button" onclick="$('#rect4').addClass('animate')">Fold</button>
+  <button class="flip-button" style="right:0;" onclick="$('#rect4').removeClass('animate')">Unfold</button>
+</div>
+
+<div class="container">
+  <div class="card" id="corner-to-quad1">
+    <div class="corner-to-quad tl-to-q1">
+		<svg class="static-corner-to-quad" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600.5 600.5"><polygon points="600.5 600.5 0 600.5 248.5 0.5 600.5 0 " stroke="none"/></svg>
+		<svg class="moving-corner-to-quad" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 230.8 652.7"><polyline points="0.7 95.9 230.3 0.7 230.3 650.2 0.5 95.4 " stroke="none"/></svg>
+	</div>	
+  </div> 
+  <button class="flip-button" onclick="$('#corner-to-quad1').addClass('animate')">Fold</button>
+  <button class="flip-button" style="right:0;" onclick="$('#corner-to-quad1').removeClass('animate')">Unfold</button>
+</div>
+
+<div class="container">
+  <div class="card" id="corner-to-quad2">
+    <div class="corner-to-quad tr-to-q4">
+		<svg class="static-corner-to-quad" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600.5 600.5"><polygon points="600.5 600.5 0 600.5 248.5 0.5 600.5 0 " stroke="none"/></svg>
+		<svg class="moving-corner-to-quad" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 230.8 652.7"><polyline points="0.7 95.9 230.3 0.7 230.3 650.2 0.5 95.4 " stroke="none"/></svg>
+	</div>	
+  </div> 
+  <button class="flip-button" onclick="$('#corner-to-quad2').addClass('animate')">Fold</button>
+  <button class="flip-button" style="right:0;" onclick="$('#corner-to-quad2').removeClass('animate')">Unfold</button>
+</div>
+
+<div class="container">
+  <div class="card" id="corner-to-quad3">
+    <div class="corner-to-quad br-to-q3">
+		<svg class="static-corner-to-quad" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600.5 600.5"><polygon points="600.5 600.5 0 600.5 248.5 0.5 600.5 0 " stroke="none"/></svg>
+		<svg class="moving-corner-to-quad" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 230.8 652.7"><polyline points="0.7 95.9 230.3 0.7 230.3 650.2 0.5 95.4 " stroke="none"/></svg>
+	</div>	
+  </div> 
+  <button class="flip-button" onclick="$('#corner-to-quad3').addClass('animate')">Fold</button>
+  <button class="flip-button" style="right:0;" onclick="$('#corner-to-quad3').removeClass('animate')">Unfold</button>
+</div>
+
+<div class="container">
+  <div class="card" id="corner-to-quad4">
+    <div class="corner-to-quad bl-to-q2">
+		<svg class="static-corner-to-quad" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600.5 600.5"><polygon points="600.5 600.5 0 600.5 248.5 0.5 600.5 0 " stroke="none"/></svg>
+		<svg class="moving-corner-to-quad" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 230.8 652.7"><polyline points="0.7 95.9 230.3 0.7 230.3 650.2 0.5 95.4 " stroke="none"/></svg>
+	</div>	
+  </div> 
+  <button class="flip-button" onclick="$('#corner-to-quad4').addClass('animate')">Fold</button>
+  <button class="flip-button" style="right:0;" onclick="$('#corner-to-quad4').removeClass('animate')">Unfold</button>
+</div>
+
+<div class="container">
+  <div class="card" id="corner-to-quad5">
+    <div class="corner-to-quad rs tr-to-q2">
+		<svg class="static-corner-to-quad" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600.5 600.5"><polygon points="600.5 600.5 0 600.5 248.5 0.5 600.5 0 " stroke="none"/></svg>
+		<svg class="moving-corner-to-quad" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 230.8 652.7"><polyline points="0.7 95.9 230.3 0.7 230.3 650.2 0.5 95.4 " stroke="none"/></svg>
+	</div>	
+  </div> 
+  <button class="flip-button" onclick="$('#corner-to-quad5').addClass('animate')">Fold</button>
+  <button class="flip-button" style="right:0;" onclick="$('#corner-to-quad5').removeClass('animate')">Unfold</button>
+</div>
+
+<div class="container">
+  <div class="card" id="corner-to-quad6">
+    <div class="corner-to-quad rs br-to-q1">
+		<svg class="static-corner-to-quad" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600.5 600.5"><polygon points="600.5 600.5 0 600.5 248.5 0.5 600.5 0 " stroke="none"/></svg>
+		<svg class="moving-corner-to-quad" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 230.8 652.7"><polyline points="0.7 95.9 230.3 0.7 230.3 650.2 0.5 95.4 " stroke="none"/></svg>
+	</div>	
+  </div> 
+  <button class="flip-button" onclick="$('#corner-to-quad6').addClass('animate')">Fold</button>
+  <button class="flip-button" style="right:0;" onclick="$('#corner-to-quad6').removeClass('animate')">Unfold</button>
+</div>
+
+<div class="container">
+  <div class="card" id="corner-to-quad7">
+    <div class="corner-to-quad rs bl-to-q4">
+		<svg class="static-corner-to-quad" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600.5 600.5"><polygon points="600.5 600.5 0 600.5 248.5 0.5 600.5 0 " stroke="none"/></svg>
+		<svg class="moving-corner-to-quad" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 230.8 652.7"><polyline points="0.7 95.9 230.3 0.7 230.3 650.2 0.5 95.4 " stroke="none"/></svg>
+	</div>	
+  </div> 
+  <button class="flip-button" onclick="$('#corner-to-quad7').addClass('animate')">Fold</button>
+  <button class="flip-button" style="right:0;" onclick="$('#corner-to-quad7').removeClass('animate')">Unfold</button>
+</div>
+
+<div class="container">
+  <div class="card" id="corner-to-quad8">
+    <div class="corner-to-quad tl-to-q3">
+		<svg class="static-corner-to-quad" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600.5 600.5"><polygon points="600.5 600.5 0 600.5 248.5 0.5 600.5 0 " stroke="none"/></svg>
+		<svg class="moving-corner-to-quad" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 230.8 652.7"><polyline points="0.7 95.9 230.3 0.7 230.3 650.2 0.5 95.4 " stroke="none"/></svg>
+	</div>	
+  </div> 
+  <button class="flip-button" onclick="$('#corner-to-quad8').addClass('animate')">Fold</button>
+  <button class="flip-button" style="right:0;" onclick="$('#corner-to-quad8').removeClass('animate')">Unfold</button>
+</div>
+
+<div class="container" style="margin-top:50px;">
+	<div class="card" id="long-diamond1">
+		<div class="long-diamond">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600.5 600.5"><polygon points=" 248.5 0 0 600.5 600.5 352 600.5 0" stroke="none"/></svg>
+			<div class="corner-to-quad tl-to-q1">
+				<svg class="moving-corner-to-quad" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 230.8 652.7"><polyline points="0.7 95.9 230.3 0.7 230.3 650.2 0.5 95.4 " stroke="none"/></svg>
+			</div>	
+			<div class="corner-to-quad br-to-q1">
+				<svg class="moving-corner-to-quad" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 230.8 652.7"><polyline points="0.7 95.9 230.3 0.7 230.3 650.2 0.5 95.4 " stroke="none"/></svg>
+			</div>
+		</div>		
+	</div>
+	<button class="flip-button" onclick="$('#long-diamond1').addClass('animate')">Fold</button>
+	<button class="flip-button" style="right:0;" onclick="$('#long-diamond1').removeClass('animate')">Unfold</button>
+</div>
+
+<div class="container" style="margin-top:50px;">
+	<style>
+	
+		.pyramid-left, .pyramid-right {
+			height: 142.5px;
+			top: -22.9%;
+			transform-origin: center center 0;
+			overflow: visible;
+		}
+	
+		.pyramid-left {
+			transform: rotate(45deg);
+			left: -4.8%;
+		}
+		
+		.pyramid-right {
+			right: -4.8%;
+			transform: rotateY(180deg) rotate(45deg);
+		}
+		
+		.pyramid-static {
+			fill: red;
+		}
+		
+		.pyramid-left polygon,
+		.pyramid-right polygon {
+			fill: red;
+			transform: rotateY(0deg);
+			transform-origin: 100% 100% 0;
+			transition: transform 1.5s ease 0s, fill 1.5s ease 0s;
+			overflow: visible;
+		}
+		
+		.card.animate .pyramid-left polygon,
+		.card.animate .pyramid-right polygon {
+			fill: #D20000;
+			transform: rotateY(179deg);
+		}
+		
+		.py-left, .py-right {
+			outline: 1px solid transparent;
+		}
+		
+		.py-left:not(.q3) {
+			right: 50%;
+			transform: scale(0.5) rotateY(27deg);
+			transform-origin: 100% 50% 0;
+		}
+		
+		.py-right:not(.q4) {
+			left: 50%;
+			transform: scale(0.5) rotateY(27deg);
+			transform-origin: 0 50% 0;
+		}
+		
+		.card.animate .py-right:not(.q4) .moving-triangle {
+			transform: rotateZ(45deg) rotateY(-179deg);
+		}
+		
+		.py-left.q3 {
+			bottom: 0;
+			right: 50%;
+			transform: scale(0.5) rotateY(-27deg);
+			transform-origin: 100% 50% 0;
+		}
+		
+		.py-right.q4 {
+			bottom: 0;
+			left: 50%;
+			transform: scale(0.5) rotateY(27deg);
+			transform-origin: 0 50% 0;
+		}
+		
+		.py-right:not(.q4) .moving-triangle {
+			border-right-color: blue;
+		}
+		
+		.py-right:not(.q4) .static-triangle {
+			border-bottom-color: blue;
+		}
+		
+		.py-left.q3 .moving-triangle {
+			border-right-color: green;
+		}
+		
+		.py-left.q3 .static-triangle {
+			border-bottom-color: green;
+		}
+		
+		.py-right.q4 .moving-triangle {
+			border-right-color: orange;
+		}
+		
+		.py-right.q4 .static-triangle {
+			border-bottom-color: orange;
+		}
+		
+	</style>
+	<div class="card py-left q2">
+		<div class="triangle tl-to-br">
+			<div class="static-triangle"></div>
+			<div class="moving-triangle"></div>
+		</div>
+	</div>
+	<div class="card py-right q1">
+		<div class="triangle tr-to-bl">
+			<div class="static-triangle"></div>
+			<div class="moving-triangle"></div>
+		</div>
+	</div>
+	<div class="card py-left q3">
+		<div class="triangle tl-to-br">
+			<div class="static-triangle"></div>
+			<div class="moving-triangle"></div>
+		</div>
+	</div>
+	<div class="card py-right q4">
+		<div class="triangle tr-to-bl">
+			<div class="static-triangle"></div>
+			<div class="moving-triangle"></div>
+		</div>
+	</div>
+</div>
+
+<div class="container" style="margin-top:50px;">
+	<style>
+		#p1 {
+			z-index: 1;
+		}
+		
+		#p2 {
+			z-index: 0;
+			transform-origin: 50% 50%;
+			transform: rotateY(180deg);
+		}
+		
+		#p1 > svg polygon, #p2 > svg polygon {
+			transition: none;
+			fill: #D20000;
+			transform: rotateY(179 deg);
+		}
+		
+	</style>
+	<div class="card" id="p1">
+		<!-- static -->
+		<svg class="pyramid-static" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600.5 300.3"><polygon points="300.2,0 0,300.3 600.5,300.2 "/></svg>
+		<!-- left -->
+		<svg class="pyramid-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 212.3 424.6"><polygon points="212.3,424.6 0,212.3 212.3,0"/></svg>
+		<!-- right -->
+		<svg class="pyramid-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 212.3 424.6"><polygon points="212.3,424.6 0,212.3 212.3,0"/></svg>
+	</div>
+	<div class="card" id="p2">
+		<!-- static -->
+		<svg class="pyramid-static" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600.5 300.3"><polygon points="300.2,0 0,300.3 600.5,300.2 "/></svg>
+		<!-- left -->
+		<svg class="pyramid-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 212.3 424.6"><polygon points="212.3,424.6 0,212.3 212.3,0"/></svg>
+		<!-- right -->
+		<svg class="pyramid-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 212.3 424.6"><polygon points="212.3,424.6 0,212.3 212.3,0"/></svg>
+	</div>
+</div>
+
+<div class="container">
+<button class="flip-button" onclick="$('.card').addClass('animate')">Fold All</button>
+  <button class="flip-button" style="right:0;" onclick="$('.card').removeClass('animate')">Unfold All</button>
+</div>
+  <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+    <script id="rendered-js" >
+function animate(foldType) {
+  $(foldType + ' .up-triangle').animate({
+    borderTopWidth: "0px" },
+  { queue: false, duration: 500 });
+
+  setTimeout(function () {
+    $(foldType + ' .down-triangle').animate({
+      borderTopWidth: "142px" },
+    500);}, 325);
+}
+
+function animateReverse(foldType) {
+  $(foldType + ' .down-triangle').animate({
+    borderTopWidth: "0px" },
+  { queue: false, duration: 500 });
+
+  setTimeout(function () {
+    $(foldType + ' .up-triangle').animate({
+      borderTopWidth: "142px" },
+    500);}, 350);
+}
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>

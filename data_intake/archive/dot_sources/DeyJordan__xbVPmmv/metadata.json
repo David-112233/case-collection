@@ -1,0 +1,73 @@
+{
+  "source_id": "codepen:deyjordan/xbvpmmv",
+  "author": "DeyJordan",
+  "pen_id": "xbVPmmv",
+  "url": "https://codepen.io/DeyJordan/pen/xbVPmmv",
+  "acquisition": "cdpn_fullpage",
+  "acquisition_url": "https://cdpn.io/DeyJordan/fullpage/xbVPmmv",
+  "retrieved_at": "2026-11-20T20:14:06+00:00",
+  "license": "MIT (CodePen public pen default)",
+  "fetch_status": "ok",
+  "title": "3D Book Preview -  Pure CSS version",
+  "canonical_url": "https://codepen.io/DeyJordan/pen/xbVPmmv",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "8b6877dd90316914ac04d860b2b520e271d3b02488f283a947ae6de6af390622",
+  "source_html_sha256": "fc02409fca29f459f82d897224cea895f316ff4bb30b4e0f3442c41e90ff2798",
+  "analysis": {
+    "js": {
+      "has_js": true,
+      "inline_js_chars": 1797,
+      "external_scripts": [
+        "https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"
+      ],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 3,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": true,
+      "checked_selector": true,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": true,
+      "clip_path": false,
+      "css_counter": false,
+      "media_query": true
+    },
+    "external_stylesheets": [],
+    "css_imports": [],
+    "css_chars": 13427,
+    "element_count": 49,
+    "html_chars": 20538
+  },
+  "license_policy": "https://blog.codepen.io/docs/pens/licensing/",
+  "external_asset_policy": "Original author links to publisher-supplied texture references; not copied",
+  "review": {
+    "candidate": "C282",
+    "label": "可拆书衣、内凹页块、拖转定角",
+    "note": "默认自动旋转；拖动后松开，桌面实测书本角度保持（X≈−34°、Y≈56.5°），再勾选 Textured 并开关 See with jacket，对比书衣绕过书脊并沿封边叠合，以及封板围出的内凹页块。未测试移动端、键盘、离线回放。",
+    "visual_verified": true,
+    "surface": "Cloud Chromium desktop at same held angle before and after jacket toggle",
+    "distinct_from": "C164/C046/C138 hinge/book opening, C249 exploded cover and spine, C257 deformed cover; C282 rigid closed hardback and interchangeable overlapping outer jacket held at user-selected angle.",
+    "mobile_verified": false,
+    "keyboard_verified": false,
+    "offline_replay_verified": false,
+    "formal_admission": false
+  }
+}

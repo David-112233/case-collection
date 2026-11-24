@@ -1,0 +1,28 @@
+{
+  "source_id": "codepen:tlauffs/mdzzqzx",
+  "author": "Tim Lauffs (tlauffs)",
+  "pen_id": "mdzzQZX",
+  "url": "https://codepen.io/tlauffs/pen/mdzzQZX",
+  "title": "Pure CSS Bookshelf",
+  "acquisition": "codepen_live_compiled_iframe_srcdoc",
+  "acquisition_url": "https://cdpn.io/tlauffs/fullpage/mdzzQZX?anon=true&view=",
+  "fetch_status": "ok",
+  "original_srcdoc_bytes": 40596,
+  "original_srcdoc_sha256": "a1cfcb974b813832ccd1041139cfa0b0b8e28e8a12b2f44a4052d4db94faa602",
+  "source_html_sha256": "a7a26b4fb10cd2474ece993bd8cd1dace98863ba1f76d0e71eac23c4a22c16b0",
+  "codepen_console_shim_removed": 1,
+  "license": "MIT for author code under public Pen policy; linked assets not relicensed",
+  "license_policy": "https://blog.codepen.io/docs/pens/licensing/",
+  "review": {
+    "candidate": "C279",
+    "label": "凹入层板、杯架穿插、书堆叠放",
+    "visual_verified": true,
+    "visual_surface": "Cloud Chromium desktop CodePen rendered preview, resting pose",
+    "evidence": "正面凹入柜格，斜内壁和层板前唇形成纵深；试管被横向深色杯架遮挡；横放叠书压在层板上。源码中书列、植物、相机、杯盖及泡泡只在悬停时短暂活动；未测试悬停表现。",
+    "dedup": "C034 是斜视等距 Object3D 立方体书架，本例则以正面后壁、边楔和阴影营造凹槽，并通过试管和横架等不同物件做遮挡。",
+    "mobile_verified": false,
+    "keyboard_verified": false,
+    "offline_replay_verified": false,
+    "formal_admission": false
+  }
+}

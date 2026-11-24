@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>App Prototype using CSS &amp; JavaScript</title>
+
+    <link rel="canonical" href="https://codepen.io/dennisgaebel/pen/NypybR">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="https://rawgit.com/marvelapp/devices.css/master/assets/devices.min.css">
+
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,700,900" rel="stylesheet">
+  <link rel="stylesheet" href="https://public.codepenassets.com/css/normalize-5.0.0.min.css">
+
+  
+  
+<style>
+html, body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background: #659683;
+}
+
+:root {
+  --primary-color: #2C3942;
+  --secondary-color: #1192FF;
+  --tertiary-color: #997AC0;
+  --button-bg: var(--tertiary-color);
+  --material-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  --screen-height: 568px;
+  --screen-width: 320px;
+}
+
+*:before, *:after {
+  box-sizing: inherit;
+}
+
+html,
+input {
+  box-sizing: border-box;
+}
+
+button {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border: 2px solid var(--button-bg);
+  border-radius: 100px;
+  margin: 10px 0;
+  padding: 10px 0;
+  transition: 200ms background cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 400;
+  background: transparent;
+  color: white;
+}
+button:hover, button:focus {
+  cursor: pointer;
+  background: var(--button-bg);
+}
+button:focus {
+  outline: none;
+}
+
+.screen {
+  position: relative;
+  background: var(--primary-color) !important;
+  color: white;
+}
+
+.screen-scroll {
+  height: 100%;
+  overflow: scroll;
+}
+
+.title {
+  font-family: "Roboto", sans-serif;
+  font-size: 1em;
+  font-weight: 300;
+  text-transform: uppercase;
+  text-align: center;
+  color: white;
+}
+
+.users {
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.users li {
+  padding: 5px;
+  width: 30%;
+  opacity: 0;
+  text-align: center;
+}
+.users img {
+  border-radius: 80%;
+  box-shadow: var(--material-shadow);
+}
+.users img:hover {
+  cursor: pointer;
+}
+
+.modal {
+  border-radius: 100%;
+  height: var(--screen-height);
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: scroll;
+  transform: scale(0) translateZ(0);
+  transition-duration: 320ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-property: transform, opacity, border-radius;
+  width: var(--screen-width);
+  background: var(--primary-color);
+  opacity: 0;
+}
+
+.avatar {
+  position: relative;
+}
+.avatar::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, var(--primary-color) 98%);
+}
+.avatar img {
+  display: inline-block;
+  width: 100%;
+  max-width: 100%;
+}
+
+.user-name {
+  display: block;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  text-align: center;
+  font-size: 0.875em;
+  text-transform: capitalize;
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  padding: 0 1rem;
+  transition: 200ms transform 100ms cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(-100%);
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+}
+
+.profile__name {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  text-transform: capitalize;
+}
+
+.profile__email {
+  display: inline-block;
+  margin: 5px 0;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  text-decoration: none;
+  color: inherit;
+}
+
+.profile__info {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+}
+
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transform: translateY(-50%);
+}
+
+.loader svg {
+  position: relative;
+  width: 200px;
+  height: 200px;
+}
+.loader svg circle {
+  animation: expand-out 600ms cubic-bezier(0.66, 0.14, 0.83, 0.67) infinite alternate both;
+  position: absolute;
+  transform: scale(0);
+  transform-origin: center center;
+  fill: #00AABB;
+}
+
+.loader circle:nth-of-type(1) {
+  animation-delay: 0.1875s;
+  fill: #00b8ca;
+}
+
+.loader circle:nth-of-type(2) {
+  animation-delay: 0.375s;
+  fill: #00c6da;
+}
+
+.loader circle:nth-of-type(3) {
+  animation-delay: 0.5625s;
+  fill: #00d4e9;
+}
+
+.loader circle:nth-of-type(4) {
+  animation-delay: 0.75s;
+  fill: #00e2f8;
+}
+
+.loader circle:nth-of-type(5) {
+  animation-delay: 0.9375s;
+  fill: #09e9ff;
+}
+
+.loader circle:nth-of-type(6) {
+  animation-delay: 1.125s;
+  fill: #18eaff;
+}
+
+.loader.hide {
+  display: none;
+}
+
+.users.show > * {
+  animation-duration: 200ms;
+  animation-name: fade-in;
+  animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(0.66, 0.14, 0.83, 0.67);
+  opacity: 1;
+}
+.users.show > * > * {
+  animation-duration: 200ms;
+  animation-name: expand-out;
+  animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(0.66, 0.14, 0.83, 0.67);
+}
+.users.show > *:nth-of-type(1) {
+  animation-delay: 0.0125s;
+}
+.users.show > *:nth-of-type(1) > * {
+  animation-delay: 0.0125s;
+}
+.users.show > *:nth-of-type(2) {
+  animation-delay: 0.025s;
+}
+.users.show > *:nth-of-type(2) > * {
+  animation-delay: 0.025s;
+}
+.users.show > *:nth-of-type(3) {
+  animation-delay: 0.0375s;
+}
+.users.show > *:nth-of-type(3) > * {
+  animation-delay: 0.0375s;
+}
+.users.show > *:nth-of-type(4) {
+  animation-delay: 0.05s;
+}
+.users.show > *:nth-of-type(4) > * {
+  animation-delay: 0.05s;
+}
+.users.show > *:nth-of-type(5) {
+  animation-delay: 0.0625s;
+}
+.users.show > *:nth-of-type(5) > * {
+  animation-delay: 0.0625s;
+}
+.users.show > *:nth-of-type(6) {
+  animation-delay: 0.075s;
+}
+.users.show > *:nth-of-type(6) > * {
+  animation-delay: 0.075s;
+}
+.users.show > *:nth-of-type(7) {
+  animation-delay: 0.0875s;
+}
+.users.show > *:nth-of-type(7) > * {
+  animation-delay: 0.0875s;
+}
+.users.show > *:nth-of-type(8) {
+  animation-delay: 0.1s;
+}
+.users.show > *:nth-of-type(8) > * {
+  animation-delay: 0.1s;
+}
+.users.show > *:nth-of-type(9) {
+  animation-delay: 0.1125s;
+}
+.users.show > *:nth-of-type(9) > * {
+  animation-delay: 0.1125s;
+}
+.users.show > *:nth-of-type(10) {
+  animation-delay: 0.125s;
+}
+.users.show > *:nth-of-type(10) > * {
+  animation-delay: 0.125s;
+}
+.users.show > *:nth-of-type(11) {
+  animation-delay: 0.1375s;
+}
+.users.show > *:nth-of-type(11) > * {
+  animation-delay: 0.1375s;
+}
+.users.show > *:nth-of-type(12) {
+  animation-delay: 0.15s;
+}
+.users.show > *:nth-of-type(12) > * {
+  animation-delay: 0.15s;
+}
+.users.show > *:nth-of-type(13) {
+  animation-delay: 0.1625s;
+}
+.users.show > *:nth-of-type(13) > * {
+  animation-delay: 0.1625s;
+}
+.users.show > *:nth-of-type(14) {
+  animation-delay: 0.175s;
+}
+.users.show > *:nth-of-type(14) > * {
+  animation-delay: 0.175s;
+}
+.users.show > *:nth-of-type(15) {
+  animation-delay: 0.1875s;
+}
+.users.show > *:nth-of-type(15) > * {
+  animation-delay: 0.1875s;
+}
+.users.show > *:nth-of-type(16) {
+  animation-delay: 0.2s;
+}
+.users.show > *:nth-of-type(16) > * {
+  animation-delay: 0.2s;
+}
+.users.show > *:nth-of-type(17) {
+  animation-delay: 0.2125s;
+}
+.users.show > *:nth-of-type(17) > * {
+  animation-delay: 0.2125s;
+}
+.users.show > *:nth-of-type(18) {
+  animation-delay: 0.225s;
+}
+.users.show > *:nth-of-type(18) > * {
+  animation-delay: 0.225s;
+}
+.users.show > *:nth-of-type(19) {
+  animation-delay: 0.2375s;
+}
+.users.show > *:nth-of-type(19) > * {
+  animation-delay: 0.2375s;
+}
+.users.show > *:nth-of-type(20) {
+  animation-delay: 0.25s;
+}
+.users.show > *:nth-of-type(20) > * {
+  animation-delay: 0.25s;
+}
+.users.show > *:nth-of-type(21) {
+  animation-delay: 0.2625s;
+}
+.users.show > *:nth-of-type(21) > * {
+  animation-delay: 0.2625s;
+}
+.users.show > *:nth-of-type(22) {
+  animation-delay: 0.275s;
+}
+.users.show > *:nth-of-type(22) > * {
+  animation-delay: 0.275s;
+}
+.users.show > *:nth-of-type(23) {
+  animation-delay: 0.2875s;
+}
+.users.show > *:nth-of-type(23) > * {
+  animation-delay: 0.2875s;
+}
+.users.show > *:nth-of-type(24) {
+  animation-delay: 0.3s;
+}
+.users.show > *:nth-of-type(24) > * {
+  animation-delay: 0.3s;
+}
+.users.show > *:nth-of-type(25) {
+  animation-delay: 0.3125s;
+}
+.users.show > *:nth-of-type(25) > * {
+  animation-delay: 0.3125s;
+}
+.users.show > *:nth-of-type(26) {
+  animation-delay: 0.325s;
+}
+.users.show > *:nth-of-type(26) > * {
+  animation-delay: 0.325s;
+}
+.users.show > *:nth-of-type(27) {
+  animation-delay: 0.3375s;
+}
+.users.show > *:nth-of-type(27) > * {
+  animation-delay: 0.3375s;
+}
+.users.show > *:nth-of-type(28) {
+  animation-delay: 0.35s;
+}
+.users.show > *:nth-of-type(28) > * {
+  animation-delay: 0.35s;
+}
+.users.show > *:nth-of-type(29) {
+  animation-delay: 0.3625s;
+}
+.users.show > *:nth-of-type(29) > * {
+  animation-delay: 0.3625s;
+}
+.users.show > *:nth-of-type(30) {
+  animation-delay: 0.375s;
+}
+.users.show > *:nth-of-type(30) > * {
+  animation-delay: 0.375s;
+}
+
+.screen.active .screen-scroll {
+  overflow: hidden;
+}
+.screen.active .modal {
+  border-radius: 0;
+  pointer-events: auto;
+  transform: scale(1) translateZ(0);
+  opacity: 1;
+}
+.screen.active .profile {
+  transform: translateY(0);
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes expand-out {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  <div class="marvel-device nexus5">
+    <div class="top-bar"></div>
+    <div class="sleep"></div>
+    <div class="volume"></div>
+    <div class="camera"></div>
+    <div class="screen">
+      <div class="screen-scroll">
+        <h3 class="title">Results</h3>
+        <div class="loader">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true">
+            <circle cx="50" cy="37" r="7"/>
+            <circle cx="62.5" cy="43.5" r="7"/>
+            <circle cx="62.5" cy="56.5" r="7"/>
+            <circle cx="50" cy="65" r="7"/>
+            <circle cx="37.5" cy="56.5" r="7"/>
+            <circle cx="37.5" cy="43.5" r="7"/>
+          </svg>
+        </div>
+        <ul class="users"></ul>
+      </div>
+      <div class="modal">
+        <div class="avatar"></div>
+        <div class="profile"></div>
+      </div>
+    </div>
+</div>
+  
+    <script id="rendered-js" >
+// ==========================================================
+// UTILITIES
+// ==========================================================
+
+function select(s) {
+  return document.querySelector(s);
+}
+
+function selectAll(s) {
+  return document.querySelectorAll(s);
+}
+
+function hide(el) {
+  el.classList.toggle('hide');
+}
+
+function show(el) {
+  el.classList.toggle('show');
+}
+
+function activeToggle(el) {
+  el.classList.toggle('active');
+}
+
+
+// ==========================================================
+// GLOBALS
+// ==========================================================
+
+const users = select('.users'),
+loader = select('.loader'),
+modal = select('.modal'),
+screen = select('.screen'),
+screen_scroll = select('.screen-scroll'),
+avatar = select('.avatar'),
+profile = select('.profile');
+
+const transOriginNames = {
+  webkitTransformOrigin: 'webkitTransformOrigin',
+  MozTransformOrigin: 'MozTransformOrigin',
+  msTransformOrigin: 'msTransformOrigin',
+  transformOrigin: 'transformOrigin' };
+
+
+
+// ==========================================================
+// AJAX
+// ==========================================================
+
+let request = new XMLHttpRequest();
+
+request.open('GET', 'https://randomuser.me/api/?results=30', true);
+
+request.onload = function () {
+  if (request.status >= 200 && request.status < 400) {
+    hide(loader);
+    show(users);
+
+    let data = JSON.parse(request.responseText),
+    l = data.results.length;
+
+    for (var i = 0; i < l; i++) {if (window.CP.shouldStopExecution(0)) break;
+      users.insertAdjacentHTML('beforeend', '<li><img src="' +
+      data.results[i].picture.medium + '" data-pic="' +
+      data.results[i].picture.large + '" data-name="' +
+      data.results[i].name.first + ' ' +
+      data.results[i].name.last + '" data-email="' +
+      data.results[i].email + '"><span class="user-name">' +
+      data.results[i].name.first + '</span></li>');
+    }window.CP.exitedLoop(0);
+
+  } else {
+    alert('We reached our target server, but there was an error');
+  }
+};
+
+request.onerror = function () {
+  alert('There was a connection error of some sort');
+};
+
+request.send();
+
+
+// ==========================================================
+// EVENTS
+// ==========================================================
+
+users.addEventListener('click', function (e) {
+  let target = e.target,
+  data_src = target.getAttribute('data-pic'),
+  data_name = target.getAttribute('data-name'),
+  data_email = target.getAttribute('data-email'),
+  target_coords = target.getBoundingClientRect();
+
+  if (target.nodeName === 'IMG') {
+    activeToggle(screen);
+
+    avatar.innerHTML = '<img src="' + data_src + '" alt="">';
+    profile.innerHTML = '<h3 class="profile__name">' + data_name + '</h3>';
+    profile.innerHTML += '<a href="#" class="profile__email">' + data_email + '</a>';
+    profile.innerHTML += '<button>Follow</button>';
+    profile.innerHTML += '<p class="profile__info">Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod.</p>';
+
+    for (let name in transOriginNames) {
+      modal.style[name] = target.offsetLeft + target_coords.width / 2 + 'px ' + (target.offsetTop + target_coords.height / 2 - screen_scroll.scrollTop) + 'px';
+    }
+  }
+});
+
+
+modal.addEventListener('click', function (e) {
+  activeToggle(screen);
+});
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>

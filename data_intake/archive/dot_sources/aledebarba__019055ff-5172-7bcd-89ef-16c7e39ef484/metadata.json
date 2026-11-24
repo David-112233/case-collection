@@ -1,0 +1,17 @@
+{
+  "key": "aledebarba__019055ff-5172-7bcd-89ef-16c7e39ef484",
+  "review_id": "C294",
+  "author": "Alexandre CMC Souza",
+  "url": "https://codepen.io/editor/aledebarba/pen/019055ff-5172-7bcd-89ef-16c7e39ef484?panel=details",
+  "tags": [
+    "抽屉开合",
+    "前沿遮挡",
+    "内壁纵深"
+  ],
+  "review_status": "await_user_review",
+  "browser_evidence": "云端浏览器中打开作者公开预览，BEARS 与 FOODS 双抽屉默认红色关闭、黄色打开；点红色抽屉并等短暂过渡后，红色保持开启、黄色关闭。近侧前沿挡住抽屉内底部，倾斜侧壁与后壁围出纵深并框住浮出的图标。该组互斥状态无需持续播放。",
+  "license": "MIT",
+  "license_scope": "MIT notice from the public author editor Details panel. index.pen.html, style.css, and empty script.js are exact CodePen-native downloads; no external assets, import, or authored JS. source.html is a separate local wrapper. See PROVENANCE.md and SHA256SUMS.",
+  "js_policy": "none",
+  "entrypoint": "source.html"
+}

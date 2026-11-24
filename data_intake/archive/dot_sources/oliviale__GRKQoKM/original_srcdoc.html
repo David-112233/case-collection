@@ -1,0 +1,1810 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>CSS Grid: Magazine Layouts</title>
+
+    <link rel="canonical" href="https://codepen.io/oliviale/pen/GRKQoKM">
+  <link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Libre+Baskerville:400,400i,700,700i|Playfair+Display:400,700" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://public.codepenassets.com/css/reset-2.0.min.css">
+
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css'>
+  
+<style>
+body {
+  background: #f4f4f4;
+  font-family: "Libre Baskerville", sans-serif;
+  line-height: 1.6;
+  color: #222;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+strong {
+  font-weight: 700;
+}
+
+em {
+  font-style: italic;
+}
+
+a {
+  text-decoration: none;
+  color: #222;
+}
+
+h5 {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+small {
+  line-height: 1.7;
+  text-transform: uppercase;
+  display: block;
+  font-family: Libre Baskerville;
+  letter-spacing: 2px;
+}
+
+main, footer {
+  width: 95%;
+  margin: 4em auto;
+  max-width: 900px;
+}
+
+footer {
+  text-align: center;
+}
+footer a {
+  border-bottom: 0.5px dashed;
+}
+footer a:hover {
+  border-bottom: 0.5px solid;
+}
+
+img {
+  width: 100%;
+}
+
+.page {
+  min-height: 1150px;
+  font-size: 12px;
+  padding: 6em 3.5em 3.5em;
+  position: relative;
+  z-index: 0;
+  margin: 2em auto;
+  border: 0.5px solid #ededed;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.05);
+  background: #fff;
+}
+.page__wrapper {
+  position: relative;
+  min-height: 1150px;
+}
+.page .controls {
+  position: absolute;
+  width: calc(100% - 6em);
+  padding: 0.5em 0;
+  top: 1.6em;
+  left: 3em;
+  color: #222;
+  display: flex;
+  font-family: "Playfair Display";
+  font-weight: 500;
+  font-size: 14px;
+}
+.page .controls__name {
+  flex: 1;
+  text-align: left;
+}
+.page .controls__name strong {
+  display: inline-block;
+  margin-right: 15px;
+  letter-spacing: 2px;
+  font-size: 20px;
+  margin-top: -3px;
+}
+.page .controls .js-next, .page .controls .js-prev, .page .controls .js-back-to-1 {
+  cursor: pointer;
+  display: none;
+  margin-left: 15px;
+  font-weight: 700;
+  text-transform: none;
+}
+@media (min-width: 900px) {
+  .page {
+    max-height: 1150px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    box-shadow: none;
+  }
+  .page__wrapper {
+    background: #fff;
+  }
+  .page * {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: 0.3s ease;
+  }
+  .page *:nth-child(odd) {
+    transform: translateY(-10px);
+  }
+  .page.active {
+    z-index: 10;
+  }
+  .page.active * {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+  .page .controls .js-next, .page .controls .js-prev, .page .controls .js-back-to-1 {
+    display: inline-block;
+  }
+  .page .controls .js-back-to-1 {
+    margin-left: 0;
+  }
+}
+@media (max-width: 500px) {
+  .page {
+    padding: 6em 2.5em 2em;
+  }
+}
+
+.title {
+  grid-column: 1/-1;
+  font-size: 40px;
+  padding-bottom: 1em;
+  font-family: "Abril Fatface";
+  font-size: 4.5em;
+  line-height: 1.2;
+  margin-top: 0.5em;
+}
+.title small {
+  font-size: 25%;
+  text-transform: uppercase;
+  display: block;
+  font-family: Libre Baskerville;
+  letter-spacing: 1px;
+  margin: 2em 0 1em;
+  color: #999;
+  width: 75%;
+}
+
+@media (min-width: 900px) {
+  .page-contributor {
+    display: grid;
+    grid-auto-flow: dense;
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+.page-contributor h5 {
+  margin: 10px 0;
+}
+.page-contributor .contributor {
+  display: flex;
+  border-top: 1px solid #222;
+  align-items: center;
+}
+.page-contributor .contributor__textwrap {
+  flex: 1;
+}
+.page-contributor .contributor__image {
+  width: 100%;
+  flex: 0 0 50%;
+  margin-right: 5%;
+  max-width: 40%;
+  max-height: 300px;
+  object-fit: contain;
+}
+@media (min-width: 900px) {
+  .page-contributor .contributor {
+    padding: 10px;
+  }
+  .page-contributor .contributor:nth-of-type(2) {
+    padding-left: 0;
+    border-bottom: 3px solid #222;
+    font-size: 120%;
+  }
+  .page-contributor .contributor:nth-of-type(2) .contributor__textwrap {
+    padding: 20px 35px 20px 0;
+  }
+  .page-contributor .contributor:nth-of-type(n + 3) {
+    display: block;
+    border-left: 1px solid #222;
+  }
+  .page-contributor .contributor:nth-of-type(2) {
+    grid-column: 1/5;
+  }
+  .page-contributor .contributor:nth-of-type(3) {
+    grid-column: 5;
+    grid-row: 2/4;
+    padding-right: 0;
+  }
+  .page-contributor .contributor:nth-of-type(4) {
+    padding-left: 0;
+    border-left: none;
+  }
+  .page-contributor .contributor:nth-of-type(6), .page-contributor .contributor:nth-of-type(7) {
+    grid-row: 3/5;
+  }
+  .page-contributor .contributor:nth-of-type(8) {
+    padding-right: 0;
+  }
+  .page-contributor .contributor__image {
+    max-width: 100%;
+  }
+}
+.page-contributor .credits {
+  grid-row: 3/4;
+  grid-column: 1/3;
+  padding: 2em 5em 2em 0;
+  border-top: 1px solid #222;
+}
+
+.page-navigator .navigator {
+  margin-bottom: 1.6em;
+  position: relative;
+  z-index: 2;
+}
+.page-navigator .navigator .year {
+  color: #999;
+  letter-spacing: 2px;
+}
+.page-navigator .navigator h5 {
+  margin: 0.25em 0;
+}
+@media (min-width: 900px) {
+  .page-navigator {
+    display: grid;
+    grid-auto-flow: dense;
+    grid-template-columns: repeat(4, 25%);
+    grid-gap: 5px;
+    overflow: hidden;
+    padding-top: 8em;
+  }
+  .page-navigator.page-navigator-2 {
+    grid-template-rows: repeat(7, 1fr);
+  }
+  .page-navigator .navigator {
+    padding-right: 2.5em;
+    margin-bottom: 2.5em;
+  }
+  .page-navigator .navigator-image {
+    grid-column: 3/-1;
+    grid-row: 2/4;
+    object-fit: contain;
+    transform: scaleX(-1);
+    margin-top: -2em;
+    width: 100%;
+    margin-left: -1.2em;
+  }
+  .page-navigator .navigator-image-2 {
+    grid-column: 1/2;
+    grid-row: 1/4;
+    height: 100%;
+    object-fit: cover;
+    max-width: 340px;
+    margin-top: 5em;
+    margin-left: -4em;
+    width: calc(100% + 3.5em);
+  }
+  .page-navigator .navigator-image-3 {
+    grid-column: 2/4;
+    grid-row: 1/4;
+    height: 100%;
+    object-fit: cover;
+    margin-top: 5em;
+  }
+  .page-navigator .navigator-space {
+    grid-column: 1/3;
+    grid-row: 5/6;
+  }
+  .page-navigator .navigator-space-2 {
+    grid-column: 1/-1;
+    grid-row: 1/5;
+  }
+  .page-navigator .navigator-space-3 {
+    grid-column: 1/2;
+    grid-row: 1/8;
+  }
+}
+
+.page-timer {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+@media (min-width: 900px) {
+  .page-timer {
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: min-content 2fr 1.5fr;
+  }
+}
+.page-timer .timer {
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-color: #51b7d3;
+  background-blend-mode: overlay;
+  position: relative;
+  min-height: 200px;
+  color: #fff;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+.page-timer .timer:before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
+}
+.page-timer .timer span {
+  font-weight: 700;
+  font-style: italic;
+  font-size: 80px;
+  color: #fff;
+  opacity: 0.7;
+  position: absolute;
+  line-height: 1;
+  width: 100%;
+}
+.page-timer .timer:nth-of-type(2) {
+  background-color: rgba(255, 34, 34, 0.5);
+  background-image: url(https://meowlivia.s3.us-east-2.amazonaws.com/codepen/avengers/ironman.png);
+}
+.page-timer .timer:nth-of-type(3) {
+  background-color: rgba(33, 150, 243, 0.5);
+  background-image: url(https://meowlivia.s3.us-east-2.amazonaws.com/codepen/avengers/cap.png);
+}
+.page-timer .timer:nth-of-type(4) {
+  background-color: rgba(233, 30, 99, 0.5);
+  background-image: url(https://meowlivia.s3.us-east-2.amazonaws.com/codepen/avengers/thor.png);
+}
+.page-timer .timer:nth-of-type(5) {
+  background-color: rgba(76, 175, 80, 0.5);
+  background-image: url(https://meowlivia.s3.us-east-2.amazonaws.com/codepen/avengers/hulk.png);
+}
+.page-timer .timer:nth-of-type(6) {
+  background-color: rgba(255, 193, 7, 0.5);
+  background-image: url(https://meowlivia.s3.us-east-2.amazonaws.com/codepen/avengers/hawkeye.png);
+}
+.page-timer .timer:nth-of-type(7) {
+  background-color: rgba(0, 150, 136, 0.5);
+  background-image: url(https://meowlivia.s3.us-east-2.amazonaws.com/codepen/avengers/antman.png);
+}
+.page-timer .timer:nth-of-type(8) {
+  background-color: rgba(0, 188, 212, 0.5);
+  background-image: url(https://meowlivia.s3.us-east-2.amazonaws.com/codepen/avengers/nebula.png);
+}
+.page-timer .timer:nth-of-type(9) {
+  background-color: rgba(255, 152, 0, 0.5);
+  background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/blackwidow2.png);
+}
+.page-timer .timer:nth-of-type(10) {
+  background-color: rgba(103, 58, 183, 0.5);
+  background-image: url(https://meowlivia.s3.us-east-2.amazonaws.com/codepen/avengers/thanos.png);
+}
+.page-timer .timer:nth-of-type(11) {
+  background-color: rgba(63, 81, 181, 0.5);
+  background-image: url(https://meowlivia.s3.us-east-2.amazonaws.com/codepen/avengers/rockt.png);
+}
+@media (min-width: 900px) {
+  .page-timer .timer {
+    background-size: 350%;
+    background-position: -150px top;
+  }
+  .page-timer .timer span {
+    text-align: center;
+    top: 15px;
+  }
+  .page-timer .timer:nth-of-type(n + 7) {
+    background-size: 200%;
+  }
+  .page-timer .timer:nth-of-type(2) {
+    background-position: -150px top;
+  }
+  .page-timer .timer:nth-of-type(3) {
+    background-position: -160px top;
+  }
+  .page-timer .timer:nth-of-type(4) {
+    background-position: -200px top;
+  }
+  .page-timer .timer:nth-of-type(5) {
+    background-position: -180px top;
+  }
+  .page-timer .timer:nth-of-type(6) {
+    background-position: center top;
+    background-size: 450%;
+  }
+  .page-timer .timer:nth-of-type(7) {
+    background-position: -170px top;
+    background-size: 300%;
+  }
+  .page-timer .timer:nth-of-type(8) {
+    background-position: center top;
+    background-size: 180%;
+  }
+  .page-timer .timer:nth-of-type(9) {
+    background-position: -90px top;
+    background-size: 250%;
+  }
+  .page-timer .timer:nth-of-type(10) {
+    background-position: -110px top;
+    background-size: 350%;
+  }
+  .page-timer .timer:nth-of-type(11) {
+    background-position: -110px top;
+    background-size: 300%;
+  }
+}
+.page-timer .timer__hero {
+  position: absolute;
+  bottom: 15px;
+  line-height: 1.5;
+  text-align: center;
+  width: 100%;
+}
+
+.page-more .image {
+  width: 100%;
+  margin-bottom: 3em;
+}
+.page-more .title-mini {
+  font-family: "Abril Fatface";
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+.page-more .title-mini + img {
+  display: none;
+}
+.page-more .quote {
+  border-left: 3px solid black;
+  padding: 0 3em 0 1.5em;
+}
+.page-more .quote p {
+  font-style: italic;
+  margin-top: 8px;
+}
+@media (min-width: 900px) {
+  .page-more {
+    display: grid;
+    grid-template-columns: 30% 70%;
+  }
+  .page-more .title-mini {
+    grid-column: 2/3;
+    grid-row: 1/2;
+    align-self: center;
+    text-align: right;
+    z-index: 10;
+    color: #fff;
+    width: 43%;
+    margin: 2em 2em 0 auto;
+  }
+  .page-more .title-mini + img {
+    display: block;
+    margin-bottom: 2em;
+  }
+  .page-more .title {
+    grid-column: 1/-1;
+    grid-row: 3;
+    z-index: 2;
+    justify-content: flex-end;
+    align-items: center;
+    text-align: center;
+    padding-bottom: 0.5em;
+    margin-top: 1em;
+  }
+  .page-more .title small {
+    margin: 1em auto 0;
+  }
+  .page-more .image {
+    grid-column: 1/3;
+    grid-row: 1/2;
+    z-index: 1;
+    width: 100%;
+  }
+  .page-more .text {
+    column-count: 2;
+    column-span: all;
+    column-gap: 30px;
+    text-align: justify;
+  }
+  .page-more .quote {
+    grid-column: 1;
+    grid-row: 2/3;
+    align-self: start;
+  }
+}
+.page-more .more {
+  grid-column: 1/-1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.page-more .more__item {
+  padding: 0.4em;
+  margin: 2em 0;
+  text-align: center;
+}
+.page-more .more__item a {
+  display: block;
+  color: #999;
+  margin-top: 8px;
+}
+.page-more .more__item a:hover {
+  font-weight: 700;
+}
+.page-more .more__image {
+  width: 100%;
+  border-radius: 50%;
+  max-width: 110px;
+}
+.page-more .more__headline {
+  line-height: 1.3;
+  margin: 1em 0 2em;
+  position: relative;
+}
+.page-more .more__headline:after {
+  content: "";
+  position: absolute;
+  width: 50px;
+  bottom: -1em;
+  left: 50%;
+  margin-left: -25px;
+  background: black;
+  height: 1px;
+}
+@media (min-width: 900px) {
+  .page-more .more__item {
+    flex: 0 1 24%;
+    margin: 0;
+  }
+}
+
+.page-diagonal .diagonal {
+  display: grid;
+  grid-template-columns: 40% 60%;
+  align-items: center;
+  margin-top: -3%;
+}
+.page-diagonal .diagonal__image {
+  margin-top: 2.5em;
+  width: 80%;
+  height: 100%;
+  object-fit: contain;
+  padding: 1em;
+}
+.page-diagonal .diagonal__text {
+  margin-top: 2.5em;
+}
+.page-diagonal .diagonal h5 {
+  margin-bottom: 5px;
+}
+@media (max-width: 900px) {
+  .page-diagonal .free-space-1, .page-diagonal .free-space-2, .page-diagonal .free-space-3, .page-diagonal .free-space-4 {
+    display: none;
+  }
+}
+@media (min-width: 900px) {
+  .page-diagonal {
+    overflow: hidden;
+  }
+  .page-diagonal .diagonal {
+    width: 100%;
+    margin-left: 5%;
+    grid-template-rows: repeat(2, 150px) 40px repeat(3, 150px);
+    grid-template-columns: 20% 3% 30% 15% 30%;
+    grid-gap: 5px;
+    transform: rotate(45deg);
+  }
+  .page-diagonal .diagonal__image, .page-diagonal .diagonal__text {
+    margin: 0;
+  }
+  .page-diagonal .diagonal__image {
+    padding: 0;
+    width: 90%;
+  }
+  .page-diagonal .diagonal__text {
+    padding: 0em;
+  }
+  .page-diagonal .show-img-1 {
+    grid-column: 1/span 2;
+    grid-row: 2/4;
+    height: 65%;
+    align-self: flex-end;
+  }
+  .page-diagonal .show-text-1 {
+    grid-column: 1/3;
+    grid-row: 4/6;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    text-align: right;
+    transform: rotate(-180deg);
+    padding: 2em 1.5em;
+  }
+  .page-diagonal .show-text-1 h5 {
+    margin-left: 5px;
+  }
+  .page-diagonal .show-img-2 {
+    grid-column: 2/4;
+    grid-row: 1/2;
+    width: 70%;
+    height: 120%;
+    align-self: flex-end;
+  }
+  .page-diagonal .show-text-2 {
+    grid-column: 2/5;
+    grid-row: 2/3;
+    width: 95%;
+  }
+  .page-diagonal .show-img-3 {
+    grid-column: 3/4;
+    grid-row: 3/5;
+    padding-top: 1em;
+    margin-left: -1em;
+  }
+  .page-diagonal .show-text-3 {
+    grid-column: 3/5;
+    grid-row: 5/6;
+    width: 85%;
+  }
+  .page-diagonal .show-img-4 {
+    grid-column: 3/4;
+    grid-row: 6/7;
+    margin-left: -15%;
+  }
+  .page-diagonal .show-text-4 {
+    grid-column: 4/6;
+    grid-row: 6/7;
+    width: 70%;
+    margin-left: -22%;
+  }
+  .page-diagonal .show-img-5 {
+    grid-column: 5/6;
+    grid-row: 5/6;
+  }
+  .page-diagonal .show-text-5 {
+    grid-column: 5/6;
+    grid-row: 2/5;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    padding-right: 2.5em;
+  }
+  .page-diagonal .show-text-5 h5 {
+    margin-left: 5px;
+  }
+  .page-diagonal .free-space-1 {
+    background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/pezmovie.jpg) no-repeat right center/cover;
+    filter: brightness(1.85);
+    grid-row: 1/2;
+    grid-column: 1/2;
+    height: 120%;
+    width: 120%;
+    transform: translate(-170px, 440px);
+    justify-self: flex-end;
+  }
+  .page-diagonal .free-space-2 {
+    background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/shawarmamovie.jpg) no-repeat center center/cover;
+    filter: brightness(1.4);
+    grid-row: 4/5;
+    height: 100%;
+    width: 120%;
+    align-items: center;
+    transform: translate(-20px, -50px);
+  }
+  .page-diagonal .free-space-3 {
+    background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/avengerbenjerrymovie.jpg) no-repeat right center/cover;
+    filter: brightness(1.6);
+    grid-row: 1/2;
+    height: 160%;
+    width: 200%;
+    align-items: center;
+    transform: translate(-50px, -70px) scaleX(-1);
+  }
+  .page-diagonal .free-space-4 {
+    background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/asgardalemovie.jpg) no-repeat center center/cover;
+    filter: brightness(1.6);
+    grid-column: 1/2;
+    grid-row: 6/7;
+    height: 130%;
+    width: 200%;
+    align-items: center;
+    transform: translate(220px, 200px);
+  }
+}
+
+.page-thor {
+  padding-bottom: 1.5em;
+  display: grid;
+  grid-template-columns: 30% 15% 55%;
+  grid-template-rows: max-content 250px 50px max-content;
+  grid-auto-flow: dense;
+  overflow: hidden;
+}
+.page-thor .title {
+  line-height: 1.3;
+  font-size: 45px;
+  max-width: 700px;
+  margin: 1em;
+  letter-spacing: 1px;
+}
+.page-thor .title small {
+  color: #777;
+  font-size: 40%;
+  text-transform: none;
+  letter-spacing: 0;
+  margin-top: 20px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+.page-thor .product-name {
+  grid-column: 1/4;
+  grid-row: 1/2;
+  z-index: 1;
+}
+.page-thor .photo-combo {
+  position: relative;
+  grid-column: 1/-1;
+  grid-row: 1/4;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: radial-gradient(#fff, #cecbea);
+  max-height: 600px;
+}
+.page-thor .photo-combo img {
+  position: relative;
+  width: 53%;
+  margin: 2em 2em -1em;
+}
+.page-thor .window {
+  display: flex;
+  position: relative;
+  grid-column: 1/-1;
+  margin-top: -65px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.page-thor .window__left, .page-thor .window__right {
+  flex: 1 1 50%;
+  position: relative;
+  text-align: center;
+}
+.page-thor .window__left img, .page-thor .window__right img {
+  width: auto;
+  height: 250px;
+}
+.page-thor .window__left span, .page-thor .window__right span {
+  display: block;
+  text-align: center;
+  padding: 2px 5px 20px;
+  font-size: 14px;
+  font-style: italic;
+  color: #999;
+}
+.page-thor .window__left img {
+  margin-left: -30px;
+}
+.page-thor .persuader {
+  grid-column: 1/-1;
+}
+.page-thor .testi__text {
+  font-size: 10px;
+  margin: 15px;
+  width: 90%;
+}
+@media (min-width: 900px) {
+  .page-thor {
+    grid-template-rows: max-content 1fr 1fr 100px;
+    padding-bottom: 0;
+    max-height: 90vh;
+  }
+  .page-thor .title {
+    margin: 2.5em;
+  }
+  .page-thor .product-name {
+    grid-column: 1/4;
+    grid-row: 1/2;
+    z-index: 1;
+  }
+  .page-thor .photo-combo {
+    justify-content: flex-end;
+    max-height: none;
+  }
+  .page-thor .photo-combo img {
+    margin: 0 8em 15em;
+  }
+  .page-thor .window {
+    grid-column: 1/2;
+    margin: 0;
+    grid-row: 4/5;
+    align-items: flex-end;
+  }
+  .page-thor .persuader {
+    grid-column: 2/4;
+    display: flex;
+    align-items: center;
+  }
+}
+
+.page-circle {
+  overflow: hidden;
+  padding-top: 7em;
+}
+.page-circle h5 {
+  font-family: "Abril Fatface";
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+.page-circle .stark-center {
+  width: 100%;
+  text-align: justify;
+}
+.page-circle .stark-center .text {
+  margin-bottom: 20px;
+}
+@media (min-width: 900px) {
+  .page-circle .stark-center {
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+    grid-template-rows: 1fr min-content min-content;
+    min-height: 600px;
+  }
+  .page-circle .stark-center .stark-left,
+.page-circle .stark-center .stark-right {
+    grid-row: 1/2;
+  }
+  .page-circle .stark-center .text {
+    grid-column: 1/2;
+    grid-row: 1/2;
+  }
+  .page-circle .stark-center .title {
+    grid-row: 2/3;
+    grid-column: 1/-1;
+    text-transform: uppercase;
+    line-height: 1;
+    border: solid;
+    border-width: 8px 0;
+    padding: 0.2em 0;
+    text-align: center;
+    font-size: 55px;
+    margin: 0 0 0.6em;
+  }
+}
+.page-circle .shape-human {
+  height: 400px;
+  width: 250px;
+  float: right;
+  background: #fff;
+  shape-margin: 15px;
+  opacity: 0;
+  shape-outside: polygon(50% 0%, 46% 2%, 44% 8%, 45% 13%, 37% 15%, 37% 15%, 37% 18%, 30% 24%, 22% 31%, 19% 36%, 17% 45%, 20% 49%, 25% 55%, 31% 59%, 32% 66%, 30% 71%, 28% 79%, 27% 86%, 22% 98%, 22% 100%, 61% 100%);
+  clip-path: polygon(50% 0%, 46% 2%, 44% 8%, 45% 13%, 37% 15%, 37% 15%, 37% 18%, 30% 24%, 22% 31%, 19% 36%, 17% 45%, 20% 49%, 25% 55%, 31% 59%, 32% 66%, 30% 71%, 28% 79%, 27% 86%, 22% 98%, 22% 100%, 61% 100%);
+  margin-right: -20%;
+}
+.page-circle .stark-left p, .page-circle .stark-right p {
+  margin: 10px 0;
+}
+.page-circle .stark-left {
+  position: relative;
+}
+.page-circle .stark-left img {
+  position: absolute;
+  right: 0;
+  object-fit: contain;
+  object-position: top;
+  top: 0;
+  margin-right: -150px;
+  width: 250px;
+  z-index: 10;
+}
+@media (min-width: 900px) {
+  .page-circle .stark-left img {
+    width: 250px;
+    height: 100%;
+    left: 69%;
+    margin: 0;
+  }
+}
+.page-circle .stark-right .shape-human {
+  display: none;
+  float: left;
+  shape-outside: polygon(50% 100%, 51% 0%, 61% 2%, 63% 7%, 65% 10%, 65% 15%, 65% 21%, 72% 21%, 75% 21%, 80% 26%, 85% 34%, 86% 43%, 75% 54%, 80% 60%, 85% 74%, 85% 76%, 84% 82%, 93% 89%, 93% 98%, 93% 100%);
+  clip-path: polygon(50% 100%, 51% 0%, 61% 2%, 63% 7%, 65% 10%, 65% 15%, 65% 21%, 72% 21%, 75% 21%, 80% 26%, 85% 34%, 86% 43%, 75% 54%, 80% 60%, 85% 74%, 85% 76%, 84% 82%, 93% 89%, 93% 98%, 93% 100%);
+}
+@media (min-width: 900px) {
+  .page-circle .stark-right .shape-human {
+    display: block;
+    margin-right: 0;
+    margin-left: -25%;
+  }
+}
+.page-circle .stark-right .text {
+  margin-top: 40px;
+}
+.page-circle .character-other {
+  display: grid;
+  width: 100%;
+  grid-gap: 25px;
+}
+.page-circle .character-other img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+@media (min-width: 900px) {
+  .page-circle .character-other {
+    grid-template-columns: repeat(2, 1fr) 220px;
+    grid-template-rows: repeat(2, min-content);
+  }
+  .page-circle .character-other__text:nth-of-type(6) {
+    grid-row: 2/3;
+    grid-column: 3/4;
+  }
+  .page-circle .character-other__image:nth-of-type(1) img {
+    height: 200px;
+  }
+  .page-circle .character-other__image:nth-of-type(5) {
+    grid-column: 3/4;
+    grid-row: 1/2;
+  }
+}
+
+@media (min-width: 900px) {
+  .page-easter {
+    display: grid;
+    grid-template-columns: 200px repeat(3, 1fr);
+    grid-column-gap: 35px;
+  }
+  .page-easter .title {
+    grid-row: 1/4;
+    grid-column: 1/2;
+    margin-top: 2em;
+  }
+}
+.page-easter .easter__item {
+  margin-top: 2em;
+}
+.page-easter .easter__item img {
+  height: 200px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+@media (min-width: 900px) {
+  .page-easter .easter__item img {
+    height: 140px;
+  }
+}
+.page-easter .easter__item:nth-child(3) img, .page-easter .easter__item:nth-child(4) img, .page-easter .easter__item:nth-child(5) img, .page-easter .easter__item:nth-child(9) img {
+  filter: brightness(2);
+}
+.page-easter .easter__item:nth-child(4) img {
+  object-position: 90% top;
+}
+.page-easter .easter__item:nth-child(5) img {
+  object-position: right;
+}
+.page-easter .easter__item:nth-child(6) img, .page-easter .easter__item:nth-child(9) img {
+  object-position: left;
+}
+
+.page-gauntlet .title {
+  text-align: center;
+  width: 80%;
+  margin: 2.8em auto 0;
+}
+.page-gauntlet .title small {
+  margin: 2em auto 0;
+}
+.page-gauntlet .gauntlet {
+  text-align: justify;
+}
+.page-gauntlet .gauntlet:not(:last-child) {
+  margin-bottom: 4em;
+}
+@media (min-width: 900px) {
+  .page-gauntlet .gauntlet {
+    flex: 0 1 35%;
+  }
+  .page-gauntlet .gauntlet__wrapper {
+    display: flex;
+    padding: 0 3em;
+    justify-content: space-evenly;
+  }
+}
+.page-gauntlet .gauntlet__image {
+  position: relative;
+  text-align: center;
+}
+.page-gauntlet .gauntlet__image img {
+  position: relative;
+  z-index: 2;
+  width: auto;
+  height: 350px;
+  max-width: 200px;
+  margin-bottom: -6px;
+}
+.page-gauntlet .gauntlet__image:before {
+  content: "";
+  position: absolute;
+  height: 70%;
+  width: 80%;
+  background: #eaecff;
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 0;
+  bottom: 0;
+}
+@media (min-width: 900px) {
+  .page-gauntlet .gauntlet__image:before {
+    width: 150%;
+    margin-left: -25%;
+  }
+}
+.page-gauntlet .gauntlet__text h5 {
+  text-align: center;
+  margin: 2.5em 0 1em;
+}
+
+.page-stones .quote {
+  font-family: "Abril Fatface";
+  font-size: 2.5em;
+  line-height: 1.2;
+  position: relative;
+  padding-top: 2.8em;
+  margin-bottom: 2em;
+}
+.page-stones .quote:before {
+  content: open-quote;
+  font-size: 4em;
+  color: #ddd;
+  position: absolute;
+  top: 0;
+}
+.page-stones p:first-letter {
+  float: left;
+  font-size: 50px;
+  font-weight: 700;
+  font-family: "Abril Fatface";
+  margin: 5px 10px 2px 0;
+  line-height: 1;
+}
+.page-stones p {
+  margin: 2em 0;
+}
+.page-stones .all-holders {
+  background: #eaecff;
+  padding: 3em;
+  margin: 2em 0;
+  text-align: center;
+}
+.page-stones .all-holders h5 {
+  margin: 0 0 25px;
+  font-family: "Abril Fatface";
+  font-weight: 400;
+  font-size: 2.2em;
+  line-height: 1.2;
+}
+.page-stones .all-holders img {
+  margin-top: 2em;
+  margin-bottom: -6em;
+  width: 100%;
+  transform: rotate(5deg);
+}
+@media (min-width: 900px) {
+  .page-stones {
+    display: grid;
+    grid-gap: 35px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: min-content repeat(3, auto);
+    align-items: flex-end;
+  }
+  .page-stones p:first-letter {
+    margin: 3px 8px 2px 4px;
+  }
+  .page-stones p {
+    text-align: justify;
+  }
+  .page-stones .title {
+    text-align: right;
+    grid-row: 1/2;
+    grid-column: 2/-1;
+    margin: 0;
+    padding-bottom: 0;
+  }
+  .page-stones .title small {
+    width: 100%;
+  }
+  .page-stones .quote {
+    grid-row: 1/3;
+    width: 82%;
+    margin-top: 1.5em;
+  }
+  .page-stones .column-1 {
+    grid-column: 1/2;
+    grid-row: 3/5;
+    align-self: flex-end;
+  }
+  .page-stones .column-2 {
+    grid-row: 2/3;
+    grid-column: 2/3;
+    align-self: flex-end;
+  }
+  .page-stones .column-3 {
+    grid-row: 2/5;
+    grid-column: 3/4;
+    margin-top: 40%;
+    align-self: flex-end;
+  }
+  .page-stones .all-holders {
+    grid-row: 3/5;
+    grid-column: 2/3;
+    margin: -2em 0 2em;
+    line-height: 1.8;
+    align-self: stretch;
+  }
+  .page-stones .all-holders img {
+    margin-left: -50%;
+    width: 200%;
+    margin-bottom: -8em;
+  }
+  .page-stones .image-2 {
+    grid-row: 1/3;
+    grid-column-end: -1;
+  }
+}
+
+.page-cap {
+  display: grid;
+  grid-template-columns: 70% 30%;
+  grid-gap: 30px;
+}
+.page-cap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: right;
+}
+.page-cap h2 {
+  align-self: center;
+  font-family: "Abril Fatface";
+  font-size: 65px;
+  line-height: 1;
+  text-transform: uppercase;
+  max-width: 70%;
+}
+
+.page-ironman {
+  text-transform: uppercase;
+  font-family: "Abril Fatface";
+  display: grid;
+  grid-template-rows: 1fr max-content;
+}
+.page-ironman .image {
+  position: relative;
+}
+.page-ironman h2.top {
+  font-size: 50px;
+  top: 10px;
+  left: 15px;
+  line-height: 1;
+  position: relative;
+  z-index: 2;
+  position: absolute;
+  color: rgba(255, 255, 255, 0.8);
+}
+.page-ironman h2.bottom {
+  font-size: 40px;
+  line-height: 1;
+  position: relative;
+  z-index: 2;
+  margin-top: 10px;
+  text-align: right;
+}
+.page-ironman img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(0.6);
+}
+
+.page-cover {
+  display: grid;
+  align-items: flex-end;
+  display: grid;
+  grid: 100%/100%;
+  text-align: center;
+  color: #fff;
+}
+.page-cover img {
+  height: 100%;
+  object-fit: cover;
+  object-position: bottom;
+  grid-row: 1/2;
+  grid-column: 1/2;
+}
+.page-cover h1 {
+  grid-row: 1/2;
+  grid-column: 1/2;
+  font-size: 70px;
+  width: 80%;
+  text-transform: uppercase;
+  margin: 0 auto 1em;
+  line-height: 1;
+  font-family: "Abril Fatface";
+}
+.page-cover h1 small {
+  font-size: 23%;
+  width: 90%;
+  margin: 2em auto;
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <main>
+  <div class="page__wrapper magazine">
+    <div class="page page-cover active">
+      <div class="controls">
+        <div class="controls__name"></div><a class="next js-next">Next</a>
+      </div><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/magazinecover.jpg"/>
+      <h1>
+         A Tribute <br/>to the Avengers<small>Exploring Avengers: Endgame, the highest-grossing movie worldwide and the future of the Marvel Cinematic Universe</small></h1>
+    </div>
+    <div class="page page-navigator">
+      <div class="controls">
+        <div class="controls__name"><strong>01</strong><span>A Tribute to the Avengers</span></div><a class="next js-prev">Back</a><a class="next js-next">Next</a>
+      </div>
+      <h1 class="title">
+         The End of An Era<small>There are 21 movies leading up to Avengers: Endgame. Should you run a Marvel Marathon, here are they in the order of the MCU timeline. You will need 2,867 minutes (48 hours).</small></h1>
+      <div class="navigator">
+        <div class="year">1943 – 1945</div>
+        <h5>Captain America: The First Avenger</h5>
+        <p>We see the creation of the first super-soldier.</p>
+      </div>
+      <div class="navigator">
+        <div class="year">1995</div>
+        <h5>Captain Marvel</h5>
+        <p>Carol Danvers fall to Earth and begin a hunt for the shape-shifting Skrull aliens.</p>
+      </div>
+      <div class="navigator">
+        <div class="year">2010</div>
+        <h5>Iron Man</h5>
+        <p>Captured by a terrorist organization, Tony Stark designs The first Iron Man suit to help him escape.</p>
+      </div>
+      <div class="navigator">
+        <div class="year">2010</div>
+        <h5>Iron Man 2</h5>
+        <p>Stark has to keep the government away from his suit tech. We meet the Black Widow and War Machine for the first time.</p>
+      </div>
+      <div class="navigator">
+        <div class="year">2010</div>
+        <h5>The Incredible Hulk</h5>
+        <p>The very first MCU movie follows Bruce Banner on the run from General Thunderbolt Ross and the US Military.</p>
+      </div>
+      <div class="navigator">
+        <div class="year">2011</div>
+        <h5>Thor</h5>
+        <p>The God of lightning has been banished to Earth from Asgard by his father Odin, all thanks to the trickery of his brother, Loki.</p>
+      </div>
+      <div class="navigator">
+        <div class="year">2012</div>
+        <h5>The Avengers</h5>
+        <p>The Avengers Initiative is live, battling Loki's army in New York City. We see Thanos for the first time.</p>
+      </div>
+      <div class="navigator">
+        <div class="year">2012</div>
+        <h5>Iron Man 3</h5>
+        <p>The film takes place six months after The Avengers in which Tony Stark deals with PTSD.</p>
+      </div>
+      <div class="navigator">
+        <div class="year">2013</div>
+        <h5>Thor: The Dark World</h5>
+        <p>Thor battles the Dark Elves, who are seeking the Aether, which is later revealed to be the Reality Stone.</p>
+      </div>
+      <div class="navigator">
+        <div class="year">2014</div>
+        <h5>Captain America: The Winter Soldier</h5>
+        <p>Captain America's closest friend returns from the dead as the Winter Soldier. This film introduces The Falcon.</p>
+      </div>
+      <div class="navigator">
+        <div class="year">2014</div>
+        <h5>Guardians of the Galaxy</h5>
+        <p>Star-Lord forms a ragtag group of outcasts with Gamora, Groot, Drax and Rocket. Nebula is also introduced.</p>
+      </div>
+      <div class="navigator">
+        <div class="year">2014</div>
+        <h5>Guardians of the Galaxy 2</h5>
+        <p>The GotG come face to face with a godlike entity known as Ego. Gamora repairs her relationship with Nebula.</p>
+      </div><img class="navigator-image" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/avengersteam.png"/>
+    </div>
+    <div class="page page-navigator page-navigator-2">
+      <div class="controls">
+        <div class="controls__name"><strong>02</strong><span>A Tribute to the Avengers</span></div><a class="next js-prev">Back</a><a class="next js-next">Next</a>
+      </div>
+      <div class="navigator">
+        <div class="year">2015</div>
+        <h5>Ant-Man</h5>
+        <p>Scott Lang is recruited by Hank Pym to dawn the Ant-Man suit in order to stop the technology from becoming weaponized.</p>
+      </div>
+      <div class="navigator">
+        <div class="year">2016</div>
+        <h5>Captain America: Civil War</h5>
+        <p>Civil War features almost every single Avenger while adding two more to the lineup: Black Panther and Spider-Man.</p>
+      </div>
+      <div class="navigator">
+        <div class="year">2016</div>
+        <h5>Black Panther</h5>
+        <p>T’Challa returns home to Wakanda to become king and is challenged by a long lost relative. Shuri, Okoye and M'Baku are introduced.</p>
+      </div>
+      <div class="navigator">
+        <div class="year">2016</div>
+        <h5>Spider-Man: Homecoming</h5>
+        <p>Spider-Man fights to keep his friendly neighborhood safe with some mentoring from Tony Stark.</p>
+      </div>
+      <div class="navigator">
+        <div class="year">2016 - 2017</div>
+        <h5>Doctor Strange</h5>
+        <p>Dr Stephen travels the world searching for a cure for his hands - and stumbles upon ancient magic.</p>
+      </div>
+      <div class="navigator">
+        <div class="year">2017</div>
+        <h5>Thor: Ragnarok</h5>
+        <p>Thor teams up with the Hulk, Loki and Valkyrie to confront some serious familial issues, mostly in the form of an evil sister.</p>
+      </div>
+      <div class="navigator">
+        <div class="year">2018</div>
+        <h5>Ant-Man and the Wasp</h5>
+        <p>Scott Lang teams up with Hope and Hank Pym to retrieve Hope's mother from the Quantum Realm. Hope dawns the Wasp suit.</p>
+      </div>
+      <div class="navigator">
+        <div class="year">2018</div>
+        <h5>Avengers: Infinity War</h5>
+        <p>Thanos is on the hunt for the infinity stones himself. The only thing standing in his way are the Avengers, who are spread across the universe.</p>
+      </div>
+      <div class="navigator">
+        <div class="year">2018-2023</div>
+        <h5>Avengers: Endgame</h5>
+        <p>The Avengers reunite for a slim chance to undo the chaos after five years since the Thanos Snap.</p>
+      </div><img class="navigator-image-2" src="https://meowlivia.s3.us-east-2.amazonaws.com/codepen/avengers/p-civilwar.jpg"/><img class="navigator-image-3" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/infinitywar.jpg"/>
+      <div class="navigator-space-2"></div>
+      <div class="navigator-space-3"></div>
+    </div>
+    <div class="page page-timer">
+      <div class="title">Let's Talk Screentime<small>With more than 50 reprising roles in Endgame and only 180 minutes to spare, here are the top 10 characters who appeared on screen the most often.</small></div>
+      <div class="timer">
+        <div class="timer__image"></div><span>1</span>
+        <div class="timer__hero">
+          <h5 class="name">Ironman</h5>
+          <p>1997 seconds</p>
+        </div>
+      </div>
+      <div class="timer">
+        <div class="timer__image"></div><span>2</span>
+        <div class="timer__hero">
+          <h5 class="name">Capt America</h5>
+          <p>1688 seconds</p>
+        </div>
+      </div>
+      <div class="timer">
+        <div class="timer__image"></div><span>3</span>
+        <div class="timer__hero">
+          <h5 class="name">Thor</h5>
+          <p>1105 seconds</p>
+        </div>
+      </div>
+      <div class="timer">
+        <div class="timer__image"></div><span>4</span>
+        <div class="timer__hero">
+          <h5 class="name">Hulk</h5>
+          <p>970 seconds</p>
+        </div>
+      </div>
+      <div class="timer">
+        <div class="timer__image"></div><span>5</span>
+        <div class="timer__hero">
+          <h5 class="name">Hawkeye</h5>
+          <p>966 seconds</p>
+        </div>
+      </div>
+      <div class="timer">
+        <div class="timer__image"></div><span>6</span>
+        <div class="timer__hero">
+          <h5 class="name">Ant-Man</h5>
+          <p>881 seconds</p>
+        </div>
+      </div>
+      <div class="timer">
+        <div class="timer__image"></div><span>7</span>
+        <div class="timer__hero">
+          <h5 class="name">Nebula</h5>
+          <p>866 seconds</p>
+        </div>
+      </div>
+      <div class="timer">
+        <div class="timer__image"></div><span>8</span>
+        <div class="timer__hero">
+          <h5 class="name">Black Widow</h5>
+          <p>839 seconds</p>
+        </div>
+      </div>
+      <div class="timer">
+        <div class="timer__image"></div><span>9</span>
+        <div class="timer__hero">
+          <h5 class="name">Thanos</h5>
+          <p>724 seconds</p>
+        </div>
+      </div>
+      <div class="timer">
+        <div class="timer__image"></div><span>10</span>
+        <div class="timer__hero">
+          <h5 class="name">Rocket</h5>
+          <p>524 seconds</p>
+        </div>
+      </div>
+      <div class="controls">
+        <div class="controls__name"><strong>03</strong><span>A Tribute to the Avengers</span></div><a class="next js-prev">Back</a><a class="next js-next">Next</a>
+      </div>
+    </div>
+    <div class="page page-easter">
+      <div class="controls">
+        <div class="controls__name"><strong>04</strong><span>A Tribute to the Avengers</span></div><a class="next js-prev">Back</a><a class="next js-next">Next</a>
+      </div>
+      <div class="title">Movie Details, Easter Eggs & More<small>It is known that Marvel loves their details and Easter eggs. Here are some that you may have missed, including fan theories and possible blunders.</small></div>
+      <div class="easter__item"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/detail-zola.jpg"/>
+        <div class="easter__text">Dr. Zola's computer can be seen when Tony sneaks into the bunker. Zola was probably preparing it to transfer his consciousness as his death would come only 2 years later.</div>
+      </div>
+      <div class="easter__item"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/detail-mjolnir.png"/>
+        <div class="easter__text">During the big battle, Thanos holds Captain America's hand and not the Mjölnir hammer because he knows he is not worthy and can't lift it.</div>
+      </div>
+      <div class="easter__item"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/detail-hulk.png"/>
+        <div class="easter__text">Hulk uses a pencil to flick the switches in the scene where they are trying to send Scott back in time, because his fingers are too big.</div>
+      </div>
+      <div class="easter__item"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/detail-tonsberg.png"/>
+        <div class="easter__text">Tønsberg, Norway has been an important setting in the MCU. It is where the Asgardians fought armies centuries ago, where the Tesseract was stolen in WW2, where Odin dies in <em>Thor: Ragnarok</em>, and where Thor builds New Asgard in <em>Endgame</em>.</div>
+      </div>
+      <div class="easter__item"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/detail-jarvis.jpg"/>
+        <div class="easter__text">After Tony Stark bids farewell to his father in 1970, Howard Stark is driven away by his butler, Edwin Jarvis (played by James D'Arcy, who also starred in the TV series, <em>Agent Carter</em>. This is the first ever crossover from the TV series into the movies.</div>
+      </div>
+      <div class="easter__item"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/detail-a113.jpg"/>
+        <div class="easter__text">The words “A-113” appear on Dr Banner’s HUD. This is an obvious reference to the classroom for character animation and graphic design at the California Institute of Arts, which has made its way into various TV shows, movies and media.</div>
+      </div>
+      <div class="easter__item"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/detail-inverted.jpg"/>
+        <div class="easter__text">Tony Stark cracks the time travel model after seeing a picture of him and Peter Parker holding an 'inverted' diploma.</div>
+      </div>
+      <div class="easter__item"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/detail-hotwire.png"/>
+        <div class="easter__text">You can see Giant-Man pushing a Chitauri in the background even though his character is supposedly in the van with Wasp during this scene.</div>
+      </div>
+      <div class="easter__item"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/detail-russos.jpg"/>
+        <div class="easter__text">In a Reddit AMA, the Russos have revealed that there are Easter eggs that have not been discovered yet. So get watching!</div>
+      </div>
+    </div>
+    <div class="page page-diagonal">
+      <div class="controls">
+        <div class="controls__name"><strong>05</strong><span>A Tribute to the Avengers</span></div><a class="next js-prev">Back</a><a class="next js-next">Next</a>
+      </div>
+      <h1 class="title">
+         Food: Much Importance<small>Avengers: Endgame has more scenes with food on screen or in dialogue than any other MCU movie.</small></h1>
+      <div class="diagonal"><img class="show-img-1 diagonal__image" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/pez.jpg"/>
+        <div class="show-text-1 diagonal__text"> 
+          <h5>Pez</h5>
+          <p>These Pez candies were not explicitly mentioned or even remotely obvious. However, some detectives managed to spot the Hulk and Iron Man Pez on a table in Thor's house during Rocket and Hulk's visit to New Asgard.</p>
+        </div><img class="show-img-2 diagonal__image" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/avengerbenjerry.png"/>
+        <div class="show-text-2 diagonal__text"> 
+          <h5>Hulk-inspired Ben &amp; Jerry's</h5>
+          <p>Wong names 'Hunka-Hulka Burning Fudge' as his favorite Ben & Jerry's flavor, preferring it over 'Stark Raving Hazelnuts' in <em>Infinity War</em>. In <em>Endgame</em>, Hulk is spotted eating a very large tub of 'Hunka-Hulka Burning Fudge' while discussing the location of the infinity stones with the Avengers.</p>
+        </div><img class="show-img-3 diagonal__image" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/shawarma.png"/>
+        <div class="show-text-3 diagonal__text"> 
+          <h5>Shawarma</h5>
+          <p>During the time heist back to New York 2012, Thor mentions that they're heading to lunch. It is not mentioned, but we all know that they are planning to have shawarma, as seen in the post-credits scene in <em>The Avengers</em> movie.</p>
+        </div><img class="show-img-4 diagonal__image" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/asgardale.jpg"/>
+        <div class="show-text-4 diagonal__text"> 
+          <h5>Asgardian Ale</h5>
+          <p>In the scene where Valkyrie explains that Thor only comes around once a month for supplies, we catch a glimpse of a barrell of <em>Asgardian Ale</em>. Although something tells us that it's not the only alcohol that Bro Thor drinks exclusively...</p>
+        </div><img class="show-img-5 diagonal__image" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/hulktaco.jpg"/>
+        <div class="show-text-5 diagonal__text"> 
+          <h5>More than 25 food items mentioned!</h5>
+          <p>The first mention? In the opening scene of <em>Endgame</em>, Hawkeye and his family were planning to eat hot dogs! Other examples include Nat and her peanut butter sandwich, Hulk eating at a diner, Frigga sending soup to Loki and of course, tacos and juice pops!</p>
+        </div>
+        <div class="free-space-1"></div>
+        <div class="free-space-2"></div>
+        <div class="free-space-3"></div>
+        <div class="free-space-4"></div>
+      </div>
+    </div>
+    <div class="page page-thor">
+      <div class="controls">
+        <div class="controls__name"><strong>06</strong><span>A Tribute to the Avengers</span></div><a class="next js-prev">Back</a><a class="next js-next">Next</a>
+      </div>
+      <div class="product-name">
+        <h1 class="title">
+           Asgard's #1 <br/>Weight-Gain Regiment<small>Clinically proven anti-workout plan to help you gain up to 4.5 times the weight. Why even diet and exercise?</small></h1>
+      </div>
+      <div class="photo-combo"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/thorcombo.png" alt="Weight Gain Regiment"/></div>
+      <div class="window">
+        <div class="window__left"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/thorhot.png"/><span>Before</span></div>
+        <div class="window__right"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/thorfat.png"/><span>After</span></div>
+      </div>
+      <div class="persuader"> 
+        <div class="testi">
+          <div class="testi__text">
+            <p>
+               Reviewed by health expert, <strong>Dr. Stephen Strange, M.D., Ph.D.</strong>: "No amount of sorcery can fix this thing." Individual results may vary. Please consult your doctor if you experience discomfort or if you show symptoms of heart disease, stroke, high blood pressure or diabetes.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="page page-gauntlet">
+      <div class="controls">
+        <div class="controls__name"><strong>07</strong><span>A Tribute to the Avengers</span></div><a class="next js-prev">Back</a><a class="next js-next">Next</a>
+      </div>
+      <div class="title">
+         Know Your Gauntlets<small>When all the Infinity Stones are united in the Gauntlet, the wearer wields unlimited power.</small></div>
+      <div class="gauntlet__wrapper">
+        <div class="gauntlet">
+          <div class="gauntlet__image"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/gauntlet-infinity.png"/></div>
+          <div class="gauntlet__text"> 
+            <h5>Infinity Gauntlet</h5>
+            <p>The Infinity Gauntlet was a powerful metallic glove that was designed to channel the power of all six Infinity Stones. It was made by the ruler of Nidavellir, King Eitri. We don't know  what it is made of, but our best guess is Uru - a metal unique to Nidavellir and the same metal used to forge Mjölnir and Stormbreaker.</p>
+          </div>
+        </div>
+        <div class="gauntlet">
+          <div class="gauntlet__image"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/gauntlet-nano.png"/></div>
+          <div class="gauntlet__text"> 
+            <h5>Nano Gauntlet</h5>
+            <p>The Nano Gauntlet was a glove made of nano-technology created by Stark, Banner and Rocket Raccoon in 2023. It was designed to allow the user to channel the powers of the Infinity Stones in a manner similar to the Infinity Gauntlet, although the effects of wielding it were far more damaging to the user than the Infinity Gauntlet.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="page page-stones">
+      <div class="controls">
+        <div class="controls__name"><strong>08</strong><span>A Tribute to the Avengers</span></div><a class="next js-prev">Back</a><a class="next js-next">Next</a>
+      </div>
+      <div class="title">Know Your Stones<small>A brief introduction to all the stones and who have held the stones. * indicates that the holder held the stone barehanded.</small></div>
+      <div class="quote">With all six stones, I can simply snap my fingers, they would all cease to exist. I call that mercy.</div>
+      <div class="column-1">
+        <p>Tessarect: a blue cube which holds the Space Stone. This stone gives the user power over space and can create a portal from one part of the universe to another. The Space Stone has been held by: Odin, the Norwegian priest, Red Skull, Howard Stark, Mar-vell, Captain Marvel, Michelle Rambeau, Goose, Nick Fury, Hawkeye, Dr Selvig, Tony Stark, Bruce Banner, Loki, Thor, Ebony Maw, Thanos*</p>
+        <p>Hurling Gamora off the cliff (or anyone whom you love) nets you the Soul Stone. It’s unclear what the Soul Stone’s powers are in the film universe. In the comics, the gem allows the holder to capture and control others’ souls. Only two have held the Soul Stone: Thanos*, Hawkeye*.</p>
+      </div>
+      <div class="column-2">
+        <p>Aether: a manifestation of The Reality Stone which grants the user power to manipulate matter. The Reality Stone has been held by: Malekith, Bor, Jane Foster, Sif the Collector, Thanos* and Rocket Raccoon</p>
+      </div>
+      <div class="column-3">
+        <p>Necklace called the Eye of Agomoto is where the Time Stone is hidden. The Time Stone grants its owner the power to re-wind or fast-forward time. The Time Stone was only held by the Ancient One and Doctor Strange before Thanos got his hands on it.</p>
+        <p>Orb that contains the Power Stone seems to be a popular item across the universe. The Power Stone bestows upon its holder a lot of energy — the sort that you could use to destroy an entire planet. The Celestial, Star-Lord*, Korath, the broker, Gamora, Drax, the Collector, the Collector's assistant*, Nebula, Ronan*, Nova Prime, Thanos*, and War Machine have all held the Power Stone.</p>
+        <p>Scepter. Loki's Scepter which could counter the immense enery of the Tessarect. Turns out, it's the Mind Stone! This yellow stone allows the user to control the minds of others and have been held by: Thanos*, Loki, Bruce Banner, Black Widow, Agent Sitwell, Agent Crossbones, Baron Strucker, Tony Stark, Ultron*, Vision, Captain America, Ant-Man</p>
+      </div>
+      <!--img.image-2(src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/pezmovie.jpg")-->
+      <div class="all-holders"> 
+        <h5>Besides Thanos, who has held all six stones? </h5>
+        <div>The participants of the "gauntlet hot potato" (as the MCU writers cutely call it): Professor Hulk, Hawkeye, Nebula, Black Panther, Spider-Man, Captain Marvel and Iron Man. Captain America has also carried all six stones to return them to their original timelines in what we'll call the Infinity Briefcase.</div><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/stoneholders.png" alt="Infinity Stones"/>
+      </div>
+    </div>
+    <div class="page page-cap">
+      <div class="controls">
+        <div class="controls__name"></div><a class="next js-prev">Back</a><a class="next js-next">Next</a>
+      </div><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/captwp.jpg"/>
+      <h2>
+         I<br/>can do this all day.</h2>
+    </div>
+    <div class="page page-contributor">
+      <div class="title">
+         Missing The Avengers?<small>Me too. But not to worry, our overlords at Disney have graced us with upcoming movies and series featuring most of the Avengers. </small></div>
+      <div class="contributor"><img class="contributor__image" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/blackwidowmovie.png" alt="Black Widow Movie"/>
+        <div class="contributor__textwrap">
+          <h5 class="contributor__author">
+             Black Widow </h5>
+          <p class="contributor__text">
+             May 1, 2020. Following the events of the Civil War, Natasha Romanoff is on the run from the government, and finds herself on her own, forced to deal with "some of the red in her ledger".</p>
+        </div>
+      </div>
+      <div class="contributor"><img class="contributor__image" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/falconwintersoldier.png" alt="Falcon &amp; The Winter Soldier"/>
+        <div class="contributor__textwrap">
+          <h5 class="contributor__author">The Falcon & The Winter Soldier </h5>
+          <p class="contributor__text"> August 2020. The Falcon wields the Captain America shield and fights alongside the Winter Soldier.</p>
+        </div>
+      </div>
+      <div class="contributor"><img class="contributor__image" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/wandavision.png" alt="WandaVision"/>
+        <div class="contributor__textwrap">
+          <h5 class="contributor__author">WandaVision</h5>
+          <p class="contributor__text">Spring 2021. Speculation: To be set in the 1950s, Wanda plays with different realities to carve out a perfect life with Vision.</p>
+        </div>
+      </div>
+      <div class="contributor"><img class="contributor__image" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/doctorstrangemovie.png" alt="Doctor Strange in the Multiverse of Universe"/>
+        <div class="contributor__textwrap">
+          <h5 class="contributor__author">
+             Doctor Strange in the Multiverse of Universe </h5>
+          <p class="contributor__text">May 7 2021. Anndddd Wanda messes up and now the magician is here to save the day.</p>
+        </div>
+      </div>
+      <div class="contributor"><img class="contributor__image" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/lokishow.png" alt="Loki"/>
+        <div class="contributor__textwrap">
+          <h5 class="contributor__author">Loki </h5>
+          <p class="contributor__text">
+             Spring 2021. The series would be exploring what Loki did after he stole the Tesseract during the Time Heist in <em>Avengers: Endgame </em>and created a new timeline.</p>
+        </div>
+      </div>
+      <div class="contributor"><img class="contributor__image" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/hawkeyeshow.png" alt="Hawkeye"/>
+        <div class="contributor__textwrap">
+          <h5 class="contributor__author">
+             Hawkeye</h5>
+          <p class="contributor__text">Fall 2021. Hawkeye returns and takes on the responsibility to train Kate Bishop to become the next Hawkeye. </p>
+        </div>
+      </div>
+      <div class="contributor"><img class="contributor__image" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/thorlovethunder.png" alt="Thor Love &amp; Thunder"/>
+        <div class="contributor__textwrap">
+          <h5 class="contributor__author">
+             Thor: Love & Thunder</h5>
+          <p class="contributor__text">November 5 2021. We don't know much, except that there will be the first Female Thor.</p>
+        </div>
+      </div>
+      <div class="credits"> <strong>Special Mention. </strong><span>Black Panther 2 is set to release on May 6, 2022.</span></div>
+      <div class="controls">
+        <div class="controls__name"><strong>10</strong><span>A Tribute to the Avengers</span></div><a class="next js-prev">Back</a><a class="next js-next">Next</a>
+      </div>
+    </div>
+    <div class="page page-circle">
+      <div class="controls">
+        <div class="controls__name"><strong>11</strong><span>A Tribute to the Avengers</span></div><a class="next js-prev">Back</a><a class="next js-next">Next</a>
+      </div>
+      <div class="stark-center">
+        <div class="title">A Shout-out to the Ones We Will Miss the Most</div>
+        <div class="stark-left">
+          <div class="shape-human"></div>
+          <div class="text"> 
+            <h5>Iron Man/Tony Stark</h5>
+            <p>
+               In <em>Endgame</em>, we had to say goodbye to the most important Avenger. Even though he wasn't the leader of the Avengers, Iron Man has always been the team's driving force. His charisma and savvy helped the team bond, and he was instrumental in giving the Avengers a good public face. Tony was also the one bankrolling the Avengers — he built the tower they used as a home base, and he built their new upstate headquarters. Tony is literally giving them a place to assemble.</p>
+            <p>There's perhaps no greater endorsement of Iron Man's status as the most important Avenger than Captain America's word. Cap called Tony "Earth's best defender." It's not hyperbolic, as over a ten-year career as a superhero, Tony truly has cemented himself as the greatest hero around. </p>
+          </div><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/tony-ironman.png"/>
+        </div>
+        <div class="stark-right">
+          <div class="shape-human"></div>
+          <div class="text"> 
+            <p>
+               What will we miss the most? Honestly? His quips and memorable quotes. From the iconic "Genius, billionaire, playboy, philanthropist" line to coming up with fitting names — Lebowski for Bro Thor and Build-A-Bear for Rocket immediately come to mind — we are not convinced that there will be another character who can pull off throwing insults so flawlessly.</p>
+            <p>
+               Our only consolation is that there is hope that Morgan Stark will grow up and follow in the footsteps of her father. Until then, we'll just have to watch YouTube compilations of Tony Stark's best moments. Here's to Iron Man and Robert Downey Jr, the anchor of the Marvel Cinematic Universe. </p>
+          </div>
+        </div>
+      </div>
+      <div class="character-other">
+        <div class="character-other__image"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/blackwidow.png" alt="Black Widow"/></div>
+        <div class="character-other__text"> 
+          <h5>Black Widow </h5>
+          <p>We didn't care much for Black Widow and had very little emotional attachment to her character. Turns out, all it needed to make her death the hardest for us was her complete dedication to the Avengers for 5 years post Thanos-snap and a tear-jerking sacrificial jump, with her best friend unwillingly sending her off.</p>
+        </div>
+        <div class="character-other__image"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/corvusproxima.jpg" alt="Corvus Glaive and Proxima Midnight"/></div>
+        <div class="character-other__text"> 
+          <h5>Proxima Midnight & Corvus Glaive</h5>
+          <p>
+             Wait, hear us out. Proxima Midnight & Corvus Glaive were actually married. Joe Russo <a href="https://comicbook.com/marvel/2018/08/03/avengers-infinity-black-order-proxima-midnight-corvus-glaive-married/">mentioned that they did have plans to explore their relations but the plot threads were ultimately cut for time.</a>. We're just lowkey disappointed that we didn't get that story.</p>
+        </div>
+        <div class="character-other__image"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/cassielang.jpg" alt="Cassie Lang"/></div>
+        <div class="character-other__text"> 
+          <h5>Young Cassie </h5>
+          <p>
+             We are glad she wasn't snapped and we know teenage Cassie is important to pave the way to the <a href="https://marvel.fandom.com/wiki/Cassandra_Lang_(Earth-616)">Young Avengers</a>. But man, Abby Ryder Johnson is the best child actor we've seen and we sure will miss this little peanut.</p>
+        </div>
+      </div>
+    </div>
+    <div class="page page-more">
+      <div class="controls">
+        <div class="controls__name"><strong>12</strong><span>A Tribute to the Avengers</span></div><a class="next js-prev">Back</a><a class="next js-next">Next</a>
+      </div>
+      <h5 class="title-mini">Captain America/ Steve Rogers</h5><img class="image" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/captwp2.jpg" alt="Captain America Wallpaper"/>
+      <div class="text">
+         Oh boy, we have so many questions. Perhaps the most hotly debated <em>Endgame</em> plot point is the fate of Captain America, who travels back in time to live out his life with Peggy Carter. It is established that Peggy had a husband and two kids, and some fans have theorized that Steve Rogers secretly was this husband all along. Others have stated that Steve created an alternate timeline when he went back to live with Peggy, and somehow got back to the mainline MCU as an old man. In conclusion, we are unsure. All we know is that the shield has been passed onto the Falcon (but he will not take on the name like in the comics, as the name of a new Disney+ show is <em>The Falcon and the Winter Soldier</em>) and Chris Evans is done with the MCU. So maybe we won't have to say goodbye to Captain America, but we'll unfortunately have to bid farewell to our favorite Chris.</div>
+      <div class="quote">
+         If there’s one thing I’ve learned about working with Marvel, they don’t leave stones unturned. They really don’t.<br/>
+        <p>– Chris Evans</p>
+      </div>
+      <div class="title">Consolation Videos<small>For when you're missing your favorite actors, we've got some YouTube videos for nostalgia.</small></div>
+      <div class="more">
+        <div class="more__item"><img class="more__image" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/show1.jpg" alt="Image for Show"/>
+          <h5 class="more__headline">50 Marvel Questions</h5>
+          <div class="more__subtext">Endgame stars answer 50 of the most Googled questions about Marvel. The questions are weird, but the video is 7 minutes of charisma.</div><a href="https://youtu.be/IEr_yj-8MmM" target="_blank">Watch video</a>
+        </div>
+        <div class="more__item"><img class="more__image" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/show2.jpg" alt="Image for Show"/>
+          <h5 class="more__headline">Most Likely To...</h5>
+          <div class="more__subtext">Watch the OG6 Avengers answer questions in this terribly short video (but it's the only one we got).</div><a href="https://www.youtube.com/watch?v=JWYPT4r9kLU" target="_blank">Watch video</a>
+        </div>
+        <div class="more__item"><img class="more__image" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/show3.jpg" alt="Image for Show"/>
+          <h5 class="more__headline">The Thanos Snap</h5>
+          <div class="more__subtext">The cast takes a meaningless Buzzfeed quiz to  learn what their fates would be if faced with a real life snap from Thanos.</div><a href="https://youtu.be/7XLd9zX6PqU" target="_blank">Watch video</a>
+        </div>
+        <div class="more__item"><img class="more__image" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/show4.jpg" alt="Image for Show"/>
+          <h5 class="more__headline">Netflix's <em>The Chef Show</em></h5>
+          <div class="more__subtext">Watch Jon Favreau taste food with RDJ, Tom Holland, and the Russo brothers. Only available on Netflix, sorry.</div><a href="https://youtu.be/A9bcFSNB25U" target="_blank">Watch teaser</a>
+        </div>
+      </div>
+    </div>
+    <div class="page page-ironman">
+      <div class="controls">
+        <div class="controls__name"><a class="js-back-to-1">Back to Cover</a></div><a class="next js-prev">Back</a>
+      </div>
+      <div class="image">
+        <h2 class="top">That's the hero gig.</h2><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/ironmanwp.jpg"/>
+      </div>
+      <h2 class="bottom">Part of the journey is the end.</h2>
+    </div>
+  </div>
+</main>
+<footer>
+  <p>Click 'Next' on the top right to see more layouts. Under 900px, it will be a single page instead.</p>
+  <div class="explanation">Part of the <a href="https://codepen.io/collection/DQvYpQ/" target="_blank">CSS Grid collection.</a></div>
+</footer>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+    <script id="rendered-js" >
+$('.js-next').on('click', function () {
+  var current = $('.page.active');
+  var findNext = $(current).next(".page");
+  $(current).removeClass('active');
+  setTimeout(function () {
+    $(findNext).addClass("active");
+  }, 200);
+});
+
+$('.js-prev').on('click', function () {
+  var current = $('.page.active');
+  var findPrev = $(current).prev(".page");
+  $(current).removeClass('active');
+  setTimeout(function () {
+    $(findPrev).addClass("active");
+  }, 200);
+});
+
+$('.js-back-to-1').on('click', function () {
+  var current = $('.page.active');
+  $(current).removeClass('active');
+  setTimeout(function () {
+    $('.page-cover').addClass("active");
+  }, 400);
+});
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>

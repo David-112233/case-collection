@@ -1,0 +1,17 @@
+{
+  "url": "https://css3dlab.edgarasneverdauskas.com/models/lipstick/",
+  "title": "Twist-up lipstick",
+  "author": "Edgaras Neverdauskas (Evirtual)",
+  "source_id": "css3dlab:evirtual/lipstick",
+  "source_path": "https://github.com/Evirtual/css-3d-lab/blob/88d044dd0c84baa94f27967f5991b7327fb44317/src/models/snippets-batch-n-lipstick.ts",
+  "license": "MIT snippet only",
+  "retrieved_at": "2026-11-20",
+  "acquisition": "Pinned MIT snippet: reproduced published string expansion into minimal local HTML/CSS wrapper, not a live page source capture; no third-party runtime",
+  "review": {
+    "number": "C276",
+    "status": "候审",
+    "visual_verified": true,
+    "evidence": "约 1316×884 作者预览。闭态盖套住筒身；悬停并等待停稳后，倾斜切面可见，金边筒口压住口红柱基部，盖子停在侧面。不要按过渡时序评分。",
+    "mobile_or_offline_replay_verified": false
+  }
+}

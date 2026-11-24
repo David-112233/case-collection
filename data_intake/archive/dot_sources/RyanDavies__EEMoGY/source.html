@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>GSAP Floor Plan</title>
+
+    <link rel="canonical" href="https://codepen.io/RyanDavies/pen/EEMoGY">
+  
+  
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
+  
+<style>
+ul {
+  list-style-type: none;
+}
+
+li {
+  display: inline-block;
+}
+
+a {
+  background-color: #4d2a76;
+  color: white;
+  padding: 0.5rem;
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+}
+
+a[aria-expanded=true] {
+  border-color: #4d2a76;
+  background-color: white;
+  color: #4d2a76;
+}
+
+.foundation {
+  fill: #4d2a76;
+}
+
+.wall,
+.roof {
+  opacity: 0;
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  <ul class="nav nav-tabs nav-tabs--map hidden-xs" id="mapTabs" role="tablist">
+  <li role="presentation">
+    <a href="#dance" aria-controls="dance" role="tab" data-toggle="tab">Dance</a>
+    </li>
+    <li role="presentation">
+      <a href="#film" aria-controls="film" role="tab" data-toggle="tab">Film</a>
+    </li>
+    <li role="presentation">
+      <a href="#studio-theater" aria-controls="studio-theater" role="tab" data-toggle="tab">Studio Theater</a>
+    </li>
+    <li role="presentation">
+      <a href="#multipurpose" aria-controls="multipurpose" role="tab" data-toggle="tab">Multipurpose</a>
+    </li>
+    <li role="presentation">
+      <a href="#visual-arts" aria-controls="visual-arts" role="tab" data-toggle="tab">Visual Arts</a>
+    </li>
+</ul>
+
+
+<svg id="map" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1063.31 457.37">
+  <!-- start ground -->
+  <polygon class="ground" points="906.5 287.93 1063.31 287.93 912.26 86.82 801.26 86.82 888.84 254.62 769.64 254.62 700.85 51.87 360.42 51.87 343.92 91.37 210.46 91.37 0 396.21 222.83 396.21 264.77 293.86 416.95 293.86 385.92 457.37 994.67 457.37 906.5 287.93 906.5 287.93" fill="#939"/>
+  <!-- end ground -->
+  
+  <!-- group building, start with foundation, add walls, then roof for proper layering -->
+  <g class="building dance film">
+    <polygon class="foundation" points="174.82 207.37 188.97 184.33 271.97 184.33 314.18 95.39 213.56 95.39 137.52 207.47 174.82 207.37"/>
+    <polygon class="wall wall-secondary" points="271.97 113.14 314.18 34.94 314.18 95.39 271.97 184.33 271.97 113.14"/>
+    <polygon class="wall wall-tertiary" points="137.54 133.05 174.82 133.05 174.82 207.37 137.52 207.47 137.54 133.05"/>
+    <polygon class="wall wall-tertiary" points="188.91 113.08 271.97 113.14 271.97 184.33 188.97 184.33 188.91 113.08"/>
+    <polygon class="wall wall-secondary" points="174.82 133.05 188.91 113.08 188.97 184.33 174.82 207.37 174.82 133.05"/>
+    <polygon class="roof" points="213.44 34.94 137.54 133.05 174.82 133.05 188.91 113.08 271.97 113.14 314.18 34.94 213.44 34.94"/>
+  </g><!-- end dance -->
+  
+  <!-- start Red Building -->
+  <g class="building film">
+    <polygon class="foundation" points="129.04 219.97 13.99 389.54 174.6 389.54 255.06 219.97 129.04 219.97"/>
+    <polygon class="wall wall-secondary" points="174.6 294.05 255.06 145.04 255.06 219.97 174.6 389.54 174.6 294.05"/>
+    <rect class="wall wall-tertiary" x="13.99" y="294.05" width="160.61" height="95.49" />
+    <polygon class="roof" points="13.99 294.05 174.6 294.05 255.06 145.04 129.04 145.04 13.99 294.05"/>     
+  </g>
+  <!-- end Red Building -->
+  
+  <!-- start Magenta Building -->
+  <g class="building studio-theater">
+    <polygon class="foundation" points="548.25 223.7 294.31 223.7 363.15 55.19 548.25 55.19 548.25 223.7"/>
+    <polygon class="wall" points="294.58 146.8 548.25 146.8 548.25 223.7 294.31 223.7 294.58 146.8" fill="#702860"/>
+    <polygon class="roof" points="294.58 146.8 548.25 146.8 548.25 0 363.15 0 294.58 146.8" fill="#e1306c"/>
+  </g>
+  <!-- end Magenta Building -->
+  
+  <!-- start gray building -->
+  <g class="building visual-arts">
+    <polygon class="foundation" points="716.5 118.87 631.18 118.87 646.25 212.8 746.72 212.8 716.5 118.87"/>
+    <polygon class="wall" points="646.25 138.63 631.18 56.11 631.18 118.87 646.25 212.8 646.25 138.63" fill="#273c6a"/>
+    <rect class="wall" x="646.25" y="138.63" width="100.47" height="74.17" fill="#5f6c8a"/>
+    <polygon class="roof" points="746.72 138.63 646.25 138.63 631.18 56.11 716.19 56.11 746.72 138.63" fill="#bcbdc0"/>
+  </g>
+  <!-- end gray building -->
+  
+  <!-- start teal buildings -->  
+  <g class="building multipurpose">
+    <polygon class="foundation" points="944.96 137.44 909.67 89.82 807.68 89.82 833.01 137.44 944.96 137.44"/>
+    <polygon class="wall" points="833.01 72.74 807.68 30.88 807.68 89.82 833.01 137.44 833.01 72.74" fill="#083967"/>    
+    <rect class="wall" x="833.01" y="72.74" width="111.95" height="64.69" fill="#136582"/>
+    <polygon class="roof" points="944.96 72.74 833.01 72.74 807.68 30.88 909.67 30.88 944.96 72.74" fill="#12b0b0"/>
+  </g>
+   <g class="building multipurpose">
+     <polygon class="foundation" points="935.55 282.27 1052.29 282.27 993.82 203.37 890.63 203.37 935.55 282.27"/> 
+    <polygon class="wall" points="935.55 200.55 890.63 131.13 890.63 203.37 935.55 282.27 935.55 200.55" fill="#083967"/>
+    <rect class="wall" x="935.55" y="200.55" width="116.74" height="81.72" fill="#136582"/>
+    <polygon class="roof" points="1052.29 200.55 935.55 200.55 890.63 131.13 993.82 131.13 1052.29 200.55" fill="#12b0b0"/>
+  </g> 
+  <g class="building multipurpose">
+    <polygon class="foundation" points="760.75 320.9 914.68 320.9 979.75 448.55 798.48 448.55 760.75 320.9"/>    
+    <polygon class="wall" points="798.48 345.55 760.75 233.44 760.75 320.9 798.48 448.55 798.48 345.55" fill="#083967"/>
+    <rect class="wall" x="798.48" y="345.55" width="181.27" height="103" fill="#136582"/>
+    <polygon class="roof" points="760.75 233.44 914.68 233.44 979.75 345.55 798.48 345.55 760.75 233.44" fill="#12b0b0"/>
+  </g>
+  <g class="building multipurpose">
+    <polygon class="foundation" points="591.75 293.86 424.43 293.86 396.75 448.55 601.47 448.55 591.75 293.86"/>    
+    <rect class="wall" x="396.75" y="343.55" width="204.73" height="105" fill="#136582"/>
+    <polygon class="wall" points="601.47 343.55 396.75 343.55 424.43 208.05 591.75 208.05 601.47 343.55" fill="#12b0b0"/>
+  </g>
+  <!-- end teal buildings -->
+</svg>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
+    <script id="rendered-js" >
+// Each building has a color scheme, consisting of a primary, secondary, and a tertiary value.
+var buildings = {
+  'dance': {
+    'colors': {
+      'primary': '#d97700',
+      'secondary': '#2b2e45',
+      'tertiary': '#6c492e' } },
+
+
+  'film': {
+    'colors': {
+      'primary': '#ca3414',
+      'secondary': '#282049',
+      'tertiary': '#642835' } } };
+
+
+
+var building, walls, wallSecondary, wallTertiary, roof;
+var map = $('#map');
+
+
+$('a[data-toggle="tab"]').on('click', function (e) {
+  e.preventDefault();
+
+  // To do: toggle this class if any tabs are open.
+  map.toggleClass('is-active');
+});
+
+$('a[data-toggle="tab"]').on('mouseenter focusin', function () {
+  if (!map.hasClass('is-active')) {
+    building = $(this).attr('aria-controls');
+    roof = '.' + building + ' .roof';
+    walls = '.' + building + ' .wall';
+    wallSecondary = '.' + building + ' .wall-secondary';
+    wallTertiary = '.' + building + ' .wall-tertiary';
+    roof = '.' + building + ' .roof';
+
+    TweenMax.
+    to([walls, roof], 0.75, {
+      opacity: 1,
+      y: 0,
+      ease: Bounce.easeInOut });
+
+
+    TweenMax.to([roof], 0.75, {
+      fill: buildings[building]['colors']['primary'] });
+
+    TweenMax.to([wallSecondary], 0.75, {
+      fill: buildings[building]['colors']['secondary'] });
+
+    TweenMax.to([wallTertiary], 0.5, {
+      fill: buildings[building]['colors']['tertiary'] });
+
+  }
+});
+
+$('a[data-toggle="tab"]').on('mouseleave focusout', function () {
+  if (!map.hasClass('is-active')) {
+    TweenMax.to('.building .wall, .building .roof', 0.75, {
+      opacity: 0,
+      y: 100,
+      ease: Bounce.easeInOut });
+
+  }
+});
+
+// Make Bootstrap tabs toggle-able...
+$('#mapTabs a').click(function (e) {
+  var tab = $(this);
+  if (tab.parent('li').hasClass('active')) {
+    window.setTimeout(function () {
+      $('.tab-pane').removeClass('active');
+      tab.parent('li').removeClass('active');
+      tab.attr('aria-expanded', 'false');
+    }, 1);
+  }
+});
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>

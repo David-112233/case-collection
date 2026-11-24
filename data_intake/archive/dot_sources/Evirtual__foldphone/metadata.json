@@ -1,0 +1,17 @@
+{
+  "url": "https://css3dlab.edgarasneverdauskas.com/models/foldphone/",
+  "title": "Foldable phone",
+  "author": "Edgaras Neverdauskas (Evirtual)",
+  "source_id": "css3dlab:evirtual/foldphone",
+  "source_path": "https://github.com/Evirtual/css-3d-lab/blob/88d044dd0c84baa94f27967f5991b7327fb44317/src/models/snippets-batch-n-foldphone.ts",
+  "license": "MIT snippet only",
+  "retrieved_at": "2026-11-20",
+  "acquisition": "Pinned MIT snippet: reproduced published string expansion into minimal local HTML/CSS wrapper, not a live page source capture; no third-party runtime",
+  "review": {
+    "number": "C277",
+    "status": "候审",
+    "visual_verified": true,
+    "evidence": "约 1316×884 作者预览。闭态外屏半片压在内半片之前，两层框边可辨；悬停停稳后内屏跨过折线、视角固定。不同于 C267 非铰接透明背板及 C272 循环旋转笔记本。",
+    "mobile_or_offline_replay_verified": false
+  }
+}

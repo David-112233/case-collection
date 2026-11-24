@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>CSS Grid: Coupons!</title>
+
+    <link rel="canonical" href="https://codepen.io/oliviale/pen/wbyVWr">
+  <link href="https://fonts.googleapis.com/css?family=Concert+One|Montserrat:500,700,900|Quicksand:400,700" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://public.codepenassets.com/css/reset-2.0.min.css">
+
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css'>
+  
+<style>
+body {
+  background: #fff;
+  color: #222;
+  font-family: "Quicksand", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+strong {
+  font-weight: 700;
+}
+
+aside.context {
+  text-align: center;
+  color: #333;
+  line-height: 1.7;
+}
+aside.context a {
+  text-decoration: none;
+  color: #333;
+  padding: 3px 0;
+  border-bottom: 1px dashed;
+}
+aside.context a:hover {
+  border-bottom: 1px solid;
+}
+aside.context .explanation {
+  max-width: 700px;
+  margin: 6em auto 0;
+}
+
+footer {
+  text-align: center;
+  margin: 4em auto;
+  width: 100%;
+}
+footer a {
+  text-decoration: none;
+  display: inline-block;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px dashed #333;
+  color: #333;
+  margin: 5px;
+}
+footer a:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+footer a .icons {
+  margin-top: 12px;
+  display: inline-block;
+  font-size: 20px;
+}
+
+main {
+  width: 990px;
+  display: grid;
+  grid: max-content 1fr 25%/76% 24%;
+  background: #f9f9f9;
+  margin: 4em auto;
+  padding: 15px 15px 22px;
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.15), 1px 1px 10px rgba(0, 0, 0, 0.1);
+}
+
+.name {
+  display: grid;
+  grid: repeat(2, max-content)/max-content 1fr max-content;
+}
+.name h1 {
+  font: 900 100px/1 "Montserrat", sans-serif;
+  text-transform: uppercase;
+  grid-column: 2/4;
+  letter-spacing: -1px;
+}
+.name p {
+  font: 900 16px "Montserrat", sans-serif;
+  text-transform: uppercase;
+  margin: 0 0 10px;
+  grid-row: 2;
+  grid-column: 1/3;
+}
+.name h5.headline {
+  font-weight: 700;
+}
+
+.callout {
+  margin-left: 10px;
+  color: #fff;
+  text-align: center;
+}
+.callout h4 {
+  background: #c13458;
+  padding: 15px;
+  font: 700 24px/1 Montserrat;
+  text-transform: uppercase;
+}
+.callout h5 {
+  background: #4aafbc;
+  padding: 10px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.sale-items {
+  display: grid;
+  grid: repeat(2, 1fr)/25% 8% 1fr 1fr 8% 25%;
+  grid-auto-flow: dense;
+  grid-row-gap: 12px;
+  border: 6px solid #4aafbc;
+}
+.sale-items .item {
+  padding: 0 8px;
+  margin: 0 0 8px;
+}
+.sale-items .item:nth-child(1) {
+  grid-column: 3/5;
+  background: #4aafbc;
+  margin: 0;
+}
+.sale-items .item:nth-child(2) {
+  grid-column: 1/3;
+}
+.sale-items .item:nth-child(3) {
+  grid-column: 5/7;
+  border-bottom: 0.5px solid #ddd;
+}
+.sale-items .item:nth-child(4) {
+  border-right: 0.5px solid #ddd;
+}
+.sale-items .item:nth-child(5) {
+  grid-column: span 2;
+  border-right: 0.5px solid #ddd;
+}
+.sale-items .item:nth-child(6) {
+  grid-column: span 2;
+  border-right: 0.5px solid #ddd;
+}
+.sale-items .item:nth-child(2), .sale-items .item:nth-child(3) {
+  border-bottom: 0.5px solid #ddd;
+  margin: 0 8px;
+  padding: 8px 0;
+}
+.sale-items .quote {
+  grid-column: 1/span 2;
+  grid-row: 1/span 3;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  padding: 10px;
+}
+.sale-items .quote h2 {
+  font: 900 34px/1 Montserrat;
+  text-transform: uppercase;
+}
+.sale-items .quote h2 small {
+  margin-top: 10px;
+  display: block;
+  text-transform: none;
+  font: 16px/1.1 "Quicksand";
+}
+
+.coupons {
+  display: grid;
+  max-height: 100%;
+  grid: repeat(3, 33.3333%)/100%;
+  padding: 0 0 15px 10px;
+}
+.coupons .item {
+  border: 3px dashed #111;
+}
+.coupons .item:nth-child(n+2) {
+  border-top: 0;
+}
+.coupons .item:nth-child(1) .item__text {
+  margin: 0 0 4px 4px;
+}
+.coupons .item:nth-child(3) .item__price {
+  margin-right: 15px;
+}
+.coupons .item:nth-child(3) .item__text {
+  margin-bottom: 5px;
+}
+
+.sale-items-2 {
+  grid-column: span 2;
+  display: grid;
+  grid: 100%/20% repeat(3, 1fr);
+  border: 6px solid #4aafbc;
+  margin-top: -6px;
+}
+.sale-items-2 .item {
+  margin: 8px 0;
+}
+.sale-items-2 .item:nth-child(2), .sale-items-2 .item:nth-child(3) {
+  border-right: 0.5px solid #ddd;
+}
+.sale-items-2 .item:nth-child(4) img {
+  width: 70%;
+  margin-top: 0;
+}
+.sale-items-2 .item__price {
+  justify-self: center;
+}
+.sale-items-2 .item__text {
+  margin-left: 12px;
+  margin-bottom: 5px;
+}
+.sale-items-2 .quote {
+  background: #4aafbc;
+  color: #fff;
+  padding: 8px;
+}
+.sale-items-2 .quote p {
+  font: 900 32px/1 "Montserrat", sans-serif;
+  text-transform: uppercase;
+  margin: 5px 0 8px;
+}
+
+.discount {
+  text-align: center;
+  width: 95px;
+  font-family: "Montserrat";
+  text-transform: uppercase;
+  padding: 6px 8px;
+  line-height: 1;
+}
+.discount h3 {
+  font: 900 40px/1 "Montserrat";
+}
+.discount h4 {
+  font: 900 22px/1 "Montserrat";
+  margin: 3px 0;
+}
+.discount h5 {
+  font: 900 20px/1 "Montserrat";
+  letter-spacing: 1px;
+  margin: 3px 0;
+}
+.discount h4 span,
+.discount h5 span {
+  font-size: 60%;
+  font-weight: 700;
+  display: inline-block;
+  margin-right: 4px;
+  vertical-align: middle;
+}
+.discount p {
+  font: 700 12px "Montserrat";
+}
+.discount p.small {
+  font-size: 70%;
+  margin: 3px 0;
+}
+.discount p.tiny {
+  font-size: 7px;
+  font-weight: 500;
+  text-transform: none;
+  margin: 1px 0;
+}
+.discount.default {
+  background: #f9f9f9;
+  border: 3px solid #ffd33c;
+}
+.discount.half-off {
+  background: #c13458;
+  color: #fff;
+  display: grid;
+  grid: repeat(4, min-content)/min-content 1fr;
+  grid-auto-flow: dense;
+  align-items: center;
+}
+.discount.half-off h3:nth-of-type(1) {
+  grid-row: span 2;
+}
+.discount.half-off h5 {
+  font-size: 13px;
+  margin-top: -4px;
+}
+.discount.half-off p {
+  grid-column: span 2;
+}
+.discount.bulk {
+  display: grid;
+  grid: repeat(3, min-content)/repeat(3, 1fr);
+  grid-auto-flow: dense;
+}
+.discount.bulk p.small {
+  grid-row: 2/3;
+  grid-column: 1;
+  margin-top: -3px;
+  margin-right: 6px;
+}
+.discount.bulk h3 {
+  grid-row: 1/span 3;
+  font-size: 60px;
+  margin-top: -4px;
+}
+.discount.bulk h4:nth-child(1) {
+  font-size: 35px;
+  margin-right: 6px;
+}
+.discount.bulk h4:nth-child(3) {
+  grid-row: 1/span 2;
+  font-size: 35px;
+  font-weight: 700;
+  margin-right: 4px;
+}
+.discount.more-saves {
+  background: #ffd33c;
+  padding: 3px 2px 5px;
+}
+
+.item {
+  display: grid;
+  grid: 80px 1fr/1fr 1fr;
+  grid-auto-flow: dense;
+  padding: 8px;
+}
+.item__image {
+  grid-column: span 2;
+  overflow: visible;
+  text-align: center;
+}
+.item__image img {
+  width: 80%;
+  margin: auto;
+  margin-top: 5px;
+}
+.item__text {
+  padding-right: 8px;
+  align-self: flex-end;
+  font-size: 13px;
+  line-height: 1.1;
+}
+.item__text strong {
+  vertical-align: middle;
+  display: inline-block;
+  margin-right: 5px;
+}
+.item__text small {
+  color: #999;
+  font-size: 10px;
+  vertical-align: middle;
+}
+.item__price {
+  align-self: end;
+  justify-self: end;
+}
+.item.horizontal {
+  grid: 1fr max-content/1fr 1fr;
+}
+.item.horizontal .item__image {
+  grid-row: 1/3;
+  grid-column-start: 1;
+}
+.item.horizontal .item__text {
+  grid-row: 1/2;
+  grid-column-start: 2;
+}
+.item.horizontal .item__price {
+  grid-row: 2/3;
+  grid-column-start: 2;
+}
+.item.alternate .item__image {
+  grid-column: 1/2;
+}
+.item.alternate .item__text {
+  grid-column: 1/2;
+}
+.item.alternate .item__price {
+  grid-row: 1/3;
+  grid-column: 2/3;
+}
+
+.logo {
+  display: grid;
+  margin: 10px 15px 0 0;
+  grid: repeat(7, 11px)/repeat(8, 11px);
+  grid-auto-flow: dense;
+}
+.logo .cookie-bit {
+  background: #d1a37c;
+}
+.logo .cookie-bit:nth-child(5n+18) {
+  background: #7b572f;
+}
+.logo .cookie-bit:nth-child(-n+12) {
+  background: #f9f9f9;
+}
+.logo .cookie-bit:nth-child(3) {
+  grid-column: 7;
+}
+.logo .cookie-bit:nth-child(4) {
+  grid-column: 8;
+}
+.logo .cookie-bit:nth-child(5) {
+  grid-column: 1;
+  grid-row: 2;
+}
+.logo .cookie-bit:nth-child(6) {
+  grid-column: 8;
+  grid-row: 2;
+}
+.logo .cookie-bit:nth-child(7) {
+  grid-column: 1;
+  grid-row: 6;
+}
+.logo .cookie-bit:nth-child(8) {
+  grid-column: 1;
+  grid-row: 7;
+}
+.logo .cookie-bit:nth-child(9) {
+  grid-column: 2;
+  grid-row: 7;
+}
+.logo .cookie-bit:nth-child(10) {
+  grid-column: 8;
+  grid-row: 6;
+}
+.logo .cookie-bit:nth-child(11) {
+  grid-column: 7;
+  grid-row: 7;
+}
+.logo .cookie-bit:nth-child(12) {
+  grid-column: 8;
+  grid-row: 7;
+}
+.logo .cookie-bit:nth-last-child(-n+7) {
+  background: #ba8046;
+}
+.logo .cookie-bit:nth-last-child(7) {
+  grid-column: 6;
+  grid-row: 1;
+}
+.logo .cookie-bit:nth-last-child(6) {
+  grid-column: 7;
+  grid-row: 2;
+}
+.logo .cookie-bit:nth-last-child(5) {
+  grid-column: 8;
+  grid-row: 3;
+}
+.logo .cookie-bit:nth-last-child(4) {
+  grid-column: 8;
+  grid-row: 4;
+}
+.logo .cookie-bit:nth-last-child(3) {
+  grid-column: 8;
+  grid-row: 5;
+}
+.logo .cookie-bit:nth-last-child(2) {
+  grid-column: 7;
+  grid-row: 6;
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <main>
+  <div class="name">
+    <div class="logo"><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span><span class="cookie-bit"></span>
+    </div>
+    <h1>Techfood.</h1>
+    <h5 class="headline">Always stocked for your all-nighters and hackathons.</h5>
+    <p>Offers end June 14</p>
+  </div>
+  <div class="callout">
+    <h4>Save 20% off all items.</h4>
+    <h5>Exclusive for tech field enthusiasts!</h5>
+  </div>
+  <div class="sale-items">
+    <div class="item">
+      <div class="quote"> 
+        <h2>From healthy food to complete junk.<small>Don't code with an empty stomach.</small></h2>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item__image"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/fruit.png"/></div>
+      <div class="item__text"> <strong>Dried Mangoes, Dried Apricots</strong><small>200g</small></div>
+      <div class="item__price">
+        <div class="discount half-off">
+          <p>Buy 1 Get 1</p>
+          <h3>50</h3>
+          <h4>%</h4>
+          <h5>off</h5>
+          <p class="tiny">Equal or lesser value</p>
+          <p class="small">With card</p>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item__image"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/chips.png"/></div>
+      <div class="item__text"> <strong>Pringles</strong><small>147g</small><strong>Cheetos</strong><small>226g</small><strong>Doritos</strong><small>198g</small></div>
+      <div class="item__price">
+        <div class="discount default">
+          <h4> <span>$</span>2.49</h4>
+          <p class="small">with card</p>
+        </div>
+        <div class="discount more-saves">
+          <p class="small divider">Also save</p>
+          <h5><span>$</span>1 off</h5>
+          <p class="tiny">With retweet of store's latest tweet</p>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item__image"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/tea.png"/></div>
+      <div class="item__text"> <strong>Twinings Tea</strong><small> 20 per pack</small></div>
+      <div class="item__price">
+        <div class="discount default">
+          <h4> <span>$</span>9.99</h4>
+          <p class="small">with card</p>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item__image"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/nuts.png"/></div>
+      <div class="item__text"> <strong>Nature's Wonders Nuts</strong><small>220g-330g</small></div>
+      <div class="item__price">
+        <div class="discount half-off">
+          <p>Buy 1 Get 1</p>
+          <h3>50</h3>
+          <h4>%</h4>
+          <h5>off</h5>
+          <p class="tiny">Equal or lesser value</p>
+        </div>
+        <div class="discount more-saves">
+          <p class="small divider">Also save</p>
+          <p class="tiny">When you show us your GitHub profile</p>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item__image"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/chobani.png"/></div>
+      <div class="item__text"> <strong>Chobani Greek Style Yogurt</strong><small>170g</small></div>
+      <div class="item__price">
+        <div class="discount default">
+          <h4> <span>$</span>1.65</h4>
+          <p class="small">with card</p>
+        </div>
+      </div>
+    </div>
+    <div class="item"> 
+      <div class="item__image"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/chocs.png"/></div>
+      <div class="item__text"> <strong>M&M's, Snickers, Kinder Bueno</strong><small>170-220g</small></div>
+      <div class="item__price">
+        <div class="discount default">
+          <h4> <span>$</span>5.99</h4>
+          <p class="small">with card</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="coupons">
+    <div class="item horizontal"> 
+      <div class="item__image"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/wine.png"/></div>
+      <div class="item__text"> <strong>Wolf Blass Yellow Label, Red or White</strong><small>750ml</small></div>
+      <div class="item__price">
+        <div class="discount default">
+          <h4> <span>$</span>21.99</h4>
+          <p class="small">with card</p>
+        </div>
+      </div>
+    </div>
+    <div class="item alternate">
+      <div class="item__image"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/bjs.png"/></div>
+      <div class="item__text"><strong>Ben & Jerry's</strong><small>453ml-478ml</small></div>
+      <div class="item__price">
+        <div class="discount half-off">
+          <p>Buy 1 Get 1</p>
+          <h3>50</h3>
+          <h4>%</h4>
+          <h5>off</h5>
+          <p class="tiny">Equal or lesser value</p>
+        </div>
+        <div class="discount more-saves">
+          <p class="small divider">Also save</p>
+          <h5><span>$</span>2 off</h5>
+          <p class="tiny">With any social media follow</p>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item__image"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/ramen.png"/></div>
+      <div class="item__text"> <strong>Samyang Ramen</strong><small>135g-140g</small></div>
+      <div class="item__price">
+        <div class="discount bulk">
+          <h4>3</h4>
+          <p class="small">for</p>
+          <h4>$</h4>
+          <h3>9</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="sale-items-2">
+    <div class="quote"> 
+      <p>For your caffeine needs.</p><small>Remember to drink responsibly.</small>
+    </div>
+    <div class="item horizontal">
+      <div class="item__image"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/coffee.png"/></div>
+      <div class="item__text"> <strong>Starbucks Frappuccino Chilled Coffee Drink </strong><small>281ml</small></div>
+      <div class="item__price">
+        <div class="discount bulk">
+          <h4>2</h4>
+          <p class="small">for</p>
+          <h4>$</h4>
+          <h3>8</h3>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item__image"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/coke.png"/></div>
+      <div class="item__text"><strong>Coca Cola Classic, Sprite Lemon-Lime</strong><small>12 x 320ml</small></div>
+      <div class="item__price">
+        <div class="discount bulk">
+          <h4>2</h4>
+          <p class="small">for</p>
+          <h4>$</h4>
+          <h3>8</h3>
+        </div>
+      </div>
+    </div>
+    <div class="item"> 
+      <div class="item__image"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/monster.png"/></div>
+      <div class="item__text"><strong>Monster Energy Drink</strong><small>500ml</small></div>
+      <div class="item__price">
+        <div class="discount bulk">
+          <h4>4</h4>
+          <p class="small">for</p>
+          <h4>$</h4>
+          <h3>4</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<aside class="context">
+  <div class="explanation">Part of the <a href="https://codepen.io/collection/DQvYpQ/" target="_blank">CSS Grid collection!</a></div>
+</aside>
+<footer><a href="https://twitter.com/meowlivia_" target="_blank"><i class="icon-social-twitter icons"></i></a><a href="https://github.com/oliviale" target="_blank"><i class="icon-social-github icons"></i></a><a href="https://dribbble.com/oliviale" target="_blank"><i class="icon-social-dribbble icons"></i></a></footer>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+  
+  
+</body>
+
+</html>

@@ -1,0 +1,71 @@
+{
+  "source_id": "codepen:jh3y/abbedme",
+  "author": "jh3y",
+  "pen_id": "abBedme",
+  "url": "https://codepen.io/jh3y/pen/abBedme",
+  "acquisition": "cdpn_fullpage_cloud_browser_dom",
+  "acquisition_url": "https://cdpn.io/jh3y/fullpage/abBedme",
+  "retrieved_at": "2026-11-18T23:13:23Z",
+  "retrieved_at_precision": "batch browser check time; no separate per-candidate timestamp in archive",
+  "fetch_status": "ok",
+  "title": "Pure CSS Desk Fan",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "a13717b636ea31f40e0aa1844ed77ad66223636d957ab0702ed2c43b2808c2cf",
+  "source_html_sha256": "f9a5903652733ca89f372aa399ef135cfbddd9faadccca96b4843cb6d26c6259",
+  "analysis": {
+    "js": {
+      "has_js": false,
+      "inline_js_chars": 0,
+      "external_scripts": [],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 2,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": true,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": true,
+      "clip_path": false,
+      "css_counter": false,
+      "media_query": false
+    },
+    "external_stylesheets": [
+      "https://public.codepenassets.com/css/normalize-5.0.0.min.css"
+    ],
+    "css_imports": [],
+    "css_chars": 8492,
+    "element_count": 88,
+    "html_chars": 13413
+  },
+  "visual_review": {
+    "viewport": [
+      1331,
+      894
+    ],
+    "default_only": true,
+    "mobile_verified": false,
+    "interactions_tested": false,
+    "evidence": "默认可见底座立柱及前后网罩、扇叶轴心的多层3D结构；radio one默认选中，CSS驱动转叶/摇头，非静态。"
+  },
+  "candidate_status": "hold_pending_user_review",
+  "license": "not separately verified",
+  "provenance": "Generated from already archived source; source_audit_dot_13.json records initial browser evidence and archive verification."
+}
