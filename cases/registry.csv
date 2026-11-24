@@ -1,6 +1,6 @@
 case_id,source_key,tier,owner,stage,updated,note,user_review
 case-228-T3,RaduBratan__mdPrWmo,T3,duet,input_draft,2026-11-24,GT 仅静态自检，渲染自检待本地运行 review_20261124/gt_check.py；input 外观按源码推断，待核对（见 input_problem.md）；档位复核仍为 T3,pending
-case-229-T1,fossheim__VweaNYW,T1,duet,gt_ready,2026-11-24,,pending
+case-229-T1,fossheim__VweaNYW,T1,duet,input_draft,2026-11-24,等用户审核 GT 与 input；云端无浏览器，外观由 CSS 推算，截图待本地运行 gt_selfcheck.py,pending
 case-230-T1,glennphilp__DBLzOW,T1,duet,input_draft,2026-11-24,等用户审核 GT 与 input；外观由 CSS 推算，截图待本地运行 shot_gt.py,pending
 case-231-T3,ricardoolivaalonso__ExPpgqG,T3,duet,admitted,2026-11-24,,pending
 case-232-T2,Ak-407__MYgKoME,T2,duet,input_draft,2026-11-24,input 已由 GT 写出，等用户审核；外观由 CSS 推算待本地渲染核对,pending

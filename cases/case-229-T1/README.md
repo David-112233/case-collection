@@ -16,6 +16,8 @@
 | `classification.json` | 档位与入库依据 |
 | `ground_truth.html` | 准静态参考页（见下文“GT 相对来源的改动”） |
 | `review_20261124/` | GT 自检：静态检查、来源差异、本地渲染脚本 |
+| `input.json` | 由 GT 写出的题目草稿，等用户审核 |
+| `input_problem.md` | input 的推断依据、取舍与待定问题 |
 
 ## GT 相对来源的改动（2026-11-24，duet）
 
@@ -32,3 +34,7 @@
 - **窄屏：** 机身固定 960px 宽，来源没有窄屏适配，375 宽视口下会横向溢出；GT 保持原样，input 只面向桌面宽屏。
 - **档位复核：** GT 没有任何动态，按难度模型 v2.1 为 T1，与入库暂定一致，不改名。
 - **自检：** 本环境装不了浏览器，只完成了静态检查和按 CSS 推算的几何；渲染自检脚本已备好，待本地运行。见 [review_20261124/static_check.md](review_20261124/static_check.md)。
+
+## input 草稿（2026-11-24，duet）
+
+[input.json](input.json) 由 GT 写出，等用户审核 GT 与 input。外观描述由 CSS 推算、尚未经渲染核对，推断依据和写与不写的取舍见 [input_problem.md](input_problem.md)。
