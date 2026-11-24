@@ -2,7 +2,7 @@
 
 来源：<https://codepen.io/agathaco/pen/JaGQPr>（作者 agathaco，CodePen 公开作品，默认 MIT 许可）
 
-当前阶段：`admitted`（入库于 2026-11-24），归属 duet。阶段以 [registry.csv](../registry.csv) 为准。
+当前阶段：`input_draft`（入库于 2026-11-24），归属 duet。阶段以 [registry.csv](../registry.csv) 为准。
 
 - 审核编号：C048；档位：T1（入库时按来源源码暂定为 T2，GT 完成后复核改为 T1，见下文“档位复核”）。
 - 特色：夜景灯塔、光束与远山
@@ -33,3 +33,8 @@
 - **作品价值提醒：** 来源的看点之一是灯塔光束来回扫动、帆船驶过的持续动画，GT 去掉后只剩静态夜景（灯塔、光束、远山交叠、海面、月亮、帆船的前后层次）。按“能做的照做”处理，是否仍收录请用户定，见 [input_problem.md](input_problem.md)。
 - **交互：** 来源没有任何交互，GT 也没有。
 - **档位复核：** GT 无任何动态、没有交互，按难度模型 v2.1 为 **T1**，已用 `registry.py retier` 由暂定 T2 改为 T1（目录名随之改为 `case-254-T1`），`classification.json` 的 `tier_status`、`tier_basis`、`tier_note` 已手动同步。
+- **渲染核对：** 云端浏览器 1280、500 宽截图，画面静止、无渲染问题；500 宽时灯塔按固定像素占去大半画面（来源如此，未改）。详见 [review_20261124/static_check.md](review_20261124/static_check.md)，截图测量脚本为 [review_20261124/shot_gt.py](review_20261124/shot_gt.py)。
+
+## input 草稿（2026-11-24，duet）
+
+[input.json](input.json) 由 GT 写出，等用户审核 GT 与 input。取舍与待定问题（含作品价值主要在动画、是否仍收录）见 [input_problem.md](input_problem.md)。
