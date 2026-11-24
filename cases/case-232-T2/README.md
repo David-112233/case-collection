@@ -38,3 +38,7 @@
 **自检**：见 [review_20261124/](review_20261124/static_check.md)。已用云端浏览器经 raw.githack.com 在 1280、500 宽下核对，渲染与推算一致，GT 无渲染问题；375 宽和脚本测量可在本地补跑 `gt_selfcheck.py`。
 
 **档位复核**：仍为 **T2**。GT 唯一的动态是悬停卡片时卡片自身的右半边和自身的箭头伪元素发生变化，指针离开即还原、不保持状态，符合难度模型 v2.1“悬停只改被指向元素自身”的 T2 定义；目录名不变。疑点见 `input_problem.md` 问题 4。
+
+## 规则草稿（manual_v1）
+
+用户 2026-11-24 审核修改 input 后，duet 起草了 [rules_drafts/manual_v1/eval_rules.json](rules_drafts/manual_v1/eval_rules.json)，人可读版 [review.md](rules_drafts/manual_v1/review.md)：9 条 Requirement / 48 条 mandatory（静态 37、动态 11），1 条常识条件，D1、D2 各 50%，只在 1280×900 采证；`check_rules.py` 通过。**待用户审核**，未冻结。台账阶段仍为 `input_draft`（`input_approved` 需用户原话）。`generation_prompt.txt` 未写：仓库里没有 `output_prompt_v2.txt`。

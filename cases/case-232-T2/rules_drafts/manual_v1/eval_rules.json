@@ -1,0 +1,1640 @@
+{
+  "schema_version": "semantic-eval-rules/3.0",
+  "case_id": "case-232",
+  "tier": "T2",
+  "rule_status": "DRAFT_FOR_USER_REVIEW",
+  "revision": "manual_v1",
+  "input_sha256": "0651957372d8fd00331bc01ba4ae1dcd592108a159cabe9876f138e25a96e6ba",
+  "input_source": {
+    "path": "input.json",
+    "note": "用户 2026-11-24 审核修改后的版本（提交 945c78f），duet 未改动。"
+  },
+  "output_contract_ref": "scripts/eval_rules_generation/preparation/output_contract_v2.json",
+  "scoring_policy_ref": "scripts/eval_rules_generation/preparation/evaluation_policy_v2.json#/scoring_policy",
+  "source_policy": {
+    "requirements": "input.json 加 1 条 DEC-037 常识条件（SR-07.C1，标 source: common_sense 并写理由）；business_background 只提供语境，不单独出条件。",
+    "gt": "ground_truth.html = source.html 去掉 CodePen 样板、无关键帧的入场动画声明和三处悬停过渡（见案例 README）。GT 只用于对象绑定与自测，不作要求来源；GT 有而 input 没写的（具体尺寸色值、翻折角度、透视、过渡、375 宽溢出）一律不考。",
+    "model_outputs": "起草时不存在也未读取任何模型输出。"
+  },
+  "render_baseline": {
+    "status": "NOT_FROZEN",
+    "states": [
+      "desktop_static",
+      "desktop_hover"
+    ],
+    "viewports": {
+      "desktop": [
+        1280,
+        900
+      ]
+    },
+    "note": "input 写明“页面面向桌面宽屏”，只在一个桌面视口采证，不考察窄屏。",
+    "resources": "JS、外部字体与图片按 v2 契约允许。记录 Bitter 字体的加载结果；评测网络导致加载失败记 UNRESOLVED，不判模型 FAIL。"
+  },
+  "member_policy": {
+    "card_identity": "卡片按可见位置从左到右编为 card.1–card.3；第 N 张显示哪篇文章只由 SR-02 的三条标题条件负责，分类与日期按标题认卡片。",
+    "backplate_identity": "背板按它所衬的卡片认领，不依赖 DOM 顺序或类名。",
+    "hover_point": "悬停时指针放在卡片左半部中心，避免右半边翻走后指针落空引起抖动；模型把悬停区域只做在右半边、导致左半部悬停无反应时，交 Judge 结合在卡片中心悬停的结果判定。"
+  },
+  "granularity_policy": {
+    "members": "input 逐项写出的每张卡片文字（标题、分类、日期）逐卡成条，共 9 条。",
+    "aggregate": "input 一句话统一规定、三张卡片共用的性质（卡片外观、文字排版、背板样式、悬停反馈）各写一条，三张卡片都核对，严重度按受影响的卡片数判；不逐卡拆条。",
+    "facts": "一句话里有几个独立可失败的事实就拆开（如“深色粗体”拆颜色与字重，“白色的向右箭头”拆出现、颜色、位置），同一事实只放一条。",
+    "scoring_merge": "沿用 case-213/217/221/227 的并列失败合并约定：同一检查模板在并列成员上、同一处实现造成的失败合为一组，只判一档。"
+  },
+  "measure_policy": {
+    "program_first": "DOM 文本、计算样式、几何、悬停前后的样式与变换由程序判；程序不确定时交 Judge，不判 FAIL。",
+    "qualitative": "颜色按色名判色系，不给色号；“细”“窄缝”“一小段距离”“大致居中”“约三倍”不设数值阈值，程序给测量值，边界交 Judge。",
+    "fold": "翻折条件只考 input 写到的结果：沿竖直中线、右半边、朝向观者、变浅灰、露出浅绿底面、白框留在原位；不考角度、透视强度和过渡。",
+    "runtime_status": "仅为语义草稿；选择器、绑定与可执行计划在准备阶段生成。"
+  },
+  "quality_gate": [
+    {
+      "id": "G1",
+      "description": "HTML forms a valid evaluable DOM; parser/environment failure alone is not model fatal failure.",
+      "source": "project_output_contract"
+    },
+    {
+      "id": "G2",
+      "description": "JS is allowed by the shared v2 policy; no blanket script/event-attribute violation.",
+      "source": "project_output_contract"
+    },
+    {
+      "id": "G3",
+      "description": "External fonts, font stylesheets, images and ordinary links are allowed; resource availability is checked separately.",
+      "source": "project_output_contract"
+    },
+    {
+      "id": "G4",
+      "description": "One complete HTML; page CSS embedded in head/style or style attributes; font-loading stylesheets allowed; required JS embedded.",
+      "source": "project_output_contract"
+    },
+    {
+      "id": "G5",
+      "description": "input.forbidden is empty; no case-specific prohibition is invented.",
+      "source": "input.forbidden"
+    }
+  ],
+  "static_requirements": [
+    {
+      "id": "SR-01",
+      "dimension": "static",
+      "type": "region",
+      "description": "页面整体：背景与字体",
+      "target": "page",
+      "source_fields": [
+        "layout_constraints"
+      ],
+      "mandatory_evidence": [
+        {
+          "id": "C1",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "整页背景为纯色浅绿",
+          "target": "page",
+          "applies_when": "桌面视口 1280×900，页面加载完成、指针不在任何卡片上的稳定状态。",
+          "check": "页面主背景（卡片与背板以外露出的底色）为单一纯色、呈浅绿色系；渐变、图案、纹理或白、灰、深绿、黄绿等明显偏离浅绿的不满足。不指定色号。",
+          "kind": "screenshot_visual",
+          "decider": "program+judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "page"
+          ],
+          "sample_viewports": [
+            "desktop"
+          ],
+          "note": "程序采样卡片以外的背景像素，报告是否单一颜色及 HSL；色系边界交 Judge。"
+        },
+        {
+          "id": "C2",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "文字使用 Bitter 字体",
+          "target": "page",
+          "applies_when": "桌面视口 1280×900，页面加载完成、指针不在任何卡片上的稳定状态。",
+          "check": "卡片内的标题、分类和日期实际以 Bitter 渲染：计算字体族首选为 Bitter 且字体实际加载；声明了但回退为其他字体的不算。字体服务加载失败若由评测网络导致记 UNRESOLVED。",
+          "kind": "font_rendering",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "card.1",
+            "card.2",
+            "card.3"
+          ],
+          "sample_viewports": [
+            "desktop"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SR-02",
+      "dimension": "static",
+      "type": "content",
+      "description": "文章卡片的数量、文字内容与附属部件",
+      "target": "cards",
+      "source_fields": [
+        "functional_requirements"
+      ],
+      "mandatory_evidence": [
+        {
+          "id": "C1",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "共三张文章卡片",
+          "target": "cards",
+          "applies_when": "桌面视口 1280×900，页面加载完成、指针不在任何卡片上的稳定状态。",
+          "check": "页面恰好有三张文章卡片（按可见的卡片个数计，不依赖标签或类名）；多于或少于三张的不满足。",
+          "kind": "dom_structure",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "cards"
+          ],
+          "sample_viewports": [
+            "desktop"
+          ]
+        },
+        {
+          "id": "C2",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "1. 标题“Sweet roll gingerbread sweet roll jelly”",
+          "target": "card.1.title",
+          "applies_when": "桌面视口 1280×900，页面加载完成、指针不在任何卡片上的稳定状态。",
+          "check": "按可见位置从左到右第 1 张卡片的标题文字为 “Sweet roll gingerbread sweet roll jelly”（逐字一致，大小写与空格按原文；换行不影响）。顺序错误只由本组三条标题条件负责。",
+          "kind": "dom_text",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "card.1"
+          ],
+          "sample_viewports": [
+            "desktop"
+          ],
+          "member": "card.1"
+        },
+        {
+          "id": "C3",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "2. 标题“Bar cupcake chocolate topping brownie”",
+          "target": "card.2.title",
+          "applies_when": "桌面视口 1280×900，页面加载完成、指针不在任何卡片上的稳定状态。",
+          "check": "按可见位置从左到右第 2 张卡片的标题文字为 “Bar cupcake chocolate topping brownie”（逐字一致，大小写与空格按原文；换行不影响）。顺序错误只由本组三条标题条件负责。",
+          "kind": "dom_text",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "card.2"
+          ],
+          "sample_viewports": [
+            "desktop"
+          ],
+          "member": "card.2"
+        },
+        {
+          "id": "C4",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "3. 标题“Powder tootsie roll chocolate sugar”",
+          "target": "card.3.title",
+          "applies_when": "桌面视口 1280×900，页面加载完成、指针不在任何卡片上的稳定状态。",
+          "check": "按可见位置从左到右第 3 张卡片的标题文字为 “Powder tootsie roll chocolate sugar”（逐字一致，大小写与空格按原文；换行不影响）。顺序错误只由本组三条标题条件负责。",
+          "kind": "dom_text",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "card.3"
+          ],
+          "sample_viewports": [
+            "desktop"
+          ],
+          "member": "card.3"
+        },
+        {
+          "id": "C5",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "分类“Cakes”",
+          "target": "card.1.category",
+          "applies_when": "桌面视口 1280×900，页面加载完成、指针不在任何卡片上的稳定状态。",
+          "check": "标题为 “Sweet roll gingerbread sweet roll jelly” 的那张卡片上的分类文字为 “Cakes”。按标题认卡片，不因卡片顺序错误重复扣分。",
+          "kind": "dom_text",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "card.1"
+          ],
+          "sample_viewports": [
+            "desktop"
+          ],
+          "member": "card.1"
+        },
+        {
+          "id": "C6",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "分类“Chocolates”",
+          "target": "card.2.category",
+          "applies_when": "桌面视口 1280×900，页面加载完成、指针不在任何卡片上的稳定状态。",
+          "check": "标题为 “Bar cupcake chocolate topping brownie” 的那张卡片上的分类文字为 “Chocolates”。按标题认卡片，不因卡片顺序错误重复扣分。",
+          "kind": "dom_text",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "card.2"
+          ],
+          "sample_viewports": [
+            "desktop"
+          ],
+          "member": "card.2"
+        },
+        {
+          "id": "C7",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "分类“Puddings”",
+          "target": "card.3.category",
+          "applies_when": "桌面视口 1280×900，页面加载完成、指针不在任何卡片上的稳定状态。",
+          "check": "标题为 “Powder tootsie roll chocolate sugar” 的那张卡片上的分类文字为 “Puddings”。按标题认卡片，不因卡片顺序错误重复扣分。",
+          "kind": "dom_text",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "card.3"
+          ],
+          "sample_viewports": [
+            "desktop"
+          ],
+          "member": "card.3"
+        },
+        {
+          "id": "C8",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "日期“1 Jan 2020”",
+          "target": "card.1.date",
+          "applies_when": "桌面视口 1280×900，页面加载完成、指针不在任何卡片上的稳定状态。",
+          "check": "标题为 “Sweet roll gingerbread sweet roll jelly” 的那张卡片上的日期文字为 “1 Jan 2020”。按标题认卡片，不因卡片顺序错误重复扣分。",
+          "kind": "dom_text",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "card.1"
+          ],
+          "sample_viewports": [
+            "desktop"
+          ],
+          "member": "card.1"
+        },
+        {
+          "id": "C9",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "日期“2 Feb 2020”",
+          "target": "card.2.date",
+          "applies_when": "桌面视口 1280×900，页面加载完成、指针不在任何卡片上的稳定状态。",
+          "check": "标题为 “Bar cupcake chocolate topping brownie” 的那张卡片上的日期文字为 “2 Feb 2020”。按标题认卡片，不因卡片顺序错误重复扣分。",
+          "kind": "dom_text",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "card.2"
+          ],
+          "sample_viewports": [
+            "desktop"
+          ],
+          "member": "card.2"
+        },
+        {
+          "id": "C10",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "日期“3 Mar 2020”",
+          "target": "card.3.date",
+          "applies_when": "桌面视口 1280×900，页面加载完成、指针不在任何卡片上的稳定状态。",
+          "check": "标题为 “Powder tootsie roll chocolate sugar” 的那张卡片上的日期文字为 “3 Mar 2020”。按标题认卡片，不因卡片顺序错误重复扣分。",
+          "kind": "dom_text",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "card.3"
+          ],
+          "sample_viewports": [
+            "desktop"
+          ],
+          "member": "card.3"
+        },
+        {
+          "id": "C11",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "每张卡片背后有一块斜线纹背板",
+          "target": "backplates",
+          "applies_when": "桌面视口 1280×900，页面加载完成、指针不在任何卡片上的稳定状态。",
+          "check": "三张卡片每张背后各有一块带斜线条纹的背板，且背板有一部分在卡片外可见（否则无法确认其存在）。严重度按缺背板的卡片数判。背板的大小、偏移、边框、条纹、层次由 SR-06 分别判，本条只判有无。",
+          "kind": "screenshot_visual",
+          "decider": "program+judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "card.1",
+            "card.2",
+            "card.3"
+          ],
+          "sample_viewports": [
+            "desktop"
+          ]
+        },
+        {
+          "id": "C12",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "每张卡片还带一个向右的箭头标记，只在悬停时出现",
+          "target": "arrows",
+          "applies_when": "桌面视口 1280×900，页面加载完成、指针不在任何卡片上的稳定状态。",
+          "check": "指针不在任何卡片上时，三张卡片上都看不到箭头标记（不可见或完全透明均可）。箭头在悬停时出现、其颜色方向位置由 DR-01 判。",
+          "kind": "screenshot_visual",
+          "decider": "program+judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "card.1",
+            "card.2",
+            "card.3"
+          ],
+          "sample_viewports": [
+            "desktop"
+          ],
+          "note": "按字面判：模型根本没做箭头时本条 PASS，缺箭头由 DR-01 的箭头出现条件负责，不重复扣分。"
+        }
+      ]
+    },
+    {
+      "id": "SR-03",
+      "dimension": "static",
+      "type": "layout",
+      "description": "三张卡片的尺寸与排布",
+      "target": "cards",
+      "source_fields": [
+        "layout_constraints"
+      ],
+      "mandatory_evidence": [
+        {
+          "id": "C1",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "三张卡片大小相同",
+          "target": "cards",
+          "applies_when": "桌面视口 1280×900，页面加载完成、指针不在任何卡片上的稳定状态。",
+          "check": "三张卡片的可见宽度相同、高度相同（程序比较包围盒，亚像素差异忽略；明显的宽高差异不满足）。",
+          "kind": "geometry",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "card.1",
+            "card.2",
+            "card.3"
+          ],
+          "sample_viewports": [
+            "desktop"
+          ]
+        },
+        {
+          "id": "C2",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "为横向的矩形（宽约为高的三倍）",
+          "target": "cards",
+          "applies_when": "桌面视口 1280×900，页面加载完成、指针不在任何卡片上的稳定状态。",
+          "check": "每张卡片是横向矩形，宽高比约为 3：明显接近 2 或 4 及以上、或竖向、正方形的不满足。不设精确阈值，程序报告宽高比，边界交 Judge。",
+          "kind": "geometry",
+          "decider": "program+judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "card.1",
+            "card.2",
+            "card.3"
+          ],
+          "sample_viewports": [
+            "desktop"
+          ]
+        },
+        {
+          "id": "C3",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "在页面上部从左到右排成一行",
+          "target": "cards",
+          "applies_when": "桌面视口 1280×900，页面加载完成、指针不在任何卡片上的稳定状态。",
+          "check": "三张卡片在同一行内左右排列（顶边大致齐平、横向不重叠）；上下排列、错行或排成两行的不满足。",
+          "kind": "geometry",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "card.1",
+            "card.2",
+            "card.3"
+          ],
+          "sample_viewports": [
+            "desktop"
+          ]
+        },
+        {
+          "id": "C4",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "在页面上部从左到右排成一行",
+          "target": "cards",
+          "applies_when": "桌面视口 1280×900，页面加载完成、指针不在任何卡片上的稳定状态。",
+          "check": "这一行卡片位于页面上部：卡片行在首屏的上半部分，上方没有大片空白把它推到页面中下部。",
+          "kind": "geometry_visual",
+          "decider": "program+judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "cards"
+          ],
+          "sample_viewports": [
+            "desktop"
+          ],
+          "note": "与上一条引同一句，分属“排成一行”与“位于上部”两个可独立失败的事实。"
+        },
+        {
+          "id": "C5",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "整组大致水平居中",
+          "target": "cards",
+          "applies_when": "桌面视口 1280×900，页面加载完成、指针不在任何卡片上的稳定状态。",
+          "check": "三张卡片作为一组在视口中大致水平居中：整组左右两侧到视口边缘的留白大致相当；明显靠左或靠右的不满足。不设数值阈值，程序报告两侧留白，边界交 Judge。",
+          "kind": "geometry",
+          "decider": "program+judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "cards"
+          ],
+          "sample_viewports": [
+            "desktop"
+          ]
+        },
+        {
+          "id": "C6",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "相邻卡片之间留有窄缝",
+          "target": "cards",
+          "applies_when": "桌面视口 1280×900，页面加载完成、指针不在任何卡片上的稳定状态。",
+          "check": "相邻两张卡片之间留有缝隙、互不接触也不重叠，且缝隙窄（明显小于卡片宽度的一半）；严重度按不满足的相邻对数判。缝隙里露出背板的一部分可以接受。",
+          "kind": "geometry",
+          "decider": "program+judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "card.1",
+            "card.2",
+            "card.3"
+          ],
+          "sample_viewports": [
+            "desktop"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SR-04",
+      "dimension": "static",
+      "type": "appearance",
+      "description": "卡片外观",
+      "target": "cards",
+      "source_fields": [
+        "layout_constraints"
+      ],
+      "mandatory_evidence": [
+        {
+          "id": "C1",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "卡片为白色",
+          "target": "cards",
+          "applies_when": "桌面视口 1280×900，页面加载完成、指针不在任何卡片上的稳定状态。",
+          "check": "三张卡片的底色为白色（近白可接受）。严重度按不满足的卡片数判。",
+          "kind": "computed_style",
+          "decider": "program+judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "card.1",
+            "card.2",
+            "card.3"
+          ],
+          "sample_viewports": [
+            "desktop"
+          ]
+        },
+        {
+          "id": "C2",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "带白色细边框",
+          "target": "cards",
+          "applies_when": "桌面视口 1280×900，页面加载完成、指针不在任何卡片上的稳定状态。",
+          "check": "卡片四周有一圈白色的细边框（border、outline、box-shadow 描边或等效实现均可，按计算样式判）；没有边框、边框不是白色或明显粗的不满足。",
+          "kind": "computed_style",
+          "decider": "program+judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "card.1",
+            "card.2",
+            "card.3"
+          ],
+          "sample_viewports": [
+            "desktop"
+          ],
+          "note": "白边框压在白卡片上肉眼难以分辨，以程序读取的样式为主；程序读不出等效实现时交 Judge 看放大截图，仍不能确定记 UNRESOLVED。"
+        },
+        {
+          "id": "C3",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "四角为直角、无阴影",
+          "target": "cards",
+          "applies_when": "桌面视口 1280×900，页面加载完成、指针不在任何卡片上的稳定状态。",
+          "check": "卡片四角为直角，没有圆角。",
+          "kind": "computed_style",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "card.1",
+            "card.2",
+            "card.3"
+          ],
+          "sample_viewports": [
+            "desktop"
+          ]
+        },
+        {
+          "id": "C4",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "四角为直角、无阴影",
+          "target": "cards",
+          "applies_when": "桌面视口 1280×900，页面加载完成、指针不在任何卡片上的稳定状态。",
+          "check": "卡片没有投影（无向外扩散的阴影）。白色描边式的 box-shadow 不算阴影。",
+          "kind": "computed_style",
+          "decider": "program+judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "card.1",
+            "card.2",
+            "card.3"
+          ],
+          "sample_viewports": [
+            "desktop"
+          ],
+          "note": "与上一条引同一句，分属“直角”与“无阴影”两个可独立失败的事实。"
+        }
+      ]
+    },
+    {
+      "id": "SR-05",
+      "dimension": "static",
+      "type": "typography",
+      "description": "卡片内文字的位置与样式",
+      "target": "cards",
+      "source_fields": [
+        "layout_constraints"
+      ],
+      "mandatory_evidence": [
+        {
+          "id": "C1",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "卡片内标题位于左上方",
+          "target": "cards",
+          "applies_when": "桌面视口 1280×900，页面加载完成、指针不在任何卡片上的稳定状态。",
+          "check": "每张卡片的标题位于卡片内的左上方：左对齐、靠近卡片顶部。严重度按不满足的卡片数判。",
+          "kind": "geometry",
+          "decider": "program+judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "card.1",
+            "card.2",
+            "card.3"
+          ],
+          "sample_viewports": [
+            "desktop"
+          ]
+        },
+        {
+          "id": "C2",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "为深色粗体",
+          "target": "cards",
+          "applies_when": "桌面视口 1280×900，页面加载完成、指针不在任何卡片上的稳定状态。",
+          "check": "标题文字为深色（接近黑色的深灰或黑色）。",
+          "kind": "computed_style",
+          "decider": "program+judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "card.1",
+            "card.2",
+            "card.3"
+          ],
+          "sample_viewports": [
+            "desktop"
+          ]
+        },
+        {
+          "id": "C3",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "为深色粗体",
+          "target": "cards",
+          "applies_when": "桌面视口 1280×900，页面加载完成、指针不在任何卡片上的稳定状态。",
+          "check": "标题文字为粗体，明显粗于分类与日期的常规字重。",
+          "kind": "computed_style",
+          "decider": "program+judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "card.1",
+            "card.2",
+            "card.3"
+          ],
+          "sample_viewports": [
+            "desktop"
+          ],
+          "note": "与上一条引同一句，分属颜色与字重两个可独立失败的事实。"
+        },
+        {
+          "id": "C4",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "分类和日期位于卡片底部同一行",
+          "target": "cards",
+          "applies_when": "桌面视口 1280×900，页面加载完成、指针不在任何卡片上的稳定状态。",
+          "check": "每张卡片的分类和日期位于卡片内底部，且两者在同一行（垂直位置大致相同）。严重度按不满足的卡片数判。",
+          "kind": "geometry",
+          "decider": "program+judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "card.1",
+            "card.2",
+            "card.3"
+          ],
+          "sample_viewports": [
+            "desktop"
+          ]
+        },
+        {
+          "id": "C5",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "分类靠左、日期靠右",
+          "target": "cards",
+          "applies_when": "桌面视口 1280×900，页面加载完成、指针不在任何卡片上的稳定状态。",
+          "check": "该行中分类靠卡片左侧、日期靠卡片右侧，两者分居两端。",
+          "kind": "geometry",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "card.1",
+            "card.2",
+            "card.3"
+          ],
+          "sample_viewports": [
+            "desktop"
+          ]
+        },
+        {
+          "id": "C6",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "与标题同色、不加粗",
+          "target": "cards",
+          "applies_when": "桌面视口 1280×900，页面加载完成、指针不在任何卡片上的稳定状态。",
+          "check": "分类和日期的文字颜色与标题相同（同一深色）。",
+          "kind": "computed_style",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "card.1",
+            "card.2",
+            "card.3"
+          ],
+          "sample_viewports": [
+            "desktop"
+          ]
+        },
+        {
+          "id": "C7",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "与标题同色、不加粗",
+          "target": "cards",
+          "applies_when": "桌面视口 1280×900，页面加载完成、指针不在任何卡片上的稳定状态。",
+          "check": "分类和日期为常规字重，不加粗。",
+          "kind": "computed_style",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "card.1",
+            "card.2",
+            "card.3"
+          ],
+          "sample_viewports": [
+            "desktop"
+          ],
+          "note": "与上一条引同一句，分属颜色与字重两个可独立失败的事实。"
+        }
+      ]
+    },
+    {
+      "id": "SR-06",
+      "dimension": "static",
+      "type": "appearance",
+      "description": "斜线纹背板",
+      "target": "backplates",
+      "source_fields": [
+        "layout_constraints"
+      ],
+      "mandatory_evidence": [
+        {
+          "id": "C1",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "背板与卡片同样大小",
+          "target": "backplates",
+          "applies_when": "桌面视口 1280×900，页面加载完成、指针不在任何卡片上的稳定状态。",
+          "check": "每块背板的宽高与它对应的卡片相同（亚像素差异忽略）。严重度按不满足的背板数判。",
+          "kind": "geometry",
+          "decider": "program+judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "card.1",
+            "card.2",
+            "card.3"
+          ],
+          "sample_viewports": [
+            "desktop"
+          ]
+        },
+        {
+          "id": "C2",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "相对卡片向左上方偏移一小段距离",
+          "target": "backplates",
+          "applies_when": "桌面视口 1280×900，页面加载完成、指针不在任何卡片上的稳定状态。",
+          "check": "每块背板相对它的卡片同时向左、向上偏移，偏移量小（远小于卡片高度，使背板只从卡片左边和上边露出窄窄一条）；向其他方向偏移、没有偏移或偏移很大的不满足。不设数值阈值。",
+          "kind": "geometry",
+          "decider": "program+judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "card.1",
+            "card.2",
+            "card.3"
+          ],
+          "sample_viewports": [
+            "desktop"
+          ]
+        },
+        {
+          "id": "C3",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "背板为白色虚线边框",
+          "target": "backplates",
+          "applies_when": "桌面视口 1280×900，页面加载完成、指针不在任何卡片上的稳定状态。",
+          "check": "背板的边框为白色虚线；实线、点线、非白色或没有边框的不满足。",
+          "kind": "screenshot_visual",
+          "decider": "program+judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "card.1",
+            "card.2",
+            "card.3"
+          ],
+          "sample_viewports": [
+            "desktop"
+          ]
+        },
+        {
+          "id": "C4",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "内部为半透明白色的细斜线条纹",
+          "target": "backplates",
+          "applies_when": "桌面视口 1280×900，页面加载完成、指针不在任何卡片上的稳定状态。",
+          "check": "背板内部为细斜线条纹：条纹线为半透明白色（能透出下面的浅绿底色），方向倾斜（非水平、非竖直），线条细而密。",
+          "kind": "screenshot_visual",
+          "decider": "judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "card.1",
+            "card.2",
+            "card.3"
+          ],
+          "sample_viewports": [
+            "desktop"
+          ]
+        },
+        {
+          "id": "C5",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "位于卡片下层",
+          "target": "backplates",
+          "applies_when": "桌面视口 1280×900，页面加载完成、指针不在任何卡片上的稳定状态。",
+          "check": "背板位于卡片下层：与卡片重叠的部分被卡片完全遮住，背板不会盖在卡片或其文字之上。",
+          "kind": "screenshot_visual",
+          "decider": "program+judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "card.1",
+            "card.2",
+            "card.3"
+          ],
+          "sample_viewports": [
+            "desktop"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SR-07",
+      "dimension": "static",
+      "type": "usability",
+      "description": "卡片文字可读（常识）",
+      "target": "cards",
+      "source_fields": [],
+      "mandatory_evidence": [
+        {
+          "id": "C1",
+          "mandatory": true,
+          "source": "common_sense",
+          "source_fields": [],
+          "source_quote": "（常识，DEC-037）卡片文字完整可读",
+          "target": "cards",
+          "applies_when": "桌面视口 1280×900，页面加载完成、指针不在任何卡片上的稳定状态。",
+          "check": "三张卡片的标题、分类和日期完整可见、可读，不被背板、箭头、相邻卡片或页面边缘遮挡或裁掉，也不溢出卡片之外。",
+          "kind": "screenshot_visual",
+          "decider": "program+judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "card.1",
+            "card.2",
+            "card.3"
+          ],
+          "sample_viewports": [
+            "desktop"
+          ],
+          "common_sense_reason": "input 列出的卡片文字应有的基本可用性：卡片尺寸固定、背板与卡片叠放，文字容易被裁掉或盖住；只要求所给文字可读，不引入新内容或样式数值。"
+        }
+      ]
+    }
+  ],
+  "dynamic_requirements": [
+    {
+      "id": "DR-01",
+      "dimension": "dynamic",
+      "type": "interaction",
+      "description": "悬停卡片时右半边翻折、出现箭头，离开后还原",
+      "target": "cards",
+      "source_fields": [
+        "motion_constraints"
+      ],
+      "mandatory_evidence": [
+        {
+          "id": "C1",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "motion_constraints"
+          ],
+          "source_quote": "卡片以自身的竖直中线为折线，右半边向观者方向翻折",
+          "target": "cards",
+          "applies_when": "桌面视口 1280×900；对三张卡片逐张悬停（指针放在卡片左半部中心，即不随翻折移动的部分），等待变化稳定后采证，再把指针移到页面空白处。",
+          "check": "悬停时被悬停卡片的右半边发生翻折，折线是卡片自身的竖直中线：翻折面的内侧边停在卡片中线处，卡片左半边留在原处。整张卡片一起转动、只是变色或位移、或折线不在中线的不满足。严重度按无此反馈的卡片数判。",
+          "kind": "dom_interaction",
+          "decider": "program+judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "card.1",
+            "card.2",
+            "card.3"
+          ],
+          "sample_viewports": [
+            "desktop"
+          ],
+          "note": "驱动：hover_then_leave 逐张成员；程序比较悬停前后左右两半的包围盒与变换，判断不了的交 Judge 看前后截图。"
+        },
+        {
+          "id": "C2",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "motion_constraints"
+          ],
+          "source_quote": "卡片以自身的竖直中线为折线，右半边向观者方向翻折",
+          "target": "cards",
+          "applies_when": "桌面视口 1280×900；对三张卡片逐张悬停（指针放在卡片左半部中心，即不随翻折移动的部分），等待变化稳定后采证，再把指针移到页面空白处。",
+          "check": "翻折方向朝向观者：右半边外侧边缘转向屏幕外（3D 变换中外侧边靠近观者；带透视时外侧边显得更大更高）。外侧边转向屏幕内侧的不满足；只是水平压缩、既看不出也读不出纵深方向的，未体现“向观者”，也不满足。",
+          "kind": "dom_interaction",
+          "decider": "program+judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "card.1",
+            "card.2",
+            "card.3"
+          ],
+          "sample_viewports": [
+            "desktop"
+          ],
+          "note": "与上一条引同一句，分属“沿中线翻折右半边”与“方向朝向观者”两个可独立失败的事实。程序读取翻折面的 3D 变换，计算外侧边的 z 方向；没有右半边翻折时本条按依赖规则处理。input 不要求透视，不因没有近大远小扣分。"
+        },
+        {
+          "id": "C3",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "motion_constraints"
+          ],
+          "source_quote": "翻折的右半边底色变为浅灰",
+          "target": "cards",
+          "applies_when": "桌面视口 1280×900；对三张卡片逐张悬停（指针放在卡片左半部中心，即不随翻折移动的部分），等待变化稳定后采证，再把指针移到页面空白处。",
+          "check": "悬停时翻折的右半边底色变为浅灰色（与静止时的白色可分辨的浅灰）。",
+          "kind": "dom_interaction",
+          "decider": "program+judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "card.1",
+            "card.2",
+            "card.3"
+          ],
+          "sample_viewports": [
+            "desktop"
+          ]
+        },
+        {
+          "id": "C4",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "motion_constraints"
+          ],
+          "source_quote": "右半边原来位置露出卡片下方的浅绿色底面",
+          "target": "cards",
+          "applies_when": "桌面视口 1280×900；对三张卡片逐张悬停（指针放在卡片左半部中心，即不随翻折移动的部分），等待变化稳定后采证，再把指针移到页面空白处。",
+          "check": "悬停时，右半边翻开后在它原来所占的区域内露出浅绿色底面（与页面背景同色系的浅绿）；露出白色、灰色或什么都没露出的不满足。",
+          "kind": "dom_interaction",
+          "decider": "program+judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "card.1",
+            "card.2",
+            "card.3"
+          ],
+          "sample_viewports": [
+            "desktop"
+          ]
+        },
+        {
+          "id": "C5",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "motion_constraints"
+          ],
+          "source_quote": "卡片原有的白色外框仍留在原位",
+          "target": "cards",
+          "applies_when": "桌面视口 1280×900；对三张卡片逐张悬停（指针放在卡片左半部中心，即不随翻折移动的部分），等待变化稳定后采证，再把指针移到页面空白处。",
+          "check": "悬停时卡片原来的白色外框仍留在原位，露出的浅绿区域外沿可以看到这圈白框；外框随右半边一起转走或消失的不满足。",
+          "kind": "dom_interaction",
+          "decider": "program+judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "card.1",
+            "card.2",
+            "card.3"
+          ],
+          "sample_viewports": [
+            "desktop"
+          ]
+        },
+        {
+          "id": "C6",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "motion_constraints"
+          ],
+          "source_quote": "且右侧竖直居中处出现一个白色的向右箭头",
+          "target": "arrows",
+          "applies_when": "桌面视口 1280×900；对三张卡片逐张悬停（指针放在卡片左半部中心，即不随翻折移动的部分），等待变化稳定后采证，再把指针移到页面空白处。",
+          "check": "悬停时被悬停卡片上出现一个指向右方的箭头（箭头、尖角或 V 形符号均可，须能看出指向右）。严重度按不出现箭头的卡片数判。",
+          "kind": "dom_interaction",
+          "decider": "program+judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "card.1",
+            "card.2",
+            "card.3"
+          ],
+          "sample_viewports": [
+            "desktop"
+          ]
+        },
+        {
+          "id": "C7",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "motion_constraints"
+          ],
+          "source_quote": "且右侧竖直居中处出现一个白色的向右箭头",
+          "target": "arrows",
+          "applies_when": "桌面视口 1280×900；对三张卡片逐张悬停（指针放在卡片左半部中心，即不随翻折移动的部分），等待变化稳定后采证，再把指针移到页面空白处。",
+          "check": "悬停时出现的箭头为白色。",
+          "kind": "dom_interaction",
+          "decider": "program+judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "card.1",
+            "card.2",
+            "card.3"
+          ],
+          "sample_viewports": [
+            "desktop"
+          ],
+          "note": "与上一条引同一句，分属“出现向右箭头”与“白色”两个事实；没有箭头时本条按依赖规则处理。"
+        },
+        {
+          "id": "C8",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "motion_constraints"
+          ],
+          "source_quote": "且右侧竖直居中处出现一个白色的向右箭头",
+          "target": "arrows",
+          "applies_when": "桌面视口 1280×900；对三张卡片逐张悬停（指针放在卡片左半部中心，即不随翻折移动的部分），等待变化稳定后采证，再把指针移到页面空白处。",
+          "check": "箭头位于卡片右侧、竖直方向居中（箭头中心与卡片竖直中心大致齐平，水平位置在卡片右半部）。",
+          "kind": "dom_interaction",
+          "decider": "program+judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "card.1",
+            "card.2",
+            "card.3"
+          ],
+          "sample_viewports": [
+            "desktop"
+          ],
+          "note": "与上两条引同一句，分属“位置”这一事实；没有箭头时本条按依赖规则处理。"
+        },
+        {
+          "id": "C9",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "motion_constraints"
+          ],
+          "source_quote": "鼠标悬停在某张卡片上时，只有这张卡片变化",
+          "target": "cards",
+          "applies_when": "桌面视口 1280×900；对三张卡片逐张悬停（指针放在卡片左半部中心，即不随翻折移动的部分），等待变化稳定后采证，再把指针移到页面空白处。",
+          "check": "悬停某一张卡片时，另外两张卡片保持静止时的样子，不翻折、不出现箭头。严重度按出现联动的悬停次数判。",
+          "kind": "dom_interaction",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "card.1",
+            "card.2",
+            "card.3"
+          ],
+          "sample_viewports": [
+            "desktop"
+          ]
+        },
+        {
+          "id": "C10",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "motion_constraints"
+          ],
+          "source_quote": "指针离开即恢复原样",
+          "target": "cards",
+          "applies_when": "桌面视口 1280×900；对三张卡片逐张悬停（指针放在卡片左半部中心，即不随翻折移动的部分），等待变化稳定后采证，再把指针移到页面空白处。",
+          "check": "指针离开卡片后（等待变化稳定），该卡片恢复为悬停前的样子：右半边回到原位、恢复白色，箭头不可见。",
+          "kind": "dom_interaction",
+          "decider": "program+judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "card.1",
+            "card.2",
+            "card.3"
+          ],
+          "sample_viewports": [
+            "desktop"
+          ],
+          "note": "按字面判：悬停时本来就没有任何变化的，离开后仍是原样，本条 PASS，不与上面各条重复扣分。input 未要求过渡，有无过渡都不扣分。"
+        }
+      ]
+    },
+    {
+      "id": "DR-02",
+      "dimension": "dynamic",
+      "type": "motion",
+      "description": "不悬停时页面静止",
+      "target": "page",
+      "source_fields": [
+        "motion_constraints"
+      ],
+      "mandatory_evidence": [
+        {
+          "id": "C1",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "motion_constraints"
+          ],
+          "source_quote": "不悬停时页面静止，没有持续或循环播放的动画",
+          "target": "page",
+          "applies_when": "桌面视口 1280×900；页面加载完成后指针移到空白处，间隔数秒取两帧截图并读取 document.getAnimations()。",
+          "check": "页面加载完成、指针不在卡片上时，观察数秒内画面不变：没有无限循环的动画或持续运动的元素。加载后一次性、在数秒内结束并停住的入场效果不算持续或循环动画。",
+          "kind": "animation_timeline",
+          "decider": "program+judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "page"
+          ],
+          "sample_viewports": [
+            "desktop"
+          ],
+          "note": "程序报告运行中的无限动画与两帧像素差；有差异时交 Judge 判断是否为持续或循环动画。"
+        }
+      ]
+    }
+  ],
+  "dimension_policy": {
+    "D1": 0.5,
+    "D2": 0.5,
+    "reason": "input 含 motion_constraints（卡片悬停翻折），按 DEC-038 两维各占 50%，与 case-222 一致。"
+  },
+  "dependency_policy": {
+    "version": "model-dependency-fail/1.0",
+    "rule": "已确认模型缺失前置对象并实际阻断下游条件时，上下游都判 FAIL、各自判档（DEC-029）；定位、网络或采证失败记 UNRESOLVED；不受阻的成员继续检查。",
+    "prerequisites": [
+      {
+        "upstream": "SR-02.C1",
+        "object": "cards",
+        "viewport": "desktop",
+        "downstream": [
+          "SR-02.C2",
+          "SR-02.C3",
+          "SR-02.C4",
+          "SR-03.*",
+          "SR-04.*",
+          "SR-05.*",
+          "DR-01.*"
+        ],
+        "when": "确认缺少某张卡片时，只阻断涉及该成员的条件；多出的卡片不阻断。"
+      },
+      {
+        "upstream": "SR-02.C11",
+        "object": "backplates",
+        "viewport": "desktop",
+        "downstream": [
+          "SR-06.*"
+        ],
+        "when": "确认某张卡片没有背板时，只阻断该成员的背板样式条件。"
+      },
+      {
+        "upstream": "DR-01.C1",
+        "object": "fold",
+        "viewport": "desktop",
+        "downstream": [
+          "DR-01.C2",
+          "DR-01.C3",
+          "DR-01.C4",
+          "DR-01.C5"
+        ],
+        "when": "确认悬停时没有任何右半边翻折时，方向、浅灰、露出底面、白框留存无法成立；只作用于无翻折的成员。"
+      },
+      {
+        "upstream": "DR-01.C6",
+        "object": "arrow",
+        "viewport": "desktop",
+        "downstream": [
+          "DR-01.C7",
+          "DR-01.C8"
+        ],
+        "when": "确认悬停时没有出现箭头时，箭头颜色和位置无法成立；只作用于无箭头的成员。"
+      }
+    ]
+  },
+  "attribution_policy": {
+    "direct_duplicates": "同一事实只扣一次：FR 与 MC 都提到箭头，静止时不可见由 SR-02.C12 判，悬停出现由 DR-01.C6 判，是不同状态。",
+    "shared_quotes": {
+      "SR-03.C3 / SR-03.C4": "“在页面上部从左到右排成一行”分属排成一行与位于上部。",
+      "SR-04.C3 / SR-04.C4": "“四角为直角、无阴影”分属直角与无阴影。",
+      "SR-05.C2 / SR-05.C3": "“为深色粗体”分属颜色与字重。",
+      "SR-05.C6 / SR-05.C7": "“与标题同色、不加粗”分属颜色与字重。",
+      "DR-01.C1 / DR-01.C2": "“以竖直中线为折线，右半边向观者方向翻折”分属折线位置与翻折方向。",
+      "DR-01.C6 / C7 / C8": "“右侧竖直居中处出现一个白色的向右箭头”分属出现与指向、颜色、位置。",
+      "SR-04.C1 / DR-01.C3": "静止时卡片白色在 D1；悬停时右半边变浅灰在 D2，是不同状态。"
+    },
+    "owner_index": [
+      {
+        "evidence_id": "SR-01.C1",
+        "target": "page",
+        "viewport": "desktop"
+      },
+      {
+        "evidence_id": "SR-01.C2",
+        "target": "page",
+        "viewport": "desktop"
+      },
+      {
+        "evidence_id": "SR-02.C1",
+        "target": "cards",
+        "viewport": "desktop"
+      },
+      {
+        "evidence_id": "SR-02.C2",
+        "target": "card.1.title",
+        "viewport": "desktop"
+      },
+      {
+        "evidence_id": "SR-02.C3",
+        "target": "card.2.title",
+        "viewport": "desktop"
+      },
+      {
+        "evidence_id": "SR-02.C4",
+        "target": "card.3.title",
+        "viewport": "desktop"
+      },
+      {
+        "evidence_id": "SR-02.C5",
+        "target": "card.1.category",
+        "viewport": "desktop"
+      },
+      {
+        "evidence_id": "SR-02.C6",
+        "target": "card.2.category",
+        "viewport": "desktop"
+      },
+      {
+        "evidence_id": "SR-02.C7",
+        "target": "card.3.category",
+        "viewport": "desktop"
+      },
+      {
+        "evidence_id": "SR-02.C8",
+        "target": "card.1.date",
+        "viewport": "desktop"
+      },
+      {
+        "evidence_id": "SR-02.C9",
+        "target": "card.2.date",
+        "viewport": "desktop"
+      },
+      {
+        "evidence_id": "SR-02.C10",
+        "target": "card.3.date",
+        "viewport": "desktop"
+      },
+      {
+        "evidence_id": "SR-02.C11",
+        "target": "backplates",
+        "viewport": "desktop"
+      },
+      {
+        "evidence_id": "SR-02.C12",
+        "target": "arrows",
+        "viewport": "desktop"
+      },
+      {
+        "evidence_id": "SR-03.C1",
+        "target": "cards",
+        "viewport": "desktop"
+      },
+      {
+        "evidence_id": "SR-03.C2",
+        "target": "cards",
+        "viewport": "desktop"
+      },
+      {
+        "evidence_id": "SR-03.C3",
+        "target": "cards",
+        "viewport": "desktop"
+      },
+      {
+        "evidence_id": "SR-03.C4",
+        "target": "cards",
+        "viewport": "desktop"
+      },
+      {
+        "evidence_id": "SR-03.C5",
+        "target": "cards",
+        "viewport": "desktop"
+      },
+      {
+        "evidence_id": "SR-03.C6",
+        "target": "cards",
+        "viewport": "desktop"
+      },
+      {
+        "evidence_id": "SR-04.C1",
+        "target": "cards",
+        "viewport": "desktop"
+      },
+      {
+        "evidence_id": "SR-04.C2",
+        "target": "cards",
+        "viewport": "desktop"
+      },
+      {
+        "evidence_id": "SR-04.C3",
+        "target": "cards",
+        "viewport": "desktop"
+      },
+      {
+        "evidence_id": "SR-04.C4",
+        "target": "cards",
+        "viewport": "desktop"
+      },
+      {
+        "evidence_id": "SR-05.C1",
+        "target": "cards",
+        "viewport": "desktop"
+      },
+      {
+        "evidence_id": "SR-05.C2",
+        "target": "cards",
+        "viewport": "desktop"
+      },
+      {
+        "evidence_id": "SR-05.C3",
+        "target": "cards",
+        "viewport": "desktop"
+      },
+      {
+        "evidence_id": "SR-05.C4",
+        "target": "cards",
+        "viewport": "desktop"
+      },
+      {
+        "evidence_id": "SR-05.C5",
+        "target": "cards",
+        "viewport": "desktop"
+      },
+      {
+        "evidence_id": "SR-05.C6",
+        "target": "cards",
+        "viewport": "desktop"
+      },
+      {
+        "evidence_id": "SR-05.C7",
+        "target": "cards",
+        "viewport": "desktop"
+      },
+      {
+        "evidence_id": "SR-06.C1",
+        "target": "backplates",
+        "viewport": "desktop"
+      },
+      {
+        "evidence_id": "SR-06.C2",
+        "target": "backplates",
+        "viewport": "desktop"
+      },
+      {
+        "evidence_id": "SR-06.C3",
+        "target": "backplates",
+        "viewport": "desktop"
+      },
+      {
+        "evidence_id": "SR-06.C4",
+        "target": "backplates",
+        "viewport": "desktop"
+      },
+      {
+        "evidence_id": "SR-06.C5",
+        "target": "backplates",
+        "viewport": "desktop"
+      },
+      {
+        "evidence_id": "SR-07.C1",
+        "target": "cards",
+        "viewport": "desktop"
+      },
+      {
+        "evidence_id": "DR-01.C1",
+        "target": "cards",
+        "viewport": "desktop"
+      },
+      {
+        "evidence_id": "DR-01.C2",
+        "target": "cards",
+        "viewport": "desktop"
+      },
+      {
+        "evidence_id": "DR-01.C3",
+        "target": "cards",
+        "viewport": "desktop"
+      },
+      {
+        "evidence_id": "DR-01.C4",
+        "target": "cards",
+        "viewport": "desktop"
+      },
+      {
+        "evidence_id": "DR-01.C5",
+        "target": "cards",
+        "viewport": "desktop"
+      },
+      {
+        "evidence_id": "DR-01.C6",
+        "target": "arrows",
+        "viewport": "desktop"
+      },
+      {
+        "evidence_id": "DR-01.C7",
+        "target": "arrows",
+        "viewport": "desktop"
+      },
+      {
+        "evidence_id": "DR-01.C8",
+        "target": "arrows",
+        "viewport": "desktop"
+      },
+      {
+        "evidence_id": "DR-01.C9",
+        "target": "cards",
+        "viewport": "desktop"
+      },
+      {
+        "evidence_id": "DR-01.C10",
+        "target": "cards",
+        "viewport": "desktop"
+      },
+      {
+        "evidence_id": "DR-02.C1",
+        "target": "page",
+        "viewport": "desktop"
+      }
+    ]
+  },
+  "scoring": {
+    "note": "Routing IDs only; formula and deductions come exclusively from the shared scoring policy.",
+    "gates": {
+      "fatal": {
+        "gate_ids": [
+          "G1"
+        ]
+      },
+      "ordinary": {
+        "gate_ids": [
+          "G2",
+          "G3",
+          "G4",
+          "G5"
+        ]
+      }
+    }
+  },
+  "draft_review": {
+    "reviewer": "Claude implementer self-review (duet)",
+    "independent_review": false,
+    "date": "2026-11-24",
+    "checked": [
+      "source quotes are literal substrings of input",
+      "granularity per case-213/217/221/222/227 conventions",
+      "no requirement taken from GT",
+      "check_rules.py structural self-check"
+    ],
+    "not_performed": [
+      "target registry / binding",
+      "GT program self-test of these rules",
+      "Judge run",
+      "release freeze",
+      "API calls",
+      "model generation or scoring",
+      "user acceptance"
+    ]
+  },
+  "evidence_count": {
+    "static": 37,
+    "dynamic": 11,
+    "total": 48,
+    "common_sense": 1
+  }
+}
