@@ -1,0 +1,3459 @@
+{
+  "schema_version": "semantic-eval-rules/3.0",
+  "case_id": "case-221",
+  "tier": "T1",
+  "rule_status": "USER_CONFIRMED_FROZEN",
+  "freeze": {
+    "confirmed_by": "user",
+    "confirmed_on": "2026-11-24",
+    "draft_written_utc": "2026-11-24T08:18:13Z",
+    "draft_sha256": "a801501ed3c2288ef3869b8512e4c529850becb33681957328b44156d97ade5d",
+    "change_at_freeze": "Only rule_status and this freeze block; every Evidence text identical to the draft.",
+    "chronology": "Draft written before the generation dispatch (2026-11-24T08:35:31Z); rules never enter the generation prompt.",
+    "post_freeze_amendments": [
+      {
+        "date": "2026-11-24",
+        "decided_by": "user",
+        "evidence_id": "SR-08.C3",
+        "after_outputs_seen": true,
+        "old_text_tail": "剧照左下部分被卡片遮住，其余部分可见。",
+        "new_text_tail": "卡片只遮住剧照的左下一部分，剧照露出的面积不少于一半，剧照主体（人物）可见。",
+        "reason": "用户审阅 Kimi-K3 输出后指出剧照被卡片遮住太多、人物面部被挡，原条件没有限定遮挡多少。input 原文“左下部分被卡片挡住”。GT 遮挡 37%，修订后仍满足。",
+        "applied": "R02 运行（release_ready_01）冻结的是旧条文；本轮按新条文对三份输出统一复核，见 evaluations/R02_20261117_static-v3/cases/case-221-T1/评测报告.md"
+      }
+    ]
+  },
+  "input_sha256": "bee4cbeb4b9b6ff01004e77e64ac805d332995346d2e446685f11a2c44ac3a49",
+  "input_source": {
+    "path": "input.json",
+    "note": "用户 2026-11-23、2026-11-24 修改后的版本；规则起草时未改动 input。"
+  },
+  "output_contract_ref": "scripts/eval_rules_generation/preparation/output_contract_v2.json",
+  "scoring_policy_ref": "scripts/eval_rules_generation/preparation/evaluation_policy_v2.json#/scoring_policy",
+  "source_policy": {
+    "requirements": "input.json 加一条明确标注的 DEC-037 常识条件（SR-12）；business_background 只提供背景。",
+    "gt": "ground_truth.html 只用于核对各条件可被满足（见 review_20261121），不作为新增要求的来源；源码中 input 未写的行为（中等宽度布局、单词中间断行、窄屏无投影等）不出题。",
+    "model_outputs": "起草时未读取任何模型输出（包括案例目录中的 case-221-duet.html）。"
+  },
+  "render_baseline": {
+    "status": "NOT_FROZEN",
+    "states": [
+      "desktop_wide",
+      "phone_narrow"
+    ],
+    "viewports": {
+      "wide": {
+        "width": 1440,
+        "height": 900
+      },
+      "narrow": {
+        "width": 375,
+        "height": 812
+      },
+      "note": "只作采证视口，不要求模型在特定断点切换布局。宽屏取 1440：标答在 1280 时 Mindhunter 剧照右侧超出视口被裁掉，在 1440 完整可见。700–1023px 的中间宽度不计分。两个视口都取整页截图，窄屏卡片在首屏以下。"
+    },
+    "resources": "JS 启用，外部字体与图片按 v2 契约允许。记录资源加载与字体就绪；评测环境、网络或采证失败一律 UNRESOLVED。"
+  },
+  "measure_policy": {
+    "qualitative": "颜色按 input 给出的颜色名判色系，不指定色号，柠檬黄不按饱和度深浅扣分；“很大”“小得多”“略小”“柔和”“偏右”“较高”按截图中清楚可辨的差别判断，不引入数值阈值。",
+    "coverage": "六张卡片作为并列成员分别计分；同成员同属性在宽窄屏要求相同时合并为一个 Evidence，两个视口分别采证；只在一个视口要求的属性只在该视口采证。",
+    "member_identity": "卡片按剧名识别，不按 DOM 顺序；上排、下排、手机顺序等由各自条件判定。",
+    "square_tolerance": "“正方形”“一样大”只容许渲染取整造成的微小差异，不接受肉眼可见的长方形。",
+    "runtime_status": "Semantic draft only; selectors, bindings, tolerances and the executable collection plan are produced in the later preparation stage."
+  },
+  "quality_gate": [
+    {
+      "id": "G1",
+      "description": "HTML forms a valid evaluable DOM; parser/environment failure alone is not model fatal failure.",
+      "source": "project_output_contract"
+    },
+    {
+      "id": "G2",
+      "description": "JS is allowed by the shared v2 policy; no blanket script/event-attribute violation. Only explicit case prohibitions may restrict it.",
+      "source": "project_output_contract"
+    },
+    {
+      "id": "G3",
+      "description": "External fonts, font stylesheets, images and ordinary navigation links are allowed; do not apply DEC-028 legacy font ban. Resource availability is checked separately.",
+      "source": "project_output_contract"
+    },
+    {
+      "id": "G4",
+      "description": "One complete HTML; page CSS embedded in head/style or HTML style attributes; font-loading stylesheets allowed; required JS embedded in the HTML (no external script files).",
+      "source": "project_output_contract"
+    },
+    {
+      "id": "G5",
+      "description": "input.forbidden is empty; no case-specific prohibition is invented.",
+      "source": "input.forbidden"
+    }
+  ],
+  "static_requirements": [
+    {
+      "id": "SR-01",
+      "dimension": "static",
+      "type": "element",
+      "description": "页面底色与通用字体",
+      "target": "page",
+      "source_fields": [
+        "layout_constraints"
+      ],
+      "mandatory_evidence": [
+        {
+          "id": "C1",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "页面底色为浅灰蓝色",
+          "target": "page",
+          "applies_when": "桌面宽屏与手机窄屏分别采证；两种视口要求相同，合为一个计分条件。允许滚动至目标。",
+          "check": "页面主背景（内容区周围与卡片之间露出的底色）呈浅灰蓝色：浅、偏灰、带蓝的冷色；不指定色号。",
+          "kind": "screenshot_visual",
+          "viewport": "both",
+          "required_objects": [
+            "page"
+          ],
+          "sample_viewports": [
+            "wide",
+            "narrow"
+          ],
+          "viewport_scoring": "one_evidence_multiple_observations",
+          "merge_reason": "input 未对该属性设置不同的宽窄屏结果；合为一个计分条件，两个视口分别采证。"
+        },
+        {
+          "id": "C2",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "文字使用 Montserrat 字体",
+          "target": "page",
+          "applies_when": "桌面宽屏与手机窄屏分别采证；两种视口要求相同，合为一个计分条件。允许滚动至目标。",
+          "check": "主标题、副标题（Dancing Script 那句除外）、剧名、统计文字、图例和说明栏文字实际渲染为 Montserrat（字体加载完成后以渲染字形判断，声明了但回退成其他字体算未使用；字体服务加载失败为 UNRESOLVED）。",
+          "kind": "font_rendering",
+          "viewport": "both",
+          "required_objects": [
+            "page"
+          ],
+          "sample_viewports": [
+            "wide",
+            "narrow"
+          ],
+          "viewport_scoring": "one_evidence_multiple_observations",
+          "merge_reason": "input 未对该属性设置不同的宽窄屏结果；合为一个计分条件，两个视口分别采证。"
+        },
+        {
+          "id": "C3",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "正文为细体",
+          "target": "page",
+          "applies_when": "桌面宽屏与手机窄屏分别采证；两种视口要求相同，合为一个计分条件。允许滚动至目标。",
+          "check": "统计文字、图例文字和说明栏文字为细字重，明显细于常规字重；不指定字重数值。",
+          "kind": "font_rendering",
+          "viewport": "both",
+          "required_objects": [
+            "page"
+          ],
+          "sample_viewports": [
+            "wide",
+            "narrow"
+          ],
+          "viewport_scoring": "one_evidence_multiple_observations",
+          "merge_reason": "input 未对该属性设置不同的宽窄屏结果；合为一个计分条件，两个视口分别采证。"
+        }
+      ]
+    },
+    {
+      "id": "SR-02",
+      "dimension": "static",
+      "type": "element",
+      "description": "主标题",
+      "target": "heading",
+      "source_fields": [
+        "functional_requirements",
+        "layout_constraints"
+      ],
+      "mandatory_evidence": [
+        {
+          "id": "C1",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "页面主标题为 Netflix Binge: Top Stats",
+          "target": "heading",
+          "applies_when": "桌面宽屏与手机窄屏分别采证；两种视口要求相同，合为一个计分条件。允许滚动至目标。",
+          "check": "主标题文字为 Netflix Binge: Top Stats（字母大小写可由样式变换，换行与多余空白不计；不能缺词、错词或多出其他文字）。",
+          "kind": "dom_text",
+          "viewport": "both",
+          "required_objects": [
+            "heading"
+          ],
+          "sample_viewports": [
+            "wide",
+            "narrow"
+          ],
+          "viewport_scoring": "one_evidence_multiple_observations",
+          "merge_reason": "input 未对该属性设置不同的宽窄屏结果；合为一个计分条件，两个视口分别采证。"
+        },
+        {
+          "id": "C2",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "主标题全大写",
+          "target": "heading",
+          "applies_when": "桌面宽屏与手机窄屏分别采证；两种视口要求相同，合为一个计分条件。允许滚动至目标。",
+          "check": "主标题在页面上显示为全大写字母。",
+          "kind": "screenshot_visual",
+          "viewport": "both",
+          "required_objects": [
+            "heading"
+          ],
+          "sample_viewports": [
+            "wide",
+            "narrow"
+          ],
+          "viewport_scoring": "one_evidence_multiple_observations",
+          "merge_reason": "input 未对该属性设置不同的宽窄屏结果；合为一个计分条件，两个视口分别采证。"
+        },
+        {
+          "id": "C3",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "粗体",
+          "target": "heading",
+          "applies_when": "桌面宽屏与手机窄屏分别采证；两种视口要求相同，合为一个计分条件。允许滚动至目标。",
+          "check": "主标题为粗体，明显粗于正文。",
+          "kind": "font_rendering",
+          "viewport": "both",
+          "required_objects": [
+            "heading"
+          ],
+          "sample_viewports": [
+            "wide",
+            "narrow"
+          ],
+          "viewport_scoring": "one_evidence_multiple_observations",
+          "merge_reason": "input 未对该属性设置不同的宽窄屏结果；合为一个计分条件，两个视口分别采证。"
+        },
+        {
+          "id": "C4",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "深青绿色",
+          "target": "heading",
+          "applies_when": "桌面宽屏与手机窄屏分别采证；两种视口要求相同，合为一个计分条件。允许滚动至目标。",
+          "check": "主标题文字为深青绿色（深色、蓝绿之间）；不指定色号。",
+          "kind": "screenshot_visual",
+          "viewport": "both",
+          "required_objects": [
+            "heading"
+          ],
+          "sample_viewports": [
+            "wide",
+            "narrow"
+          ],
+          "viewport_scoring": "one_evidence_multiple_observations",
+          "merge_reason": "input 未对该属性设置不同的宽窄屏结果；合为一个计分条件，两个视口分别采证。"
+        },
+        {
+          "id": "C5",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "字号很大",
+          "target": "heading",
+          "applies_when": "桌面宽屏与手机窄屏分别采证；两种视口要求相同，合为一个计分条件。允许滚动至目标。",
+          "check": "主标题是页面上字号最大的文字，明显大于卡片剧名。",
+          "kind": "geometry",
+          "viewport": "both",
+          "required_objects": [
+            "heading",
+            "card.cloy",
+            "card.inheritors",
+            "card.foodwars",
+            "card.theking",
+            "card.mindhunter",
+            "card.kakegurui"
+          ],
+          "sample_viewports": [
+            "wide",
+            "narrow"
+          ],
+          "viewport_scoring": "one_evidence_multiple_observations",
+          "merge_reason": "input 未对该属性设置不同的宽窄屏结果；合为一个计分条件，两个视口分别采证。"
+        },
+        {
+          "id": "C6",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "宽屏下主标题竖排在内容区最左侧，文字自下而上阅读",
+          "target": "heading",
+          "applies_when": "桌面宽屏稳定状态（资源加载完成后）；允许滚动至目标。",
+          "check": "主标题为竖排：字母沿竖直方向排列，整体旋转后需从下往上读（字母顶部朝左）；不是逐字竖向堆叠的横排字母，也不是从上往下读。",
+          "kind": "screenshot_visual",
+          "viewport": "wide",
+          "required_objects": [
+            "heading"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C7",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "宽屏下主标题竖排在内容区最左侧",
+          "target": "heading",
+          "applies_when": "桌面宽屏稳定状态（资源加载完成后）；允许滚动至目标。",
+          "check": "主标题位于页面主体内容（卡片、图例、副标题）的最左侧，所有卡片和图例都在它的右边；说明栏除外。",
+          "kind": "geometry",
+          "viewport": "wide",
+          "required_objects": [
+            "heading",
+            "card.cloy",
+            "card.inheritors",
+            "card.foodwars",
+            "card.theking",
+            "card.mindhunter",
+            "card.kakegurui",
+            "legend"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C8",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "分成 NETFLIX BINGE: 和 TOP STATS 两列，TOP STATS 在右",
+          "target": "heading",
+          "applies_when": "桌面宽屏稳定状态（资源加载完成后）；允许滚动至目标。",
+          "check": "竖排主标题分成两列：一列为 NETFLIX BINGE:，另一列为 TOP STATS，TOP STATS 一列在右。",
+          "kind": "geometry_and_visual",
+          "viewport": "wide",
+          "required_objects": [
+            "heading"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C9",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "且它的下端较高",
+          "target": "heading",
+          "applies_when": "桌面宽屏稳定状态（资源加载完成后）；允许滚动至目标。",
+          "check": "TOP STATS 一列的下端高于 NETFLIX BINGE: 一列的下端，两列下端在截图中清楚可见地错开，不是几像素的对齐误差。",
+          "kind": "geometry",
+          "viewport": "wide",
+          "required_objects": [
+            "heading"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C10",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "手机窄屏下主标题横排并居中",
+          "target": "heading",
+          "applies_when": "手机窄屏稳定状态（资源加载完成后）；允许滚动至目标，整页截图。",
+          "check": "主标题为正常横排文字，在可用宽度内水平居中（多行时各行居中）。",
+          "kind": "geometry_and_visual",
+          "viewport": "narrow",
+          "required_objects": [
+            "heading"
+          ],
+          "sample_viewports": [
+            "narrow"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SR-03",
+      "dimension": "static",
+      "type": "element",
+      "description": "副标题",
+      "target": "subtitle",
+      "source_fields": [
+        "functional_requirements",
+        "layout_constraints"
+      ],
+      "mandatory_evidence": [
+        {
+          "id": "C1",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "副标题为 When your friend recommended you that series, you should've said no.",
+          "target": "subtitle",
+          "applies_when": "桌面宽屏稳定状态（资源加载完成后）；允许滚动至目标。",
+          "check": "副标题文字为 When your friend recommended you that series, you should've said no.（撇号用直撇号或弯撇号均可，换行与多余空白不计）。宽屏下必须可见。",
+          "kind": "dom_text",
+          "viewport": "wide",
+          "required_objects": [
+            "subtitle"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C2",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "副标题字号小得多",
+          "target": "subtitle",
+          "applies_when": "桌面宽屏稳定状态（资源加载完成后）；允许滚动至目标。",
+          "check": "副标题字号明显小于主标题（一眼可见的数量级差别）。",
+          "kind": "geometry",
+          "viewport": "wide",
+          "required_objects": [
+            "subtitle",
+            "heading"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C3",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "细体",
+          "target": "subtitle",
+          "applies_when": "桌面宽屏稳定状态（资源加载完成后）；允许滚动至目标。",
+          "check": "副标题中除 should've said no. 外的部分为细字重。",
+          "kind": "font_rendering",
+          "viewport": "wide",
+          "required_objects": [
+            "subtitle"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C4",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "其中 should've said no. 一句改用 Dancing Script 手写体",
+          "target": "subtitle",
+          "applies_when": "桌面宽屏稳定状态（资源加载完成后）；允许滚动至目标。",
+          "check": "should've said no. 这一句实际渲染为 Dancing Script 手写体，副标题其余部分不是手写体（字体服务加载失败为 UNRESOLVED）。",
+          "kind": "font_rendering",
+          "viewport": "wide",
+          "required_objects": [
+            "subtitle"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C5",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "并略微放大",
+          "target": "subtitle",
+          "applies_when": "桌面宽屏稳定状态（资源加载完成后）；允许滚动至目标。",
+          "check": "should've said no. 一句的字号大于副标题其余部分，且仍明显小于主标题。",
+          "kind": "geometry",
+          "viewport": "wide",
+          "required_objects": [
+            "subtitle",
+            "heading"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C6",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "副标题同样自下而上竖排",
+          "target": "subtitle",
+          "applies_when": "桌面宽屏稳定状态（资源加载完成后）；允许滚动至目标。",
+          "check": "副标题为竖排，需从下往上读，方向与主标题一致。",
+          "kind": "screenshot_visual",
+          "viewport": "wide",
+          "required_objects": [
+            "subtitle"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C7",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "在TOP STATS右侧",
+          "target": "subtitle",
+          "applies_when": "桌面宽屏稳定状态（资源加载完成后）；允许滚动至目标。",
+          "check": "副标题整体位于 TOP STATS 一列的右侧，且在所有卡片左侧（不压在卡片上）。",
+          "kind": "geometry",
+          "viewport": "wide",
+          "required_objects": [
+            "subtitle",
+            "heading",
+            "card.cloy",
+            "card.inheritors",
+            "card.foodwars",
+            "card.theking",
+            "card.mindhunter",
+            "card.kakegurui"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C8",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "手机窄屏下主标题横排并居中，不显示副标题",
+          "target": "subtitle",
+          "applies_when": "手机窄屏稳定状态（资源加载完成后）；允许滚动至目标，整页截图。",
+          "check": "页面上看不到副标题文字（不可见即可，DOM 中是否保留不计）。",
+          "kind": "screenshot_visual",
+          "viewport": "narrow",
+          "required_objects": [
+            "subtitle"
+          ],
+          "sample_viewports": [
+            "narrow"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SR-04",
+      "dimension": "static",
+      "type": "element",
+      "description": "图例",
+      "target": "legend",
+      "source_fields": [
+        "functional_requirements",
+        "layout_constraints"
+      ],
+      "mandatory_evidence": [
+        {
+          "id": "C1",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "页面上有一组图例，三个色块依次对应 Korean Drama、Anime、Western Series",
+          "target": "legend",
+          "applies_when": "桌面宽屏与手机窄屏分别采证；两种视口要求相同，合为一个计分条件。允许滚动至目标。",
+          "check": "图例共三项，每项由一个色块和一段文字组成，文字依次为 Korean Drama、Anime、Western Series（按阅读顺序：从左到右，换行时先上后下）。",
+          "kind": "dom_text",
+          "viewport": "both",
+          "required_objects": [
+            "legend"
+          ],
+          "sample_viewports": [
+            "wide",
+            "narrow"
+          ],
+          "viewport_scoring": "one_evidence_multiple_observations",
+          "merge_reason": "input 未对该属性设置不同的宽窄屏结果；合为一个计分条件，两个视口分别采证。"
+        },
+        {
+          "id": "C2",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "图例排成一行",
+          "target": "legend",
+          "applies_when": "桌面宽屏稳定状态（资源加载完成后）；允许滚动至目标。",
+          "check": "三项图例在同一行内横向排列。",
+          "kind": "geometry",
+          "viewport": "wide",
+          "required_objects": [
+            "legend"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C3",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "位于下排卡片下方偏右",
+          "target": "legend",
+          "applies_when": "桌面宽屏稳定状态（资源加载完成后）；允许滚动至目标。",
+          "check": "图例整体位于下排三张卡片（Food Wars、Kakegurui、Inheritors）的下方，水平方向偏向页面主体的右侧（图例中心在主体内容水平中线右边）。",
+          "kind": "geometry",
+          "viewport": "wide",
+          "required_objects": [
+            "legend",
+            "card.foodwars",
+            "card.kakegurui",
+            "card.inheritors"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C4",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "图例紧接在标题下方",
+          "target": "legend",
+          "applies_when": "手机窄屏稳定状态（资源加载完成后）；允许滚动至目标，整页截图。",
+          "check": "图例在主标题下方、第一张卡片上方，两者之间没有其他内容。",
+          "kind": "geometry",
+          "viewport": "narrow",
+          "required_objects": [
+            "legend",
+            "heading",
+            "card.cloy"
+          ],
+          "sample_viewports": [
+            "narrow"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SR-05",
+      "dimension": "static",
+      "type": "element",
+      "description": "按剧集类型着色（卡片与图例色块）",
+      "target": "cards",
+      "source_fields": [
+        "layout_constraints"
+      ],
+      "mandatory_evidence": [
+        {
+          "id": "C1",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "Korean Drama 为柠檬黄色底、深青绿色字",
+          "target": "card.cloy",
+          "applies_when": "桌面宽屏与手机窄屏分别采证；两种视口要求相同，合为一个计分条件。允许滚动至目标。",
+          "check": "Crash Landing on You 卡片（Korean Drama）：底色为柠檬黄色系（色相为黄，浅或中等明度；不按饱和度深浅扣分），卡片内文字（剧名与统计文字）为深青绿色。",
+          "kind": "screenshot_visual",
+          "viewport": "both",
+          "required_objects": [
+            "card.cloy"
+          ],
+          "sample_viewports": [
+            "wide",
+            "narrow"
+          ],
+          "viewport_scoring": "one_evidence_multiple_observations",
+          "merge_reason": "input 未对该属性设置不同的宽窄屏结果；合为一个计分条件，两个视口分别采证。"
+        },
+        {
+          "id": "C2",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "Korean Drama 为柠檬黄色底、深青绿色字",
+          "target": "card.inheritors",
+          "applies_when": "桌面宽屏与手机窄屏分别采证；两种视口要求相同，合为一个计分条件。允许滚动至目标。",
+          "check": "Inheritors 卡片（Korean Drama）：底色为柠檬黄色系（色相为黄，浅或中等明度；不按饱和度深浅扣分），卡片内文字（剧名与统计文字）为深青绿色。",
+          "kind": "screenshot_visual",
+          "viewport": "both",
+          "required_objects": [
+            "card.inheritors"
+          ],
+          "sample_viewports": [
+            "wide",
+            "narrow"
+          ],
+          "viewport_scoring": "one_evidence_multiple_observations",
+          "merge_reason": "input 未对该属性设置不同的宽窄屏结果；合为一个计分条件，两个视口分别采证。"
+        },
+        {
+          "id": "C3",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "Anime 为亮青绿色底、近白色字",
+          "target": "card.foodwars",
+          "applies_when": "桌面宽屏与手机窄屏分别采证；两种视口要求相同，合为一个计分条件。允许滚动至目标。",
+          "check": "Food Wars 卡片（Anime）：底色为明亮的青绿色系（介于绿与青之间、明度高），卡片内文字为白色或近白色。",
+          "kind": "screenshot_visual",
+          "viewport": "both",
+          "required_objects": [
+            "card.foodwars"
+          ],
+          "sample_viewports": [
+            "wide",
+            "narrow"
+          ],
+          "viewport_scoring": "one_evidence_multiple_observations",
+          "merge_reason": "input 未对该属性设置不同的宽窄屏结果；合为一个计分条件，两个视口分别采证。"
+        },
+        {
+          "id": "C4",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "Korean Drama 为柠檬黄色底、深青绿色字",
+          "target": "card.theking",
+          "applies_when": "桌面宽屏与手机窄屏分别采证；两种视口要求相同，合为一个计分条件。允许滚动至目标。",
+          "check": "The King 卡片（Korean Drama）：底色为柠檬黄色系（色相为黄，浅或中等明度；不按饱和度深浅扣分），卡片内文字（剧名与统计文字）为深青绿色。",
+          "kind": "screenshot_visual",
+          "viewport": "both",
+          "required_objects": [
+            "card.theking"
+          ],
+          "sample_viewports": [
+            "wide",
+            "narrow"
+          ],
+          "viewport_scoring": "one_evidence_multiple_observations",
+          "merge_reason": "input 未对该属性设置不同的宽窄屏结果；合为一个计分条件，两个视口分别采证。"
+        },
+        {
+          "id": "C5",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "Western Series 为天蓝色底、近白色字",
+          "target": "card.mindhunter",
+          "applies_when": "桌面宽屏与手机窄屏分别采证；两种视口要求相同，合为一个计分条件。允许滚动至目标。",
+          "check": "Mindhunter 卡片（Western Series）：底色为天蓝色系（明亮的蓝，偏青），卡片内文字为白色或近白色。",
+          "kind": "screenshot_visual",
+          "viewport": "both",
+          "required_objects": [
+            "card.mindhunter"
+          ],
+          "sample_viewports": [
+            "wide",
+            "narrow"
+          ],
+          "viewport_scoring": "one_evidence_multiple_observations",
+          "merge_reason": "input 未对该属性设置不同的宽窄屏结果；合为一个计分条件，两个视口分别采证。"
+        },
+        {
+          "id": "C6",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "Anime 为亮青绿色底、近白色字",
+          "target": "card.kakegurui",
+          "applies_when": "桌面宽屏与手机窄屏分别采证；两种视口要求相同，合为一个计分条件。允许滚动至目标。",
+          "check": "Kakegurui 卡片（Anime）：底色为明亮的青绿色系（介于绿与青之间、明度高），卡片内文字为白色或近白色。",
+          "kind": "screenshot_visual",
+          "viewport": "both",
+          "required_objects": [
+            "card.kakegurui"
+          ],
+          "sample_viewports": [
+            "wide",
+            "narrow"
+          ],
+          "viewport_scoring": "one_evidence_multiple_observations",
+          "merge_reason": "input 未对该属性设置不同的宽窄屏结果；合为一个计分条件，两个视口分别采证。"
+        },
+        {
+          "id": "C7",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "卡片色底按图例色块着色",
+          "target": "legend.Korean Drama",
+          "applies_when": "桌面宽屏与手机窄屏分别采证；两种视口要求相同，合为一个计分条件。允许滚动至目标。",
+          "check": "图例中 Korean Drama 的色块为柠檬黄色，与 Korean Drama 卡片的底色相同（目视为同一颜色）。",
+          "kind": "screenshot_visual",
+          "viewport": "both",
+          "required_objects": [
+            "legend",
+            "card.cloy",
+            "card.inheritors",
+            "card.theking"
+          ],
+          "sample_viewports": [
+            "wide",
+            "narrow"
+          ],
+          "viewport_scoring": "one_evidence_multiple_observations",
+          "merge_reason": "input 未对该属性设置不同的宽窄屏结果；合为一个计分条件，两个视口分别采证。"
+        },
+        {
+          "id": "C8",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "卡片色底按图例色块着色",
+          "target": "legend.Anime",
+          "applies_when": "桌面宽屏与手机窄屏分别采证；两种视口要求相同，合为一个计分条件。允许滚动至目标。",
+          "check": "图例中 Anime 的色块为亮青绿色，与 Anime 卡片的底色相同（目视为同一颜色）。",
+          "kind": "screenshot_visual",
+          "viewport": "both",
+          "required_objects": [
+            "legend",
+            "card.foodwars",
+            "card.kakegurui"
+          ],
+          "sample_viewports": [
+            "wide",
+            "narrow"
+          ],
+          "viewport_scoring": "one_evidence_multiple_observations",
+          "merge_reason": "input 未对该属性设置不同的宽窄屏结果；合为一个计分条件，两个视口分别采证。"
+        },
+        {
+          "id": "C9",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "卡片色底按图例色块着色",
+          "target": "legend.Western Series",
+          "applies_when": "桌面宽屏与手机窄屏分别采证；两种视口要求相同，合为一个计分条件。允许滚动至目标。",
+          "check": "图例中 Western Series 的色块为天蓝色，与 Western Series 卡片的底色相同（目视为同一颜色）。",
+          "kind": "screenshot_visual",
+          "viewport": "both",
+          "required_objects": [
+            "legend",
+            "card.mindhunter"
+          ],
+          "sample_viewports": [
+            "wide",
+            "narrow"
+          ],
+          "viewport_scoring": "one_evidence_multiple_observations",
+          "merge_reason": "input 未对该属性设置不同的宽窄屏结果；合为一个计分条件，两个视口分别采证。"
+        },
+        {
+          "id": "C10",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "卡片色底按图例色块着色",
+          "target": "cards",
+          "applies_when": "桌面宽屏与手机窄屏分别采证；两种视口要求相同，合为一个计分条件。允许滚动至目标。",
+          "check": "三种类型的卡片底色彼此可明显区分，尤其 Anime 的亮青绿与 Western Series 的天蓝不能混成同一颜色。",
+          "kind": "screenshot_visual",
+          "viewport": "both",
+          "required_objects": [
+            "card.cloy",
+            "card.inheritors",
+            "card.foodwars",
+            "card.theking",
+            "card.mindhunter",
+            "card.kakegurui"
+          ],
+          "sample_viewports": [
+            "wide",
+            "narrow"
+          ],
+          "viewport_scoring": "one_evidence_multiple_observations",
+          "merge_reason": "input 未对该属性设置不同的宽窄屏结果；合为一个计分条件，两个视口分别采证。"
+        }
+      ]
+    },
+    {
+      "id": "SR-06",
+      "dimension": "static",
+      "type": "element",
+      "description": "卡片内容与文字样式",
+      "target": "cards",
+      "source_fields": [
+        "functional_requirements",
+        "layout_constraints"
+      ],
+      "mandatory_evidence": [
+        {
+          "id": "C1",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "Crash Landing on You（",
+          "target": "card.cloy",
+          "applies_when": "桌面宽屏与手机窄屏分别采证；两种视口要求相同，合为一个计分条件。允许滚动至目标。",
+          "check": "存在一张剧名为 Crash Landing on You 的卡片（不区分大小写；剧名在单词中间断行可接受，字母必须齐全且顺序正确）。",
+          "kind": "dom_text",
+          "viewport": "both",
+          "required_objects": [
+            "card.cloy"
+          ],
+          "sample_viewports": [
+            "wide",
+            "narrow"
+          ],
+          "viewport_scoring": "one_evidence_multiple_observations",
+          "merge_reason": "input 未对该属性设置不同的宽窄屏结果；合为一个计分条件，两个视口分别采证。"
+        },
+        {
+          "id": "C2",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "Inheritors（",
+          "target": "card.inheritors",
+          "applies_when": "桌面宽屏与手机窄屏分别采证；两种视口要求相同，合为一个计分条件。允许滚动至目标。",
+          "check": "存在一张剧名为 Inheritors 的卡片（不区分大小写；剧名在单词中间断行可接受，字母必须齐全且顺序正确）。",
+          "kind": "dom_text",
+          "viewport": "both",
+          "required_objects": [
+            "card.inheritors"
+          ],
+          "sample_viewports": [
+            "wide",
+            "narrow"
+          ],
+          "viewport_scoring": "one_evidence_multiple_observations",
+          "merge_reason": "input 未对该属性设置不同的宽窄屏结果；合为一个计分条件，两个视口分别采证。"
+        },
+        {
+          "id": "C3",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "Food Wars（",
+          "target": "card.foodwars",
+          "applies_when": "桌面宽屏与手机窄屏分别采证；两种视口要求相同，合为一个计分条件。允许滚动至目标。",
+          "check": "存在一张剧名为 Food Wars 的卡片（不区分大小写；剧名在单词中间断行可接受，字母必须齐全且顺序正确）。",
+          "kind": "dom_text",
+          "viewport": "both",
+          "required_objects": [
+            "card.foodwars"
+          ],
+          "sample_viewports": [
+            "wide",
+            "narrow"
+          ],
+          "viewport_scoring": "one_evidence_multiple_observations",
+          "merge_reason": "input 未对该属性设置不同的宽窄屏结果；合为一个计分条件，两个视口分别采证。"
+        },
+        {
+          "id": "C4",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "The King（",
+          "target": "card.theking",
+          "applies_when": "桌面宽屏与手机窄屏分别采证；两种视口要求相同，合为一个计分条件。允许滚动至目标。",
+          "check": "存在一张剧名为 The King 的卡片（不区分大小写；剧名在单词中间断行可接受，字母必须齐全且顺序正确）。",
+          "kind": "dom_text",
+          "viewport": "both",
+          "required_objects": [
+            "card.theking"
+          ],
+          "sample_viewports": [
+            "wide",
+            "narrow"
+          ],
+          "viewport_scoring": "one_evidence_multiple_observations",
+          "merge_reason": "input 未对该属性设置不同的宽窄屏结果；合为一个计分条件，两个视口分别采证。"
+        },
+        {
+          "id": "C5",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "Mindhunter（",
+          "target": "card.mindhunter",
+          "applies_when": "桌面宽屏与手机窄屏分别采证；两种视口要求相同，合为一个计分条件。允许滚动至目标。",
+          "check": "存在一张剧名为 Mindhunter 的卡片（不区分大小写；剧名在单词中间断行可接受，字母必须齐全且顺序正确）。",
+          "kind": "dom_text",
+          "viewport": "both",
+          "required_objects": [
+            "card.mindhunter"
+          ],
+          "sample_viewports": [
+            "wide",
+            "narrow"
+          ],
+          "viewport_scoring": "one_evidence_multiple_observations",
+          "merge_reason": "input 未对该属性设置不同的宽窄屏结果；合为一个计分条件，两个视口分别采证。"
+        },
+        {
+          "id": "C6",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "Kakegurui（",
+          "target": "card.kakegurui",
+          "applies_when": "桌面宽屏与手机窄屏分别采证；两种视口要求相同，合为一个计分条件。允许滚动至目标。",
+          "check": "存在一张剧名为 Kakegurui 的卡片（不区分大小写；剧名在单词中间断行可接受，字母必须齐全且顺序正确）。",
+          "kind": "dom_text",
+          "viewport": "both",
+          "required_objects": [
+            "card.kakegurui"
+          ],
+          "sample_viewports": [
+            "wide",
+            "narrow"
+          ],
+          "viewport_scoring": "one_evidence_multiple_observations",
+          "merge_reason": "input 未对该属性设置不同的宽窄屏结果；合为一个计分条件，两个视口分别采证。"
+        },
+        {
+          "id": "C7",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "16 episodes // 960 minutes in 1 day. One sitting.",
+          "target": "card.cloy",
+          "applies_when": "桌面宽屏与手机窄屏分别采证；两种视口要求相同，合为一个计分条件。允许滚动至目标。",
+          "check": "Crash Landing on You 卡片的统计文字为 16 episodes // 960 minutes in 1 day. One sitting.（换行与多余空白不计，标点和数字须一致）。",
+          "kind": "dom_text",
+          "viewport": "both",
+          "required_objects": [
+            "card.cloy"
+          ],
+          "sample_viewports": [
+            "wide",
+            "narrow"
+          ],
+          "viewport_scoring": "one_evidence_multiple_observations",
+          "merge_reason": "input 未对该属性设置不同的宽窄屏结果；合为一个计分条件，两个视口分别采证。"
+        },
+        {
+          "id": "C8",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "16 episodes // 960 minutes in 1 day. One sitting.",
+          "target": "card.inheritors",
+          "applies_when": "桌面宽屏与手机窄屏分别采证；两种视口要求相同，合为一个计分条件。允许滚动至目标。",
+          "check": "Inheritors 卡片的统计文字为 16 episodes // 960 minutes in 1 day. One sitting.（换行与多余空白不计，标点和数字须一致）。",
+          "kind": "dom_text",
+          "viewport": "both",
+          "required_objects": [
+            "card.inheritors"
+          ],
+          "sample_viewports": [
+            "wide",
+            "narrow"
+          ],
+          "viewport_scoring": "one_evidence_multiple_observations",
+          "merge_reason": "input 未对该属性设置不同的宽窄屏结果；合为一个计分条件，两个视口分别采证。"
+        },
+        {
+          "id": "C9",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "85 episodes // 1700 minutes in 3 days.",
+          "target": "card.foodwars",
+          "applies_when": "桌面宽屏与手机窄屏分别采证；两种视口要求相同，合为一个计分条件。允许滚动至目标。",
+          "check": "Food Wars 卡片的统计文字为 85 episodes // 1700 minutes in 3 days.（换行与多余空白不计，标点和数字须一致）。",
+          "kind": "dom_text",
+          "viewport": "both",
+          "required_objects": [
+            "card.foodwars"
+          ],
+          "sample_viewports": [
+            "wide",
+            "narrow"
+          ],
+          "viewport_scoring": "one_evidence_multiple_observations",
+          "merge_reason": "input 未对该属性设置不同的宽窄屏结果；合为一个计分条件，两个视口分别采证。"
+        },
+        {
+          "id": "C10",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "16 episodes // 960 minutes in 2 days.",
+          "target": "card.theking",
+          "applies_when": "桌面宽屏与手机窄屏分别采证；两种视口要求相同，合为一个计分条件。允许滚动至目标。",
+          "check": "The King 卡片的统计文字为 16 episodes // 960 minutes in 2 days.（换行与多余空白不计，标点和数字须一致）。",
+          "kind": "dom_text",
+          "viewport": "both",
+          "required_objects": [
+            "card.theking"
+          ],
+          "sample_viewports": [
+            "wide",
+            "narrow"
+          ],
+          "viewport_scoring": "one_evidence_multiple_observations",
+          "merge_reason": "input 未对该属性设置不同的宽窄屏结果；合为一个计分条件，两个视口分别采证。"
+        },
+        {
+          "id": "C11",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "19 episodes // 942 minutes in 3 days.",
+          "target": "card.mindhunter",
+          "applies_when": "桌面宽屏与手机窄屏分别采证；两种视口要求相同，合为一个计分条件。允许滚动至目标。",
+          "check": "Mindhunter 卡片的统计文字为 19 episodes // 942 minutes in 3 days.（换行与多余空白不计，标点和数字须一致）。",
+          "kind": "dom_text",
+          "viewport": "both",
+          "required_objects": [
+            "card.mindhunter"
+          ],
+          "sample_viewports": [
+            "wide",
+            "narrow"
+          ],
+          "viewport_scoring": "one_evidence_multiple_observations",
+          "merge_reason": "input 未对该属性设置不同的宽窄屏结果；合为一个计分条件，两个视口分别采证。"
+        },
+        {
+          "id": "C12",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "24 episodes // 480 minutes in 2 days.",
+          "target": "card.kakegurui",
+          "applies_when": "桌面宽屏与手机窄屏分别采证；两种视口要求相同，合为一个计分条件。允许滚动至目标。",
+          "check": "Kakegurui 卡片的统计文字为 24 episodes // 480 minutes in 2 days.（换行与多余空白不计，标点和数字须一致）。",
+          "kind": "dom_text",
+          "viewport": "both",
+          "required_objects": [
+            "card.kakegurui"
+          ],
+          "sample_viewports": [
+            "wide",
+            "narrow"
+          ],
+          "viewport_scoring": "one_evidence_multiple_observations",
+          "merge_reason": "input 未对该属性设置不同的宽窄屏结果；合为一个计分条件，两个视口分别采证。"
+        },
+        {
+          "id": "C13",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "卡片内剧名在上、统计文字在下",
+          "target": "cards",
+          "applies_when": "桌面宽屏与手机窄屏分别采证；两种视口要求相同，合为一个计分条件。允许滚动至目标。",
+          "check": "六张卡片中，剧名都在统计文字上方。",
+          "kind": "geometry",
+          "viewport": "both",
+          "required_objects": [
+            "card.cloy",
+            "card.inheritors",
+            "card.foodwars",
+            "card.theking",
+            "card.mindhunter",
+            "card.kakegurui"
+          ],
+          "sample_viewports": [
+            "wide",
+            "narrow"
+          ],
+          "viewport_scoring": "one_evidence_multiple_observations",
+          "merge_reason": "input 未对该属性设置不同的宽窄屏结果；合为一个计分条件，两个视口分别采证。"
+        },
+        {
+          "id": "C14",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "剧名全大写、粗体",
+          "target": "cards",
+          "applies_when": "桌面宽屏与手机窄屏分别采证；两种视口要求相同，合为一个计分条件。允许滚动至目标。",
+          "check": "六张卡片的剧名都显示为全大写且为粗体。",
+          "kind": "font_rendering",
+          "viewport": "both",
+          "required_objects": [
+            "card.cloy",
+            "card.inheritors",
+            "card.foodwars",
+            "card.theking",
+            "card.mindhunter",
+            "card.kakegurui"
+          ],
+          "sample_viewports": [
+            "wide",
+            "narrow"
+          ],
+          "viewport_scoring": "one_evidence_multiple_observations",
+          "merge_reason": "input 未对该属性设置不同的宽窄屏结果；合为一个计分条件，两个视口分别采证。"
+        },
+        {
+          "id": "C15",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "明显大于统计文字",
+          "target": "cards",
+          "applies_when": "桌面宽屏与手机窄屏分别采证；两种视口要求相同，合为一个计分条件。允许滚动至目标。",
+          "check": "六张卡片的剧名字号都明显大于同卡统计文字。",
+          "kind": "geometry",
+          "viewport": "both",
+          "required_objects": [
+            "card.cloy",
+            "card.inheritors",
+            "card.foodwars",
+            "card.theking",
+            "card.mindhunter",
+            "card.kakegurui"
+          ],
+          "sample_viewports": [
+            "wide",
+            "narrow"
+          ],
+          "viewport_scoring": "one_evidence_multiple_observations",
+          "merge_reason": "input 未对该属性设置不同的宽窄屏结果；合为一个计分条件，两个视口分别采证。"
+        }
+      ]
+    },
+    {
+      "id": "SR-07",
+      "dimension": "static",
+      "type": "element",
+      "description": "宽屏卡片拼贴",
+      "target": "cards",
+      "source_fields": [
+        "layout_constraints"
+      ],
+      "mandatory_evidence": [
+        {
+          "id": "C1",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "六张卡片在标题右侧错落拼贴",
+          "target": "cards",
+          "applies_when": "桌面宽屏稳定状态（资源加载完成后）；允许滚动至目标。",
+          "check": "六张卡片都位于竖排主标题右侧，不与主标题重叠。",
+          "kind": "geometry",
+          "viewport": "wide",
+          "required_objects": [
+            "heading",
+            "card.cloy",
+            "card.inheritors",
+            "card.foodwars",
+            "card.theking",
+            "card.mindhunter",
+            "card.kakegurui"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C2",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "上排从左到右为 Crash Landing on You、The King、Mindhunter",
+          "target": "cards.top_row",
+          "applies_when": "桌面宽屏稳定状态（资源加载完成后）；允许滚动至目标。",
+          "check": "上排三张卡片从左到右依次为 Crash Landing on You、The King、Mindhunter（按卡片左边缘或中心的水平顺序）。",
+          "kind": "geometry",
+          "viewport": "wide",
+          "required_objects": [
+            "card.cloy",
+            "card.theking",
+            "card.mindhunter"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C3",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "下排从左到右为 Food Wars、Kakegurui、Inheritors",
+          "target": "cards.bottom_row",
+          "applies_when": "桌面宽屏稳定状态（资源加载完成后）；允许滚动至目标。",
+          "check": "下排三张卡片从左到右依次为 Food Wars、Kakegurui、Inheritors。",
+          "kind": "geometry",
+          "viewport": "wide",
+          "required_objects": [
+            "card.foodwars",
+            "card.kakegurui",
+            "card.inheritors"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C4",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "大致分上下两排",
+          "target": "cards",
+          "applies_when": "桌面宽屏稳定状态（资源加载完成后）；允许滚动至目标。",
+          "check": "上排三张卡片的中心都高于下排三张卡片的中心，形成上下两排；同排卡片高低可以错落，不要求对齐。",
+          "kind": "geometry",
+          "viewport": "wide",
+          "required_objects": [
+            "card.cloy",
+            "card.inheritors",
+            "card.foodwars",
+            "card.theking",
+            "card.mindhunter",
+            "card.kakegurui"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C5",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "其中 The King 最靠上",
+          "target": "cards",
+          "applies_when": "桌面宽屏稳定状态（资源加载完成后）；允许滚动至目标。",
+          "check": "The King 的上边缘高于 Crash Landing on You 和 Mindhunter 的上边缘，差距清楚可见。",
+          "kind": "geometry",
+          "viewport": "wide",
+          "required_objects": [
+            "card.theking",
+            "card.cloy",
+            "card.mindhunter"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C6",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "其中 Kakegurui 位置偏高",
+          "target": "cards",
+          "applies_when": "桌面宽屏稳定状态（资源加载完成后）；允许滚动至目标。",
+          "check": "Kakegurui 的上边缘高于 Food Wars 和 Inheritors 的上边缘，差距清楚可见。",
+          "kind": "geometry",
+          "viewport": "wide",
+          "required_objects": [
+            "card.kakegurui",
+            "card.foodwars",
+            "card.inheritors"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C7",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "每张卡片都是正方形",
+          "target": "card.cloy",
+          "applies_when": "桌面宽屏稳定状态（资源加载完成后）；允许滚动至目标。",
+          "check": "Crash Landing on You 卡片的宽和高相等（只允许取整造成的微小差异）。",
+          "kind": "geometry",
+          "viewport": "wide",
+          "required_objects": [
+            "card.cloy"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C8",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "每张卡片都是正方形",
+          "target": "card.inheritors",
+          "applies_when": "桌面宽屏稳定状态（资源加载完成后）；允许滚动至目标。",
+          "check": "Inheritors 卡片的宽和高相等（只允许取整造成的微小差异）。",
+          "kind": "geometry",
+          "viewport": "wide",
+          "required_objects": [
+            "card.inheritors"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C9",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "每张卡片都是正方形",
+          "target": "card.foodwars",
+          "applies_when": "桌面宽屏稳定状态（资源加载完成后）；允许滚动至目标。",
+          "check": "Food Wars 卡片的宽和高相等（只允许取整造成的微小差异）。",
+          "kind": "geometry",
+          "viewport": "wide",
+          "required_objects": [
+            "card.foodwars"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C10",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "每张卡片都是正方形",
+          "target": "card.theking",
+          "applies_when": "桌面宽屏稳定状态（资源加载完成后）；允许滚动至目标。",
+          "check": "The King 卡片的宽和高相等（只允许取整造成的微小差异）。",
+          "kind": "geometry",
+          "viewport": "wide",
+          "required_objects": [
+            "card.theking"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C11",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "每张卡片都是正方形",
+          "target": "card.mindhunter",
+          "applies_when": "桌面宽屏稳定状态（资源加载完成后）；允许滚动至目标。",
+          "check": "Mindhunter 卡片的宽和高相等（只允许取整造成的微小差异）。",
+          "kind": "geometry",
+          "viewport": "wide",
+          "required_objects": [
+            "card.mindhunter"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C12",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "每张卡片都是正方形",
+          "target": "card.kakegurui",
+          "applies_when": "桌面宽屏稳定状态（资源加载完成后）；允许滚动至目标。",
+          "check": "Kakegurui 卡片的宽和高相等（只允许取整造成的微小差异）。",
+          "kind": "geometry",
+          "viewport": "wide",
+          "required_objects": [
+            "card.kakegurui"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C13",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "大小略有差别，Crash Landing on You 最大",
+          "target": "card.cloy",
+          "applies_when": "桌面宽屏稳定状态（资源加载完成后）；允许滚动至目标。",
+          "check": "Crash Landing on You 卡片边长严格大于其他五张；六张卡片尺寸属同一量级，没有某张远大于或远小于其余卡片。",
+          "kind": "geometry",
+          "viewport": "wide",
+          "required_objects": [
+            "card.cloy",
+            "card.inheritors",
+            "card.foodwars",
+            "card.theking",
+            "card.mindhunter",
+            "card.kakegurui"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C14",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "卡片文字靠卡片底部排列",
+          "target": "cards",
+          "applies_when": "桌面宽屏稳定状态（资源加载完成后）；允许滚动至目标。",
+          "check": "六张卡片的文字（剧名和统计文字）都贴近卡片底部，空白集中在文字上方。",
+          "kind": "geometry",
+          "viewport": "wide",
+          "required_objects": [
+            "card.cloy",
+            "card.inheritors",
+            "card.foodwars",
+            "card.theking",
+            "card.mindhunter",
+            "card.kakegurui"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C15",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "Kakegurui 盖住 Crash Landing on You 的右下角",
+          "target": "cards",
+          "applies_when": "桌面宽屏稳定状态（资源加载完成后）；允许滚动至目标。",
+          "check": "Kakegurui 与 Crash Landing on You 卡片的右下角区域重叠，重叠处 Kakegurui 在上；只压住角部，不覆盖 Crash Landing on You 的大部分。",
+          "kind": "geometry_and_visual",
+          "viewport": "wide",
+          "required_objects": [
+            "card.kakegurui",
+            "card.cloy"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C16",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "Mindhunter 盖住 The King 的右下角",
+          "target": "cards",
+          "applies_when": "桌面宽屏稳定状态（资源加载完成后）；允许滚动至目标。",
+          "check": "Mindhunter 与 The King 卡片的右下角区域重叠，重叠处 Mindhunter 在上；只压住角部，不覆盖 The King 的大部分。",
+          "kind": "geometry_and_visual",
+          "viewport": "wide",
+          "required_objects": [
+            "card.mindhunter",
+            "card.theking"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C17",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "卡片和 Mindhunter 的剧照都带柔和的投影",
+          "target": "cards",
+          "applies_when": "桌面宽屏稳定状态（资源加载完成后）；允许滚动至目标。",
+          "check": "六张卡片都带柔和的投影（边缘虚化、颜色浅，不是实线描边或生硬的深色阴影）。",
+          "kind": "screenshot_visual",
+          "viewport": "wide",
+          "required_objects": [
+            "card.cloy",
+            "card.inheritors",
+            "card.foodwars",
+            "card.theking",
+            "card.mindhunter",
+            "card.kakegurui"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SR-08",
+      "dimension": "static",
+      "type": "element",
+      "description": "剧照",
+      "target": "stills",
+      "source_fields": [
+        "functional_requirements",
+        "layout_constraints"
+      ],
+      "mandatory_evidence": [
+        {
+          "id": "C1",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "Crash Landing on You 用 https://assets.codepen.io/567707/show-cloy.jpg",
+          "target": "still.cloy",
+          "applies_when": "桌面宽屏稳定状态（资源加载完成后）；允许滚动至目标。",
+          "check": "Crash Landing on You 的剧照使用 https://assets.codepen.io/567707/show-cloy.jpg 并实际显示出来（图片请求失败而地址正确时为 UNRESOLVED）。",
+          "kind": "dom_url",
+          "viewport": "wide",
+          "required_objects": [
+            "still.cloy"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C2",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "Crash Landing on You 的剧照比卡片略小",
+          "target": "stills",
+          "applies_when": "桌面宽屏稳定状态（资源加载完成后）；允许滚动至目标。",
+          "check": "该剧照的宽和高都小于 Crash Landing on You 卡片，但只是略小，不是缩略图那样的小图。",
+          "kind": "geometry",
+          "viewport": "wide",
+          "required_objects": [
+            "still.cloy",
+            "card.cloy"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C3",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "垫在卡片后面并向右上方错开，左下部分被卡片挡住",
+          "target": "stills",
+          "applies_when": "桌面宽屏稳定状态（资源加载完成后）；允许滚动至目标。",
+          "check": "该剧照在 Crash Landing on You 卡片下层，相对卡片向右上方错开：剧照上边缘高于卡片上边缘、右边缘超出卡片右边缘；卡片只遮住剧照的左下一部分，剧照露出的面积不少于一半，剧照主体（人物）可见。",
+          "kind": "geometry_and_visual",
+          "viewport": "wide",
+          "required_objects": [
+            "still.cloy",
+            "card.cloy"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C4",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "Mindhunter 用 https://assets.codepen.io/567707/show-mindhunter.png",
+          "target": "still.mindhunter",
+          "applies_when": "桌面宽屏稳定状态（资源加载完成后）；允许滚动至目标。",
+          "check": "Mindhunter 的剧照使用 https://assets.codepen.io/567707/show-mindhunter.png 并实际显示出来（图片请求失败而地址正确时为 UNRESOLVED）。",
+          "kind": "dom_url",
+          "viewport": "wide",
+          "required_objects": [
+            "still.mindhunter"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C5",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "Mindhunter 的剧照与卡片一样大",
+          "target": "stills",
+          "applies_when": "桌面宽屏稳定状态（资源加载完成后）；允许滚动至目标。",
+          "check": "该剧照与 Mindhunter 卡片宽高相同（只允许取整造成的微小差异）。",
+          "kind": "geometry",
+          "viewport": "wide",
+          "required_objects": [
+            "still.mindhunter",
+            "card.mindhunter"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C6",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "并排紧贴在卡片右侧",
+          "target": "stills",
+          "applies_when": "桌面宽屏稳定状态（资源加载完成后）；允许滚动至目标。",
+          "check": "该剧照位于 Mindhunter 卡片右侧，左边缘与卡片右边缘相接（无明显缝隙、不重叠），上下边缘与卡片对齐。",
+          "kind": "geometry",
+          "viewport": "wide",
+          "required_objects": [
+            "still.mindhunter",
+            "card.mindhunter"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C7",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "卡片和 Mindhunter 的剧照都带柔和的投影",
+          "target": "still.mindhunter",
+          "applies_when": "桌面宽屏稳定状态（资源加载完成后）；允许滚动至目标。",
+          "check": "Mindhunter 剧照带柔和的投影。",
+          "kind": "screenshot_visual",
+          "viewport": "wide",
+          "required_objects": [
+            "still.mindhunter"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C8",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "不显示剧照",
+          "target": "stills",
+          "applies_when": "手机窄屏稳定状态（资源加载完成后）；允许滚动至目标，整页截图。",
+          "check": "手机窄屏下两张剧照都不可见。",
+          "kind": "screenshot_visual",
+          "viewport": "narrow",
+          "required_objects": [
+            "still.cloy",
+            "still.mindhunter"
+          ],
+          "sample_viewports": [
+            "narrow"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SR-09",
+      "dimension": "static",
+      "type": "element",
+      "description": "爆米花装饰背景",
+      "target": "popcorn",
+      "source_fields": [
+        "functional_requirements",
+        "layout_constraints"
+      ],
+      "mandatory_evidence": [
+        {
+          "id": "C1",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "页面内容区的左下角用爆米花图片 https://assets.codepen.io/567707/bg-popcorn.png 作装饰背景",
+          "target": "popcorn",
+          "applies_when": "桌面宽屏与手机窄屏分别采证；两种视口要求相同，合为一个计分条件。允许滚动至目标。",
+          "check": "页面使用 https://assets.codepen.io/567707/bg-popcorn.png 并实际显示，位置在页面主体内容区的左下角（说明栏之上）（图片请求失败而地址正确时为 UNRESOLVED）。",
+          "kind": "dom_url",
+          "viewport": "both",
+          "required_objects": [
+            "popcorn"
+          ],
+          "sample_viewports": [
+            "wide",
+            "narrow"
+          ],
+          "viewport_scoring": "one_evidence_multiple_observations",
+          "merge_reason": "input 未对该属性设置不同的宽窄屏结果；合为一个计分条件，两个视口分别采证。"
+        },
+        {
+          "id": "C2",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "爆米花图在卡片下层，Food Wars",
+          "target": "popcorn",
+          "applies_when": "桌面宽屏稳定状态（资源加载完成后）；允许滚动至目标。",
+          "check": "Food Wars 卡片与爆米花图局部重叠，重叠处卡片在上；其他卡片若与爆米花图重叠，也都在其上层。",
+          "kind": "geometry_and_visual",
+          "viewport": "wide",
+          "required_objects": [
+            "popcorn",
+            "card.foodwars"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C3",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "和主标题局部压在它上面",
+          "target": "popcorn",
+          "applies_when": "桌面宽屏稳定状态（资源加载完成后）；允许滚动至目标。",
+          "check": "主标题与爆米花图局部重叠，重叠处主标题文字在上、可见。",
+          "kind": "geometry_and_visual",
+          "viewport": "wide",
+          "required_objects": [
+            "popcorn",
+            "heading"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SR-10",
+      "dimension": "static",
+      "type": "element",
+      "description": "底部说明栏",
+      "target": "footer",
+      "source_fields": [
+        "functional_requirements",
+        "layout_constraints"
+      ],
+      "mandatory_evidence": [
+        {
+          "id": "C1",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "页面最底部是一条说明栏",
+          "target": "footer",
+          "applies_when": "桌面宽屏与手机窄屏分别采证；两种视口要求相同，合为一个计分条件。允许滚动至目标。",
+          "check": "说明栏是页面最底部的内容，位于卡片、图例和爆米花图之下，下方没有其他内容。",
+          "kind": "geometry",
+          "viewport": "both",
+          "required_objects": [
+            "footer"
+          ],
+          "sample_viewports": [
+            "wide",
+            "narrow"
+          ],
+          "viewport_scoring": "one_evidence_multiple_observations",
+          "merge_reason": "input 未对该属性设置不同的宽窄屏结果；合为一个计分条件，两个视口分别采证。"
+        },
+        {
+          "id": "C2",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "左边是图片 https://assets.codepen.io/567707/palette-ts.png",
+          "target": "footer.image",
+          "applies_when": "桌面宽屏与手机窄屏分别采证；两种视口要求相同，合为一个计分条件。允许滚动至目标。",
+          "check": "说明栏中有图片 https://assets.codepen.io/567707/palette-ts.png 并实际显示，位于说明文字左边（图片请求失败而地址正确时为 UNRESOLVED）。",
+          "kind": "dom_url",
+          "viewport": "both",
+          "required_objects": [
+            "footer.image"
+          ],
+          "sample_viewports": [
+            "wide",
+            "narrow"
+          ],
+          "viewport_scoring": "one_evidence_multiple_observations",
+          "merge_reason": "input 未对该属性设置不同的宽窄屏结果；合为一个计分条件，两个视口分别采证。"
+        },
+        {
+          "id": "C3",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "右边文字为 Part of the UI Designs inspired by Taylor Swift Album Covers collection. This is Taylor Swift (2006).",
+          "target": "footer.text",
+          "applies_when": "桌面宽屏与手机窄屏分别采证；两种视口要求相同，合为一个计分条件。允许滚动至目标。",
+          "check": "说明栏文字为 Part of the UI Designs inspired by Taylor Swift Album Covers collection. This is Taylor Swift (2006).（换行与多余空白不计）。",
+          "kind": "dom_text",
+          "viewport": "both",
+          "required_objects": [
+            "footer.text"
+          ],
+          "sample_viewports": [
+            "wide",
+            "narrow"
+          ],
+          "viewport_scoring": "one_evidence_multiple_observations",
+          "merge_reason": "input 未对该属性设置不同的宽窄屏结果；合为一个计分条件，两个视口分别采证。"
+        },
+        {
+          "id": "C4",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "其中 UI Designs inspired by Taylor Swift Album Covers 是指向 https://codepen.io/collection/XPxJmz 的链接",
+          "target": "footer.link",
+          "applies_when": "桌面宽屏与手机窄屏分别采证；两种视口要求相同，合为一个计分条件。允许滚动至目标。",
+          "check": "只有 UI Designs inspired by Taylor Swift Album Covers 这一段是链接，链接地址为 https://codepen.io/collection/XPxJmz。",
+          "kind": "dom_url",
+          "viewport": "both",
+          "required_objects": [
+            "footer.link"
+          ],
+          "sample_viewports": [
+            "wide",
+            "narrow"
+          ],
+          "viewport_scoring": "one_evidence_multiple_observations",
+          "merge_reason": "input 未对该属性设置不同的宽窄屏结果；合为一个计分条件，两个视口分别采证。"
+        },
+        {
+          "id": "C5",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "底部说明栏为钢蓝色",
+          "target": "footer",
+          "applies_when": "桌面宽屏与手机窄屏分别采证；两种视口要求相同，合为一个计分条件。允许滚动至目标。",
+          "check": "说明栏底色为钢蓝色：蓝色系、略偏灰，明显深于页面底色和 Mindhunter 卡片的天蓝色；不指定色号。",
+          "kind": "screenshot_visual",
+          "viewport": "both",
+          "required_objects": [
+            "footer",
+            "card.mindhunter"
+          ],
+          "sample_viewports": [
+            "wide",
+            "narrow"
+          ],
+          "viewport_scoring": "one_evidence_multiple_observations",
+          "merge_reason": "input 未对该属性设置不同的宽窄屏结果；合为一个计分条件，两个视口分别采证。"
+        },
+        {
+          "id": "C6",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "横跨整个视口宽度",
+          "target": "footer",
+          "applies_when": "桌面宽屏与手机窄屏分别采证；两种视口要求相同，合为一个计分条件。允许滚动至目标。",
+          "check": "说明栏左右两端分别贴住视口左右边缘。",
+          "kind": "geometry",
+          "viewport": "both",
+          "required_objects": [
+            "footer"
+          ],
+          "sample_viewports": [
+            "wide",
+            "narrow"
+          ],
+          "viewport_scoring": "one_evidence_multiple_observations",
+          "merge_reason": "input 未对该属性设置不同的宽窄屏结果；合为一个计分条件，两个视口分别采证。"
+        },
+        {
+          "id": "C7",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "左侧图片只占一小部分宽度",
+          "target": "footer",
+          "applies_when": "桌面宽屏与手机窄屏分别采证；两种视口要求相同，合为一个计分条件。允许滚动至目标。",
+          "check": "说明栏图片宽度明显小于说明栏宽度的一半。",
+          "kind": "geometry",
+          "viewport": "both",
+          "required_objects": [
+            "footer.image",
+            "footer"
+          ],
+          "sample_viewports": [
+            "wide",
+            "narrow"
+          ],
+          "viewport_scoring": "one_evidence_multiple_observations",
+          "merge_reason": "input 未对该属性设置不同的宽窄屏结果；合为一个计分条件，两个视口分别采证。"
+        },
+        {
+          "id": "C8",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "右侧文字为浅黄色",
+          "target": "footer",
+          "applies_when": "桌面宽屏与手机窄屏分别采证；两种视口要求相同，合为一个计分条件。允许滚动至目标。",
+          "check": "说明栏文字（含链接文字）为浅黄色（很浅、略带黄）；不指定色号。",
+          "kind": "screenshot_visual",
+          "viewport": "both",
+          "required_objects": [
+            "footer.text",
+            "footer.link"
+          ],
+          "sample_viewports": [
+            "wide",
+            "narrow"
+          ],
+          "viewport_scoring": "one_evidence_multiple_observations",
+          "merge_reason": "input 未对该属性设置不同的宽窄屏结果；合为一个计分条件，两个视口分别采证。"
+        },
+        {
+          "id": "C9",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "与图片垂直居中",
+          "target": "footer",
+          "applies_when": "桌面宽屏与手机窄屏分别采证；两种视口要求相同，合为一个计分条件。允许滚动至目标。",
+          "check": "说明文字的垂直中心与图片的垂直中心基本对齐。",
+          "kind": "geometry",
+          "viewport": "both",
+          "required_objects": [
+            "footer.text",
+            "footer.image"
+          ],
+          "sample_viewports": [
+            "wide",
+            "narrow"
+          ],
+          "viewport_scoring": "one_evidence_multiple_observations",
+          "merge_reason": "input 未对该属性设置不同的宽窄屏结果；合为一个计分条件，两个视口分别采证。"
+        },
+        {
+          "id": "C10",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "链接带下划线",
+          "target": "footer.link",
+          "applies_when": "桌面宽屏与手机窄屏分别采证；两种视口要求相同，合为一个计分条件。允许滚动至目标。",
+          "check": "链接文字带下划线。",
+          "kind": "computed_style",
+          "viewport": "both",
+          "required_objects": [
+            "footer.link"
+          ],
+          "sample_viewports": [
+            "wide",
+            "narrow"
+          ],
+          "viewport_scoring": "one_evidence_multiple_observations",
+          "merge_reason": "input 未对该属性设置不同的宽窄屏结果；合为一个计分条件，两个视口分别采证。"
+        },
+        {
+          "id": "C11",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "Taylor Swift (2006) 为斜体",
+          "target": "footer.text",
+          "applies_when": "桌面宽屏与手机窄屏分别采证；两种视口要求相同，合为一个计分条件。允许滚动至目标。",
+          "check": "Taylor Swift (2006) 显示为斜体，说明栏其余文字不是斜体。",
+          "kind": "font_rendering",
+          "viewport": "both",
+          "required_objects": [
+            "footer.text"
+          ],
+          "sample_viewports": [
+            "wide",
+            "narrow"
+          ],
+          "viewport_scoring": "one_evidence_multiple_observations",
+          "merge_reason": "input 未对该属性设置不同的宽窄屏结果；合为一个计分条件，两个视口分别采证。"
+        }
+      ]
+    },
+    {
+      "id": "SR-11",
+      "dimension": "static",
+      "type": "element",
+      "description": "手机窄屏卡片排列",
+      "target": "cards",
+      "source_fields": [
+        "layout_constraints"
+      ],
+      "mandatory_evidence": [
+        {
+          "id": "C1",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "卡片单列排列",
+          "target": "cards",
+          "applies_when": "手机窄屏稳定状态（资源加载完成后）；允许滚动至目标，整页截图。",
+          "check": "六张卡片上下排成一列，每行只有一张卡片。",
+          "kind": "geometry",
+          "viewport": "narrow",
+          "required_objects": [
+            "card.cloy",
+            "card.inheritors",
+            "card.foodwars",
+            "card.theking",
+            "card.mindhunter",
+            "card.kakegurui"
+          ],
+          "sample_viewports": [
+            "narrow"
+          ]
+        },
+        {
+          "id": "C2",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "铺满可用宽度",
+          "target": "cards",
+          "applies_when": "手机窄屏稳定状态（资源加载完成后）；允许滚动至目标，整页截图。",
+          "check": "每张卡片宽度占满页面主体内容的可用宽度（与图例、标题所在内容区同宽，左右只留页面留白），不超出视口。",
+          "kind": "geometry",
+          "viewport": "narrow",
+          "required_objects": [
+            "card.cloy",
+            "card.inheritors",
+            "card.foodwars",
+            "card.theking",
+            "card.mindhunter",
+            "card.kakegurui"
+          ],
+          "sample_viewports": [
+            "narrow"
+          ]
+        },
+        {
+          "id": "C3",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "从上到下的顺序与上面所列相同",
+          "target": "cards",
+          "applies_when": "手机窄屏稳定状态（资源加载完成后）；允许滚动至目标，整页截图。",
+          "check": "卡片从上到下依次为 Crash Landing on You、Inheritors、Food Wars、The King、Mindhunter、Kakegurui。",
+          "kind": "geometry",
+          "viewport": "narrow",
+          "required_objects": [
+            "card.cloy",
+            "card.inheritors",
+            "card.foodwars",
+            "card.theking",
+            "card.mindhunter",
+            "card.kakegurui"
+          ],
+          "sample_viewports": [
+            "narrow"
+          ]
+        },
+        {
+          "id": "C4",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "卡片高度随内容而定",
+          "target": "cards",
+          "applies_when": "手机窄屏稳定状态（资源加载完成后）；允许滚动至目标，整页截图。",
+          "check": "卡片高度由文字内容决定（文字加内边距），不是宽屏那样的正方形，也没有大片空白。",
+          "kind": "geometry",
+          "viewport": "narrow",
+          "required_objects": [
+            "card.cloy",
+            "card.inheritors",
+            "card.foodwars",
+            "card.theking",
+            "card.mindhunter",
+            "card.kakegurui"
+          ],
+          "sample_viewports": [
+            "narrow"
+          ]
+        },
+        {
+          "id": "C5",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "彼此留有间距",
+          "target": "cards",
+          "applies_when": "手机窄屏稳定状态（资源加载完成后）；允许滚动至目标，整页截图。",
+          "check": "相邻卡片之间留有可见间距，不相接、不重叠。",
+          "kind": "geometry",
+          "viewport": "narrow",
+          "required_objects": [
+            "card.cloy",
+            "card.inheritors",
+            "card.foodwars",
+            "card.theking",
+            "card.mindhunter",
+            "card.kakegurui"
+          ],
+          "sample_viewports": [
+            "narrow"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SR-12",
+      "dimension": "static",
+      "type": "element",
+      "description": "卡片文字可读（常识）",
+      "target": "cards",
+      "source_fields": [],
+      "mandatory_evidence": [
+        {
+          "id": "C1",
+          "mandatory": true,
+          "source": "common_sense",
+          "source_fields": [],
+          "source_quote": "（常识，DEC-037）卡片文字完整可读",
+          "target": "cards",
+          "applies_when": "桌面宽屏与手机窄屏分别采证；两种视口要求相同，合为一个计分条件。允许滚动至目标。",
+          "check": "六张卡片的剧名和统计文字完整可见、可读，不被其他卡片、剧照或页面边缘遮挡或裁掉（剧名在单词中间断行但字母齐全可接受）。",
+          "kind": "screenshot_visual",
+          "viewport": "both",
+          "required_objects": [
+            "card.cloy",
+            "card.inheritors",
+            "card.foodwars",
+            "card.theking",
+            "card.mindhunter",
+            "card.kakegurui"
+          ],
+          "sample_viewports": [
+            "wide",
+            "narrow"
+          ],
+          "viewport_scoring": "one_evidence_multiple_observations",
+          "merge_reason": "input 未对该属性设置不同的宽窄屏结果；合为一个计分条件，两个视口分别采证。",
+          "common_sense_reason": "input 要求的卡片文字应有的基本可用性：拼贴压叠和剧照很容易盖住文字；只要求所给文字可读，不引入新内容或样式数值。",
+          "review_status": "用户 2026-11-23 删去 input 中的同义句，并确认按 DEC-037 常识条件计分"
+        }
+      ]
+    }
+  ],
+  "dynamic_requirements": [],
+  "dimension_policy": {
+    "D1": 1,
+    "D2": 0,
+    "reason": "input 没有动画或状态切换要求；唯一的链接是 D1 功能属性。input 无 motion_constraints 字段，不回写。"
+  },
+  "dependency_policy": {
+    "version": "model-dependency-fail/1.0",
+    "rule": "Confirmed missing/failed model prerequisite that actually blocks another independent mandatory condition: both FAIL with individual severity. Locator, network, script-driving or collection failure/unknown cause: UNRESOLVED. Unblocked members/conditions still evaluated.",
+    "prerequisites": [
+      {
+        "upstream": "SR-02.C1",
+        "object": "heading",
+        "viewport": "narrow",
+        "downstream": [
+          "SR-02.C10",
+          "SR-02.C2",
+          "SR-02.C3",
+          "SR-02.C4",
+          "SR-02.C5",
+          "SR-04.C4"
+        ],
+        "when": "仅当该对象本体被确认缺失并实际阻断下游事实；文案写错、颜色错、尺寸不符本身不阻断几何。只作用于此处记录的视口。"
+      },
+      {
+        "upstream": "SR-02.C1",
+        "object": "heading",
+        "viewport": "wide",
+        "downstream": [
+          "SR-02.C2",
+          "SR-02.C3",
+          "SR-02.C4",
+          "SR-02.C5",
+          "SR-02.C6",
+          "SR-02.C7",
+          "SR-02.C8",
+          "SR-02.C9",
+          "SR-03.C2",
+          "SR-03.C5",
+          "SR-03.C7",
+          "SR-07.C1",
+          "SR-09.C3"
+        ],
+        "when": "仅当该对象本体被确认缺失并实际阻断下游事实；文案写错、颜色错、尺寸不符本身不阻断几何。只作用于此处记录的视口。"
+      },
+      {
+        "upstream": "SR-03.C1",
+        "object": "subtitle",
+        "viewport": "wide",
+        "downstream": [
+          "SR-03.C2",
+          "SR-03.C3",
+          "SR-03.C4",
+          "SR-03.C5",
+          "SR-03.C6",
+          "SR-03.C7"
+        ],
+        "when": "仅当该对象本体被确认缺失并实际阻断下游事实；文案写错、颜色错、尺寸不符本身不阻断几何。只作用于此处记录的视口。"
+      },
+      {
+        "upstream": "SR-04.C1",
+        "object": "legend",
+        "viewport": "narrow",
+        "downstream": [
+          "SR-04.C4",
+          "SR-05.C7",
+          "SR-05.C8",
+          "SR-05.C9"
+        ],
+        "when": "仅当该对象本体被确认缺失并实际阻断下游事实；文案写错、颜色错、尺寸不符本身不阻断几何。只作用于此处记录的视口。"
+      },
+      {
+        "upstream": "SR-04.C1",
+        "object": "legend",
+        "viewport": "wide",
+        "downstream": [
+          "SR-02.C7",
+          "SR-04.C2",
+          "SR-04.C3",
+          "SR-05.C7",
+          "SR-05.C8",
+          "SR-05.C9"
+        ],
+        "when": "仅当该对象本体被确认缺失并实际阻断下游事实；文案写错、颜色错、尺寸不符本身不阻断几何。只作用于此处记录的视口。"
+      },
+      {
+        "upstream": "SR-06.C1",
+        "object": "card.cloy",
+        "viewport": "narrow",
+        "downstream": [
+          "SR-02.C5",
+          "SR-04.C4",
+          "SR-05.C1",
+          "SR-05.C10",
+          "SR-05.C7",
+          "SR-06.C13",
+          "SR-06.C14",
+          "SR-06.C15",
+          "SR-06.C7",
+          "SR-11.C1",
+          "SR-11.C2",
+          "SR-11.C3",
+          "SR-11.C4",
+          "SR-11.C5",
+          "SR-12.C1"
+        ],
+        "when": "仅当该对象本体被确认缺失并实际阻断下游事实；文案写错、颜色错、尺寸不符本身不阻断几何。只作用于此处记录的视口。"
+      },
+      {
+        "upstream": "SR-06.C1",
+        "object": "card.cloy",
+        "viewport": "wide",
+        "downstream": [
+          "SR-02.C5",
+          "SR-02.C7",
+          "SR-03.C7",
+          "SR-05.C1",
+          "SR-05.C10",
+          "SR-05.C7",
+          "SR-06.C13",
+          "SR-06.C14",
+          "SR-06.C15",
+          "SR-06.C7",
+          "SR-07.C1",
+          "SR-07.C13",
+          "SR-07.C14",
+          "SR-07.C15",
+          "SR-07.C17",
+          "SR-07.C2",
+          "SR-07.C4",
+          "SR-07.C5",
+          "SR-07.C7",
+          "SR-08.C2",
+          "SR-08.C3",
+          "SR-12.C1"
+        ],
+        "when": "仅当该对象本体被确认缺失并实际阻断下游事实；文案写错、颜色错、尺寸不符本身不阻断几何。只作用于此处记录的视口。"
+      },
+      {
+        "upstream": "SR-06.C2",
+        "object": "card.inheritors",
+        "viewport": "narrow",
+        "downstream": [
+          "SR-02.C5",
+          "SR-05.C10",
+          "SR-05.C2",
+          "SR-05.C7",
+          "SR-06.C13",
+          "SR-06.C14",
+          "SR-06.C15",
+          "SR-06.C8",
+          "SR-11.C1",
+          "SR-11.C2",
+          "SR-11.C3",
+          "SR-11.C4",
+          "SR-11.C5",
+          "SR-12.C1"
+        ],
+        "when": "仅当该对象本体被确认缺失并实际阻断下游事实；文案写错、颜色错、尺寸不符本身不阻断几何。只作用于此处记录的视口。"
+      },
+      {
+        "upstream": "SR-06.C2",
+        "object": "card.inheritors",
+        "viewport": "wide",
+        "downstream": [
+          "SR-02.C5",
+          "SR-02.C7",
+          "SR-03.C7",
+          "SR-04.C3",
+          "SR-05.C10",
+          "SR-05.C2",
+          "SR-05.C7",
+          "SR-06.C13",
+          "SR-06.C14",
+          "SR-06.C15",
+          "SR-06.C8",
+          "SR-07.C1",
+          "SR-07.C13",
+          "SR-07.C14",
+          "SR-07.C17",
+          "SR-07.C3",
+          "SR-07.C4",
+          "SR-07.C6",
+          "SR-07.C8",
+          "SR-12.C1"
+        ],
+        "when": "仅当该对象本体被确认缺失并实际阻断下游事实；文案写错、颜色错、尺寸不符本身不阻断几何。只作用于此处记录的视口。"
+      },
+      {
+        "upstream": "SR-06.C3",
+        "object": "card.foodwars",
+        "viewport": "narrow",
+        "downstream": [
+          "SR-02.C5",
+          "SR-05.C10",
+          "SR-05.C3",
+          "SR-05.C8",
+          "SR-06.C13",
+          "SR-06.C14",
+          "SR-06.C15",
+          "SR-06.C9",
+          "SR-11.C1",
+          "SR-11.C2",
+          "SR-11.C3",
+          "SR-11.C4",
+          "SR-11.C5",
+          "SR-12.C1"
+        ],
+        "when": "仅当该对象本体被确认缺失并实际阻断下游事实；文案写错、颜色错、尺寸不符本身不阻断几何。只作用于此处记录的视口。"
+      },
+      {
+        "upstream": "SR-06.C3",
+        "object": "card.foodwars",
+        "viewport": "wide",
+        "downstream": [
+          "SR-02.C5",
+          "SR-02.C7",
+          "SR-03.C7",
+          "SR-04.C3",
+          "SR-05.C10",
+          "SR-05.C3",
+          "SR-05.C8",
+          "SR-06.C13",
+          "SR-06.C14",
+          "SR-06.C15",
+          "SR-06.C9",
+          "SR-07.C1",
+          "SR-07.C13",
+          "SR-07.C14",
+          "SR-07.C17",
+          "SR-07.C3",
+          "SR-07.C4",
+          "SR-07.C6",
+          "SR-07.C9",
+          "SR-09.C2",
+          "SR-12.C1"
+        ],
+        "when": "仅当该对象本体被确认缺失并实际阻断下游事实；文案写错、颜色错、尺寸不符本身不阻断几何。只作用于此处记录的视口。"
+      },
+      {
+        "upstream": "SR-06.C4",
+        "object": "card.theking",
+        "viewport": "narrow",
+        "downstream": [
+          "SR-02.C5",
+          "SR-05.C10",
+          "SR-05.C4",
+          "SR-05.C7",
+          "SR-06.C10",
+          "SR-06.C13",
+          "SR-06.C14",
+          "SR-06.C15",
+          "SR-11.C1",
+          "SR-11.C2",
+          "SR-11.C3",
+          "SR-11.C4",
+          "SR-11.C5",
+          "SR-12.C1"
+        ],
+        "when": "仅当该对象本体被确认缺失并实际阻断下游事实；文案写错、颜色错、尺寸不符本身不阻断几何。只作用于此处记录的视口。"
+      },
+      {
+        "upstream": "SR-06.C4",
+        "object": "card.theking",
+        "viewport": "wide",
+        "downstream": [
+          "SR-02.C5",
+          "SR-02.C7",
+          "SR-03.C7",
+          "SR-05.C10",
+          "SR-05.C4",
+          "SR-05.C7",
+          "SR-06.C10",
+          "SR-06.C13",
+          "SR-06.C14",
+          "SR-06.C15",
+          "SR-07.C1",
+          "SR-07.C10",
+          "SR-07.C13",
+          "SR-07.C14",
+          "SR-07.C16",
+          "SR-07.C17",
+          "SR-07.C2",
+          "SR-07.C4",
+          "SR-07.C5",
+          "SR-12.C1"
+        ],
+        "when": "仅当该对象本体被确认缺失并实际阻断下游事实；文案写错、颜色错、尺寸不符本身不阻断几何。只作用于此处记录的视口。"
+      },
+      {
+        "upstream": "SR-06.C5",
+        "object": "card.mindhunter",
+        "viewport": "narrow",
+        "downstream": [
+          "SR-02.C5",
+          "SR-05.C10",
+          "SR-05.C5",
+          "SR-05.C9",
+          "SR-06.C11",
+          "SR-06.C13",
+          "SR-06.C14",
+          "SR-06.C15",
+          "SR-10.C5",
+          "SR-11.C1",
+          "SR-11.C2",
+          "SR-11.C3",
+          "SR-11.C4",
+          "SR-11.C5",
+          "SR-12.C1"
+        ],
+        "when": "仅当该对象本体被确认缺失并实际阻断下游事实；文案写错、颜色错、尺寸不符本身不阻断几何。只作用于此处记录的视口。"
+      },
+      {
+        "upstream": "SR-06.C5",
+        "object": "card.mindhunter",
+        "viewport": "wide",
+        "downstream": [
+          "SR-02.C5",
+          "SR-02.C7",
+          "SR-03.C7",
+          "SR-05.C10",
+          "SR-05.C5",
+          "SR-05.C9",
+          "SR-06.C11",
+          "SR-06.C13",
+          "SR-06.C14",
+          "SR-06.C15",
+          "SR-07.C1",
+          "SR-07.C11",
+          "SR-07.C13",
+          "SR-07.C14",
+          "SR-07.C16",
+          "SR-07.C17",
+          "SR-07.C2",
+          "SR-07.C4",
+          "SR-07.C5",
+          "SR-08.C5",
+          "SR-08.C6",
+          "SR-10.C5",
+          "SR-12.C1"
+        ],
+        "when": "仅当该对象本体被确认缺失并实际阻断下游事实；文案写错、颜色错、尺寸不符本身不阻断几何。只作用于此处记录的视口。"
+      },
+      {
+        "upstream": "SR-06.C6",
+        "object": "card.kakegurui",
+        "viewport": "narrow",
+        "downstream": [
+          "SR-02.C5",
+          "SR-05.C10",
+          "SR-05.C6",
+          "SR-05.C8",
+          "SR-06.C12",
+          "SR-06.C13",
+          "SR-06.C14",
+          "SR-06.C15",
+          "SR-11.C1",
+          "SR-11.C2",
+          "SR-11.C3",
+          "SR-11.C4",
+          "SR-11.C5",
+          "SR-12.C1"
+        ],
+        "when": "仅当该对象本体被确认缺失并实际阻断下游事实；文案写错、颜色错、尺寸不符本身不阻断几何。只作用于此处记录的视口。"
+      },
+      {
+        "upstream": "SR-06.C6",
+        "object": "card.kakegurui",
+        "viewport": "wide",
+        "downstream": [
+          "SR-02.C5",
+          "SR-02.C7",
+          "SR-03.C7",
+          "SR-04.C3",
+          "SR-05.C10",
+          "SR-05.C6",
+          "SR-05.C8",
+          "SR-06.C12",
+          "SR-06.C13",
+          "SR-06.C14",
+          "SR-06.C15",
+          "SR-07.C1",
+          "SR-07.C12",
+          "SR-07.C13",
+          "SR-07.C14",
+          "SR-07.C15",
+          "SR-07.C17",
+          "SR-07.C3",
+          "SR-07.C4",
+          "SR-07.C6",
+          "SR-12.C1"
+        ],
+        "when": "仅当该对象本体被确认缺失并实际阻断下游事实；文案写错、颜色错、尺寸不符本身不阻断几何。只作用于此处记录的视口。"
+      },
+      {
+        "upstream": "SR-08.C1",
+        "object": "still.cloy",
+        "viewport": "wide",
+        "downstream": [
+          "SR-08.C2",
+          "SR-08.C3"
+        ],
+        "when": "仅当该对象本体被确认缺失并实际阻断下游事实；文案写错、颜色错、尺寸不符本身不阻断几何。只作用于此处记录的视口。"
+      },
+      {
+        "upstream": "SR-08.C4",
+        "object": "still.mindhunter",
+        "viewport": "wide",
+        "downstream": [
+          "SR-08.C5",
+          "SR-08.C6",
+          "SR-08.C7"
+        ],
+        "when": "仅当该对象本体被确认缺失并实际阻断下游事实；文案写错、颜色错、尺寸不符本身不阻断几何。只作用于此处记录的视口。"
+      },
+      {
+        "upstream": "SR-09.C1",
+        "object": "popcorn",
+        "viewport": "wide",
+        "downstream": [
+          "SR-09.C2",
+          "SR-09.C3"
+        ],
+        "when": "仅当该对象本体被确认缺失并实际阻断下游事实；文案写错、颜色错、尺寸不符本身不阻断几何。只作用于此处记录的视口。"
+      },
+      {
+        "upstream": "SR-10.C1",
+        "object": "footer",
+        "viewport": "narrow",
+        "downstream": [
+          "SR-10.C5",
+          "SR-10.C6",
+          "SR-10.C7"
+        ],
+        "when": "仅当该对象本体被确认缺失并实际阻断下游事实；文案写错、颜色错、尺寸不符本身不阻断几何。只作用于此处记录的视口。"
+      },
+      {
+        "upstream": "SR-10.C1",
+        "object": "footer",
+        "viewport": "wide",
+        "downstream": [
+          "SR-10.C5",
+          "SR-10.C6",
+          "SR-10.C7"
+        ],
+        "when": "仅当该对象本体被确认缺失并实际阻断下游事实；文案写错、颜色错、尺寸不符本身不阻断几何。只作用于此处记录的视口。"
+      },
+      {
+        "upstream": "SR-10.C2",
+        "object": "footer.image",
+        "viewport": "narrow",
+        "downstream": [
+          "SR-10.C7",
+          "SR-10.C9"
+        ],
+        "when": "仅当该对象本体被确认缺失并实际阻断下游事实；文案写错、颜色错、尺寸不符本身不阻断几何。只作用于此处记录的视口。"
+      },
+      {
+        "upstream": "SR-10.C2",
+        "object": "footer.image",
+        "viewport": "wide",
+        "downstream": [
+          "SR-10.C7",
+          "SR-10.C9"
+        ],
+        "when": "仅当该对象本体被确认缺失并实际阻断下游事实；文案写错、颜色错、尺寸不符本身不阻断几何。只作用于此处记录的视口。"
+      },
+      {
+        "upstream": "SR-10.C3",
+        "object": "footer.text",
+        "viewport": "narrow",
+        "downstream": [
+          "SR-10.C11",
+          "SR-10.C8",
+          "SR-10.C9"
+        ],
+        "when": "仅当该对象本体被确认缺失并实际阻断下游事实；文案写错、颜色错、尺寸不符本身不阻断几何。只作用于此处记录的视口。"
+      },
+      {
+        "upstream": "SR-10.C3",
+        "object": "footer.text",
+        "viewport": "wide",
+        "downstream": [
+          "SR-10.C11",
+          "SR-10.C8",
+          "SR-10.C9"
+        ],
+        "when": "仅当该对象本体被确认缺失并实际阻断下游事实；文案写错、颜色错、尺寸不符本身不阻断几何。只作用于此处记录的视口。"
+      },
+      {
+        "upstream": "SR-10.C4",
+        "object": "footer.link",
+        "viewport": "narrow",
+        "downstream": [
+          "SR-10.C10",
+          "SR-10.C8"
+        ],
+        "when": "仅当该对象本体被确认缺失并实际阻断下游事实；文案写错、颜色错、尺寸不符本身不阻断几何。只作用于此处记录的视口。"
+      },
+      {
+        "upstream": "SR-10.C4",
+        "object": "footer.link",
+        "viewport": "wide",
+        "downstream": [
+          "SR-10.C10",
+          "SR-10.C8"
+        ],
+        "when": "仅当该对象本体被确认缺失并实际阻断下游事实；文案写错、颜色错、尺寸不符本身不阻断几何。只作用于此处记录的视口。"
+      }
+    ]
+  },
+  "attribution_policy": {
+    "direct_duplicates": "同成员同属性在要求相同的两个视口只扣一次；不同卡片各自独立。门禁与 Evidence 之间同一事实只归一次。",
+    "shared_quotes": {
+      "SR-07.C17 / SR-08.C7": "同一句“卡片和 Mindhunter 的剧照都带柔和的投影”拆成卡片投影与剧照投影两个对象，不重叠。",
+      "SR-05.C7-C9 / SR-05.C1-C6": "卡片底色由 C1–C6 判；C7–C9 只判图例色块与卡片同色，色块颜色错不再扣卡片。",
+      "SR-07.C7-C12 / SR-11.C4": "宽屏正方形与窄屏高度随内容是不同视口的不同要求。",
+      "SR-12 / SR-07.C15-C16、SR-08.C3": "压叠位置由 SR-07/SR-08 判；SR-12 只判文字是否被盖到不可读，位置错误本身不在 SR-12 再扣。"
+    },
+    "owner_index": [
+      {
+        "evidence_id": "SR-01.C1",
+        "target": "page",
+        "viewport": "both"
+      },
+      {
+        "evidence_id": "SR-01.C2",
+        "target": "page",
+        "viewport": "both"
+      },
+      {
+        "evidence_id": "SR-01.C3",
+        "target": "page",
+        "viewport": "both"
+      },
+      {
+        "evidence_id": "SR-02.C1",
+        "target": "heading",
+        "viewport": "both"
+      },
+      {
+        "evidence_id": "SR-02.C2",
+        "target": "heading",
+        "viewport": "both"
+      },
+      {
+        "evidence_id": "SR-02.C3",
+        "target": "heading",
+        "viewport": "both"
+      },
+      {
+        "evidence_id": "SR-02.C4",
+        "target": "heading",
+        "viewport": "both"
+      },
+      {
+        "evidence_id": "SR-02.C5",
+        "target": "heading",
+        "viewport": "both"
+      },
+      {
+        "evidence_id": "SR-02.C6",
+        "target": "heading",
+        "viewport": "wide"
+      },
+      {
+        "evidence_id": "SR-02.C7",
+        "target": "heading",
+        "viewport": "wide"
+      },
+      {
+        "evidence_id": "SR-02.C8",
+        "target": "heading",
+        "viewport": "wide"
+      },
+      {
+        "evidence_id": "SR-02.C9",
+        "target": "heading",
+        "viewport": "wide"
+      },
+      {
+        "evidence_id": "SR-02.C10",
+        "target": "heading",
+        "viewport": "narrow"
+      },
+      {
+        "evidence_id": "SR-03.C1",
+        "target": "subtitle",
+        "viewport": "wide"
+      },
+      {
+        "evidence_id": "SR-03.C2",
+        "target": "subtitle",
+        "viewport": "wide"
+      },
+      {
+        "evidence_id": "SR-03.C3",
+        "target": "subtitle",
+        "viewport": "wide"
+      },
+      {
+        "evidence_id": "SR-03.C4",
+        "target": "subtitle",
+        "viewport": "wide"
+      },
+      {
+        "evidence_id": "SR-03.C5",
+        "target": "subtitle",
+        "viewport": "wide"
+      },
+      {
+        "evidence_id": "SR-03.C6",
+        "target": "subtitle",
+        "viewport": "wide"
+      },
+      {
+        "evidence_id": "SR-03.C7",
+        "target": "subtitle",
+        "viewport": "wide"
+      },
+      {
+        "evidence_id": "SR-03.C8",
+        "target": "subtitle",
+        "viewport": "narrow"
+      },
+      {
+        "evidence_id": "SR-04.C1",
+        "target": "legend",
+        "viewport": "both"
+      },
+      {
+        "evidence_id": "SR-04.C2",
+        "target": "legend",
+        "viewport": "wide"
+      },
+      {
+        "evidence_id": "SR-04.C3",
+        "target": "legend",
+        "viewport": "wide"
+      },
+      {
+        "evidence_id": "SR-04.C4",
+        "target": "legend",
+        "viewport": "narrow"
+      },
+      {
+        "evidence_id": "SR-05.C1",
+        "target": "card.cloy",
+        "viewport": "both"
+      },
+      {
+        "evidence_id": "SR-05.C2",
+        "target": "card.inheritors",
+        "viewport": "both"
+      },
+      {
+        "evidence_id": "SR-05.C3",
+        "target": "card.foodwars",
+        "viewport": "both"
+      },
+      {
+        "evidence_id": "SR-05.C4",
+        "target": "card.theking",
+        "viewport": "both"
+      },
+      {
+        "evidence_id": "SR-05.C5",
+        "target": "card.mindhunter",
+        "viewport": "both"
+      },
+      {
+        "evidence_id": "SR-05.C6",
+        "target": "card.kakegurui",
+        "viewport": "both"
+      },
+      {
+        "evidence_id": "SR-05.C7",
+        "target": "legend.Korean Drama",
+        "viewport": "both"
+      },
+      {
+        "evidence_id": "SR-05.C8",
+        "target": "legend.Anime",
+        "viewport": "both"
+      },
+      {
+        "evidence_id": "SR-05.C9",
+        "target": "legend.Western Series",
+        "viewport": "both"
+      },
+      {
+        "evidence_id": "SR-05.C10",
+        "target": "cards",
+        "viewport": "both"
+      },
+      {
+        "evidence_id": "SR-06.C1",
+        "target": "card.cloy",
+        "viewport": "both"
+      },
+      {
+        "evidence_id": "SR-06.C2",
+        "target": "card.inheritors",
+        "viewport": "both"
+      },
+      {
+        "evidence_id": "SR-06.C3",
+        "target": "card.foodwars",
+        "viewport": "both"
+      },
+      {
+        "evidence_id": "SR-06.C4",
+        "target": "card.theking",
+        "viewport": "both"
+      },
+      {
+        "evidence_id": "SR-06.C5",
+        "target": "card.mindhunter",
+        "viewport": "both"
+      },
+      {
+        "evidence_id": "SR-06.C6",
+        "target": "card.kakegurui",
+        "viewport": "both"
+      },
+      {
+        "evidence_id": "SR-06.C7",
+        "target": "card.cloy",
+        "viewport": "both"
+      },
+      {
+        "evidence_id": "SR-06.C8",
+        "target": "card.inheritors",
+        "viewport": "both"
+      },
+      {
+        "evidence_id": "SR-06.C9",
+        "target": "card.foodwars",
+        "viewport": "both"
+      },
+      {
+        "evidence_id": "SR-06.C10",
+        "target": "card.theking",
+        "viewport": "both"
+      },
+      {
+        "evidence_id": "SR-06.C11",
+        "target": "card.mindhunter",
+        "viewport": "both"
+      },
+      {
+        "evidence_id": "SR-06.C12",
+        "target": "card.kakegurui",
+        "viewport": "both"
+      },
+      {
+        "evidence_id": "SR-06.C13",
+        "target": "cards",
+        "viewport": "both"
+      },
+      {
+        "evidence_id": "SR-06.C14",
+        "target": "cards",
+        "viewport": "both"
+      },
+      {
+        "evidence_id": "SR-06.C15",
+        "target": "cards",
+        "viewport": "both"
+      },
+      {
+        "evidence_id": "SR-07.C1",
+        "target": "cards",
+        "viewport": "wide"
+      },
+      {
+        "evidence_id": "SR-07.C2",
+        "target": "cards.top_row",
+        "viewport": "wide"
+      },
+      {
+        "evidence_id": "SR-07.C3",
+        "target": "cards.bottom_row",
+        "viewport": "wide"
+      },
+      {
+        "evidence_id": "SR-07.C4",
+        "target": "cards",
+        "viewport": "wide"
+      },
+      {
+        "evidence_id": "SR-07.C5",
+        "target": "cards",
+        "viewport": "wide"
+      },
+      {
+        "evidence_id": "SR-07.C6",
+        "target": "cards",
+        "viewport": "wide"
+      },
+      {
+        "evidence_id": "SR-07.C7",
+        "target": "card.cloy",
+        "viewport": "wide"
+      },
+      {
+        "evidence_id": "SR-07.C8",
+        "target": "card.inheritors",
+        "viewport": "wide"
+      },
+      {
+        "evidence_id": "SR-07.C9",
+        "target": "card.foodwars",
+        "viewport": "wide"
+      },
+      {
+        "evidence_id": "SR-07.C10",
+        "target": "card.theking",
+        "viewport": "wide"
+      },
+      {
+        "evidence_id": "SR-07.C11",
+        "target": "card.mindhunter",
+        "viewport": "wide"
+      },
+      {
+        "evidence_id": "SR-07.C12",
+        "target": "card.kakegurui",
+        "viewport": "wide"
+      },
+      {
+        "evidence_id": "SR-07.C13",
+        "target": "card.cloy",
+        "viewport": "wide"
+      },
+      {
+        "evidence_id": "SR-07.C14",
+        "target": "cards",
+        "viewport": "wide"
+      },
+      {
+        "evidence_id": "SR-07.C15",
+        "target": "cards",
+        "viewport": "wide"
+      },
+      {
+        "evidence_id": "SR-07.C16",
+        "target": "cards",
+        "viewport": "wide"
+      },
+      {
+        "evidence_id": "SR-07.C17",
+        "target": "cards",
+        "viewport": "wide"
+      },
+      {
+        "evidence_id": "SR-08.C1",
+        "target": "still.cloy",
+        "viewport": "wide"
+      },
+      {
+        "evidence_id": "SR-08.C2",
+        "target": "stills",
+        "viewport": "wide"
+      },
+      {
+        "evidence_id": "SR-08.C3",
+        "target": "stills",
+        "viewport": "wide"
+      },
+      {
+        "evidence_id": "SR-08.C4",
+        "target": "still.mindhunter",
+        "viewport": "wide"
+      },
+      {
+        "evidence_id": "SR-08.C5",
+        "target": "stills",
+        "viewport": "wide"
+      },
+      {
+        "evidence_id": "SR-08.C6",
+        "target": "stills",
+        "viewport": "wide"
+      },
+      {
+        "evidence_id": "SR-08.C7",
+        "target": "still.mindhunter",
+        "viewport": "wide"
+      },
+      {
+        "evidence_id": "SR-08.C8",
+        "target": "stills",
+        "viewport": "narrow"
+      },
+      {
+        "evidence_id": "SR-09.C1",
+        "target": "popcorn",
+        "viewport": "both"
+      },
+      {
+        "evidence_id": "SR-09.C2",
+        "target": "popcorn",
+        "viewport": "wide"
+      },
+      {
+        "evidence_id": "SR-09.C3",
+        "target": "popcorn",
+        "viewport": "wide"
+      },
+      {
+        "evidence_id": "SR-10.C1",
+        "target": "footer",
+        "viewport": "both"
+      },
+      {
+        "evidence_id": "SR-10.C2",
+        "target": "footer.image",
+        "viewport": "both"
+      },
+      {
+        "evidence_id": "SR-10.C3",
+        "target": "footer.text",
+        "viewport": "both"
+      },
+      {
+        "evidence_id": "SR-10.C4",
+        "target": "footer.link",
+        "viewport": "both"
+      },
+      {
+        "evidence_id": "SR-10.C5",
+        "target": "footer",
+        "viewport": "both"
+      },
+      {
+        "evidence_id": "SR-10.C6",
+        "target": "footer",
+        "viewport": "both"
+      },
+      {
+        "evidence_id": "SR-10.C7",
+        "target": "footer",
+        "viewport": "both"
+      },
+      {
+        "evidence_id": "SR-10.C8",
+        "target": "footer",
+        "viewport": "both"
+      },
+      {
+        "evidence_id": "SR-10.C9",
+        "target": "footer",
+        "viewport": "both"
+      },
+      {
+        "evidence_id": "SR-10.C10",
+        "target": "footer.link",
+        "viewport": "both"
+      },
+      {
+        "evidence_id": "SR-10.C11",
+        "target": "footer.text",
+        "viewport": "both"
+      },
+      {
+        "evidence_id": "SR-11.C1",
+        "target": "cards",
+        "viewport": "narrow"
+      },
+      {
+        "evidence_id": "SR-11.C2",
+        "target": "cards",
+        "viewport": "narrow"
+      },
+      {
+        "evidence_id": "SR-11.C3",
+        "target": "cards",
+        "viewport": "narrow"
+      },
+      {
+        "evidence_id": "SR-11.C4",
+        "target": "cards",
+        "viewport": "narrow"
+      },
+      {
+        "evidence_id": "SR-11.C5",
+        "target": "cards",
+        "viewport": "narrow"
+      },
+      {
+        "evidence_id": "SR-12.C1",
+        "target": "cards",
+        "viewport": "both"
+      }
+    ]
+  },
+  "scoring": {
+    "note": "Routing IDs only; formula and deductions come exclusively from the shared scoring policy.",
+    "gates": {
+      "fatal": {
+        "gate_ids": [
+          "G1"
+        ]
+      },
+      "ordinary": {
+        "gate_ids": [
+          "G2",
+          "G3",
+          "G4",
+          "G5"
+        ]
+      }
+    }
+  },
+  "multi_viewport_verdict_policy": {
+    "coverage": [
+      "wide",
+      "narrow"
+    ],
+    "PASS": "两个视口的适用检查均通过。不能因要求相同而只检查一个视口。",
+    "FAIL": "任一适用视口有充分证据确认失败，该 Evidence 判 FAIL；失败视口分别记录，但该 Evidence 只判一档严重度、扣一次。",
+    "UNRESOLVED": "尚无确认 FAIL 且任一适用视口未能判定，则该 Evidence 为 UNRESOLVED。",
+    "mixed_fail_unresolved": "已确认 FAIL 与另一视口未决同时存在时，保留 FAIL 及独立未决记录；未决仍阻止正式发布。",
+    "severity": "按该 Evidence 实际失败影响整体判一档；不把宽屏和窄屏的档位相加。"
+  },
+  "draft_review": {
+    "reviewer": "Claude implementer self-review",
+    "independent_review": false,
+    "date": "2026-11-24",
+    "checked": [
+      "every input source_quote is a literal substring of its field",
+      "every input sentence covered (see review.md)",
+      "GT satisfies each condition on measured facts (review_20261121)",
+      "dependency prerequisites derived from required_objects"
+    ],
+    "not_performed": [
+      "executable compilation",
+      "GT self-test through the pipeline",
+      "release freeze",
+      "API calls",
+      "model scoring",
+      "user acceptance"
+    ]
+  },
+  "evidence_count": 95
+}

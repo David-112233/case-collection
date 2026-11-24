@@ -19,13 +19,25 @@
 | `scripts/eval_rules_generation/preparation/output_contract_v2.json` | `reference/schemas/output_contract_v2.json` | `996d65a6ee14bba1` | 原样复制 |
 | `scripts/eval_rules_generation/preparation/evaluation_policy_v2.json` | `reference/schemas/evaluation_policy_v2.json` | `510132ae8bd165f1` | 原样复制 |
 | `scripts/eval_rules_generation/preparation/severity_anchors_v1_1.json` | `reference/schemas/severity_anchors_v1_1.json` | `51a76331102f44ac` | 原样复制 |
+| `cases/case-217-T1/ground_truth.html` | `reference/examples_finished/case-217-T1/ground_truth.html` | `6f1583604e7fd6ad` | 原样复制（完成态样板） |
+| `cases/case-217-T1/input.json` | `reference/examples_finished/case-217-T1/input.json` | `d78afc395ad0201a` | 原样复制（完成态样板） |
+| `cases/case-217-T1/rules_drafts/manual_v3/eval_rules.json` | `reference/examples_finished/case-217-T1/rules_drafts/manual_v3/eval_rules.json` | `c8cb6c66955dd64e` | 原样复制（完成态样板） |
+| `cases/case-217-T1/rules_drafts/manual_v3/review.md` | `reference/examples_finished/case-217-T1/rules_drafts/manual_v3/review.md` | `c48bcf0a756bc23a` | 原样复制（完成态样板） |
+| `cases/case-221-T1/ground_truth.html` | `reference/examples_finished/case-221-T1/ground_truth.html` | `e7ab090520448369` | 原样复制（完成态样板） |
+| `cases/case-221-T1/input.json` | `reference/examples_finished/case-221-T1/input.json` | `bee4cbeb4b9b6ff0` | 原样复制（完成态样板） |
+| `cases/case-221-T1/rules_drafts/manual_v1/eval_rules.json` | `reference/examples_finished/case-221-T1/rules_drafts/manual_v1/eval_rules.json` | `f0619eb216f73198` | 原样复制（完成态样板） |
+| `cases/case-221-T1/rules_drafts/manual_v1/review.md` | `reference/examples_finished/case-221-T1/rules_drafts/manual_v1/review.md` | `33ddad50402b3848` | 原样复制（完成态样板） |
+| `cases/case-222-T2/ground_truth.html` | `reference/examples_finished/case-222-T2/ground_truth.html` | `1f827dbb37b986a4` | 原样复制（完成态样板） |
+| `cases/case-222-T2/input.json` | `reference/examples_finished/case-222-T2/input.json` | `6afe8fab7796db5f` | 原样复制（完成态样板） |
+| `cases/case-222-T2/rules_drafts/manual_v1/eval_rules.json` | `reference/examples_finished/case-222-T2/rules_drafts/manual_v1/eval_rules.json` | `df2c5f1ecf9518ad` | 原样复制（完成态样板） |
+| `cases/case-222-T2/rules_drafts/manual_v1/review.md` | `reference/examples_finished/case-222-T2/rules_drafts/manual_v1/review.md` | `00ffd27442afc0cb` | 原样复制（完成态样板） |
+| `cases/case-222-T2/rules_drafts/manual_v1/gt_selfcheck.py` | `reference/examples_finished/case-222-T2/rules_drafts/manual_v1/gt_selfcheck.py` | `9525db5dcb41da5a` | 原样复制（完成态样板） |
+| `cases/case-222-T2/rules_drafts/manual_v1/gt_selfcheck_results.txt` | `reference/examples_finished/case-222-T2/rules_drafts/manual_v1/gt_selfcheck_results.txt` | `b5af395c9180a1cd` | 原样复制（完成态样板） |
+| `cases/case-227-T1/ground_truth.html` | `reference/examples_finished/case-227-T1/ground_truth.html` | `3d76d1a5e533d987` | 原样复制（完成态样板） |
 | `cases/case-227-T1/input.json` | `reference/examples_finished/case-227-T1/input.json` | `8aaa972efd799f71` | 原样复制（完成态样板） |
 | `cases/case-227-T1/rules_drafts/manual_v1/eval_rules.json` | `reference/examples_finished/case-227-T1/rules_drafts/manual_v1/eval_rules.json` | `3d6a5fcf8cc99a7a` | 原样复制（完成态样板） |
 | `cases/case-227-T1/rules_drafts/manual_v1/review.md` | `reference/examples_finished/case-227-T1/rules_drafts/manual_v1/review.md` | `52007a25d0b3b570` | 原样复制（完成态样板） |
-| `cases/case-227-T1/README.md` | `reference/examples_finished/case-227-T1/README.md` | `93fbdd6ecb5573f9` | 原样复制（完成态样板） |
-| `cases/case-224-T1/input.json` | `reference/examples_finished/case-224-T1/input.json` | `19616af6cb8f703b` | 原样复制（完成态样板） |
-| `cases/case-224-T1/rules_drafts/manual_v1/eval_rules.json` | `reference/examples_finished/case-224-T1/rules_drafts/manual_v1/eval_rules.json` | `c3698ad9c775cd30` | 原样复制（完成态样板） |
-| `cases/case-224-T1/README.md` | `reference/examples_finished/case-224-T1/README.md` | `e8080b34def2f125` | 原样复制（完成态样板） |
+| `cases/case-227-T1/rules_drafts/manual_v1/gt_selfcheck.py` | `reference/examples_finished/case-227-T1/rules_drafts/manual_v1/gt_selfcheck.py` | `76ebb9cf1bc0fcde` | 原样复制（完成态样板） |
 
 `dedupe_index.csv`：主仓库 `cases/` 全部 227 例的编号、档位、来源链接，供去重；其中 192 例有 CodePen 来源链接。
 `history/`：采集初期的旧快照（旧任务定义、旧决策、旧扩量方案、旧案例目录），只供追溯，**口径已过期**（例如当时禁止 JavaScript，2026-11-16 起已放开，见 `docs/output_contract_v2.md`）。

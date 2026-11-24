@@ -4,7 +4,7 @@
 
 Checks: files exist and parse; input_sha256 equals the sha256 of input.json; case_id matches the directory;
 requirement / evidence ids are unique and every mandatory evidence has check, kind and source; for evidence with
-source=input the source_quote occurs verbatim in the named input fields; common_sense evidence states a reason;
+source=input the source_quote occurs verbatim in the named input fields; common_sense evidence states a reason (common_sense_reason);
 dependency references point to existing evidence. Exit code 0 only when nothing failed (warnings do not fail).
 """
 import hashlib
@@ -87,7 +87,7 @@ def main() -> int:
                     elif not any(quote in field_text.get(f, "") for f in (fields or INPUT_FIELDS)):
                         problems.append(f"{full}: source_quote not found verbatim in {fields or 'input'}")
                 elif src == "common_sense":
-                    if not (ev.get("reason") or ev.get("note")):
+                    if not (ev.get("common_sense_reason") or ev.get("reason") or ev.get("note")):
                         problems.append(f"{full}: common_sense evidence needs a reason")
                 elif src not in ("project_output_contract",):
                     warnings.append(f"{full}: unusual source {src!r}")

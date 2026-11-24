@@ -1,0 +1,422 @@
+{
+ "SR-02.C1 count 8": [
+  true,
+  8
+ ],
+ "SR-02.C2 same size & portrait": [
+  true,
+  [
+   450,
+   800
+  ]
+ ],
+ "SR-02.C3 radius": [
+  true,
+  "30px"
+ ],
+ "SR-02.C5 overflow hidden": [
+  true,
+  "hidden"
+ ],
+ "texts screen 1": [
+  true,
+  []
+ ],
+ "texts screen 2": [
+  true,
+  []
+ ],
+ "texts screen 3": [
+  true,
+  []
+ ],
+ "texts screen 4": [
+  true,
+  []
+ ],
+ "texts screen 5": [
+  true,
+  []
+ ],
+ "texts screen 6": [
+  true,
+  []
+ ],
+ "texts screen 7": [
+  true,
+  []
+ ],
+ "texts screen 8": [
+  true,
+  []
+ ],
+ "urls screen 1": [
+  true,
+  []
+ ],
+ "urls screen 3": [
+  true,
+  []
+ ],
+ "urls screen 4": [
+  true,
+  []
+ ],
+ "urls screen 6": [
+  true,
+  []
+ ],
+ "urls screen 8": [
+  true,
+  []
+ ],
+ "SR-06.C5/C6 placeholders": [
+  true,
+  [
+   "dorothea@gmail.com",
+   "At least 8 characters"
+  ]
+ ],
+ "nav raw (for binding)": {
+  "2": [],
+  "3": [],
+  "5": [],
+  "7": [],
+  "8": []
+ },
+ "SR-01.C2 / SR-09.C4 fonts loaded": [
+  true,
+  [
+   "Big Shoulders Inline Display 400",
+   "Manrope 300",
+   "Manrope 600"
+  ]
+ ],
+ "order screen 1": [
+  true,
+  [
+   148.73828125,
+   195.23828125,
+   256.73828125,
+   341.32421875,
+   503.16015625,
+   522.6484375
+  ]
+ ],
+ "order screen 4": [
+  true,
+  [
+   2084.265625,
+   2178.765625,
+   2236.046875,
+   2290.796875
+  ]
+ ],
+ "order screen 5": [
+  true,
+  [
+   2739.84765625,
+   2843.2421875,
+   3000.00390625,
+   3156.765625
+  ]
+ ],
+ "order screen 6": [
+  true,
+  [
+   3353.5,
+   3400,
+   3802.71484375
+  ]
+ ],
+ "order screen 8": [
+  true,
+  [
+   4844.01953125,
+   4911.33203125,
+   4979.27734375
+  ]
+ ],
+ "SR-07.C11 name left amount right": [
+  true,
+  [
+   [
+    36.75,
+    929.04296875,
+    75.375,
+    950.04296875
+   ],
+   [
+    249.97265625,
+    929.04296875,
+    289.5,
+    950.04296875
+   ]
+  ]
+ ],
+ "SR-07.C15 card above list": [
+  true,
+  null
+ ],
+ "SR-07.C3 Total bold vs lines": [
+  true,
+  {
+   "Total: $12,000": "600",
+   "Remaining: $1,500": "300"
+  }
+ ],
+ "SR-09.C2 upper middle": [
+  true,
+  [
+   163,
+   600
+  ]
+ ],
+ "SR-09.C3 biggest": [
+  true,
+  null
+ ],
+ "SR-06.C4 title left-aligned with input": [
+  true,
+  [
+   48.75,
+   48.75
+  ]
+ ],
+ "SR-13.C7 font sizes": [
+  [
+   "CHECKLIST",
+   11.44
+  ],
+  [
+   "BUDGET",
+   11.44
+  ],
+  [
+   "GUESTS",
+   11.44
+  ],
+  [
+   "VISION",
+   11.44
+  ],
+  [
+   "Connect your Pintere",
+   20.8
+  ],
+  [
+   "Your Pinterest board",
+   16.64
+  ]
+ ],
+ "SR-17.C1 not tilted": [
+  true,
+  "none"
+ ],
+ "SR-17.C2 single column centered": [
+  true,
+  [
+   19,
+   19,
+   19,
+   19,
+   19,
+   19,
+   19,
+   19
+  ]
+ ],
+ "SR-17.C4 within viewport width": [
+  true,
+  [
+   [
+    19,
+    356
+   ]
+  ]
+ ],
+ "SR-17.C5 info bar last": [
+  true,
+  [
+   0,
+   5296,
+   375,
+   5419.625,
+   5420
+  ]
+ ],
+ "SR-17.C6 info bar full width": [
+  true,
+  [
+   0,
+   5296,
+   375
+  ]
+ ],
+ "SR-15.C1-C3 info bar": [
+  true,
+  [
+   "Part of the UI Designs inspired by Taylor Swift Album Covers collection. This is evermore (2020).",
+   "UI Designs inspired by Taylor Swift Album Covers",
+   "https://codepen.io/collection/XPxJmz",
+   "https://assets.codepen.io/567707/palette-evermore.jpg"
+  ]
+ ],
+ "DR-01.C1 hover orange": [
+  true,
+  [
+   [
+    "rgb(139, 66, 24)",
+    "rgb(245, 147, 0)",
+    "rgb(139, 66, 24)"
+   ],
+   [
+    "rgb(139, 66, 24)",
+    "rgb(245, 147, 0)",
+    "rgb(139, 66, 24)"
+   ]
+  ]
+ ],
+ "DR-01.C2 restore": [
+  true,
+  null
+ ],
+ "DR-02.C1 thicker on focus": [
+  true,
+  [
+   [
+    [
+     "1px",
+     "none",
+     "none"
+    ],
+    [
+     "1px",
+     "rgb(54, 57, 70) 0px 2px 0px 0px",
+     "none"
+    ],
+    [
+     "1px",
+     "none",
+     "none"
+    ]
+   ],
+   [
+    [
+     "1px",
+     "none",
+     "none"
+    ],
+    [
+     "1px",
+     "rgb(54, 57, 70) 0px 2px 0px 0px",
+     "none"
+    ],
+    [
+     "1px",
+     "none",
+     "none"
+    ]
+   ]
+  ]
+ ],
+ "DR-02.C2 no outline": [
+  true,
+  null
+ ],
+ "DR-02.C3 restore": [
+  true,
+  null
+ ],
+ "SR-16.C1 no scrollbar & no scroll": [
+  true,
+  [
+   0,
+   0
+  ]
+ ],
+ "SR-16.C2 four columns ①②/③④/⑤⑥/⑦⑧": [
+  true,
+  [
+   [
+    172,
+    227
+   ],
+   [
+    -60,
+    865
+   ],
+   [
+    635,
+    155
+   ],
+   [
+    403,
+    793
+   ],
+   [
+    1063,
+    179
+   ],
+   [
+    831,
+    817
+   ],
+   [
+    1434,
+    360
+   ],
+   [
+    1202,
+    997
+   ]
+  ]
+ ],
+ "SR-16.C5/C6 clockwise & uniform tilt": [
+  true,
+  [
+   20.0,
+   20.0,
+   20.0,
+   20.0,
+   20.0,
+   20.0,
+   20.0,
+   20.0
+  ]
+ ],
+ "SR-16.C7 col2 highest, col4 lowest": [
+  true,
+  [
+   -135,
+   -207,
+   -183,
+   -3
+  ]
+ ],
+ "SR-16.C4 group center dx": -33,
+ "SR-16.C8 info top-right": [
+  true,
+  [
+   940,
+   0,
+   1440,
+   102.265625
+  ]
+ ],
+ "SR-16.C9 info width ratio": 0.347,
+ "SR-16.C10 info over screens": [
+  true,
+  null
+ ],
+ "SR-16.C3 gap along tilted column axis": [
+  true,
+  [
+   38,
+   38,
+   38,
+   38
+  ]
+ ]
+}
+FAILED: []
