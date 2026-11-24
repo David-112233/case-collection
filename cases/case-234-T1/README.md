@@ -39,3 +39,7 @@ GT 无任何动态：无动画、无过渡、无悬停或点击效果。按难�
 ## GT 自检
 
 见 [review_20261124/static_check.md](review_20261124/static_check.md)。**截图和测量没做成**：云端环境没有可用的浏览器。渲染自检脚本 [review_20261124/gt_check.py](review_20261124/gt_check.py) 已备好，可在本地运行。画面描述来自样式推算，尚未经渲染验证。
+
+## input 草稿（2026-11-24，duet）
+
+[input.json](input.json) 由 GT 写出，问题与取舍见 [input_problem.md](input_problem.md)。外观描述由 CSS 推算，待本地渲染核对；`/script.js` 未核验，“无交互”与 T1 档位待用户确认。阶段 `input_draft`：等用户审核 GT 与 input，规则草稿和 `generation_prompt.txt` 尚未写。

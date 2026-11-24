@@ -2,7 +2,7 @@
 
 由 `data_intake/tools/registry.py render-index` 生成，**不要手写**。状态来源是 [registry.csv](registry.csv)。
 
-阶段分布：admitted 20，gt_ready 1，input_draft 6
+阶段分布：admitted 20，input_draft 7
 
 | 案例 | 档位 | 来源 | 特色 | 阶段 | 处理者 | 更新 | 用户审核 | 备注 |
 |---|---|---|---|---|---|---|---|---|
@@ -12,7 +12,7 @@
 | [case-231-T3](case-231-T3/) | T3 | [ricardoolivaalonso__ExPpgqG](https://codepen.io/ricardoolivaalonso/pen/ExPpgqG) | 立体收音机、磁带仓与凹槽 | input_draft | duet | 2026-11-24 | pending | 等用户审核 GT 与 input；云端无浏览器，外观由 CSS 推算，待本地运行 review_20261124/gt_check.py 核对（见 input_problem.md） |
 | [case-232-T2](case-232-T2/) | T2 | [Ak-407__MYgKoME](https://codepen.io/Ak-407/pen/MYgKoME) | 折叠卡片、页面折角 | input_draft | duet | 2026-11-24 | pending | input 已由 GT 写出，等用户审核；外观由 CSS 推算待本地渲染核对 |
 | [case-233-T3](case-233-T3/) | T3 | [bofengbu__JjvYZoJ](https://codepen.io/bofengbu/pen/JjvYZoJ) | 分层蛋糕、夹心切面 | input_draft | duet | 2026-11-24 | pending | 等用户审核 GT 与 input；外部 CSS 与 camera.js 未核实，外观由内联 CSS 推算，渲染自检待本地运行 review_20261124/gt_check.py；说明面板留不留待定（删则改 T1），见 input_problem.md |
-| [case-234-T1](case-234-T1/) | T1 | [fossheim__xxboBzO](https://codepen.io/fossheim/pen/xxboBzO) | 拍立得、凹面取景器 | gt_ready | duet | 2026-11-24 | pending | GT 仅静态自检，渲染自检待本地运行 review_20261124/gt_check.py；外部 /script.js 未核验，按推断不存在已删；档位复核仍为 T1 |
+| [case-234-T1](case-234-T1/) | T1 | [fossheim__xxboBzO](https://codepen.io/fossheim/pen/xxboBzO) | 拍立得、凹面取景器 | input_draft | duet | 2026-11-24 | pending | input 已由 GT 写出，等用户审核；外观由 CSS 推算待本地渲染核对；/script.js 未核验，无交互与 T1 档位待用户确认 |
 | [case-235-T3](case-235-T3/) | T3 | [ricardoolivaalonso__NWJeBPE](https://codepen.io/ricardoolivaalonso/pen/NWJeBPE) | 立体办公室、家具分层 | admitted | duet | 2026-11-24 | pending | WebGL 画布（three.js），非 HTML/CSS 结构，评分可行性待用户确认 |
 | [case-236-T3](case-236-T3/) | T3 | [ricardoolivaalonso__QWJxYXE](https://codepen.io/ricardoolivaalonso/pen/QWJxYXE) | Switch机身、按键凹凸 | admitted | duet | 2026-11-24 | pending |  |
 | [case-237-T3](case-237-T3/) | T3 | [dustindwayne__bGyYoar](https://codepen.io/dustindwayne/pen/bGyYoar) | 唱片机、正面浮雕 | admitted | duet | 2026-11-24 | pending |  |
