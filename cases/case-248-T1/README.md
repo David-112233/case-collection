@@ -2,7 +2,7 @@
 
 来源：<https://codepen.io/lynnandtonic/pen/PoZpjOr>（作者 lynnandtonic，CodePen 公开作品，默认 MIT 许可）
 
-当前阶段：`admitted`（入库于 2026-11-24），归属 duet。阶段以 [registry.csv](../registry.csv) 为准。
+当前阶段：`input_draft`（入库于 2026-11-24），归属 duet。阶段以 [registry.csv](../registry.csv) 为准。
 
 - 审核编号：C037；档位：T1（**暂定**，依据入库时的来源源码；`ground_truth.html` 完成后按 GT 的驱动方式重新判定，必要时用 `registry.py retier` 改名）。
 - 特色：折痕海报、纸面光影
@@ -28,4 +28,8 @@
 - **保留不动：** CodePen 重置样式表 `reset-2.0.min.css`（作者在 pen 设置里选用的重置，影响默认边距等版式，属于作品的一部分）；脚本块里只剩作者署名注释，没有可执行代码；三张海报图片（assets.codepen.io）。
 - **静止状态：** 来源本身没有动画、过渡和交互，默认画面就是静止画面，无须另选。
 - **档位复核：** GT 无动态、无交互，仍为 **T1**，目录名不变。
-- **自检：** 见 [review_20261124/](review_20261124/)。渲染核对结论写在 `static_check.md`。
+- **自检：** 见 [review_20261124/static_check.md](review_20261124/static_check.md)。已用云端浏览器经 raw.githack.com 在 1280、500 宽下核对：三张图片和重置样式表都加载，渲染正常，GT 不需要修改；500 宽时内容区不缩、出现横向滚动条，来源如此。
+
+## input 草稿（2026-11-24，duet）
+
+[input.json](input.json) 由 GT 和渲染截图写出，等用户审核 GT 与 input。取舍和待定问题见 [input_problem.md](input_problem.md)。
