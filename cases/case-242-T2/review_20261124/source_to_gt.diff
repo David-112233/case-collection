@@ -1,0 +1,104 @@
+--- source.html	2026-11-24 09:39:01.019348788 +0000
++++ ground_truth.html	2026-11-24 10:27:55.713272874 +0000
+@@ -4,25 +4,9 @@
+ <head>
+   
+   <meta charset="UTF-8">
+-  
+-
+-    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+-
+-    <meta name="apple-mobile-web-app-title" content="CodePen">
+-
+-    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+-
+-    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+-
+-
+-
+-  
+-    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+ 
+ 
+   <title>CSS3D Room furniture challenge...</title>
+-
+-    <link rel="canonical" href="https://codepen.io/zenete/pen/BaMbmqW">
+   
+   
+   <link rel='stylesheet' href='https://codepen.io/zenete/pen/eYLjgaq.css'>
+@@ -236,7 +220,6 @@
+ }
+ light > u:nth-of-type(5) {
+   transform: rotate(0) translate3d(0, 0, 5rem);
+-  animation: rotate 3s linear infinite;
+   right: 0;
+   margin: auto;
+   width: 5rem;
+@@ -246,7 +229,6 @@
+ }
+ @media (max-width: 400px) {
+   light > u:nth-of-type(5) {
+-    animation-play-state: paused;
+     transform: rotate(180deg) translate3d(0, 0, 5rem) !important;
+   }
+ }
+@@ -273,18 +255,14 @@
+   transform: rotateX(5deg);
+ }
+ light > u:nth-of-type(5) u {
+-  animation: rlight 3s -2s linear infinite;
+-  transition: all 0.2s cubic-bezier(0.5, 2, 0.5, 0.8);
+ }
+ @media (max-width: 400px) {
+   light > u:nth-of-type(5) u {
+-    animation-play-state: paused !important;
+     transform: translate3d(2.5rem, 0, 0) rotate(20deg) rotateX(15deg) rotateY(-45deg);
+   }
+ }
+ light > u:nth-of-type(5) u:nth-of-type(2) {
+   transform: translate3d(2.5rem, 0, 0) rotate(120deg) rotateX(15deg);
+-  animation: rlight 3s -1s linear infinite;
+ }
+ @media (max-width: 220px) {
+   light > u:nth-of-type(5) u:nth-of-type(2) {
+@@ -293,23 +271,12 @@
+ }
+ light > u:nth-of-type(5) u:nth-of-type(3) {
+   transform: translate3d(2.5rem, 0, 0) rotate(240deg) rotateX(15deg);
+-  animation: rlight 3s linear infinite;
+ }
+ @media (max-width: 220px) {
+   light > u:nth-of-type(5) u:nth-of-type(3) {
+     transform: translate3d(2.5rem, 0, 0) rotate(240deg) rotateX(15deg) rotateY(-90deg);
+   }
+ }
+-@keyframes rlight {
+-  50% {
+-    filter: brightness(0.5);
+-  }
+-}
+-@keyframes rotate {
+-  100% {
+-    transform: rotate(-360deg) translate3d(0, 0, 5rem);
+-  }
+-}
+ 
+ window {
+   width: 50%;
+@@ -415,7 +382,7 @@
+ 
+   </head>
+ 
+-<body translate="no">
++<body>
+   <div>
+ 
+   <room class='css3d'>
+@@ -452,7 +419,6 @@
+ // HTML and CSS only!
+ 
+ // Your time starts now 🧨
+-//# sourceURL=pen.js
+   </script>
+ 
+   
