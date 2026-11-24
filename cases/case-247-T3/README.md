@@ -2,7 +2,7 @@
 
 来源：<https://codepen.io/jh3y/pen/XWdQBRx>（作者 jh3y，CodePen 公开作品，默认 MIT 许可）
 
-当前阶段：`gt_ready`（入库于 2026-11-24），归属 duet。阶段以 [registry.csv](../registry.csv) 为准。
+当前阶段：`input_draft`（入库于 2026-11-24），归属 duet。阶段以 [registry.csv](../registry.csv) 为准。
 
 - 审核编号：C036；档位：T3（**暂定**，依据入库时的来源源码；`ground_truth.html` 完成后按 GT 的驱动方式重新判定，必要时用 `registry.py retier` 改名）。
 - 特色：立体工作室、室内遮挡
@@ -35,3 +35,15 @@
 - **保留的交互：** 右下角两个圆形图标按钮。“灯光”：点击进入夜间模式并保持（墙面、地板、家具变暗，背景变深蓝，百叶窗合上，台灯、墙面和书架亮起粉色光），再点回到白天。“缩放”：点击后镜头拉近到正对书桌的视角并隐藏椅子和另一个按钮，再点回到默认视角。两者都瞬时切换。
 - **保留但无作用的代码：** `audio { display: none; }` 和 `.dg.ac` 两条样式（元素已删除或来源本就没有），不影响画面，按最小修改不删。
 - **保留的外部资源：** normalize.css 5.0.0；pexels 的三张照片（窗外景色、桌面木纹、地毯）；assets.codepen.io 的盆栽 PNG 和椅背头像 PNG。
+
+## GT 自检
+
+见 [review_20261124/static_check.md](review_20261124/static_check.md)。经 raw.githack.com 在云端浏览器打开 GT，在 1280 和 500 宽、默认、夜间、缩放、夜间加缩放四种状态截图核对，截图未入库；本地可运行 `review_20261124/shot_gt.py` 重新得到截图和测量。
+
+## 档位复核
+
+GT 保留两个“点击切换并保持状态”的开关（灯光、缩放），按难度模型 v2.1 仍为 **T3**，与目录名一致，不需要 retier。
+
+## input
+
+[input.json](input.json) 由 GT 写出，问题与取舍见 [input_problem.md](input_problem.md)。外观已按截图核对。阶段 `input_draft`：等用户审核 GT 与 input，规则草稿和 `generation_prompt.txt` 尚未写。
