@@ -32,3 +32,7 @@
 - **外部资源：** 保留 Google Fonts（Montserrat）、`starter.css`、`3d.css`、`howto.css` 与七张纹理图（海绵、海绵切面、蛋糕顶面、盘子三张、噪点）。场景容器的透视与相机变换、`--px` 尺寸单位、页面背景图层、说明面板的样式都在这三份样式表里，**本环境读不到，均未核实**；也无法确认 `camera.js` 有没有在初始化时写入画面必需的值。详见 [review_20261124/static_check.md](review_20261124/static_check.md)。
 - **档位复核：** GT 已没有时间动画，剩下的动态只有“点 How to? 打开说明面板并保持，点关闭再收起”，属于点击进入可保持的状态，按难度模型 v2.1 为 T3，已由暂定的 T2 改名为 T3。若用户决定删掉这块面板，GT 就没有任何动态，应改为 T1。
 - **自检：** 本环境无法渲染，只完成了静态检查；渲染自检脚本 [review_20261124/gt_check.py](review_20261124/gt_check.py) 已备好，待本地运行。
+
+## input 草稿（2026-11-24，duet）
+
+[input.json](input.json) 由 GT 写出，等用户审核 GT 与 input。按内联 CSS 推算、尚未经渲染核对的外观描述，写与不写的取舍，以及说明面板留不留的问题，见 [input_problem.md](input_problem.md)。
