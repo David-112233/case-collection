@@ -1,7 +1,7 @@
 {
   "review_id": "C033",
-  "case_id": "case-245-T2",
-  "tier": "T2",
+  "case_id": "case-245-T1",
+  "tier": "T1",
   "spatial_feature": "埃舍尔方块、桥面穿插",
   "evidence": "埃舍尔方块、桥面穿插。沿用候选归档的桌面默认画面核验；不新增交互、移动端或离线核验结论。",
   "decision": "accept",
@@ -11,8 +11,8 @@
     "date": "2026-11-21"
   },
   "qualification_note": "未分配主项目正式编号、未强定档；视觉核验范围沿用采集记录。",
-  "tier_basis": "悬停与聚焦自反馈加一个关键帧动画；元素约 1579 个，规模大（按难度模型 v2.1 的驱动方式判定；JS 驱动按等价的 CSS 驱动类比）",
+  "tier_basis": "GT 去掉了载入时一次性的整图缩放入场动画，并删除了右下角 YouTube 推广徽标（来源唯一的悬停交互）；画面无任何动态，也没有交互，按难度模型 v2.1 为 T1",
   "tier_assigned_by": "Claude，本地入库时（2026-11-24），待用户抽查",
-  "tier_status": "provisional_from_source",
-  "tier_note": "入库时按来源源码暂定；ground_truth.html（准静态）完成后按 GT 重新判定"
+  "tier_status": "reviewed_after_gt",
+  "tier_note": "2026-11-24 duet 按 GT 复核，由暂定 T2 改为 T1。若用户决定保留 YouTube 推广徽标及其悬停放大，GT 有悬停只改自身的效果，应改回 T2"
 }

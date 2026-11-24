@@ -73,7 +73,7 @@
     "scope": "仅采集仓库交付；主项目尚未导入"
   },
   "review_id": "C033",
-  "case_id": "case-245-T2",
+  "case_id": "case-245-T1",
   "source_archive": {
     "repository": "David-112233/case-collection",
     "pr": 10,
