@@ -2,7 +2,7 @@
 
 由 `data_intake/tools/registry.py render-index` 生成，**不要手写**。状态来源是 [registry.csv](registry.csv)。
 
-阶段分布：admitted 8，gt_ready 4，input_draft 15
+阶段分布：admitted 7，gt_ready 5，input_draft 15
 
 | 案例 | 档位 | 来源 | 特色 | 阶段 | 处理者 | 更新 | 用户审核 | 备注 |
 |---|---|---|---|---|---|---|---|---|
@@ -27,7 +27,7 @@
 | [case-246-T1](case-246-T1/) | T1 | [ehckk__WNzGYKy](https://codepen.io/ehckk/pen/WNzGYKy) | 彩虹书架、书脊深度 | gt_ready | duet | 2026-11-24 | pending | GT 已完成（仅删 CodePen 样板），待渲染核对 |
 | [case-247-T3](case-247-T3/) | T3 | [jh3y__XWdQBRx](https://codepen.io/jh3y/pen/XWdQBRx) | 立体工作室、室内遮挡 | admitted | duet | 2026-11-24 | pending |  |
 | [case-248-T1](case-248-T1/) | T1 | [lynnandtonic__PoZpjOr](https://codepen.io/lynnandtonic/pen/PoZpjOr) | 折痕海报、纸面光影 | input_draft | duet | 2026-11-24 | pending | 等用户审核 GT 与 input；云端浏览器 1280/500 渲染核对通过，图片与重置样式表均加载；档位复核仍为 T1 |
-| [case-249-T3](case-249-T3/) | T3 | [ricardoolivaalonso__RwBZMGB](https://codepen.io/ricardoolivaalonso/pen/RwBZMGB) | 开盖随身听、内腔层次 | admitted | duet | 2026-11-24 | pending |  |
+| [case-249-T3](case-249-T3/) | T3 | [ricardoolivaalonso__RwBZMGB](https://codepen.io/ricardoolivaalonso/pen/RwBZMGB) | 开盖随身听、内腔层次 | gt_ready | duet | 2026-11-24 | pending | GT 去掉拖动和持续动画，保留点击播放；待渲染核对 |
 | [case-250-T1](case-250-T1/) | T1 | [thebabydino__NLWdwz](https://codepen.io/thebabydino/pen/NLWdwz) | 圆片信息图、编号叠盖 | admitted | duet | 2026-11-24 | pending |  |
 | [case-251-T1](case-251-T1/) | T1 | [thebabydino__eQvWLB](https://codepen.io/thebabydino/pen/eQvWLB) | 彩色折纸条、交替折角 | admitted | duet | 2026-11-24 | pending |  |
 | [case-252-T1](case-252-T1/) | T1 | [thebabydino__pBmMaJ](https://codepen.io/thebabydino/pen/pBmMaJ) | 斜切编号条、圆标压层 | input_draft | duet | 2026-11-24 | pending | 等用户审核 GT 与 input；云端浏览器 1280/500 渲染核对通过；档位复核仍为 T1；窄屏版式是否写入 input 待定 |

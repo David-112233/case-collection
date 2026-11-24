@@ -1,0 +1,224 @@
+--- source.html	2026-11-24 09:39:01.021673646 +0000
++++ ground_truth.html	2026-11-24 10:28:03.723582373 +0000
+@@ -4,25 +4,9 @@
+ <head>
+   
+   <meta charset="UTF-8">
+-  
+-
+-    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+-
+-    <meta name="apple-mobile-web-app-title" content="CodePen">
+-
+-    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+-
+-    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+-
+-
+-
+-  
+-    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+ 
+ 
+   <title>3D Walkman - Pure CSS Art</title>
+-
+-    <link rel="canonical" href="https://codepen.io/ricardoolivaalonso/pen/RwBZMGB">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   
+   
+@@ -55,7 +39,6 @@
+   width: 100%;
+   font-weight: bolder;
+   overflow: hidden;
+-  cursor: grab;
+   background-color: #b7ecff;
+ }
+ 
+@@ -137,64 +120,19 @@
+   background-color: #639cb5;
+ }
+ .wave:nth-of-type(3) {
+-  animation: wave 525ms ease-in alternate infinite 300ms;
++  height: 7.74vmin;
+ }
+ .wave:nth-of-type(4) {
+-  animation: wave 525ms ease-in alternate infinite 400ms;
++  height: 11.375vmin;
+ }
+ .wave:nth-of-type(5) {
+-  animation: wave 525ms ease-in alternate infinite 500ms;
++  height: 9.41vmin;
+ }
+ .wave:nth-of-type(2), .wave:nth-of-type(6) {
+-  height: 0vmin;
+-  animation: wave-2 262.5ms ease-in alternate infinite 425ms;
++  height: 7.94vmin;
+ }
+ .wave:nth-of-type(1), .wave:nth-of-type(7) {
+-  height: 0vmin;
+-  animation: wave-3 525ms ease-in alternate infinite 850ms;
+-}
+-
+-@keyframes wave {
+-  0%, 100% {
+-    height: 7vmin;
+-  }
+-  24% {
+-    height: 10.5vmin;
+-  }
+-  25%, 30% {
+-    height: 11.375vmin;
+-  }
+-  55%, 60% {
+-    height: 7.875vmin;
+-  }
+-  61%, 65% {
+-    height: 11.55vmin;
+-  }
+-  80%, 82% {
+-    height: 6.125vmin;
+-  }
+-  83%, 90% {
+-    height: 5.25vmin;
+-  }
+-  95% {
+-    height: 5.6875vmin;
+-  }
+-}
+-@keyframes wave-2 {
+-  0% {
+-    height: 5.25vmin;
+-  }
+-  100% {
+-    height: 10.5vmin;
+-  }
+-}
+-@keyframes wave-3 {
+-  0%, 50% {
+-    height: 0vmin;
+-  }
+-  75%, 100% {
+-    height: 8.75vmin;
+-  }
++  height: 8.75vmin;
+ }
+ /***********************/
+ /***********************/
+@@ -621,7 +559,6 @@
+   left: 0;
+   transform-origin: bottom left;
+   transform: rotateZ(19deg);
+-  transition: transform 300ms linear;
+ }
+ .c__front {
+   width: 31.5vmin;
+@@ -692,7 +629,6 @@
+ 
+ .is-c-close {
+   transform: rotateZ(0deg);
+-  transition: transform 300ms linear;
+ }
+ 
+ .sphere,
+@@ -788,15 +724,6 @@
+   transform: translateZ(30.1875vmin) rotateX(-90deg) rotateZ(135deg);
+ }
+ 
+-.cr {
+-  animation: circle linear 4000ms infinite;
+-}
+-
+-@keyframes circle {
+-  to {
+-    transform: translateZ(1.75vmin) rotateZ(1turn);
+-  }
+-}
+ .cs {
+   width: 28vmin;
+   height: 1.225vmin;
+@@ -1625,7 +1552,6 @@
+   bottom: 7.875vmin;
+   left: 92%;
+   transform: translateZ(39.375vmin);
+-  transition: left 100ms linear;
+ }
+ .button5__front {
+   width: 3.5vmin;
+@@ -1684,7 +1610,6 @@
+   padding: 0.4375vmin;
+   background-clip: padding-box;
+   border: 0.2625vmin solid #9ebec7;
+-  animation: btn 1000ms linear infinite;
+   cursor: pointer;
+ }
+ .button5__right::after {
+@@ -1711,14 +1636,8 @@
+ 
+ .is-button-pressed {
+   left: 90%;
+-  transition: left 100ms linear;
+ }
+ 
+-@keyframes btn {
+-  to {
+-    border: 0.2625vmin solid #e7b953;
+-  }
+-}
+ .button6,
+ .button7 {
+   width: 3.5vmin;
+@@ -1913,7 +1832,7 @@
+ 
+   </head>
+ 
+-<body translate="no">
++<body>
+   <audio id="a">
+   <source src="https://rawcdn.githack.com/ricardoolivaalonso/Codepen/a7164cf6992d98ab75ca79465024dcd182dd1bdf/Walkman/audio.mp3" type="audio/mpeg"/>
+ </audio>
+@@ -2397,32 +2316,17 @@
+ */
+ 
+ const b = document.body;
+-const h = document.querySelector("#h");
+-const unit = 1.75;
+ const audioElement = document.querySelector("#a");
+ const btnElement = document.querySelector(".button5");
+ const tapeElement = document.querySelector(".c");
+ const circleElement = document.querySelectorAll(".circle")[1];
+ const waveElement = document.querySelector(".waves");
+ // =================================
+-const mouseDown = () => b.addEventListener('mousemove', moveFunc);
+-const mouseUp = () => b.removeEventListener('mousemove', moveFunc);
+-const moveFunc = e => {
+-  let x = e.pageX / window.innerWidth - 0.5;
+-  let y = e.pageY / window.innerHeight - 0.5;
+-
+-  h.style.transform = `
+-        perspective(${400 * unit}vmin)
+-        rotateX(${y * 20 + 66}deg)
+-        rotateZ(${-x * 420 + 40}deg)
+-        translateZ(${-16 * unit}vmin)
+-    `;
+-};
+ const playRadio = () => {
+   btnElement.removeEventListener("click", playRadio);
+   audioElement.currentTime = 0;
+   audioElement.play();
+-  setTimeout(() => waveElement.classList.add('is-wave-playing'), 1100);
++  waveElement.classList.add('is-wave-playing');
+   toggleStyles();
+ 
+ };
+@@ -2439,11 +2343,8 @@
+ 
+ };
+ 
+-h.addEventListener('mousedown', mouseDown);
+-b.addEventListener('mouseup', mouseUp);
+ btnElement.addEventListener("click", playRadio);
+ audioElement.addEventListener('ended', stopRadio);
+-//# sourceURL=pen.js
+   </script>
+ 
+   

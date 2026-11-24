@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<!-- 自检辅助页：在同源 iframe 里打开 ../ground_truth.html（或 ?page= 指定的同目录上级文件），
+     载入后按 ?click= 给出的选择器点击一次，便于在只能截图、不能执行脚本的浏览器里查看点击后的状态。
+     例：state_view.html?page=ground_truth.html&click=.button5&delay=800
+     不属于 GT，不参与评分。 -->
+<html lang="zh"><head><meta charset="UTF-8"><title>state view</title>
+<style>html,body{margin:0;height:100%;overflow:hidden}iframe{border:0;width:100%;height:100%;display:block}</style>
+</head><body>
+<iframe id="f"></iframe>
+<script>
+const q = new URLSearchParams(location.search);
+const page = (q.get('page') || 'ground_truth.html').replace(/[^\w.-]/g, '');
+const f = document.getElementById('f');
+f.addEventListener('load', () => {
+  const sel = q.get('click');
+  if (!sel) return;
+  setTimeout(() => {
+    const el = f.contentDocument.querySelector(sel);
+    if (el) el.click(); else document.title = 'selector not found';
+  }, +(q.get('delay') || 500));
+});
+f.src = '../' + page;
+</script>
+</body></html>

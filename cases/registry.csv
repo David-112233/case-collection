@@ -20,7 +20,7 @@ case-245-T1,HunorMarton__BazeOpE,T1,duet,input_draft,2026-11-24,等用户审核 
 case-246-T1,ehckk__WNzGYKy,T1,duet,gt_ready,2026-11-24,GT 已完成（仅删 CodePen 样板），待渲染核对,pending
 case-247-T3,jh3y__XWdQBRx,T3,duet,admitted,2026-11-24,,pending
 case-248-T1,lynnandtonic__PoZpjOr,T1,duet,input_draft,2026-11-24,等用户审核 GT 与 input；云端浏览器 1280/500 渲染核对通过，图片与重置样式表均加载；档位复核仍为 T1,pending
-case-249-T3,ricardoolivaalonso__RwBZMGB,T3,duet,admitted,2026-11-24,,pending
+case-249-T3,ricardoolivaalonso__RwBZMGB,T3,duet,gt_ready,2026-11-24,GT 去掉拖动和持续动画，保留点击播放；待渲染核对,pending
 case-250-T1,thebabydino__NLWdwz,T1,duet,admitted,2026-11-24,,pending
 case-251-T1,thebabydino__eQvWLB,T1,duet,admitted,2026-11-24,,pending
 case-252-T1,thebabydino__pBmMaJ,T1,duet,input_draft,2026-11-24,等用户审核 GT 与 input；云端浏览器 1280/500 渲染核对通过；档位复核仍为 T1；窄屏版式是否写入 input 待定,pending
