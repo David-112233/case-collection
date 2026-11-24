@@ -2,7 +2,7 @@
 
 来源：<https://codepen.io/kevinleclair1/pen/XJgQrr>（作者 kevinleclair1，CodePen 公开作品，默认 MIT 许可）
 
-当前阶段：`gt_ready`（入库于 2026-11-24），归属 duet。阶段以 [registry.csv](../registry.csv) 为准。
+当前阶段：`input_draft`（入库于 2026-11-24），归属 duet。阶段以 [registry.csv](../registry.csv) 为准。
 
 - 审核编号：C032；档位：T1（**暂定**，依据入库时的来源源码；`ground_truth.html` 完成后按 GT 的驱动方式重新判定，必要时用 `registry.py retier` 改名）。
 - 特色：交织五环、前后交替
@@ -34,3 +34,17 @@
 - **套扣的做法**：五个整环之外，另有五个同尺寸、只有一条边框着色的“半透明环”（`overlap1`–`overlap5`）叠在对应整环上，用 `z-index` 把该环的一段四分之一弧提到相邻环之上，从而在每对相交环的两个交点上形成一上一下。
 - **固定像素尺寸**：外框宽 735px、上边距 100px，不随视口缩放；视口窄于约 735px 时页面横向溢出（来源相同）。GT 未修。
 - **外部资源**：GT 不加载任何外部资源。
+
+## GT 自检
+
+见 [review_20261124/static_check.md](review_20261124/static_check.md)。经 raw.githack.com 在云端浏览器打开 GT，在 1280 和 500 宽截图，并放大核对了八个交点，截图未入库；本地可运行 `review_20261124/shot_gt.py` 重新得到截图和测量。
+
+## 档位复核
+
+GT 无任何动态：无动画、无过渡、无悬停或点击效果。按难度模型 v2.1 仍为 **T1**，与目录名一致，不需要 retier。
+
+## input
+
+[input.json](input.json) 由 GT 写出，问题与取舍见 [input_problem.md](input_problem.md)。外观已按截图核对。阶段 `input_draft`：等用户审核 GT 与 input，规则草稿和 `generation_prompt.txt` 尚未写。
+
+注意：入库评语认为本案复杂度明显低于参考案例，是否保留待用户定（见 input_problem.md 第 3 节）。

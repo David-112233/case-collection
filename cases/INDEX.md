@@ -2,7 +2,7 @@
 
 由 `data_intake/tools/registry.py render-index` 生成，**不要手写**。状态来源是 [registry.csv](registry.csv)。
 
-阶段分布：admitted 14，gt_ready 5，input_draft 8
+阶段分布：admitted 14，gt_ready 4，input_draft 9
 
 | 案例 | 档位 | 来源 | 特色 | 阶段 | 处理者 | 更新 | 用户审核 | 备注 |
 |---|---|---|---|---|---|---|---|---|
@@ -22,7 +22,7 @@
 | [case-241-T1](case-241-T1/) | T1 | [meylon__qByaYVp](https://codepen.io/meylon/pen/qByaYVp) | 圆环凹面、错落连线 | admitted | duet | 2026-11-24 | pending |  |
 | [case-242-T2](case-242-T2/) | T2 | [zenete__BaMbmqW](https://codepen.io/zenete/pen/BaMbmqW) | 房间吊顶、扇叶遮叠 | admitted | duet | 2026-11-24 | pending |  |
 | [case-243-T3](case-243-T3/) | T3 | [alvaromontoro__zxvqodP](https://codepen.io/alvaromontoro/pen/zxvqodP) | 四工位办公室、隔板交错 | admitted | duet | 2026-11-24 | pending |  |
-| [case-244-T1](case-244-T1/) | T1 | [kevinleclair1__XJgQrr](https://codepen.io/kevinleclair1/pen/XJgQrr) | 交织五环、前后交替 | gt_ready | duet | 2026-11-24 | pending | GT 已完成（仅删 CodePen 样板），待渲染核对 |
+| [case-244-T1](case-244-T1/) | T1 | [kevinleclair1__XJgQrr](https://codepen.io/kevinleclair1/pen/XJgQrr) | 交织五环、前后交替 | input_draft | duet | 2026-11-24 | pending | 等用户审核 GT 与 input；外观已按 raw.githack 截图核对；难度偏低，是否保留待定 |
 | [case-245-T2](case-245-T2/) | T2 | [HunorMarton__BazeOpE](https://codepen.io/HunorMarton/pen/BazeOpE) | 埃舍尔方块、桥面穿插 | admitted | duet | 2026-11-24 | pending |  |
 | [case-246-T1](case-246-T1/) | T1 | [ehckk__WNzGYKy](https://codepen.io/ehckk/pen/WNzGYKy) | 彩虹书架、书脊深度 | admitted | duet | 2026-11-24 | pending |  |
 | [case-247-T3](case-247-T3/) | T3 | [jh3y__XWdQBRx](https://codepen.io/jh3y/pen/XWdQBRx) | 立体工作室、室内遮挡 | admitted | duet | 2026-11-24 | pending |  |
