@@ -16,6 +16,8 @@
 | `classification.json` | 档位与入库依据 |
 | `ground_truth.html` | 准静态参考页（见下文“GT 相对来源的改动”） |
 | `review_20261124/` | GT 自检：来源差异、静态检查与渲染核对记录、本地测量脚本 |
+| `input.json` | 由 GT 写出的题目草稿，等用户审核 |
+| `input_problem.md` | input 的核对结果、取舍与待定问题 |
 
 下一步由 duet 按顺序做（见 [cases/README.md](../README.md)）：① 以 `source.html` 为基础改造 `ground_truth.html`（尽量尊重源码，改成准静态、无动画、只保留简单交互）并自检；② 由 GT 写出 `input.json`；③ 停下，等用户审核 GT 与 input；④ 用户通过后才写 `rules_drafts/manual_v1/`。
 
@@ -33,6 +35,11 @@
 
 - **静止状态：** 吊扇固定在动画起点，即各元素的基础样式：转子 `rotate(0)`，三片扇叶按源码的 20°、120°、240° 均匀分布，亮度为原色（`rlight` 只在 50% 帧把亮度降到一半，起点和终点都是原色）。删掉动画后不用另写任何数值，最尊重源码。
 - **保留的交互：** 无（来源没有悬停、点击等交互）。
-- **外部资源：** 作者引用的 `codepen.io/zenete/pen/eYLjgaq.css` 与 `.js`（作者另一个作品的样式和脚本）保留；能否加载、起什么作用见渲染核对。
+- **外部资源：** 作者引用的 `codepen.io/zenete/pen/eYLjgaq.css` 与 `.js`（作者另一个作品的样式和脚本）保留；本环境代理拒绝 codepen.io，读不到内容，云端浏览器里是否加载也未能核实。
 - **档位复核：** 去掉吊扇动画后，GT 没有任何动态和交互，按难度模型 v2.1 为 T1，由暂定 T2 改为 T1（`registry.py retier`）。
 - **作品价值：** 来源的唯一动态就是吊扇旋转，它是装饰性的；作品的空间价值在房间透视、窗洞与吊顶凹槽、吊扇多层圆盘与扇叶的遮叠，静止后都还在，所以照常改造，没有停下。
+- **自检：** 静态检查通过。**云端浏览器渲染出大块白色缺口**（后墙、地板、天花板前端），不符合 CSS 几何，可能是无 GPU 渲染问题或外部 CSS 未加载，待本地用 `review_20261124/gt_check.py` 复核；详见 [review_20261124/static_check.md](review_20261124/static_check.md) 与 [input_problem.md](input_problem.md) 第 1 节。
+
+## input 草稿（2026-11-24，duet）
+
+[input.json](input.json) 由 GT 写出，按源码几何描述完整房间，等用户审核 GT 与 input。渲染缺口问题和写与不写的取舍见 [input_problem.md](input_problem.md)。
