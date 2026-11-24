@@ -36,3 +36,7 @@
 ## input 草稿（2026-11-24，duet）
 
 [input.json](input.json) 由 GT 写出，等用户审核 GT 与 input。外观描述中按源码推断、尚未经渲染核对的部分，以及写与不写的取舍，见 [input_problem.md](input_problem.md)。
+
+## 规则草稿（2026-11-24，duet）
+
+[rules_drafts/manual_v1/](rules_drafts/manual_v1/review.md)：按用户修改后的 input 写成，12 条 Requirement、47 条 Evidence，`check_rules.py` 通过，待用户审核。台账阶段仍为 `input_draft`（`input_approved` 只能由用户设置）。
