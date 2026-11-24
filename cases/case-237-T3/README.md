@@ -2,7 +2,7 @@
 
 来源：<https://codepen.io/dustindwayne/pen/bGyYoar>（作者 dustindwayne，CodePen 公开作品，默认 MIT 许可）
 
-当前阶段：`gt_ready`（入库于 2026-11-24），归属 duet。阶段以 [registry.csv](../registry.csv) 为准。
+当前阶段：`input_draft`（入库于 2026-11-24），归属 duet。阶段以 [registry.csv](../registry.csv) 为准。
 
 - 审核编号：C014；档位：T3（**暂定**，依据入库时的来源源码；`ground_truth.html` 完成后按 GT 的驱动方式重新判定，必要时用 `registry.py retier` 改名）。
 - 特色：唱片机、正面浮雕
@@ -35,4 +35,8 @@
 - **保留的外部资源：** Google Fonts 的 Bungee、Teko，normalize.css，Tone.js 15.1.2（cdnjs）。
 - **作品价值说明：** 来源播放时唱片持续旋转、唱臂缓慢扫过，这部分动画按准静态要求去掉了；保留的是唱机正面的浮雕细节和点击开关的状态切换。
 - **档位复核：** GT 有“点击电源键进入并保持播放状态，同时改变唱臂、指示灯和提示文字”的点击保持状态，按难度模型 v2.1 为 T3，与入库暂定一致，不改名。
-- **自检：** 见 [review_20261124/static_check.md](review_20261124/static_check.md)。
+- **自检：** 默认状态和音量刻度已用云端浏览器经 raw.githack.com 截图核对；电源键点击在云端浏览器里点不到，播放状态按源码推算，待本地运行 `review_20261124/gt_check.py`。见 [review_20261124/static_check.md](review_20261124/static_check.md)。
+
+## input 草稿（2026-11-24，duet）
+
+[input.json](input.json) 由 GT 写出，等用户审核 GT 与 input。写与不写的取舍和待定问题见 [input_problem.md](input_problem.md)。
