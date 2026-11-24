@@ -32,4 +32,4 @@
 | [case-251-T1](case-251-T1/) | T1 | [thebabydino__eQvWLB](https://codepen.io/thebabydino/pen/eQvWLB) | 彩色折纸条、交替折角 | admitted | duet | 2026-11-24 | pending |  |
 | [case-252-T1](case-252-T1/) | T1 | [thebabydino__pBmMaJ](https://codepen.io/thebabydino/pen/pBmMaJ) | 斜切编号条、圆标压层 | input_draft | duet | 2026-11-24 | pending | 等用户审核 GT 与 input；云端浏览器 1280/500 渲染核对通过；档位复核仍为 T1；窄屏版式是否写入 input 待定 |
 | [case-253-T2](case-253-T2/) | T2 | [ykadosh__bGKgxbe](https://codepen.io/ykadosh/pen/bGKgxbe) | 机械键盘、错排立体键帽 | input_draft | duet | 2026-11-24 | pending | 等用户审核 GT 与 input；云端浏览器渲染核对通过（按住状态用预览页核对）；档位复核仍为 T2（键盘按键只改键帽自身），待用户确认；音效未写入 input |
-| [case-254-T2](case-254-T2/) | T2 | [agathaco__JaGQPr](https://codepen.io/agathaco/pen/JaGQPr) | 夜景灯塔、光束与远山 | gt_ready | duet | 2026-11-24 | pending |  |
+| [case-254-T1](case-254-T1/) | T1 | [agathaco__JaGQPr](https://codepen.io/agathaco/pen/JaGQPr) | 夜景灯塔、光束与远山 | gt_ready | duet | 2026-11-24 | pending | 档位由 T2 改为 T1（按 GT 重新判定） |
