@@ -16,7 +16,7 @@ case-241-T1,meylon__qByaYVp,T1,duet,admitted,2026-11-24,,pending
 case-242-T2,zenete__BaMbmqW,T2,duet,admitted,2026-11-24,,pending
 case-243-T3,alvaromontoro__zxvqodP,T3,duet,admitted,2026-11-24,,pending
 case-244-T1,kevinleclair1__XJgQrr,T1,duet,input_draft,2026-11-24,等用户审核 GT 与 input；外观已按 raw.githack 截图核对；难度偏低，是否保留待定,pending
-case-245-T2,HunorMarton__BazeOpE,T2,duet,admitted,2026-11-24,,pending
+case-245-T2,HunorMarton__BazeOpE,T2,duet,gt_ready,2026-11-24,GT 已完成：去掉入场缩放动画和 YouTube 推广徽标，待渲染核对与档位复核,pending
 case-246-T1,ehckk__WNzGYKy,T1,duet,admitted,2026-11-24,,pending
 case-247-T3,jh3y__XWdQBRx,T3,duet,admitted,2026-11-24,,pending
 case-248-T1,lynnandtonic__PoZpjOr,T1,duet,gt_ready,2026-11-24,GT 只删 CodePen 样板；待云端浏览器渲染核对,pending
