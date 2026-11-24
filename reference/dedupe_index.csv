@@ -1,0 +1,228 @@
+case_id,tier,source_key,source_url,title,summary
+case-001-T2,T2,,,,我们需要开发一个仿 Facebook 风格的用户认证静态原型页面。该页面面向社交网络产品的前端开发练习场景，需要同时呈现登录入口和新用户注册入口，两个功能区域在同一页面内共存。
+case-002-T2,T2,,,,我们需要开发一款通用 SaaS 产品的营销落地页静态原型。页面面向潜在用户，需要呈现品牌导航、产品核心价值主张、功能介绍、定价套餐以及页脚信息，帮助用户快速了解产品并引导注册行为。页面仅作为静态 HTML/CSS 原型，不涉及任何后端逻辑或
+case-003-T1,T1,,,,我们需要开发一款后台管理系统的数据看板静态原型页面。页面面向内部运营人员，需要呈现顶部导航栏、左侧功能菜单，以及主内容区的数据指标卡片、图表占位卡片和数据表格。页面仅作为静态 HTML/CSS 原型，不涉及任何 JavaScript 交互逻
+case-004-T2,T2,,,,我们需要开发一个仿 Amazon 风格的电商平台首页静态原型。页面面向前端练习场景，需要呈现电商网站的标准结构：顶部主导航栏、二级分类面板、Hero 横幅区、以及商品分类展示区。
+case-005-T2,T2,,,,我们需要开发一个简洁风格的用户登录页静态原型。页面为单屏设计，背景使用纯色占位。页面仅作为静态 HTML/CSS 原型，不涉及任何后端交互逻辑。
+case-006-T2,T2,,,,我们需要开发一个深色主题的简约登录卡片静态原型。页面为单屏设计，深色背景上展示一张登录卡片，卡片整体风格简洁，使用图标点缀输入框区域。页面仅作为静态 HTML/CSS 原型，不涉及任何后端交互逻辑。
+case-007-T2,T2,,,,用户注册页面，用于新用户创建账号。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-008-T2,T2,,,,用户注册页面，提供邮箱和密码注册功能。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-009-T2,T2,,,,个人主页与作品集页面，展示个人简介、提供的服务、课程、书籍、社区信任度以及联系方式。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-010-T2,T2,,,,个人网站的隐私政策页面，用于向用户展示数据收集、使用和保护的相关条款。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-011-T2,T2,,,,个人或团队的作品集展示页面，用于展示项目案例列表。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-012-T2,T2,,,,我们需要开发一个个人作品集（Portfolio）静态原型页面。页面用于设计师/开发者展示个人形象、技能、作品和联系方式，整体风格清新活泼。页面仅涉及前端，不涉及任何后端交互逻辑。
+case-013-T2,T2,,,,这是一个数字代理机构（Agency）的官方网站页面，用于展示公司服务、项目经验和作品集。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-014-T2,T2,,,,加密货币或科技类博客页面，用于展示文章列表、项目导航及订阅信息。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-015-T2,T2,,,,这是一个开发者个人简介页面，用于展示个人基本信息和社交媒体链接。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-016-T1,T1,,,,我们需要开发一个名为 Orion 的社交/内容产品的欢迎入口页面。该页面是用户进入产品的第一屏，主要功能是引导新用户通过多种方式注册账号，或让已有用户跳转到登录入口。页面仅作为静态 HTML/CSS 原型，不涉及任何后端交互逻辑。
+case-017-T1,T1,,,,我们需要开发名为 Orion 的社交/内容产品的用户登录页面。该页面承接欢迎页中“已有账号登录”的入口，允许用户使用邮箱密码登录，或选择使用第三方账号(Facebook、Google)继续登录。页面仅作为静态 HTML/CSS 原型，不涉及
+case-018-T1,T1,,,,我们需要开发一个名为 Orion 的社交/内容产品的欢迎入口页面。该页面是用户进入产品的第一屏，主要功能是引导新用户通过多种方式注册账号，或让已有用户跳转到登录入口。页面仅作为静态 HTML/CSS 原型，不涉及任何后端交互逻辑。
+case-019-T2,T2,,,,用户登录页面，提供邮箱和密码输入功能。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-020-T2,T2,,,,用户注册页面，用于新用户填写基本信息创建账号。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-021-T5,T5,,,,制作一个用于产品发布或技术展示的单页滚动叙事页面，把一段较长的滚动过程组织成连续的视觉故事。
+case-022-T6,T6,mobalti__WNBZJdG,https://codepen.io/mobalti/pen/WNBZJdG,Dynamic Content Lockups V2 - Open Props,这是一个面向游戏玩家的奇幻战斗主题宣传落地页，用于展示角色成长、战斗技能与英雄冒险内容。
+case-023-T5,T5,hexagoncircle__MWMKPZJ,https://codepen.io/hexagoncircle/pen/MWMKPZJ,Horizontal scroller with scroll-driven animation + scroll snap,用于展示连续编号内容的可滚动卡片浏览演示页面，适合作为滚动交互与视觉动效的静态 HTML/CSS 原型，不涉及后端逻辑。
+case-024-T6,T6,mobalti__poYmvqj,https://codepen.io/mobalti/pen/poYmvqj,Open Props - Recommendation Carousel (Scroll-Driven Animations),这是一个社交平台的用户推荐轮播组件，用于向当前用户展示可能感兴趣的个人账号；仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-025-T5,T5,yel_un__xbxYEXB,https://codepen.io/yel_un/pen/xbxYEXB,Scroll driven animation - horizontal scroll,这是一个以万圣节夜景为主题的 CSS 滚动驱动动画演示页面，用于展示连续滚动浏览的图片幻灯片效果；仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-026-T5,T5,aybukeceylan__yLdQXmP,https://codepen.io/aybukeceylan/pen/yLdQXmP,Scroll-driven Animations (works on Chrome),用于展示滚动驱动视觉效果的风景主题卡片画廊原型，帮助用户浏览多组自然景观内容并观察页面滚动反馈。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-027-T5,T5,mobalti__xxopyQO,https://codepen.io/mobalti/pen/xxopyQO,Sticky Slider CTA Cards with Scroll-Driven Animations & Container Queries – Open Props,用于展示 Open Props 的 AI 信息搜索与图像创作能力的产品宣传模块：用三张 CTA 卡片介绍能力，引导用户尝试功能或学习使用技巧。
+case-028-T6,T6,yel_un__PwqBMeO,https://codepen.io/yel_un/pen/PwqBMeO,Stretchy text experiment,用于展示滚动驱动字体形变效果的单页视觉实验与 CSS 动效演示，仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-029-T6,T6,Sansheel-Mitha__JjQzrmo,https://codepen.io/Sansheel-Mitha/pen/JjQzrmo,Untitled,这是一个太阳能监控平台的宣传展示页，用于介绍平台的 AI 驱动洞察、精确数据和核心能力；仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-030-T6,T6,Sansheel-Mitha__NWZJaOY,https://codepen.io/Sansheel-Mitha/pen/NWZJaOY,Untitled,这是一个太阳能监测平台的产品宣传与介绍页面，用于展示 AI 驱动洞察、精准数据和平台能力。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-031-T5,T5,,,,制作一个用于展示「纯 CSS 滚动动画」效果的演示页面，可用于个人作品集或前端技术分享展示。仅作为静态原型，不涉及后端逻辑。
+case-032-T5,T5,,,,制作一个展示「滚动触发文字动画」的演示页面，用于个人作品集或前端动效技术分享。仅作为静态原型，不涉及后端逻辑。
+case-033-T6,T6,,,,为一个开源项目「css-skills」制作落地展示页。该项目是一套 Claude Code 技能，能识别设计风格并自动套用纯 CSS 特效。本页面用于演示其效果，仅作为静态原型，不涉及后端逻辑。
+case-034-T3,T3,,,,为某 SaaS 产品的帮助中心页面制作一个常见问题解答区块的静态原型，供用户快速查阅答案而无需跳转页面。本原型仅用于前端展示，不涉及任何后端逻辑。
+case-035-T3,T3,,,,为一家手工艺品电商的商品详情页制作静态原型，让用户点击商品缩略图后查看放大的预览图。本原型仅用于前端展示，不涉及后端逻辑与真实图片资源。
+case-036-T3,T3,,,,为一个在线社区的注册页面制作静态原型，希望在用户填写时即时提示每一项是否合规，减少用户提交后才发现出错的挫败感。本原型仅用于前端展示，不涉及真实注册与后端逻辑。
+case-037-T4,T4,,,,开发一个供内容型网站使用的横向卡片轮播展示区原型，仅用于前端视觉展示，不包含任何后端数据交互。
+case-038-T4,T4,,,,开发一个用于展示团队成员或设计师简介的横向滑动卡片组件原型，用于前端静态视觉验证，不涉及实际的数据绑定。
+case-039-T5,T5,,,,这是一个用横向滚动讲故事的趣味展示页面：一只猫拖着彩虹穿越太空，营造轻松、怀旧的浏览体验。
+case-040-T5,T5,,,,开发一个用于展示 CSS 滚动驱动动效能力的技术演示页面，仅作为静态原型，不涉及后端逻辑。
+case-041-T5,T5,,,,开发一个纯 CSS 多层视差滚动效果的技术演示页面，用于展示滚动驱动的空间纵深感，仅作为静态原型，不涉及后端逻辑。
+case-042-T5,T5,,,,一个用于展示 CSS 滚动联动精灵帧动画效果的单页演示原型，适合作为前端动效技术展示页面，仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-043-T1,T1,,,,一个代理机构官网的静态宣传落地页，用于展示服务介绍、作品案例和客户评价，仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-044-T3,T3,,,,一个旅行社官网风格的营销落地页，用于展示品牌入口、轮播宣传内容和客户推荐，仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-045-T6,T6,necgjhqs-the-bold__019e1714-ac25-75e1-af24-fc88239d483b,https://codepen.io/necgjhqs-the-bold/pen/019e1714-ac25-75e1-af24-fc88239d483b,[100% Pure CSS] Dice,用于展示滚动解码与骰子状态可视化的实验型前端原型，仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-046-T6,T6,fyildiz1974__azZWxGj,https://codepen.io/fyildiz1974/pen/azZWxGj,Corner-Shape Gallery: 4 Scroll-Driven Variations (Responsive + Fallbacks),用于展示现代 CSS 形状与视觉效果的互动艺术画廊，通过四个变体演示不同的圆角形态、渐变、边框、玻璃和阴影风格。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-047-T5,T5,kirkegaard__azBBwKL,https://codepen.io/kirkegaard/pen/azBBwKL,CSS Scroll-Driven Word-by-Word Reveal,用于文学短句的沉浸式滚动阅读与文字渐进展示场景，仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-048-T6,T6,emilio-dominguez__PwzVoBz,https://codepen.io/emilio-dominguez/pen/PwzVoBz,Scroll-Driven CSS Animations [No JS] - animation-timeline,这是一个面向前端开发者的 CSS 滚动驱动动画技术展示单页，用于演示滚动进度、视口进入效果、可插值自定义值和混合文字视觉。
+case-049-T6,T6,emilio-dominguez__ByzMoZK,https://codepen.io/emilio-dominguez/pen/ByzMoZK,The Tale of the Three Brothers,这是一个以《The Tale of the Three Brothers》为主题的沉浸式童话阅读页面，用连续场景讲述三兄弟与死亡相遇、获得三件魔法物品并走向各自命运的故事。
+case-050-T6,T6,necgjhqs-the-bold__019f5b71-8f8c-7589-9b40-5d635e9c4d07,https://codepen.io/necgjhqs-the-bold/pen/019f5b71-8f8c-7589-9b40-5d635e9c4d07,The Unspoken Archive - Pure CSS Interactive Folders,一个展示未解决超自然事件档案的悬疑主题档案页面。
+case-051-T6,T6,bramus__zYMoNvg,https://codepen.io/bramus/pen/zYMoNvg,(Ab)using Scroll-Driven Animations to fake Scroll-Snapping :snapped,这是一个用于展示滚动吸附与滚动驱动视觉状态的前端技术演示页面，仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-052-T5,T5,giancarlosgza__MWzxgXV,https://codepen.io/giancarlosgza/pen/MWzxgXV,CSS Scroll Driven Animations,这是一个用于展示 CSS 纯滚动驱动动画概念的前端技术演示页面，帮助访客了解图片揭示效果与淡入效果。页面仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-053-T6,T6,hexagoncircle__wvOPmGO,https://codepen.io/hexagoncircle/pen/wvOPmGO,CSS scroll-triggered animations with style queries,这是一个以歌词式短句和表情符号营造滚动惊喜效果的实验性视觉展示页，适合用于展示 CSS 动效与滚动阅读体验；仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-054-T5,T5,hexagoncircle__PoxMPzM,https://codepen.io/hexagoncircle/pen/PoxMPzM,Photo figures — Scroll-driven animations,这是一个以夏日海滩为主题的长篇图文游记式杂志文章页面，用于展示旅行故事、海滩活动照片和配文，仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-055-T5,T5,brian-pob__ZEPVjgL,https://codepen.io/brian-pob/pen/ZEPVjgL,Scroll animation test,用于展示滚动驱动文字视觉效果的极简网页演示，仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-056-T5,T5,hexagoncircle__OJrJZqR,https://codepen.io/hexagoncircle/pen/OJrJZqR,Weather app prototype — Scroll-driven animations,这是一个面向移动端天气查看场景的天气应用原型，展示 Fresh Coast 的当前天气、小时预报、未来十天天气、空气质量、降水和其他天气指标。
+case-057-T5,T5,argyleink__ZEdrzJZ,https://codepen.io/argyleink/pen/ZEdrzJZ,3D spacial scroll zoom with CSS Scroll Animation,这是一个用于展示现代 CSS 特性和语法概念的实验性技术词条展示页面，仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-058-T2,T2,jh3y__poOvyor,https://codepen.io/jh3y/pen/poOvyor,Animating the Gallery,一个用于展示抽象艺术作品的实验性动态画廊页面，仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-059-T6,T6,argyleink__BaGVyyJ,https://codepen.io/argyleink/pen/BaGVyyJ,CSS scroll themes in oklch,这是一个用于 LGBTQ+ 骄傲月公益倡导与慈善信息展示的长页面，仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-060-T1,T1,jh3y__BaOyjgj,https://codepen.io/jh3y/pen/BaOyjgj,Grid Collage Layout,用于展示抽象视觉素材的网格拼贴画廊，作为单文件静态 HTML/CSS 原型，不涉及后端逻辑。
+case-061-T5,T5,argyleink__ExOzEMJ,https://codepen.io/argyleink/pen/ExOzEMJ,GUI Snippet - Scroll Drive All The Things,这是一个用于学习、检索和展示 HTML 元素名称的静态参考目录，将常用、媒体、表格、表单、交互以及已废弃元素统一收录为可滚动浏览的视觉原型。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-062-T6,T6,argyleink__vYQQEmo,https://codepen.io/argyleink/pen/vYQQEmo,"Hue Cards (subgrid, oklch, view-timeline, @property)",一个横向分页浏览、配色随滚动变换色相的内容卡片展示页。
+case-063-T5,T5,argyleink__VwNMLQN,https://codepen.io/argyleink/pen/VwNMLQN,IO - Scroll Drive All The Things,这是一个供前端开发者浏览和识别标准及历史网页标记词汇的滚动展示原型，仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-064-T5,T5,argyleink__OPyKEOy,https://codepen.io/argyleink/pen/OPyKEOy,Masonry danglies,一个展示滚动驱动卡片动效与瀑布流内容集合的视觉实验页面，页面主题为“Masonry danglies”。
+case-065-T5,T5,argyleink__KKrGNEO,https://codepen.io/argyleink/pen/KKrGNEO,Minimal fade in nav with CSS scroll driven animations,这是一个用于展示滚动阅读内容的极简信息页面，通过导航标题帮助用户识别当前阅读场景。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-066-T6,T6,argyleink__vYbpNVm,https://codepen.io/argyleink/pen/vYbpNVm,range input fill (using scroll-driven animations),这是一个用于展示范围滑块动态填充能力的交互式 CSS 原型页面，适合用于浏览器特性演示或前端动效实验；仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-067-T6,T6,argyleink__xbEbRBz,https://codepen.io/argyleink/pen/xbEbRBz,Scroll Driven Atomic Gyro,一个用于展示原子结构与宇宙轨道运动概念的沉浸式滚动视觉实验页面，仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-068-T5,T5,jh3y__VwBgPxP,https://codepen.io/jh3y/pen/VwBgPxP,Scroll driven gallery 👀,一个用于展示抽象艺术缩略图的滚动驱动图片画廊原型，仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-069-T6,T6,argyleink__yyayVZb,https://codepen.io/argyleink/pen/yyayVZb,Scroll Driven Orbital System,用于展示滚动驱动天体运行效果的创意交互演示页面，适合作为网页动效实验或前端视觉技术展示。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-070-T6,T6,argyleink__poGqgNz,https://codepen.io/argyleink/pen/poGqgNz,scroll driven parallax carousel,这是一个用于展示植物与抽象艺术主题作品的沉浸式图片画廊原型，强调浏览作品时的视差观感。
+case-071-T6,T6,argyleink__EagaZbG,https://codepen.io/argyleink/pen/EagaZbG,Scroll Driven Square Gyro,这是一个以滚动驱动的太空/陀螺仪为主题的创意展示页面，用于演示纯 CSS 的三维旋转变换与滚动联动效果。页面作为视觉原型展示，仅包含静态 HTML/CSS，不涉及后端逻辑。
+case-072-T6,T6,argyleink__gbwbzpR,https://codepen.io/argyleink/pen/gbwbzpR,Scroll Driven Tri-Gyro,该页面是一个展示滚动驱动三维陀螺仪动画的创意视觉原型，模拟太空场景中的太阳、行星和旋转环，用于展示 CSS 滚动驱动动画能力。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-073-T5,T5,argyleink__wBMvNaN,https://codepen.io/argyleink/pen/wBMvNaN,Scroll to bloom,一个用于展示插画卡片流的灵感画廊页面，强调滚动浏览时的内容呈现节奏。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-074-T5,T5,argyleink__RwvOmvY,https://codepen.io/argyleink/pen/RwvOmvY,Scrolling scaling product images with CSS scroll driven animation view(),这是一个用于展示节日插画商品或角色形象的产品画廊示例页面，适合礼品、插画周边或节日主题商品展示场景。页面仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-075-T5,T5,argyleink__LYqvedp,https://codepen.io/argyleink/pen/LYqvedp,Scrolling scaling product images with CSS scroll driven animation,一个用于展示节日插画商品或角色卡片的画廊页面，包含多张作品预览和署名说明。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-076-T5,T5,argyleink__gOyoBLj,https://codepen.io/argyleink/pen/gOyoBLj,Scrollytelling - CSS scroll driven animations,一个介绍 CSS 滚动驱动动画的产品展示页，用滚动叙事演示滚动联动的视觉效果。
+case-077-T5,T5,argyleink__zxNaGVK,https://codepen.io/argyleink/pen/zxNaGVK,sticky nav adopt an inline title,一个展示滚动驱动导航标题变化效果的产品宣传页面，用于演示滚动时导航栏标题与内容标题之间的联动；仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-078-T5,T5,Sidstumple__KwPepLa,https://codepen.io/Sidstumple/pen/KwPepLa,Appear scroll-driven animations - CSS only,一个面向滚动演示的单页作品集/案例展示页面，用来展示多段人物插画与文案的出现式滚动动画效果，作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-079-T6,T6,utilitybend__bGjQqXg,https://codepen.io/utilitybend/pen/bGjQqXg,Chicky Scroll - scroll-driven-animation with CSS,一个以小鸡成长与奔跑为主题的滚动演示页，用于展示滚动过程中的连续动画效果，整体仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-080-T5,T5,andrewrock__NWoRavN,https://codepen.io/andrewrock/pen/NWoRavN,CSS scroll animations exploration,这是一个以美国 1960 年代政治与社会议题为主题的沉浸式叙事长页原型，结合历史语句、年份标识与图文卡片做滚动式内容展示，可用于专题报道、数字展览或编辑型故事页面。
+case-081-T6,T6,Maseone__WbbGxeO,https://codepen.io/Maseone/pen/WbbGxeO,CSS Sprite-Based Flip Carousel Using Scroll-Timeline,一个用横向滚动来翻阅的翻页书演示页面。
+case-082-T6,T6,rpsthecoder__LYvoojP,https://codepen.io/rpsthecoder/pen/LYvoojP,Extending CSS view() V2,一个用于展示滚动阅读进度的网页示例，帮助用户在浏览长内容时直观看到当前查看到的章节位置，仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-083-T6,T6,argyleink__vYQQEmo,https://codepen.io/argyleink/pen/vYQQEmo,"Hue Cards (subgrid, oklch, view-timeline, @property)",一个横向分页浏览的卡片展示型营销页面，用于展示多组内容卡片和分页导航，作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-084-T5,T5,thebabydino__GRYbVoe,https://codepen.io/thebabydino/pen/GRYbVoe,Jupiter in 3D with CSS trigonometry,一个以木星为主题的 3D 纪念展示页面，用于呈现带有致敬文案的沉浸式视觉原型，仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-085-T6,T6,thebabydino__KKLWBJZ,https://codepen.io/thebabydino/pen/KKLWBJZ,No JS char by char on scroll reveal effects,一个用于展示“滚动时逐字符显现”效果的纯前端演示页，面向网页动效与 CSS 视觉实验展示场景，仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-086-T5,T5,hexagoncircle__PoxMPzM,https://codepen.io/hexagoncircle/pen/PoxMPzM,Photo figures — Scroll-driven animations,一个以海滩夏日回忆为主题的图文故事展示页，用于呈现旅行相册、随笔段落与照片说明。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-087-T6,T6,Sidstumple__ogvqoZg,https://codepen.io/Sidstumple/pen/ogvqoZg,Progress bar two ways,这是一个文章阅读页原型，用于展示长文内容阅读进度，并对比两种基于滚动的阅读进度呈现方式。页面包含导航、正文、作者信息、相关文章和页脚，仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-088-T5,T5,thebabydino__MWPeLmp,https://codepen.io/thebabydino/pen/MWPeLmp,Pure CSS char by char on scroll reveal,一个纯 CSS 的长页面浏览器兼容演示，用于展示滚动过程中逐字揭示文案的效果，作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-089-T6,T6,thebabydino__rNqPGMM,https://codepen.io/thebabydino/pen/rNqPGMM,Pure CSS diagonal scroll reveal,一个基于滚动浏览的动物图鉴展示页，用于演示多屏卡片随滚动逐步揭示的纯 CSS 原型，不涉及后端逻辑。
+case-090-T6,T6,thebabydino__YzJPRvd,https://codepen.io/thebabydino/pen/YzJPRvd,Pure CSS header slide effect on scroll,这是一个用于展示品牌主视觉文案的沉浸式宣传页原型，强调滚动过程中的标题视觉变化，并包含浏览器能力提示说明。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-091-T6,T6,thebabydino__abgOxaW,https://codepen.io/thebabydino/pen/abgOxaW,"Pure CSS simple parallax on scroll (responsive, accessible)",一个展示城市街景摄影作品的纯前端灵感画廊页面，用于演示滚动驱动的图片呈现效果、悬停时的图片署名展示以及兼容性提示信息。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-092-T6,T6,thebabydino__jENzprY,https://codepen.io/thebabydino/pen/jENzprY,Pure CSS tilt & zoom grid on scroll (Chrome + Firefox with flag),一个以自然风景和署名展示滚动倾斜与缩放效果的纯 HTML/CSS 图片画廊落地页。
+case-093-T6,T6,thebabydino__WNqJXXa,https://codepen.io/thebabydino/pen/WNqJXXa,"Pure CSS vertical scroll, horizontal slide",一个用于展示纯 CSS 滚动驱动画廊效果的实验性落地页，场景是通过滚动浏览一组风景图片并提示浏览器兼容性信息。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-094-T5,T5,utilitybend__xxJBmRV,https://codepen.io/utilitybend/pen/xxJBmRV,Revealing a scroll to top with scroll timeline,这是一个长内容阅读页中的“返回页面起点”交互原型，用于展示在文章或说明文档场景里，用户滚动较深后可快速回到开头的辅助入口。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-095-T6,T6,utilitybend__dyQmQYy,https://codepen.io/utilitybend/pen/dyQmQYy,Scroll driven animation timeline,一个用于展示数据存储硬件发展历史的滚动叙事型时间线页面，适合科技科普、数字博物馆或产品历史专题落地页。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-096-T6,T6,bramus__OJrxBaL,https://codepen.io/bramus/pen/OJrxBaL,Scroll-Driven Animations Scroll Detection: BADASS,一个用于展示 CSS 滚动驱动动画效果的创意视觉实验页面，场景类似品牌概念展示或前端动效演示页。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-097-T5,T5,meltingopera__QWPgxoQ,https://codepen.io/meltingopera/pen/QWPgxoQ,Scroll Driven CSS Animation: Header Animation,一个用于展示创意文案与长篇阅读内容的品牌宣传落地页原型，强调首屏视觉横幅与阅读过程中的动态沉浸感。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-098-T6,T6,Sidstumple__LEPrYwV,https://codepen.io/Sidstumple/pen/LEPrYwV,Scroll-driven marquees (CSS only),一个用于展示多种跑马灯标题动画效果的创意排版演示页面，可用于品牌视觉实验、交互动效概念展示或前端动效案例集。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-099-T6,T6,amit_sheen__ZENNgMw,https://codepen.io/amit_sheen/pen/ZENNgMw,scroll-driven maze (CPC - pure CSS),纯 CSS 迷宫互动效果的创意小游戏原型，用于前端实验和交互展示，不涉及后端逻辑。
+case-100-T5,T5,stoumann__wvbXyvx,https://codepen.io/stoumann/pen/wvbXyvx,Scroll-Driven,一个用于展示 scroll-driven 动画效果集合的前端演示页面，面向开发者或设计系统场景，用来陈列多种图片进入视口时的纯样式动效示例。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-101-T6,T6,leemeyer__XWvrMBr,https://codepen.io/leemeyer/pen/XWvrMBr,scroll linked 3D demo,这是一个用于展示复古游戏主机细节的交互式产品演示页面，通过滚动阅读提示语并同步观察一个可旋转的 3D 主机模型。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-102-T6,T6,thebabydino__qBQzPGY,https://codepen.io/thebabydino/pen/qBQzPGY,Scroll-triggered animation (Chrome 115+ only!),一个用于展示浏览器滚动联动视觉效果的实验性演示页面，适合动效原型或交互概念展示。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-103-T5,T5,Sidstumple__LEVwgyy,https://codepen.io/Sidstumple/pen/LEVwgyy,Scroll 'triggers' for Anne with sticky fallback,一个用于展示滚动驱动卡片出场效果的视觉实验页面，可用于动效原型、交互概念演示或前端动画能力展示。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-104-T5,T5,Sidstumple__GgoKmaJ,https://codepen.io/Sidstumple/pen/GgoKmaJ,Simple scroll driven animation example,一个用于展示滚动驱动视觉效果的简单内容演示页，适合用于交互动效示例或设计实验页。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-105-T6,T6,utilitybend__qEWbgMR,https://codepen.io/utilitybend/pen/qEWbgMR,Stylish holidays!,这是一个节日主题的创意展示页面，用一棵圣诞树、几个装饰球和节日文案组成海报式的祝福画面，仅作为静态 HTML/CSS 原型。
+case-106-T5,T5,hexagoncircle__OJrJZqR,https://codepen.io/hexagoncircle/pen/OJrJZqR,Weather app prototype — Scroll-driven animations,一个天气应用的移动端信息展示原型，用于呈现当前位置天气、预警、小时预报、10 日预报和空气质量等内容。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-107-T5,T5,argyleink__QwwdjJq,https://codepen.io/argyleink/pen/QwwdjJq,Zen Garden Leave,这是一个展示 CSS Zen Garden 内容的实验性宣传与资源页面，用于呈现项目介绍、参与说明、设计档案和相关资源导航。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-108-T6,T6,t_afif__ZEgjNxm,https://codepen.io/t_afif/pen/ZEgjNxm,Circular progress element using scroll-driven animation II,这是一个用于数据监控、指标展示或统计看板的进度可视化原型页面，用来展示多个不同取值范围的完成度。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-109-T5,T5,marianab__bGXdEoB,https://codepen.io/marianab/pen/bGXdEoB,CSS Family Guy with scroll-driven animations - scroll progress timeline and timeline-scope,制作“CSS FAMILY GUY”主题的滚动控制逐帧插画展示页。
+case-110-T5,T5,marianab__GRVgQxy,https://codepen.io/marianab/pen/GRVgQxy,Named Scroll Progress Timeline,一个用于展示罐装沙丁鱼产品口味的商品画廊原型，强调浏览不同口味包装时的滚动浏览体验。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-111-T5,T5,marianab__WNVbJyZ,https://codepen.io/marianab/pen/WNVbJyZ,Parallax effect with CSS Scroll driven animations - view(),这是一个为文化活动或演出制作的艺术海报型宣传落地页，主题围绕奇幻蘑菇、派对与售票信息展示。页面重点用于展示活动名称、时间、地点与购票入口，仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-112-T5,T5,marianab__JjgoOOp,https://codepen.io/marianab/pen/JjgoOOp,Scroll Driven Animations - timeline-scope,一个用于演示 CSS 滚动驱动动画能力的教学或技术展示页面，场景是通过滚动阅读说明文字来联动展示插画变化。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-113-T5,T5,marianab__mdNJKrO,https://codepen.io/marianab/pen/mdNJKrO,"target range inside @keyframes - view-timeline, timeline-range-name",一个用于展示 PORTO 沙丁鱼罐头系列包装视觉的产品陈列原型页，适合品牌展示或包装方案浏览场景。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-114-T5,T5,marianab__MWNYPbx,https://codepen.io/marianab/pen/MWNYPbx,"View-timeline, timeline-scope",这是一个将产品画廊与歌曲文字结合的滚动叙事展示页面，用于演示图片和对应文字随独立滚动区域同步变化的视觉效果；仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-115-T6,T6,propjockey__poWjxmW,https://codepen.io/propjockey/pen/poWjxmW,100% CSS Conway's Game of Life - 60 Generations @ 20x20,一个用于展示和体验 Conway's Game of Life 的交互式演示页面，包含规则说明、初始状态配置和代际演化展示。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-116-T3,T3,propjockey__mdBvjgg,https://codepen.io/propjockey/pen/mdBvjgg,100% CSS Etch-A-Sketch,这是一个仿经典 Etch-A-Sketch 的互动式创意演示页面，用于展示纯前端绘图玩具概念与视觉效果，仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-117-T3,T3,tarunpatel1998__GRajzvR,https://codepen.io/tarunpatel1998/pen/GRajzvR,45 CSS buttons,一个用于展示“45 CSS Only Modern Button Styles”的前端样式画廊页面，面向按钮样式灵感展示、组件预览或设计系统参考场景。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-118-T2,T2,propjockey__bGwdZmN,https://codepen.io/propjockey/pen/bGwdZmN,ALMAZ CORPORATION animated (on hover) logo from Daniel Deluxe's Almaz,这是一个科幻风品牌标识展示页，用于呈现“ALMAZ CORPORATION”的发光徽标与品牌识别效果。页面本质上是一个可悬停观看动效的品牌 Logo 原型，并带有一个外部宣传链接。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-119-T2,T2,tarunpatel1998__oNRzmeV,https://codepen.io/tarunpatel1998/pen/oNRzmeV,animated loading,这是一个用于产品加载、等待反馈或启动过渡场景的纯视觉加载页，仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-120-T1,T1,propjockey__LYOpmQM,https://codepen.io/propjockey/pen/LYOpmQM,augmented-ui consulting available in collaboration with you!,一张展示 augmented-ui 咨询合作服务的宣传卡片，向潜在客户介绍可提供的服务并邀请联系。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-121-T6,T6,thebabydino__jOBYqXY,https://codepen.io/thebabydino/pen/jOBYqXY,Breathe into me - pure CSS,一个用于展示纯视觉创意动效的 3D 抽象艺术原型页面，适合用作实验性着陆页背景、数字艺术展示页或前端动画效果样例。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-122-T2,T2,thejamespower__OVNYLL,https://codepen.io/thejamespower/pen/OVNYLL,Button Hover States,一个用于展示多种按钮悬停视觉方案的前端样式演示页，可作为设计系统、营销页组件库或交互风格参考案例。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-123-T2,T2,dazulu__WNNMXr,https://codepen.io/dazulu/pen/WNNMXr,Code Against Humanity,一个以桌游卡牌视觉为灵感的趣味单页展示，用于呈现一句黑色幽默文案对话。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-124-T2,T2,CreativeSalahu__qBGVxOg,https://codepen.io/CreativeSalahu/pen/qBGVxOg,Creative HTML Hero Section -- Digital Agency,这是一个数字创意机构或个人网页开发者的宣传型首屏，用于展示个人定位、服务简介、联系入口与可信度背书，并配合人物插画强化品牌形象。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-125-T3,T3,CreativeSalahu__gOJGKwL,https://codepen.io/CreativeSalahu/pen/gOJGKwL,Creative HTML Team Section | Style 1,这是一个用于企业官网、创意机构或数字服务团队展示成员信息的团队介绍版块，包含团队标题、成员卡片以及作者支持入口。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-126-T6,T6,propjockey__NWazORr,https://codepen.io/propjockey/pen/NWazORr,CSS Star Wars Binoculars Animation with augmented-ui (no js),这是一个科幻风格的单页视觉原型，用于展示“Star Wars 双筒望远镜/扫描仪界面”效果，强调电影 HUD 观察窗口、扫描读数和品牌署名氛围。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-127-T2,T2,propjockey__ZEXNjrd,https://codepen.io/propjockey/pen/ZEXNjrd,CSS Star Wars Scout Drone UI Animation,科幻侦察无人机的HUD概念页，展示扫描视窗与品牌视觉。
+case-128-T2,T2,vickimurley__QWJJOP,https://codepen.io/vickimurley/pen/QWJJOP,Drift Animation,一个用于展示 CSS 动画效果并附带电子书宣传入口的单屏演示页，仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-129-T2,T2,tarunpatel1998__wvbzymo,https://codepen.io/tarunpatel1998/pen/wvbzymo,login form,一个暗色风格的登录入口原型页，用于展示带装饰性动态边框的账号登录界面，并附带基础账号找回与注册入口。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-130-T3,T3,shakdaniel__raWBOb,https://codepen.io/shakdaniel/pen/raWBOb,Ninja Zoom Nav,一个极简风格的全屏导航菜单原型页面，用于展示品牌站点或创意作品集的入口导航。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-131-T6,T6,thebabydino__WNGPjLx,https://codepen.io/thebabydino/pen/WNGPjLx,Pure CSS 3D musical toy,一个用于纪念主题的纯前端艺术展示页，内容表现为可自动旋转的 3D 音乐玩具摆件，并配有纪念文案。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-132-T6,T6,thebabydino__GRjdEmb,https://codepen.io/thebabydino/pen/GRjdEmb,Pure CSS 3D shaded rotating golden ⭐ (make your own by changing vars on 1st line of Pug),一个用于展示纯视觉创意效果的单页 3D 金色星形原型页面，适合用作动效海报、实验性落地页封面或设计作品演示。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-133-T6,T6,thebabydino__OJRoapw,https://codepen.io/thebabydino/pen/OJRoapw,Pure CSS 3D wooden 🌙,一个用于创意视觉展示或节日装饰概念页的单屏艺术化原型，主题为木质材质的 3D 月亮摆件展示。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-134-T6,T6,thebabydino__LYWeOPP,https://codepen.io/thebabydino/pen/LYWeOPP,Pure CSS magic gateways with Houdini 🎩✨🐇,一个艺术化纪念主题展示页，以纯 HTML/CSS 呈现魔法传送门动态图形装置和纪念题字。
+case-135-T2,T2,thebabydino__qBaROMG,https://codepen.io/thebabydino/pen/qBaROMG,Pure CSS morphing polyhedra #2,一个用于展示几何多面体形态演化的概念性视觉页面，适合数学可视化、生成艺术作品集或前端动画实验展示。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-136-T2,T2,thebabydino__KKXYarP,https://codepen.io/thebabydino/pen/KKXYarP,Pure CSS morphing polyhedra: cube → rhombicuboctahedron → snub cube  → rhombicuboctahedron → octahedron,一个用于展示几何造型演变与纯视觉实验效果的 3D 动画插画页面，适合作为创意着陆页、数字艺术展示或前端动效实验案例。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-137-T2,T2,thebabydino__gOjGyby,https://codepen.io/thebabydino/pen/gOjGyby,Pure CSS morphing polyhedra: dodecahedron → rhombicosidodecahedron → snub dodecahedron  → rhombicosidodecahedron → icosahedron,这是一个用于展示几何体形变与三维视觉效果的实验性展示页，适合创意编码、数学可视化或纯 CSS 动画作品集场景。页面仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-138-T2,T2,thebabydino__YzGRQWW,https://codepen.io/thebabydino/pen/YzGRQWW,Pure CSS shaded prisms & pyramids,一个用于展示纯 CSS 3D 几何造型效果的视觉实验页面，场景包含旋转的棱柱与金字塔模型，仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-139-T2,T2,thebabydino__QWKpVEq,https://codepen.io/thebabydino/pen/QWKpVEq,Simplest CSS cube ever!,一个用于展示 CSS 3D 视觉效果的创意动效演示页，核心用途是呈现一个持续运动的彩色立方体。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-140-T2,T2,jonitrythall__dNJRRK,https://codepen.io/jonitrythall/pen/dNJRRK,Bounce Delay Loader,一个用于产品或网站加载过程中的等待提示动效页面，展示轻量级的加载指示器。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-141-T3,T3,elad2412__wvabjXy,https://codepen.io/elad2412/pen/wvabjXy,Coronavirus Invaders - CSS Pure Game (No JS!),一个以疫情主题为包装的浏览器小游戏落地页与游戏界面，包含主菜单、玩法说明、作者介绍、正式游戏区和结束画面，用于展示纯前端互动原型。
+case-142-T3,T3,nathantaylor__KaLvXw,https://codepen.io/nathantaylor/pen/KaLvXw,CSS/HTML Platform Game,一个以单页形式呈现的创意互动小游戏原型，主题是用纯前端视觉搭建的迷你平台闯关体验，包含多关卡推进、机关按钮与通关结果页。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-143-T3,T3,electerious__ZeammP,https://codepen.io/electerious/pen/ZeammP,Follow the Point (CSS only game),一个用于展示纯前端悬停追踪玩法的微型互动游戏原型，用户通过持续跟随一个移动的黑色圆点来观察完成度变化。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-144-T2,T2,lukasoe__MJVxpN,https://codepen.io/lukasoe/pen/MJVxpN,Gooey Loader,一个用于产品等待态或内容加载态展示的极简加载动画页面，仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-145-T3,T3,robstinson__RwRGMJm,https://codepen.io/robstinson/pen/RwRGMJm,Lo-fi Slack UI with Tailwind CSS,一个模仿团队协作聊天产品 Slack 的低保真工作台界面原型，用于展示工作区切换、频道导航、私信列表、消息时间线和消息输入区。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-146-T2,T2,robstinson__KKgdJPQ,https://codepen.io/robstinson/pen/KKgdJPQ,Lo-fi Subscription Checkout - with Tailwind CSS,这是一个 SaaS 或数字产品的订阅结账页面，用于收集付款方式并展示订阅费用摘要。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-147-T3,T3,robstinson__zYBGNQB,https://codepen.io/robstinson/pen/zYBGNQB,Lo-fi Tailwind CSS App/Dashboard/Admin Shell,一个用于后台管理系统或应用工作台的低保真 dashboard shell 原型，包含图标导航、二级导航、页面操作区和内容卡片区，并带有社交账号露出入口。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-148-T3,T3,robstinson__BaKOZry,https://codepen.io/robstinson/pen/BaKOZry,Lo-fi Tailwind CSS Calendar - Month View,一个日历产品的月视图页面，用于查看某个月的每日事件安排，并提供继续添加事件的入口。页面还包含一个品牌/社交署名入口。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-149-T2,T2,pawelqcm__dMqrqd,https://codepen.io/pawelqcm/pen/dMqrqd,Never-ending box,这是一个用于页面加载或处理中状态提示的极简动画加载器场景，仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-150-T2,T2,stacy__BmaLxW,https://codepen.io/stacy/pen/BmaLxW,Not so Spooky Pumpkin Facts,一个万圣节主题的内容展示页，用于以趣味海报/专题页形式呈现南瓜冷知识、品牌露出与节日祝福。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-151-T1,T1,yuanchuan__RwErwVG,https://codepen.io/yuanchuan/pen/RwErwVG,OpenAI Logo,用于品牌资产预览的极简静态图形展示页。
+case-152-T3,T3,robstinson__BaLQQdX,https://codepen.io/robstinson/pen/BaLQQdX,Project/Kanban Board - with Tailwind CSS,这是一个团队协作产品中的项目看板页面，用于展示不同阶段的任务卡片与成员分工。页面体现项目管理、任务跟踪和团队协作场景，仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-153-T3,T3,finnhvman__xXpzVN,https://codepen.io/finnhvman/pen/xXpzVN,Pure CSS Connect 4,一个可交互的网页小游戏原型，用于展示双人轮流进行的四子连线棋盘对局。页面用于游戏演示与视觉交互表达。
+case-154-T3,T3,adrianroworth__OpeyZq,https://codepen.io/adrianroworth/pen/OpeyZq,Pure CSS crossword - CSS Grid,一个用于展示前端与 CSS 主题词汇的填字游戏练习页面，适合做教学演示、交互式答题原型或纯前端概念展示。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-155-T3,T3,elad2412__DBeNNZ,https://codepen.io/elad2412/pen/DBeNNZ,PURE CSS GAME - NO JS,一个纯前端演示性质的小游戏落地页，用于展示“打鸟”主题的 CSS 交互原型。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-156-T6,T6,bali_balo__BLJONZ,https://codepen.io/bali_balo/pen/BLJONZ,Pure CSS minesweeper,制作一个可完整游玩并重新开始的复古桌面风格扫雷小游戏，使用单文件 HTML 和内嵌 CSS，不使用 JavaScript 或后端。
+case-157-T3,T3,una__NxZaNr,https://codepen.io/una/pen/NxZaNr,Pure CSS (Sass) Carnival Game,一个嘉年华风格的网页小游戏原型，用于展示纯前端实现的“打靶”互动练习页面。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-158-T6,T6,una__aNZEbB,https://codepen.io/una/pen/aNZEbB,Pure CSS Tic Tac Toe!,一个用于展示纯前端交互创意的双人井字棋小游戏原型，适合实验性网页、CSS 玩法演示或轻量互动页面。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-159-T3,T3,finnhvman__gzmMaa,https://codepen.io/finnhvman/pen/gzmMaa,Pure CSS Tower of Hanoi,一个用于展示“汉诺塔”益智游戏概念的单页互动原型，面向网页端小游戏或 CSS 交互实验场景，仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-160-T3,T3,brandoncash__NjEKaM,https://codepen.io/brandoncash/pen/NjEKaM,SCSS smoke with CSS variable wind,一个用于展示可调节风向与烟雾模糊度的视觉特效演示页面，适合作为创意着陆页、动效实验页或设计稿效果验证原型。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-161-T2,T2,magnus16__BKoRNw,https://codepen.io/magnus16/pen/BKoRNw,Simple Loader,一个用于页面加载、等待处理或启动过程的简洁加载指示界面，仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-162-T3,T3,pgalor__KRyjPr,https://codepen.io/pgalor/pen/KRyjPr,Sunset CSS Slots - a game without JS/img/SVG/preprocessing or actual text.,这是一个用于展示复古老虎机小游戏概念的单页视觉原型，主题为日落色系的纯 CSS 游戏机演示页面，仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-163-T6,T6,graphilla__zEZKpN,https://codepen.io/graphilla/pen/zEZKpN,Time Series 2: Typographic Clock,这是一个用于展示时间序列与排版实验效果的概念型时钟页面，场景类似设计作品展示或创意视觉演示。页面还提供明暗主题切换，用于呈现同一组件在不同主题下的视觉状态。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-164-T3,T3,robstinson__eYBBLYz,https://codepen.io/robstinson/pen/eYBBLYz,[WIP] LoFi UI App Settings Modal,一个桌面风格应用的设置弹窗原型，用于展示不同设置分类下的偏好项、账号信息与安全选项。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-165-T3,T3,i0z__AwYbda,https://codepen.io/i0z/pen/AwYbda,Zero lines JS game,一个展示零行 JavaScript 网页小游戏的单页 HTML/CSS 原型，不涉及后端。
+case-166-T2,T2,valeriasalazar__mMJmdm,https://codepen.io/valeriasalazar/pen/mMJmdm,2. Botón Hover,一个用于展示按钮悬停与按压视觉反馈的交互样式演示页，仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-167-T3,T3,Gogh__jOOqamq,https://codepen.io/Gogh/pen/jOOqamq,30 Different Checkbox Styles - CSS Only,一个用于展示多种复选框开关样式的前端样式画廊页面，适合组件库示例、设计灵感展示或交互控件样式参考。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-168-T2,T2,valeriasalazar__vJNQaz,https://codepen.io/valeriasalazar/pen/vJNQaz,4. Boton con animación,一个用于展示点赞、喜爱或收藏情绪的单按钮交互演示页，可用于营销落地页、设计练习或组件展示。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-169-T3,T3,JonathanBergson__WraRjE,https://codepen.io/JonathanBergson/pen/WraRjE,Accordion CSS,这是一个用于展示两种常见折叠面板交互形式的组件示例页，适合组件库说明、表单交互演示或帮助中心内容收纳场景。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-170-T3,T3,cant89__RLEoyV,https://codepen.io/cant89/pen/RLEoyV,Accordion in Vanilla Js with Css transition,一个用于展示常见问题、说明条目或内容摘要的手风琴信息卡片组件示例，适合帮助中心、产品说明页或内容分组阅读场景。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-171-T2,T2,ousmanrichard__yLOwMwJ,https://codepen.io/ousmanrichard/pen/yLOwMwJ,Accordion - flexbox _ Ousman Diallo,一个用于展示 Flexbox 手风琴交互效果的前端演示页面，适合作为组件样式预览或交互实验示例。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-172-T2,T2,harsh-limbachiya__vYayLmj,https://codepen.io/harsh-limbachiya/pen/vYayLmj,building-quiz,一个用于练习无障碍表单与基础前端知识的在线测验页面，面向学习 HTML/CSS 的用户。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-173-T3,T3,havardob__BapJYMg,https://codepen.io/havardob/pen/BapJYMg,Checkbox group styled as tiles,一个用于兴趣偏好选择的选项卡式勾选界面，适合设置页、 onboarding 偏好采集或收藏平台选择场景。用户可从多个设计与社交平台中勾选自己喜欢的项目。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-174-T3,T3,marcusconnor__QJNvMa,https://codepen.io/marcusconnor/pen/QJNvMa,Checkbox Rocker Toggle Switch,一个用于设置开关状态的控件展示页，适合后台配置、表单选项或产品交互组件演示场景。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-175-T3,T3,lonekorean__xGLLwX,https://codepen.io/lonekorean/pen/xGLLwX,Checkbox Trickery: To-Do List,一个个人待办事项清单页面，用于展示暑期任务的完成与未完成状态，仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-176-T3,T3,ig_design__dLNKgM,https://codepen.io/ig_design/pen/dLNKgM,Checkboxes and radios (dark/light) - pure css - #06,这是一个用于展示自定义单选框与复选框样式的设置面板原型，场景类似设计工具选项选择、客户预算选择和预订附加服务选择。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-177-T3,T3,yexx__yLvyxWP,https://codepen.io/yexx/pen/yLvyxWP,Codepen Challenges:  Bump - Agressive Toggle,一个用于产品界面或设计系统展示的单个开关控件原型，用来表现带有强烈撞击感和抖动反馈的切换器交互。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-178-T3,T3,jcoulterdesign__zdwajv,https://codepen.io/jcoulterdesign/pen/zdwajv,CSS only order process steps,一个礼品订单处理流程展示页，用于演示订单从开始到寄送的五个阶段及对应说明，仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-179-T3,T3,valerypatorius__oXGMGL,https://codepen.io/valerypatorius/pen/oXGMGL,Custom checkbox,这是一个深色风格的任务选择或偏好勾选界面，用于展示自定义样式复选项的静态原型。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-180-T3,T3,josetxu__raOgrKx,https://codepen.io/josetxu/pen/raOgrKx,Elastic Checkboxes - CSS,一个用于兴趣偏好收集的自然场景选择界面，适合问卷、偏好设置或轻量互动展示场景。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-181-T3,T3,shshaw__EbjvbQ,https://codepen.io/shshaw/pen/EbjvbQ,🔘  Flexbox Toggles 🔘,这是一个用于展示存储容量套餐选择方式的交互型定价组件原型，适合云存储、主机空间或数据套餐选择场景。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-182-T3,T3,anirudhgray__GRzmzNM,https://codepen.io/anirudhgray/pen/GRzmzNM,Flicker Bulb Toggle,这是一个用于展示创意开关交互的单页视觉原型，主题为灯泡拉绳/拨杆式点亮效果演示，可用于作品集、动效练习或交互概念展示。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-183-T3,T3,jcoulterdesign__OMmZPd,https://codepen.io/jcoulterdesign/pen/OMmZPd,Funky Pure CSS Accordion,这是一个用于展示电台或节目时段安排的创意宣传页面，包含品牌文案、作者引导链接以及一个可切换的节目信息手风琴卡片区域。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-184-T3,T3,jkantner__PoPvoGK,https://codepen.io/jkantner/pen/PoPvoGK,Literal Radio Buttons,一个仿复古收音机波段选择的小型交互原型，用于展示不同波段选项的单选切换效果。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-185-T3,T3,Danilo06__VwaYxmP,https://codepen.io/Danilo06/pen/VwaYxmP,Neomorphism switcher,这是一个用于展示多档位状态选择的控件原型，可用于设备模式切换、步骤指示或参数档位开关界面。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-186-T2,T2,mhoumark__oNEypEP,https://codepen.io/mhoumark/pen/oNEypEP,[POC] Accordion,这是一个用于展示多个结果条目的信息入口原型，适用于成果展示、案例列表或专题索引页面。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-187-T3,T3,462960__gPOddP,https://codepen.io/462960/pen/gPOddP,Pure CSS Color Tabs (no label),一个用于展示纯样式切换效果的颜色标签页原型页面，适合作为组件示例或交互演示。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-188-T3,T3,finnhvman__xXpzVN,https://codepen.io/finnhvman/pen/xXpzVN,Pure CSS Connect 4,这是一个在浏览器中展示的 Connect 4 四子棋小游戏原型页面，用于演示纯前端交互式棋盘玩法。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-189-T3,T3,davidicus__LEBbLX,https://codepen.io/davidicus/pen/LEBbLX,Pure CSS Content Accordion,一个用于展示“纯 CSS 内容手风琴”交互模式的演示型信息页面，内容涵盖技术问答、SassBreak 文章、其他作品推荐以及占位问答，仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-190-T3,T3,bali_balo__BLJONZ,https://codepen.io/bali_balo/pen/BLJONZ,Pure CSS minesweeper,一个浏览器内的怀旧风扫雷小游戏原型，用于展示纯前端可交互棋盘、计时和胜负反馈。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-191-T3,T3,caseycallow__yaGQMo,https://codepen.io/caseycallow/pen/yaGQMo,Pure CSS Radio Button Tiles,用于出行方式选择的选项卡式单选界面，可用于活动报名、健康记录、通勤偏好或服务设置等场景。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-192-T3,T3,gabrielferreira__oYxNVy,https://codepen.io/gabrielferreira/pen/oYxNVy,Radio Button Big Square [CSS Only],一个用于展示 CSS 单选卡片选择样式的演示页面，场景类似前端交互组件示例或样式实验页。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-193-T3,T3,adamstuartclark__pbYVYR,https://codepen.io/adamstuartclark/pen/pbYVYR,Radio Selects: Flexbox and Fun,这是一个游戏产品中新建存档或开始新局时的难度选择界面，用于让玩家在进入游戏前选择一个难度等级。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-194-T3,T3,wtaype__pNXwMW,https://codepen.io/wtaype/pen/pNXwMW,Ripple animation on  input type radio and Checkbox,一个用于展示自定义单选与多选控件视觉效果的表单控件演示页面，适合组件库、设计规范或交互样式示例场景。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-195-T3,T3,jkantner__RwQGKrd,https://codepen.io/jkantner/pen/RwQGKrd,Segmented Toggle,一个用于设备电源或开关状态展示的极简切换控件原型，适合系统设置页、智能设备控制面板或状态开关组件演示。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-196-T3,T3,SoufianeAbid__xVXNdM,https://codepen.io/SoufianeAbid/pen/xVXNdM,Simple Toggle :D,这是一个用于产品设置、功能开关或偏好切换的极简状态切换控件展示页，仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-197-T3,T3,havardob__ExVaELV,https://codepen.io/havardob/pen/ExVaELV,Sliding tabs | CSS transitions only,一个任务或项目管理产品中的标签切换组件原型，用于在不同任务状态之间进行筛选展示。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-198-T3,T3,jhawes__ZEZeLd,https://codepen.io/jhawes/pen/ZEZeLd,Tabbed navigation with radio buttons,一个用于展示纯前端分栏切换效果的内容导航示例页，适合文档说明、组件演示或内容分组浏览场景。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-199-T3,T3,flkt-crnpio__WxROwy,https://codepen.io/flkt-crnpio/pen/WxROwy,Tabs. Pitaya CSS,一个用于展示 CSS 标签页切换效果的组件演示页面，适合前端组件文档、设计系统示例页或交互动效展示页。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-200-T3,T3,bennettfeely__DZBajr,https://codepen.io/bennettfeely/pen/DZBajr,Toggles,一个用于展示多种开关控件视觉方案的交互演示页，适合组件库、设计系统或前端动效示例场景。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-201-T4,T4,argyleink__gOzPYOj,https://codepen.io/argyleink/pen/gOzPYOj,Android Homescreen,一个 Android 手机主屏幕概念原型，展示资讯、主屏页面、应用快捷方式、Dock 和搜索入口；仅作 HTML/CSS 原型，不涉及后端逻辑。
+case-202-T5,T5,argyleink__mdxBoKx,https://codepen.io/argyleink/pen/mdxBoKx,In View?,这是一个用于展示滚动吸附与滚动可视区联动效果的视觉实验页面，场景类似设计系统、前端特性演示或交互原型展示。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-203-T5,T5,argyleink__ZExaeLp,https://codepen.io/argyleink/pen/ZExaeLp,Pull To Refresh,一个用于演示移动端下拉刷新增强体验的内容页原型，展示刷新提示区与正文内容区的组合效果，仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-204-T5,T5,argyleink__poGqgNz,https://codepen.io/argyleink/pen/poGqgNz,scroll driven parallax carousel,一个用于展示精选图片作品的沉浸式轮播画廊，可用于创意展示、摄影集预览或视觉灵感陈列。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-205-T5,T5,designcouch__rNgpExP,https://codepen.io/designcouch/pen/rNgpExP,Scroll Snap Carousel ( Cover Flow Style ),一个用于展示概念型作品、相册条目或内容卡片的沉浸式轮播浏览页面，强调通过滚动查看多张卡片。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-206-T4,T4,argyleink__MWKxMyb,https://codepen.io/argyleink/pen/MWKxMyb,Scroll Snap Date Time Picker,一个用于日期与时间选择的移动端风格滚轮选择器原型，可用于日程安排、预约时间选择或提醒设置场景。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-207-T4,T4,argyleink__bGvoZpK,https://codepen.io/argyleink/pen/bGvoZpK,"Snap Align - start, center, & end",一个用于展示滚动吸附对齐方式差异的前端交互示例页，面向设计系统、CSS 能力演示或教学场景。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-208-T4,T4,argyleink__GRxMPGb,https://codepen.io/argyleink/pen/GRxMPGb,Snap Matrix,一个用于展示双向滚动吸附效果的视觉实验页面，适合设计系统、前端交互示例或滚动行为演示场景。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-209-T4,T4,argyleink__rNdGPPR,https://codepen.io/argyleink/pen/rNdGPPR,Snap X - On Indirect Children,一个用于展示 CSS 横向吸附滚动效果的界面示例，适合作为组件演示页或设计系统中的交互原型。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-210-T4,T4,argyleink__abYLPGY,https://codepen.io/argyleink/pen/abYLPGY,Snap Y,一个用于展示纵向滚动吸附效果的界面示例，适合作为设计系统、交互规范或滚动容器能力演示页面。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-211-T4,T4,HejChristian__azzWVWL,https://codepen.io/HejChristian/pen/azzWVWL,#CodePenChallenge: Card Carousel |  CSS Carousel Spec - Photo Gallery,旅行摄影相册：左右切换国家，在各国内上下浏览照片。
+case-212-T4,T4,allanwhite__oNNbpqx,https://codepen.io/allanwhite/pen/oNNbpqx,Horizontal scrolling cards w. snapping,设计工作室 Easel Studio 作品集的“精选作品”页：顶部为站点导航，下方以一条可横向浏览的项目卡片带展示近期作品。仅作为静态 HTML/CSS 原型，不涉及后端逻辑。
+case-213-T1,T1,thebabydino__gOdPzEK,https://codepen.io/thebabydino/pen/gOdPzEK,Pure CSS infographic: angled,制作一个介绍四种甜点的英文信息图页面。
+case-214-T4,T4,una__myJOjQx,https://codepen.io/una/pen/myJOjQx,Trip Overview Carousel with scroll-state queries - DARK and plane,法国两周自由行的行程概览：通过横向卡片带浏览每日目的地和安排，并按周、按天定位。
+case-215-T4,T4,utilitybend__ZYOKRXV,https://codepen.io/utilitybend/pen/ZYOKRXV,CSS Scroll-state: Is it scrollable?,
+case-216-T1,T1,letsbleachthis__zewKYE,https://codepen.io/letsbleachthis/pen/zewKYE,"Knitwear Landing Page (CSS Grid, Flexbox, AOS Scrolling Animations)",
+case-217-T1,T1,xdesro__dVxpgN,https://codepen.io/xdesro/pen/dVxpgN,Pure CSS Isometric Towers,制作一个展示等轴测建筑插画的单屏页面
+case-218-T3,T3,ste-vg__oKYjKV,https://codepen.io/ste-vg/pen/oKYjKV,Clip Clop Clippity Clop [CSS Only],用于直观展示肢体运动协调性的奔马动画页面。
+case-219-T2,T2,annampawl__jOZmboO,https://codepen.io/annampawl/pen/jOZmboO,Pure CSS Sewing Machine w/ Animation 🧵,展示缝纫机持续工作的插画动画页面，用于观察多个局部动作是否组成完整工作场景。
+case-220-T2,T2,amit_sheen__mdVqoZw,https://codepen.io/amit_sheen/pen/mdVqoZw,Juggling with CSS,展示双手连续抛接五个球的杂耍动画页面，用于观察轨迹、节奏及手球配合。
+case-221-T1,T1,oliviale__BaKamvY,https://codepen.io/oliviale/pen/BaKamvY,UI Design: Stats Dashboard,制作一个英文的个人追剧战绩页面，主题是 Netflix 刷剧统计：用彩色卡片拼贴展示六部剧的集数和观看时长，并用颜色区分剧集类型。
+case-222-T2,T2,oliviale__rNWyzmx,https://codepen.io/oliviale/pen/rNWyzmx,UI Design: Wedding Planning App,制作一个婚礼策划 App「evermore」的英文界面设计展示页，用多块手机屏幕同时展示这个 App 的各个界面。
+case-223-T6,T6,leonam-silva-de-souza__MYgLgvV,https://codepen.io/leonam-silva-de-souza/pen/MYgLgvV,GameX - Gaming Website Landing Page,
+case-224-T1,T1,ricardoolivaalonso__BazMqJx,https://codepen.io/ricardoolivaalonso/pen/BazMqJx,3D Summer House - Pure CSS,制作一个展示现代度假别墅（Summer House）夜景的三维轴测插画页面。
+case-225-T3,T3,TurkAysenur__RwWKYMO,https://codepen.io/TurkAysenur/pen/RwWKYMO,Responsive Social Platform UI,
+case-226-T6,T6,ricardoolivaalonso__yLOpNdZ,https://codepen.io/ricardoolivaalonso/pen/yLOpNdZ,3D Modern House - Pure CSS,制作一个展示白色极简风格两层现代住宅的三维轴测插画页面。
+case-227-T1,T1,lynnandtonic__dyGjvLB,https://codepen.io/lynnandtonic/pen/dyGjvLB,CSS leaning card effect,制作一个展示四张剧集角色海报的页面：画面中上方悬浮展示原图，下方表现同样四张海报斜靠在墙角的立体陈列效果。

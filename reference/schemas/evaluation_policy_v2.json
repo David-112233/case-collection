@@ -1,0 +1,153 @@
+{
+  "contract_version": "evaluation-preparation-policy/2.0",
+  "policy_id": "preparation-v2-dec048",
+  "source_decisions": [
+    "DEC-024",
+    "DEC-028",
+    "DEC-029",
+    "DEC-048"
+  ],
+  "scope": "Shared policy for new cases/rounds under DEC-048; never a case-specific requirement list.",
+  "environment": {
+    "host_platform": "Windows-11-10.0.26200-SP0",
+    "playwright_version": "1.62.0",
+    "browser_channel": "chromium",
+    "browser_version": "151.0.7922.34",
+    "viewport": {
+      "width": 1280,
+      "height": 900
+    },
+    "device_scale_factor": 1,
+    "reduced_motion": "no-preference",
+    "locale": "zh-CN",
+    "timezone_id": "America/New_York",
+    "screenshot_scale": "css",
+    "page_javascript": "enabled; task-specific restrictions belong to explicit case policy"
+  },
+  "static_state": {
+    "scroll": "top unless the Evidence requires another position; below-fold objects are not absent",
+    "pointer": "outside evaluated targets",
+    "focus": "none unless the Evidence requires focus",
+    "animation": "freeze or exclude from static measurements",
+    "stability": "wait for fonts and verify relevant layout/style stability; fixed delay alone is not proof",
+    "failure": "UNRESOLVED"
+  },
+  "dynamic_state": {
+    "driver": "real browser action declared by the Evidence",
+    "settling": "bounded stability wait; record actual times and timeout",
+    "recovery": "mandatory only when the source Requirement requires it",
+    "missing_target": "resolution failure alone is not proof of model absence",
+    "failure": "UNRESOLVED; retain acquisition gap"
+  },
+  "measurement": {
+    "pixel_tolerance": {
+      "absolute_px": 2.0,
+      "relative_fraction": 0.02,
+      "combination": "max"
+    },
+    "pixel_formula": "abs(actual - expected) <= max(absolute_px, relative_fraction * abs(expected))",
+    "color": {
+      "space": "srgb",
+      "difference": "ciede2000",
+      "maximum_delta_e00": 2.0
+    },
+    "color_alpha": "do not ignore alpha or layered appearance; use reliable painted-color evidence or Judge",
+    "rem": "convert using captured root font size; do not assume 16px",
+    "ratios": "compare measured pixels against ratio * captured reference extent using pixel tolerance",
+    "precision": "retain exact versus approximate source wording even when using the same measurement error policy",
+    "qualitative": "Judge or unsupported; no thresholds inferred from GT",
+    "individual_overrides": "none active; DEC-025 proposed thresholds are not adopted"
+  },
+  "font_policy": {
+    "default": "unrestricted font family choice unless input specifies a font",
+    "specified_font": "must actually render; declaration alone is insufficient",
+    "external_font_download": "allowed, including font stylesheets",
+    "unavailable_font": "record resource evidence; environment/unknown failure is UNRESOLVED"
+  },
+  "resource_policy": {
+    "external_images": "allowed",
+    "external_fonts": "allowed",
+    "font_stylesheets": "allowed",
+    "external_page_stylesheets": "not allowed; page CSS remains embedded",
+    "external_script_files": "not allowed; JavaScript remains embedded",
+    "ordinary_hyperlinks": "allowed; not resource dependencies",
+    "permitted_resource_unavailable": "UNRESOLVED when evaluator/network failure or origin unknown; no automatic model FAIL"
+  },
+  "scoring_policy": {
+    "mode": "evidence_severity",
+    "version": "evidence-severity/1.0",
+    "decision": "DEC-038",
+    "unit": "one mandatory Evidence (compiled condition)",
+    "dimension_base": 10,
+    "severity_deductions": {
+      "light": 0.5,
+      "medium": 1.0,
+      "severe": 1.5
+    },
+    "severity_definitions": {
+      "light": "局部偏差；主要内容仍可识别，主要操作仍能完成",
+      "medium": "明显偏差；影响部分内容呈现、布局关系或操作体验",
+      "severe": "条件整体缺失、关键内容不可辨认，或要求的交互无法完成"
+    },
+    "same_requirement": "sum the deductions of distinct failed Evidence",
+    "dimension_floor": 0,
+    "final_floor": 0,
+    "static_weight": 0.5,
+    "dynamic_weight": 0.5,
+    "missing_dimension": "the other applicable dimension has weight 1",
+    "ordinary_independent_gate_penalty": 2,
+    "fatal_gate": "terminate with zero and reason",
+    "single_attribution": "One direct fact, one deduction: Gate/Evidence and Evidence/Evidence duplicates keep their verdicts, deduct 0 and name the owner.",
+    "unresolved": "no deduction; mandatory UNRESOLVED blocks the formal score",
+    "severity_unresolved": "a FAIL without a validated severity is never imputed and blocks the formal score",
+    "judge_source": "record the Judge and severity source; use one Judge type for all models in a batch",
+    "dependency_policy_version": "model-dependency-fail/1.0",
+    "confirmed_model_dependency_failure": "FAIL each affected mandatory condition; each failed Evidence deducts its own severity; no root-cause deduplication",
+    "missing_mandatory_evidence": "Evaluator failure or unknown cause: UNRESOLVED; no formal score. Confirmed model dependency failure: FAIL under DEC-029.",
+    "legacy_requirement_formula": "retired by DEC-038 (2026-10-18); historical results only, never recomputed or reported for new runs",
+    "out_of_scope": [
+      "Judge/human agreement validation",
+      "appearance score (Codex 0-10 and human 1-5) - not part of the score"
+    ]
+  },
+  "output_contract": {
+    "contract_version": "frontend-output/2.0",
+    "decision": "DEC-048",
+    "effective_on": "2026-11-16",
+    "scope": "Newly prepared cases and rounds; historical frozen versions retain their original contract.",
+    "javascript": {
+      "allowed": true,
+      "inline_script": true,
+      "event_attributes": true,
+      "external_script_files": false
+    },
+    "resources": {
+      "external_images": true,
+      "external_fonts": true,
+      "font_stylesheets": true,
+      "ordinary_navigation_links": true,
+      "external_page_stylesheets": false
+    },
+    "format": {
+      "single_html": true,
+      "css_location": "head/style or HTML style attributes",
+      "style_attributes": true,
+      "javascript_location": "embedded in HTML",
+      "markdown_wrapper": false,
+      "explanatory_text": false
+    },
+    "case_prohibitions": "Only explicit input.forbidden or separately recorded user scope may narrow permissions; preserve the source and freeze it with the case. Do not add new Evidence from GT.",
+    "font_expectation": "Use any font unless input specifies one; specified fonts must actually render. Do not inherit the old generic-only font ban.",
+    "resource_failure": "Evaluator/network/collection failure or unknown cause is UNRESOLVED; confirmed implementation failure is assessed against the owning Evidence. Permitted resources are not blanket gate failures.",
+    "scoring_policy": "evidence-severity/1.0 unchanged",
+    "not_implied": [
+      "all cases are static",
+      "all cases forbid animation",
+      "permission implies a requirement to use JS or remote resources"
+    ]
+  },
+  "implementation_status": {
+    "status": "IMPLEMENTED_DIRECTED_TESTS_PASSED",
+    "reason": "Policy-bound preparation and runtime enable inline JavaScript and observe remote fonts/images. Font stylesheet permission requires complete supported CSS evidence; unknown evidence remains UNRESOLVED. Synthetic browser and legacy isolation tests passed; each release still requires environment preflight and GT validation."
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "contract_version": "frontend-output/2.0",
+  "decision": "DEC-048",
+  "effective_on": "2026-11-16",
+  "scope": "Newly prepared cases and rounds; historical frozen versions retain their original contract.",
+  "javascript": {
+    "allowed": true,
+    "inline_script": true,
+    "event_attributes": true,
+    "external_script_files": false
+  },
+  "resources": {
+    "external_images": true,
+    "external_fonts": true,
+    "font_stylesheets": true,
+    "ordinary_navigation_links": true,
+    "external_page_stylesheets": false
+  },
+  "format": {
+    "single_html": true,
+    "css_location": "head/style or HTML style attributes",
+    "style_attributes": true,
+    "javascript_location": "embedded in HTML",
+    "markdown_wrapper": false,
+    "explanatory_text": false
+  },
+  "case_prohibitions": "Only explicit input.forbidden or separately recorded user scope may narrow permissions; preserve the source and freeze it with the case. Do not add new Evidence from GT.",
+  "font_expectation": "Use any font unless input specifies one; specified fonts must actually render. Do not inherit the old generic-only font ban.",
+  "resource_failure": "Evaluator/network/collection failure or unknown cause is UNRESOLVED; confirmed implementation failure is assessed against the owning Evidence. Permitted resources are not blanket gate failures.",
+  "scoring_policy": "evidence-severity/1.0 unchanged",
+  "not_implied": [
+    "all cases are static",
+    "all cases forbid animation",
+    "permission implies a requirement to use JS or remote resources"
+  ]
+}

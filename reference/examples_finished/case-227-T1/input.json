@@ -1,0 +1,6 @@
+{
+  "business_background": "制作一个展示四张剧集角色海报的页面：画面中上方悬浮展示原图，下方表现同样四张海报斜靠在墙角的立体陈列效果。",
+  "functional_requirements": "画面中有一面墙和一块地面：墙面相对观察者向右后方延伸，与地面相交形成墙角。页面包含两组海报，每组都是同样的四张，一组悬浮展示在画面中上部，一组斜靠在墙角。海报均使用以下图片地址，替代文字依次为：https://assets.codepen.io/1025350/eleanor.jpg（Eleanor from The Good Place）、https://assets.codepen.io/1025350/chidi.jpg（Chidi from The Good Place）、https://assets.codepen.io/1025350/jason.jpg（Jason from The Good Place）、https://assets.codepen.io/1025350/tahani.jpg（Tahani from The Good Place）。两组从左到右的顺序都是 Tahani、Jason、Chidi、Eleanor。",
+  "layout_constraints": "页面面向桌面宽屏。悬浮的一组位于画面中上部、水平居中，正面展示，与墙体和地面没有空间关联：四张同样宽度、等间距排成一行，保持原图比例，不倾斜、无投影。斜靠的一组底边立在地面上、上端靠着墙面，四张排成一排、整组大致居中，相邻海报之间留有窄缝、互不重叠，整体比悬浮的一组略大，两组之间留有明显空白。斜靠的海报沿墙向右后方排开，大小和高低符合近大远小的透视；海报是有一定厚度的卡片。光线从右上方照来，斜靠的海报在墙面和地面上投下自然的影子，表面带有与光照方向一致的明暗和反光。",
+  "forbidden": []
+}

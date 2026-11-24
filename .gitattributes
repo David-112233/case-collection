@@ -2,3 +2,5 @@ data_intake/B1/claims.csv merge=union
 data_intake/B1/raw/fetch_log.jsonl merge=union
 *.csv text eol=lf
 *.jsonl text eol=lf
+cases/registry.csv merge=union
+*.xlsx binary

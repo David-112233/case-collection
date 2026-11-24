@@ -1,0 +1,1569 @@
+{
+  "schema_version": "semantic-eval-rules/3.0",
+  "case_id": "case-227",
+  "tier": "T1",
+  "rule_status": "USER_CONFIRMED_DRAFT",
+  "revision": "manual_v1",
+  "input_sha256": "8aaa972efd799f71d97fff11812e7f453a6a96a26cf2664eb4cc24535c9a1825",
+  "input_source": {
+    "path": "input.json",
+    "note": "用户 2026-11-17 微调定稿；Claude 只统一了“平铺/悬浮”用词"
+  },
+  "output_contract_ref": "scripts/eval_rules_generation/preparation/output_contract_v2.json",
+  "scoring_policy_ref": "scripts/eval_rules_generation/preparation/evaluation_policy_v2.json#/scoring_policy",
+  "source_policy": {
+    "requirements": "input.json only; no DEC-037 common-sense condition added; business_background supplies context only",
+    "gt": "ground_truth.html = source.html minus CodePen external script, reset stylesheet inlined; GT only for binding/self-test, never a requirement source",
+    "model_outputs": "No model output read when drafting these rules"
+  },
+  "render_baseline": {
+    "status": "NOT_FROZEN",
+    "states": [
+      "desktop"
+    ],
+    "viewports": {
+      "desktop": [
+        1280,
+        900
+      ]
+    },
+    "note": "input 只要求桌面宽屏；单一桌面视口采证，不考察其他宽度。",
+    "resources": "JS、外部图片允许。记录 8 张图片加载结果；评测网络导致加载失败记 UNRESOLVED，不判模型 FAIL。"
+  },
+  "member_policy": {
+    "group_identity": "两组按可见位置区分：上方正面平铺的四张为悬浮组，下方墙角场景中的四张为斜靠组；不依赖 DOM 顺序或类名。",
+    "member_order": "组内第 N 张按可见位置从左到右确定；哪张图在哪个位置只由 SR-02/SR-03 的地址条件负责，其余条件只按位置判断。",
+    "pairs": "相邻关系按三对（1-2、2-3、3-4）逐对计。"
+  },
+  "granularity_policy": {
+    "members": "并列成员逐个成条：每张海报的地址、替代文字、比例、正面展示、无投影、立地面、靠墙、厚度、投影、表面光影各一条；相邻关系三对各一条。",
+    "aggregate": "数量、整组居中、同宽、等距、两组大小比较、两组空白是整组性质，各一条。",
+    "same_fact": "同一事实只放一条：顺序错误由位置-地址条件负责，替代文字按图片身份核对；“正面展示”与“不倾斜”合为一条。",
+    "scoring_merge": "计分沿用 R02 case-213 的并列失败合并裁定（用户 2026-11-17 确认用于 case-227）：同一检查模板在并列成员上、由同一处实现造成的失败合为一组，按整组影响只判一档；流水线逐条分留档。"
+  },
+  "measure_policy": {
+    "program_first": "DOM、URL、几何事实由程序判；程序不确定时交回 Judge，不判 FAIL。",
+    "judge": "墙角、靠墙姿态、厚度、投影、表面光影是定性视觉条件，交 Judge；规则写出最低判定标准，不预设数值阈值。",
+    "qualitative_words": "“略大”“大致居中”“窄缝”“明显空白”不设数值上下限；程序只给测量值，边界情况由 Judge 判断。"
+  },
+  "quality_gate": [
+    {
+      "id": "G1",
+      "description": "HTML forms a valid evaluable DOM; parser/environment failure alone is not model fatal failure.",
+      "source": "project_output_contract"
+    },
+    {
+      "id": "G2",
+      "description": "JS is allowed by the shared v2 policy; no blanket script/event-attribute violation.",
+      "source": "project_output_contract"
+    },
+    {
+      "id": "G3",
+      "description": "External fonts, font stylesheets, images and ordinary links are allowed; resource availability is checked separately.",
+      "source": "project_output_contract"
+    },
+    {
+      "id": "G4",
+      "description": "One complete HTML; page CSS embedded in head/style or style attributes; required JS embedded.",
+      "source": "project_output_contract"
+    },
+    {
+      "id": "G5",
+      "description": "input.forbidden is empty; no case-specific prohibition is invented.",
+      "source": "input.forbidden"
+    }
+  ],
+  "static_requirements": [
+    {
+      "id": "SR-01",
+      "dimension": "static",
+      "description": "墙角场景",
+      "target": "corner_scene",
+      "source_fields": [
+        "functional_requirements"
+      ],
+      "mandatory_evidence": [
+        {
+          "id": "C1",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "画面中有一面墙和一块地面",
+          "target": "corner_scene",
+          "check": "画面中能分辨出墙面和地面两个区域，二者相交处有可辨认的墙角线（明暗或颜色分界）；只有一块均匀背景、看不出墙和地面的不满足。",
+          "kind": "screenshot_visual",
+          "decider": "judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "corner_scene"
+          ]
+        },
+        {
+          "id": "C2",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "墙面相对观察者向右后方延伸",
+          "target": "corner_scene.line",
+          "check": "墙角线呈现墙面向右后方延伸的透视：从左向右逐渐升高（向右上方倾斜）；水平的或向右下降的墙角线不满足。",
+          "kind": "screenshot_visual",
+          "decider": "judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "corner_scene.line"
+          ],
+          "note": "墙角线多由背景渐变绘制，DOM 读不到，交 Judge；程序可报告墙角线两端高度作辅助。"
+        },
+        {
+          "id": "C3",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "画面中有一面墙和一块地面",
+          "target": "corner_scene.width",
+          "check": "在桌面宽屏评测视口下，墙面和地面横向延伸到页面左右两侧边缘，不是页面中间的一块有限区域。",
+          "kind": "screenshot_visual",
+          "decider": "judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "corner_scene.width"
+          ],
+          "note": "input 未直接写“横贯全宽”；依据“画面中有一面墙和一块地面”作为画面背景的语义。用户 2026-11-17 确认保留。"
+        },
+        {
+          "id": "C4",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "一组悬浮展示在画面中上部，一组斜靠在墙角",
+          "target": "corner_scene.position",
+          "check": "墙角场景位于悬浮组下方、页面下部；斜靠组位于墙角场景中。",
+          "kind": "geometry_visual",
+          "decider": "judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "corner_scene",
+            "float",
+            "lean"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SR-02",
+      "dimension": "static",
+      "description": "悬浮组的图片身份、顺序与替代文字",
+      "target": "float",
+      "source_fields": [
+        "functional_requirements"
+      ],
+      "mandatory_evidence": [
+        {
+          "id": "C1",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "每组都是同样的四张",
+          "target": "float.count",
+          "check": "悬浮组恰好由四张海报图片组成（img 或 CSS 背景图均可，按可见图片计数）。",
+          "kind": "dom_structure",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "float.count"
+          ]
+        },
+        {
+          "id": "C2",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "两组从左到右的顺序都是 Tahani、Jason、Chidi、Eleanor",
+          "target": "float.1.src",
+          "check": "悬浮组按可见位置从左到右第1张显示 https://assets.codepen.io/1025350/tahani.jpg（Tahani）；地址完全一致，且图片实际加载成功。评测网络导致加载失败记 UNRESOLVED。",
+          "kind": "dom_url",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "float.1.src"
+          ],
+          "member": "float.1"
+        },
+        {
+          "id": "C3",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "两组从左到右的顺序都是 Tahani、Jason、Chidi、Eleanor",
+          "target": "float.2.src",
+          "check": "悬浮组按可见位置从左到右第2张显示 https://assets.codepen.io/1025350/jason.jpg（Jason）；地址完全一致，且图片实际加载成功。评测网络导致加载失败记 UNRESOLVED。",
+          "kind": "dom_url",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "float.2.src"
+          ],
+          "member": "float.2"
+        },
+        {
+          "id": "C4",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "两组从左到右的顺序都是 Tahani、Jason、Chidi、Eleanor",
+          "target": "float.3.src",
+          "check": "悬浮组按可见位置从左到右第3张显示 https://assets.codepen.io/1025350/chidi.jpg（Chidi）；地址完全一致，且图片实际加载成功。评测网络导致加载失败记 UNRESOLVED。",
+          "kind": "dom_url",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "float.3.src"
+          ],
+          "member": "float.3"
+        },
+        {
+          "id": "C5",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "两组从左到右的顺序都是 Tahani、Jason、Chidi、Eleanor",
+          "target": "float.4.src",
+          "check": "悬浮组按可见位置从左到右第4张显示 https://assets.codepen.io/1025350/eleanor.jpg（Eleanor）；地址完全一致，且图片实际加载成功。评测网络导致加载失败记 UNRESOLVED。",
+          "kind": "dom_url",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "float.4.src"
+          ],
+          "member": "float.4"
+        },
+        {
+          "id": "C6",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "替代文字依次为",
+          "target": "float.tahani.alt",
+          "check": "悬浮组中使用 tahani.jpg 的那张海报，替代文字为 Tahani from The Good Place（img 的 alt，或等效的 aria-label + role=\"img\" 无障碍名称）；按图片身份核对，不因位置顺序错误重复扣分。",
+          "kind": "dom_accessibility",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "float.tahani.alt"
+          ],
+          "member": "float.tahani"
+        },
+        {
+          "id": "C7",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "替代文字依次为",
+          "target": "float.jason.alt",
+          "check": "悬浮组中使用 jason.jpg 的那张海报，替代文字为 Jason from The Good Place（img 的 alt，或等效的 aria-label + role=\"img\" 无障碍名称）；按图片身份核对，不因位置顺序错误重复扣分。",
+          "kind": "dom_accessibility",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "float.jason.alt"
+          ],
+          "member": "float.jason"
+        },
+        {
+          "id": "C8",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "替代文字依次为",
+          "target": "float.chidi.alt",
+          "check": "悬浮组中使用 chidi.jpg 的那张海报，替代文字为 Chidi from The Good Place（img 的 alt，或等效的 aria-label + role=\"img\" 无障碍名称）；按图片身份核对，不因位置顺序错误重复扣分。",
+          "kind": "dom_accessibility",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "float.chidi.alt"
+          ],
+          "member": "float.chidi"
+        },
+        {
+          "id": "C9",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "替代文字依次为",
+          "target": "float.eleanor.alt",
+          "check": "悬浮组中使用 eleanor.jpg 的那张海报，替代文字为 Eleanor from The Good Place（img 的 alt，或等效的 aria-label + role=\"img\" 无障碍名称）；按图片身份核对，不因位置顺序错误重复扣分。",
+          "kind": "dom_accessibility",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "float.eleanor.alt"
+          ],
+          "member": "float.eleanor"
+        }
+      ]
+    },
+    {
+      "id": "SR-03",
+      "dimension": "static",
+      "description": "斜靠组的图片身份、顺序与替代文字",
+      "target": "lean",
+      "source_fields": [
+        "functional_requirements"
+      ],
+      "mandatory_evidence": [
+        {
+          "id": "C1",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "每组都是同样的四张",
+          "target": "lean.count",
+          "check": "斜靠组恰好由四张海报图片组成（img 或 CSS 背景图均可，按可见图片计数）。",
+          "kind": "dom_structure",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "lean.count"
+          ]
+        },
+        {
+          "id": "C2",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "两组从左到右的顺序都是 Tahani、Jason、Chidi、Eleanor",
+          "target": "lean.1.src",
+          "check": "斜靠组按可见位置从左到右第1张显示 https://assets.codepen.io/1025350/tahani.jpg（Tahani）；地址完全一致，且图片实际加载成功。评测网络导致加载失败记 UNRESOLVED。",
+          "kind": "dom_url",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "lean.1.src"
+          ],
+          "member": "lean.1"
+        },
+        {
+          "id": "C3",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "两组从左到右的顺序都是 Tahani、Jason、Chidi、Eleanor",
+          "target": "lean.2.src",
+          "check": "斜靠组按可见位置从左到右第2张显示 https://assets.codepen.io/1025350/jason.jpg（Jason）；地址完全一致，且图片实际加载成功。评测网络导致加载失败记 UNRESOLVED。",
+          "kind": "dom_url",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "lean.2.src"
+          ],
+          "member": "lean.2"
+        },
+        {
+          "id": "C4",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "两组从左到右的顺序都是 Tahani、Jason、Chidi、Eleanor",
+          "target": "lean.3.src",
+          "check": "斜靠组按可见位置从左到右第3张显示 https://assets.codepen.io/1025350/chidi.jpg（Chidi）；地址完全一致，且图片实际加载成功。评测网络导致加载失败记 UNRESOLVED。",
+          "kind": "dom_url",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "lean.3.src"
+          ],
+          "member": "lean.3"
+        },
+        {
+          "id": "C5",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "两组从左到右的顺序都是 Tahani、Jason、Chidi、Eleanor",
+          "target": "lean.4.src",
+          "check": "斜靠组按可见位置从左到右第4张显示 https://assets.codepen.io/1025350/eleanor.jpg（Eleanor）；地址完全一致，且图片实际加载成功。评测网络导致加载失败记 UNRESOLVED。",
+          "kind": "dom_url",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "lean.4.src"
+          ],
+          "member": "lean.4"
+        },
+        {
+          "id": "C6",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "替代文字依次为",
+          "target": "lean.tahani.alt",
+          "check": "斜靠组中使用 tahani.jpg 的那张海报，替代文字为 Tahani from The Good Place（img 的 alt，或等效的 aria-label + role=\"img\" 无障碍名称）；按图片身份核对，不因位置顺序错误重复扣分。",
+          "kind": "dom_accessibility",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "lean.tahani.alt"
+          ],
+          "member": "lean.tahani"
+        },
+        {
+          "id": "C7",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "替代文字依次为",
+          "target": "lean.jason.alt",
+          "check": "斜靠组中使用 jason.jpg 的那张海报，替代文字为 Jason from The Good Place（img 的 alt，或等效的 aria-label + role=\"img\" 无障碍名称）；按图片身份核对，不因位置顺序错误重复扣分。",
+          "kind": "dom_accessibility",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "lean.jason.alt"
+          ],
+          "member": "lean.jason"
+        },
+        {
+          "id": "C8",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "替代文字依次为",
+          "target": "lean.chidi.alt",
+          "check": "斜靠组中使用 chidi.jpg 的那张海报，替代文字为 Chidi from The Good Place（img 的 alt，或等效的 aria-label + role=\"img\" 无障碍名称）；按图片身份核对，不因位置顺序错误重复扣分。",
+          "kind": "dom_accessibility",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "lean.chidi.alt"
+          ],
+          "member": "lean.chidi"
+        },
+        {
+          "id": "C9",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "替代文字依次为",
+          "target": "lean.eleanor.alt",
+          "check": "斜靠组中使用 eleanor.jpg 的那张海报，替代文字为 Eleanor from The Good Place（img 的 alt，或等效的 aria-label + role=\"img\" 无障碍名称）；按图片身份核对，不因位置顺序错误重复扣分。",
+          "kind": "dom_accessibility",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "lean.eleanor.alt"
+          ],
+          "member": "lean.eleanor"
+        }
+      ]
+    },
+    {
+      "id": "SR-04",
+      "dimension": "static",
+      "description": "悬浮组的位置与排布",
+      "target": "float",
+      "source_fields": [
+        "layout_constraints"
+      ],
+      "mandatory_evidence": [
+        {
+          "id": "C1",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "与墙体和地面没有空间关联",
+          "target": "float.position",
+          "check": "悬浮组位于页面中上部、墙角场景上方，与墙面和地面没有摆放关系：不立在地面、不靠墙、不与墙角线重叠。",
+          "kind": "geometry_visual",
+          "decider": "judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "float",
+            "corner_scene"
+          ]
+        },
+        {
+          "id": "C2",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "水平居中",
+          "target": "float.center",
+          "check": "悬浮组整体在页面宽度内水平居中（整组左右边界到页面两侧距离相等，容差为舍入误差）。",
+          "kind": "geometry",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "float.center"
+          ]
+        },
+        {
+          "id": "C3",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "等间距排成一行",
+          "target": "float.row",
+          "check": "四张悬浮海报排成一行：顶边或垂直中心在同一水平线上。",
+          "kind": "geometry",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "float.row"
+          ]
+        },
+        {
+          "id": "C4",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "四张同样宽度",
+          "target": "float.width",
+          "check": "四张悬浮海报渲染宽度相同（容差为舍入误差）。",
+          "kind": "geometry",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "float.width"
+          ]
+        },
+        {
+          "id": "C5",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "等间距排成一行",
+          "target": "float.gap",
+          "check": "相邻悬浮海报之间的三个水平间距相等（容差为舍入误差）。",
+          "kind": "geometry",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "float.gap"
+          ],
+          "note": "等距是三个间距放在一起比较才有的整组性质，按一条计。"
+        },
+        {
+          "id": "C6",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "保持原图比例",
+          "target": "float.1.ratio",
+          "check": "悬浮组第1张（Tahani）渲染宽高比与原图一致，不拉伸、不裁切。",
+          "kind": "geometry",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "float.1.ratio"
+          ],
+          "member": "float.1"
+        },
+        {
+          "id": "C7",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "保持原图比例",
+          "target": "float.2.ratio",
+          "check": "悬浮组第2张（Jason）渲染宽高比与原图一致，不拉伸、不裁切。",
+          "kind": "geometry",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "float.2.ratio"
+          ],
+          "member": "float.2"
+        },
+        {
+          "id": "C8",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "保持原图比例",
+          "target": "float.3.ratio",
+          "check": "悬浮组第3张（Chidi）渲染宽高比与原图一致，不拉伸、不裁切。",
+          "kind": "geometry",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "float.3.ratio"
+          ],
+          "member": "float.3"
+        },
+        {
+          "id": "C9",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "保持原图比例",
+          "target": "float.4.ratio",
+          "check": "悬浮组第4张（Eleanor）渲染宽高比与原图一致，不拉伸、不裁切。",
+          "kind": "geometry",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "float.4.ratio"
+          ],
+          "member": "float.4"
+        },
+        {
+          "id": "C10",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "正面展示",
+          "target": "float.1.flat",
+          "check": "悬浮组第1张（Tahani）正面展示，不旋转、不斜切、无透视变形。",
+          "kind": "geometry",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "float.1.flat"
+          ],
+          "member": "float.1",
+          "note": "input“正面展示”与“不倾斜”是同一事实，合为一条。"
+        },
+        {
+          "id": "C11",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "正面展示",
+          "target": "float.2.flat",
+          "check": "悬浮组第2张（Jason）正面展示，不旋转、不斜切、无透视变形。",
+          "kind": "geometry",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "float.2.flat"
+          ],
+          "member": "float.2",
+          "note": "input“正面展示”与“不倾斜”是同一事实，合为一条。"
+        },
+        {
+          "id": "C12",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "正面展示",
+          "target": "float.3.flat",
+          "check": "悬浮组第3张（Chidi）正面展示，不旋转、不斜切、无透视变形。",
+          "kind": "geometry",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "float.3.flat"
+          ],
+          "member": "float.3",
+          "note": "input“正面展示”与“不倾斜”是同一事实，合为一条。"
+        },
+        {
+          "id": "C13",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "正面展示",
+          "target": "float.4.flat",
+          "check": "悬浮组第4张（Eleanor）正面展示，不旋转、不斜切、无透视变形。",
+          "kind": "geometry",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "float.4.flat"
+          ],
+          "member": "float.4",
+          "note": "input“正面展示”与“不倾斜”是同一事实，合为一条。"
+        },
+        {
+          "id": "C14",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "无投影",
+          "target": "float.1.shadow",
+          "check": "悬浮组第1张（Tahani）周围没有可见投影。",
+          "kind": "screenshot_visual",
+          "decider": "program+judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "float.1.shadow"
+          ],
+          "member": "float.1",
+          "note": "程序先查 box-shadow / drop-shadow；没查到也要看截图，因为影子可能由伪元素或背景画出。"
+        },
+        {
+          "id": "C15",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "无投影",
+          "target": "float.2.shadow",
+          "check": "悬浮组第2张（Jason）周围没有可见投影。",
+          "kind": "screenshot_visual",
+          "decider": "program+judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "float.2.shadow"
+          ],
+          "member": "float.2",
+          "note": "程序先查 box-shadow / drop-shadow；没查到也要看截图，因为影子可能由伪元素或背景画出。"
+        },
+        {
+          "id": "C16",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "无投影",
+          "target": "float.3.shadow",
+          "check": "悬浮组第3张（Chidi）周围没有可见投影。",
+          "kind": "screenshot_visual",
+          "decider": "program+judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "float.3.shadow"
+          ],
+          "member": "float.3",
+          "note": "程序先查 box-shadow / drop-shadow；没查到也要看截图，因为影子可能由伪元素或背景画出。"
+        },
+        {
+          "id": "C17",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "无投影",
+          "target": "float.4.shadow",
+          "check": "悬浮组第4张（Eleanor）周围没有可见投影。",
+          "kind": "screenshot_visual",
+          "decider": "program+judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "float.4.shadow"
+          ],
+          "member": "float.4",
+          "note": "程序先查 box-shadow / drop-shadow；没查到也要看截图，因为影子可能由伪元素或背景画出。"
+        }
+      ]
+    },
+    {
+      "id": "SR-05",
+      "dimension": "static",
+      "description": "斜靠组的摆放",
+      "target": "lean",
+      "source_fields": [
+        "layout_constraints"
+      ],
+      "mandatory_evidence": [
+        {
+          "id": "C1",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "四张排成一排",
+          "target": "lean.row",
+          "check": "四张斜靠海报从左到右排成一排，没有上下分行或堆叠。",
+          "kind": "geometry_visual",
+          "decider": "program+judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "lean.row"
+          ]
+        },
+        {
+          "id": "C2",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "整组大致居中",
+          "target": "lean.center",
+          "check": "斜靠组整体在页面宽度内大致水平居中；明显偏向一侧的不满足。",
+          "kind": "geometry",
+          "decider": "program+judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "lean.center"
+          ],
+          "note": "程序报告整组中心与页面中线的偏移；“大致”不预设数值，偏移明显时交 Judge。"
+        },
+        {
+          "id": "C3",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "相邻海报之间留有窄缝、互不重叠",
+          "target": "lean.pair12.gap",
+          "check": "斜靠组第1张（Tahani）与第2张（Jason）之间互不重叠，并留有可见的窄缝；紧贴无缝、重叠，或间距大到不像同一排的不满足。",
+          "kind": "geometry_visual",
+          "decider": "program+judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "lean.1",
+            "lean.2"
+          ],
+          "member": "lean.pair12"
+        },
+        {
+          "id": "C4",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "相邻海报之间留有窄缝、互不重叠",
+          "target": "lean.pair23.gap",
+          "check": "斜靠组第2张（Jason）与第3张（Chidi）之间互不重叠，并留有可见的窄缝；紧贴无缝、重叠，或间距大到不像同一排的不满足。",
+          "kind": "geometry_visual",
+          "decider": "program+judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "lean.2",
+            "lean.3"
+          ],
+          "member": "lean.pair23"
+        },
+        {
+          "id": "C5",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "相邻海报之间留有窄缝、互不重叠",
+          "target": "lean.pair34.gap",
+          "check": "斜靠组第3张（Chidi）与第4张（Eleanor）之间互不重叠，并留有可见的窄缝；紧贴无缝、重叠，或间距大到不像同一排的不满足。",
+          "kind": "geometry_visual",
+          "decider": "program+judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "lean.3",
+            "lean.4"
+          ],
+          "member": "lean.pair34"
+        },
+        {
+          "id": "C6",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "斜靠的一组底边立在地面上",
+          "target": "lean.1.floor",
+          "check": "斜靠组第1张（Tahani）底边落在墙角线下方的地面区域。",
+          "kind": "screenshot_visual",
+          "decider": "judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "lean.1",
+            "corner_scene"
+          ],
+          "member": "lean.1"
+        },
+        {
+          "id": "C7",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "斜靠的一组底边立在地面上",
+          "target": "lean.2.floor",
+          "check": "斜靠组第2张（Jason）底边落在墙角线下方的地面区域。",
+          "kind": "screenshot_visual",
+          "decider": "judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "lean.2",
+            "corner_scene"
+          ],
+          "member": "lean.2"
+        },
+        {
+          "id": "C8",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "斜靠的一组底边立在地面上",
+          "target": "lean.3.floor",
+          "check": "斜靠组第3张（Chidi）底边落在墙角线下方的地面区域。",
+          "kind": "screenshot_visual",
+          "decider": "judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "lean.3",
+            "corner_scene"
+          ],
+          "member": "lean.3"
+        },
+        {
+          "id": "C9",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "斜靠的一组底边立在地面上",
+          "target": "lean.4.floor",
+          "check": "斜靠组第4张（Eleanor）底边落在墙角线下方的地面区域。",
+          "kind": "screenshot_visual",
+          "decider": "judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "lean.4",
+            "corner_scene"
+          ],
+          "member": "lean.4"
+        },
+        {
+          "id": "C10",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "上端靠着墙面",
+          "target": "lean.1.wall",
+          "check": "斜靠组第1张（Tahani）上端位于墙角线上方的墙面区域，整张呈倾斜靠墙的姿态；正立平贴或完全平放的不满足。",
+          "kind": "screenshot_visual",
+          "decider": "judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "lean.1",
+            "corner_scene"
+          ],
+          "member": "lean.1"
+        },
+        {
+          "id": "C11",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "上端靠着墙面",
+          "target": "lean.2.wall",
+          "check": "斜靠组第2张（Jason）上端位于墙角线上方的墙面区域，整张呈倾斜靠墙的姿态；正立平贴或完全平放的不满足。",
+          "kind": "screenshot_visual",
+          "decider": "judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "lean.2",
+            "corner_scene"
+          ],
+          "member": "lean.2"
+        },
+        {
+          "id": "C12",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "上端靠着墙面",
+          "target": "lean.3.wall",
+          "check": "斜靠组第3张（Chidi）上端位于墙角线上方的墙面区域，整张呈倾斜靠墙的姿态；正立平贴或完全平放的不满足。",
+          "kind": "screenshot_visual",
+          "decider": "judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "lean.3",
+            "corner_scene"
+          ],
+          "member": "lean.3"
+        },
+        {
+          "id": "C13",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "上端靠着墙面",
+          "target": "lean.4.wall",
+          "check": "斜靠组第4张（Eleanor）上端位于墙角线上方的墙面区域，整张呈倾斜靠墙的姿态；正立平贴或完全平放的不满足。",
+          "kind": "screenshot_visual",
+          "decider": "judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "lean.4",
+            "corner_scene"
+          ],
+          "member": "lean.4"
+        },
+        {
+          "id": "C14",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "整体比悬浮的一组略大",
+          "target": "lean_vs_float.size",
+          "check": "斜靠组海报整体尺寸比悬浮组略大：平均渲染宽度和高度都大于悬浮组，但不是成倍放大。",
+          "kind": "geometry",
+          "decider": "program+judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "lean",
+            "float"
+          ],
+          "note": "程序比较平均宽高；“略”的上限不预设数值，接近成倍时交 Judge。"
+        },
+        {
+          "id": "C15",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "两组之间留有明显空白",
+          "target": "groups.gap",
+          "check": "悬浮组下边缘与斜靠组最高点之间有明显的竖直空白，两组不相接、不重叠。",
+          "kind": "geometry_visual",
+          "decider": "program+judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "lean",
+            "float"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SR-06",
+      "dimension": "static",
+      "description": "斜靠组的透视纵深与卡片厚度",
+      "target": "lean",
+      "source_fields": [
+        "layout_constraints"
+      ],
+      "mandatory_evidence": [
+        {
+          "id": "C1",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "大小和高低符合近大远小的透视",
+          "target": "lean.pair12.height",
+          "check": "斜靠组第2张（Jason）在地面上的位置比第1张（Tahani）更高，体现沿墙向右后方延伸。",
+          "kind": "geometry",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "lean.1",
+            "lean.2"
+          ],
+          "member": "lean.pair12",
+          "note": "比较两张海报可见下边缘的最低点。"
+        },
+        {
+          "id": "C2",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "大小和高低符合近大远小的透视",
+          "target": "lean.pair23.height",
+          "check": "斜靠组第3张（Chidi）在地面上的位置比第2张（Jason）更高，体现沿墙向右后方延伸。",
+          "kind": "geometry",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "lean.2",
+            "lean.3"
+          ],
+          "member": "lean.pair23",
+          "note": "比较两张海报可见下边缘的最低点。"
+        },
+        {
+          "id": "C3",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "大小和高低符合近大远小的透视",
+          "target": "lean.pair34.height",
+          "check": "斜靠组第4张（Eleanor）在地面上的位置比第3张（Chidi）更高，体现沿墙向右后方延伸。",
+          "kind": "geometry",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "lean.3",
+            "lean.4"
+          ],
+          "member": "lean.pair34",
+          "note": "比较两张海报可见下边缘的最低点。"
+        },
+        {
+          "id": "C4",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "大小和高低符合近大远小的透视",
+          "target": "lean.pair12.size",
+          "check": "斜靠组第2张（Jason）渲染尺寸比第1张（Tahani）更小（近大远小）。",
+          "kind": "geometry",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "lean.1",
+            "lean.2"
+          ],
+          "member": "lean.pair12",
+          "note": "比较可见区域的高度；宽度受倾斜影响，只作辅助。"
+        },
+        {
+          "id": "C5",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "大小和高低符合近大远小的透视",
+          "target": "lean.pair23.size",
+          "check": "斜靠组第3张（Chidi）渲染尺寸比第2张（Jason）更小（近大远小）。",
+          "kind": "geometry",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "lean.2",
+            "lean.3"
+          ],
+          "member": "lean.pair23",
+          "note": "比较可见区域的高度；宽度受倾斜影响，只作辅助。"
+        },
+        {
+          "id": "C6",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "大小和高低符合近大远小的透视",
+          "target": "lean.pair34.size",
+          "check": "斜靠组第4张（Eleanor）渲染尺寸比第3张（Chidi）更小（近大远小）。",
+          "kind": "geometry",
+          "decider": "program",
+          "viewport": "desktop",
+          "required_objects": [
+            "lean.3",
+            "lean.4"
+          ],
+          "member": "lean.pair34",
+          "note": "比较可见区域的高度；宽度受倾斜影响，只作辅助。"
+        },
+        {
+          "id": "C7",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "海报是有一定厚度的卡片",
+          "target": "lean.1.thickness",
+          "check": "斜靠组第1张（Tahani）可见卡片厚度：至少一侧边缘有与画面不同的窄边，表现卡片的侧面。",
+          "kind": "screenshot_visual",
+          "decider": "judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "lean.1.thickness"
+          ],
+          "member": "lean.1",
+          "note": "该句紧接斜靠组的描述，只适用于斜靠组；悬浮组不要求厚度。"
+        },
+        {
+          "id": "C8",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "海报是有一定厚度的卡片",
+          "target": "lean.2.thickness",
+          "check": "斜靠组第2张（Jason）可见卡片厚度：至少一侧边缘有与画面不同的窄边，表现卡片的侧面。",
+          "kind": "screenshot_visual",
+          "decider": "judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "lean.2.thickness"
+          ],
+          "member": "lean.2",
+          "note": "该句紧接斜靠组的描述，只适用于斜靠组；悬浮组不要求厚度。"
+        },
+        {
+          "id": "C9",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "海报是有一定厚度的卡片",
+          "target": "lean.3.thickness",
+          "check": "斜靠组第3张（Chidi）可见卡片厚度：至少一侧边缘有与画面不同的窄边，表现卡片的侧面。",
+          "kind": "screenshot_visual",
+          "decider": "judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "lean.3.thickness"
+          ],
+          "member": "lean.3",
+          "note": "该句紧接斜靠组的描述，只适用于斜靠组；悬浮组不要求厚度。"
+        },
+        {
+          "id": "C10",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "海报是有一定厚度的卡片",
+          "target": "lean.4.thickness",
+          "check": "斜靠组第4张（Eleanor）可见卡片厚度：至少一侧边缘有与画面不同的窄边，表现卡片的侧面。",
+          "kind": "screenshot_visual",
+          "decider": "judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "lean.4.thickness"
+          ],
+          "member": "lean.4",
+          "note": "该句紧接斜靠组的描述，只适用于斜靠组；悬浮组不要求厚度。"
+        }
+      ]
+    },
+    {
+      "id": "SR-07",
+      "dimension": "static",
+      "description": "斜靠组的光影",
+      "target": "lean",
+      "source_fields": [
+        "layout_constraints"
+      ],
+      "mandatory_evidence": [
+        {
+          "id": "C1",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "光线从右上方照来，斜靠的海报在墙面和地面上投下自然的影子",
+          "target": "lean.1.cast_shadow",
+          "check": "斜靠组第1张（Tahani）有可见投影：投影在海报背光的左侧或左下方，与海报相连，同时落在墙面和地面上，并有深浅过渡；没有投影、投影朝右或朝上，或只是与海报同形的平移色块的不满足。",
+          "kind": "screenshot_visual",
+          "decider": "judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "lean.1.cast_shadow"
+          ],
+          "member": "lean.1"
+        },
+        {
+          "id": "C2",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "光线从右上方照来，斜靠的海报在墙面和地面上投下自然的影子",
+          "target": "lean.2.cast_shadow",
+          "check": "斜靠组第2张（Jason）有可见投影：投影在海报背光的左侧或左下方，与海报相连，同时落在墙面和地面上，并有深浅过渡；没有投影、投影朝右或朝上，或只是与海报同形的平移色块的不满足。",
+          "kind": "screenshot_visual",
+          "decider": "judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "lean.2.cast_shadow"
+          ],
+          "member": "lean.2"
+        },
+        {
+          "id": "C3",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "光线从右上方照来，斜靠的海报在墙面和地面上投下自然的影子",
+          "target": "lean.3.cast_shadow",
+          "check": "斜靠组第3张（Chidi）有可见投影：投影在海报背光的左侧或左下方，与海报相连，同时落在墙面和地面上，并有深浅过渡；没有投影、投影朝右或朝上，或只是与海报同形的平移色块的不满足。",
+          "kind": "screenshot_visual",
+          "decider": "judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "lean.3.cast_shadow"
+          ],
+          "member": "lean.3"
+        },
+        {
+          "id": "C4",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "光线从右上方照来，斜靠的海报在墙面和地面上投下自然的影子",
+          "target": "lean.4.cast_shadow",
+          "check": "斜靠组第4张（Eleanor）有可见投影：投影在海报背光的左侧或左下方，与海报相连，同时落在墙面和地面上，并有深浅过渡；没有投影、投影朝右或朝上，或只是与海报同形的平移色块的不满足。",
+          "kind": "screenshot_visual",
+          "decider": "judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "lean.4.cast_shadow"
+          ],
+          "member": "lean.4"
+        },
+        {
+          "id": "C5",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "表面带有与光照方向一致的明暗和反光",
+          "target": "lean.1.surface_light",
+          "check": "斜靠组第1张（Tahani）表面有可见的明暗与反光，朝向光源的右上部分更亮或带反光，背光的左下部分更暗；完全没有表面光影，或亮暗方向与右上光源相反的不满足。",
+          "kind": "screenshot_visual",
+          "decider": "judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "lean.1.surface_light"
+          ],
+          "member": "lean.1"
+        },
+        {
+          "id": "C6",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "表面带有与光照方向一致的明暗和反光",
+          "target": "lean.2.surface_light",
+          "check": "斜靠组第2张（Jason）表面有可见的明暗与反光，朝向光源的右上部分更亮或带反光，背光的左下部分更暗；完全没有表面光影，或亮暗方向与右上光源相反的不满足。",
+          "kind": "screenshot_visual",
+          "decider": "judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "lean.2.surface_light"
+          ],
+          "member": "lean.2"
+        },
+        {
+          "id": "C7",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "表面带有与光照方向一致的明暗和反光",
+          "target": "lean.3.surface_light",
+          "check": "斜靠组第3张（Chidi）表面有可见的明暗与反光，朝向光源的右上部分更亮或带反光，背光的左下部分更暗；完全没有表面光影，或亮暗方向与右上光源相反的不满足。",
+          "kind": "screenshot_visual",
+          "decider": "judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "lean.3.surface_light"
+          ],
+          "member": "lean.3"
+        },
+        {
+          "id": "C8",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "表面带有与光照方向一致的明暗和反光",
+          "target": "lean.4.surface_light",
+          "check": "斜靠组第4张（Eleanor）表面有可见的明暗与反光，朝向光源的右上部分更亮或带反光，背光的左下部分更暗；完全没有表面光影，或亮暗方向与右上光源相反的不满足。",
+          "kind": "screenshot_visual",
+          "decider": "judge",
+          "viewport": "desktop",
+          "required_objects": [
+            "lean.4.surface_light"
+          ],
+          "member": "lean.4"
+        }
+      ]
+    }
+  ],
+  "dynamic_requirements": [],
+  "dimension_policy": {
+    "D1": 1,
+    "D2": 0,
+    "reason": "input 无动画或状态切换要求，准静态页面；只计 D1。"
+  },
+  "dependency_policy": {
+    "version": "model-dependency-fail/1.0",
+    "rule": "已确认模型缺失前置对象并实际阻断下游条件时，上下游都判 FAIL、各自判档（DEC-029）；定位、网络或采证失败记 UNRESOLVED；不受阻的成员继续检查。",
+    "prerequisites": [
+      {
+        "upstream": "SR-01.C1",
+        "downstream": [
+          "SR-05.C6",
+          "SR-05.C7",
+          "SR-05.C8",
+          "SR-05.C9",
+          "SR-05.C10",
+          "SR-05.C11",
+          "SR-05.C12",
+          "SR-05.C13"
+        ],
+        "when": "确认画面中分辨不出墙面和地面时，立地面、靠墙条件无法成立。"
+      },
+      {
+        "upstream": "SR-03.C1",
+        "downstream": [
+          "SR-05.*",
+          "SR-06.*",
+          "SR-07.*"
+        ],
+        "when": "确认斜靠组缺少某张海报时，只阻断涉及该成员的条件。"
+      },
+      {
+        "upstream": "SR-02.C1",
+        "downstream": [
+          "SR-04.*"
+        ],
+        "when": "确认悬浮组缺少某张海报时，只阻断涉及该成员的条件。"
+      }
+    ]
+  },
+  "scoring": {
+    "note": "Routing IDs only; formula and deductions come exclusively from the shared scoring policy.",
+    "gates": {
+      "fatal": {
+        "gate_ids": [
+          "G1"
+        ]
+      },
+      "ordinary": {
+        "gate_ids": [
+          "G2",
+          "G3",
+          "G4",
+          "G5"
+        ]
+      }
+    }
+  },
+  "draft_review": {
+    "reviewer": "Claude implementer self-review",
+    "independent_review": false,
+    "date": "2026-11-17",
+    "checked": [
+      "source quotes are exact substrings of input",
+      "member split",
+      "same-fact ownership"
+    ],
+    "not_performed": [
+      "target registry / binding",
+      "Judge run",
+      "release freeze",
+      "API calls",
+      "model scoring",
+      "user acceptance"
+    ]
+  },
+  "user_confirmation": {
+    "date": "2026-11-17",
+    "quote": "按建议处理",
+    "items": [
+      "SR-01.C3 墙角场景横贯全宽：保留",
+      "并列失败合并裁定：沿用 case-213 规则",
+      "采证视口：只用 1280×900",
+      "SR-07.C1–C4 投影最低标准：采用"
+    ]
+  }
+}

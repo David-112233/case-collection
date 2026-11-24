@@ -67,7 +67,15 @@ def pen_key(url: str) -> tuple[str, str] | None:
 
 
 def existing_case_pens() -> dict[str, str]:
+    """Pens already in the project: main-repo index (reference/dedupe_index.csv) plus cases/ added in this repo."""
     seen: dict[str, str] = {}
+    index = REPO_ROOT / "reference" / "dedupe_index.csv"
+    if index.is_file():
+        with index.open(encoding="utf-8-sig", newline="") as handle:
+            for row in csv.DictReader(handle):
+                key = pen_key(row.get("source_url") or "")
+                if key:
+                    seen[f"{key[0]}/{key[1]}".lower()] = row.get("case_id") or "indexed"
     for meta in CASES_DIR.glob("case-*/metadata.json"):
         try:
             url = json.loads(meta.read_text(encoding="utf-8")).get("url") or ""

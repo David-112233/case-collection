@@ -45,6 +45,13 @@ def already_judged() -> dict[str, str]:
         with path.open(encoding="utf-8-sig", newline="") as handle:
             for row in csv.DictReader(handle):
                 seen.setdefault(row["key"].lower(), f"{path.name}:{row['decision']}")
+    index = ROOT.parents[1] / "reference" / "dedupe_index.csv"
+    if index.is_file():
+        with index.open(encoding="utf-8-sig", newline="") as handle:
+            for row in csv.DictReader(handle):
+                key = key_of(row.get("source_url") or "")
+                if key:
+                    seen[key.lower()] = f"in {row.get('case_id') or 'main repo'}"
     for meta in CASES.glob("case-*/metadata.json"):
         try:
             key = key_of(json.loads(meta.read_text(encoding="utf-8")).get("url") or "")

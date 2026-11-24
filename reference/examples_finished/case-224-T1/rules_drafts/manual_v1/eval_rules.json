@@ -1,0 +1,2180 @@
+{
+  "schema_version": "semantic-eval-rules/3.0",
+  "case_id": "case-224",
+  "tier": "T1",
+  "rule_status": "DRAFT_FOR_USER_REVIEW",
+  "revision": "20261117-manual-v1-draft",
+  "input_sha256": "19616af6cb8f703be3eebda5a1b8f90fcd78f157cb467d505b040c7f192407c3",
+  "input_source": {
+    "path": "input.json",
+    "note": "2026-11-17 用户确认的 input（四角地灯、光影自然一句、房屋构型方正）。"
+  },
+  "output_contract_ref": "scripts/eval_rules_generation/preparation/output_contract_v2.json",
+  "scoring_policy_ref": "scripts/eval_rules_generation/preparation/evaluation_policy_v2.json#/scoring_policy",
+  "severity_anchor_ref": "scripts/eval_rules_generation/preparation/severity_anchors_v1_1.json",
+  "source_policy": {
+    "requirements": "只来自 input.json；business_background 只提供语境；本稿没有 DEC-037 常识条件。",
+    "gt": "ground_truth.html = source.html 删去 CodePen stopExecutionOnTimeout 外链脚本一行；GT 只用于自测与锚点，不反推新增要求。",
+    "model_outputs": "起草时未读取任何模型输出。"
+  },
+  "render_baseline": {
+    "status": "NOT_FROZEN",
+    "viewports": {
+      "wide": [
+        1280,
+        900
+      ],
+      "xl": [
+        1920,
+        1080
+      ]
+    },
+    "note": "input 没有响应式分支，除 SR-02.C4 外全部只在 wide 采证；xl 只用于缩放比较。",
+    "resources": "JS 开启；外部字体/图片按通用 v2 契约允许。环境或采证失败记 UNRESOLVED。"
+  },
+  "measure_policy": {
+    "direction_convention": "input 的前后左右以别墅自身为准（站在屋内向外看）：别墅正面朝画面左下，左侧朝画面右下，右侧朝画面左上。各条 check 已写出对应的画面方向，Judge 按画面方向判。",
+    "qualitative": "颜色按色系判，不给色号；“明显”“略”按相对关系判，不发明数值阈值。",
+    "program_first": "背景亮度、静止、水平居中、等比缩放由程序在截图上测量。模型可能用 DOM、SVG 或 canvas 实现，故以截图像素为准，不依赖选择器。",
+    "occluded_ground_lamp": "“四个角旁各一盏地灯”中，后方角被建筑遮挡，标答中也看不到，无法观察，不设条件；只对画面左、右、下三个角分别计分。",
+    "coverage": "并列成员分别计分（栏板四处、埋地灯六处、地灯三角、两间屋各自的玻璃）；同一成员在同一句里的几个子属性合为一条（如每处栏板的位置＋半透明深色＋斜向反光）。"
+  },
+  "quality_gate": [
+    {
+      "id": "G1",
+      "description": "HTML 能形成可评测的 DOM；仅解析器或环境失败不算模型致命失败。",
+      "source": "project_output_contract"
+    },
+    {
+      "id": "G2",
+      "description": "按通用 v2 允许 JS；不因含脚本或事件属性判违规。",
+      "source": "project_output_contract"
+    },
+    {
+      "id": "G3",
+      "description": "允许外部字体、字体样式表、图片和普通链接；资源可用性单独检查。",
+      "source": "project_output_contract"
+    },
+    {
+      "id": "G4",
+      "description": "单个完整 HTML；页面 CSS 内嵌在 head/style 或元素 style 属性；JS 内嵌，不依赖外部脚本文件。",
+      "source": "project_output_contract"
+    },
+    {
+      "id": "G5",
+      "description": "input.forbidden 为空；不另设案例禁令。",
+      "source": "input.forbidden"
+    }
+  ],
+  "static_requirements": [
+    {
+      "id": "SR-01",
+      "dimension": "static",
+      "type": "region",
+      "description": "页面背景",
+      "target": "sr-01",
+      "source_fields": [
+        "layout_constraints"
+      ],
+      "mandatory_evidence": [
+        {
+          "id": "C1",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "整页背景为深海军蓝夜色，中心略亮、向四周渐暗至近黑",
+          "target": "page",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "模型以外的页面背景为深海军蓝夜色，呈中心稍亮、向四周渐暗、边缘接近黑色的渐变；变化允许很弱，但不能是纯黑或其他色相；不指定色号与渐变节点。程序在模型包围框以外取中心附近与四角像素比较亮度，色相由 Judge 复核。",
+          "kind": "screenshot_pixels",
+          "evaluator": "program+api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "page"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SR-02",
+      "dimension": "static",
+      "type": "region",
+      "description": "模型整体：呈现、视角、居中与缩放",
+      "target": "sr-02",
+      "source_fields": [
+        "functional_requirements",
+        "layout_constraints"
+      ],
+      "mandatory_evidence": [
+        {
+          "id": "C1",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "页面展示一座三维别墅模型",
+          "target": "model",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "页面中可辨认出一座有体积感的三维别墅模型（不是平面示意图或文字说明），且只有一座。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "model"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C2",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "模型以固定视角静态呈现",
+          "target": "model",
+          "applies_when": "初始画面与等待及指针移动后的画面对比。",
+          "check": "页面稳定后，等待一段时间以及指针在页面上移动后，模型视角与画面均不改变（截图逐像素比较，容许抗锯齿噪声，阈值在可执行化阶段冻结）。",
+          "kind": "static_stability",
+          "evaluator": "program",
+          "viewport": "wide",
+          "required_objects": [
+            "model"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C3",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "在视口中部水平居中",
+          "target": "model",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "模型可见像素包围框的水平中心接近视口水平中心（容差在可执行化阶段冻结）；input 只写水平居中，不判垂直精确居中。",
+          "kind": "screenshot_geometry",
+          "evaluator": "program",
+          "viewport": "wide",
+          "required_objects": [
+            "model"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C4",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "整体尺寸随视口宽度等比缩放",
+          "target": "model",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "两个宽度不同的视口下，模型包围框宽度之比与视口宽度之比一致（容差在可执行化阶段冻结）；wide 只作基线，本条只计一次。",
+          "kind": "cross_viewport_geometry",
+          "evaluator": "program",
+          "viewport": "wide+xl",
+          "required_objects": [
+            "model"
+          ],
+          "sample_viewports": [
+            "wide",
+            "xl"
+          ]
+        },
+        {
+          "id": "C5",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "模型采用从斜上方俯视的轴测视角",
+          "target": "model",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "视点在斜上方：同时看得到顶面和两个相邻立面，不是正视、正俯视或仰视。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "model"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C6",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "近似平行投影，几乎没有近大远小",
+          "target": "model",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "空间中平行的边在画面中基本保持平行，远近同尺寸的部件画面尺寸基本相同，没有明显透视汇聚。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "model"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C7",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "矩形场地的一个角正对观者、位于模型最下方",
+          "target": "site",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "矩形场地呈菱形朝向：一个角位于模型最下方、正对观者，而不是一条边朝向观者。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "site"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C8",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "别墅正面朝向画面左下",
+          "target": "site",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "从最下方的角出发，前侧边（实心台、泳池、台阶所在一侧）向画面左上展开，左侧边向画面右上展开；即别墅正面朝画面左下、别墅左侧朝画面右下。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "site"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C9",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "房屋构型方正",
+          "target": "model",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "建筑各体块以方正的直角体块为主，墙、楼板、屋顶相互垂直或平行，没有明显歪斜、弧形或不规则形体。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "model"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SR-03",
+      "dimension": "static",
+      "type": "element",
+      "description": "场地底板与高台",
+      "target": "sr-03",
+      "source_fields": [
+        "functional_requirements",
+        "layout_constraints"
+      ],
+      "mandatory_evidence": [
+        {
+          "id": "C1",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "一块场地底板",
+          "target": "site.base",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "存在一块位于最底层、承托整个场地的薄底板。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "site.base"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C2",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "底板为浅灰紫色",
+          "target": "site.base",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "底板呈浅灰紫色系（允许叠加光斑）；不指定色号。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "site.base"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C3",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "底板中后部抬起的高台",
+          "target": "site.platform",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "底板上方抬起一个高台，位于场地中部偏后，前方留出实心台、泳池和台阶所在的区域。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "site.platform"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C4",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "高台与场地同宽",
+          "target": "site.platform",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "高台沿左右方向（画面上与前侧边平行，即左下—右上方向）贯通整个场地宽度。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "site.platform"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C5",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "高度明显大于底板厚度",
+          "target": "site.platform",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "高台高出底板的高度明显大于底板自身厚度。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "site.platform"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C6",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "实心台、泳池与前侧边之间露出一条底板窄带",
+          "target": "site.base.front_strip",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "实心台和泳池前方与场地前侧边之间露出一条底板窄带，而不是贴齐场地边缘。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "site.base.front_strip"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SR-04",
+      "dimension": "static",
+      "type": "element",
+      "description": "高台前方三部件：存在、顺序与高度",
+      "target": "sr-04",
+      "source_fields": [
+        "functional_requirements",
+        "layout_constraints"
+      ],
+      "mandatory_evidence": [
+        {
+          "id": "C1",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "高台前方的一个方形实心台",
+          "target": "front.block",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "高台前方有一个方正的实心体块。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "front.block"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C2",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "一座露天泳池",
+          "target": "front.pool",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "高台前方有一座露天泳池（可见水面）。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "front.pool"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C3",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "一段从底板通往高台的室外台阶",
+          "target": "front.stairs",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "高台前方有一段室外台阶，下端落在底板上、上端到达高台顶面。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "front.stairs"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C4",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "高台前方沿前侧边从右到左依次为实心台、泳池和室外台阶",
+          "target": "front.block",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "实心台位于这一排最右端（别墅右侧，即画面中靠场地左侧角的一端）。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "front.block"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C5",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "泳池紧邻实心台",
+          "target": "front.pool",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "泳池在三者中间，位于实心台左侧（画面中实心台的右下方向）并与实心台紧邻。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "front.pool"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C6",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "高台前方沿前侧边从右到左依次为实心台、泳池和室外台阶",
+          "target": "front.stairs",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "室外台阶位于这一排最左端（别墅左侧，即画面中泳池右下方向、靠最下方角的一端）。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "front.stairs"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C7",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "实心台与高台等高",
+          "target": "front.block",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "实心台顶面与高台顶面基本齐平。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "front.block"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SR-05",
+      "dimension": "static",
+      "type": "element",
+      "description": "泳池",
+      "target": "sr-05",
+      "source_fields": [
+        "functional_requirements",
+        "layout_constraints"
+      ],
+      "mandatory_evidence": [
+        {
+          "id": "C1",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "水面为半透明亮蓝色",
+          "target": "front.pool.water",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "泳池水面呈亮蓝色且半透明（能透出池内结构或池底）。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "front.pool.water"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C2",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "略低于池沿",
+          "target": "front.pool.water",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "水面略低于池沿，不与池沿齐平或高出。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "front.pool.water"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C3",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "池内有入水台阶",
+          "target": "front.pool.steps",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "泳池内有入水台阶（可透过水面看到）。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "front.pool.steps"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C4",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "入水台阶位于靠实心台一侧、逐级下降",
+          "target": "front.pool.steps",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "入水台阶位于泳池靠实心台的一侧，并由该侧向池中逐级下降。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "front.pool.steps"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SR-06",
+      "dimension": "static",
+      "type": "element",
+      "description": "室外台阶",
+      "target": "sr-06",
+      "source_fields": [
+        "layout_constraints"
+      ],
+      "mandatory_evidence": [
+        {
+          "id": "C1",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "室外台阶共四个踏面",
+          "target": "front.stairs",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "底板与高台顶面之间可数出四个踏面（不含底板和高台顶面）。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "front.stairs"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C2",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "从底板逐级升至高台",
+          "target": "front.stairs",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "台阶逐级升高，最低一级从底板升起，最高一级与高台顶面衔接。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "front.stairs"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C3",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "朝前下行",
+          "target": "front.stairs",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "台阶朝别墅前方（画面左下方向）下行，越靠前越低。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "front.stairs"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SR-07",
+      "dimension": "static",
+      "type": "element",
+      "description": "一层左屋、右屋与墙垛",
+      "target": "sr-07",
+      "source_fields": [
+        "functional_requirements",
+        "layout_constraints"
+      ],
+      "mandatory_evidence": [
+        {
+          "id": "C1",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "一层为左右两间落地玻璃房",
+          "target": "gf.left_room",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "高台上一层有左屋，为落地玻璃房（外墙主要是通高玻璃）。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "gf.left_room"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C2",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "一层为左右两间落地玻璃房",
+          "target": "gf.right_room",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "高台上一层有右屋，为落地玻璃房（外墙主要是通高玻璃）。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "gf.right_room"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C3",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "一层分为左屋和右屋",
+          "target": "gf.rooms",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "左屋在别墅左侧（画面中偏右下），右屋在别墅右侧（画面中偏左上），两屋可区分为两个体块。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "gf.rooms"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C4",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "右屋比左屋向前突出",
+          "target": "gf.right_room",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "右屋正面比左屋正面更靠前（更向画面左下伸出）。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "gf.right_room"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C5",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "落地玻璃透出明亮浅青白光",
+          "target": "gf.left_room.glass",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "左屋落地玻璃透出明亮的浅青白色光。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "gf.left_room.glass"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C6",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "落地玻璃透出明亮浅青白光",
+          "target": "gf.right_room.glass",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "右屋落地玻璃透出明亮的浅青白色光。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "gf.right_room.glass"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C7",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "有深色窗框和竖向中梃",
+          "target": "gf.left_room.glass",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "左屋玻璃有深色窗框，并有竖向中梃分格。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "gf.left_room.glass"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C8",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "有深色窗框和竖向中梃",
+          "target": "gf.right_room.glass",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "右屋玻璃有深色窗框，并有竖向中梃分格。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "gf.right_room.glass"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C9",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "左屋左侧外墙为两段墙垛",
+          "target": "gf.left_room.piers",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "左屋左侧外墙（朝画面右下的一面）由两段墙垛构成。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "gf.left_room.piers"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C10",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "左屋左侧外墙为两段浅色墙垛",
+          "target": "gf.left_room.piers",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "两段墙垛为浅色实墙，与玻璃明显不同。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "gf.left_room.piers"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C11",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "中间留一道透光竖缝",
+          "target": "gf.left_room.piers",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "两段墙垛之间留有一道竖缝，缝中透出室内光。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "gf.left_room.piers"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SR-08",
+      "dimension": "static",
+      "type": "element",
+      "description": "屋顶露台与二层",
+      "target": "sr-08",
+      "source_fields": [
+        "functional_requirements",
+        "layout_constraints"
+      ],
+      "mandatory_evidence": [
+        {
+          "id": "C1",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "左屋屋顶为屋顶露台",
+          "target": "roof_terrace",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "左屋屋顶为屋顶露台（平屋面，不是再叠一层房间）。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "roof_terrace"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C2",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "右屋之上为二层体量",
+          "target": "upper_floor",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "右屋之上叠有二层体量。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "upper_floor"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C3",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "向前延伸并悬挑出右屋",
+          "target": "upper_floor",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "二层向前延伸超出右屋正面，形成悬挑，悬挑部分下方没有落地支撑。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "upper_floor"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C4",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "二层外墙由深色实墙板与玻璃窗交替组成",
+          "target": "upper_floor.facade",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "二层外墙由深色实墙板与发光玻璃窗交替组成，不是整面玻璃或整面实墙。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "upper_floor.facade"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C5",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "functional_requirements"
+          ],
+          "source_quote": "并有一扇转角窗",
+          "target": "upper_floor.corner_window",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "二层有一扇跨越两个相邻立面、在转角处连续折过去的窗。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "upper_floor.corner_window"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C6",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "转角窗位于二层正面与左侧立面相交的转角",
+          "target": "upper_floor.corner_window",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "转角窗位于二层正面（朝画面左下）与左侧立面（朝画面右下）相交的转角，即二层最靠近观者的竖向转角。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "upper_floor.corner_window"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SR-09",
+      "dimension": "static",
+      "type": "element",
+      "description": "玻璃栏板（逐处）",
+      "target": "sr-09",
+      "source_fields": [
+        "layout_constraints"
+      ],
+      "mandatory_evidence": [
+        {
+          "id": "C1",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "设在实心台和泳池的前侧与外侧",
+          "target": "railing.block",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "实心台的前侧和外侧（别墅右侧方向）边缘设有半透明深色、带斜向反光的玻璃栏板。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "railing.block"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C2",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "设在实心台和泳池的前侧与外侧",
+          "target": "railing.pool",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "泳池的前侧和外侧（靠室外台阶一侧）边缘设有半透明深色、带斜向反光的玻璃栏板。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "railing.pool"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C3",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "高台左侧边缘",
+          "target": "railing.platform",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "高台左侧边缘（画面右侧）设有半透明深色、带斜向反光的玻璃栏板。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "railing.platform"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C4",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "屋顶露台外侧",
+          "target": "railing.roof_terrace",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "屋顶露台外侧边缘设有半透明深色、带斜向反光的玻璃栏板。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "railing.roof_terrace"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SR-10",
+      "dimension": "static",
+      "type": "element",
+      "description": "灯光、投影与地面光晕（逐处）",
+      "target": "sr-10",
+      "source_fields": [
+        "layout_constraints"
+      ],
+      "mandatory_evidence": [
+        {
+          "id": "C1",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "分布在各屋顶",
+          "target": "lamps.upper_roof",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "二层屋顶上有带光晕的发光小圆点灯。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "lamps.upper_roof"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C2",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "分布在各屋顶",
+          "target": "lamps.roof_terrace",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "屋顶露台上有带光晕的发光小圆点灯。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "lamps.roof_terrace"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C3",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "实心台顶面",
+          "target": "lamps.block",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "实心台顶面有带光晕的发光小圆点灯。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "lamps.block"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C4",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "高台",
+          "target": "lamps.platform",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "高台顶面有带光晕的发光小圆点灯。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "lamps.platform"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C5",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "台阶踏面",
+          "target": "lamps.stairs",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "室外台阶踏面上有带光晕的发光小圆点灯。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "lamps.stairs"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C6",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "泳池前方的底板窄带上",
+          "target": "lamps.front_strip",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "泳池前方的底板窄带上有带光晕的发光小圆点灯。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "lamps.front_strip"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C7",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "泳池前壁外侧有一排纵向洗墙光晕",
+          "target": "pool.front_wall_wash",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "泳池前壁外侧有一排纵向光晕，像洗墙灯照亮墙面。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "pool.front_wall_wash"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C8",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "场地四个角旁的地面上各有一盏独立地灯",
+          "target": "ground_lamps.left",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "场地画面左侧角外侧的地面上有一盏独立发光地灯。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "ground_lamps.left"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C9",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "场地四个角旁的地面上各有一盏独立地灯",
+          "target": "ground_lamps.right",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "场地画面右侧角外侧的地面上有一盏独立发光地灯。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "ground_lamps.right"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C10",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "场地四个角旁的地面上各有一盏独立地灯",
+          "target": "ground_lamps.bottom",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "场地画面最下方角外侧的地面上有一盏独立发光地灯。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "ground_lamps.bottom"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C11",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "底板下方有柔和的深色投影",
+          "target": "ground.shadow",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "底板下方地面有柔和的深色投影。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "ground.shadow"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C12",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "蓝色环境光晕",
+          "target": "ground.glow",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "模型下方或周围地面有蓝色环境光晕。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "ground.glow"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SR-11",
+      "dimension": "static",
+      "type": "element",
+      "description": "明暗、深色顶面与整体光影",
+      "target": "sr-11",
+      "source_fields": [
+        "layout_constraints"
+      ],
+      "mandatory_evidence": [
+        {
+          "id": "C1",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "浅色体块的顶面最亮，正立面为中等灰紫，左侧立面更暗",
+          "target": "light_blocks.faces",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "浅色体块的顶面最亮，正立面（朝画面左下）为中等灰紫，左侧立面（朝画面右下）更暗；这一明暗层次在各浅色体块上一致。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "light_blocks.faces"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C2",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "实心台顶面",
+          "target": "front.block.top",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "实心台顶面为深蓝紫色。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "front.block.top"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C3",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "屋顶露台地面",
+          "target": "roof_terrace.floor",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "屋顶露台地面为深蓝紫色。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "roof_terrace.floor"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C4",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "二层屋顶均为深蓝紫色，二层屋顶带渐变",
+          "target": "upper_floor.roof",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "二层屋顶为深蓝紫色并带可见渐变。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "upper_floor.roof"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        },
+        {
+          "id": "C5",
+          "mandatory": true,
+          "source": "input",
+          "source_fields": [
+            "layout_constraints"
+          ],
+          "source_quote": "房屋各处光影自然，符合物理规律",
+          "target": "model.lighting",
+          "applies_when": "页面加载与资源稳定后的初始静态画面；不交互。",
+          "check": "光影整体可信：灯与亮窗附近的表面被照亮、带柔和光晕；投影和光晕位置与体块、光源相符；不同体块之间没有相互矛盾的光照方向或无来由的强光。三类立面的明暗由 SR-11.C1 负责，本条不重复判。",
+          "kind": "screenshot_visual",
+          "evaluator": "api_judge",
+          "viewport": "wide",
+          "required_objects": [
+            "model.lighting"
+          ],
+          "sample_viewports": [
+            "wide"
+          ]
+        }
+      ]
+    }
+  ],
+  "dynamic_requirements": [],
+  "dimension_policy": {
+    "D1": 1,
+    "D2": 0,
+    "reason": "input 只要求固定视角的静态画面，没有动画或状态切换；“静态呈现”作为 D1 条件 SR-02.C2 由程序检查。"
+  },
+  "dependency_policy": {
+    "version": "model-dependency-fail/1.0",
+    "rule": "确认缺失的前置部件实际阻断下游条件时，上下游均判 FAIL、各按自身严重度扣分（DEC-029）；定位、采证失败或原因不明记 UNRESOLVED；未受阻条件照常判定。",
+    "prerequisites": [
+      {
+        "upstream": "SR-03.C1",
+        "downstream": [
+          "SR-03.C2",
+          "SR-03.C6",
+          "SR-10.C11"
+        ],
+        "object": "site.base",
+        "viewport": "wide",
+        "when": "仅当前置部件本体确认缺失；部件存在但位置、颜色错误不阻断下游。"
+      },
+      {
+        "upstream": "SR-03.C3",
+        "downstream": [
+          "SR-03.C4",
+          "SR-03.C5",
+          "SR-09.C3",
+          "SR-10.C4"
+        ],
+        "object": "site.platform",
+        "viewport": "wide",
+        "when": "仅当前置部件本体确认缺失；部件存在但位置、颜色错误不阻断下游。"
+      },
+      {
+        "upstream": "SR-04.C1",
+        "downstream": [
+          "SR-04.C4",
+          "SR-04.C7",
+          "SR-09.C1",
+          "SR-10.C3",
+          "SR-11.C2"
+        ],
+        "object": "front.block",
+        "viewport": "wide",
+        "when": "仅当前置部件本体确认缺失；部件存在但位置、颜色错误不阻断下游。"
+      },
+      {
+        "upstream": "SR-04.C2",
+        "downstream": [
+          "SR-04.C5",
+          "SR-05.C1",
+          "SR-05.C2",
+          "SR-05.C3",
+          "SR-09.C2",
+          "SR-10.C6",
+          "SR-10.C7"
+        ],
+        "object": "front.pool",
+        "viewport": "wide",
+        "when": "仅当前置部件本体确认缺失；部件存在但位置、颜色错误不阻断下游。"
+      },
+      {
+        "upstream": "SR-04.C3",
+        "downstream": [
+          "SR-04.C6",
+          "SR-06.C1",
+          "SR-06.C2",
+          "SR-06.C3",
+          "SR-10.C5"
+        ],
+        "object": "front.stairs",
+        "viewport": "wide",
+        "when": "仅当前置部件本体确认缺失；部件存在但位置、颜色错误不阻断下游。"
+      },
+      {
+        "upstream": "SR-05.C3",
+        "downstream": [
+          "SR-05.C4"
+        ],
+        "object": "front.pool.steps",
+        "viewport": "wide",
+        "when": "仅当前置部件本体确认缺失；部件存在但位置、颜色错误不阻断下游。"
+      },
+      {
+        "upstream": "SR-07.C1",
+        "downstream": [
+          "SR-07.C3",
+          "SR-07.C4",
+          "SR-07.C5",
+          "SR-07.C7",
+          "SR-07.C9",
+          "SR-08.C1"
+        ],
+        "object": "gf.left_room",
+        "viewport": "wide",
+        "when": "仅当前置部件本体确认缺失；部件存在但位置、颜色错误不阻断下游。"
+      },
+      {
+        "upstream": "SR-07.C2",
+        "downstream": [
+          "SR-07.C3",
+          "SR-07.C4",
+          "SR-07.C6",
+          "SR-07.C8",
+          "SR-08.C2"
+        ],
+        "object": "gf.right_room",
+        "viewport": "wide",
+        "when": "仅当前置部件本体确认缺失；部件存在但位置、颜色错误不阻断下游。"
+      },
+      {
+        "upstream": "SR-07.C9",
+        "downstream": [
+          "SR-07.C10",
+          "SR-07.C11"
+        ],
+        "object": "gf.left_room.piers",
+        "viewport": "wide",
+        "when": "仅当前置部件本体确认缺失；部件存在但位置、颜色错误不阻断下游。"
+      },
+      {
+        "upstream": "SR-08.C1",
+        "downstream": [
+          "SR-09.C4",
+          "SR-10.C2",
+          "SR-11.C3"
+        ],
+        "object": "roof_terrace",
+        "viewport": "wide",
+        "when": "仅当前置部件本体确认缺失；部件存在但位置、颜色错误不阻断下游。"
+      },
+      {
+        "upstream": "SR-08.C2",
+        "downstream": [
+          "SR-08.C3",
+          "SR-08.C4",
+          "SR-08.C5",
+          "SR-10.C1",
+          "SR-11.C4"
+        ],
+        "object": "upper_floor",
+        "viewport": "wide",
+        "when": "仅当前置部件本体确认缺失；部件存在但位置、颜色错误不阻断下游。"
+      },
+      {
+        "upstream": "SR-08.C5",
+        "downstream": [
+          "SR-08.C6"
+        ],
+        "object": "upper_floor.corner_window",
+        "viewport": "wide",
+        "when": "仅当前置部件本体确认缺失；部件存在但位置、颜色错误不阻断下游。"
+      }
+    ]
+  },
+  "attribution_policy": {
+    "direct_duplicates": "同一事实只扣一次：存在性只在功能字段来源的条件判，位置与外观在布局条件判；SR-11.C5 不判三类面明暗（归 SR-11.C1）；栏板外观并入各处栏板条件，不另设总条件。",
+    "owner_index": [
+      {
+        "evidence_id": "SR-01.C1",
+        "target": "page",
+        "fact_origin": "SR-01.C1"
+      },
+      {
+        "evidence_id": "SR-02.C1",
+        "target": "model",
+        "fact_origin": "SR-02.C1"
+      },
+      {
+        "evidence_id": "SR-02.C2",
+        "target": "model",
+        "fact_origin": "SR-02.C2"
+      },
+      {
+        "evidence_id": "SR-02.C3",
+        "target": "model",
+        "fact_origin": "SR-02.C3"
+      },
+      {
+        "evidence_id": "SR-02.C4",
+        "target": "model",
+        "fact_origin": "SR-02.C4"
+      },
+      {
+        "evidence_id": "SR-02.C5",
+        "target": "model",
+        "fact_origin": "SR-02.C5"
+      },
+      {
+        "evidence_id": "SR-02.C6",
+        "target": "model",
+        "fact_origin": "SR-02.C6"
+      },
+      {
+        "evidence_id": "SR-02.C7",
+        "target": "site",
+        "fact_origin": "SR-02.C7"
+      },
+      {
+        "evidence_id": "SR-02.C8",
+        "target": "site",
+        "fact_origin": "SR-02.C8"
+      },
+      {
+        "evidence_id": "SR-02.C9",
+        "target": "model",
+        "fact_origin": "SR-02.C9"
+      },
+      {
+        "evidence_id": "SR-03.C1",
+        "target": "site.base",
+        "fact_origin": "SR-03.C1"
+      },
+      {
+        "evidence_id": "SR-03.C2",
+        "target": "site.base",
+        "fact_origin": "SR-03.C2"
+      },
+      {
+        "evidence_id": "SR-03.C3",
+        "target": "site.platform",
+        "fact_origin": "SR-03.C3"
+      },
+      {
+        "evidence_id": "SR-03.C4",
+        "target": "site.platform",
+        "fact_origin": "SR-03.C4"
+      },
+      {
+        "evidence_id": "SR-03.C5",
+        "target": "site.platform",
+        "fact_origin": "SR-03.C5"
+      },
+      {
+        "evidence_id": "SR-03.C6",
+        "target": "site.base.front_strip",
+        "fact_origin": "SR-03.C6"
+      },
+      {
+        "evidence_id": "SR-04.C1",
+        "target": "front.block",
+        "fact_origin": "SR-04.C1"
+      },
+      {
+        "evidence_id": "SR-04.C2",
+        "target": "front.pool",
+        "fact_origin": "SR-04.C2"
+      },
+      {
+        "evidence_id": "SR-04.C3",
+        "target": "front.stairs",
+        "fact_origin": "SR-04.C3"
+      },
+      {
+        "evidence_id": "SR-04.C4",
+        "target": "front.block",
+        "fact_origin": "SR-04.C4"
+      },
+      {
+        "evidence_id": "SR-04.C5",
+        "target": "front.pool",
+        "fact_origin": "SR-04.C5"
+      },
+      {
+        "evidence_id": "SR-04.C6",
+        "target": "front.stairs",
+        "fact_origin": "SR-04.C6"
+      },
+      {
+        "evidence_id": "SR-04.C7",
+        "target": "front.block",
+        "fact_origin": "SR-04.C7"
+      },
+      {
+        "evidence_id": "SR-05.C1",
+        "target": "front.pool.water",
+        "fact_origin": "SR-05.C1"
+      },
+      {
+        "evidence_id": "SR-05.C2",
+        "target": "front.pool.water",
+        "fact_origin": "SR-05.C2"
+      },
+      {
+        "evidence_id": "SR-05.C3",
+        "target": "front.pool.steps",
+        "fact_origin": "SR-05.C3"
+      },
+      {
+        "evidence_id": "SR-05.C4",
+        "target": "front.pool.steps",
+        "fact_origin": "SR-05.C4"
+      },
+      {
+        "evidence_id": "SR-06.C1",
+        "target": "front.stairs",
+        "fact_origin": "SR-06.C1"
+      },
+      {
+        "evidence_id": "SR-06.C2",
+        "target": "front.stairs",
+        "fact_origin": "SR-06.C2"
+      },
+      {
+        "evidence_id": "SR-06.C3",
+        "target": "front.stairs",
+        "fact_origin": "SR-06.C3"
+      },
+      {
+        "evidence_id": "SR-07.C1",
+        "target": "gf.left_room",
+        "fact_origin": "SR-07.C1"
+      },
+      {
+        "evidence_id": "SR-07.C2",
+        "target": "gf.right_room",
+        "fact_origin": "SR-07.C2"
+      },
+      {
+        "evidence_id": "SR-07.C3",
+        "target": "gf.rooms",
+        "fact_origin": "SR-07.C3"
+      },
+      {
+        "evidence_id": "SR-07.C4",
+        "target": "gf.right_room",
+        "fact_origin": "SR-07.C4"
+      },
+      {
+        "evidence_id": "SR-07.C5",
+        "target": "gf.left_room.glass",
+        "fact_origin": "SR-07.C5"
+      },
+      {
+        "evidence_id": "SR-07.C6",
+        "target": "gf.right_room.glass",
+        "fact_origin": "SR-07.C6"
+      },
+      {
+        "evidence_id": "SR-07.C7",
+        "target": "gf.left_room.glass",
+        "fact_origin": "SR-07.C7"
+      },
+      {
+        "evidence_id": "SR-07.C8",
+        "target": "gf.right_room.glass",
+        "fact_origin": "SR-07.C8"
+      },
+      {
+        "evidence_id": "SR-07.C9",
+        "target": "gf.left_room.piers",
+        "fact_origin": "SR-07.C9"
+      },
+      {
+        "evidence_id": "SR-07.C10",
+        "target": "gf.left_room.piers",
+        "fact_origin": "SR-07.C10"
+      },
+      {
+        "evidence_id": "SR-07.C11",
+        "target": "gf.left_room.piers",
+        "fact_origin": "SR-07.C11"
+      },
+      {
+        "evidence_id": "SR-08.C1",
+        "target": "roof_terrace",
+        "fact_origin": "SR-08.C1"
+      },
+      {
+        "evidence_id": "SR-08.C2",
+        "target": "upper_floor",
+        "fact_origin": "SR-08.C2"
+      },
+      {
+        "evidence_id": "SR-08.C3",
+        "target": "upper_floor",
+        "fact_origin": "SR-08.C3"
+      },
+      {
+        "evidence_id": "SR-08.C4",
+        "target": "upper_floor.facade",
+        "fact_origin": "SR-08.C4"
+      },
+      {
+        "evidence_id": "SR-08.C5",
+        "target": "upper_floor.corner_window",
+        "fact_origin": "SR-08.C5"
+      },
+      {
+        "evidence_id": "SR-08.C6",
+        "target": "upper_floor.corner_window",
+        "fact_origin": "SR-08.C6"
+      },
+      {
+        "evidence_id": "SR-09.C1",
+        "target": "railing.block",
+        "fact_origin": "SR-09.C1"
+      },
+      {
+        "evidence_id": "SR-09.C2",
+        "target": "railing.pool",
+        "fact_origin": "SR-09.C2"
+      },
+      {
+        "evidence_id": "SR-09.C3",
+        "target": "railing.platform",
+        "fact_origin": "SR-09.C3"
+      },
+      {
+        "evidence_id": "SR-09.C4",
+        "target": "railing.roof_terrace",
+        "fact_origin": "SR-09.C4"
+      },
+      {
+        "evidence_id": "SR-10.C1",
+        "target": "lamps.upper_roof",
+        "fact_origin": "SR-10.C1"
+      },
+      {
+        "evidence_id": "SR-10.C2",
+        "target": "lamps.roof_terrace",
+        "fact_origin": "SR-10.C2"
+      },
+      {
+        "evidence_id": "SR-10.C3",
+        "target": "lamps.block",
+        "fact_origin": "SR-10.C3"
+      },
+      {
+        "evidence_id": "SR-10.C4",
+        "target": "lamps.platform",
+        "fact_origin": "SR-10.C4"
+      },
+      {
+        "evidence_id": "SR-10.C5",
+        "target": "lamps.stairs",
+        "fact_origin": "SR-10.C5"
+      },
+      {
+        "evidence_id": "SR-10.C6",
+        "target": "lamps.front_strip",
+        "fact_origin": "SR-10.C6"
+      },
+      {
+        "evidence_id": "SR-10.C7",
+        "target": "pool.front_wall_wash",
+        "fact_origin": "SR-10.C7"
+      },
+      {
+        "evidence_id": "SR-10.C8",
+        "target": "ground_lamps.left",
+        "fact_origin": "SR-10.C8"
+      },
+      {
+        "evidence_id": "SR-10.C9",
+        "target": "ground_lamps.right",
+        "fact_origin": "SR-10.C9"
+      },
+      {
+        "evidence_id": "SR-10.C10",
+        "target": "ground_lamps.bottom",
+        "fact_origin": "SR-10.C10"
+      },
+      {
+        "evidence_id": "SR-10.C11",
+        "target": "ground.shadow",
+        "fact_origin": "SR-10.C11"
+      },
+      {
+        "evidence_id": "SR-10.C12",
+        "target": "ground.glow",
+        "fact_origin": "SR-10.C12"
+      },
+      {
+        "evidence_id": "SR-11.C1",
+        "target": "light_blocks.faces",
+        "fact_origin": "SR-11.C1"
+      },
+      {
+        "evidence_id": "SR-11.C2",
+        "target": "front.block.top",
+        "fact_origin": "SR-11.C2"
+      },
+      {
+        "evidence_id": "SR-11.C3",
+        "target": "roof_terrace.floor",
+        "fact_origin": "SR-11.C3"
+      },
+      {
+        "evidence_id": "SR-11.C4",
+        "target": "upper_floor.roof",
+        "fact_origin": "SR-11.C4"
+      },
+      {
+        "evidence_id": "SR-11.C5",
+        "target": "model.lighting",
+        "fact_origin": "SR-11.C5"
+      }
+    ]
+  },
+  "scoring": {
+    "note": "只列门禁路由；公式与扣分只来自通用 scoring policy。",
+    "gates": {
+      "fatal": {
+        "gate_ids": [
+          "G1"
+        ]
+      },
+      "ordinary": {
+        "gate_ids": [
+          "G2",
+          "G3",
+          "G4",
+          "G5"
+        ]
+      }
+    }
+  },
+  "api_batching_note": {
+    "verdict": "沿用 light-judge/1.2.2：按采证组把多个 Evidence 合在一次请求；本案例视觉条件大多共用同一张 wide 截图。",
+    "severity": "沿用 1.2.2：每条 FAIL 单独请求判档，按 evidence-severity/1.0 与 severity_anchors_v1_1 判轻/中/重，无依据记 UNRESOLVED。",
+    "cost": "本稿不声称节省；请求数取决于后续冻结的组批计划。"
+  },
+  "draft_review": {
+    "reviewer": "Claude 实现者自检",
+    "independent_review": false,
+    "date": "2026-11-17",
+    "checked": [
+      "source_quote 均为 input 原文子串",
+      "逐句覆盖",
+      "方向约定换算",
+      "依赖 ID 存在",
+      "GT 截图逐条目视对照"
+    ],
+    "not_performed": [
+      "可执行化（容差、采证组）",
+      "GT 自动自测",
+      "API 调用",
+      "模型评分",
+      "用户确认"
+    ]
+  }
+}

@@ -1,22 +1,22 @@
 # 数据收集路径（供云端智能体执行）
 
-更新：2026-11-10。整理者：Claude。本页把 DATA-001/DATA-002 已确认的做法写成一份可独立执行的说明；决策原文见 [DECISIONS](../project_state/DECISIONS.md) 的 DEC-031—036，方案原文见 [B1 工作方案](../project_state/handoffs/DATA-001-workplan-B1-20261002.md)。
+更新：2026-11-24。整理者：Claude。本页是采集区（`data_intake/`）的执行说明。统一规则和角色边界见 [AGENTS.md](../AGENTS.md)；决策原文见 [DECISIONS](../reference/docs/DECISIONS.md)（DEC-031—036 是选题标准，**DEC-048 放开了 JavaScript、外部字体和图片**）；采集初期的旧方案在 [reference/history/](../reference/history/)，口径已过期，只供追溯。
 
 ## 0. 先读这些
 
 | 顺序 | 文件 | 读它是为了 |
 |---|---|---|
-| 1 | [项目背景](../docs/PROJECT_BACKGROUND.md) | 明白基准测什么、为什么只要难题、什么作品能改成案例 |
+| 1 | [项目背景](../reference/docs/PROJECT_BACKGROUND.md) | 明白基准测什么、为什么只要难题、什么作品能改成案例 |
 | 2 | 本页 | 步骤、标准、协作规则 |
-| 3 | [examples/](../examples/) | 看 13 个已入库案例的题目和难点说明（先读其中的 README），知道成品长什么样 |
+| 3 | [reference/examples/](../reference/examples/) | 看 13 个已入库案例的题目和难点说明（先读其中的 README），知道成品长什么样；完成态样板见 [reference/examples_finished/](../reference/examples_finished/) |
 | 4 | [B1/screening.csv](B1/screening.csv) | 看 265 条历史判断的写法，尤其是 7 条 accept 和被用户否掉的 U1、U2 |
-| 5 | [existing_cases_catalog.csv](existing_cases_catalog.csv) | 库内 220 例的题材，避免重复 |
+| 5 | [reference/dedupe_index.csv](../reference/dedupe_index.csv) | 主仓库全部 227 例的档位、来源链接和一句话背景，避免题材重复（链接级去重由脚本自动完成） |
 
-需要查原文时再看：[任务定义 v5.2](../docs/TASK_DEFINITION_v5_2_synced.md)、[类型与难度模型 v2.1](../docs/difficulty_model_v2_1.md)、[扩量方案](../project_state/handoffs/DATA-001-expansion-plan-20260928.md)。
+需要查原文时再看：[输出契约 v2](../reference/docs/output_contract_v2.md)（输出限制以它为准）、[任务定义 v5.2](../reference/docs/TASK_DEFINITION_v5_2_synced.md)（其中“禁止 JavaScript”已被取代）、[类型与难度模型 v2.1](../reference/docs/difficulty_model_v2_1.md)、[扩量方案](../reference/history/DATA-001-expansion-plan-20260928.md)。
 
 ## 1. 一句话任务
 
-从 CodePen 公开作品里找出**技术罕见、对模型难**的纯 CSS（或可改成纯 CSS）作品，抓取源码，逐个判断并写出理由，最后交一份“建议入库”清单给用户挑选。
+从 CodePen 公开作品里找出**技术罕见、对模型难**的作品，抓取源码，逐个判断并写出理由，最后交一份“建议入库”清单给用户挑选。**不要求纯 CSS**：JavaScript、外部字体和图片均已放开（DEC-048），原作保留原样，不为符合旧门槛而删改。
 
 ## 1.5 两个采集者的协作规则
 
@@ -45,13 +45,12 @@ git commit -m "认领：dot 第01轮" && git push origin main          # 4 立�
 | 候选链接 | `B1/candidates_dot_NN.csv` | `B1/candidates_duet_NN.csv` |
 | 筛选判断 | `B1/screening_dot.csv` | `B1/screening_duet.csv` |
 | 源码 | `B1/raw/` 下自己认领的作品目录 | 同左 |
-| 工作分支 | `collect/dot-日期-NN` | `collect/duet-日期-NN` |
 
 - 旧的 `B1/screening.csv` 和 `B1/candidates*.csv`（不带名字的）是历史记录，两人都只读不写。
 - 默认搜索分工，减少撞车：**dot 主找 T1、T2、T6；duet 主找 T4、T5、T3。** 这只是搜索方向。顺手发现对方方向的好作品照样可以认领，谁先登记归谁。
-- 不重判对方的作品。对对方的结论有不同看法时，写在自己的 PR 说明里，由用户裁决，不要改对方的文件。
+- 不重判对方的作品。对对方的结论有不同看法时，写在自己的批次说明里，由用户裁决，不要改对方的文件。
 - `B1/raw/` 里历史留下的 24 份暂留候选（`screening.csv` 中的 hold）不属于任何一方，用户指派后再处理。
-- 只有“认领”这一种提交可以直接推 `main`。其他成果一律走自己的分支和 PR。
+- **所有提交都直接推 `main`**（认领、抓取、筛选、清单），不再为每批新建分支和 PR。每次提交前先 `git pull --rebase origin main`；一次提交只做一件事；不强推。
 
 ## 2. 整条路径与云端范围
 
@@ -62,25 +61,24 @@ git commit -m "认领：dot 第01轮" && git push origin main          # 4 立�
 | 3 汇总 | 生成一张源码规模与特性表 | `B1/triage.csv` | 做 |
 | 4 筛选 | 读源码、看渲染，定档位、难度特征、JS 处理、去留 | `B1/screening_<名字>.csv` | 做 |
 | **检查点 A** | **用户从“建议入库”里挑选** | — | **停在这里** |
-| 5 入库 | 分配案例编号，写来源与分类文件 | `cases/case-NNN-TX/` | 不做 |
-| 6 写 input | 依据源码实际效果写 `input.json` | 案例目录 | 不做 |
-| 7 写 GT | 依据 input 写单文件纯 CSS 参考页并双视口自测 | 案例目录 | 不做 |
-| **检查点 B** | **用户审核 input 与 GT** | — | — |
+| 5 入库 | 分配案例编号（从 `case-228` 起），生成案例目录，写台账 | `cases/case-NNN-TX/`、`cases/registry.csv` | **dot 执行，由用户触发** |
+| 6 加工 | 写 input、GT、规则草稿，GT 自检 | 案例目录 | **duet 执行**，见 [cases/README.md](../cases/README.md) |
+| **检查点 B** | **用户在本地审核 input、GT、规则**，再指示下一步 | — | 停在这里 |
 
-云端只做第 1—4 步。第 5 步起要占用案例编号、需要用户逐例确认，留在本地做。
+采集区只做第 1—4 步；第 5、6 步在 `cases/` 工作区进行。入库只在用户标 1 之后执行，不自行入库。
 
 ## 3. 当前进度
 
-- 已入库 7 例：case-211—217（T4 四例、T1 三例）。检查点 B 还没过，见 [B1 进度](B1/STATUS.md)。
-- 已判断 265 个候选：建议入库 7、暂留 24（T2 7、T3 6、T5 11）、拒收 234。通过率约 3%，所以要多找候选。
-- `B1/raw/` 里还留着 24 份暂留候选的源码，不必重抓。
+- 实时进度看 [cases/INDEX.md](../cases/INDEX.md)（已入库案例）和认领表 `B1/claims.csv`。历史进度见 [B1 进度](B1/STATUS.md)，只供追溯。
+- 主仓库已有案例 `case-001`—`227`。dot 已收集约 300 个“空间关系”候选，审核清单在 [review_lists/20261121_dot/](review_lists/20261121_dot/)，**用户正在审核，任何人不得移动、改名、删除或覆盖其中的文件**。
+- `B1/raw/` 里还留着 24 份旧暂留候选的源码，不必重抓。
 - 库内现有数量（名义值，部分旧案例不合格）：T1 11、T2 43、T3 55、T4 12、T5 49、T6 50。目标各 75，共 450；T4 不设硬目标。
 - **档位优先级：T1 和 T4 最缺；其次 T5、T6、T2、T3。** 不为凑数降低标准。
 - **题材优先级：多收网页类，其次 CSS 动画类，少收小游戏类。** 详见第 6.7 节。
 
 ## 4. 环境准备
 
-云端一般是 Linux，本仓库的 Windows 写法要换掉：
+云端一般是 Linux，本仓库的 Windows 写法要换掉（`scripts/case_tools/check_rules.py` 等脚本只用标准库）：
 
 ```bash
 python3 -m venv .venv && . .venv/bin/activate
@@ -106,7 +104,7 @@ https://codepen.io/作者/pen/ID,T4,websearch-2026-11-10
 
 - 搜索词用“档位 × 难度机制”组合，例如 `codepen scroll-state container query table`、`codepen pure css isometric city`、`codepen animation-timeline view() landing page`、`codepen css only dashboard layout :has()`、`codepen pure css character walk cycle animation`。
 - 搜索重心放在完整页面和应用界面（落地页、仪表盘、应用原型、专题长页、信息图）以及多部件协调的 CSS 动画上；小游戏类不必专门去搜。
-- **不要**加 “no JavaScript”“pure CSS only” 这类限定词，含 JS 的作品也可能改造后收入。
+- **不要**加 “no JavaScript”“pure CSS only” 这类限定词：JS 已放开，含 JS 的作品同样值得收。
 - 其他线索：GitHub 上的 awesome 列表（css-art、pure-css、css-only 主题）里的 CodePen 链接；常产出难题的作者，如 argyleink、jh3y、bramus、una、thebabydino、utilitybend、giana、hexagoncircle、amit_sheen。
 - 写完后按第 1.5 节认领并推送。已判断过、已入库、对方已认领的链接会在认领时自动跳过。
 
@@ -121,8 +119,8 @@ python scripts/codepen_collection/fetch_cdpn.py --candidates /tmp/owned_dot.csv 
 
 - 脚本请求 `https://cdpn.io/{作者}/fullpage/{ID}`，默认每 2 秒一次，不要调快。
 - 每个作品得到 `original_srcdoc.html`（原样）、`source.html`（去掉 CodePen 样板脚本）、`metadata.json`（作者、链接、时间、哈希、JS 与 CSS 特性标注）。
-- 自动跳过三种情况：已在 `cases/` 里的作品、本目录已抓过的作品、取不到源码的页面。
-- 脚本**只标注** JS，不因为有 JS 就丢弃。
+- 自动跳过三种情况：已在库内的作品（主仓库 `reference/dedupe_index.csv` 与本仓库 `cases/`）、本目录已抓过的作品、取不到源码的页面。
+- 脚本**只标注** JS 和外部资源，不因为有 JS、外部图片或外链就丢弃。
 - 每次运行的记录追加在 `B1/raw/fetch_log.jsonl`。
 
 ### 第 3 步：汇总
@@ -146,7 +144,7 @@ python data_intake/B1/shot.py data_intake/B1/raw/作者__ID/source.html /tmp/sho
 
 ```bash
 export COLLECT_AGENT=dot
-python data_intake/B1/decide.py KEY DECISION TIER HITS REASON "证据" "备注" JS_POLICY
+python data_intake/B1/decide.py KEY DECISION TIER HITS REASON "证据" "备注" JS_POLICY   # JS_POLICY 填 none（无 JS）或 preserve（含 JS，原样保留）
 python data_intake/B1/decide.py una__myJOjQx accept T4 H2,H4,H6,H8 - "横向吸附日卡片；scroll-state(snapped)联动当前卡片；counter生成天数编号" "外部图标字体需替换" none
 ```
 
@@ -158,7 +156,7 @@ python data_intake/B1/decide.py una__myJOjQx accept T4 H2,H4,H6,H8 - "横向吸�
 
 ### 6.1 定档位（T1—T6）
 
-问一个问题：这个视觉变化是谁在驱动的？完整定义见 [类型与难度模型 v2.1](../docs/difficulty_model_v2_1.md) 第三章。
+问一个问题：这个视觉变化是谁在驱动的？完整定义见 [类型与难度模型 v2.1](../reference/docs/difficulty_model_v2_1.md) 第三章。
 
 | 档 | 驱动方式 |
 |---|---|
@@ -204,16 +202,16 @@ python data_intake/B1/decide.py una__myJOjQx accept T4 H2,H4,H6,H8 - "横向吸�
 
 用户实际收过的类型，可作参照：双层嵌套吸附轮播、菜单加跨元素悬停加吸附的完整页、斜切锯齿加计数器加多断点的信息图、吸附与编号与指示点联动的行程页、scroll-state 驱动双侧箭头的表格页、针织品牌着陆页、大量部件拼装的静态 3D 等距场景。
 
-### 6.5 含 JS 的作品
+### 6.5 含 JS 与外部资源的作品（输出契约 v2）
 
-| 情况 | 处理 | `JS_POLICY` |
-|---|---|---|
-| 没有 JS，或只有 CodePen 样板脚本 | 正常判断 | `none` |
-| JS 不是核心（埋点、装饰随机数、提示弹窗、懒加载） | 删掉后按阈值判断 | `remove` |
-| 核心功能可用 CSS 等价实现（点击切换改 checkbox 或 `:target`，滚动监听改 `animation-timeline`），且改后仍达阈值 | 可收，备注里写清替换思路 | `replace` |
-| JS 承担核心逻辑且 CSS 无法等价（复杂游戏规则、Canvas/WebGL、网络请求、随机生成内容） | 拒收，原因码 J1 | `reject` |
+JS、外部字体、外部图片、普通链接都已放开，**原样保留**，不要为了通过旧的“纯 CSS 门槛”删改作品。`JS_POLICY` 只填两个值：`none`（无 JS）、`preserve`（含 JS，保留原样）。以下情况仍要在备注里写明：
 
-云端只需判断并写明处理思路，不必动手改写源码。
+| 情况 | 怎么处理 |
+|---|---|
+| JS 是效果的核心，且需要截很多时间帧才能评分（逐帧物理模拟、持续随机位移、全屏循环视频） | 不是因为“有 JS”，而是评分成本太高：记原因码 `DYN`，不推荐 |
+| JS 只做导航、菜单开关、简单状态切换 | 正常判断，备注写明 JS 的作用 |
+| 页面靠网络请求、随机或实时数据才有内容 | 同样是评分成本问题，备注写明，不推荐 |
+| 视觉核心依赖外部图片或视频 | 看不到图不是拒收理由；备注写明哪些内容只能从源码推断、哪些已见画面，**不得写成已核验** |
 
 ### 6.6 原因码
 
@@ -223,8 +221,11 @@ python data_intake/B1/decide.py una__myJOjQx accept T4 H2,H4,H6,H8 - "横向吸�
 | D0 | 单组件、纯装饰、一条规则可复现 |
 | D1 | 未达阈值 |
 | C1 | 技术常见，或答案可联网检索（DEC-036） |
-| J1 | JS 是核心且无 CSS 等价 |
-| X1 | 源码不可用，或依赖外部资源、真实品牌人物 |
+| J1 | （已停用）旧的“JS 是核心且无 CSS 等价”，JS 放开后不再使用 |
+| X1 | 源码不可用，或视觉核心是真实品牌、真实人物 |
+| DYN | 动态取证成本高：需要截大量时间帧才能评分（见 6.5） |
+| LAY | 布局或空间关系的复杂度未证明超过已入库案例 |
+| PENDING | 难度、视觉或范围的证据尚不足，待补 |
 | R02 | 与其他候选重复 |
 | T2/T3/T5/T6 | 合格但属于后续批次，`decision` 记 `hold` |
 | U1/U2 | 用户在检查点未选，只由用户侧填写 |
@@ -241,22 +242,22 @@ python data_intake/B1/decide.py una__myJOjQx accept T4 H2,H4,H6,H8 - "横向吸�
 
 - 小游戏不是不收，只是少收：**每轮建议入库的清单里，小游戏类最多 1 例**，而且要是库里没有的玩法。
 - 在 `decide.py` 的备注开头标明题材：`[网页]`、`[动画]`、`[游戏]`，方便用户按题材挑选。
-- 题材偏好不改变阈值。网页类也必须够难，普通的登录页、定价表、营销落地页照样拒收。各类样例见 [examples/](../examples/)。
+- 题材偏好不改变阈值。网页类也必须够难，普通的登录页、定价表、营销落地页照样拒收。各类样例见 [reference/examples/](../reference/examples/)。
 
 ## 7. 交付
 
-- 认领按第 1.5 节直接推 `main`；筛选成果在自己的分支 `collect/<名字>-日期-NN` 上提交，开 Pull Request。
-- PR 里的改动只应出现在：`data_intake/B1/screening_<名字>.csv`、`data_intake/B1/raw/` 下自己认领的作品目录、`data_intake/B1/raw/fetch_log.jsonl`。
-- PR 说明里写清：新增候选数、抓取成功与失败数、各原因码数量、建议入库清单（链接、档位、命中特征、为什么难）、没做完的部分。
+- 所有提交直接推 `main`（见第 1.5 节）。你的改动只应出现在：自己的 `B1/candidates_<名字>_NN.csv`、`B1/screening_<名字>.csv`、`B1/raw/` 下自己认领的作品目录、`B1/raw/fetch_log.jsonl`、给用户看的清单目录 `review_lists/<日期>_<名字>/`。
+- 每轮写一份清单交用户挑选：新增候选数、抓取成功与失败数、各原因码数量、建议入库清单（链接、档位、命中特征、**为什么难**、已核验与未核验的范围）、没做完的部分。
 - 宁可少报。每轮建议入库控制在 10 例以内，方便用户逐个看。
+- 用户标 1 之后才入库；标 0 的只留原作链接，不删。
 
 ## 8. 不要做
 
-- 不要新建或修改 `cases/` 下任何目录，不要分配案例编号。本仓库的 `cases/` 只有各案例的 `metadata.json`，仅供抓取脚本去重。
-- 不要写 `input.json`、`ground_truth.html`、评测规则；不要生成模型输出，不要评分。
+- 不要在 `cases/` 里新建目录，**入库只在用户标 1 之后，由 dot 执行**；不要自行分配案例编号。
+- 采集者不写 `input.json`、`ground_truth.html`、评测规则（这是 duet 在 `cases/` 里的工作）；不生成模型输出，不评分。
 - 不要调用任何大模型 API 来分类或筛选；不要读取或输出 `.env`、密钥等凭据。
-- 不要用被测模型的得分来挑题。
-- 不要修改 `project_state/`、`docs/` 下的文件（它们是主仓库的只读副本）；不要执行 `git reset`、`git clean`。
+- 不要用被测模型的得分来挑题，也不要把候选交给模型试做。
+- 不要修改 `reference/`（主仓库的只读副本）；不要移动、改名、删除、覆盖 `review_lists/` 里的文件；不要执行 `git reset`、`git clean`，不要强推。
 - 不要抓非公开作品，不要绕过 Cloudflare 验证；保留作者与原链接（公开作品默认 MIT 许可）。
 - `accept` 只是建议，是否入库由用户决定。
 
@@ -265,3 +266,5 @@ python data_intake/B1/decide.py una__myJOjQx accept T4 H2,H4,H6,H8 - "横向吸�
 - cdpn.io 导出的是编译后代码，没有 SCSS 原稿；个别作品的样式不随导出带出，抓到的页面没有 CSS，记 X1。
 - 源码里的外部字体、图片、CDN 样式在离线环境可能加载不到，截图会走样；看渲染时不要加 `--offline`。
 - 很新的特性（scroll-state、`::scroll-marker`、anchor 定位）需要较新的 Chromium，截图不对时先确认浏览器版本。
+- 外部字体、图片和 CDN 样式现在是允许的，但只能原样保留，抓取时不下载这些外部资源；缺图不是拒收理由。
+- 2026-11-19 起 dot 另有一轮“空间关系”专项（多物体空间、叠压遮挡、三维等），其具体标准是用户当时对 dot 的口头说明，**尚未写进本页**；需要时向用户确认，不要自行推断。

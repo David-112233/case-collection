@@ -1,6 +1,6 @@
 # B1 进度（DATA-002）
 
-- 方案：[B1 工作方案](../../project_state/handoffs/DATA-001-workplan-B1-20261002.md)；决策 DEC-031—036。
+- 方案：[B1 工作方案](../../reference/history/DATA-001-workplan-B1-20261002.md)；决策 DEC-031—036。
 - 完整收集路径与云端执行说明：[data_intake/README.md](../README.md)。
 - 当前位置：已入库 7 例（case-211—217）。211/212/213/214/217 已写 input.json 与 GT 并自测，停在**检查点 B** 等待用户审核（见 [checkpoint_B.md](checkpoint_B.md)）；215/216 待写。
 
