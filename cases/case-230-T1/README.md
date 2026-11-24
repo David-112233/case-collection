@@ -2,7 +2,7 @@
 
 来源：<https://codepen.io/glennphilp/pen/DBLzOW>（作者 glennphilp，CodePen 公开作品，默认 MIT 许可）
 
-当前阶段：`gt_ready`（入库于 2026-11-24），归属 duet。阶段以 [registry.csv](../registry.csv) 为准。
+当前阶段：`input_draft`（入库于 2026-11-24），归属 duet。阶段以 [registry.csv](../registry.csv) 为准。
 
 - 审核编号：C004；档位：T1（**暂定**，依据入库时的来源源码；`ground_truth.html` 完成后按 GT 的驱动方式重新判定，必要时用 `registry.py retier` 改名）。
 - 特色：剪纸叠字、倾斜阴影
@@ -38,8 +38,12 @@
 
 ## GT 自检
 
-见 [review_20261124/self_check.md](review_20261124/self_check.md)。**截图和测量没做成**：云端环境禁用了 Playwright 的浏览器下载，系统也没有 chromium。截图脚本 `review_20261124/shot_gt.py` 已备好，可在本地运行。上面对画面的描述来自样式推算，尚未经渲染验证。
+见 [review_20261124/static_check.md](review_20261124/static_check.md)。**截图和测量没做成**：云端环境禁用了 Playwright 的浏览器下载，系统也没有 chromium。截图脚本 `review_20261124/shot_gt.py` 已备好，可在本地运行。上面对画面的描述来自样式推算，尚未经渲染验证。
 
 ## 档位复核
 
 GT 无任何动态：无动画、无过渡、无悬停或点击效果。按难度模型 v2.1 仍为 **T1**，与目录名一致，不需要 retier。
+
+## input
+
+[input.json](input.json) 由 GT 写出，问题与取舍见 [input_problem.md](input_problem.md)。外观描述由 CSS 推算，待本地渲染核对。阶段 `input_draft`：等用户审核 GT 与 input，规则草稿和 `generation_prompt.txt` 尚未写。

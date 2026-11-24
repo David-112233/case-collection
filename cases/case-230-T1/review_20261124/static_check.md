@@ -1,4 +1,4 @@
-# case-230 GT 自检（2026-11-24）
+# case-230 GT 静态核对（2026-11-24）
 
 ## 截图与测量：未完成
 
@@ -8,7 +8,7 @@
 
 ## 代码层面的核对（替代截图，未经渲染验证）
 
-GT 与 `source.html` 的差别只在 `<head>` 的 CodePen 样板和 `<body translate="no">`，`<style>` 与 `<body>` 内容逐字相同，所以两者渲染结果应一致。
+GT 与 `source.html` 的差别（见 [source_to_gt.diff](source_to_gt.diff)）只在 `<head>` 的 CodePen 样板和 `<body translate="no">`，`<style>` 与 `<body>` 内容逐字相同，所以两者渲染结果应一致。
 
 按样式推算的静止画面（待截图确认）：
 
