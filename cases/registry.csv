@@ -10,7 +10,7 @@ case-235-T1,ricardoolivaalonso__NWJeBPE,T1,duet,input_draft,2026-11-24,input 已
 case-236-T1,ricardoolivaalonso__QWJxYXE,T1,duet,input_draft,2026-11-24,input 已由 GT 写出，等用户审核；已经 raw.githack.com 渲染核对；无交互，已 retier 为 T1,pending
 case-237-T3,dustindwayne__bGyYoar,T3,duet,input_draft,2026-11-24,input 已由 GT 写出，等用户审核；默认状态已渲染核对，播放状态按源码推算待本地截图；动态价值主要在唱片旋转，已去掉,pending
 case-238-T1,MadeByArne__bGWwRoX,T1,duet,input_draft,2026-11-24,input 已由 GT 写出，等用户审核；已渲染核对；来源本身静态，窄屏会横向滚动，按桌面宽屏写,pending
-case-239-T2,RaduBratan__MWyKrRZ,T2,duet,gt_ready,2026-11-24,GT 去掉卷轴旋转和过渡，保留悬停抬起；复核仍为 T2,pending
+case-239-T2,RaduBratan__MWyKrRZ,T2,duet,input_draft,2026-11-24,input 已由 GT 写出，等用户审核；默认状态已渲染核对，悬停按源码推算待本地截图；悬停也改投影，按 T2 判定待确认,pending
 case-240-T1,shunyadezain__QWyVwep,T1,duet,input_draft,2026-11-24,等用户审核 GT 与 input；已经 raw.githack 渲染核对；待定：网格单位写法、字体名（见 input_problem.md）,pending
 case-241-T1,meylon__qByaYVp,T1,duet,input_draft,2026-11-24,等用户审核 GT 与 input；已经 raw.githack 渲染核对；待定：992px 以下横排是否写入、像素尺寸（见 input_problem.md）,pending
 case-242-T1,zenete__BaMbmqW,T1,duet,input_draft,2026-11-24,等用户审核；云端渲染有大块白色缺口，待本地 GPU 复核（见 input_problem.md 第 1 节）；档位已由 T2 改为 T1,pending
