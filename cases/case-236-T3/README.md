@@ -2,7 +2,7 @@
 
 来源：<https://codepen.io/ricardoolivaalonso/pen/QWJxYXE>（作者 ricardoolivaalonso，CodePen 公开作品，默认 MIT 许可）
 
-当前阶段：`admitted`（入库于 2026-11-24），归属 duet。阶段以 [registry.csv](../registry.csv) 为准。
+当前阶段：`gt_ready`（入库于 2026-11-24），归属 duet。阶段以 [registry.csv](../registry.csv) 为准。
 
 - 审核编号：C011；档位：T3（**暂定**，依据入库时的来源源码；`ground_truth.html` 完成后按 GT 的驱动方式重新判定，必要时用 `registry.py retier` 改名）。
 - 特色：Switch机身、按键凹凸
@@ -16,3 +16,19 @@
 | `classification.json` | 档位与入库依据 |
 
 下一步由 duet 按顺序做（见 [cases/README.md](../README.md)）：① 以 `source.html` 为基础改造 `ground_truth.html`（尽量尊重源码，改成准静态、无动画、只保留简单交互）并自检；② 由 GT 写出 `input.json`；③ 停下，等用户审核 GT 与 input；④ 用户通过后才写 `rules_drafts/manual_v1/`。
+
+## GT 相对来源的改动（2026-11-24，duet）
+
+`ground_truth.html` 以 `source.html` 为基础，只做删除，结构、样式数值、id 与 class 都不动。来源没有引用任何外部资源，GT 也没有。完整差异见 [review_20261124/source_to_gt.diff](review_20261124/source_to_gt.diff)。
+
+| 改动 | 原因 |
+|---|---|
+| 删除 CodePen 样板：apple-touch-icon、`apple-mobile-web-app-title`、favicon、mask-icon、canonical、`stopExecutionOnTimeout` 脚本、`<body translate="no">` 的属性 | 与作品和评分无关（用户同意删除） |
+| 删除整段内联脚本：按住左键拖动改变模型角度、右键拖动平移模型、滚轮缩放（`mousedown`、`mousemove`、`mouseup`、`contextmenu`、`wheel` 监听与 `moveModel`） | 拖动、平移、缩放属于复杂交互；按 3D 场景的统一做法（参照 case-235）固定在来源的初始视角 |
+| 删除 `.main` 的 `transition: transform 550ms ease-out` | 只服务于拖动和缩放后的视角过渡，脚本删除后不再起作用 |
+| 删除 `body` 的 `cursor: pointer` | 没有可点或可拖的交互后，手形光标会误导 |
+
+- **静止状态：** 来源初始视角，即 `.main` 的 CSS 原值 `perspective(2000vmin) rotateX(66deg) rotateZ(30deg) translateZ(-8vmin)`。来源打开后、用户按下鼠标之前就是这个画面；脚本里的 `moveModel()` 只在拖动或滚轮时才写入新的变换，所以删除脚本不改变初始画面。没有另选角度。
+- **保留的交互：** 无。
+- **档位复核：** GT 没有任何动态和交互，按难度模型 v2.1 为 T1，与入库暂定的 T3 不同，用 `registry.py retier` 改为 T1。
+- **自检：** 见 [review_20261124/static_check.md](review_20261124/static_check.md)；本地可运行 `review_20261124/gt_check.py` 补截图与测量。

@@ -1,0 +1,129 @@
+--- source.html	2026-11-24 09:39:01.017526659 +0000
++++ ground_truth.html	2026-11-24 10:22:47.943207477 +0000
+@@ -4,25 +4,9 @@
+ <head>
+   
+   <meta charset="UTF-8">
+-  
+-
+-    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+-
+-    <meta name="apple-mobile-web-app-title" content="CodePen">
+-
+-    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+-
+-    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+-
+-
+-
+-  
+-    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+ 
+ 
+   <title>3D Nintendo Switch - CSS Art</title>
+-
+-    <link rel="canonical" href="https://codepen.io/ricardoolivaalonso/pen/QWJxYXE">
+   
+   
+   
+@@ -50,7 +34,6 @@
+   height: 100vh;
+   width: 100%;
+   overflow: hidden;
+-  cursor: pointer;
+   background-color: #aed4c3;
+ }
+ 
+@@ -71,7 +54,6 @@
+   width: 96vmin;
+   height: 40vmin;
+   transform: perspective(2000vmin) rotateX(66deg) rotateZ(30deg) translateZ(-8vmin);
+-  transition: transform 550ms ease-out;
+ }
+ 
+ .shadows,
+@@ -1560,7 +1542,7 @@
+ 
+   </head>
+ 
+-<body translate="no">
++<body>
+   <div class="main" id="h">
+   <div class="shadows-wrapper">
+     <div class="shadow sh01"></div>
+@@ -1946,74 +1928,7 @@
+   </div>
+ </div>
+   
+-    <script id="rendered-js" >
+-const model = document.querySelector('#h');
+-const perspective = 400;
+-const unit = 4;
+-let scale = 1;
+-let minScale = .75;
+-let maxScale = 1.25;
+-let x = 0;
+-let y = 0;
+-let isMoving = false;
+-let isDragging = false;
+-
+-const moveModel = () => {
+-  model.style.transform = `
+-        perspective(${perspective * unit}vmin)
+-        rotateX(${y * 20 + 66}deg)
+-        rotateZ(${-x * 420 + 40}deg)
+-        translateZ(${-2 * unit}vmin)
+-        scale3d(${scale}, ${scale}, ${scale})
+-    `;
+-};
+-
+-const getCoords = e => {
+-  x = e.pageX / window.innerWidth - 0.5;
+-  y = e.pageY / window.innerHeight - 0.5;
+-};
+-
+-document.addEventListener('mousedown', e => {
+-  if (e.button === 0) {
+-    getCoords(e);
+-    isMoving = true;
+-  } else
+-  if (e.button === 2) {
+-    x = e.clientX - model.offsetLeft;
+-    y = e.clientY - model.offsetTop;
+-    isDragging = true;
+-  }
+-});
+-
+-document.addEventListener('mousemove', e => {
+-  if (isMoving) {
+-    getCoords(e);
+-    moveModel();
+-  } else
+-  if (isDragging) {
+-    model.style.left = `${e.clientX - x}px`;
+-    model.style.top = `${e.clientY - y}px`;
+-  }
+-});
+-
+-document.addEventListener('mouseup', () => {
+-  isMoving = false;
+-  isDragging = false;
+-});
+-
+-document.addEventListener('contextmenu', e => {
+-  e.preventDefault();
+-});
+-
+-document.addEventListener('wheel', e => {
+-  getCoords(e);
+-  if (e.deltaY > 0) scale = Math.max(minScale - 0.1, minScale);else
+-  scale = Math.min(maxScale + 0.1, maxScale);
+-
+-  moveModel();
+-});
+-//# sourceURL=pen.js
+-  </script>
++
+ 
+   
+ </body>
