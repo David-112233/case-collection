@@ -4,7 +4,7 @@
 
 当前阶段见 [registry.csv](../registry.csv)（入库于 2026-11-24），归属 duet。阶段以 [registry.csv](../registry.csv) 为准。
 
-- 审核编号：C029；档位：T1（**暂定**，依据入库时的来源源码；`ground_truth.html` 完成后按 GT 的驱动方式重新判定，必要时用 `registry.py retier` 改名）。
+- 审核编号：C029；档位：T1（入库时按来源源码暂定为 T3，GT 完成后复核改为 T1，见下文“档位复核”）。
 - 特色：四工位办公室、隔板交错
 
 | 文件 | 说明 |
@@ -16,6 +16,8 @@
 | `classification.json` | 档位与入库依据 |
 | `ground_truth.html` | 准静态参考页（见下文“GT 相对来源的改动”） |
 | `review_20261124/` | GT 自检：来源差异、静态检查与渲染核对记录、本地测量脚本 |
+| `input.json` | 由 GT 写出的题目草稿，等用户审核 |
+| `input_problem.md` | input 的核对结果、取舍与待定问题 |
 
 下一步由 duet 按顺序做（见 [cases/README.md](../README.md)）：① 以 `source.html` 为基础改造 `ground_truth.html`（尽量尊重源码，改成准静态、无动画、只保留简单交互）并自检；② 由 GT 写出 `input.json`；③ 停下，等用户审核 GT 与 input；④ 用户通过后才写 `rules_drafts/manual_v1/`。
 
@@ -35,3 +37,8 @@
 - **外部资源：** 无。
 - **档位复核：** 去掉旋转和复选框后，GT 没有任何动态和交互，按难度模型 v2.1 为 T1，由暂定 T3 改为 T1（`registry.py retier`）。
 - **作品价值：** 旋转只是展示用的可选动画，作品的空间价值在四个工位围绕中央立柱交错排列、隔板与电脑和桌面的遮挡、抽屉厚度、键盘与地面投影，静止后都在，所以照常改造。
+- **自检：** 静态检查通过；用云端浏览器经 raw.githack 在 1280 与 500 宽视口截图核对，GT 与来源默认画面除复选框外一致，GT 不改。本地测量脚本 `review_20261124/gt_check.py` 已备好（同时截来源作对比）。见 [review_20261124/static_check.md](review_20261124/static_check.md)。
+
+## input 草稿（2026-11-24，duet）
+
+[input.json](input.json) 由 GT 写出，已对照截图核对，等用户审核 GT 与 input。写与不写的取舍和待定问题见 [input_problem.md](input_problem.md)。
