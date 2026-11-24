@@ -28,11 +28,11 @@
 | 删除 `[data-camera][data-autorotate]` 下的三条自动旋转规则（场景 `rotateCamera`、草莓两片 `rotateSphereBefore/After`）及两个 `@keyframes` | 去掉持续动画。去掉 `camera.js` 后 `data-autorotate` 不会再被设置，这三条已是死代码，一并删掉 |
 
 - **静止状态：** 相机固定在作者在内联 CSS“camera configuration”里写的初值：`--cameraZ: 108`、`--cameraY: 46`、`--perspective: 800`。这是作品加载后的起始视角，也是唯一由作者明确给出的视角；蛋糕本身转了 `--cake-rZ: -108deg`，与相机的 108 正好抵消，说明作者让切掉的那一块缺口在起始视角下朝向观者，夹心切面最完整。草莓用的是“两片交叉圆片”的做法，静止时停在基础样式给的角度（即去掉动画后的状态，与 `from` 帧一致）。
-- **保留的交互：** 右上角的 “How to?” 链接与说明面板（`#howto`），按标记推断是 `:target` 开合：点链接打开面板并保持，点面板的关闭区域（`href="#"`）关闭。面板文字列出的是 `camera.js` 的手势，GT 已不支持这些手势；按“尽量尊重源码”保留原文，是否删掉整块面板待用户定（见 [input_problem.md](input_problem.md)）。
-- **外部资源：** 保留 Google Fonts（Montserrat）、`starter.css`、`3d.css`、`howto.css` 与七张纹理图（海绵、海绵切面、蛋糕顶面、盘子三张、噪点）。场景容器的透视与相机变换、`--px` 尺寸单位、页面背景图层、说明面板的样式都在这三份样式表里，**本环境读不到，均未核实**；也无法确认 `camera.js` 有没有在初始化时写入画面必需的值。详见 [review_20261124/static_check.md](review_20261124/static_check.md)。
+- **保留的交互：** 右上角的 “How to?” 链接与说明面板（`#howto`），渲染核对确认是 `:target` 开合：点链接打开面板并保持，点面板的关闭区域（`href="#"`）关闭。面板文字列出的是 `camera.js` 的手势，GT 已不支持这些手势；按“尽量尊重源码”保留原文，是否删掉整块面板待用户定（见 [input_problem.md](input_problem.md)）。
+- **外部资源：** 保留 Google Fonts（Montserrat）、`starter.css`、`3d.css`、`howto.css` 与七张纹理图（海绵、海绵切面、蛋糕顶面、盘子三张、噪点）。场景容器的透视与相机变换、`--px` 尺寸单位、页面背景图层、说明面板的样式都在这三份样式表里。云端命令行读不到这些文件，但渲染核对时它们都能加载，去掉 `camera.js` 后画面完整。详见 [review_20261124/static_check.md](review_20261124/static_check.md)。
 - **档位复核：** GT 已没有时间动画，剩下的动态只有“点 How to? 打开说明面板并保持，点关闭再收起”，属于点击进入可保持的状态，按难度模型 v2.1 为 T3，已由暂定的 T2 改名为 T3。若用户决定删掉这块面板，GT 就没有任何动态，应改为 T1。
-- **自检：** 本环境无法渲染，只完成了静态检查；渲染自检脚本 [review_20261124/gt_check.py](review_20261124/gt_check.py) 已备好，待本地运行。
+- **自检：** 2026-11-24 已用云端浏览器渲染核对（1280 宽、500 宽、How to? 面板开合）：外部样式表、贴图、字体都能加载，去掉 `camera.js` 后画面完整、静止，面板按 `:target` 开合。结论见 [review_20261124/static_check.md](review_20261124/static_check.md)；面板有无短过渡仍可用 [review_20261124/gt_check.py](review_20261124/gt_check.py) 在本地补测。
 
 ## input 草稿（2026-11-24，duet）
 
-[input.json](input.json) 由 GT 写出，等用户审核 GT 与 input。按内联 CSS 推算、尚未经渲染核对的外观描述，写与不写的取舍，以及说明面板留不留的问题，见 [input_problem.md](input_problem.md)。
+[input.json](input.json) 由 GT 写出，并已对照渲染截图修正，等用户审核 GT 与 input。修正了哪些条目、仍未核实的点、写与不写的取舍，以及说明面板留不留的问题，见 [input_problem.md](input_problem.md)。
