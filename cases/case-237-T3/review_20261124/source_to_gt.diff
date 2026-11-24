@@ -1,0 +1,430 @@
+--- source.html	2026-11-24 09:39:01.017969223 +0000
++++ ground_truth.html	2026-11-24 10:26:27.738884754 +0000
+@@ -4,25 +4,9 @@
+ <head>
+   
+   <meta charset="UTF-8">
+-  
+-
+-    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+-
+-    <meta name="apple-mobile-web-app-title" content="CodePen">
+-
+-    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+-
+-    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+-
+-
+-
+-  
+-    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+ 
+ 
+   <title>CSS Record Player</title>
+-
+-    <link rel="canonical" href="https://codepen.io/dustindwayne/pen/bGyYoar">
+   
+   <link rel="stylesheet" href="https://public.codepenassets.com/css/normalize-5.0.0.min.css">
+ 
+@@ -268,7 +252,6 @@
+   color: #fff;
+   font-size: 24px;
+   font-family: 'Teko';
+-  transition: all 0.7s;
+ }
+ .clickme:after {
+   content: 'Click Me';
+@@ -283,7 +266,6 @@
+   top: -30px;
+   font-size: 24px;
+   left: 25px;
+-  animation: point 0.25s linear infinite alternate;
+ }
+ .record {
+   width: 250px;
+@@ -294,7 +276,6 @@
+   place-items: center;
+   position: relative;
+   box-shadow: -1px -1px 1px rgba(255,255,255,0.125), 1px 1px 1px rgba(255,255,255,0.025);
+-  transition: all 1s;
+   box-shadow: 0 0 5px rgba(0,0,0,0.5);
+   scale: 1.5;
+ }
+@@ -669,7 +650,6 @@
+   color: #fff;
+   font-size: 24px;
+   font-family: 'Teko';
+-  transition: all 0.7s;
+ }
+ .clickme:after {
+   content: 'Click Me';
+@@ -684,7 +664,6 @@
+   top: -30px;
+   font-size: 24px;
+   left: 25px;
+-  animation: point 0.25s linear infinite alternate;
+ }
+ .record {
+   width: 250px;
+@@ -695,7 +674,6 @@
+   place-items: center;
+   position: relative;
+   box-shadow: -1px -1px 1px rgba(255,255,255,0.125), 1px 1px 1px rgba(255,255,255,0.025);
+-  transition: all 1s;
+   box-shadow: 0 0 5px rgba(0,0,0,0.5);
+   scale: 1.5;
+ }
+@@ -1070,7 +1048,6 @@
+   color: #fff;
+   font-size: 24px;
+   font-family: 'Teko';
+-  transition: all 0.7s;
+ }
+ .clickme:after {
+   content: 'Click Me';
+@@ -1085,7 +1062,6 @@
+   top: -30px;
+   font-size: 24px;
+   left: 25px;
+-  animation: point 0.25s linear infinite alternate;
+ }
+ .record {
+   width: 250px;
+@@ -1096,7 +1072,6 @@
+   place-items: center;
+   position: relative;
+   box-shadow: -1px -1px 1px rgba(255,255,255,0.125), 1px 1px 1px rgba(255,255,255,0.025);
+-  transition: all 1s;
+   box-shadow: 0 0 5px rgba(0,0,0,0.5);
+   scale: 1.5;
+ }
+@@ -1471,7 +1446,6 @@
+   color: #fff;
+   font-size: 24px;
+   font-family: 'Teko';
+-  transition: all 0.7s;
+ }
+ .clickme:after {
+   content: 'Click Me';
+@@ -1486,7 +1460,6 @@
+   top: -30px;
+   font-size: 24px;
+   left: 25px;
+-  animation: point 0.25s linear infinite alternate;
+ }
+ .record {
+   width: 250px;
+@@ -1497,7 +1470,6 @@
+   place-items: center;
+   position: relative;
+   box-shadow: -1px -1px 1px rgba(255,255,255,0.125), 1px 1px 1px rgba(255,255,255,0.025);
+-  transition: all 1s;
+   box-shadow: 0 0 5px rgba(0,0,0,0.5);
+   scale: 1.5;
+ }
+@@ -1872,7 +1844,6 @@
+   color: #fff;
+   font-size: 24px;
+   font-family: 'Teko';
+-  transition: all 0.7s;
+ }
+ .clickme:after {
+   content: 'Click Me';
+@@ -1887,7 +1858,6 @@
+   top: -30px;
+   font-size: 24px;
+   left: 25px;
+-  animation: point 0.25s linear infinite alternate;
+ }
+ .record {
+   width: 250px;
+@@ -1898,7 +1868,6 @@
+   place-items: center;
+   position: relative;
+   box-shadow: -1px -1px 1px rgba(255,255,255,0.125), 1px 1px 1px rgba(255,255,255,0.025);
+-  transition: all 1s;
+   box-shadow: 0 0 5px rgba(0,0,0,0.5);
+   scale: 1.5;
+ }
+@@ -2273,7 +2242,6 @@
+   color: #fff;
+   font-size: 24px;
+   font-family: 'Teko';
+-  transition: all 0.7s;
+ }
+ .clickme:after {
+   content: 'Click Me';
+@@ -2288,7 +2256,6 @@
+   top: -30px;
+   font-size: 24px;
+   left: 25px;
+-  animation: point 0.25s linear infinite alternate;
+ }
+ .record {
+   width: 250px;
+@@ -2299,7 +2266,6 @@
+   place-items: center;
+   position: relative;
+   box-shadow: -1px -1px 1px rgba(255,255,255,0.125), 1px 1px 1px rgba(255,255,255,0.025);
+-  transition: all 1s;
+   box-shadow: 0 0 5px rgba(0,0,0,0.5);
+   scale: 1.5;
+ }
+@@ -2674,7 +2640,6 @@
+   color: #fff;
+   font-size: 24px;
+   font-family: 'Teko';
+-  transition: all 0.7s;
+ }
+ .clickme:after {
+   content: 'Click Me';
+@@ -2689,7 +2654,6 @@
+   top: -30px;
+   font-size: 24px;
+   left: 25px;
+-  animation: point 0.25s linear infinite alternate;
+ }
+ .record {
+   width: 250px;
+@@ -2700,7 +2664,6 @@
+   place-items: center;
+   position: relative;
+   box-shadow: -1px -1px 1px rgba(255,255,255,0.125), 1px 1px 1px rgba(255,255,255,0.025);
+-  transition: all 1s;
+   box-shadow: 0 0 5px rgba(0,0,0,0.5);
+   scale: 1.5;
+ }
+@@ -3075,7 +3038,6 @@
+   color: #fff;
+   font-size: 24px;
+   font-family: 'Teko';
+-  transition: all 0.7s;
+ }
+ .clickme:after {
+   content: 'Click Me';
+@@ -3090,7 +3052,6 @@
+   top: -30px;
+   font-size: 24px;
+   left: 25px;
+-  animation: point 0.25s linear infinite alternate;
+ }
+ .record {
+   width: 250px;
+@@ -3101,7 +3062,6 @@
+   place-items: center;
+   position: relative;
+   box-shadow: -1px -1px 1px rgba(255,255,255,0.125), 1px 1px 1px rgba(255,255,255,0.025);
+-  transition: all 1s;
+   box-shadow: 0 0 5px rgba(0,0,0,0.5);
+   scale: 1.5;
+ }
+@@ -3476,7 +3436,6 @@
+   color: #fff;
+   font-size: 24px;
+   font-family: 'Teko';
+-  transition: all 0.7s;
+ }
+ .clickme:after {
+   content: 'Click Me';
+@@ -3491,7 +3450,6 @@
+   top: -30px;
+   font-size: 24px;
+   left: 25px;
+-  animation: point 0.25s linear infinite alternate;
+ }
+ .record {
+   width: 250px;
+@@ -3502,7 +3460,6 @@
+   place-items: center;
+   position: relative;
+   box-shadow: -1px -1px 1px rgba(255,255,255,0.125), 1px 1px 1px rgba(255,255,255,0.025);
+-  transition: all 1s;
+   box-shadow: 0 0 5px rgba(0,0,0,0.5);
+   scale: 1.5;
+ }
+@@ -3813,139 +3770,11 @@
+ :root {
+   --pwlight: #f00;
+ }
+-@-moz-keyframes spin {
+-  to {
+-    rotate: 360deg;
+-  }
+-}
+-@-webkit-keyframes spin {
+-  to {
+-    rotate: 360deg;
+-  }
+-}
+-@-o-keyframes spin {
+-  to {
+-    rotate: 360deg;
+-  }
+-}
+-@keyframes spin {
+-  to {
+-    rotate: 360deg;
+-  }
+-}
+-@-moz-keyframes movebar {
+-  0% {
+-    transform: rotate(0deg);
+-  }
+-  2% {
+-    transform: rotate(17deg);
+-  }
+-  90% {
+-    transform: rotate(34deg);
+-  }
+-  100% {
+-    transform: rotate(17deg);
+-  }
+-}
+-@-webkit-keyframes movebar {
+-  0% {
+-    transform: rotate(0deg);
+-  }
+-  2% {
+-    transform: rotate(17deg);
+-  }
+-  90% {
+-    transform: rotate(34deg);
+-  }
+-  100% {
+-    transform: rotate(17deg);
+-  }
+-}
+-@-o-keyframes movebar {
+-  0% {
+-    transform: rotate(0deg);
+-  }
+-  2% {
+-    transform: rotate(17deg);
+-  }
+-  90% {
+-    transform: rotate(34deg);
+-  }
+-  100% {
+-    transform: rotate(17deg);
+-  }
+-}
+-@keyframes movebar {
+-  0% {
+-    transform: rotate(0deg);
+-  }
+-  2% {
+-    transform: rotate(17deg);
+-  }
+-  90% {
+-    transform: rotate(34deg);
+-  }
+-  100% {
+-    transform: rotate(17deg);
+-  }
+-}
+-@-moz-keyframes mb1 {
+-  from {
+-    transform: rotate(17deg);
+-  }
+-  to {
+-    transform: rotate(0deg);
+-  }
+-}
+-@-webkit-keyframes mb1 {
+-  from {
+-    transform: rotate(17deg);
+-  }
+-  to {
+-    transform: rotate(0deg);
+-  }
+-}
+-@-o-keyframes mb1 {
+-  from {
+-    transform: rotate(17deg);
+-  }
+-  to {
+-    transform: rotate(0deg);
+-  }
+-}
+-@keyframes mb1 {
+-  from {
+-    transform: rotate(17deg);
+-  }
+-  to {
+-    transform: rotate(0deg);
+-  }
+-}
+-@-moz-keyframes point {
+-  to {
+-    top: -40px;
+-  }
+-}
+-@-webkit-keyframes point {
+-  to {
+-    top: -40px;
+-  }
+-}
+-@-o-keyframes point {
+-  to {
+-    top: -40px;
+-  }
+-}
+-@keyframes point {
+-  to {
+-    top: -40px;
+-  }
+-}
+ </style>
+ 
+   </head>
+ 
+-<body translate="no">
++<body>
+   <div class="rplayer">
+   <div class="highlight"></div>
+   <div class="logo">
+@@ -4089,16 +3918,13 @@
+ document.documentElement.style.setProperty('--pwlight', 'rgba(255,255,255,.5)');
+ pwr.addEventListener('click', () => {
+   if (playing === 0) {
+-    tb.style.animation = 'movebar 100s linear infinite';
+     tb.style.transform = 'rotate(17deg)';
+-    rec.style.animation = 'spin 5s linear infinite';
+     document.documentElement.style.setProperty('--pwlight', 'red');
+     clickme.style.opacity = '0';
+     playing = 1;
+     playRockLoop();
+   } else {
+-    tb.style.animation = 'mb1 3s linear forwards';
+-    rec.style.animationPlayState = 'paused';
++    tb.style.transform = 'rotate(0deg)';
+     document.documentElement.style.setProperty('--pwlight', 'rgba(255,255,255,.5)');
+     playing = 0;
+     stopRockLoop();
+@@ -4152,7 +3978,7 @@
+     ["4n", null, "4n", null, "4n", null, "4n", "4n"] // Kick kick snare, kick kick, snare, kick kick kick
+     ];
+ 
+-    for (let i = 0; i < introPattern[0].length; i++) {if (window.CP.shouldStopExecution(0)) break;
++    for (let i = 0; i < introPattern[0].length; i++) {
+       if (introPattern[0][i]) {
+         snare.triggerAttackRelease(introPattern[0][i], time + i * 0.125);
+       }
+@@ -4163,7 +3989,7 @@
+     }
+ 
+     // Main loop
+-    window.CP.exitedLoop(0);kick.triggerAttackRelease("C2", "4n", time + 2);
++    kick.triggerAttackRelease("C2", "4n", time + 2);
+     snare.triggerAttackRelease("8n", time + 2.5);
+     hats.triggerAttackRelease("8n", time + 2);
+     hats.triggerAttackRelease("8n", time + 2.25);
+@@ -4219,7 +4045,7 @@
+   // Dispose the loop
+   rockLoop.dispose();
+ }
+-//# sourceURL=pen.js
++
+   </script>
+ 
+   
