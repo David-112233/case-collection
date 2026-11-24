@@ -33,8 +33,8 @@
 - **外部资源：** 只有作者在 HTML 里引用的 Google Fonts Montserrat 800（用于 “CASIO PT-1” 标志）。从本环境请求字体 CSS 与拉丁子集 woff2 均返回 200；浏览器内是否实际应用未核实。
 - **窄屏：** 机身固定 960px 宽，来源没有窄屏适配，375 宽视口下会横向溢出；GT 保持原样，input 只面向桌面宽屏。
 - **档位复核：** GT 没有任何动态，按难度模型 v2.1 为 T1，与入库暂定一致，不改名。
-- **自检：** 本环境装不了浏览器，只完成了静态检查和按 CSS 推算的几何；渲染自检脚本已备好，待本地运行。见 [review_20261124/static_check.md](review_20261124/static_check.md)。
+- **自检：** 做了静态检查和按 CSS 推算的几何；之后用云端浏览器经 raw.githack 在 1280 与 500 宽视口截图核对，画面无渲染问题，GT 不改。精确测量的 Playwright 脚本已备好，待本地运行（375 视口也待本地）。见 [review_20261124/static_check.md](review_20261124/static_check.md)。
 
 ## input 草稿（2026-11-24，duet）
 
-[input.json](input.json) 由 GT 写出，等用户审核 GT 与 input。外观描述由 CSS 推算、尚未经渲染核对，推断依据和写与不写的取舍见 [input_problem.md](input_problem.md)。
+[input.json](input.json) 由 GT 写出，等用户审核 GT 与 input。外观描述已对照截图核对并修正 3 处，核对结果和写与不写的取舍见 [input_problem.md](input_problem.md)。
