@@ -1,0 +1,45 @@
+--- source.html	2026-11-24 09:39:01.018845425 +0000
++++ ground_truth.html	2026-11-24 10:22:36.573081327 +0000
+@@ -4,25 +4,9 @@
+ <head>
+   
+   <meta charset="UTF-8">
+-  
+-
+-    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+-
+-    <meta name="apple-mobile-web-app-title" content="CodePen">
+-
+-    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+-
+-    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+-
+-
+-
+-  
+-    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+ 
+ 
+   <title>CSS-Art Teenage Engineering OP-1 Portable Synthesizer</title>
+-
+-    <link rel="canonical" href="https://codepen.io/shunyadezain/pen/QWyVwep">
+   
+   
+   
+@@ -1622,7 +1606,7 @@
+ 
+   </head>
+ 
+-<body translate="no">
++<body>
+   <div class="base">
+   
+   <div class="op">
+@@ -2046,7 +2030,6 @@
+     <script id="rendered-js" >
+ // Teenage Engineering OP-1 Portable Synthesizer
+ //Hope you like it!
+-//# sourceURL=pen.js
+   </script>
+ 
+   
