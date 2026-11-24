@@ -41,4 +41,4 @@
 
 ## 规则草稿（manual_v1）
 
-用户 2026-11-24 审核修改 input 后，duet 起草了 [rules_drafts/manual_v1/eval_rules.json](rules_drafts/manual_v1/eval_rules.json)，人可读版 [review.md](rules_drafts/manual_v1/review.md)：9 条 Requirement / 48 条 mandatory（静态 37、动态 11），1 条常识条件，D1、D2 各 50%，只在 1280×900 采证；`check_rules.py` 通过。**待用户审核**，未冻结。台账阶段仍为 `input_draft`（`input_approved` 需用户原话）。`generation_prompt.txt` 未写：仓库里没有 `output_prompt_v2.txt`。
+用户 2026-11-24 审核修改 input 后，duet 起草了 [rules_drafts/manual_v1/eval_rules.json](rules_drafts/manual_v1/eval_rules.json)，人可读版 [review.md](rules_drafts/manual_v1/review.md)：9 条 Requirement / 48 条 mandatory（静态 37、动态 11），1 条常识条件，D1、D2 各 50%，只在 1280×900 采证；`check_rules.py` 通过。**待用户审核**，未冻结。台账阶段仍为 `input_draft`，请用户设 `input_approved`，之后 duet 再推进到 `ready_for_review`。`generation_prompt.txt` 未写：仓库里没有 `output_prompt_v2.txt`。
