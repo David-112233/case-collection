@@ -1,7 +1,7 @@
-# case-collection 仓库整理与 Duet 案例工作区方案（定稿 v2）
+# case-collection 仓库整理与 Duet 案例工作区方案（定稿 v3，已执行）
 
-日期：2026-11-24　撰写：Claude　状态：**用户已确认，待 dot 执行**
-适用对象：dot（执行者）、duet（执行完成后使用）。本文件在主仓库 `project_state/handoffs/` 也有一份，内容相同；dot 执行完毕后把本文件移入 `data_intake/archive/`。
+日期：2026-11-24　撰写：Claude　状态：**已由 Claude 在本地全部执行（阶段 0–5），未推送前 dot、duet 不需要再做整理**
+适用对象：dot、duet（按新结构工作）。**本文第 6 节的步骤已经执行完毕，保留作历史记录**；现行规则以 `AGENTS.md`、`data_intake/README.md`、`cases/README.md` 为准。本文件在主仓库 `project_state/handoffs/` 也有一份，内容相同；dot 执行完毕后把本文件移入 `data_intake/archive/`。
 
 ## 0. 已确认的决定
 
@@ -130,3 +130,18 @@ case-collection/
 ## 8. 仍未固化的一点
 
 dot 自 2026-11-19 起做的“空间关系”专项（多物体空间、叠压遮挡、三维等），其选题标准是用户当时对 dot 的口头说明，没有成文。`data_intake/README.md` 里只标注了这一缺口。请用户在方便时把标准口述一份，由 Claude 写入采集说明。
+
+---
+
+## 9. 执行结果（2026-11-24，Claude 本地）
+
+| 阶段 | 结果 |
+|---|---|
+| 0 | 本地标签 `pre-restructure-20261124`（指向整理前的 `62aba07`） |
+| 1 | 旧 `data_intake/B1/` 全部按 §3 迁移：脚本进 `tools/`，认领表进 `ledger/`，各候选名单进 `batches/<日期>_<agent>_<NN>/`，旧历史材料进 `archive/` |
+| 2 | 工具与说明的路径已改；`ledger/review.csv` 共 431 行；各分支独有的候选名单、筛选记录、来源核验、dot 报告已并入 `batches/` 与 `archive/dot_branch_records/`；待判定源码 233 份放 `pending/`（哈希全部核对一致）；其余候选源码 173 份并入 `archive/dot_sources/` |
+| 3 | 新增 `tools/registry.py`、`tools/admit_case.py`（默认预演）；预演与各类拒绝条件已验证 |
+| 4 | 已选 27 个入库为 `case-228`–`254`，档位由 Claude 按驱动方式判定并写明依据，**待用户抽查**；三个有疑问的在 `registry.csv` 备注：case-235（WebGL 画布）、case-253（T2/T3 有争议）、case-234（外部脚本未核验） |
+| 5 | 分支清理清单见 `data_intake/archive/branch_cleanup_list_20261124.md`：66 个分支内容均已并入 `main`；**未删除任何分支或 PR，须用户逐条同意** |
+
+补充：两份早期入库清单（`入库清单_dot.md`、`二轮备选_dot.md`）已保存到 `data_intake/review_lists/20261120_dot_c001_c050/`；用户的 xlsx 在 `review_lists/20261121_dot/`，未动。

@@ -21,7 +21,7 @@
 | 可以写 | `data_intake/`；入库时新建 `cases/case-NNN-TX/` 并追加 `cases/registry.csv` | `cases/` 下归属 duet 的案例目录；采集时写自己的批次目录与 `data_intake/ledger/` |
 | 不可以写 | 案例内容（input、GT、规则） | `user_review` 字段、入库、`reference/` |
 
-两者共同禁止：改 `reference/`；改对方的案例目录或批次文件；重判对方认领的作品。认领规则见 [data_intake/README.md](data_intake/README.md)：先认领并推送，成功后才抓取和判断，先到先得。
+两者共同禁止：改 `reference/`；改对方的案例目录或批次文件；重判对方认领的作品。认领规则见 [data_intake/README.md](data_intake/README.md)：先认领并推送，成功后才抓取和判断，先到先得。工具都在 `data_intake/tools/`（`claim.py`、`decide.py`、`peek.py`、`triage.py`、`shot.py`、`registry.py`、`admit_case.py`）。
 
 ## 4. 案例加工要求（duet）
 
