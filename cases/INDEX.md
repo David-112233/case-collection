@@ -2,7 +2,7 @@
 
 由 `data_intake/tools/registry.py render-index` 生成，**不要手写**。状态来源是 [registry.csv](registry.csv)。
 
-阶段分布：admitted 25，gt_ready 1，input_draft 1
+阶段分布：admitted 24，gt_ready 2，input_draft 1
 
 | 案例 | 档位 | 来源 | 特色 | 阶段 | 处理者 | 更新 | 用户审核 | 备注 |
 |---|---|---|---|---|---|---|---|---|
@@ -10,7 +10,7 @@
 | [case-229-T1](case-229-T1/) | T1 | [fossheim__VweaNYW](https://codepen.io/fossheim/pen/VweaNYW) | 卡西欧键盘、黑白键叠压 | admitted | duet | 2026-11-24 | pending |  |
 | [case-230-T1](case-230-T1/) | T1 | [glennphilp__DBLzOW](https://codepen.io/glennphilp/pen/DBLzOW) | 剪纸叠字、倾斜阴影 | gt_ready | duet | 2026-11-24 | pending | GT 只删 CodePen 样板；截图自检未做（云端无浏览器），脚本已备 |
 | [case-231-T3](case-231-T3/) | T3 | [ricardoolivaalonso__ExPpgqG](https://codepen.io/ricardoolivaalonso/pen/ExPpgqG) | 立体收音机、磁带仓与凹槽 | admitted | duet | 2026-11-24 | pending |  |
-| [case-232-T2](case-232-T2/) | T2 | [Ak-407__MYgKoME](https://codepen.io/Ak-407/pen/MYgKoME) | 折叠卡片、页面折角 | admitted | duet | 2026-11-24 | pending |  |
+| [case-232-T2](case-232-T2/) | T2 | [Ak-407__MYgKoME](https://codepen.io/Ak-407/pen/MYgKoME) | 折叠卡片、页面折角 | gt_ready | duet | 2026-11-24 | pending | GT 已做；云端无浏览器，截图自检待本地运行 |
 | [case-233-T2](case-233-T2/) | T2 | [bofengbu__JjvYZoJ](https://codepen.io/bofengbu/pen/JjvYZoJ) | 分层蛋糕、夹心切面 | admitted | duet | 2026-11-24 | pending |  |
 | [case-234-T1](case-234-T1/) | T1 | [fossheim__xxboBzO](https://codepen.io/fossheim/pen/xxboBzO) | 拍立得、凹面取景器 | admitted | duet | 2026-11-24 | pending | 引用外部 script.js，内容未核验，档位按未见动态暂定 |
 | [case-235-T3](case-235-T3/) | T3 | [ricardoolivaalonso__NWJeBPE](https://codepen.io/ricardoolivaalonso/pen/NWJeBPE) | 立体办公室、家具分层 | admitted | duet | 2026-11-24 | pending | WebGL 画布（three.js），非 HTML/CSS 结构，评分可行性待用户确认 |
