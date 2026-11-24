@@ -4,9 +4,7 @@ case-229-T1,fossheim__VweaNYW,T1,duet,input_draft,2026-11-24,等用户审核 GT 
 case-230-T1,glennphilp__DBLzOW,T1,duet,input_draft,2026-11-24,等用户审核 GT 与 input；外观由 CSS 推算，截图待本地运行 shot_gt.py,pending
 case-231-T3,ricardoolivaalonso__ExPpgqG,T3,duet,input_draft,2026-11-24,等用户审核 GT 与 input；云端无浏览器，外观由 CSS 推算，待本地运行 review_20261124/gt_check.py 核对（见 input_problem.md）,pending
 case-232-T2,Ak-407__MYgKoME,T2,duet,input_draft,2026-11-24,input 已由 GT 写出，等用户审核；外观由 CSS 推算待本地渲染核对,pending
-case-233-T2,bofengbu__JjvYZoJ,T2,duet,admitted,2026-11-24,,pending
 case-233-T3,bofengbu__JjvYZoJ,T3,duet,gt_ready,2026-11-24,GT 去掉 camera.js（拖拽相机）与自动旋转，保留 How to? 面板；外部 CSS 与 camera.js 被代理拦截未核实，渲染自检待本地运行 review_20261124/gt_check.py | 档位由 T2 改为 T3（按 GT 重新判定）,pending
-case-234-T1,fossheim__xxboBzO,T1,duet,admitted,2026-11-24,引用外部 script.js，内容未核验，档位按未见动态暂定,pending
 case-234-T1,fossheim__xxboBzO,T1,duet,gt_ready,2026-11-24,GT 仅静态自检，渲染自检待本地运行 review_20261124/gt_check.py；外部 /script.js 未核验，按推断不存在已删；档位复核仍为 T1,pending
 case-235-T3,ricardoolivaalonso__NWJeBPE,T3,duet,admitted,2026-11-24,WebGL 画布（three.js），非 HTML/CSS 结构，评分可行性待用户确认,pending
 case-236-T3,ricardoolivaalonso__QWJxYXE,T3,duet,admitted,2026-11-24,,pending
