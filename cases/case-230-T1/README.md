@@ -33,12 +33,12 @@
 - **字体**：标题只写了 `font-family: "Helvetica"`，没有通用族回退，也不加载外部字体。各系统多会把 Helvetica 映射到同类无衬线体，没有映射时会落到浏览器默认字体。保持来源原样。
 - **来源里的无效声明**：`::before` 的第二条 `text-shadow` 写了四个长度值（文字阴影不支持扩展半径），`::after` 里有一行没有属性名的 `-ms-linear-gradient(...)`，还有 `-ms-` 前缀的变换。浏览器会忽略这些，实际生效的是第一条阴影和标准 `transform`。保持原样。
 - **`rotateY` 与 `translateZ`**：父元素没有设 `perspective`，所以这两项几乎看不出效果，可见的倾斜主要来自 `skew`。保持原样。
-- **窄屏**：五个超大字母约 590px 宽，375 视口下估计会换成两行（估算，见自检）。来源没有响应式处理，GT 不加。
+- **窄屏**：五个字母实际总宽约 470px。宽度不足约 490px 时会换成两行，第一个 N 的纸片层和阴影与字母错开，页面横向溢出（来源相同）。input 只面向桌面宽屏，GT 未修，是否要修待用户定。
 - **外部资源**：GT 不加载任何外部资源。
 
 ## GT 自检
 
-见 [review_20261124/static_check.md](review_20261124/static_check.md)。**截图和测量没做成**：云端环境禁用了 Playwright 的浏览器下载，系统也没有 chromium。截图脚本 `review_20261124/shot_gt.py` 已备好，可在本地运行。上面对画面的描述来自样式推算，尚未经渲染验证。
+见 [review_20261124/static_check.md](review_20261124/static_check.md)。本机装不了浏览器，改用项目的云端浏览器经 raw.githack 打开 GT，在 1280 和 500 宽截图核对（工具最小宽度 500），截图未入库。完整的双视口截图和测量仍可在本地运行 `review_20261124/shot_gt.py` 得到。
 
 ## 档位复核
 
@@ -46,4 +46,4 @@ GT 无任何动态：无动画、无过渡、无悬停或点击效果。按难�
 
 ## input
 
-[input.json](input.json) 由 GT 写出，问题与取舍见 [input_problem.md](input_problem.md)。外观描述由 CSS 推算，待本地渲染核对。阶段 `input_draft`：等用户审核 GT 与 input，规则草稿和 `generation_prompt.txt` 尚未写。
+[input.json](input.json) 由 GT 写出，问题与取舍见 [input_problem.md](input_problem.md)。外观描述已按云端浏览器截图核对并修正。阶段 `input_draft`：等用户审核 GT 与 input，规则草稿和 `generation_prompt.txt` 尚未写。
