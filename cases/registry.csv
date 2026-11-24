@@ -6,7 +6,7 @@ case-231-T3,ricardoolivaalonso__ExPpgqG,T3,duet,input_draft,2026-11-24,等用户
 case-232-T2,Ak-407__MYgKoME,T2,duet,input_draft,2026-11-24,input 已由 GT 写出，等用户审核；外观由 CSS 推算待本地渲染核对,pending
 case-233-T3,bofengbu__JjvYZoJ,T3,duet,input_draft,2026-11-24,等用户审核 GT 与 input；外部 CSS 与 camera.js 未核实，外观由内联 CSS 推算，渲染自检待本地运行 review_20261124/gt_check.py；说明面板留不留待定（删则改 T1），见 input_problem.md,pending
 case-234-T1,fossheim__xxboBzO,T1,duet,input_draft,2026-11-24,input 已由 GT 写出，等用户审核；外观由 CSS 推算待本地渲染核对；/script.js 未核验，无交互与 T1 档位待用户确认,pending
-case-235-T1,ricardoolivaalonso__NWJeBPE,T1,duet,gt_ready,2026-11-24,GT 固定为来源初始视角，去掉轨道控制、点击交互、自转和视频；仅静态自检，渲染自检待本地运行 review_20261124/gt_check.py | 档位由 T3 改为 T1（按 GT 重新判定）,pending
+case-235-T1,ricardoolivaalonso__NWJeBPE,T1,duet,input_draft,2026-11-24,input 已由 GT 写出，等用户审核；外观依据目标图与模型投影，待本地渲染核对；交互全删（T1）、屏幕黑底、竖屏裁切待用户确认,pending
 case-236-T3,ricardoolivaalonso__QWJxYXE,T3,duet,admitted,2026-11-24,,pending
 case-237-T3,dustindwayne__bGyYoar,T3,duet,admitted,2026-11-24,,pending
 case-238-T1,MadeByArne__bGWwRoX,T1,duet,admitted,2026-11-24,,pending

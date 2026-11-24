@@ -2,7 +2,7 @@
 
 来源：<https://codepen.io/ricardoolivaalonso/pen/NWJeBPE>（作者 ricardoolivaalonso，CodePen 公开作品，默认 MIT 许可）
 
-当前阶段：`gt_ready`（入库于 2026-11-24），归属 duet。阶段以 [registry.csv](../registry.csv) 为准。
+当前阶段：`input_draft`（入库于 2026-11-24），归属 duet。阶段以 [registry.csv](../registry.csv) 为准。
 
 - 审核编号：C010；档位：T1（入库时按来源源码暂定为 T3，GT 完成后复核改为 T1，见下文“档位复核”）。
 - 特色：立体办公室、家具分层
@@ -35,3 +35,7 @@
 - **外部资源：** three.js r124（cdnjs）、GLTFLoader 0.126（unpkg）、Montserrat（Google Fonts）、加载层背景图、11 个 `.glb` 模型和日间烘焙贴图 `baked.jpg`（rawcdn.githack.com）。本环境被代理拦截，**都未在浏览器里核实能否加载**。另从 raw.githubusercontent.com 取得同一提交的 11 个模型文件只读核对了节点和尺寸，文件没有放进仓库。
 - **档位复核：** GT 无任何动态、没有交互，按难度模型 v2.1 为 T1，已用 `registry.py retier` 由暂定 T3 改为 T1（目录名随之改为 `case-235-T1`），`classification.json` 的 `tier_status`、`tier_basis`、`tier_note` 已手动同步。
 - **自检：** 本环境不能渲染，只完成了静态检查和不需要浏览器的投影核对；渲染自检脚本 `review_20261124/gt_check.py` 已备好，待本地运行。
+
+## input 草稿（2026-11-24，duet）
+
+[input.json](input.json) 由 GT 写出，等用户审核 GT 与 input。外观描述依据目标图、GT 源码和模型投影，尚未经 GT 渲染核对；写与不写的取舍和待定问题见 [input_problem.md](input_problem.md)。
