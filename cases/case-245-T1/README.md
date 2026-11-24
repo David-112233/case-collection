@@ -2,7 +2,7 @@
 
 来源：<https://codepen.io/HunorMarton/pen/BazeOpE>（作者 HunorMarton，CodePen 公开作品，默认 MIT 许可）
 
-当前阶段：`gt_ready`（入库于 2026-11-24），归属 duet。阶段以 [registry.csv](../registry.csv) 为准。
+当前阶段：`input_draft`（入库于 2026-11-24），归属 duet。阶段以 [registry.csv](../registry.csv) 为准。
 
 - 审核编号：C033；档位：T1（**暂定**，依据入库时的来源源码；`ground_truth.html` 完成后按 GT 的驱动方式重新判定，必要时用 `registry.py retier` 改名）。
 - 特色：埃舍尔方块、桥面穿插
@@ -34,3 +34,13 @@
 ## 档位复核
 
 GT 无任何动态：入场动画已去掉，唯一的悬停交互（YouTube 推广徽标放大并弹出卡片）随徽标一起删除。按难度模型 v2.1 由暂定 **T2 改为 T1**，已用 `registry.py retier` 改名并同步 classification.json。若用户决定保留徽标，应改回 T2。
+
+## GT 自检
+
+见 [review_20261124/static_check.md](review_20261124/static_check.md)。经 raw.githack.com 在云端浏览器打开 GT，在 1280×800、1280×992、500×800 截图并放大核对，截图未入库；本地可运行 `review_20261124/shot_gt.py` 重新得到截图和测量。
+
+## input
+
+[input.json](input.json) 由 GT 写出，问题与取舍见 [input_problem.md](input_problem.md)。外观已按截图核对。阶段 `input_draft`：等用户审核 GT 与 input，规则草稿和 `generation_prompt.txt` 尚未写。
+
+注意：这幅图案由十几种不同的格子按 4 排 × 6 格的单元重复组成，文字只能写到花样类别一层，是否可评测待用户定（见 input_problem.md 第 2 节）。
