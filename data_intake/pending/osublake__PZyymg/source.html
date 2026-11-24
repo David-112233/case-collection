@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>Draw 3D SVG paths</title>
+
+    <link rel="canonical" href="https://codepen.io/osublake/pen/PZyymg">
+  
+  <link rel="stylesheet" href="https://public.codepenassets.com/css/normalize-5.0.0.min.css">
+
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.0.2/angular-material.min.css'>
+  
+<style>
+body {
+  background: #000;
+  color: #dadada;
+}
+
+main {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  visibility: hidden;
+  opacity: 0;
+}
+
+button {
+  color: black;
+}
+
+#svg {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+#hud {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 300px;
+  padding: 4px;
+  border: 1px solid #111;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+#pencil-line {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 1;
+  stroke-opacity: 0.8;
+}
+
+#pencil-point {
+  opacity: 0;
+}
+
+#ribbon-layer {
+  pointer-events: none;
+}
+
+.headline {
+  font-size: 18px;
+  font-weight: normal;
+  margin: 10px;
+}
+
+.ribbon {
+  fill: none;
+  stroke-linecap: round;
+  stroke-width: 2;
+}
+
+.control {
+  padding: 10px;
+}
+
+.range {
+  font-size: 14px;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.range-label {
+  min-width: 65px;
+  width: 65px;
+}
+
+.range-value {
+  min-width: 50px;
+  width: 50px;
+  padding-left: 10px;
+}
+
+.range-input {
+  width: 100%;
+  vertical-align: middle;
+}
+
+.flex {
+  box-sizing: border-box;
+  flex: 1;
+}
+
+.layout-row {
+  flex-direction: row;
+}
+
+.layout-column {
+  flex-direction: column;
+}
+</style>
+
+  <script src="https://public.codepenassets.com/js/prefixfree-1.0.7.min.js"></script>
+
+  
+</head>
+
+<body translate="no">
+  <main>
+  <svg id="svg">
+    <g id="ribbon-layer"></g>
+    <g>
+      <polyline id="pencil-line" points="" />
+      <rect id="pencil-point" width="1" height="1" />
+    </g>
+  </svg>
+
+  <section id="hud">
+    <h2 class="headline">Start Drawing!!!</h2>
+    
+    <div id="angle-range" class="range control layout-row">    
+      <div class="range-label">
+        Angle
+      </div>
+      <div class="flex">
+        <input class="range-input" type="range" min="0" max="360" step="2" value="0" />
+      </div>
+      <div class="range-value">0</div>
+    </div>
+    
+    <div id="width-range" class="range control layout-row">    
+      <div class="range-label">
+        Width
+      </div>
+      <div class="flex">
+        <input class="range-input" type="range" min="1" max="80" step="1" value="80" />
+      </div>
+      <div class="range-value">0</div>
+    </div>
+    
+    <div class="control">
+      <button id="clear">Clear</button>
+    </div>
+  </section>
+</main>
+  <script src='//cdnjs.cloudflare.com/ajax/libs/lodash.js/4.1.0/lodash.min.js'></script>
+<script src='//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/TweenMax.min.js'></script>
+<script src='//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/utils/Draggable.min.js'></script>
+    <script id="rendered-js" >
+"use strict";
+// Based on Israel Eisenberg's variable stroke width articles
+// http://owl3d.com/svg/vsw/articles/
+// Path simplification based on Simplify.js
+// https://mourner.github.io/simplify-js/
+//
+// CATMULL ROM
+// ========================================================================
+var catmullRom;
+(function (catmullRom) {
+    function getDistSq(p1x, p1y, p2x, p2y) {
+        var dx = p1x - p2x;
+        var dy = p1y - p2y;
+        return dx * dx + dy * dy;
+    }
+    function getSegDistSq(px, py, p1x, p1y, p2x, p2y) {
+        var x = p1x;
+        var y = p1y;
+        var dx = p2x - x;
+        var dy = p2y - y;
+        if (dx !== 0 || dy !== 0) {
+            var t = ((px - x) * dx + (py - y) * dy) / (dx * dx + dy * dy);
+            if (t > 1) {
+                x = p2x;
+                y = p2y;
+            }
+            else if (t > 0) {
+                x += dx * t;
+                y += dy * t;
+            }
+        }
+        dx = px - x;
+        dy = py - y;
+        return dx * dx + dy * dy;
+    }
+    function simplifyRadialDist(points, toleranceSq) {
+        var prevPointX = points[0];
+        var prevPointY = points[1];
+        var newPoints = [prevPointX, prevPointY];
+        var pointX, pointY;
+        for (var i = 2, len = points.length; i < len; i += 2) {
+            pointX = points[i];
+            pointY = points[i + 1];
+            if (getDistSq(pointX, pointY, prevPointX, prevPointY) > toleranceSq) {
+                newPoints.push(pointX, pointY);
+                prevPointX = pointX;
+                prevPointY = pointY;
+            }
+        }
+        if (prevPointX !== pointX && prevPointY !== pointY) {
+            newPoints.push(pointX, pointY);
+        }
+        return newPoints;
+    }
+    function simplifyDPStep(points, first, last, toleranceSq, simplified) {
+        var maxDistSq = toleranceSq;
+        var index;
+        for (var i = first + 2; i < last; i += 2) {
+            var distSq = getSegDistSq(points[i], points[i + 1], points[first], points[first + 1], points[last], points[last + 1]);
+            if (distSq > maxDistSq) {
+                index = i;
+                maxDistSq = distSq;
+            }
+        }
+        if (maxDistSq > toleranceSq) {
+            if (index - first > 1)
+                simplifyDPStep(points, first, index, toleranceSq, simplified);
+            simplified.push(points[index], points[index + 1]);
+            if (last - index > 1)
+                simplifyDPStep(points, index, last, toleranceSq, simplified);
+        }
+    }
+    function simplifyDouglasPeucker(points, sqTolerance) {
+        var last = points.length - 2;
+        var simplified = [points[0], points[1]];
+        simplifyDPStep(points, 0, last, sqTolerance, simplified);
+        simplified.push(points[last], points[last + 1]);
+        return simplified;
+    }
+    function solve(points, tolerance = 1, highQuality = false, interpolate = false, k) {
+        var size = points.length;
+        if (size < 5)
+            return;
+        var toleranceSq = tolerance ** 2;
+        points = highQuality ? points : simplifyRadialDist(points, toleranceSq);
+        points = simplifyDouglasPeucker(points, toleranceSq);
+        size = points.length;
+        if (size < 3)
+            return;
+        if (size < 4) {
+            var sameX = (points[0] === points[2]);
+            var sameY = (points[1] === points[3]);
+            if (sameX && sameY)
+                return;
+        }
+        if (k == null)
+            k = 1;
+        var last = size - 4;
+        var path = `M${points[0]},${points[1]}`;
+        for (var i = 0; i < size - 2; i += 2) {
+            var x0 = i ? points[i - 2] : points[0];
+            var y0 = i ? points[i - 1] : points[1];
+            var x1 = points[i + 0];
+            var y1 = points[i + 1];
+            var x2 = points[i + 2];
+            var y2 = points[i + 3];
+            var x3 = i !== last ? points[i + 4] : x2;
+            var y3 = i !== last ? points[i + 5] : y2;
+            if (interpolate) {
+                var xc1 = (x0 + x1) / 2;
+                var yc1 = (y0 + y1) / 2;
+                var xc2 = (x1 + x2) / 2;
+                var yc2 = (y1 + y2) / 2;
+                var xc3 = (x2 + x3) / 2;
+                var yc3 = (y2 + y3) / 2;
+                var len1 = Math.sqrt((x1 - x0) * (x1 - x0) + (y1 - y0) * (y1 - y0));
+                var len2 = Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+                var len3 = Math.sqrt((x3 - x2) * (x3 - x2) + (y3 - y2) * (y3 - y2));
+                var k1 = len1 / (len1 + len2);
+                var k2 = len2 / (len2 + len3);
+                var xm1 = xc1 + (xc2 - xc1) * k1;
+                var ym1 = yc1 + (yc2 - yc1) * k1;
+                var xm2 = xc2 + (xc3 - xc2) * k2;
+                var ym2 = yc2 + (yc3 - yc2) * k2;
+                var cp1x = xm1 + (xc2 - xm1) * k + x1 - xm1;
+                var cp1y = ym1 + (yc2 - ym1) * k + y1 - ym1;
+                var cp2x = xm2 + (xc2 - xm2) * k + x2 - xm2;
+                var cp2y = ym2 + (yc2 - ym2) * k + y2 - ym2;
+            }
+            else {
+                var cp1x = x1 + (x2 - x0) / 6 * k;
+                var cp1y = y1 + (y2 - y0) / 6 * k;
+                var cp2x = x2 - (x3 - x1) / 6 * k;
+                var cp2y = y2 - (y3 - y1) / 6 * k;
+            }
+            path += ` C${cp1x},${cp1y},${cp2x},${cp2y},${x2},${y2}`;
+        }
+        return path;
+    }
+    catmullRom.solve = solve;
+})(catmullRom || (catmullRom = {}));
+//
+// RIBBON PATH
+// ========================================================================
+class RibbonPath {
+    constructor(ribbon, index) {
+        this.ribbon = ribbon;
+        this.index = index;
+        this.group = document.querySelector("#layer-" + index);
+        this.element = createSvg("path", {
+            appendTo: this.group,
+            class: "ribbon",
+            d: ribbon.d
+        });
+        this.update();
+    }
+    destroy() {
+        this.group.removeChild(this.element);
+    }
+    update() {
+        var ribbon = this.ribbon;
+        var progress = this.index / ribbon.width;
+        var transform = lerpArray(progress, ribbon.start, ribbon.end);
+        var color = lerpColor(progress, ribbon.color);
+        var stroke = `rgb(${color[0] >> 0},${color[1] >> 0},${color[2] >> 0})`;
+        TweenLite.set(this.element, {
+            x: transform[0],
+            y: transform[1],
+            stroke
+        });
+    }
+}
+//
+// RIBBON
+// ========================================================================
+class Ribbon {
+    constructor(d, angle, width) {
+        this.d = d;
+        this._angle = 0;
+        this._width = 0;
+        this.color = colors.slice(0);
+        this.dirty = false;
+        this.paths = [];
+        this.start = [];
+        this.end = [];
+        this.update(angle, width);
+    }
+    get angle() { return this._angle; }
+    set angle(n) {
+        if (n != null && n !== this._angle) {
+            this.dirty = true;
+            this._angle = n;
+        }
+    }
+    get width() { return this._width; }
+    set width(n) {
+        if (n != null && n !== this._width) {
+            this.dirty = true;
+            this._width = n;
+        }
+    }
+    destroy() {
+        _.forEach(this.paths, path => path.destroy());
+    }
+    update(angle, width) {
+        this.angle = angle;
+        this.width = width;
+        if (!this.dirty)
+            return;
+        if (this.paths.length > this.width) {
+            var paths = this.paths.splice(this.width);
+            _.forEach(paths, path => path.destroy());
+        }
+        var x = (cos(180 - this.angle) * this.width / 2);
+        var y = (sin(180 - this.angle) * this.width / 2);
+        this.start[0] = x;
+        this.start[1] = -y;
+        this.end[0] = -x;
+        this.end[1] = y;
+        for (var i = 0; i < this.width; i++) {
+            var path = this.paths[i];
+            if (path) {
+                path.update();
+            }
+            else {
+                this.paths[i] = new RibbonPath(this, i, this.width);
+            }
+        }
+        this.dirty = false;
+    }
+}
+//
+// PENCIL
+// ========================================================================
+class Pencil {
+    constructor(tolerance, distSq) {
+        this.tolerance = tolerance;
+        this.distSq = distSq;
+        this.points = [];
+        this.lastX = 0;
+        this.lastY = 0;
+        this.line = document.querySelector("#pencil-line");
+        this.point = document.querySelector("#pencil-point");
+        this.pencil = new Draggable(this.point, {
+            bounds: "#svg",
+            trigger: "#svg",
+            cursor: "crosshair",
+            onPress: this.onPress,
+            onDrag: this.onDrag,
+            onDragEnd: this.onDragEnd,
+            callbackScope: this
+        });
+    }
+    onPress(event) {
+        render();
+        var x = this.lastX = this.pencil.pointerX;
+        var y = this.lastY = this.pencil.pointerY;
+        TweenLite.set(this.point, { x, y });
+        this.pencil.update();
+        this.points.length = 0;
+        this.points.push(x, y);
+    }
+    onDrag(event) {
+        var x = this.pencil.x;
+        var y = this.pencil.y;
+        var dx = (this.lastX - x) ** 2;
+        var dy = (this.lastY - y) ** 2;
+        if (dx + dy > this.distSq) {
+            this.lastX = this.pencil.x;
+            this.lastY = this.pencil.y;
+            this.points.push(x, y);
+            this.line.setAttribute("points", this.points);
+        }
+    }
+    onDragEnd(event) {
+        var x = this.pencil.x;
+        var y = this.pencil.y;
+        this.points.push(x, y);
+        if (this.points.length < 5) {
+            this.points.push(x + 1, y + 1);
+        }
+        var path = catmullRom.solve(this.points, this.tolerance, false, false, 1);
+        if (path) {
+            var angle = angleRange.value;
+            var width = widthRange.value;
+            ribbons.push(new Ribbon(path, angle, width));
+        }
+        this.points.length = 0;
+        this.line.setAttribute("points", "");
+    }
+}
+//
+// RANGE
+// ========================================================================
+class Range {
+    constructor(selector, config) {
+        this.dirty = false;
+        this.element = document.querySelector(selector);
+        this.inputElement = this.element.querySelector(".range-input");
+        this.valueElement = this.element.querySelector(".range-value");
+        this.inputElement.min = config.min;
+        this.inputElement.max = config.max;
+        this.inputElement.value = config.value;
+        this.value = config.value;
+        this.inputElement.addEventListener("input", event => {
+            this.dirty = true;
+            this.value = event.target.value;
+        });
+        TweenLite.set(this.element, { autoAlpha: 1 });
+    }
+    get value() { return this.inputElement.value; }
+    set value(n) { this.valueElement.textContent = n; }
+}
+//
+// RENDER
+// ========================================================================
+function render() {
+    var angle = null;
+    var width = null;
+    if (angleRange.dirty) {
+        angle = angleRange.value;
+        angleRange.dirty = false;
+    }
+    if (widthRange.dirty) {
+        width = widthRange.value;
+        widthRange.dirty = false;
+    }
+    if (angle != null || width != null) {
+        _.forEach(ribbons, ribbon => {
+            ribbon.update(angle, width);
+        });
+    }
+}
+//
+// CREATE SVG
+// ========================================================================
+function createSvg(type, config) {
+    var node = document.createElementNS(xmlns, type);
+    if (config) {
+        if (config.appendTo)
+            config.appendTo.appendChild(node);
+        if (config.transforms)
+            _.defaults(config, { x: "+=0" });
+        var attrs = "id,class,cx,cy,r,d,points".split(",");
+        var css = _.assign(_.omit(config, attrs, "appendTo", "attr", "transforms"));
+        css.attr = _.assign(_.pick(config, attrs), _.omit(config.attr));
+        TweenLite.set(node, css);
+    }
+    return node;
+}
+//
+// HELPERS
+// ========================================================================
+function sin(deg) {
+    return Math.sin(deg * rad);
+}
+function cos(deg) {
+    return Math.cos(deg * rad);
+}
+function lerp(p, a, b) {
+    return +a + (b - a) * p;
+}
+function lerpArray(p, a, b) {
+    var c = [];
+    for (var i = 0; i < a.length; i++) {
+        c[i] = lerp(p, a[i], b[i]);
+    }
+    return c;
+}
+function lerpColor(p, color) {
+    if (p >= 1)
+        return color[color.length - 1];
+    p *= (color.length - 1);
+    var i = p >> 0;
+    return lerpArray(p - i, color[i], color[i + 1]);
+}
+//
+// RUN
+// ========================================================================
+console.clear();
+const xmlns = "http://www.w3.org/2000/svg";
+const log = console.log.bind(console);
+const rad = Math.PI / 180;
+var angleConfig = {
+    min: 0,
+    max: 360,
+    value: 70
+};
+var widthConfig = {
+    min: 2,
+    max: 40,
+    value: 20
+};
+var renderFps = 1000 / 30;
+var minDist = 10;
+var tolerance = 10;
+var colors = [[0, 0, 128], [100, 192, 255]];
+var ribbons = [];
+var svg = document.querySelector("#svg");
+var clear = document.querySelector("#clear");
+var layers = document.querySelector("#ribbon-layer");
+var angleRange = new Range("#angle-range", angleConfig);
+var widthRange = new Range("#width-range", widthConfig);
+_.times(widthConfig.max, i => {
+    createSvg("g", {
+        appendTo: layers,
+        id: "layer-" + i
+    });
+});
+var pencil = new Pencil(tolerance, minDist ** 2);
+clear.addEventListener("click", event => {
+    _.forEach(ribbons, ribbon => ribbon.destroy());
+    ribbons.length = 0;
+});
+TweenLite.ticker.addEventListener("tick", _.throttle(render, renderFps));
+TweenLite.to("main", 0.5, { autoAlpha: 1 });
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>

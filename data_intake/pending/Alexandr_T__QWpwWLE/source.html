@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>Animation of car movement along the highway when scrolling</title>
+
+    <link rel="canonical" href="https://codepen.io/Alexandr_T/pen/QWpwWLE">
+  
+  
+  
+  
+<style>
+body {
+  min-height: 30000px;
+}
+.container {
+width:100vw;
+height:100vw;
+}
+svg {
+  position: fixed;
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  <div class="container">
+<svg id="svg1" viewBox="0 80 1840 1035" preserveAspectRatio="xMinYMin meet">
+<defs>
+
+   <path id="walk1"
+   d="m343 268 34-10 50-9-33-86 22-14 7-21 8-3 13 18 34-25 47 65 22-19"  />
+  <g id="Man" transform="translate(0,0) scale(1,-1)">
+    <path   fill="none">
+         <animate
+          attributeName="d"
+          begin="0.1s"
+          dur="0.3s"
+          repeatCount="indefinite"
+          values="M-3,0 0,10 3,0 M0,10 0,16 l 4,-5 M0,16 l-4,-5 M0,16 c4,4 -4,4 0,0;
+                  M 0,0 0,10 0,0 M0,10 0,16 l 0,-5 M0,16 l 0,-5 M0,16 c4,4 -4,4 0,0;
+                  M-3,0 0,10 3,0 M0,10 0,16 l 4,-5 M0,16 l-4,-5 M0,16 c4,4 -4,4 0,0"/>
+    </path> 
+      </g>  
+	    <!-- Трасса в школу через пешеходный переход  -->
+ <path id="child"  fill="none" stroke="none" d="m328 893 1-212M344 864" /> 
+       <!-- Трасса в палатку через пешеходный переход  -->
+   <path id="home1"  fill="none" stroke="none" d="m 344.35582,863.69183 c 0,0 -34.63139,-111.56426 0,-145.53606 29.52729,-28.96492 84.99455,-11.19516 124.06352,2.38584 15.72518,5.46632 24.12207,24.52029 39.76395,30.2206 78.91988,28.76045 173.36704,37.53827 258.46569,18.29141" /> 
+    <path id="child2"  fill="none" stroke="none" d="m309 874c0 0-13-111 2-157 2-6 14 0 17-5 6-8 1-30 1-30" />  
+	<!-- Трасса2 из палатки через пешеходный переход  -->
+	<path id="home2" d="m 876.39749,779.39226 c 0,0 -307.5863,30.55405 -455.69489,-3.18112 -25.43694,-5.79386 -49.02287,-47.7976 -70.77983,-33.40172 -33.85116,22.39822 4.77167,121.67769 4.77167,121.67769" style="fill:none;stroke-width:2;stroke:#e02e2e"/>  
+     <!-- Трасса из школы через пешеходный переход	   -->
+	  <path id="back" d="m329 682c0 0-23 32-25 41-13 54 14 143 14 143" style="fill:none;stroke-width:2;stroke:#da3434"/>
+	
+  </defs>
+  <!--Карта-->
+  <g id="map" x="0" y="0" transform="scale(1) translate(0,0)">
+    <image href="https://i.imgur.com/uTmJYO7.png">
+    </image>
+  </g>
+
+ 
+
+<!--Путь-->
+<path id="mPath" fill="none" stroke="none" stroke-width="1px" d="M-99.9 458.3C405 455.9 909.9 453.5 1168.1 451.5c258.3-2 269.8-3.7 284-9 14.2-5.3 31-14.2 44.5-25.7 13.5-11.5 24-25.7 30.9-40 6.9-14.3 10.3-28.6 12-52.9 1.7-24.3 1.7-59-0.7-82.6-2.4-23.5-7.2-36.5-14.1-48.6-6.8-12.1-15.9-23.8-27.6-34.1-11.7-10.3-26-19.2-41-25.4-15.1-6.2-30.4-9.6-69.2-10.9-38.8-1.4-100.8-0.8-138.2 3.2-37.4 4-50.2 11.4-61.6 19.2-11.5 7.9-21.6 16.3-31 28.1-9.4 11.9-17.9 27.2-23.1 42.3-5.2 15.1-7 29.8-6.3 113.4 0.7 83.6 3.9 235.9 2.4 318.2-1.5 82.3-7.7 94.4-13.2 104.4-5.5 9.9-10.6 17.8-19.2 27.4-8.6 9.6-20.7 20.9-34.1 29.3-13.4 8.4-27.9 13.8-167.6 16.5-139.7 2.7-404.5 2.7-542.3 1.2-137.8-1.5-149-4.5-161.3-10.4-12.4-5.9-26.1-14.7-37.6-26.8-11.5-12.2-20.6-27.7-26.5-41.9-5.9-14.1-8.5-26.9-9.7-101.5-1.2-74.6-1-211 0.4-283.5 1.4-72.5 4-81.1 8.9-91.2 4.9-10.2 12.1-21.9 21.1-32.7 9.1-10.8 20-20.5 31.3-27.6 11.3-7.1 22.8-11.5 34.8-14.2 12-2.8 24.7-4 94.9-4.5 70.2-0.5 198-0.3 264.3 0.6 66.3 0.9 70.7 2.5 77.6 5 6.9 2.5 16.1 5.9 25.9 12 9.9 6.1 20.4 14.9 29.5 25 9.1 10.2 16.7 21.7 22 33.8 5.4 12.1 8.6 24.6 10.4 37.6 1.8 13 2.2 25.9 3.7 36.8 1.5 10.9 4.1 19.4 8.6 29.5 4.5 10.1 10.9 21.6 19.3 32 8.5 10.4 19 19.5 31 27.3 12 7.8 25.3 14.2 41.6 18 16.3 3.8 35.6 5.1 134.6 5.1 99 0 277.8-1.4 371.1-3.6 93.3-2.2 101-5.3 111.8-10.8 10.8-5.5 24.9-13.3 37.2-23.8 12.3-10.5 23.2-24 30.2-38.2 7-14.2 10.2-28.7 11.6-53.5 1.5-24.7 1.3-59.4-1.1-83-2.4-23.5-7-35.9-13.4-47.9-6.4-12-14.6-23.5-26.1-33.7-11.6-10.2-26.5-18.9-41.1-25.2-14.6-6.3-28.7-10.1-67.8-11.7-39.1-1.6-103.1-1-139.8 2.2-36.7 3.2-46.1 9-57.4 17.1-11.4 8.1-24.7 18.4-35.6 31.5-10.9 13-19.2 28.4-23.8 38.3-4.6 9.9-5.4 14.1-6.3 44.4-0.9 30.3-1.9 86.8-3 118.9-1.1 32.1-2.3 39.9-4 45.1-1.7 5.2-3.9 7.8-5.9 9.9-2 2.1-3.7 3.7-6.7 5.5-3 1.8-7.2 3.8-11.3 5.2-4 1.4-7.8 2.2-14 3.2-6.2 1-14.8 2.2-53.1 2.5-38.3 0.3-106.3-0.3-144.8-2-38.5-1.7-47.5-4.5-58.5-9.7-11-5.2-23.9-12.7-34.6-22-10.8-9.3-19.3-20.2-26-32.9-6.7-12.7-11.5-27-14.2-41.9-2.7-14.9-3.3-30.6-5.6-44.1-2.3-13.5-6.3-24.8-11.5-35.2-5.2-10.4-11.6-19.7-19.9-28.8-8.4-9.1-18.7-17.8-30.7-24.9-12-7.1-25.5-12.5-37.1-16.1-11.6-3.6-21.1-5.4-92.3-6.5-71.2-1.1-204.4-1.6-274.9 0-70.5 1.6-78.4 5.2-87.8 10.2-9.4 5-20.2 11.5-29.7 19-9.5 7.5-17.7 16.1-25 26.1-7.4 10-14 21.3-18.6 33.2-4.7 11.9-7.5 24.2-8.9 34.8-1.4 10.6-1.4 19.3-1.1 88.5 0.3 69.2 0.9 198.8 2.2 266.1 1.3 67.3 3.2 72.2 6.6 81.1 3.4 8.9 8.2 21.7 15.8 33.5 7.5 11.8 17.7 22.6 28 30.8 10.3 8.3 20.6 14.1 31.5 18.7 10.9 4.6 22.2 8 159.5 9.8 137.3 1.8 400.5 2 535.8 1.3 135.2-0.7 142.4-2.3 152.8-6.4 10.5-4.1 23.9-10.6 35.7-18.7 11.8-8 21.9-17.5 30.1-28.2 8.3-10.7 14.8-22.5 20.1-34.3 5.3-11.7 9.4-23.3 10.2-69.3 0.8-46-1.8-124.7-9.8-169.4-8-44.8-20.8-51.7-32.9-56.1-12.2-4.4-23.4-6.1-32.1-6.8-8.7-0.7-14.9-0.4-20.5-0.1-5.5 0.3-10.4 0.7-200.4 0.5-190-0.2-565.2-1.1-940.5-2" />
+
+  <g id="map" x="0" y="0" transform="scale(1) translate(0,0)">
+    <image href="https://i.imgur.com/WaWS3m2.png">
+    </image>
+  </g>  
+     
+       <rect x="298" y="800" width="71" height="8" fill="gold" /> 
+	     <rect x="296" y="814" width="75" height="8" fill="#F3F3F3" />  
+		   <rect x="294" y="827" width="77" height="9" fill="gold" /> 
+		    <rect x="292" y="840" width="83" height="9.5" fill="#F3F3F3" /> 
+           <rect x="290" y="855" width="87" height="11" fill="gold" />   			
+	       <!-- Знак пешеходного перехода -->
+	   <image href="https://i.stack.imgur.com/1ILIG.jpg" x="260" y="695" width="40px" height="40px" />  
+   <g transform="translate(312 675) scale(0.3)">
+	     <!-- верхняя крышка светофора-->
+<circle cx="270" cy="55"  r="30" style="fill:grey; " />
+            <!-- корпус светофора -->
+<rect x="240" y="40" width="60" height="190" style="fill:gray;" />
+   
+        <!-- секции светофора -->
+<g style="fill:none; stroke:black; stroke-width:2px;">
+ <rect x="240" y="40" width="60" height="60"  />
+ <rect x="240" y="103" width="60" height="60"  />
+ <rect x="240" y="166" width="60" height="60"  />
+</g> 
+    <!-- сигнальные лампочки-->
+<circle cx="270" cy="70"  r="20" fill="red" opacity="0.4" >
+  <animate id="startRed" attributeName="opacity" begin="0s;smallGreen.end" dur="0.1s" to="1" fill="freeze" /> 
+    <animate id="stopRed" attributeName="opacity" begin="startRed.end+5s" dur="0.1s" to="0.4" fill="freeze" /> 
+    <animate id="bigRed" attributeName="r" begin="startRed.begin" dur="0.1s" to="28" fill="freeze" /> 
+	 <animate id="smallRed" attributeName="r" begin="bigRed.end+5s" dur="0.1s" to="20" fill="freeze" />
+</circle>
+
+<circle cx="270" cy="133"  r="20" fill="yellow" opacity="0.4" > 
+   <animate id="startYellow" attributeName="opacity" begin="smallRed.end" dur="0.1s" to="1" fill="freeze" /> 
+     <animate id="stopYellow" attributeName="opacity" begin="smallRed.end+2s" dur="0.1s" to="0.4" fill="freeze" /> 
+    
+	<animate id="bigYellow" attributeName="r" begin="smallRed.end" dur="0.1s" to="28" fill="freeze" /> 
+	  <animate id="smallYellow" attributeName="r" begin="smallRed.end +2s" dur="0.1s" to="22" fill="freeze" />
+</circle>	
+<circle cx="270" cy="196"  r="20" fill="lime" opacity="0.4" >
+    <animate id="startGreen" attributeName="opacity" begin="smallYellow.end" dur="0.1s" to="1" fill="freeze" /> 
+      <animate d="stopGreen" attributeName="opacity" begin="smallYellow.end+10s" dur="0.1s" to="0.4" fill="freeze" /> 
+	    <animate id="bigGreen" attributeName="r" begin="smallYellow.end" dur="0.1s" to="28" fill="freeze" /> 
+	  <animate id="smallGreen" attributeName="r" begin="smallYellow.end +10s" dur="0.1s" to="22" fill="freeze" />
+</circle>	
+      
+          <!-- стойка светофора -->
+<rect x="260" y="226" width="20" height="174" style="fill:gray;" /> 
+  </g>  
+  
+     <!-- Анимация пешеходов -->
+  <use xlink:href="#Man" transform="translate(0,0) scale(2)" style="stroke:blue; fill:black;"> 
+     <animateMotion id="an1"
+       begin="startGreen.begin"
+       dur="10s"
+       repeatCount="1"  >
+          <mpath xlink:href="#child"/>
+     </animateMotion>    
+   </use>  
+     <use xlink:href="#Man" transform="translate(0,0) scale(2)" style="stroke:green; fill:black;"> 
+       <animateMotion id="an2"
+          begin="startGreen.begin+4s"
+          dur="10s"
+          repeatCount="1"  >
+          <mpath xlink:href="#child"/>
+       </animateMotion> 
+	 </use>  
+	      <use xlink:href="#Man" transform="translate(0,0) scale(1.5)" style="stroke:black; fill:black;"> 
+       <animateMotion id="an3"
+          begin="startGreen.begin"
+          dur="10s"
+          repeatCount="1"  >
+          <mpath xlink:href="#child2"/>
+       </animateMotion> 
+	 </use>
+   <use xlink:href="#Man" transform="translate(0,0) scale(2)" style="stroke:red; fill:black;"> 
+     <animateMotion id="an4"
+		   begin="startGreen.begin"
+		   dur="15s"
+		   repeatCount="1"  >
+			  <mpath xlink:href="#home1"/>
+     </animateMotion>    
+   </use>     
+       <use xlink:href="#Man" transform="translate(0,0) scale(2)" style="stroke:black; fill:black;"> 
+          <animateMotion id="an5"
+			  begin="startGreen.begin-3s"
+			  dur="10s"
+			  repeatCount="1"  >
+			  <mpath xlink:href="#home2"/>
+         </animateMotion>    
+      </use>      
+	    <use xlink:href="#Man" transform="translate(0,0) scale(2)" style="stroke:blue; fill:black;"> 
+          <animateMotion id="an6"
+			  begin="startGreen.begin-3s"
+			  dur="12s"
+			  repeatCount="1"  >
+			  <mpath xlink:href="#home2"/>
+          </animateMotion>    
+       </use>    
+
+           <use xlink:href="#Man" transform="translate(0,0) scale(2)" style="stroke:red; fill:black;"> 
+          <animateMotion id="an7"
+			  begin="startGreen.begin-5s"
+			  dur="14s"
+			  repeatCount="1"  >
+			  <mpath xlink:href="#home2"/>
+          </animateMotion>    
+       </use> 	   
+	  
+<use xlink:href="#Man" transform="translate(0,0) scale(2)" style="stroke:brown; fill:black;"> 
+          <animateMotion id="an8"
+			  begin="startGreen.begin"
+			  dur="8s"
+			  repeatCount="1"  >
+			  <mpath xlink:href="#back"/>
+         </animateMotion>    
+</use>   	  
+   <!--Автомобиль-->
+  <g id="car" >
+  <!--Зеркала-->
+<path transform="scale(0.1)" d="M371 88l-31-77c-3-6-9-11-17-11h-23l35 88zm0 142h-36l-35 88h23c8 0 14-5 17-11z" fill="red" />
+  <!--Кузов-->
+    <path transform="scale(0.1)" d="M492 224l13-30c9-22 9-48 0-70l-13-30a88 88 0 0 0-88-53L256 53 104 40c-36-3-70 17-86 49l-3 7c-20 40-20 86 0 126l3 7a88 88 0 0 0 86 49l152-13 148 12c38 3 73-18 88-53z" fill="orangered" />
+    <!--Тень кузова-->
+    <path  transform="scale(0.1)" d="M396 277c66-50 95-134 74-214 9 9 17 19 22 31l13 30c9 22 9 48 0 70l-13 30a88 88 0 0 1-88 53z" fill="red" />
+    <!--Переднее стекло-->
+    <path transform="scale(0.1)" d="M369 91l-2-3c-3-5-10-8-16-7l-77 7v142l77 7c6 1 13-2 16-7l2-3c27-41 27-95 0-136z" fill="white" />
+    <!--Тень переднего стекла-->
+    <path transform="scale(0.1)" d="M370 92c26 41 26 94-1 135l-2 3c-3 5-10 8-16 7l-59-6c44-33 72-84 78-139z" fill="lightgray" />
+    <!--Заднее стекло-->
+    <path transform="scale(0.1)" d="M150 88v142l-41 6c-7 2-14-2-18-8l-9-18c-18-32-18-70 0-102l9-18c4-6 11-10 18-8z" fill="white" />
+    <!--Тень заднего стекла-->
+    <path transform="scale(0.1)" d="M91 228l-5-9c31-35 53-76 64-121v132l-41 6c-7 2-14-2-18-8z" fill="lightgray" />
+    <!--Фары-->
+    <path transform="scale(0.1)" d="M411 72l53 36-10 15-53-36zm43 124l10 15-54 35-10-15z" fill="yellow" />
+     </g> 
+    <path id="car1" d="M-15,-10 L15,0 L -15,10 z" fill="yellow" stroke="red" stroke-width="7.06"/>
+</svg>
+</div>
+  
+    <script id="rendered-js" >
+//Animation of car movement along the highway //when scrolling + animation of people when //crossing a pedestrian intersection 
+
+function MoveScroll() {
+  var scrollY = window.scrollY || window.pageYOffset;
+  var maxScrollY = document.documentElement.scrollHeight - window.innerHeight;
+  var path = document.getElementById("mPath");
+  // Рассчитать расстояние по пути, на котором машина должна быть для текущего количества прокрутки
+  var pathLen = path.getTotalLength();
+  var dist = pathLen * scrollY / maxScrollY;
+  var pos = path.getPointAtLength(dist);
+  // Вычислить положение немного впереди машины (или позади, если мы в конце), чтобы мы могли рассчитать угол автомобиля.
+  if (dist + 1 <= pathLen) {
+    var posAhead = path.getPointAtLength(dist + 1);
+    var angle = Math.atan2(posAhead.y - pos.y, posAhead.x - pos.x);
+  } else {
+    var posBehind = path.getPointAtLength(dist - 1);
+    var angle = Math.atan2(pos.y - posBehind.y, pos.x - posBehind.x);
+  }
+  // Поместите автомобиль в "pos", повернутый на "angle".
+  var car = document.getElementById("car");
+  car.setAttribute("transform", "translate(" + pos.x + "," + pos.y + ") rotate(" + rad2deg(angle) + ")");
+}
+
+function rad2deg(rad) {
+  return 180 * rad / Math.PI;
+}
+
+// Передвигать автомобиль всякий раз, когда есть событие прокрутки
+window.addEventListener("scroll", MoveScroll);
+
+// Первоначально установить автомобиль
+MoveScroll();
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>

@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>Floor Plan - Feature</title>
+
+    <link rel="canonical" href="https://codepen.io/ysuthar/pen/MWWKEGy">
+  
+  
+  
+  
+<style>
+body{margin:0; padding:0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size:13px}
+svg{min-width:100%; height:100%}
+svg g.TrackElem{outline:1px solid transparent; transition: all 0.5s ease; cursor: pointer;}
+svg g.TrackElem:hover{ outline:1px solid #000}
+h1{position: absolute;top: 0;width:80%;left:10%;text-align: center;margin: 0;text-shadow: 1px 1px 1px #fff;font-size: 4vh;}
+.wrapper {overflow:hidden;width: 100vw;/* width:auto; */height: 100vh;margin:0 auto;}
+#MetaInfo{display:none;position: fixed;z-index:10;background: rgb(232, 232, 232);padding: 5px 10px;bottom:0;left:0;border: 1px solid #707070;box-shadow: 0 -2px 5px #00000042;}
+
+@media screen and (max-width: 992px) {
+    .svg-pan-zoom-control{transform:  translate(250, 492) scale(0.75, 0.75) !important; position: fixed; right:0; bottom:0; width:50px; height:100px}
+    svg{max-height: 100vh; max-width: 100vw;}
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  <!DOCTYPE html>
+<html>
+<head>
+    <title>Office - Floor Plan Sample</title>
+    <meta name="description" content="Floor Map" />
+    <meta name="author" content="Yogesh Suthar" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="resources/css/style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="wrapper" id="floorViewArea">
+        <h1>Office Floor Plan</h1>
+
+        <!-- Element Meta Info-->
+       <div id="MetaInfo"></div>
+
+       <!-- SVG -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="768" height="461" viewBox="0 0 768 461" id="floorMap">
+            <!-- Reception Area Starts-->
+            <g id="ReceptionArea" data-name="Reception Area" class="TrackElem" transform="translate(468 142)" fill="#fff" stroke="#707070" stroke-width="8">
+                <rect width="300" height="319" stroke="none"></rect>
+                <rect x="4" y="4" width="292" height="311" fill="none"></rect>
+            </g>
+            <g id="ReceptionSofa" data-name="Reception Sofa" class="TrackElem" fill="none">
+                <path id="ReceptionSofaBase" data-name="ReceptionSofaBase" d="M3,177a3,3,0,0,1-3-3V3A3,3,0,0,1,3,0H277a3,3,0,0,1,3,3V43.43a15,15,0,0,1-15,15H60V162a15,15,0,0,1-15,15Z" transform="translate(478 152)" fill="#707070"></path>
+                <rect id="ReceptionSofaHandle" data-name="Reception Sofa Handle" width="43" height="8" rx="3" transform="translate(521.75 339.75) rotate(180)" fill="#707070"></rect>
+            </g>
+            <!-- Reception Area Ends-->
+
+            <!-- Production Area Starts-->
+            <g id="ProductionFloorDoor" data-name="Production Floor Door" class="TrackElem" transform="translate(468 340)" fill="#fff" stroke="#707070" stroke-width="1">
+                <rect width="8" height="114" stroke="none"></rect>
+                <rect x="0.5" y="0.5" width="7" height="113" fill="none"></rect>
+            </g>
+
+            <!-- Chairs Starts -->
+            <g id="Chair1" data-name="Chair 1" class="TrackElem" transform="translate(337 78.322) rotate(90)">
+                <path id="Rectangle_7-7" data-name="Rectangle 7" d="M15,0H45.43a3,3,0,0,1,3,3V41.632a3,3,0,0,1-3,3H15a15,15,0,0,1-15-15V15A15,15,0,0,1,15,0Z" transform="translate(0 8.547)" fill="#707070"></path>
+                <rect id="Rectangle_8-7" data-name="Rectangle 8" width="35.136" height="6.647" rx="3" transform="translate(13.037 0)" fill="#707070"></rect>
+                <rect id="Rectangle_9-7" data-name="Rectangle 9" width="35.136" height="6.647" rx="3" transform="translate(13.037 55.078)" fill="#707070"></rect>
+                <rect id="Rectangle_10-7" data-name="Rectangle 10" width="44.294" height="6.423" rx="3" transform="translate(50.553 53.528) rotate(-90)" fill="#707070"></rect>
+            </g>
+            <g id="Chair2" data-name="Chair 2" class="TrackElem" transform="translate(261.031 78.322) rotate(90)">
+                <path id="Rectangle_7-6" data-name="Rectangle 7" d="M15,0H45.43a3,3,0,0,1,3,3V41.632a3,3,0,0,1-3,3H15a15,15,0,0,1-15-15V15A15,15,0,0,1,15,0Z" transform="translate(0 8.547)" fill="#707070"></path>
+                <rect id="Rectangle_8-6" data-name="Rectangle 8" width="35.136" height="6.647" rx="3" transform="translate(13.037 0)" fill="#707070"></rect>
+                <rect id="Rectangle_9-6" data-name="Rectangle 9" width="35.136" height="6.647" rx="3" transform="translate(13.037 55.078)" fill="#707070"></rect>
+                <rect id="Rectangle_10-6" data-name="Rectangle 10" width="44.294" height="6.423" rx="3" transform="translate(50.553 53.528) rotate(-90)" fill="#707070"></rect>
+            </g>
+            <g id="Chair3" data-name="Chair 3" class="TrackElem" transform="translate(82 87.645)">
+                <path id="Rectangle_7-8" data-name="Rectangle 7" d="M15,0H45a3,3,0,0,1,3,3V42a3,3,0,0,1-3,3H15A15,15,0,0,1,0,30V15A15,15,0,0,1,15,0Z" transform="translate(0 8.355)" fill="#707070"></path>
+                <rect id="Rectangle_8-8" data-name="Rectangle 8" width="35.136" height="6.647" rx="3" transform="translate(13.037)" fill="#707070"></rect>
+                <rect id="Rectangle_9-8" data-name="Rectangle 9" width="35.136" height="6.647" rx="3" transform="translate(13.037 55.078)" fill="#707070"></rect>
+                <rect id="Rectangle_10-8" data-name="Rectangle 10" width="44.294" height="6.423" rx="3" transform="translate(50.553 53.528) rotate(-90)" fill="#707070"></rect>
+            </g>
+            <g id="Chair4" data-name="Chair 4" class="TrackElem" transform="translate(82 163.614)">
+                <path id="Rectangle_7-3" data-name="Rectangle 7" d="M15,0H45a3,3,0,0,1,3,3V42a3,3,0,0,1-3,3H15A15,15,0,0,1,0,30V15A15,15,0,0,1,15,0Z" transform="translate(0 8.386)" fill="#707070"></path>
+                <rect id="Rectangle_8-3" data-name="Rectangle 8" width="35.136" height="6.647" rx="3" transform="translate(13.037)" fill="#707070"></rect>
+                <rect id="Rectangle_9-3" data-name="Rectangle 9" width="35.136" height="6.647" rx="3" transform="translate(13.037 55.078)" fill="#707070"></rect>
+                <rect id="Rectangle_10-3" data-name="Rectangle 10" width="44.294" height="6.423" rx="3" transform="translate(50.553 53.528) rotate(-90)" fill="#707070"></rect>
+            </g>
+            <g id="Chair5" data-name="Chair 5" class="TrackElem" transform="translate(82 239.583)">
+                <path id="Rectangle_7" data-name="Rectangle 7" d="M15,0H45a3,3,0,0,1,3,3V42a3,3,0,0,1-3,3H15A15,15,0,0,1,0,30V15A15,15,0,0,1,15,0Z" transform="translate(0 8.417)" fill="#707070"></path>
+                <rect id="Rectangle_8" data-name="Rectangle 8" width="35.136" height="6.647" rx="3" transform="translate(13.037)" fill="#707070"></rect>
+                <rect id="Rectangle_9" data-name="Rectangle 9" width="35.136" height="6.647" rx="3" transform="translate(13.037 55.078)" fill="#707070"></rect>
+                <rect id="Rectangle_10" data-name="Rectangle 10" width="44.294" height="6.423" rx="3" transform="translate(50.553 53.528) rotate(-90)" fill="#707070"></rect>
+            </g>
+            <g id="Chair6" data-name="Chair 6" class="TrackElem" transform="translate(82 315.552)">
+                <path id="Rectangle_7-2" data-name="Rectangle 7" d="M15,0H45a3,3,0,0,1,3,3V42a3,3,0,0,1-3,3H15A15,15,0,0,1,0,30V15A15,15,0,0,1,15,0Z" transform="translate(0 8.448)" fill="#707070"></path>
+                <rect id="Rectangle_8-2" data-name="Rectangle 8" width="35.136" height="6.647" rx="3" transform="translate(13.037 0)" fill="#707070"></rect>
+                <rect id="Rectangle_9-2" data-name="Rectangle 9" width="35.136" height="6.647" rx="3" transform="translate(13.037 55.078)" fill="#707070"></rect>
+                <rect id="Rectangle_10-2" data-name="Rectangle 10" width="44.294" height="6.423" rx="3" transform="translate(50.553 53.528) rotate(-90)" fill="#707070"></rect>
+            </g>
+            <g id="Chair7" data-name="Chair 7" class="TrackElem" transform="translate(199.306 386.5) rotate(-90)">
+                <path id="Rectangle_7-4" data-name="Rectangle 7" d="M15,0H45.43a3,3,0,0,1,3,3V41.632a3,3,0,0,1-3,3H15a15,15,0,0,1-15-15V15A15,15,0,0,1,15,0Z" transform="translate(0 8.547)" fill="#707070"></path>
+                <rect id="Rectangle_8-4" data-name="Rectangle 8" width="35.136" height="6.647" rx="3" transform="translate(13.037 0)" fill="#707070"></rect>
+                <rect id="Rectangle_9-4" data-name="Rectangle 9" width="35.136" height="6.647" rx="3" transform="translate(13.037 55.078)" fill="#707070"></rect>
+                <rect id="Rectangle_10-4" data-name="Rectangle 10" width="44.294" height="6.423" rx="3" transform="translate(50.553 53.528) rotate(-90)" fill="#707070"></rect>
+            </g>
+            <g id="Chair8" data-name="Chair 8" class="TrackElem" transform="translate(275.275 386.5) rotate(-90)">
+                <path id="Rectangle_7-5" data-name="Rectangle 7" d="M15,0H45.43a3,3,0,0,1,3,3V41.632a3,3,0,0,1-3,3H15a15,15,0,0,1-15-15V15A15,15,0,0,1,15,0Z" transform="translate(0 8.547)" fill="#707070"></path>
+                <rect id="Rectangle_8-5" data-name="Rectangle 8" width="35.136" height="6.647" rx="3" transform="translate(13.037 0)" fill="#707070"></rect>
+                <rect id="Rectangle_9-5" data-name="Rectangle 9" width="35.136" height="6.647" rx="3" transform="translate(13.037 55.078)" fill="#707070"></rect>
+                <rect id="Rectangle_10-5" data-name="Rectangle 10" width="44.294" height="6.423" rx="3" transform="translate(50.553 53.528) rotate(-90)" fill="#707070"></rect>
+            </g>
+            <!-- Chairs Ends -->
+
+            <!-- Computer Table Starts -->
+            <g id="StaffTable" data-name="Staff Table" class="TrackElem" transform="translate(4 106)" fill="#fff">
+                <path d="M 348.0001220703125 348.9998168945313 L 53.63547134399414 348.9998168945313 L 2.000002145767212 348.9998168945313 L 2.000002145767212 348.0133666992188 L 2.000002145767212 -98.943115234375 L 64.99982452392578 -98.943115234375 L 348.0001220703125 -98.943115234375 L 348.0001220703125 -38.228759765625 L 64.99982452392578 -38.228759765625 L 62.99982452392578 -38.228759765625 L 62.99982452392578 -36.228759765625 L 62.99982452392578 279.2130737304688 L 62.99982452392578 286.2864074707031 L 62.99982452392578 288.2864074707031 L 64.99982452392578 288.2864074707031 L 348.0001220703125 288.2864074707031 L 348.0001220703125 348.9998168945313 Z" stroke="none"></path>
+                <path d="M 346.0001220703125 346.9998168945313 L 346.0001220703125 290.2864074707031 L 64.99982452392578 290.2864074707031 L 60.99982452392578 290.2864074707031 L 60.99982452392578 286.2864074707031 L 60.99982452392578 279.2130737304688 L 60.99982452392578 -36.228759765625 L 60.99982452392578 -40.228759765625 L 64.99982452392578 -40.228759765625 L 346.0001220703125 -40.228759765625 L 346.0001220703125 -96.943115234375 L 64.99982452392578 -96.943115234375 L 4.000002384185791 -96.943115234375 L 4.000002384185791 346.9998168945313 L 53.63547134399414 346.9998168945313 L 346.0001220703125 346.9998168945313 M 350.0001220703125 350.9998168945313 L 53.63547134399414 350.9998168945313 L 2.211626906500896e-06 350.9998168945313 L 2.211626906500896e-06 348.0133666992188 L 2.211626906500896e-06 -100.943115234375 L 64.99982452392578 -100.943115234375 L 350.0001220703125 -100.943115234375 L 350.0001220703125 -36.228759765625 L 64.99982452392578 -36.228759765625 L 64.99982452392578 279.2130737304688 L 64.99982452392578 286.2864074707031 L 350.0001220703125 286.2864074707031 L 350.0001220703125 350.9998168945313 Z" stroke="none" fill="#707070"></path>
+            </g>
+            <!-- Computer Table Ends -->
+            <!-- Production Area Ends-->
+
+            <!-- Toilet Starts -->
+            <g id="Toilet" data-name="Toilet" class="TrackElem" transform="translate(518)" fill="#ffffff">
+                <path d="M0,0H250V150H0Z" stroke="none"></path>
+                <path d="M 8 8 L 8 142 L 242 142 L 242 8 L 8 8 M 0 0 L 250 0 L 250 150 L 0 150 L 0 0 Z" stroke="none" fill="#707070"></path>
+            </g>
+            <g id="ToiletDoor" data-name="Toilet Door" transform="translate(518 53)" fill="#fff" stroke="#707070" stroke-width="1">
+                <rect width="8" height="90" stroke="none"></rect>
+                <rect x="0.5" y="0.5" width="7" height="89" fill="none"></rect>
+            </g>
+
+            <g transform="translate(3934.112 -935) rotate(90)" class="TrackElem" data-name="Toilet WC" id="ToiletWC">
+                <g id="Group_7" data-name="Group 7" transform="translate(980.161 3173)">
+                    <path id="Path_5" data-name="Path 5" d="M1154.108,3173a2.549,2.549,0,0,1,1.2,2.416c-.03,6.5-.01,12.993-.01,19.489,0,4.027-2.111,6.156-6.114,6.156q-22.1,0-44.208-.007c-3.542,0-5.786-2.213-5.792-5.741-.013-6.633.011-13.266-.019-19.9a2.538,2.538,0,0,1,1.2-2.414Z" transform="translate(-1098.081 -3173)" fill="#707070" fill-rule="evenodd" />
+                    <path id="Path_6" data-name="Path 6" d="M1152.416,3364.132c-.207,7.61-1.422,14.942-5.216,21.613-5.174,9.1-13.031,13.843-23.556,14.176-11.749.372-22.2-6.389-26.825-18.548a49.936,49.936,0,0,1-2.773-21.353c.743-11.19,3.977-21.751,8.148-32.076a2.311,2.311,0,0,1,2.42-1.615q18.454.023,36.909,0a2.258,2.258,0,0,1,2.355,1.557,111.894,111.894,0,0,1,7.384,25.154C1151.827,3356.711,1152.042,3360.434,1152.416,3364.132Zm-28.548-25.456a15.423,15.423,0,0,0-7.085,1.416,20.55,20.55,0,0,0-9.32,9.471,33.337,33.337,0,0,0-2.753,23.18,26.3,26.3,0,0,0,7.583,13.89c5.821,5.461,13.674,5.989,19.911,1.335a22.488,22.488,0,0,0,6.85-8.552,33.71,33.71,0,0,0,2.547-21.363,27.453,27.453,0,0,0-6.434-13.5C1131.926,3340.95,1127.987,3338.725,1123.868,3338.676Zm-11.3-6.178c0,.239-.005.478,0,.717a1.735,1.735,0,1,0,3.462.131,9.911,9.911,0,0,0-.028-1.839,1.667,1.667,0,0,0-1.8-1.575,1.69,1.69,0,0,0-1.633,1.747C1112.562,3331.951,1112.573,3332.225,1112.572,3332.5Zm20.952.083c0-.307.014-.616,0-.922a1.692,1.692,0,0,0-1.55-1.724,1.665,1.665,0,0,0-1.878,1.484,8.943,8.943,0,0,0,.026,2.243,1.64,1.64,0,0,0,1.815,1.437,1.711,1.711,0,0,0,1.586-1.7C1133.538,3333.128,1133.524,3332.854,1133.524,3332.581Z" transform="translate(-1093.897 -3294.875)" fill="#707070" fill-rule="evenodd" />
+                    <path id="Path_7" data-name="Path 7" d="M1162.18,3386.509c4.119.049,8.058,2.275,11.3,5.877a27.453,27.453,0,0,1,6.434,13.5,33.71,33.71,0,0,1-2.547,21.363,22.488,22.488,0,0,1-6.85,8.552c-6.237,4.654-14.09,4.126-19.911-1.335a26.3,26.3,0,0,1-7.583-13.89,33.337,33.337,0,0,1,2.753-23.18,20.55,20.55,0,0,1,9.32-9.471A15.423,15.423,0,0,1,1162.18,3386.509Zm6.177,20.991h0c0-1.64,0-3.279,0-4.919,0-1.482-.609-2.132-2.111-2.142q-4.918-.031-9.838.01c-1.448.012-2.039.639-2.045,2.09-.013,3.211.022,6.422-.031,9.633a2.649,2.649,0,0,0,1.2,2.333c3.047,2.265,8.644,2.246,11.693-.041a2.505,2.505,0,0,0,1.146-2.251C1168.31,3410.645,1168.357,3409.072,1168.357,3407.5Z" transform="translate(-1132.209 -3342.707)" fill="#fff" fill-rule="evenodd" />
+                    <path id="Path_10" data-name="Path 10" d="M1215.771,3461.425c0,1.571-.047,3.145.017,4.714a2.506,2.506,0,0,1-1.146,2.251c-3.049,2.286-8.646,2.305-11.693.041a2.649,2.649,0,0,1-1.2-2.333c.053-3.21.018-6.422.031-9.633.006-1.451.6-2.078,2.045-2.09q4.918-.04,9.838-.01c1.5.01,2.108.66,2.111,2.142,0,1.639,0,3.279,0,4.919Z" transform="translate(-1179.624 -3396.632)" fill="#707070" fill-rule="evenodd" />
+                </g>
+            </g>
+            <g id="ToiletBasin" data-name="Toilet Basin" class="TrackElem">
+                <rect id="ToiletBasinpath" data-name="ToiletBasinpath" width="89" height="35" rx="15" transform="translate(529 11)" fill="#707070"></rect>
+            </g>
+            <!-- Toilet Ends  -->
+
+            <!-- Office Floor Boundaries Starts-->
+            <g id="OfficeLayout" data-name="Office" fill="none" stroke="#707070" stroke-width="8">
+                <rect width="768" height="461" stroke="none"></rect>
+                <rect x="4" y="4" width="760" height="453" fill="none"></rect>
+            </g>
+
+            <g id="MainDoor" data-name="Main Door" transform="translate(535 461) rotate(-90)" fill="#fff" stroke="#707070" stroke-width="1">
+                <rect width="8" height="200" stroke="none"></rect>
+                <rect x="0.5" y="0.5" width="7" height="199" fill="none"></rect>
+            </g>
+            <!-- Office Floor Boundaries Ends-->
+        </svg>
+
+    </div>
+
+    <!-- Page Level Scripts -->
+    <script src="resources/js/jquery-1.12.1.min.js"></script>
+    <script src="resources/js/svg-pan-zoom.js"></script>
+    <script src="resources/js/hammer.min.js"></script>
+    <script src="resources/js/main.js"></script>
+</body>
+</html>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.1/jquery.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js'></script>
+    <script id="rendered-js" >
+var i,
+targetElem = document.getElementsByClassName('TrackElem'),
+ChangeScale;
+
+/* Scripting for ustom Interaction Starts */
+for (i = 0; i < targetElem.length; i++) {if (window.CP.shouldStopExecution(0)) break;
+  /* Element Mouseover Event */
+  targetElem[i].onmouseover = function displayDetails(evt) {
+    var ElemDimension = this.getBoundingClientRect(); // get the bounding rectangle
+    var CheckTransform = this.hasAttribute('transform'); // Check if Element Has Transform Attribute
+    var ElemRotation = CheckTransform ? this.getAttribute('transform').includes('rotate') : ''; // Check Element Rotation
+
+    /* Meta Info Starts */
+    document.getElementById('MetaInfo').style.display = "block";
+    document.getElementById('MetaInfo').innerHTML =
+    "<strong>" + this.getAttribute('data-name') +
+    "</strong><br> Dimensions: " + (
+    ElemRotation ? ChangeScale(ElemDimension.height) : ChangeScale(ElemDimension.width)) +
+    " x " + (
+    ElemRotation ? ChangeScale(ElemDimension.width) : ChangeScale(ElemDimension.height)) +
+    "<br> Top: " + Math.floor(ElemDimension.top) + "<br> Left: " + Math.floor(ElemDimension.left);
+    /* Meta Info Ends */
+  };
+
+  /* Element Mouseout Event */
+  targetElem[i].onmouseout = function hideDetails() {
+    document.getElementById('MetaInfo').style.display = "none";
+  };
+
+  /* Element Click Event */
+  targetElem[i].onclick = function zoomTo(evt) {
+    var ElemPos = this.getBoundingClientRect(); // get the bounding rectangle;
+    var viewPort = document.getElementsByClassName("svg-pan-zoom_viewport")[0]; // Viewport for animation
+    var ScreenPos = screen.width - document.getElementById("OfficeLayout").getBoundingClientRect().width; // get blank value if viewport is greater than the floor plan width
+
+    /* Positioning for Mobiles / Handheld devices */
+    if (typeof window.orientation !== 'undefined') {
+      var props = this.getBoundingClientRect();
+      var obj = {};
+      for (var prop in props) {
+        obj[prop] = props[prop];
+      };
+
+      viewPort.style.transition = "all " + 100 / 1000 + "s ease";
+      if (panZoomInstance.getZoom() != 1) {
+        panZoomInstance.panBy({
+          x: obj.width / 2 - obj.left,
+          y: obj.height - obj.top / 2 },
+        700);
+      } else {
+        panZoomInstance.zoomBy(2);
+        panZoomInstance.pan({
+          x: obj.width / 2 - obj.left * 2,
+          y: obj.height - obj.top / 2 });
+
+      }
+    }
+    /* Positioning for Desktop PC */else
+      {
+        viewPort.style.transition = "all " + 300 / 1000 + "s ease";
+        /* Check if already in Zoom state */
+        if (panZoomInstance.getZoom() != 1) {
+          if (ElemPos.height < window.innerHeight) {
+            panZoomInstance.panBy({
+              x: -(ElemPos.left + ElemPos.width / 2 - screen.width / 2),
+              y: -(ElemPos.top + ElemPos.height / 2 - window.innerHeight / 2) });
+
+          } else {
+            panZoomInstance.panBy({
+              x: 50 - ElemPos.left,
+              y: 50 - ElemPos.top });
+
+          }
+        } else {
+          /* If not in Zoom state */
+          panZoomInstance.zoomBy(2);
+          if (ElemPos.height < window.innerHeight) {
+            panZoomInstance.pan({
+              x: -(ElemPos.left * 2 - ScreenPos + ElemPos.width - screen.width / 2),
+              y: -(ElemPos.top * 2 + ElemPos.height - window.innerHeight / 2) });
+
+          } else {
+            panZoomInstance.pan({
+              x: 50 - (ElemPos.left * 2 - ScreenPos),
+              y: 50 - ElemPos.top * 2 });
+
+          }
+        }
+      }
+  };
+}
+
+/* Change Scale*/window.CP.exitedLoop(0);
+ChangeScale = function (val) {
+  var CurrentZoom = panZoomInstance.getZoom();
+  var realFeet = val * 0.393700 / 12 / CurrentZoom;
+  var feet = Math.floor(realFeet);
+  var inches = Math.round((realFeet - feet) * 12);
+  return Math.floor(feet) + "'" + Math.floor(inches) + '\"';
+};
+/* Scripting for ustom Interaction Ends */
+
+$(function () {
+  /* SVG Pan Zoom Function */
+  panZoomInstance = svgPanZoom('#floorMap', {
+    zoomEnabled: true,
+    controlIconsEnabled: true,
+    fit: true,
+    center: true,
+    minZoom: 1,
+    beforePan: beforePan,
+    customEventsHandler: {
+      // Halt all touch events
+      haltEventListeners: ['touchstart', 'touchend', 'touchmove', 'touchleave', 'touchcancel'],
+      init: function (options) {
+        var instance = options.instance,
+        initialScale = 1,
+        pannedX = 0,
+        pannedY = 0;
+
+        // Init Hammer
+        // Listen only for pointer and touch events
+        this.hammer = Hammer(options.svgElement, {
+          inputClass: Hammer.SUPPORT_POINTER_EVENTS ? Hammer.PointerEventInput : Hammer.TouchInput });
+
+
+        // Enable pinch
+        this.hammer.get('pinch').set({
+          enable: true });
+
+
+        // Handle double tap
+        this.hammer.on('doubletap', function (ev) {
+          instance.zoomIn();
+        });
+
+        // Handle pan
+        this.hammer.on('panstart panmove', function (ev) {
+          // On pan start reset panned variables
+          if (ev.type === 'panstart') {
+            pannedX = 0;
+            pannedY = 0;
+          }
+
+          // Pan only the difference
+          instance.panBy({
+            x: ev.deltaX - pannedX,
+            y: ev.deltaY - pannedY });
+
+          pannedX = ev.deltaX;
+          pannedY = ev.deltaY;
+        });
+
+        // Handle pinch
+        this.hammer.on('pinchstart pinchmove', function (ev) {
+          // On pinch start remember initial zoom
+          if (ev.type === 'pinchstart') {
+            initialScale = instance.getZoom();
+            instance.zoomAtPoint(initialScale * ev.scale, {
+              x: ev.center.x,
+              y: ev.center.y });
+
+          }
+          instance.zoomAtPoint(initialScale * ev.scale, {
+            x: ev.center.x,
+            y: ev.center.y });
+
+        });
+
+        // Prevent moving the page on some devices when panning over SVG
+        options.svgElement.addEventListener('touchmove', function (e) {
+          e.preventDefault();
+        });
+      },
+      destroy: function () {
+        this.hammer.destroy();
+      } },
+
+    onZoom: function () {
+      saveSettings(panZoomInstance);
+    },
+    onPan: function () {
+      saveSettings(panZoomInstance);
+    } });
+
+
+  /* SVG Pan Zoom Settings */
+  var settings = loadSettings();
+  if (settings) {
+    panZoomInstance.zoom(settings.zoom);
+    panZoomInstance.pan(settings.pan);
+  }
+});
+
+/* Restrict Pan to remain element in viewport */
+var beforePan;
+beforePan = function (oldPan, newPan) {
+  var stopHorizontal = false,
+  stopVertical = false,
+  gutterWidth = 200,
+  gutterHeight = 200,
+  sizes = this.getSizes(),
+  leftLimit = -((sizes.viewBox.x + sizes.viewBox.width) * sizes.realZoom) + gutterWidth,
+  rightLimit = sizes.width - gutterWidth - sizes.viewBox.x * sizes.realZoom,
+  topLimit = -((sizes.viewBox.y + sizes.viewBox.height) * sizes.realZoom) + gutterHeight,
+  bottomLimit = sizes.height - gutterHeight - sizes.viewBox.y * sizes.realZoom;
+
+  customPan = {};
+  customPan.x = Math.max(leftLimit, Math.min(rightLimit, newPan.x));
+  customPan.y = Math.max(topLimit, Math.min(bottomLimit, newPan.y));
+
+  return customPan;
+};
+/* Restrict Pan to remain element in viewport */
+
+/* Save Cookies */
+function saveSettings(i) {
+  var obj = {
+    zoom: i.getZoom(),
+    pan: i.getPan() };
+
+  var d = new Date();
+  d.setTime(d.getTime() + 24 * 60 * 60 * 1000);
+  document.cookie = 'svgPanZoom=' + JSON.stringify(obj) + ';expires=' + d.toUTCString();
+}
+
+/* Load Cookies */
+function loadSettings() {
+  var match = document.cookie.match(/svgPanZoom\=([^;]+)/);
+  try {
+    if (match) {
+      return JSON.parse(match[1]);
+    }
+  } catch (e) {}
+
+  return null;
+}
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>

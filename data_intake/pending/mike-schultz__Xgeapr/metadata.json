@@ -1,0 +1,68 @@
+{
+  "source_id": "codepen:mike-schultz/xgeapr",
+  "author": "mike-schultz",
+  "pen_id": "Xgeapr",
+  "url": "https://codepen.io/mike-schultz/pen/Xgeapr",
+  "acquisition": "cdpn_fullpage",
+  "acquisition_url": "https://cdpn.io/mike-schultz/fullpage/Xgeapr",
+  "retrieved_at": "2026-11-19T07:16:18+00:00",
+  "license": "未单独核验；外链资源许可另查",
+  "fetch_status": "ok",
+  "title": "NYC Subway SVG Path Animation",
+  "canonical_url": "https://codepen.io/mike-schultz/pen/Xgeapr",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "f7fbc2b1ac8842bb748bee924df728093760e58f54bbb6b459dc88054bf42ca9",
+  "source_html_sha256": "534cc129747969878eea2af602163e2cf4ba744f9e0ad94587e3391931ab6783",
+  "analysis": {
+    "js": {
+      "has_js": true,
+      "inline_js_chars": 1152,
+      "external_scripts": [
+        "https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"
+      ],
+      "inline_event_handlers": 1,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 0,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": true,
+      "clip_path": false,
+      "css_counter": false,
+      "media_query": false
+    },
+    "external_stylesheets": [],
+    "css_imports": [],
+    "css_chars": 1581,
+    "element_count": 74,
+    "html_chars": 12653
+  },
+  "review": {
+    "label": "纽约地铁线网",
+    "status": "优先",
+    "reference_case": "224/227",
+    "evidence": "云端实见倾斜面和点击 Toggle 3D 后的正视面。稠密彩色线路并行、交汇，亮点压在线上；评拓扑和视角两态，不比对变化中的亮点精确位置。",
+    "visual_verified": true,
+    "surface": "Cloud Chrome, CodePen Full Page default or stated interaction; desktop only",
+    "formal_admission": false
+  }
+}

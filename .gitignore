@@ -3,4 +3,4 @@ __pycache__/
 *.pyc
 .env
 .env.*
-data_intake/B1/triage.csv
+data_intake/triage.csv

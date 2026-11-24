@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>Learn CSS: mask-composite</title>
+
+    <link rel="canonical" href="https://codepen.io/web-dot-dev/pen/zxvjbyZ">
+  
+  
+  <link rel='stylesheet' href='https://codepen.io/web-dot-dev/pen/abpoXGZ.css'>
+  
+<style>
+:root {
+  --mask-h-stripes: repeating-linear-gradient(green, green 25px, transparent 25px, transparent 50px);
+  --mask-v-stripes: repeating-linear-gradient(90deg, black, black 25px, transparent 25px, transparent 50px);
+  --mask-circle-sm: radial-gradient(circle at 60px 80px, blue, blue 50px, transparent 50px);
+  --mask-circle-lg: radial-gradient(circle at 120px 150px, red, red 75px, transparent 75px);
+  --checkerboard: repeating-conic-gradient(#ffaaff 0% 25%, white 0% 50%) 50%/ 25px 25px;  
+}
+
+#kitten-masked {
+  mask-image: var(--mask-circle-lg), var(--mask-circle-sm), var(--mask-v-stripes), var(--mask-h-stripes);
+}
+
+/* display styles */
+body {
+  padding: 0;
+}
+
+#container {
+  margin: 0 auto;
+  padding: 1em;
+  max-width: 850px;
+}
+
+#demo {
+  display: grid;
+  grid-template-columns: 200px 1fr 200px 1fr 200px;
+  grid-gap: 1em;
+  align-items: center;
+}
+
+#demo h1 {
+  width: 100%;
+  font-size: 1.25em;
+  font-weight: 400;
+  text-align: center;
+}
+
+#demo p.operand {
+  width: 100%;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 2em;
+}
+
+#controls {
+  margin-top: 1em;
+  padding: 1em;
+  background: var(--color-off-white);
+  border: solid 1px var(--color-stroke);
+  border-radius: var(--metric-radius);
+}
+
+#controls h2 {
+  font-size: 1.25em;
+  font-weight: 400;
+  margin-bottom: .5em;
+}
+
+#controls div {
+  display: grid;
+  grid-template-columns: 5ch 24ch 15ch 1fr;
+  gap: .5em 0;
+  align-items: center;
+}
+
+#masks {
+  width: 200px;
+  height: 250px;
+  background: 
+    var(--mask-circle-lg), 
+    var(--mask-circle-sm), 
+    var(--mask-v-stripes), 
+    var(--mask-h-stripes), 
+    var(--checkerboard);
+}
+
+#masked {
+  width: 200px;
+  height: 250px;
+  background: var(--checkerboard);
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <div id="container">
+  <div id="demo">
+    <h1>Unmasked</h1>
+    <div></div>
+    <h1>Masks</h1>
+    <div></div>
+    <h1>Masked</h1>
+    <div id="unmasked">
+      <img id="kitten-unmasked" src="https://images.unsplash.com/photo-1574144611937-0df059b5ef3e?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NTE1NTcwMjR8&ixlib=rb-4.1.0&q=85&w=200" />
+    </div>
+    <div>
+      <p class="operand">+</p>
+    </div>
+    <div id="masks"></div>
+    <div>
+      <p class="operand">=</p>
+    </div>
+    <div id="masked">
+      <img id="kitten-masked" src="https://images.unsplash.com/photo-1574144611937-0df059b5ef3e?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NTE1NTcwMjR8&ixlib=rb-4.1.0&q=85&w=200" />
+    </div>
+  </div>
+  <div id="controls">
+    <h2>Select masks to apply:</h2>
+    <div>
+      <input id="enable-circle-lg" type="checkbox" checked />
+      <label for="enable-circle-lg">large circle (red)</label>
+      <label ><code>mask-composite</code>:</label>
+      <select id="composite-circle-lg">
+        <option>add</option>
+        <option>subtract</option>
+        <option>intersect</option>
+        <option>exclude</option>
+      </select>
+
+      <input id="enable-circle-sm" type="checkbox" checked />
+      <label for="enable-circle-sm">small circle (blue)</label>
+      <label ><code>mask-composite</code>:</label>
+      <select id="composite-circle-sm">
+        <option>add</option>
+        <option>subtract</option>
+        <option>intersect</option>
+        <option>exclude</option>
+      </select>
+
+      <input id="enable-v-stripes" type="checkbox" checked />
+      <label for="enable-v-stripes">vertical stripes (black)</label>
+      <label ><code>mask-composite</code>:</label>
+      <select id="composite-v-stripes">
+        <option>add</option>
+        <option>subtract</option>
+        <option>intersect</option>
+        <option>exclude</option>
+      </select>
+
+      <input id="enable-h-stripes" type="checkbox" checked />
+      <label for="enable-h-stripes">horizontal stripes (green)</label>
+      <label ><code>mask-composite</code>:</label>
+      <select id="composite-h-stripes">
+        <option>add</option>
+        <option>subtract</option>
+        <option>intersect</option>
+        <option>exclude</option>
+      </select>
+    </div>
+  </div>
+</div>
+  
+    <script id="rendered-js" >
+var cssVars = window.getComputedStyle(document.body);
+let kitten = document.getElementById("kitten-masked");
+let masks = document.getElementById("masks");
+let enableCircleLg = document.getElementById("enable-circle-lg");
+let enableCircleSm = document.getElementById("enable-circle-sm");
+let enableVStripes = document.getElementById("enable-v-stripes");
+let enableHStripes = document.getElementById("enable-h-stripes");
+let compositeCircleLg = document.getElementById("composite-circle-lg");
+let compositeCircleSm = document.getElementById("composite-circle-sm");
+let compositeVStripes = document.getElementById("composite-v-stripes");
+let compositeHStripes = document.getElementById("composite-h-stripes");
+enableCircleLg.addEventListener("click", enableMasks);
+enableCircleSm.addEventListener("click", enableMasks);
+enableVStripes.addEventListener("click", enableMasks);
+enableHStripes.addEventListener("click", enableMasks);
+compositeCircleLg.addEventListener("click", enableMasks);
+compositeCircleSm.addEventListener("click", enableMasks);
+compositeVStripes.addEventListener("click", enableMasks);
+compositeHStripes.addEventListener("click", enableMasks);
+
+function enableMasks() {
+  let enabledMasks = [];
+  let enabledComposites = [];
+  if (enableCircleLg.checked) {
+    enabledMasks.push(cssVars.getPropertyValue('--mask-circle-lg'));
+    enabledComposites.push(compositeCircleLg.value);
+  }
+  if (enableCircleSm.checked) {
+    enabledMasks.push(cssVars.getPropertyValue('--mask-circle-sm'));
+    enabledComposites.push(compositeCircleSm.value);
+  }
+  if (enableVStripes.checked) {
+    enabledMasks.push(cssVars.getPropertyValue('--mask-v-stripes'));
+    enabledComposites.push(compositeVStripes.value);
+  }
+  if (enableHStripes.checked) {
+    enabledMasks.push(cssVars.getPropertyValue('--mask-h-stripes'));
+    enabledComposites.push(compositeHStripes.value);
+  }
+  kitten.style.setProperty("mask-image", enabledMasks.join(", ") || "none");
+  kitten.style.setProperty("mask-composite", enabledComposites.join(", ") || "none");
+  enabledMasks.push(cssVars.getPropertyValue('--checkerboard'));
+  masks.style.setProperty("background", enabledMasks.join(", "));
+}
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>

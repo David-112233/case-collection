@@ -1,0 +1,70 @@
+{
+  "source_id": "codepen:jh3y/mlaxre",
+  "author": "jh3y",
+  "pen_id": "mLaXRe",
+  "url": "https://codepen.io/jh3y/pen/mLaXRe",
+  "acquisition": "cdpn_fullpage",
+  "acquisition_url": "https://cdpn.io/jh3y/fullpage/mLaXRe",
+  "retrieved_at": "2026-11-19T09:12:57+00:00",
+  "license": "未单独核验；外链资源许可另查",
+  "fetch_status": "ok",
+  "title": "Pure CSS drawers using <details> & <summary> 🔨🔩🤓 #CodePenChallenge",
+  "canonical_url": "https://codepen.io/jh3y/pen/mLaXRe",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "dd8c086b70f12d0f46f23257a20279134e965259b0d33e096e83ad9be227730a",
+  "source_html_sha256": "0d8061159772b9fcbb395ffc77287d35b16034402383e327be60aa5f01d1f7a5",
+  "analysis": {
+    "js": {
+      "has_js": true,
+      "inline_js_chars": 33,
+      "external_scripts": [
+        "https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"
+      ],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 0,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": true,
+      "clip_path": false,
+      "css_counter": false,
+      "media_query": false
+    },
+    "external_stylesheets": [
+      "https://public.codepenassets.com/css/normalize-5.0.0.min.css"
+    ],
+    "css_imports": [],
+    "css_chars": 5810,
+    "element_count": 33,
+    "html_chars": 8911
+  },
+  "review": {
+    "label": "等轴抽屉沿深度平移",
+    "status": "候选",
+    "reference_case": "213/224",
+    "evidence": "从关闭态启用上层抽屉的展开按钮，移开指针后仍保持打开；黑面板拉出，露出白色抽屉侧壁、底面及背板文字。与同批冰箱的旋转门不同，这里考的是滑出和平移遮挡，另两屉未完整验证。",
+    "visual_verified": true,
+    "surface": "Cloud Chrome, CodePen Full Page default or stated interaction; desktop only",
+    "formal_admission": false
+  }
+}

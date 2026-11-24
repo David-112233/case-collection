@@ -1,0 +1,70 @@
+{
+  "source_id": "codepen:mayuk/vwppeeb",
+  "author": "mayuk",
+  "pen_id": "VwppeEb",
+  "url": "https://codepen.io/mayuk/pen/VwppeEb",
+  "acquisition": "cdpn_fullpage",
+  "acquisition_url": "https://cdpn.io/mayuk/fullpage/VwppeEb",
+  "retrieved_at": "2026-11-19T10:16:50+00:00",
+  "license": "未单独核验；外链资源许可另查",
+  "fetch_status": "ok",
+  "title": "Vending Machine",
+  "canonical_url": "https://codepen.io/mayuk/pen/VwppeEb",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "1d72dbd8be07b6dcb1e95cc5b1aee6347f20c8cfd38d850654eb72b42b5a0151",
+  "source_html_sha256": "666789db32010f146f0c30a4f9212e542c200c06c1e7ba65ab0b667c07d1e431",
+  "analysis": {
+    "js": {
+      "has_js": true,
+      "inline_js_chars": 5638,
+      "external_scripts": [
+        "https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js",
+        "https://cdnjs.cloudflare.com/ajax/libs/react/16.10.1/umd/react.production.min.js",
+        "https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.10.1/umd/react-dom.production.min.js"
+      ],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 0,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": false,
+      "clip_path": false,
+      "css_counter": false,
+      "media_query": false
+    },
+    "external_stylesheets": [],
+    "css_imports": [],
+    "css_chars": 4029,
+    "element_count": 8,
+    "html_chars": 11162
+  },
+  "review": {
+    "label": "售货机玻璃反光覆盖陈列",
+    "status": "候选",
+    "reference_case": "213/224",
+    "evidence": "默认态实见 3×6 陈列由面板包围，斜向反光跨过数排玻璃后商品但止于橱窗边，按键区不受反光遮盖。可单帧评玻璃、商品和面框层级；不验证购买流程，商品图为外链。",
+    "visual_verified": true,
+    "surface": "Cloud Chrome, CodePen Full Page default or stated interaction; desktop only",
+    "formal_admission": false
+  }
+}

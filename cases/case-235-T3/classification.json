@@ -1,0 +1,16 @@
+{
+  "review_id": "C010",
+  "case_id": "case-235-T3",
+  "tier": "T3",
+  "spatial_feature": "立体办公室、家具分层",
+  "evidence": "办公室完整空间中柜体、书本、桌椅、吊灯、墙面及地板遮挡关系丰富。ThreeJS/GLTF外部模型依赖；场景已可见但Loading字样残留，不能宣称完全加载成功。",
+  "decision": "accept",
+  "confirmation": {
+    "batch": "首轮 C001–C030",
+    "value": 1,
+    "date": "2026-11-20"
+  },
+  "qualification_note": "未分配主项目正式编号、未强定档；视觉核验范围沿用采集记录。",
+  "tier_basis": "拖动/点击改变视角并保持（three.js 轨道控制）；**页面是 WebGL 画布，不是 HTML/CSS 结构，评分可行性需用户确认**（按难度模型 v2.1 的驱动方式判定；JS 驱动按等价的 CSS 驱动类比）",
+  "tier_assigned_by": "Claude，本地入库时（2026-11-24），待用户抽查"
+}

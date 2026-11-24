@@ -5,8 +5,8 @@
 Only acquires and annotates. It never rejects a pen for containing JavaScript
 (DEC-034); screening is done by a human reviewer afterwards.
 
-  python scripts/codepen_collection/fetch_cdpn.py --candidates data_intake/B1/candidates.csv --out data_intake/B1/raw
-  python scripts/codepen_collection/fetch_cdpn.py --url https://codepen.io/argyleink/pen/gOzPYOj --out data_intake/B1/raw
+  python scripts/codepen_collection/fetch_cdpn.py --candidates data_intake/batches/<batch>/candidates.csv --out data_intake/pending
+  python scripts/codepen_collection/fetch_cdpn.py --url https://codepen.io/argyleink/pen/gOzPYOj --out data_intake/pending
 """
 
 from __future__ import annotations

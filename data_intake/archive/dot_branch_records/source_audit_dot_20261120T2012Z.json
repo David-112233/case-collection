@@ -1,0 +1,18 @@
+{
+  "slot_utc": "2026-11-20T20:12:00Z",
+  "candidate_count": 1,
+  "total_if_verified": 282,
+  "formal_admission_excluded": true,
+  "cases": [
+    {
+      "review_no": "C282",
+      "id": "DeyJordan__xbVPmmv",
+      "url": "https://codepen.io/DeyJordan/pen/xbVPmmv",
+      "label": "可拆书衣、内凹页块、拖转定角",
+      "original_blob": "4c5bd8ee639fd83d73fd4297c72af3bb92fb34d5",
+      "derived_blob": "d07a31f369820a0be9102c9b43698a5167904645",
+      "desktop_same_pose_jacket_both_states": true,
+      "external_texture_bytes_included": false
+    }
+  ]
+}

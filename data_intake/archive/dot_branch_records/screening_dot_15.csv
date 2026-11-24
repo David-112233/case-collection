@@ -1,0 +1,11 @@
+key,url,decision,tier,hits,reason,js_policy,evidence,notes,decided_on
+ccprog__RNwMPoo,https://codepen.io/ccprog/pen/RNwMPoo,hold,unclassified,spatial_layers,await_user_review,preserve,满幅白色经纬线在相邻交点轮流遮住对方；局部断开，在远观形成轮廓。逐点交错明确。桌面默认实见，移动端未测。,推荐审核，对照 213/227；仅候审，未正式入库。,2026-11-19
+jkantner__vXBPLV,https://codepen.io/jkantner/pen/vXBPLV,hold,unclassified,spatial_layers,await_user_review,preserve,连续四面阶梯在视角中合成闭环，红球位于阶面前，内侧缺口和侧面深度分明。云端默认画面实见；切换角度未测。,推荐审核，对照 224/227；仅候审，未正式入库。,2026-11-19
+cmer41k__XLEPwg,https://codepen.io/cmer41k/pen/XLEPwg,hold,unclassified,spatial_layers,await_user_review,preserve,原态车体在书页上方且遮住投影；实点后车窗、车身、轮子、书页和书壳沿等轴方向分开，适合检验层级前后关系。,推荐审核，对照 224/227；仅候审，未正式入库。,2026-11-19
+petebarr__BaymYWg,https://codepen.io/petebarr/pen/BaymYWg,hold,unclassified,spatial_layers,await_user_review,preserve,黑白巨大字形在红底上相互穿插并由海报边缘裁切；实见进场后的完整字形和文字区，未测试交互或窄屏。,推荐审核，对照 213/227；仅候审，未正式入库。,2026-11-19
+DanSmaR__jOrNeWK,https://codepen.io/DanSmaR/pen/jOrNeWK,hold,unclassified,spatial_layers,await_user_review,preserve,屋檐盖住墙面，前廊围栏与楼梯和人物形成前中后景，楼梯扶手跨过廊边。只实见一个默认时刻，室内切换未评估。,备选，对照 224；仅候审，未正式入库。,2026-11-19
+amit_sheen__WNEOPQa,https://codepen.io/amit_sheen/pen/WNEOPQa,hold,unclassified,spatial_layers,await_user_review,preserve,多个不同深度的盒子排在斜向传送面，实见一盒开盖、盒壁与盖形成遮挡；套接完整周期未逐帧检查。,备选，对照 224/227；仅候审，未正式入库。,2026-11-19
+jermin__beXaOx,https://codepen.io/jermin/pen/beXaOx,hold,unclassified,spatial_layers,await_user_review,preserve,橘色折角梁通过内外交错和断口组成不可能立方；默认主体实见。与上一轮 Penrose 同属错视类但其六面框架、分段开口与遮挡结构不同，不宜同批优先。,备选，对照 227；仅候审，未正式入库。,2026-11-19
+Bathansneard__RwPjjKL,https://codepen.io/Bathansneard/pen/RwPjjKL,hold,unclassified,spatial_layers,await_user_review,preserve,大 O 压住 K 的橙色侧面，字形又与蓝边框交错，适合检查多层文字阴影与裁切。桌面首屏可见上部，未查下方全部字形。,备选，对照 213/227；仅候审，未正式入库。,2026-11-19
+walickialbert__OJxOOGX,https://codepen.io/walickialbert/pen/OJxOOGX,hold,unclassified,spatial_layers,await_user_review,preserve,树冠局部叠盖入口白柱和窗户，山墙遮住深色主体屋顶，前后分明但仍为正视立面。只核过桌面。,备选，对照 224；仅候审，未正式入库。,2026-11-19
+scootman__wrNdYP,https://codepen.io/scootman/pen/wrNdYP,hold,unclassified,spatial_layers,await_user_review,preserve,时间轴在平面态用边框、色段和标签形成叠层；在中央触发后实见倾转并出现标注，图层间距不及书页案例明显。未测所有标签和主题。,备选，对照 213/224；仅候审，未正式入库。,2026-11-19

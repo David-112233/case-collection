@@ -1,0 +1,7 @@
+key,url,decision,tier,hits,reason,js_policy,evidence,notes,decided_on
+Giedr-Ju__yygVejd,https://codepen.io/Giedr-Ju/pen/yygVejd,hold,unclassified,spatial_layers,await_user_review,original_preserved,折纸船折面与多层前后波浪互相遮挡，默认效果可见；主体由Canvas 2D绘制，含随机状态和连续动画、音效与拖动控制，稳定截图评测适配性待复核，未测试交互。,备选；未正式入库，未评分。,2026-11-18
+diegopardo__AzvaGL,https://codepen.io/diegopardo/pen/AzvaGL,hold,unclassified,spatial_layers,await_user_review,original_preserved,倾斜屏幕外壳、边框厚度与反光可见，但默认屏幕内容为黑色，主体结构较简单且交错较弱。,不优先推荐；未正式入库，未评分。,2026-11-18
+FLiiNK__gOamzbd,https://codepen.io/FLiiNK/pen/gOamzbd,hold,unclassified,spatial_layers,await_user_review,original_preserved,墙面与木地板透视明显，但默认后墙大块绿色、视频黑屏，部分控制文字倒置；贴图及YouTube外部依赖保留，移动/播放/灯光交互未测试。,待复核；未正式入库，未评分。,2026-11-18
+zenete__BaMbmqW,https://codepen.io/zenete/pen/BaMbmqW,hold,unclassified,spatial_layers,await_user_review,original_preserved,默认房间可见墙面/地板/顶面透视、吊顶凹槽与旋转吊扇；扇叶和轴体交叠，但家具不丰富，白色大块区域与视口裁切需复核；未全面测试动画。,备选；未正式入库，未评分。,2026-11-18
+meylon__qByaYVp,https://codepen.io/meylon/pen/qByaYVp,hold,unclassified,spatial_layers,await_user_review,original_preserved,圆环与编号凹面构成浅层嵌套，连线分布错落；缺少强前后遮挡/交错关系，默认部分说明溢出首屏。,不优先推荐；未正式入库，未评分。,2026-11-18
+ufocatcher__WNzXwgX,https://codepen.io/ufocatcher/pen/WNzXwgX,hold,unclassified,spatial_layers,await_user_review,original_preserved,默认为单个青色立方体，六面透视与地面投影清晰，但多元素层叠交错不足；摄像视角交互未测试。,备选；未正式入库，未评分。,2026-11-18

@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>CSS &#39;00s 3D iPod Nano [CHALLENGES]</title>
+
+    <link rel="canonical" href="https://codepen.io/RaduBratan/pen/mdPrWmo">
+  
+  
+  <link rel='stylesheet' href='https://pro.fontawesome.com/releases/v5.2.0/css/all.css'>
+  
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  transform-style: preserve-3d;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #ff695c;
+  transition: 0.6s ease-in-out;
+}
+body.animation {
+  background-color: black;
+  transition: 0.6s ease-in-out;
+}
+body.animation .shadow-scene {
+  display: none;
+}
+body.animation .case-scene {
+  animation: hover-ipod 1s infinite alternate;
+}
+body.animation .case-scene .cub-1 .face {
+  box-shadow: 0 0 5px rgba(35, 116, 198, 0.4), 0 0 10px rgba(35, 116, 198, 0.35), 0 0 15px rgba(35, 116, 198, 0.3), 0 0 20px rgba(35, 116, 198, 0.25), 0 0 40px rgba(35, 116, 198, 0.2), 0 0 60px rgba(35, 116, 198, 0.15);
+  opacity: 0.8;
+  background-color: #cccccc;
+}
+body.animation .case-scene .cub-1 .face:after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-color: #2374c6;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 6;
+  opacity: 1;
+  mix-blend-mode: screen;
+}
+body.animation .case-scene .cub-1 .ft {
+  background-color: #ffffff;
+}
+body.animation .case-scene .cub-1 .rt {
+  background-color: #ffffff;
+}
+body.animation .case-scene .cub-1 .cr-0 .s0 {
+  background-color: #ffffff;
+}
+body.animation .case-scene .cub-1 .cr-0 .s1 {
+  background-color: #ffffff;
+}
+body.animation .case-scene .cub-1 .cr-0 .s2 {
+  background-color: #ffffff;
+}
+body.animation .case-scene .cub-1 .cr-1 .s0 {
+  background-color: #ffffff;
+}
+body.animation .case-scene .cub-1 .cr-1 .s1 {
+  background-color: #ffffff;
+}
+body.animation .case-scene .cub-1 .cr-1 .s2 {
+  background-color: #ffffff;
+}
+body.animation .case-scene .cub-1 .cr-2 .s0 {
+  background-color: #ffffff;
+}
+body.animation .case-scene .cub-1 .cr-2 .s1 {
+  background-color: #ffffff;
+}
+body.animation .case-scene .cub-1 .cr-2 .s2 {
+  background-color: #ffffff;
+}
+body.animation .case-scene .cub-1 .cr-3 .s0 {
+  background-color: #ffffff;
+}
+body.animation .case-scene .cub-1 .cr-3 .s1 {
+  background-color: #ffffff;
+}
+body.animation .case-scene .cub-1 .cr-3 .s2 {
+  background-color: #ffffff;
+}
+body.animation .screen-scene {
+  animation: hover-screen 1s infinite alternate;
+  opacity: 0.8;
+}
+body.animation .wheel-scene {
+  background-color: #ffffff;
+  animation: hover-wheel 1s infinite alternate;
+  opacity: 0.8;
+}
+body.animation .wheel-scene::before {
+  content: "";
+  position: absolute;
+  width: 3.5vw;
+  height: 3.5vw;
+  border-radius: 50%;
+  background-color: #2374c6;
+  opacity: 0.5;
+  top: 1.75vw;
+  left: 1.75vw;
+}
+body.animation .light-scene {
+  display: flex;
+}
+
+.shadow-scene {
+  position: absolute;
+  width: 10.25vw;
+  height: 22.25vw;
+  transform: perspective(1500px) rotateX(309deg) rotateY(-694deg) rotateZ(0deg);
+  transition: 0.6s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.shadow-scene .shadow-shape {
+  background-color: #000000;
+  opacity: 0.3;
+  box-shadow: 0px 0px 0px 0px black;
+  transition: 0.6s ease;
+  position: absolute;
+  width: 10.25vw;
+  height: 22.25vw;
+  transform-origin: center;
+  transform: rotatex(90deg) translateZ(-0.8625vw) translateY(0vw) translateX(-3vw);
+  border-radius: 1.25vw;
+}
+
+.ipod-scene {
+  position: absolute;
+  transform: perspective(1500px) rotateX(309deg) rotateY(-694deg) rotateZ(0deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ipod-scene .case-scene {
+  position: absolute;
+  transform-style: preserve-3d;
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.ipod-scene .case-scene .case-shape {
+  position: absolute;
+  transform-style: preserve-3d;
+  width: 0;
+  height: 0;
+  transform-origin: 50%;
+}
+.ipod-scene .case-scene [class*=cuboid] .ft {
+  width: 100%;
+  height: 100%;
+}
+.ipod-scene .case-scene [class*=cuboid] .bk {
+  width: 100%;
+  height: 100%;
+  left: 100%;
+}
+.ipod-scene .case-scene [class*=cuboid] .rt {
+  transform: rotateY(-90deg) translateX(-50%);
+}
+.ipod-scene .case-scene [class*=cuboid] .lt {
+  transform: rotateY(90deg) translateX(-50%);
+  left: 100%;
+}
+.ipod-scene .case-scene [class*=cuboid] .tp {
+  transform: rotateX(90deg) translateY(-50%);
+}
+.ipod-scene .case-scene [class*=cuboid] .bm {
+  transform: rotateX(-90deg) translateY(-50%);
+  top: 100%;
+}
+.ipod-scene .case-scene .cub-1 {
+  width: 10.25vw;
+  height: 1.725vw;
+}
+.ipod-scene .case-scene .cub-1 .face {
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.4);
+  position: absolute;
+  transform-style: preserve-3d;
+  overflow: hidden;
+  transform-origin: 0 0;
+  backface-visibility: hidden;
+  background-size: 100% 100% !important;
+  background-position: center;
+  background-color: #ffe13c;
+  box-shadow: none;
+  opacity: 1;
+}
+.ipod-scene .case-scene .cub-1 .cr {
+  width: 1.25vw;
+  left: 0.625vw;
+  position: absolute;
+  transform-style: preserve-3d;
+  height: 100%;
+}
+.ipod-scene .case-scene .cub-1 .cr .side {
+  height: 100%;
+}
+.ipod-scene .case-scene .cub-1 .side {
+  left: 50%;
+  width: 0.6948729811vw;
+}
+.ipod-scene .case-scene .cub-1 .ft {
+  transform: translateZ(11.125vw);
+  width: 7.75vw;
+  margin-left: 1.25vw;
+  background-color: #F5D000;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.ipod-scene .case-scene .cub-1 .ft .charging-port {
+  width: 3.5vw;
+  height: 0.8vw;
+  background-color: #000000;
+  margin: 0 0.5vw;
+  opacity: 0.8;
+}
+.ipod-scene .case-scene .cub-1 .ft .headphone-jack {
+  width: 0.8vw;
+  height: 0.8vw;
+  border-radius: 100%;
+  margin: 0 0.5vw;
+  background-color: #000000;
+  opacity: 0.8;
+}
+.ipod-scene .case-scene .cub-1 .bk {
+  transform: translateZ(-11.125vw) rotateY(180deg);
+  width: 7.75vw;
+  margin-left: -1.25vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+.ipod-scene .case-scene .cub-1 .bk .hold-button {
+  width: 2vw;
+  height: 0.8vw;
+  background-color: #333333;
+  border-radius: 1.25vw;
+  margin-right: 1.5vw;
+}
+.ipod-scene .case-scene .cub-1 .bk .hold-button:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #c20f00;
+  border-radius: 1.25vw;
+  transform: translateX(0.8vw);
+}
+.ipod-scene .case-scene .cub-1 .rt {
+  width: 22.25vw;
+  height: 1.725vw;
+  width: 19.75vw;
+  background-color: #E0BF00;
+}
+.ipod-scene .case-scene .cub-1 .lt {
+  width: 22.25vw;
+  height: 1.725vw;
+  width: 19.75vw;
+}
+.ipod-scene .case-scene .cub-1 .tp {
+  width: 10.25vw;
+  height: 22.25vw;
+  border-radius: 1.25vw;
+}
+.ipod-scene .case-scene .cub-1 .bm {
+  width: 10.25vw;
+  height: 22.25vw;
+  border-radius: 1.25vw;
+}
+.ipod-scene .case-scene .cub-1 .cr-0 {
+  transform: translate3D(7.75vw, 0, 9.875vw);
+}
+.ipod-scene .case-scene .cub-1 .cr-0 .s0 {
+  transform: rotateY(15deg) translate3D(-50%, 0, 1.225vw);
+  background-color: #ffd900;
+}
+.ipod-scene .case-scene .cub-1 .cr-0 .s1 {
+  transform: rotateY(45deg) translate3D(-50%, 0, 1.225vw);
+  background-color: #ffda0a;
+}
+.ipod-scene .case-scene .cub-1 .cr-0 .s2 {
+  transform: rotateY(75deg) translate3D(-50%, 0, 1.225vw);
+  background-color: #ffdd22;
+}
+.ipod-scene .case-scene .cub-1 .cr-1 {
+  transform: translate3D(7.75vw, 0, -9.875vw);
+}
+.ipod-scene .case-scene .cub-1 .cr-1 .s0 {
+  transform: rotateY(105deg) translate3D(-50%, 0, 1.225vw);
+}
+.ipod-scene .case-scene .cub-1 .cr-1 .s1 {
+  transform: rotateY(135deg) translate3D(-50%, 0, 1.225vw);
+}
+.ipod-scene .case-scene .cub-1 .cr-1 .s2 {
+  transform: rotateY(165deg) translate3D(-50%, 0, 1.225vw);
+}
+.ipod-scene .case-scene .cub-1 .cr-2 {
+  transform: translate3D(0, 0, -9.875vw);
+}
+.ipod-scene .case-scene .cub-1 .cr-2 .s0 {
+  transform: rotateY(195deg) translate3D(-50%, 0, 1.225vw);
+  background-color: #ffdd22;
+}
+.ipod-scene .case-scene .cub-1 .cr-2 .s1 {
+  transform: rotateY(225deg) translate3D(-50%, 0, 1.225vw);
+  background-color: #f4d000;
+}
+.ipod-scene .case-scene .cub-1 .cr-2 .s2 {
+  transform: rotateY(255deg) translate3D(-50%, 0, 1.225vw);
+  background-color: #eac800;
+}
+.ipod-scene .case-scene .cub-1 .cr-3 {
+  transform: translate3D(0, 0, 9.875vw);
+}
+.ipod-scene .case-scene .cub-1 .cr-3 .s0 {
+  transform: rotateY(285deg) translate3D(-50%, 0, 1.225vw);
+  background-color: #eac800;
+}
+.ipod-scene .case-scene .cub-1 .cr-3 .s1 {
+  transform: rotateY(315deg) translate3D(-50%, 0, 1.225vw);
+  background-color: #f4d000;
+}
+.ipod-scene .case-scene .cub-1 .cr-3 .s2 {
+  transform: rotateY(345deg) translate3D(-50%, 0, 1.225vw);
+  background-color: #F5D000;
+}
+.ipod-scene .screen-scene {
+  width: 7.8vw;
+  height: 6.5vw;
+  transform: rotateX(90deg) translate3d(0vw, -6vw, 1vw);
+  background-color: #000000;
+  border-radius: 0.3vw;
+  position: absolute;
+  opacity: 1;
+}
+.ipod-scene .wheel-scene {
+  width: 7vw;
+  height: 7vw;
+  transform: rotateX(90deg) translate3d(0vw, 4.5vw, 1vw);
+  background-color: #ffffff;
+  border-radius: 100%;
+  position: absolute;
+  opacity: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ipod-scene .wheel-scene .fa-imenu {
+  position: absolute;
+  color: #000000;
+  opacity: 0.8;
+  font-size: 0.32rem;
+  top: 0.875vw;
+}
+.ipod-scene .wheel-scene .fa-ifwd {
+  position: absolute;
+  color: #000000;
+  opacity: 0.8;
+  font-size: 0.32rem;
+  right: 0.4375vw;
+}
+.ipod-scene .wheel-scene .fa-ibkwd {
+  position: absolute;
+  color: #000000;
+  opacity: 0.8;
+  font-size: 0.32rem;
+  left: 0.4375vw;
+}
+.ipod-scene .wheel-scene .fa-iplypse {
+  position: absolute;
+  color: #000000;
+  opacity: 0.8;
+  font-size: 0.32rem;
+  bottom: 0.875vw;
+}
+.ipod-scene .wheel-scene::before {
+  content: "";
+  position: absolute;
+  width: 3.5vw;
+  height: 3.5vw;
+  border-radius: 50%;
+  background-color: #ffe13c;
+  opacity: 1;
+  top: 1.75vw;
+  left: 1.75vw;
+}
+.ipod-scene .light-scene {
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: -100;
+  width: 22.5vw;
+  height: 22.5vw;
+  border-radius: 100%;
+  transform: rotateX(90deg) rotateY(0deg) rotateZ(0deg) translateY(-1vw) translateZ(-6vw);
+  background-color: #2374c6;
+  opacity: 0.2;
+  filter: blur(2px);
+  box-shadow: 0px 0px 35px 25px #2374c6;
+  transform-style: preserve-3d;
+  animation: light 1s infinite alternate;
+}
+.ipod-scene .light-scene:after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-color: #ffdd22;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 100%;
+  opacity: 0.4;
+  filter: blur(2px);
+  box-shadow: 0px 0px 35px 25px #ffdd22;
+  mix-blend-mode: screen;
+}
+
+@keyframes hover-ipod {
+  from {
+    will-change: unset;
+    transform: translateY(0px);
+  }
+  to {
+    will-change: transform;
+    transform: translateY(-20px);
+  }
+}
+@keyframes hover-screen {
+  from {
+    will-change: unset;
+    transform: rotateX(90deg) translate3d(0vw, -6vw, 1vw);
+  }
+  to {
+    will-change: transform;
+    transform: rotateX(90deg) translate3d(0vw, -6vw, calc(1vw + 20px));
+  }
+}
+@keyframes hover-wheel {
+  from {
+    will-change: unset;
+    transform: rotateX(90deg) translate3d(0vw, 4.5vw, 1vw);
+  }
+  to {
+    will-change: transform;
+    transform: rotateX(90deg) translate3d(0vw, 4.5vw, calc(1vw + 20px));
+  }
+}
+@keyframes light {
+  from {
+    will-change: unset;
+    width: 22.5vw;
+    height: 22.5vw;
+    opacity: 0.2;
+    filter: blur(2px);
+    box-shadow: 0px 0px 35px 25px #2374c6;
+  }
+  to {
+    will-change: transform;
+    width: 23vw;
+    height: 23vw;
+    opacity: 0.12;
+    filter: blur(2.5px);
+    box-shadow: 0px 0px 44px 32px #2374c6;
+  }
+}
+/*@keyframes start {
+  0% {
+    background-color: lighten($black, 10%);
+  }
+  100% {
+    background-color: $black;
+  }
+}*/
+/*------------------------------------------------ o l d ------------------------------------------------
+.holo-scene {
+    z-index: -50;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 10vw;
+    height: 10vw;
+    border: 2px solid $blue;
+    position: absolute;
+    border-radius: 100%;
+    transform: rotateX(90deg) rotateY(0deg) rotateZ(0deg) translateY(0vw)
+      translateZ(-4vw);
+    box-shadow: 0 0 5px rgba($blue, 0.4), 0 0 10px rgba($blue, 0.35),
+      0 0 15px rgba($blue, 0.3), 0 0 20px rgba($blue, 0.25),
+      0 0 40px rgba($blue, 0.2), 0 0 60px rgba($blue, 0.15);
+    transform-style: preserve-3d;
+
+    .fa-apple {
+      font-size: 4vw;
+      color: lighten($red, 30%);
+      text-shadow: 0 0 5px rgba($blue, 0.4), 0 0 10px rgba($blue, 0.35),
+        0 0 15px rgba($blue, 0.3), 0 0 20px rgba($blue, 0.25),
+        0 0 40px rgba($blue, 0.2), 0 0 60px rgba($blue, 0.15);
+    }
+  }
+*/
+</style>
+
+  <script src="https://public.codepenassets.com/js/prefixfree-1.0.7.min.js"></script>
+
+  
+</head>
+
+<body translate="no">
+  <div class="shadow-scene">
+  <div class="shadow-shape"></div>
+</div>
+
+<div class="ipod-scene">
+  <div class="case-scene">
+    <div class="case-shape cuboid-1 cub-1">
+      <div class="face ft">
+        <div class="charging-port"></div>
+        <div class="headphone-jack"></div>
+      </div>
+      <div class="face bk">
+        <div class="hold-button"></div>
+      </div>
+      <div class="face rt"></div>
+      <div class="face lt"></div>
+      <div class="face bm"></div>
+      <div class="face tp"></div>
+      <div class="cr cr-0">
+        <div class="face side s0"></div>
+        <div class="face side s1"></div>
+        <div class="face side s2"></div>
+      </div>
+      <div class="cr cr-1">
+        <div class="face side s0"></div>
+        <div class="face side s1"></div>
+        <div class="face side s2"></div>
+      </div>
+      <div class="cr cr-2">
+        <div class="face side s0"></div>
+        <div class="face side s1"></div>
+        <div class="face side s2"></div>
+      </div>
+      <div class="cr cr-3">
+        <div class="face side s0"></div>
+        <div class="face side s1"></div>
+        <div class="face side s2"></div>
+      </div>
+    </div>
+  </div>
+  <div class="screen-scene"></div>
+  <div class="wheel-scene">
+    <i class="fac fa-imenu"></i>
+    <i class="fac fa-ifwd"></i>
+    <i class="fac fa-ibkwd"></i>
+    <i class="fac fa-iplypse"></i>
+  </div>
+  <div class="light-scene"></div>
+</div>
+
+<!-- ----------------------- o l d -----------------------
+<div class="holo-scene">
+  <i class="fab fa-apple"></i>
+</div> 
+-->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
+<script src='https://use.fontawesome.com/releases/v5.2.0/js/all.js'></script>
+    <script id="rendered-js" >
+$(".wheel-scene").click(function () {
+  $("body").toggleClass("animation");
+});
+
+var faiMenu = {
+  prefix: "fac",
+  iconName: "imenu",
+  icon: [
+  64.069,
+  16.437,
+  [],
+  null,
+  "M0,16.44.7,0H4.75l3.7,10.21L12.15,0H16l1.05,16.44h-3L13.2,6.69l-3,9.75H7L3.87,6.34l-.53,10.1Zm21.12,0V0h9.51V2.46H24.38V6.51h5.89V9H24.38v4.4H30.8v3.06Zm13.46,0V0h3.16l6.44,10.7V0h3V16.44h-3L37.74,5.22V16.44ZM51.31,0h3.43V11.88c0,2.82,5.72,2.21,5.72,0V0h3.61V12.23c0,2.86-3.21,4.21-6.43,4.21s-6.42-1.34-6.42-4.21Z"] };
+
+
+
+var faiForward = {
+  prefix: "fac",
+  iconName: "ifwd",
+  icon: [
+  30.742,
+  16.18,
+  [],
+  null,
+  "M12.83,8.21,0,16.06.06.37Zm13.74,7.91V0h4.17V16.18Zm-.49-7.91L13.25,16.06,13.31.37Z"] };
+
+
+
+var faiBackward = {
+  prefix: "fac",
+  iconName: "ibkwd",
+  icon: [
+  30.742,
+  16.18,
+  [],
+  null,
+  "M17.91,8.21l12.83,7.85L30.68.37ZM4.17,16.12V0H0V16.18Zm.49-7.91,12.83,7.85L17.43.37Z"] };
+
+
+
+var faiPlayPause = {
+  prefix: "fac",
+  iconName: "iplypse",
+  icon: [
+  39.251,
+  16.809,
+  [],
+  null,
+  "M0,0,16,8.21.07,16.81ZM25.35,16.81V0h4.72V16.81Zm9.18,0V0h4.72V16.81Z"] };
+
+
+
+FontAwesome.library.add(faiMenu, faiForward, faiBackward, faiPlayPause);
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>

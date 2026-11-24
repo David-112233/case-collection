@@ -1,0 +1,92 @@
+{
+  "source_id": "codepen:ykadosh/bgkgxbe",
+  "author": "ykadosh",
+  "pen_id": "bGKgxbe",
+  "url": "https://codepen.io/ykadosh/pen/bGKgxbe",
+  "acquisition": "cdpn_fullpage_cloud_browser_dom",
+  "acquisition_url": "https://cdpn.io/ykadosh/fullpage/bGKgxbe",
+  "retrieved_at": "2026-11-18T15:48:21.800Z",
+  "fetch_status": "ok",
+  "title": "CSS Mechanical Keyboard",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "4cdeaae27ecd11cccd482d563bb0f02ab616d6fa7b369276685f618883a05c6c",
+  "source_html_sha256": "fd3e5b031dba5c5190d819dbeeaff07528fbcc36f55e759ffb9ca64d6c02ace7",
+  "analysis": {
+    "js": {
+      "has_js": true,
+      "inline_js_chars": 2572,
+      "external_scripts": [
+        "https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"
+      ],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 0,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": true,
+      "clip_path": false,
+      "css_counter": false,
+      "media_query": false
+    },
+    "external_stylesheets": [
+      "https://public.codepenassets.com/css/reset-2.0.min.css"
+    ],
+    "css_imports": [],
+    "css_chars": 4361,
+    "element_count": 2,
+    "html_chars": 8402
+  },
+  "visual_review": {
+    "viewport": [
+      1180,
+      757
+    ],
+    "default_only": true,
+    "mobile_verified": false,
+    "screenshot_available": true
+  },
+  "candidate_status": "admitted_in_collection_repo",
+  "license": "not separately verified",
+  "review": {
+    "status": "用户追加审核选中",
+    "evidence": "机械键盘、错排立体键帽。沿用候选归档的桌面默认画面核验；不新增交互、移动端或离线核验结论。",
+    "visual_verified": true,
+    "formal_admission": true,
+    "scope": "仅采集仓库交付；主项目尚未导入"
+  },
+  "review_id": "C042",
+  "case_id": "case-253-T2",
+  "source_archive": {
+    "repository": "David-112233/case-collection",
+    "pr": 10,
+    "commit": "c295c34b901f0623cb3c0a8178a1dfb43f320fb9",
+    "path": "data_intake/B1/raw/ykadosh__bGKgxbe"
+  },
+  "intake_date": "2026-11-21",
+  "source_original_sha256": "fd3e5b031dba5c5190d819dbeeaff07528fbcc36f55e759ffb9ca64d6c02ace7",
+  "source_original_note": "保留原归档预览；与本文件夹 source.html 字节一致。完整捕获另存 original_srcdoc.html。",
+  "js_policy": "original_preserved",
+  "js_changes": "不改写归档预览或原始捕获，保留原作脚本及外部依赖。",
+  "admitted_at": "2026-11-24",
+  "admitted_by": "admit_case.py"
+}

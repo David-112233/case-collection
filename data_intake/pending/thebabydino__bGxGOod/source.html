@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>3D cube-plane intersection &amp; backdrop-filter test</title>
+
+    <link rel="canonical" href="https://codepen.io/thebabydino/pen/bGxGOod">
+  
+  
+  
+  
+<style>
+html, body, div {
+  display: grid;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  perspective: 25em;
+}
+
+div, ::before, ::after {
+  grid-area: 1/1;
+}
+
+div {
+  transform-style: preserve-3d;
+}
+
+.assembly {
+  place-self: center;
+  transform: rotatex(-25deg) rotatey(30deg);
+}
+
+@keyframes r {
+  0% {
+    transform: none;
+  }
+  100% {
+    transform: rotatey(1turn);
+  }
+}
+.face {
+  --i: 0;
+  --j: calc(1 - var(--i));
+  transform: rotate3d(var(--i), var(--j), 0, calc(var(--m)*90deg)) translatez(7.5vmin);
+}
+.face:nth-child(n+5) {
+  --i: 1 ;
+}
+.face:nth-child(1) {
+  --m: 0 ;
+}
+.face:nth-child(2) {
+  --m: 1 ;
+}
+.face:nth-child(3) {
+  --m: 2 ;
+}
+.face:nth-child(4) {
+  --m: 3 ;
+}
+.face:nth-child(5) {
+  --m: -1 ;
+}
+.face:nth-child(6) {
+  --m: 1 ;
+}
+.face::before, .face::after {
+  --k: 0;
+  box-sizing: border-box;
+  border: solid 2px;
+  width: 15vmin;
+  aspect-ratio: 1;
+  backface-visibility: hidden;
+  transform: rotatey(calc(var(--k)*.5turn));
+  backdrop-filter: blur(3px);
+  background: hsla(var(--hue, 0), 100%, 50%, 0.5);
+  content: "";
+}
+.face::after {
+  --k: 1;
+}
+
+.int {
+  transform: rotatex(-5deg) rotatey(-9deg) scale(2);
+  --hue: 240 ;
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  <div class="assembly">
+  <div class="cube">
+    <div class="face"></div>
+    <div class="face"></div>
+    <div class="face"></div>
+    <div class="face"></div>
+    <div class="face"></div>
+    <div class="face"></div>
+  </div>
+  <div class="face int"></div>
+</div>
+  
+  
+  
+</body>
+
+</html>

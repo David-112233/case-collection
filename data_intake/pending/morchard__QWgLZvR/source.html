@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>Pop-up Book</title>
+
+    <link rel="canonical" href="https://codepen.io/morchard/pen/QWgLZvR">
+  
+  <link rel="stylesheet" href="https://public.codepenassets.com/css/normalize-5.0.0.min.css">
+
+  
+  
+<style>
+body {
+  font-family: sans-serif;
+  background-color: #1D1E22;
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1000px;
+  --char-x: 250px;
+  --char-y: 250px;
+}
+* {
+  box-sizing: border-box;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.ground {
+  width: 500px;
+  height: 500px;
+  border: 1px solid;
+  transform: rotateX(60deg);
+  transform-style: preserve-3d;
+  position: relative;
+}
+.item {
+  transform-origin: 50% 100%;
+  font-size: 5rem;
+  display: inline-block;
+  transform:
+    translate(-50%, -100%)
+    translate(var(--x), var(--y))
+    rotateX(-60deg);
+  position: absolute;
+}
+.character {
+  pointer-events: none;
+  font-size: 2rem;
+  --x: var(--char-x);
+  --y: var(--char-y);
+}
+.character::before {
+  content: "😀"
+}
+.ground:active .character::before {
+  content: "😁";
+}
+.ground:active .item {
+  pointer-events: none;
+}
+
+.hoverable:hover {
+  filter: brightness(1.25)
+}
+.item:not(.character) {
+  cursor: pointer;
+}
+aside {
+  margin-left: 2rem;
+  max-width: 24rem;
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  <main class="ground">
+  <div class="item character"></div>
+  <div class="item hoverable" style="--x: 300px; --y: 100px">🌲</div>
+  <div class="item hoverable" style="--x: 100px; --y: 300px">🌳</div>
+  <div class="item hoverable" style="--x: 400px; --y: 400px">🌲</div>
+</main>
+<aside>
+  <h2>Pop-up Book</h2>
+  <p>A quick demo showcasing one how CSS transforms can be used to emulate a pop-up book style.</p>
+</aside>
+  
+    <script id="rendered-js" >
+const main = document.querySelector("main");
+const handler = event => {
+  if (event.target !== event.currentTarget) return;
+  if (!event.pressure) return;
+  const { offsetX, offsetY } = event;
+  main.style.setProperty("--char-x", `${offsetX}px`);
+  main.style.setProperty("--char-y", `${offsetY}px`);
+};
+main.onpointermove = handler;
+main.onpointerdown = handler;
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>

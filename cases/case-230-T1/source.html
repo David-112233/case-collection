@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>Paper Cut-Out Effect w/CSS</title>
+
+    <link rel="canonical" href="https://codepen.io/glennphilp/pen/DBLzOW">
+  
+  
+  
+  
+<style>
+html, body {
+  height: 100%; width: 100%;
+  margin: 0; padding: 0;
+  font: normal normal normal 100%/1.2em Arial, Helvetica, sans-serif;
+}
+.container {
+  width: 100%;
+}
+  #logo {
+				margin-top: 6em;
+				font-family: "Helvetica";
+				text-align: center;
+			}
+
+			#logo span {
+				position: relative;
+				color: #32A8E0;
+				font-size: 8rem;
+				font-weight: bold;
+				line-height: 1em;
+			}
+
+			#logo span:before,
+			#logo span:after {
+				content: attr(data-letter);
+				position: absolute;
+				left: 0;
+				color: transparent;
+			}
+			#logo span:before {
+			    -webkit-transform-style: preserve-3d;
+			    -webkit-transform: skew(0deg, 3deg);
+			    -webkit-transform-origin:0 100% ;
+  -ms-transform-style: preserve-3d;
+			    -ms-transform: skew(0deg, 3deg);
+			    -ms-transform-origin:0 100% ;
+			    transform-style:preserve-3d;
+			    transform: skew(0deg, 3deg);
+			    transform-origin:0 100% ;
+      /* Both shadows are required for browsers that don't support full spread specs and those that do support full spread specs*/
+       text-shadow: 0px 3px 5px rgba(0, 0, 0, 0.25);
+       text-shadow:0px 3px 5px 1px rgba(0,0,0,0.25);
+       
+}
+			#logo span:after {
+				color: #FFF;
+				background: 
+    -webkit-linear-gradient(left, #FFF, #EEE);
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+				-webkit-transform-style:preserve-3d;
+			    -webkit-transform: rotateY(11deg)translate3d(-4px,-2px,-20px) skew(-2deg, -6deg);
+			    -webkit-transform-origin:0 100% ;
+  -ms-linear-gradient(45deg, white, black);
+				-ms-background-clip: text;
+				-ms-text-fill-color: transparent;
+				-ms-transform-style:preserve-3d;
+			    -ms-transform: rotateY(11deg)translate3d(-4px,-2px,-20px) skew(-2deg, -6deg);
+			    -ms-transform-origin:0 100% ;
+			    transform-style:preserve-3d;
+			    transform: rotateY(11deg)translate3d(-4px,-2px,-20px) skew(-2deg, -6deg);;
+			    transform-origin:0 100% ;
+			    z-index: 100;
+			}
+</style>
+
+  </head>
+
+<body translate="no">
+  <div class="container">  
+  <h1 id="logo">
+			<span data-letter="G">G</span>
+			<span data-letter="L">L</span>
+			<span data-letter="E">E</span>
+			<span data-letter="N">N</span>
+			<span data-letter="N">N</span>
+		</h1>
+</div>
+  
+  
+  
+</body>
+
+</html>

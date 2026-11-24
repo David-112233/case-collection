@@ -9,7 +9,7 @@
 | 1 | [项目背景](../reference/docs/PROJECT_BACKGROUND.md) | 明白基准测什么、为什么只要难题、什么作品能改成案例 |
 | 2 | 本页 | 步骤、标准、协作规则 |
 | 3 | [reference/examples/](../reference/examples/) | 看 13 个已入库案例的题目和难点说明（先读其中的 README），知道成品长什么样；完成态样板见 [reference/examples_finished/](../reference/examples_finished/) |
-| 4 | [B1/screening.csv](B1/screening.csv) | 看 265 条历史判断的写法，尤其是 7 条 accept 和被用户否掉的 U1、U2 |
+| 4 | [archive/screening.csv](archive/screening.csv) | 看 265 条早期判断的写法，尤其是 7 条 accept 和被用户否掉的 U1、U2 |
 | 5 | [reference/dedupe_index.csv](../reference/dedupe_index.csv) | 主仓库全部 227 例的档位、来源链接和一句话背景，避免题材重复（链接级去重由脚本自动完成） |
 
 需要查原文时再看：[输出契约 v2](../reference/docs/output_contract_v2.md)（输出限制以它为准）、[任务定义 v5.2](../reference/docs/TASK_DEFINITION_v5_2_synced.md)（其中“禁止 JavaScript”已被取代）、[类型与难度模型 v2.1](../reference/docs/difficulty_model_v2_1.md)、[扩量方案](../reference/history/DATA-001-expansion-plan-20260928.md)。
@@ -22,44 +22,44 @@
 
 本仓库由 dot 和 duet 两个智能体同时采集。规则只有一条主线：**先认领，后处理；谁先认领归谁。**
 
-**公共登记表是 [B1/claims.csv](B1/claims.csv)。** 一行一个作品，只追加、不修改、不删除。同一个作品出现多行时，靠前的那行有效。
+**公共登记表是 [ledger/claims.csv](ledger/claims.csv)。** 一行一个作品，只追加、不修改、不删除。同一个作品出现多行时，靠前的那行有效。
 
 每一轮按这个顺序做：
 
 ```bash
 git pull --rebase origin main                                   # 1 先同步
-# 2 把本轮找到的链接写进自己的候选文件 data_intake/B1/candidates_dot_01.csv
-python data_intake/B1/claim.py dot data_intake/B1/candidates_dot_01.csv    # 3 认领
-git add data_intake/B1/claims.csv data_intake/B1/candidates_dot_01.csv
+# 2 把本轮找到的链接写进本批的候选文件 data_intake/batches/20261125_dot_40/candidates.csv（批次号 日期_名字_序号）
+python data_intake/tools/claim.py dot data_intake/batches/20261125_dot_40/candidates.csv    # 3 认领
+git add data_intake/ledger/claims.csv data_intake/batches/20261125_dot_40/candidates.csv
 git commit -m "认领：dot 第01轮" && git push origin main          # 4 立刻推到 main
 ```
 
 - 第 3 步会自动跳过三类作品：对方已认领的、历史上已判断过的、已在库内的。
-- 第 4 步推送被拒，说明对方刚推过。执行 `git pull --rebase origin main` 后再推即可，登记表会自动合并。然后运行 `python data_intake/B1/claim.py --check`，它会列出两边撞车的作品和归属，排在后面的一方放弃。
+- 第 4 步推送被拒，说明对方刚推过。执行 `git pull --rebase origin main` 后再推即可，登记表会自动合并。然后运行 `python data_intake/tools/claim.py --check`，它会列出两边撞车的作品和归属，排在后面的一方放弃。
 - **认领推送成功之后才能开始抓取和判断。** 只处理归自己的作品。
 
 各写各的文件，互不触碰：
 
 | 内容 | dot 写 | duet 写 |
 |---|---|---|
-| 候选链接 | `B1/candidates_dot_NN.csv` | `B1/candidates_duet_NN.csv` |
-| 筛选判断 | `B1/screening_dot.csv` | `B1/screening_duet.csv` |
-| 源码 | `B1/raw/` 下自己认领的作品目录 | 同左 |
+| 候选链接 | `batches/<日期>_dot_<NN>/candidates.csv` | `batches/<日期>_duet_<NN>/candidates.csv` |
+| 筛选判断 | 同批目录的 `screening.csv` | 同左 |
+| 源码 | `pending/` 下自己认领的作品目录 | 同左 |
 
-- 旧的 `B1/screening.csv` 和 `B1/candidates*.csv`（不带名字的）是历史记录，两人都只读不写。
+- `archive/` 下是早期历史记录（旧筛选表、旧候选表、旧脚本、dot 各分支里的批次记录），两人都只读不写。
 - 默认搜索分工，减少撞车：**dot 主找 T1、T2、T6；duet 主找 T4、T5、T3。** 这只是搜索方向。顺手发现对方方向的好作品照样可以认领，谁先登记归谁。
 - 不重判对方的作品。对对方的结论有不同看法时，写在自己的批次说明里，由用户裁决，不要改对方的文件。
-- `B1/raw/` 里历史留下的 24 份暂留候选（`screening.csv` 中的 hold）不属于任何一方，用户指派后再处理。
+- `pending/` 里有 233 份待用户判定的源码：约 210 份来自 dot 的空间关系候选（审核清单见 `review_lists/20261121_dot/`），另有早期 24 份暂留候选。这些都不属于任何一方，用户标 1 后才入库。
 - **所有提交都直接推 `main`**（认领、抓取、筛选、清单），不再为每批新建分支和 PR。每次提交前先 `git pull --rebase origin main`；一次提交只做一件事；不强推。
 
 ## 2. 整条路径与云端范围
 
 | 步 | 内容 | 产出 | 云端做吗 |
 |---|---|---|---|
-| 1 发现并认领 | 网页搜索，收集 CodePen 链接，登记到公共表 | `B1/candidates_<名字>_NN.csv`、`B1/claims.csv` | 做 |
-| 2 获取 | 经 cdpn.io 抓编译后的 HTML+CSS | `B1/raw/{作者}__{ID}/` | 做 |
-| 3 汇总 | 生成一张源码规模与特性表 | `B1/triage.csv` | 做 |
-| 4 筛选 | 读源码、看渲染，定档位、难度特征、JS 处理、去留 | `B1/screening_<名字>.csv` | 做 |
+| 1 发现并认领 | 网页搜索，收集 CodePen 链接，登记到公共表 | `batches/<批次>/candidates.csv`、`ledger/claims.csv` | 做 |
+| 2 获取 | 经 cdpn.io 抓编译后的 HTML+CSS | `pending/{作者}__{ID}/` | 做 |
+| 3 汇总 | 生成一张源码规模与特性表 | `triage.csv`（本地辅助） | 做 |
+| 4 筛选 | 读源码、看渲染，定档位、难度特征、JS 处理、去留 | `batches/<批次>/screening.csv` | 做 |
 | **检查点 A** | **用户从“建议入库”里挑选** | — | **停在这里** |
 | 5 入库 | 分配案例编号（从 `case-228` 起），生成案例目录，写台账 | `cases/case-NNN-TX/`、`cases/registry.csv` | **dot 执行，由用户触发** |
 | 6 加工 | 写 input、GT、规则草稿，GT 自检 | 案例目录 | **duet 执行**，见 [cases/README.md](../cases/README.md) |
@@ -69,9 +69,9 @@ git commit -m "认领：dot 第01轮" && git push origin main          # 4 立�
 
 ## 3. 当前进度
 
-- 实时进度看 [cases/INDEX.md](../cases/INDEX.md)（已入库案例）和认领表 `B1/claims.csv`。历史进度见 [B1 进度](B1/STATUS.md)，只供追溯。
+- 实时进度看 [cases/INDEX.md](../cases/INDEX.md)（已入库案例）、候选状态表 [ledger/review.csv](ledger/review.csv) 和认领表 `ledger/claims.csv`。早期进度见 [archive/STATUS.md](archive/STATUS.md)，只供追溯。
 - 主仓库已有案例 `case-001`—`227`。dot 已收集约 300 个“空间关系”候选，审核清单在 [review_lists/20261121_dot/](review_lists/20261121_dot/)，**用户正在审核，任何人不得移动、改名、删除或覆盖其中的文件**。
-- `B1/raw/` 里还留着 24 份旧暂留候选的源码，不必重抓。
+- 已入库案例 `case-228`—`254`（27 个，来自 dot 的空间关系首轮与追加审核）；其余候选的状态见 `ledger/review.csv`（pending/reserve/hold/rejected 等）。
 - 库内现有数量（名义值，部分旧案例不合格）：T1 11、T2 43、T3 55、T4 12、T5 49、T6 50。目标各 75，共 450；T4 不设硬目标。
 - **档位优先级：T1 和 T4 最缺；其次 T5、T6、T2、T3。** 不为凑数降低标准。
 - **题材优先级：多收网页类，其次 CSS 动画类，少收小游戏类。** 详见第 6.7 节。
@@ -88,14 +88,14 @@ export PYTHONUTF8=1
 ```
 
 - 网络要能访问 `cdpn.io`（抓源码）和搜索引擎。`codepen.io` 本身有 Cloudflare 验证，不要去抓，也不要尝试绕过验证。
-- 抓取脚本只用标准库；只有截图脚本 `B1/shot.py` 需要 Playwright。
+- 抓取脚本只用标准库；只有截图脚本 `tools/shot.py` 需要 Playwright。
 - 以下命令都在仓库根目录执行。
 
 ## 5. 步骤
 
 ### 第 1 步：发现候选
 
-用网页搜索找链接，写入自己的新文件 `data_intake/B1/candidates_<名字>_01.csv`（之后递增），三列：
+用网页搜索找链接，写入本批的新文件 `data_intake/batches/<日期>_<名字>_<NN>/candidates.csv`（序号递增），三列：
 
 ```csv
 url,target_tier,found_via
@@ -113,39 +113,39 @@ https://codepen.io/作者/pen/ID,T4,websearch-2026-11-10
 只抓归自己的作品：
 
 ```bash
-python data_intake/B1/claim.py --owned dot > /tmp/owned_dot.csv
-python scripts/codepen_collection/fetch_cdpn.py --candidates /tmp/owned_dot.csv --out data_intake/B1/raw
+python data_intake/tools/claim.py --owned dot > /tmp/owned_dot.csv
+python scripts/codepen_collection/fetch_cdpn.py --candidates /tmp/owned_dot.csv --out data_intake/pending
 ```
 
 - 脚本请求 `https://cdpn.io/{作者}/fullpage/{ID}`，默认每 2 秒一次，不要调快。
 - 每个作品得到 `original_srcdoc.html`（原样）、`source.html`（去掉 CodePen 样板脚本）、`metadata.json`（作者、链接、时间、哈希、JS 与 CSS 特性标注）。
 - 自动跳过三种情况：已在库内的作品（主仓库 `reference/dedupe_index.csv` 与本仓库 `cases/`）、本目录已抓过的作品、取不到源码的页面。
 - 脚本**只标注** JS 和外部资源，不因为有 JS、外部图片或外链就丢弃。
-- 每次运行的记录追加在 `B1/raw/fetch_log.jsonl`。
+- 每次运行的记录追加在 `pending/fetch_log.jsonl`。
 
 ### 第 3 步：汇总
 
 ```bash
-python data_intake/B1/triage.py
+python data_intake/tools/triage.py
 ```
 
-输出 `B1/triage.csv`：每个候选的 JS 字符数、CSS 字符数、元素数、keyframes 数、命中的 CSS 特性。用它先排掉明显太小的作品（元素很少、CSS 很短的单组件）。这张表每次按 `raw/` 现有内容整张重写，是本地辅助文件，不入库、不提交。
+输出 `data_intake/triage.csv`：每个候选的 JS 字符数、CSS 字符数、元素数、keyframes 数、命中的 CSS 特性。用它先排掉明显太小的作品（元素很少、CSS 很短的单组件）。这张表每次按 `raw/` 现有内容整张重写，是本地辅助文件，不入库、不提交。
 
 ### 第 4 步：逐个筛选
 
 每个候选都要看源码，拿不准的要看渲染结果：
 
 ```bash
-python data_intake/B1/peek.py 作者__ID            # 压缩后的 CSS 与正文文字；加 --js 看脚本
-python data_intake/B1/shot.py data_intake/B1/raw/作者__ID/source.html /tmp/shots/作者__ID --widths=1280,375
+python data_intake/tools/peek.py 作者__ID            # 压缩后的 CSS 与正文文字；加 --js 看脚本
+python data_intake/tools/shot.py data_intake/pending/作者__ID/source.html /tmp/shots/作者__ID --widths=1280,375
 ```
 
-判断完用 `decide.py` 记一行（同一个 key 再记一次会覆盖旧行）。先设好自己的名字，记录会写进 `screening_<名字>.csv`；不是自己认领的作品会被拒绝：
+判断完用 `decide.py` 记一行（同一个 key 再记一次会覆盖旧行）。先设好自己的名字，记录会写进 `batches/<批次>/screening.csv`（批次用环境变量 `COLLECT_BATCH` 指定，默认今天的 `_01`）；不是自己认领的作品会被拒绝：
 
 ```bash
 export COLLECT_AGENT=dot
-python data_intake/B1/decide.py KEY DECISION TIER HITS REASON "证据" "备注" JS_POLICY   # JS_POLICY 填 none（无 JS）或 preserve（含 JS，原样保留）
-python data_intake/B1/decide.py una__myJOjQx accept T4 H2,H4,H6,H8 - "横向吸附日卡片；scroll-state(snapped)联动当前卡片；counter生成天数编号" "外部图标字体需替换" none
+python data_intake/tools/decide.py KEY DECISION TIER HITS REASON "证据" "备注" JS_POLICY   # JS_POLICY 填 none（无 JS）或 preserve（含 JS，原样保留）
+python data_intake/tools/decide.py una__myJOjQx accept T4 H2,H4,H6,H8 - "横向吸附日卡片；scroll-state(snapped)联动当前卡片；counter生成天数编号" "外部图标字体需替换" none
 ```
 
 - `DECISION`：`accept`（建议入库，等用户挑）、`reject`、`hold`（合格但属于后续批次，或需再细看）。
@@ -246,7 +246,7 @@ JS、外部字体、外部图片、普通链接都已放开，**原样保留**�
 
 ## 7. 交付
 
-- 所有提交直接推 `main`（见第 1.5 节）。你的改动只应出现在：自己的 `B1/candidates_<名字>_NN.csv`、`B1/screening_<名字>.csv`、`B1/raw/` 下自己认领的作品目录、`B1/raw/fetch_log.jsonl`、给用户看的清单目录 `review_lists/<日期>_<名字>/`。
+- 所有提交直接推 `main`（见第 1.5 节）。你的改动只应出现在：自己的 `batches/` 下本批目录、`pending/` 下自己认领的作品目录、`pending/fetch_log.jsonl`、`ledger/claims.csv`、给用户看的清单目录 `review_lists/<日期>_<名字>/`。
 - 每轮写一份清单交用户挑选：新增候选数、抓取成功与失败数、各原因码数量、建议入库清单（链接、档位、命中特征、**为什么难**、已核验与未核验的范围）、没做完的部分。
 - 宁可少报。每轮建议入库控制在 10 例以内，方便用户逐个看。
 - 用户标 1 之后才入库；标 0 的只留原作链接，不删。

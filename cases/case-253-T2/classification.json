@@ -1,0 +1,16 @@
+{
+  "review_id": "C042",
+  "case_id": "case-253-T2",
+  "tier": "T2",
+  "spatial_feature": "机械键盘、错排立体键帽",
+  "evidence": "机械键盘、错排立体键帽。沿用候选归档的桌面默认画面核验；不新增交互、移动端或离线核验结论。",
+  "decision": "accept",
+  "confirmation": {
+    "batch": "追加审核 C031–C050",
+    "value": 1,
+    "date": "2026-11-21"
+  },
+  "qualification_note": "未分配主项目正式编号、未强定档；视觉核验范围沿用采集记录。",
+  "tier_basis": "键盘按下/松开的瞬时反馈（React，自 esm.sh 引入），类比悬停自反馈；也可归 T3，待用户抽查（按难度模型 v2.1 的驱动方式判定；JS 驱动按等价的 CSS 驱动类比）",
+  "tier_assigned_by": "Claude，本地入库时（2026-11-24），待用户抽查"
+}

@@ -1,0 +1,69 @@
+{
+  "source_id": "codepen:yusukenakaya/zadzxl",
+  "author": "YusukeNakaya",
+  "pen_id": "ZadZxL",
+  "url": "https://codepen.io/YusukeNakaya/pen/ZadZxL",
+  "acquisition": "cdpn_fullpage",
+  "acquisition_url": "https://cdpn.io/YusukeNakaya/fullpage/ZadZxL",
+  "retrieved_at": "2026-11-19T18:14:14+00:00",
+  "license": "未单独核验；外链资源许可另查",
+  "fetch_status": "ok",
+  "title": "Only CSS: Showcase Car",
+  "canonical_url": "https://codepen.io/YusukeNakaya/pen/ZadZxL",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "57415114f73996d941568009004a9da51e8ea7359ef4eb60d57eb7216a6b91ce",
+  "source_html_sha256": "73a040fe8945160348367be715a5730a3f84d675b281482f4c0ef88d3c80b04d",
+  "analysis": {
+    "js": {
+      "has_js": false,
+      "inline_js_chars": 0,
+      "external_scripts": [],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 1,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": true,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": true,
+      "clip_path": true,
+      "css_counter": false,
+      "media_query": false
+    },
+    "external_stylesheets": [
+      "https://public.codepenassets.com/css/normalize-5.0.0.min.css",
+      "https://fonts.googleapis.com/css?family=Encode+Sans+Condensed"
+    ],
+    "css_imports": [],
+    "css_chars": 20058,
+    "element_count": 111,
+    "html_chars": 26480
+  },
+  "review": {
+    "label": "车门、前盖与车舱",
+    "status": "优先·半动态",
+    "reference_case": "224 / 227",
+    "evidence": "实测默认和同时勾选 BONNET、DOOR：前盖抬升露出下面暗色表面，两侧门翼向外，前轮及蓝色车窗与车体发生遮挡。两开关状态可保持，但车体默认自动旋转，需固定同一朝向再对照；其余 12 个控件未验证。",
+    "visual_verified": true,
+    "surface": "Cloud Chrome, cdpn.io public preview, 1331×894 desktop including preview banner; no mobile check",
+    "formal_admission": false
+  }
+}

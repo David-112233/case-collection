@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title> CSS Space</title>
+
+    <link rel="canonical" href="https://codepen.io/celiarozalenm/pen/GmVWbv">
+  
+  
+  
+  
+<style>
+body, html, .stars {
+  height: 100%;
+  width: 100%;
+  background: #303955;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+body div, body div:after, body div:before, html div, html div:after, html div:before, .stars div, .stars div:after, .stars div:before {
+  position: absolute;
+}
+body .astronaut, html .astronaut, .stars .astronaut {
+  position: absolute;
+  left: 200px;
+  top: 35%;
+  left: 50%;
+  width: 70px;
+  height: 200px;
+  transform: translate(-50%, -50%);
+  animation: astronaut alternate 25s cubic-bezier(0.37, 0.44, 0.53, 0.59) 0s infinite;
+}
+body .astronaut div, body .astronaut div:after, body .astronaut div:before, html .astronaut div, html .astronaut div:after, html .astronaut div:before, .stars .astronaut div, .stars .astronaut div:after, .stars .astronaut div:before {
+  background: white;
+}
+body .astronaut .head, html .astronaut .head, .stars .astronaut .head {
+  width: 75px;
+  height: 65px;
+  border-radius: 80px/65px;
+  top: -3px;
+  left: -2px;
+}
+body .astronaut .head:before, html .astronaut .head:before, .stars .astronaut .head:before {
+  content: "";
+  width: 55px;
+  height: 40px;
+  background: #213f5b;
+  border-radius: 100px/80px;
+  top: 17px;
+  left: 10px;
+  box-shadow: inset -5px -5px 0 rgba(225, 225, 225, 0.75);
+}
+body .astronaut .head:after, html .astronaut .head:after, .stars .astronaut .head:after {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 100%;
+  top: 30px;
+  left: 20px;
+  background: white;
+  box-shadow: 5px -7px 0 -1.5px white;
+}
+body .astronaut .body, html .astronaut .body, .stars .astronaut .body {
+  border-bottom: 62px solid white;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  height: 0;
+  width: 45px;
+  top: 65px;
+  left: 6px;
+  border-radius: 5px;
+  background: transparent;
+}
+body .astronaut .body:before, html .astronaut .body:before, .stars .astronaut .body:before {
+  content: "";
+  background: #B14B4F;
+  width: 50px;
+  height: 7px;
+  top: -5px;
+  left: -2px;
+  border-radius: 10px;
+  box-shadow: -8px 60px 0 1px #B14B4F, 8px 60px 0 1px #B14B4F;
+}
+body .astronaut .body:after, html .astronaut .body:after, .stars .astronaut .body:after {
+  content: "";
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-left: 25px solid #ecb28a;
+  background: #a4d2a4;
+  top: 15px;
+  left: 10px;
+}
+body .astronaut .arms, body .astronaut .arms:before, html .astronaut .arms, html .astronaut .arms:before, .stars .astronaut .arms, .stars .astronaut .arms:before {
+  width: 60px;
+  height: 15px;
+  border-radius: 5px;
+  transform: rotate(20deg);
+  top: 60px;
+  left: -40px;
+  background-image: linear-gradient(to left, transparent 44px, #C0636A 0, #C0636A 50px, transparent 48px);
+  background-position: 0 20px;
+}
+body .astronaut .arms:before, html .astronaut .arms:before, .stars .astronaut .arms:before {
+  background-image: linear-gradient(to right, transparent 44px, #C0636A 0, #C0636A 50px, transparent 48px);
+  content: "";
+  left: 86px;
+  top: -32px;
+  transform: rotate(-40deg);
+}
+body .astronaut .hands, body .astronaut .hands:before, html .astronaut .hands, html .astronaut .hands:before, .stars .astronaut .hands, .stars .astronaut .hands:before {
+  height: 10px;
+  width: 20px;
+  border-radius: 10px;
+  background: white;
+  top: -4px;
+  left: -13px;
+  transform: rotate(20deg);
+  box-shadow: 5px 6px 0 -1px white;
+}
+body .astronaut .hands:before, html .astronaut .hands:before, .stars .astronaut .hands:before {
+  content: "";
+  left: 115px;
+  top: -96px;
+  transform: rotate(100deg);
+  background: white;
+  box-shadow: 5px -5px 0 -1px white;
+}
+body .astronaut .legs, body .astronaut .legs:before, html .astronaut .legs, html .astronaut .legs:before, .stars .astronaut .legs, .stars .astronaut .legs:before {
+  width: 20px;
+  height: 80px;
+  top: 120px;
+  left: 5px;
+  border-radius: 10px;
+  z-index: -2;
+  transform: rotate(10deg);
+  background-image: linear-gradient(to top, transparent 10px, #71B4D2 10px, #71B4D2 15px, transparent 15px, transparent 25px, #C0636A 24px, #C0636A 15px);
+  background-size: 1px 30px;
+  background-position: 0 60px;
+}
+body .astronaut .legs:before, html .astronaut .legs:before, .stars .astronaut .legs:before {
+  content: "";
+  left: 40px;
+  top: -8px;
+  transform: rotate(160deg);
+  background-position: 0 44px;
+}
+body .astronaut .feet, body .astronaut .feet:before, html .astronaut .feet, html .astronaut .feet:before, .stars .astronaut .feet, .stars .astronaut .feet:before {
+  width: 35px;
+  height: 15px;
+  top: 65px;
+  left: -15px;
+  border-radius: 10px 0 3px 4px;
+}
+body .astronaut .feet:before, html .astronaut .feet:before, .stars .astronaut .feet:before {
+  content: "";
+  top: -12px;
+  left: 67px;
+  transform: rotate(-20deg);
+  border-radius: 0 10px 3px 6px;
+}
+
+.stars {
+  background-repeat: no-repeat;
+  background-image: radial-gradient(circle, rgba(250, 250, 250, 0.8) 50%, transparent 50%), radial-gradient(circle, rgba(250, 250, 250, 0.2) 50%, transparent 50%), radial-gradient(circle, rgba(250, 250, 250, 0.5) 50%, transparent 50%), radial-gradient(circle, rgba(250, 250, 250, 0.4) 50%, transparent 50%), radial-gradient(circle, rgba(250, 250, 250, 0.7) 50%, transparent 50%), radial-gradient(circle, rgba(250, 250, 250, 0.8) 50%, transparent 50%), radial-gradient(circle, rgba(250, 250, 250, 0.4) 50%, transparent 50%), radial-gradient(circle, rgba(250, 250, 250, 0.6) 50%, transparent 50%), radial-gradient(circle, rgba(250, 250, 250, 0.5) 50%, transparent 50%);
+  background-size: 20px 20px, 10px 10px, 20px 20px, 20px 20px, 20px 20px, 15px 15px, 11px 11px, 22px 22px, 8px 8px;
+  background-position: 60% 20%, 20% 80%, 90% 70%, 25% 48%, 55% 75%, 30% 40%, 50% 60%, 80% 35%, 10% 20%;
+}
+.stars .saturn {
+  left: 80%;
+  top: 70%;
+  width: 70px;
+  height: 70px;
+  border-radius: 100%;
+  background: #807395;
+  z-index: 10;
+  box-shadow: inset -12px 4px 0 0 rgba(80, 88, 102, 0.37);
+  transform: rotate(-10deg);
+}
+.stars .saturn:before {
+  content: "";
+  width: 100px;
+  height: 18px;
+  top: 18px;
+  left: -25px;
+  border: 10px solid #adbf97;
+  border-radius: 120px/50px;
+  z-index: 1;
+}
+.stars .saturn:after {
+  content: "";
+  width: 70px;
+  height: 40px;
+  background-color: #807395;
+  border-top-left-radius: 120px;
+  border-top-right-radius: 120px;
+  border-bottom: 0;
+  z-index: 1;
+  box-shadow: inset -12px 0 0 0 rgba(80, 88, 102, 0.37);
+}
+.stars .jupiter {
+  top: 65%;
+  left: 20%;
+  width: 120px;
+  height: 120px;
+  background: #f2a822;
+  border-radius: 100%;
+  box-shadow: inset -23px -8px 0 0 rgba(80, 88, 102, 0.37);
+  background-image: repeating-linear-gradient(to bottom, transparent 5px, #D87658 5px, #D87658 12px, #eed37b 11px, #eed37b 20px, #eebc31 17px, #eebc31 34px, #db6a6a 31px, #db6a6a 41px, #b46161 41px, #b46161 48px, transparent 44px);
+  background-size: 9px 59px;
+  background-position: 0 11px;
+}
+.stars .jupiter:before {
+  content: "";
+  top: 120%;
+  left: 415%;
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  background: #538dae;
+  box-shadow: inset -10px -4px 0 0 rgba(80, 88, 102, 0.37);
+}
+.stars .jupiter:after {
+  content: "";
+  left: 595%;
+  top: -210%;
+  width: 70px;
+  height: 70px;
+  border-radius: 100%;
+  background: #60916e;
+  box-shadow: inset -15px -5px 0 0 rgba(80, 88, 102, 0.37);
+}
+.stars .moon {
+  top: 10%;
+  left: 30%;
+  width: 180px;
+  height: 180px;
+  border-radius: 100%;
+  background: #658897;
+  box-shadow: inset -23px -13px 0 0 rgba(80, 88, 102, 0.37);
+}
+.stars .moon:before {
+  content: "";
+  background: #4d5d6e;
+  border-radius: 100%;
+  width: 20px;
+  height: 20px;
+  top: 40px;
+  left: 20px;
+  box-shadow: inset -4px -3px 0 0 #344359, 58px 10px 0 -4px #4d5d6e, 59px 10px 0 -3px #344359, 63px 35px 0 -6px #4d5d6e, 64px 35px 0 -5px #344359, 13px 45px 0 -7px #4d5d6e, 14px 45px 0 -6px #344359, -9px 30px 0 -8px #4d5d6e, -8px 31px 0 -7px #344359, 9px 28px 0 -9px #4d5d6e, 8px 29px 0 -8px #344359, 19px 18px 0 -7px #4d5d6e, 19px 19px 0 -6px #344359, 88px 78px 0 -4px #4d5d6e, 89px 78px 0 -3px #344359, 38px 68px 0 -2px #4d5d6e, 39px 68px 0 -1px #344359, 99px -6px 0 -6px #4d5d6e, 99px -5px 0 -5px #344359, 63px -35px 0 -6px #4d5d6e, 64px -35px 0 -5px #344359, 9px 95px 0 -9px #4d5d6e, 8px 96px 0 -8px #344359, 67px 115px 0 -8px #4d5d6e, 68px 116px 0 -7px #344359, 105px 50px 0 -5px #4d5d6e, 106px 50px 0 -4px #344359;
+}
+.stars .meteorite {
+  width: 100px;
+  height: 80px;
+  background: #ea7f22;
+  border-radius: 65px/65px;
+  box-shadow: 26px -32px 0 -32px #ea7f22, 50px -32px 0 -32px #ea7f22, 74px -32px 0 -32px #ea7f22, 98px -32px 0 -32px #ea7f22, 50px -15px 0 -37px #ea7f22, 73px -15px 0 -37px #ea7f22, 96px -15px 0 -37px #ea7f22, 110px -15px 0 -37px #ea7f22, 50px 5px 0 -35px #ea7f22, 73px 5px 0 -35px #ea7f22, 97px 5px 0 -35px #ea7f22, 97px 5px 0 -35px #ea7f22, 56px 20px 0 -38px #ea7f22, 75px 20px 0 -38px #ea7f22, 96px 20px 0 -38px #ea7f22, 110px 20px 0 -38px #ea7f22, 131px 20px 0 -38px #ea7f22, 26px 35px 0 -35px #ea7f22, 50px 35px 0 -35px #ea7f22, 73px 35px 0 -35px #ea7f22, 97px 35px 0 -35px #ea7f22, 97px 35px 0 -35px #ea7f22, 120px 35px 0 -35px #ea7f22;
+  z-index: 20;
+  top: 20%;
+  left: 300px;
+  animation: meteorite 10s ease-out 0s infinite;
+}
+.stars .meteorite:before {
+  content: "";
+  top: 10px;
+  left: 10px;
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  background: #bc3939;
+  z-index: -1;
+}
+
+@keyframes astronaut {
+  0% {
+    transform: rotate(20deg);
+    left: -15%;
+  }
+  50% {
+    left: 110%;
+  }
+  100% {
+    transform: rotate(780deg);
+    left: -15%;
+  }
+}
+@keyframes meteorite {
+  0% {
+    left: 115%;
+  }
+  15% {
+    transform: rotate(0deg);
+    left: -25%;
+    top: 10%;
+  }
+  50% {
+    transform: rotate(180deg);
+    top: 80%;
+  }
+  51% {
+    left: -25%;
+  }
+  65% {
+    transform: rotate(180deg);
+    left: 115%;
+  }
+  100% {
+    transform: rotate(180deg);
+    left: 115%;
+  }
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <div class="stars">
+  <div class="saturn"></div>
+  <div class="jupiter"></div>
+  <div class="moon"></div>
+  <div class="meteorite"></div>
+</div>
+<div class="astronaut">
+  <div class="head"></div>
+  <div class="body"></div>
+  <div class="arms">
+    <div class="hands"></div>
+  </div>
+  <div class="legs">
+    <div class="feet"></div>
+  </div>
+</div>
+  
+  
+  
+</body>
+
+</html>

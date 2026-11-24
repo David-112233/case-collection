@@ -1,0 +1,74 @@
+{
+  "source_id": "codepen:petebarr/baymywg",
+  "author": "petebarr",
+  "pen_id": "BaymYWg",
+  "url": "https://codepen.io/petebarr/pen/BaymYWg",
+  "acquisition": "cdpn_fullpage",
+  "acquisition_url": "https://cdpn.io/petebarr/fullpage/BaymYWg",
+  "retrieved_at": "2026-11-19T01:12:26+00:00",
+  "license": "未单独核验；外链资源许可另查",
+  "candidate_target_tier": "T6",
+  "candidate_found_via": "public web search: occlusion and interlocking design",
+  "fetch_status": "ok",
+  "title": "The Jam - Swissted",
+  "canonical_url": "https://codepen.io/petebarr/pen/BaymYWg",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "1701630db9f62e4ca15b1662ae71892e7733f5ffc549ae14b09cd682759cb755",
+  "source_html_sha256": "3218a309c0d6b7a8ebdc2219ad4a0373215198f6c2fc98d8639826192235339c",
+  "analysis": {
+    "js": {
+      "has_js": true,
+      "inline_js_chars": 1456,
+      "external_scripts": [
+        "https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js",
+        "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.0.4/gsap.min.js"
+      ],
+      "inline_event_handlers": 0,
+      "has_gsap": true,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 0,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": false,
+      "clip_path": false,
+      "css_counter": false,
+      "media_query": false
+    },
+    "external_stylesheets": [
+      "https://use.typekit.net/jep3kms.css",
+      "https://public.codepenassets.com/css/normalize-5.0.0.min.css"
+    ],
+    "css_imports": [],
+    "css_chars": 1285,
+    "element_count": 28,
+    "html_chars": 7226
+  },
+  "review": {
+    "label": "Swissted JAM 排字海报",
+    "status": "推荐审核",
+    "reference_case": "213/227",
+    "evidence": "黑白巨大字形在红底上相互穿插并由海报边缘裁切；实见进场后的完整字形和文字区，未测试交互或窄屏。",
+    "visual_verified": true,
+    "surface": "Cloud Chromium, CodePen Full Page default or stated interaction; desktop only",
+    "formal_admission": false
+  }
+}

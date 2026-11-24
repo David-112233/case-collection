@@ -1,0 +1,16 @@
+{
+  "review_id": "C033",
+  "case_id": "case-245-T2",
+  "tier": "T2",
+  "spatial_feature": "埃舍尔方块、桥面穿插",
+  "evidence": "埃舍尔方块、桥面穿插。沿用候选归档的桌面默认画面核验；不新增交互、移动端或离线核验结论。",
+  "decision": "accept",
+  "confirmation": {
+    "batch": "追加审核 C031–C050",
+    "value": 1,
+    "date": "2026-11-21"
+  },
+  "qualification_note": "未分配主项目正式编号、未强定档；视觉核验范围沿用采集记录。",
+  "tier_basis": "悬停与聚焦自反馈加一个关键帧动画；元素约 1579 个，规模大（按难度模型 v2.1 的驱动方式判定；JS 驱动按等价的 CSS 驱动类比）",
+  "tier_assigned_by": "Claude，本地入库时（2026-11-24），待用户抽查"
+}

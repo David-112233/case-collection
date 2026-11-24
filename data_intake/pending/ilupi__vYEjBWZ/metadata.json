@@ -1,0 +1,71 @@
+{
+  "source_id": "codepen:ilupi/vyejbwz",
+  "author": "ilupi",
+  "pen_id": "vYEjBWZ",
+  "url": "https://codepen.io/ilupi/pen/vYEjBWZ",
+  "acquisition": "cdpn_fullpage",
+  "acquisition_url": "https://cdpn.io/ilupi/fullpage/vYEjBWZ",
+  "retrieved_at": "2026-11-19T02:18:04+00:00",
+  "license": "未单独核验；外链资源许可另查",
+  "candidate_target_tier": "unclassified",
+  "candidate_found_via": "spatial cutaways and layering public search",
+  "fetch_status": "ok",
+  "title": "Simple House 3D CSS",
+  "canonical_url": "https://codepen.io/ilupi/pen/vYEjBWZ",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "184e423720fd60ae9936398d1a83f00b8198139b34371d3841b90a9ebd2497c4",
+  "source_html_sha256": "e477ad3b9242fff5df890c9641ae8167292fd03c8d0d51d8ede445cf845c5679",
+  "analysis": {
+    "js": {
+      "has_js": true,
+      "inline_js_chars": 126,
+      "external_scripts": [
+        "https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js",
+        "https://codepen.io/rukh/pen/EVBBVo.js"
+      ],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 0,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": true,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": true,
+      "clip_path": false,
+      "css_counter": false,
+      "media_query": false
+    },
+    "external_stylesheets": [],
+    "css_imports": [],
+    "css_chars": 3031,
+    "element_count": 35,
+    "html_chars": 5732
+  },
+  "review": {
+    "label": "门窗镂空的无顶房",
+    "status": "优先",
+    "reference_case": "224",
+    "evidence": "默认一帧可见前后山墙、侧墙和底板的封闭关系，门窗真空洞揭露背后地面或背景；形体朴素，未验证其他视角。",
+    "visual_verified": true,
+    "surface": "Cloud Chromium, CodePen Full Page default or stated interaction; desktop only",
+    "formal_admission": false
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "scheduled_for": "2026-11-20T14:12:24Z",
+  "count": 2,
+  "rows": [
+    {
+      "id": "C274",
+      "slug": "blackhole",
+      "title": "Black hole",
+      "feature": "倾斜吸积盘、明暗互遮、背后光环",
+      "evidence": "暂停下近侧斜盘掠过黑色中心前部，远侧被中心遮住，竖直光环分别从中心上下露出；旋转只是纹理变化。",
+      "url": "https://css3dlab.edgarasneverdauskas.com/models/blackhole/",
+      "archive_id": "Evirtual__blackhole",
+      "source": "https://github.com/Evirtual/css-3d-lab/blob/88d044dd0c84baa94f27967f5991b7327fb44317/src/models/snippets-batch-o-blackhole.ts",
+      "source_blob": "2f631a4f56ded986661a5d9bd58fdab2c9fb54fa"
+    },
+    {
+      "id": "C275",
+      "slug": "campfire",
+      "title": "Campfire",
+      "feature": "交叠木柴、交叉火焰、石圈落地",
+      "evidence": "暂停下木柴以不同倾角互相盖住，前方横木挡住火焰下缘，后方木柴伸到火焰背后；外围石头落于同一底面。仅评价一帧，地面转动与火苗闪烁不计。",
+      "url": "https://css3dlab.edgarasneverdauskas.com/models/campfire/",
+      "archive_id": "Evirtual__campfire",
+      "source": "https://github.com/Evirtual/css-3d-lab/blob/88d044dd0c84baa94f27967f5991b7327fb44317/src/models/snippets-batch-n-campfire.ts",
+      "source_blob": "32c4b19efbb2e05ea0b0faeb9c1fdc00e4240d03"
+    }
+  ],
+  "checks": [
+    "Cloud desktop author preview verified after using per-preview Pause, showing coherent fixed geometry. No mobile/offline replay tests.",
+    "New exact URLs and repository archive IDs compared against canonical candidate/reserve index, main claims/catalog and open draft paths."
+  ]
+}

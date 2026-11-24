@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>Impossible Waterfall Illusion - Pure CSS</title>
+
+    <link rel="canonical" href="https://codepen.io/josetxu/pen/PoaQMgO">
+  
+  
+  
+  
+<style>
+* {
+	transform-style: preserve-3d;
+	box-sizing: border-box;
+}
+		
+body {
+	margin: 0;
+	padding: 0;
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	perspective: 1000vmin;
+	background: radial-gradient(circle at 50% 50%, #333, #021320);
+	cursor: zoom-in;
+}
+
+body:active .scene {
+    transform: scale3d(1.35, 1.35, 1.35);
+    transition: all 1s ease 0s;
+}
+
+.scene {
+    width: 50vmin;
+    height: 50vmin;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 1s ease 0s;
+}
+
+.content {
+	width: 50vmin;
+    height: 50vmin;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotateX(-27.25deg) rotateY(-48.75deg) rotateZ(0deg);
+	transition: all 1s ease 0s;
+    margin-top: -20vmin;
+	animation: back-scene 1s linear 0s 1;
+}
+
+.content:hover {
+	animation: spin-scene 20s linear 0s infinite;
+}
+
+@keyframes spin-scene {
+	0% { transform: rotateX(-27.25deg) rotateY(-48.75deg) rotateZ(0deg); }
+	100% { transform: rotateX(-27.25deg) rotateY(-408.75deg) rotateZ(0deg); }
+}
+
+@keyframes back-scene {
+	0%, 100% { transform: rotateX(-27.25deg) rotateY(-48.75deg) rotateZ(0deg); }
+	25% { transform: rotateX(-27.25deg) rotateY(-52.75deg) rotateZ(0deg); }
+	50% { transform: rotateX(-27.25deg) rotateY(-46.75deg) rotateZ(0deg); }
+	75% { transform: rotateX(-27.25deg) rotateY(-49.75deg) rotateZ(0deg); }
+}
+
+body:active .content {
+	animation-play-state: paused;
+}
+
+.content:before {
+    content: "";
+    position: absolute;
+    width: calc(100% + 4vmin);
+    height: calc(100% + 4vmin);
+    background: green;
+    transform: rotateX(90deg) translateZ(-25.5vmin);
+    border-radius: 1vmin;
+    box-shadow: 0 0 1vmin 0 #0008 inset;
+    background: 
+		radial-gradient(#1c8820 12%, transparent 18%) 0px 0, 
+		radial-gradient(#4caf5080 12%, transparent 18%) 3px 4px, 
+		radial-gradient(#ffffff40 12%, transparent 23%) 0 1px, 
+		radial-gradient(#ffffff30 12%, transparent 23%) 2px 3px;
+    background-color: #298f2c;
+    background-size: 5px 4px;
+}
+
+
+
+/*** CUBOID ***/
+
+.cuboid {
+	--height: 2;
+    --width: 2;
+    --depth: 2;
+	--hue: 200;
+	--sat: 10%;
+	height: calc(var(--height) * 1vmin);
+	width: calc(var(--width) * 1vmin);
+	position: absolute;
+	animation: cube1 0.6s linear 0s infinite;
+	transform: translate3d(0vmin, 0vmin, -5vmin);
+}
+
+.cuboid .side {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	height: 100%;
+	width: 100%;
+	border-radius: 2px;
+	background: hsl(var(--hue), var(--sat), 10%);
+}
+
+.cuboid .side:nth-of-type(1) {
+	transform: translate3d(-50%, -50%, calc(var(--depth) * 0.5vmin));
+	filter: brightness(0.75);
+}
+.cuboid .side:nth-of-type(2) {
+	transform: translate3d(-50%, -50%, calc(var(--depth) * -0.5vmin)) rotateY(180deg);
+}
+.cuboid .side:nth-of-type(3) {
+	width: calc(var(--depth) * 1vmin);
+	transform: translate(-50%, -50%) rotateY(90deg)	translate3d(0, 0, calc(var(--width) * 0.5vmin));
+	filter: brightness(1.5);
+}
+.cuboid .side:nth-of-type(4) {
+	width: calc(var(--depth) * 1vmin);
+	transform: translate(-50%, -50%) rotateY(-90deg) translate3d(0, 0, calc(var(--width) * 0.5vmin));
+	filter: brightness(0.6);
+}
+.cuboid .side:nth-of-type(5) {
+	height: calc(var(--depth) * 1vmin);
+	transform: translate(-50%, -50%) rotateX(90deg)	translate3d(0, 0, calc(var(--height) * 0.5vmin));
+	filter: brightness(2);
+}
+.cuboid .side:nth-of-type(6) {
+	height: calc(var(--depth) * 1vmin);
+	transform: translate(-50%, -50%) rotateX(-90deg) translate3d(0, 0, calc(var(--height) * 0.5vmin));
+	filter: brightness(1.25);
+}
+
+.side:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    --units: 0.25vmin;
+    --brick1: #ef490d;
+    --brick2: #f13500;
+    --lines: #5e5e5e;
+	--brick1: #724f42;
+    --brick2: #795548;
+    --lines: #9b8989;
+    --gp-ln: 50%/ calc(var(--units) * 10) calc(var(--units) * 5);
+    --gp-cn: 50%/ calc(var(--units) * 5) calc(var(--units) * 5);
+    background: repeating-conic-gradient(from 90deg at 95% 55%, var(--lines) 0% 25%, #fff0 0% 100%) var(--gp-cn), repeating-linear-gradient(180deg, var(--lines) 0 5%, #fff0 0 50%, var(--lines) 0 55%, var(--brick2) 0 100% ) var(--gp-ln), repeating-linear-gradient(90deg, var(--brick1) 0 47.5%, var(--lines) 0 50%, var(--brick1) 0 97.5%, var(--lines) 0 100% ) var(--gp-ln);
+    opacity: 0.5;
+}
+
+
+
+/*** BRICKS ***/
+.cuboid.brick-1 {
+    --width: 36.5;
+    transform: translate3d(1.75vmin, 24.45vmin, 22vmin);
+}
+.cuboid.brick-2 {
+    --depth: 32;
+    transform: translate3d(21vmin, 24.45vmin, 7vmin);;
+}
+.cuboid.brick-3 {
+    --width: 29;
+    transform: translate3d(7.5vmin, 24.45vmin, -8vmin);
+}
+.cuboid.brick-4 {
+    --depth: 26;
+    transform: translate3d(-6vmin, 24.45vmin, -20vmin);
+}
+.cuboid.brick-5 {
+    --width: 30;
+    transform: translate3d(-20vmin, 24.45vmin, -33vmin);
+}
+.cuboid.brick-6 {
+    --width: 8.5;
+    transform: translate3d(-19vmin, 24.45vmin, -22.5vmin);
+}
+.cuboid.brick-7 {
+    --depth: 26;
+    transform: translate3d(-15.75vmin, 24.45vmin, -9.5vmin);
+}
+.cuboid.brick-8 {
+    --width: 27;
+    transform: translate3d(-2.5vmin, 24.45vmin, 2.6vmin);
+}
+.cuboid.brick-9 {
+    --depth: 7;
+    transform: translate3d(10vmin, 24.45vmin, 6.5vmin);
+}
+.cuboid.brick-10 {
+    --width: 27;
+    transform: translate3d(-2.5vmin, 24.45vmin, 9.5vmin);
+}
+.cuboid.brick-11 {
+    --depth: 14.5;
+    transform: translate3d(-15.75vmin, 24.45vmin, 15.75vmin);
+}
+
+.cuboid.brick-12 {
+    --depth: 28;
+    transform: translate3d(-15.75vmin, 12.25vmin, -2vmin);
+}
+.cuboid.brick-13 {
+    --depth: 18;
+    transform: translate3d(-4.5vmin, 12.25vmin, 3.1vmin);
+}
+.cuboid.brick-14 {
+    --width: 9;
+    --height: 0.75;
+    transform: translate3d(-10.25vmin, 12.65vmin, 11.5vmin);
+}
+.cuboid.brick-14 .side:nth-of-type(1), 
+.cuboid.brick-14 .side:nth-of-type(5) {
+    background: #2196f3;
+}
+
+.cuboid.brick-15 {
+    --depth: 3;
+    --width: 1;
+    transform: translate3d(-15.75vmin, 24.65vmin, 7vmin);
+}
+
+
+
+/*** COLUMNS ***/
+.cuboid.col-1 {
+    --height: 18;
+    transform: translate3d(21.15vmin, 14.5vmin, -8vmin);
+}
+.cuboid.col-2 {
+    --height: 18;
+    transform: translate3d(21vmin, 14.5vmin, 2vmin);
+}
+.cuboid.col-1 .side:nth-of-type(1),
+.cuboid.col-2 .side:nth-of-type(1) {
+    clip-path: polygon(0 12%, 100% 5%, 100% 100%, 0% 100%);
+}
+.cuboid.col-1 .side:nth-of-type(2),
+.cuboid.col-2 .side:nth-of-type(2) {
+    clip-path: polygon(0 4%, 100% 11.5%, 100% 100%, 0% 100%);
+}
+.cuboid.col-1 .side:nth-of-type(3),
+.cuboid.col-2 .side:nth-of-type(3) {
+   clip-path: polygon(0 4%, 100% 4%, 100% 100%, 0% 100%);
+}
+.cuboid.col-1 .side:nth-of-type(4),
+.cuboid.col-2 .side:nth-of-type(4) {
+   clip-path: polygon(0 12%, 100% 12%, 100% 100%, 0% 100%);
+}
+.cuboid.col-1 .side:nth-of-type(5),
+.cuboid.col-2 .side:nth-of-type(5) {
+    display: none;
+}
+.cuboid.col-3 {
+    --height: 13;
+    transform: translate3d(-15.7vmin, 17.75vmin, 9.5vmin);
+}
+.cuboid.col-4 {
+    --height: 13;
+    transform: translate3d(-4.5vmin, 17.75vmin, 9.5vmin);
+}
+.cuboid.col-4 .side:nth-of-type(3):after {
+    content: "";
+    background: #00000069;
+    width: 1.2vmin;
+    height: 1.2vmin;
+    position: absolute;
+    left: 0.35vmin;
+    top: 52%;
+    border-radius: 100%;
+    border-left: 1px solid #fff8;
+    box-sizing: border-box;
+}
+
+
+
+/*** WATER ***/
+.water {
+    background: #03a9f4;
+    position: absolute;
+    width: 36vmin;
+    height: 11vmin;
+    transform: translate3d(3vmin, 24.75vmin, 16vmin) rotateX(90deg);
+    overflow: hidden;
+}
+.water.one {
+    clip-path: polygon(0% 0%, 72% 0%, 100% 100%, 0 100%, 0 0);
+}
+.water.two {
+    width: 30vmin;
+    height: 11vmin;
+    transform: translate3d(15.5vmin, 24.75vmin, 7.5vmin) rotateX(90deg) rotate(-90deg);
+    clip-path: polygon(0% 0%, 66% 0%, 100% 100%, 0% 100%, 40% 0);
+}
+.water.three {
+    width: 36vmin;
+    height: 11vmin;
+    transform: translate3d(3vmin, 24.75vmin, -2vmin) rotateX(90deg) rotate(180deg);
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 30% 0);
+}
+.water.four {
+    width: 37vmin;
+    height: 11vmin;
+    transform: translate3d(-11vmin, 24.75vmin, -14.5vmin) rotateX(90deg) rotate(-90deg);
+    clip-path: polygon(0 0, 72% 0, 100% 100%, 30% 100%, 2% 0%);
+}
+.water.five {
+    width: 32vmin;
+    height: 11vmin;
+    transform: translate3d(-20vmin, 24.75vmin, -27.5vmin) rotateX(90deg) rotate(180deg);
+    clip-path: polygon(93% 100%, 5% 100%, 35% 0%, 0% 0%, 65% 0%);
+}
+.water.six {
+    width: 29.75vmin;
+    height: 9.15vmin;
+    transform: translate3d(-10.25vmin, 12.25vmin, -2.35vmin) rotateX(90deg) rotate(90deg);
+    clip-path: polygon(22% 0%, 100% 0%, 100% 100%, 5% 100%, 5.5% 85%, 40% 0);
+}
+.water.fall {
+    width: 13vmin;
+    height: 9.1vmin;
+	transform: translate3d(-10.1vmin, 18.35vmin, 13.55vmin) rotateX(9deg) rotate(90deg);
+    border-right: 0.125vmin solid #fff2;
+    border-left: 0.25vmin solid #fff4;
+    opacity: 0.85;
+    box-shadow: 1vmin 0vmin 1vmin 0.5vmin #03a9f4, 0vmin 0 2vmin 10vmin #03a9f4 inset;
+}
+.water.fall:before {
+    animation-duration: 0.8s;
+}
+.water:before {
+    content: "";
+	--clr: #fff8;
+    width: 2vmin;
+    height: 0.1vmin;
+    background: var(--clr);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    box-shadow: -19vmin 0vmin 0 0 var(--clr), -14vmin 3vmin 0 0 var(--clr), -5vmin 2vmin 0 0 var(--clr), -10vmin -1vmin 0 0 var(--clr), -7vmin -3vmin 0 0 var(--clr), -38vmin 0vmin 0 0 var(--clr), -33vmin 3vmin 0 0 var(--clr), -24vmin 2vmin 0 0 var(--clr), -29vmin -1vmin 0 0 var(--clr), -26vmin -3vmin 0 0 var(--clr);
+    transition: all 1s ease 0s;
+	animation: water-move 2s linear 0s infinite;
+	filter: blur(1px);
+}
+.water:after {
+    content: "";
+    --clr: #ffffff47;
+    width: 100%;
+    height: 0.1vmin;
+    background: var(--clr);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    box-shadow: -19vmin -4vmin 0 0 var(--clr), -14vmin 3vmin 0 0 var(--clr), -5vmin 2vmin 0 0 var(--clr), -10vmin -1vmin 0 0 var(--clr), -7vmin -2vmin 0 0 var(--clr), -38vmin 0vmin 0 0 var(--clr), -33vmin -2.5vmin 0 0 var(--clr), -24vmin 2vmin 0 0 var(--clr), -29vmin -1vmin 0 0 var(--clr), -26vmin 0.65vmin 0 0 var(--clr);
+    transition: all 1s ease 0s;
+    filter: blur(1.5px);
+}
+@keyframes water-move {
+	0% { transform: translateX(0vmin); }
+	100% { transform: translateX(19vmin); }
+}
+.water.foam {
+    width: 20vmin;
+    height: 10vmin;
+    transform: translate3d(-4vmin, 24.35vmin, 16.15vmin) rotateX(90deg) rotate(0deg);
+    background: #fff0;
+}
+.water.foam div {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+}
+.water.foam div:before, .water.foam div:after {
+    content: "";
+	position: absolute;
+    width: 15vmin;
+    height: 12vmin;
+    border: 0.1vmin solid #fff8;
+    border-radius: 100%;
+    animation: waves 3s linear 0s infinite;
+    top: 1vmin;
+    left: 0.5vmin;
+    background: #fff0;
+    box-shadow: none;
+    opacity: 0;
+}
+.water.foam div:after {
+    animation-delay: -1s;
+}
+@keyframes waves {
+    0%{ 
+        width: 0; 
+        height: 0;
+        opacity: 1;
+    }
+    100%{ 
+        width: 15vmin; 
+        height: 12vmin;
+        opacity: 0;
+    }
+}
+.water.foam div + div:before {
+    animation-delay: -2s;
+}
+.water.foam div + div:after {
+    animation-delay: -3s;
+	border-color: #fff4;
+}
+
+
+/*** TOWERS ***/
+.cuboid.tower-1 {
+    --height: 12;
+    transform: translate3d(-6vmin, 17.45vmin, -22.5vmin);
+}
+.cuboid.tower-2 {
+    --height: 12;
+    transform: translate3d(-6vmin, 17.45vmin, -33vmin);
+}
+.cuboid.tower-3 {
+    --height: 12;
+    transform: translate3d(-15.85vmin, 17.45vmin, -22.5vmin);
+}
+.cuboid.tower-4 {
+    --height: 12;
+    transform: translate3d(-16.125vmin, 17.45vmin, -33vmin);
+}
+.cuboid.tower-5 {
+    --height: 15;
+    transform: translate3d(-4.5vmin, 4vmin, -2vmin);
+}
+.cuboid.tower-6 {
+    --height: 15;
+    transform: translate3d(-15.75vmin, 4vmin, -2vmin);
+}
+.cuboid.tower-7 {
+    --height: 15;
+    transform: translate3d(-4.5vmin, 4vmin, 9.5vmin);
+}
+.cuboid.tower-8 {
+    --height: 15;
+    transform: translate3d(-15.75vmin, 4vmin, 9.5vmin);
+}
+
+
+
+
+/*** ROOFS ***/
+.cuboid.roof-1 {
+    --depth: 13.5;
+    --width: 13.5;
+    --height: 1;
+    transform: translate3d(-11.125vmin, 11.9vmin, -27.75vmin);
+}
+.cuboid.roof-2 {
+    --depth: 15.5;
+    --width: 15.5;
+    --height: 1;
+    transform: translate3d(-10.25vmin, -4vmin, 3.75vmin);
+}
+
+
+
+
+/*** SHAPES ***/
+.shape {
+    position: absolute;
+    width: 10vmin;
+    height: 10vmin;
+    transform: translate3d(-11vmin, 8vmin, -28vmin) rotateY(0deg);
+}
+.shape .cuboid {
+    --height: 8;
+    --width: 8;
+    --depth: 8;
+    transform: translate3d(1vmin, 0vmin, 0vmin);
+}
+.shape .cuboid .side:before {
+    opacity: 0.25;
+}
+.shape .cuboid:nth-child(2) {
+    transform: translate3d(1vmin, 0vmin, 0vmin) rotateY(-45deg);
+}
+.shape .cuboid:nth-child(3) {
+    transform: translate3d(1vmin, 0vmin, 0vmin) rotateY(-45deg) rotateX(45deg);
+}
+.shape .cuboid:nth-child(4) {
+    transform: translate3d(1vmin, 0vmin, 0vmin) rotateY(45deg) rotateX(135deg);
+}
+.shape.two {
+    transform: translate3d(-10.125vmin, -8.25vmin, 3.75vmin) rotateY(0deg) scale3d(1.25, 1.25, 1.25);
+}
+
+
+
+/*** FENCE ***/
+.fence {
+    position: absolute;
+    width: calc(100% + 4vmin);
+    height: calc(100% + 4vmin);
+    transform: rotateX(90deg) translate3d(0, 0, -25.45vmin);
+}
+.fence .side {
+    background:
+        repeating-linear-gradient(90deg, #fff0 1vmin, #54370c 0 1.5vmin, #fff0 0 2vmin),
+        linear-gradient(180deg, #fff0 0.25vmin, #4c3006 0 0.75vmin, #fff0 0 1.025vmin, #4c3006 0 1.55vmin, #fff0 0 100%);
+    width: 100%;
+    height: 2vmin;
+    position: absolute;
+    transform: rotateX(90deg) translate3d(0vmin, 1vmin, 1vmin);
+}
+.fence .side:before {
+    display: none;
+}
+.fence .side:nth-child(1) {
+    width: 60%;
+    transform: rotateX(90deg) translate3d(22vmin, 1vmin, 1vmin);
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 9% 100%);
+    filter: brightness(0.85) drop-shadow(1px 1px 0px #fff3);
+}
+.fence .side:nth-child(2) {
+    transform: rotateX(90deg) rotateY(90deg) translate3d(26vmin, 1vmin, 27vmin);
+    filter: brightness(1.25) drop-shadow(1px 1px 0px #fff3);
+}
+.fence .side:nth-child(3) {
+    transform: rotateX(90deg) rotateY(90deg) translate3d(26vmin, 1vmin, -27vmin);
+    clip-path: polygon(2% 0%, 100% -1%, 100% 100%, 9% 100%);
+    filter: brightness(1.25) drop-shadow(1px 1px 0px #fff3);
+	width: calc(100% - 0.1vmin);
+}
+.fence .side:nth-child(4) {
+    transform: rotateX(90deg) translate3d(0vmin, 1vmin, -53vmin);
+    filter: brightness(0.85) drop-shadow(1px 1px 0px #fff3);
+}
+
+
+
+/*** GROUND ***/
+.cuboid.ground {
+    --width: 58; 
+    --depth: 58;
+	--height: 4;
+    transform: translateY(27.8vmin);
+}
+.cuboid.ground .side {
+    background-color: #193c11;
+}
+.cuboid.ground .side:before {
+    opacity: 0.35;
+}
+
+
+
+/*** WHEEL ***/
+.wheel {
+    position: absolute;
+    width: 8vmin;
+    height: 8vmin;
+    transform: translate3d(-8vmin, 18.5vmin, 9.6vmin) rotateX(-10deg);
+    transition: all 1s ease 0s;
+	animation: wheel-move 8s linear 0s infinite;
+}
+@keyframes wheel-move {
+	0% { transform: translate3d(-8vmin, 18.5vmin, 9.6vmin) rotateX(0deg); }
+	100% { transform: translate3d(-8vmin, 18.5vmin, 9.6vmin) rotateX(-360deg); }
+}
+.wheel .cuboid {
+    --width: 4;
+    --height: 8;
+    --depth: 0.3;
+    transform: translate3d(0, 0, 0);
+}
+.wheel .cuboid .side {
+    background-color: #54382e;
+}
+.wheel .cuboid .side:before {
+    display: none;
+}
+.wheel .cuboid:nth-child(2) {
+    transform: rotateX(45deg);
+}
+.wheel .cuboid:nth-child(3) {
+    transform: rotateX(90deg);
+}
+.wheel .cuboid:nth-child(4) {
+    transform: rotateX(135deg);
+}
+.wheel .cuboid:nth-child(5) {
+    transform: rotateX(-22.5deg);
+}
+.wheel .cuboid:nth-child(6) {
+    transform: rotateX(112.5deg);
+}
+.wheel .cuboid:nth-child(7) {
+    transform: rotateX(22.5deg);
+}
+.wheel .cuboid:nth-child(8) {
+    transform: rotateX(67.5deg);
+}
+.wheel .cuboid .side:nth-of-type(5) {
+	filter: brightness(1.25);
+}
+.wheel:before,
+.wheel:after {
+    content: "";
+    position: absolute;
+    width: calc(100% - 1vmin);
+    height: calc(100% - 1vmin);
+    border-radius: 100%;
+    transform: rotateY(90deg) translate3d(0vmin, 0vmin, -1vmin);
+    border: 0.5vmin solid #795548;
+    box-sizing: border-box;
+    margin-left: 0.9vmin;
+    margin-top: 0.5vmin;
+}
+.wheel:after {
+    margin-left: -2.1vmin;
+    border-color: #5c4036;
+}
+
+/*** Axis ***/
+.cuboid.axis {
+    --width: 19;
+    --height: 0.5;
+    --depth: 0.5;
+    transform: translate3d(-10.25vmin, 3.75vmin, 0);
+}
+.cuboid.axis .side:nth-of-type(3) {
+    border-radius: 100%;
+    background: linear-gradient(90deg, #54382e 30%, #38251e 0 70%, #54382e 0 100%);
+    box-shadow: 0 0 0 0.2vmin #38251e;
+}
+
+
+
+
+/*** HOUSE ***/
+.cuboid.house {
+	--width: 7;
+    --height: 9;
+    --depth: 12;
+    transform: translate3d(-23vmin, 20.85vmin, 11.5vmin);
+}
+.cuboid.house .side:nth-of-type(1) {
+    clip-path: polygon(0% 0%, 0% 100%, 50% 100%, 50% 32%, 90% 32%, 90% 85%, 50% 85%, 50% 100%, 100% 100%, 100% 0%);
+}
+.cuboid.house .side:nth-of-type(3):after {
+    content: "";
+    background: #00000069;
+    width: 1.2vmin;
+    height: 1.2vmin;
+    position: absolute;
+    left: 59%;
+    top: 18%;
+    border-radius: 100%;
+    border-left: 1px solid #fff8;
+    box-sizing: border-box;
+}
+
+/*** ROOF ***/
+.cuboid.house-roof {
+	--width: 6;
+    --height: 6;
+    --depth: 13;
+    transform: translate3d(-23vmin, 16.85vmin, 11.5vmin) rotate(45deg);
+}
+.cuboid.house-roof .side {
+	background: red;
+}
+.cuboid.house-roof .side:nth-child(1) {
+	clip-path: polygon(0 0, 100% 0%, 0% 100%);
+	background: #181818;
+	transform: translate3d(-50%, -50%, calc(var(--depth) * 0.46vmin));
+}
+.cuboid.house-roof .side:nth-child(2) {
+	clip-path: polygon(0 0, 100% 100%, 100% 0);
+	background: #181818;
+	transform: translate3d(-50%, -50%, calc(var(--depth) * -0.46vmin)) rotateY(180deg);
+}
+.cuboid.house .side:nth-child(5),
+.cuboid.house-roof .side:nth-child(3),
+.cuboid.house-roof .side:nth-child(6) {
+	opacity: 0;
+}
+
+.cuboid.house-roof .side:nth-child(1):before, 
+.cuboid.house-roof .side:nth-child(2):before {
+    transform: rotate(-45deg);
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+}
+.cuboid.house-roof .side:nth-child(2):before {
+    transform: rotate(45deg);
+}
+.cuboid.house-roof .side:nth-child(4){
+    overflow: hidden;
+}
+.cuboid.house-roof .side:nth-child(4):before {
+    transform: rotate(90deg) translate(-7vmin, 0vmin);
+    height: 15vmin;
+}
+
+
+
+
+/*** STEPS ***/
+.cuboid.house-step {
+	--width: 3;
+    --height: 0.75;
+    --depth: 6.25;
+    transform: translate3d(-21.5vmin, 25.125vmin, 17vmin) rotate(0deg);
+}
+.cuboid.house-step.two {
+    --depth: 4;
+    --height: 1.5;
+    transform: translate3d(-21.5vmin, 24.75vmin, 17vmin) rotate(0deg);
+}
+.cuboid.house-step.three {
+    --depth: 1;
+    --height: 0.5;
+    --width: 2;
+    transform: translate3d(-23vmin, 20.15vmin, 5vmin) rotate(0deg);
+}
+
+
+
+/*** DOOR ***/
+.cuboid.house-door {
+	--width: 3;
+    --height: 5;
+    --depth: 0.5;
+    transform: translate3d(-21.5vmin, 21.5vmin, 17.5vmin) rotate(0deg);
+}
+.cuboid.house-door .side {
+	background-color: #402317;
+}
+.cuboid.house-door .side:before {
+	opacity: 0;
+}
+.cuboid.house-door.two {
+	--width: 2.6;
+    --height: 4.6;
+    --depth: 0.25;
+    transform: translate3d(-20.5vmin, 21.5vmin, 16.7vmin) rotateY(-78deg);
+}
+.cuboid.house-door.two .side {
+	background-color: #56372b;
+}
+.cuboid.house-door.one .side:nth-child(1), 
+.cuboid.house-door.one .side:nth-child(2) {
+    clip-path: polygon(0% 0%, 0% 100%, 8% 100%, 10% 8%, 90% 8%, 90% 100%, 8% 100%, 8% 100%, 100% 100%, 100% 0%);
+}
+.cuboid.house-door.one .side:nth-of-type(6) {
+    display: none;
+}
+
+
+
+/*** WINDOWS ***/
+.cuboid.house-window {
+	--width: 1.85;
+    --height: 3.3;
+    --depth: 0.5;
+    transform: translate3d(-24.75vmin, 20.85vmin, 17.5vmin) rotate(0deg);
+}
+.cuboid.house-window .side {
+	background-color: #402317;
+}
+.cuboid.house-window .side:before {
+	opacity: 0;
+}
+.cuboid.house-window.two {
+	--width: 1.45;
+    --height: 2.7;
+    --depth: 0.5;
+    transform: translate3d(-24.75vmin, 20.85vmin, 17.65vmin) rotate(0deg);
+}
+.cuboid.house-window.two .side {
+	background-color: #56372b;
+}
+.cuboid.house-window.three {
+	--width: 1.95;
+    --height: 2.7;
+    transform: translate3d(-22.95vmin, 18.85vmin, 5.65vmin) rotate(0deg);
+}
+.cuboid.house-window.three .side:nth-child(1), .cuboid.house-window.three .side:nth-child(2) {
+    clip-path: polygon(0% 0%, 0% 100%, 12% 100%, 12% 12%, 88% 12%, 88% 88%, 12% 88%, 13% 100%, 100% 100%, 100% 0%);
+}
+.cuboid.house .side:nth-of-type(2) {
+	clip-path: polygon(0% 0%, 0% 100%, 36% 100%, 36% 12%, 61% 12%, 61% 42%, 36% 42%, 36% 100%, 100% 100%, 100% 0%);
+}
+
+
+
+/*** PULLEY ***/
+.house-pulley {
+	--width: 0.35;
+    --height: 0.35;
+    --depth: 2;
+    transform: translate3d(-22.85vmin, 16.75vmin, 4.6vmin) rotate(0deg);
+}
+.cuboid.house-pulley .side {
+	background-color: #402317;
+}
+.cuboid.house-pulley .side:before {
+	opacity: 0.2;
+}
+
+
+
+/*** WHEEL DOOR ***/
+.cuboid.wheel-door {
+	--width: 0.25;
+    --height: 2;
+    --depth: 1.6;
+    transform: translate3d(-15.85vmin, 24.5vmin, 4.6vmin) rotate(0deg);
+}
+.cuboid.wheel-door .side {
+    background: repeating-linear-gradient(90deg, #fff0 0.35vmin, #54370c 0 0.55vmin, #fff0 0 0.75vmin), linear-gradient(180deg, #fff0 0.35vmin, #4c3006 0 0.6vmin, #fff0 0 1.25vmin, #4c3006 0 1.5vmin, #fff0 0 100%);
+}
+.cuboid.wheel-door .side:before {
+	opacity: 0;
+}
+.cuboid.wheel-door .side:nth-of-type(5), .cuboid.wheel-door .side:nth-of-type(6) {
+    opacity: 0;
+}
+
+
+
+/*** CHIMNEY ***/
+.cuboid.house-chimney {
+	--height: 3;
+    --width: 1.25;
+    --depth: 1.25;
+    transform: translate3d(-21.25vmin, 12.25vmin, 16vmin) rotate(0deg);
+}
+.cuboid.house-chimney .side:nth-of-type(5) {
+    clip-path: polygon(0% 0%, 0% 100%, 20% 100%, 20% 20%, 80% 20%, 80% 80%, 20% 80%, 20% 100%, 100% 100%, 100% 0%);
+}
+.cuboid.house-chimney.base {
+    --height: 2;
+    --width: 2;
+    --depth: 2;
+    transform: translate3d(-21.25vmin, 14.25vmin, 16vmin) rotate(0deg);
+}
+
+
+/*** FLOUR SACK ***/
+
+.cuboid.flour-sack {
+	--width: 0.75;
+    --height: 0.35;
+    --depth: 1.5;
+    transform: translate3d(-23.85vmin, 25.25vmin, 4.6vmin) rotate(0deg);
+}
+.cuboid.flour-sack .side {
+    background: #8f7b56;
+    border-radius: 5px;
+}
+.cuboid.flour-sack .side:before {
+	opacity: 0.2;
+}
+.cuboid.flour-sack.two {
+    transform: translate3d(-23.85vmin, 24.85vmin, 4.6vmin) rotate(0deg);
+}
+.cuboid.flour-sack.three {
+    transform: translate3d(-22.85vmin, 24.85vmin, 4.65vmin);
+    --width: 1.5;
+    --height: 0.35;
+    --depth: 0.75;
+}
+.cuboid.flour-sack.four {
+    transform: translate3d(-22.5vmin, 25.1vmin, 4.7vmin) rotateX(-1deg);
+}
+.cuboid.flour-sack.five {
+    transform: translate3d(-23.15vmin, 25.15vmin, 4.7vmin) rotateX(-1deg);
+}
+
+
+
+/*** TRAILS ***/
+.trails {
+    background: var(--trail), var(--trail), var(--trail), var(--trail), var(--trail), var(--trail), var(--trail), var(--trail);
+    position: absolute;
+    width: calc(100% + 4vmin);
+    height: calc(100% + 4vmin);
+    transform: rotateX(90deg) translate3d(0vmin, 0vmin, -25.4vmin);
+    border: 1px solid #959595;
+    opacity: 0.25;
+    --trail: conic-gradient(from 90deg at 0 0, #ff9800 0 25%, #fff0 0 100%);
+    background-repeat: no-repeat;
+    background-size: 47vmin 2vmin, 2vmin 51vmin, 27vmin 2vmin, 27vmin 2vmin, 2vmin 12vmin, 2vmin 2vmin, 2vmin 26vmin, 8.5vmin 25.5vmin;
+    background-position: 4.5vmin calc(100% - 1vmin), calc(100% - 1.5vmin) calc(100% - 1vmin), 23.5vmin 1.85vmin, 23.5vmin 14.5vmin, 23.5vmin 3.5vmin, 4.5vmin 49vmin, 7.5vmin 25vmin, 1vmin 6vmin;
+    filter: blur(5px);
+}
+
+
+
+/*** SEAT ***/
+.cuboid.seat {
+    --depth: 5;
+    --height: 1;
+    transform: translate3d(20.5vmin, 25vmin, -18vmin);
+}
+.cuboid.seat.back {
+    --depth: 5;
+    --height: 3;
+    --width: 0.5;
+    transform: translate3d(21vmin, 24.5vmin, -18vmin) rotate(15deg);
+}
+
+
+
+/*** SCULPTURE ***/
+
+.cuboid.sculpture.base {
+    transform: translate3d(10.25vmin, 24.5vmin, -18vmin) rotate(0deg);
+}
+.cuboid.sculpture.one.metal {
+    transform: translate3d(10.25vmin, 22vmin, -18vmin) rotateX(45deg) rotateY(-45deg);
+}
+.cuboid.sculpture.two.metal {
+    transform: translate3d(10.25vmin, 22vmin, -18vmin) rotateX(-45deg) rotateY(45deg);
+}
+.cuboid.sculpture.three.metal {
+    transform: translate3d(10.25vmin, 22vmin, -18vmin) rotateX(-45deg) rotateY(-45deg) rotateZ(-45deg);
+}
+.cuboid.sculpture.four.metal {
+    transform: translate3d(10.25vmin, 22vmin, -18vmin) rotateX(45deg) rotateY(45deg) rotateZ(45deg);
+}
+.cuboid.sculpture.metal .side {
+    background: #fff0;
+    border: 0.185vmin solid #68301c;
+    border-radius: 0.5vmin;
+}
+.cuboid.sculpture.metal .side:before {
+    display: none;
+}
+.cuboid.sculpture.base .side {
+    background: #998983;
+}
+.cuboid.sculpture.base .side:before {
+    background: #00000075;
+}
+.cuboid.sculpture.base .side:nth-of-type(3):before {
+    content: "M.C. ESCHER";
+    color: #000;
+    position: absolute;
+    width: 80%;
+    height: 60%;
+    font-size: 3px;
+    background: #b55f34;
+    left: 10%;
+    top: 10%;
+    opacity: 1;
+    text-align: center;
+    padding-top: 2px;
+}
+
+
+
+/*** VEGETABLES ***/
+.vegetables {
+    position: absolute;
+    width: 13.5vmin;
+    height: 3vmin;
+    background: repeating-radial-gradient(circle at 50% 50%, #e9a993 1px, #fff0 3px 100px);
+    transform: rotateX(90deg) translate3d(1vmin, 6vmin, -25.3vmin);
+    background-size: 8px 7px;
+}
+.vegetables div {
+    width: 0.25vmin;
+    height: 2vmin;
+    background: green;
+    position: absolute;
+    transform: rotateX(90deg) translate3d(0.35vmin, 0vmin, -1.6vmin);
+    filter: drop-shadow(0 0 0 green) drop-shadow(0.75vmin 0 0 green) drop-shadow(1.75vmin 0 0 green) drop-shadow(3.5vmin 0 0 green) drop-shadow(6.9vmin 0 0 green);
+}
+.vegetables div:before, .vegetables div:after {
+    content: "";
+    width: 0.15vmin;
+    height: 100%;
+    background: green;
+    position: absolute;
+    transform: rotateY(45deg);
+}
+.vegetables div:after {
+    background: green;
+    transform: rotateY(-45deg);
+}
+.vegetables div:nth-child(2) {
+    transform: rotateX(90deg) translate3d(0.35vmin, 0vmin, -0.85vmin);
+}
+.vegetables div:nth-child(3) {
+    transform: rotateX(90deg) translate3d(0.35vmin, 0vmin, -0.125vmin);
+}
+.vegetables div:nth-child(4) {
+    transform: rotateX(90deg) translate3d(0.35vmin, 0vmin, 0.65vmin);
+}
+.vegetables div:nth-child(5) {
+    transform: rotateX(90deg) translate3d(8vmin, 1vmin, 1.25vmin);
+}
+
+
+
+/*** FLOWERS ***/
+.flowers {
+    position: absolute;
+    width: 3vmin;
+    height: 5vmin;
+    background: repeating-radial-gradient(circle at 50% 50%, #e9a99394 0.15vmin, #fff0 0.65vmin 100px);
+    transform: rotateX(90deg) translate3d(1vmin, -18vmin, -25.3vmin);
+    background-size: 1vmin 1vmin;
+}
+.flowers div {
+    width: 0.25vmin;
+    height: 2vmin;
+    background: green;
+    position: absolute;
+    transform: rotateX(90deg) translate3d(0.35vmin, 0vmin, -3.5vmin);
+}
+.flowers div:before, .flowers div:after {
+    content: "";
+    width: 0.15vmin;
+    height: 100%;
+    background: green;
+    position: absolute;
+    transform: rotateY(45deg);
+}
+.flowers div:after {
+    background: green;
+    transform: rotateY(-45deg);
+}
+.flowers div span {
+    width: 0.4vmin;
+    height: 0.75vmin;
+    --clr: #f11b0b;
+    position: absolute;
+    transform: rotateY(-90deg) translate3d(-0.1vmin, 2vmin, 0);
+    border-radius: 0.5vmin;
+    box-shadow: 0 0 0.125vmin 0 #000c inset;
+	background: var(--clr);
+}
+.flowers div span:before, .flowers div span:after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: var(--clr);
+    position: absolute;
+    transform: rotateY(45deg) translate3d(0vmin, 0vmin, 0vmin);
+    border-radius: 0.5vmin;
+	opacity: 0.85;
+	border: 1px solid #fff2;
+}
+.flowers div span:after {
+    background: var(--clr);
+    transform: rotateY(-45deg);
+	opacity: 0.75;
+}
+
+.flowers div:nth-child(2) {
+    transform: rotateX(90deg) translate3d(0.35vmin, 0vmin, -2.5vmin);
+}
+.flowers div:nth-child(3) {
+    transform: rotateX(90deg) translate3d(0.35vmin, 0vmin, -1.5vmin);
+}
+.flowers div:nth-child(4) {
+    transform: rotateX(90deg) translate3d(0.35vmin, 0vmin, -0.5vmin);
+}
+.flowers div:nth-child(5) {
+    transform: rotateX(90deg) translate3d(0.35vmin, 0vmin, 0.5vmin);
+}
+.flowers div:nth-child(6) {
+    transform: rotateX(90deg) translate3d(1.35vmin, 0vmin, -3.5vmin);
+}
+.flowers div:nth-child(7) {
+    transform: rotateX(90deg) translate3d(1.35vmin, 0vmin, -2.5vmin);
+}
+.flowers div:nth-child(8) {
+    transform: rotateX(90deg) translate3d(1.35vmin, 0vmin, -1.5vmin);
+}
+.flowers div:nth-child(9) {
+    transform: rotateX(90deg) translate3d(1.35vmin, 0vmin, -0.5vmin);
+}
+.flowers div:nth-child(10) {
+    transform: rotateX(90deg) translate3d(1.35vmin, 0vmin, 0.5vmin);
+}
+.flowers div:nth-child(11) {
+    transform: rotateX(90deg) translate3d(2.35vmin, 0vmin, -3.5vmin);
+}
+.flowers div:nth-child(12) {
+    transform: rotateX(90deg) translate3d(2.35vmin, 0vmin, -2.5vmin);
+}
+.flowers div:nth-child(13) {
+    transform: rotateX(90deg) translate3d(2.35vmin, 0vmin, -1.5vmin);
+}
+.flowers div:nth-child(14) {
+    transform: rotateX(90deg) translate3d(2.35vmin, 0vmin, -0.5vmin);
+}
+.flowers div:nth-child(15) {
+    transform: rotateX(90deg) translate3d(2.35vmin, 0vmin, 0.5vmin);
+}
+.flowers div:nth-child(3n+2) span {
+    --clr: #ffc107;
+}
+.flowers div:nth-child(3n+3) span {
+    --clr: #9c27b0;
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  <div class="scene">
+  <div class="content">
+    <div class="water one"></div>
+    <div class="water two"></div>
+    <div class="water three"></div>
+    <div class="water four"></div>
+    <div class="water five"></div>
+    <div class="water six"></div>
+    <div class="water fall"></div>
+    <div class="water foam">
+      <div></div>
+      <div></div>
+    </div>
+    <div class="cuboid brick-1"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid brick-2"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid brick-3"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid brick-4"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid brick-5"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid brick-6"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid brick-7"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid brick-8"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid brick-9"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid brick-10"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid brick-11"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid brick-12"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid brick-13"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid brick-14"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid brick-15"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid col-1"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid col-2"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid col-3"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid col-4"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid tower-1"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid tower-2"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid tower-3"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid tower-4"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid tower-5"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid tower-6"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid tower-7"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid tower-8"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid roof-1"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid roof-2"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="shape one">
+      <div class="cuboid"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+      <div class="cuboid"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+      <div class="cuboid"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+      <div class="cuboid"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    </div>
+    <div class="shape two">
+      <div class="cuboid"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+      <div class="cuboid"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+      <div class="cuboid"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+      <div class="cuboid"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    </div>
+    <div class="fence">
+      <div class="side"></div>
+      <div class="side"></div>
+      <div class="side"></div>
+      <div class="side"></div>
+    </div>
+    <div class="wheel">
+      <div class="cuboid"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+      <div class="cuboid"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+      <div class="cuboid"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+      <div class="cuboid"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+      <div class="cuboid"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+      <div class="cuboid"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+      <div class="cuboid"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+      <div class="cuboid"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+      <div class="cuboid axis"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    </div>
+    <div class="cuboid wheel-door"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid house"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid house-roof"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid house-step"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid house-step two"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid house-step three"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid house-door one"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid house-door two"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid house-window"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid house-window two"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid house-window three"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid house-pulley"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid house-chimney"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid house-chimney base"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid flour-sack"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid flour-sack two"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid flour-sack three"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid flour-sack four"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid flour-sack five"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="trails"></div>
+    <div class="cuboid ground"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid seat"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid seat back"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid sculpture base"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid sculpture one metal"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid sculpture two metal"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid sculpture three metal"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="cuboid sculpture four metal"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+    <div class="flowers">
+      <div><span></span></div>
+      <div><span></span></div>
+      <div><span></span></div>
+      <div><span></span></div>
+      <div><span></span></div>
+      <div><span></span></div>
+      <div><span></span></div>
+      <div><span></span></div>
+      <div><span></span></div>
+      <div><span></span></div>
+      <div><span></span></div>
+      <div><span></span></div>
+      <div><span></span></div>
+      <div><span></span></div>
+      <div><span></span></div>
+    </div>
+    <div class="vegetables">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+</div>
+  
+  
+  
+</body>
+
+</html>

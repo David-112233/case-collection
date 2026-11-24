@@ -1,0 +1,83 @@
+{
+  "source_id": "codepen:fossheim/xxbobzo",
+  "author": "fossheim",
+  "pen_id": "xxboBzO",
+  "url": "https://codepen.io/fossheim/pen/xxboBzO",
+  "acquisition": "cloud_browser_cdpn_srcdoc",
+  "acquisition_url": "https://cdpn.io/fossheim/fullpage/xxboBzO",
+  "retrieved_at": "2026-11-18",
+  "title": "📸 Polaroid Camera In CSS",
+  "fetch_status": "ok",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "db4eb6b34e3f0e8267d900d16782976d64061d2380b5fb451c5e4b8866c5be53",
+  "source_html_sha256": "126e004becf84dca5e73cfc60933f2f683ebfd6f106dbd49bcdb0ac8b5528f47",
+  "analysis": {
+    "js": {
+      "has_js": true,
+      "inline_js_chars": 0,
+      "external_scripts": [
+        "/script.js"
+      ],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 0,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": false,
+      "clip_path": false,
+      "css_counter": false,
+      "media_query": false
+    },
+    "external_stylesheets": [
+      "/style.css"
+    ],
+    "css_imports": [],
+    "css_chars": 14031,
+    "element_count": 33,
+    "html_chars": 16298
+  },
+  "review": {
+    "status": "用户首轮审核选中",
+    "evidence": "镜头多重同心环向前凸起，取景器与闪光灯嵌套凹面，底部出片槽和拨钮形成多层遮挡。正面单物体，倾斜空间弱于Switch；/script.js依赖照录，不擅自移除。",
+    "visual_verified": true,
+    "formal_admission": true,
+    "scope": "仅采集仓库入库交付；主项目尚未导入"
+  },
+  "review_id": "C008",
+  "case_id": "case-234-T1",
+  "candidate_status": "admitted_in_collection_repo",
+  "source_archive": {
+    "repository": "David-112233/case-collection",
+    "pr": 4,
+    "commit": "fe6b79929dd36108ed795838ee29354b7d4b1bfd",
+    "path": "data_intake/B1/raw/fossheim__xxboBzO"
+  },
+  "intake_date": "2026-11-20",
+  "source_original_sha256": "126e004becf84dca5e73cfc60933f2f683ebfd6f106dbd49bcdb0ac8b5528f47",
+  "source_original_note": "与原作品主体一致，已去除采集页的 CodePen console 样板；完整捕获另存 original_srcdoc.html。",
+  "js_policy": "original_preserved",
+  "js_changes": "未将原作强行改写为纯 CSS；source.html 与归档预览一致，可能包含原作脚本及外部依赖。",
+  "license": "not separately verified",
+  "admitted_at": "2026-11-24",
+  "admitted_by": "admit_case.py"
+}

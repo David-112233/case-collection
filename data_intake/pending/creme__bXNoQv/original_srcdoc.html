@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>CSS Gamejam jar</title>
+
+    <link rel="canonical" href="https://codepen.io/creme/pen/bXNoQv">
+  <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy|Raleway:900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://public.codepenassets.com/css/normalize-5.0.0.min.css">
+
+  
+  
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #E5E5E5;
+}
+
+a {
+  text-decoration: none;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 6vmin;
+}
+.title > div {
+  text-align: center;
+}
+@keyframes slide-in {
+  0% {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.title .name {
+  opacity: 0;
+  animation: slide-in 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+.title .name a {
+  display: block;
+  font-family: "Raleway", sans-serif;
+  font-size: 6vmin;
+  color: #404040;
+  transition: transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.title .name a:hover {
+  transform: rotate(-1deg) scale(1.05) translateZ(0);
+}
+.title .gamejam {
+  opacity: 0;
+  animation: slide-in 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.15s forwards;
+}
+.title .gamejam a {
+  display: block;
+  font-family: "Luckiest Guy", cursive;
+  color: #277ECD;
+  font-size: 10vmin;
+  line-height: 1;
+  transition: transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.title .gamejam a:hover {
+  transform: rotate(2deg) scale(1.05) translateZ(0);
+}
+
+.bottle {
+  position: relative;
+  width: 40vmin;
+  height: 40vmin;
+  background: #E8F4FA;
+  border-bottom-right-radius: 50% 15%;
+  border-bottom-left-radius: 50% 15%;
+  border-top-right-radius: 40% 20%;
+  border-top-left-radius: 40% 20%;
+  box-shadow: inset 0 -10px 0 0 #bee0f1, inset -10px 0 0 0 #bee0f1;
+  opacity: 0;
+  animation: slide-in 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s forwards;
+}
+.bottle:before {
+  content: "";
+  position: absolute;
+  margin: auto;
+  width: 70%;
+  padding-top: 8%;
+  border-bottom-right-radius: 50% 20%;
+  border-bottom-left-radius: 50% 20%;
+  background: #E8F4FA;
+  left: 0;
+  right: 0;
+  top: -1%;
+  box-shadow: inset -5px 1px 0 0 #bee0f1, inset 0 -1px 0 0 #fff, inset 0 4px 0 0 #d3eaf5;
+}
+.bottle:after {
+  content: "";
+  position: absolute;
+  margin: auto;
+  width: 80%;
+  padding-top: 8%;
+  background: #E8F4FA;
+  border-radius: 2vmin;
+  left: 0;
+  right: 0;
+  top: -8%;
+  box-shadow: inset -5px 0 0 #bee0f1;
+}
+
+.controller {
+  position: absolute;
+  margin: auto;
+  left: 0;
+  top: 15%;
+  right: 0;
+  bottom: 0;
+  width: 12.6vmin;
+  height: 6.3vmin;
+  background: #999999;
+  mix-blend-mode: overlay;
+  animation: controller 8s ease-in-out infinite;
+  transform-origin: 50% 50%;
+}
+@keyframes controller {
+  0% {
+    transform: translateY(-1vmin) rotate(-8deg);
+  }
+  50% {
+    transform: translateY(3vmin) rotate(8deg);
+  }
+  100% {
+    transform: translateY(-1vmin) rotate(-8deg);
+  }
+}
+.controller:before {
+  content: "";
+  position: absolute;
+  width: 1.4vmin;
+  height: 1.4vmin;
+  background: #666666;
+  right: 1.4vmin;
+  top: 1.4vmin;
+  box-shadow: 0.7vmin 0 0 #000, -0.7vmin 0 0 #000, 0 0.7vmin 0 #000, 0 -0.7vmin 0 #000, -2.1vmin 2.1vmin 0 #666666, -2.8vmin 2.1vmin 0 #000, -1.4vmin 2.1vmin 0 #000, -2.1vmin 1.4vmin 0 #000, -2.1vmin 2.8vmin 0 #000;
+}
+.controller:after {
+  content: "";
+  position: absolute;
+  width: 0.7vmin;
+  height: 0.7vmin;
+  top: -0.7vmin;
+  left: 0.7vmin;
+  background: #000;
+  box-shadow: -0.7vmin 0.7vmin 0 #000, 0.7vmin 0 0 #000, 1.4vmin 0 0 #000, 2.1vmin 0 0 #000, 2.8vmin 0 0 #000, 3.5vmin 0 0 #000, 4.2vmin 0 0 #000, 4.9vmin 0 0 #000, 5.6vmin 0 0 #000, 6.3vmin 0 0 #000, 7vmin 0 0 #000, 7.7vmin 0 0 #000, 8.4vmin 0 0 #000, 9.1vmin 0 0 #000, 9.8vmin 0 0 #000, 10.5vmin 0 0 #000, 11.2vmin 0.7vmin 0 #000, 11.9vmin 1.4vmin 0 #000, 11.9vmin 2.1vmin 0 #000, 11.9vmin 2.8vmin 0 #000, 11.9vmin 3.5vmin 0 #000, 11.9vmin 4.2vmin 0 #000, 11.9vmin 4.9vmin 0 #000, 11.9vmin 5.6vmin 0 #000, 11.2vmin 6.3vmin 0 #000, 10.5vmin 7vmin 0 #000, 9.8vmin 7vmin 0 #000, 9.1vmin 7vmin 0 #000, 8.4vmin 7vmin 0 #000, 7.7vmin 7vmin 0 #000, 7vmin 7vmin 0 #000, 6.3vmin 7vmin 0 #000, 5.6vmin 7vmin 0 #000, 4.9vmin 7vmin 0 #000, 4.2vmin 7vmin 0 #000, 3.5vmin 7vmin 0 #000, 2.8vmin 7vmin 0 #000, 2.1vmin 7vmin 0 #000, 1.4vmin 7vmin 0 #000, 0.7vmin 7vmin 0 #000, 0 7vmin 0 #000, -0.7vmin 6.3vmin 0 #000, -1.4vmin 5.6vmin 0 #000, -1.4vmin 4.9vmin 0 #000, -1.4vmin 4.2vmin 0 #000, -1.4vmin 3.5vmin 0 #000, -1.4vmin 2.8vmin 0 #000, -1.4vmin 2.1vmin 0 #000, -1.4vmin 1.4vmin 0 #000, 4.9vmin -0.7vmin 0 #000, 4.9vmin -1.4vmin 0 #000, 4.9vmin -2.1vmin 0 #000, 5.6vmin -2.8vmin 0 #000, 6.3vmin -2.8vmin 0 #000, 7vmin -2.1vmin 0 #000, 2.1vmin 1.4vmin 0 #000, 2.8vmin 1.4vmin 0 #000, 2.8vmin 2.1vmin 0 #000, 2.8vmin 2.8vmin 0 #000, 3.5vmin 2.8vmin 0 #000, 4.2vmin 2.8vmin 0 #000, 4.2vmin 3.5vmin 0 #000, 4.2vmin 4.2vmin 0 #000, 3.5vmin 4.2vmin 0 #000, 2.8vmin 4.2vmin 0 #000, 2.8vmin 4.9vmin 0 #000, 2.8vmin 5.6vmin 0 #000, 2.1vmin 5.6vmin 0 #000, 1.4vmin 5.6vmin 0 #000, 1.4vmin 4.9vmin 0 #000, 1.4vmin 4.2vmin 0 #000, 0.7vmin 4.2vmin 0 #000, 0 4.2vmin 0 #000, 0 3.5vmin 0 #000, 0 2.8vmin 0 #000, 0.7vmin 2.8vmin 0 #000, 1.4vmin 2.8vmin 0 #000, 1.4vmin 2.1vmin 0 #000, 1.4vmin 1.4vmin 0 #000, 2.1vmin 2.1vmin 0 #666666, 2.1vmin 2.8vmin 0 #666666, 2.1vmin 3.5vmin 0 #666666, 2.8vmin 3.5vmin 0 #666666, 3.5vmin 3.5vmin 0 #666666, 1.4vmin 3.5vmin 0 #666666, 0.7vmin 3.5vmin 0 #666666, 2.1vmin 4.2vmin 0 #666666, 2.1vmin 4.9vmin 0 #666666;
+}
+
+.shine {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.shine svg {
+  position: absolute;
+  margin: auto;
+  width: 85%;
+  height: 100%;
+  z-index: 2;
+  left: 0;
+  right: 0;
+  opacity: 0.6;
+  bottom: -6%;
+}
+
+.jam {
+  position: absolute;
+  margin: auto;
+  width: 90%;
+  height: 70%;
+  background: #EA5356;
+  left: 0;
+  right: 1%;
+  bottom: 7%;
+  border-bottom-right-radius: 50% 15%;
+  border-bottom-left-radius: 50% 15%;
+  border-top-right-radius: 20% 5%;
+  border-top-left-radius: 40% 5%;
+  overflow: hidden;
+  animation: flow 1.4s ease-In-Out infinite alternate;
+}
+@keyframes flow {
+  0% {
+    height: 70%;
+    border-top-right-radius: 20% 5%;
+    border-top-left-radius: 40% 10%;
+  }
+  100% {
+    height: 69%;
+    border-top-right-radius: 40% 10%;
+    border-top-left-radius: 40% 5%;
+  }
+}
+.jam:before {
+  content: "";
+  position: absolute;
+  margin: auto;
+  width: 100%;
+  height: 10%;
+  left: 0;
+  top: 0;
+  background: #ed6a6c;
+  border-bottom-right-radius: 20% 45%;
+  border-bottom-left-radius: 20% 45%;
+  animation: flow1 1.4s ease-In-Out infinite alternate;
+  z-index: 1;
+}
+@keyframes flow1 {
+  0% {
+    height: 8%;
+    border-bottom-right-radius: 20% 45%;
+    border-bottom-left-radius: 10% 10%;
+  }
+  100% {
+    height: 10%;
+    border-bottom-right-radius: 20% 20%;
+    border-bottom-left-radius: 60% 60%;
+  }
+}
+.jam:after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 2%;
+  width: 98%;
+  padding-top: 80%;
+  background: #EA5356;
+  z-index: 0;
+  border-bottom-right-radius: 40% 30%;
+  border-bottom-left-radius: 70% 50%;
+  transform: rotate(-5deg);
+  box-shadow: 0 5vmin 0 0 #e42629, -5vmin 5vmin 0 0 #e42629;
+}
+
+.bubble {
+  background: #e42629;
+  border-radius: 50%;
+  position: absolute;
+  z-index: 1;
+  animation: bubble 1.4s ease-In-Out infinite alternate;
+}
+@keyframes bubble {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(0.5vmin);
+  }
+}
+.bubble--1 {
+  width: 6%;
+  padding-top: 6%;
+  right: 5%;
+  bottom: 20%;
+  box-shadow: -31vmin -2vmin 0 0 #e42629, -28vmin -8vmin 0 0 #e42629, -2vmin -12vmin 0 0 #e42629, -8vmin 4vmin 0 0 #ed6a6c, -30vmin -16vmin 0 0 #ed6a6c;
+  animation-direction: alternate-reverse;
+}
+.bubble--2 {
+  width: 3%;
+  padding-top: 3%;
+  right: 3%;
+  bottom: 40%;
+  box-shadow: -6.5vmin 7vmin 0 0 #ed6a6c, -1vmin -10vmin 0 0 #ed6a6c, -30vmin 2vmin 0 0 #e42629;
+}
+
+.ice {
+  position: fixed;
+  right: 1rem;
+  bottom: 0.5rem;
+  width: 80px;
+}
+.ice svg {
+  width: 100%;
+  height: 100%;
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <div class="title">
+	<div class="name">
+		<a href="https://discord.gg/aRrD4m" target="_blank">
+			Cult of Jabrils
+		</a>
+	</div>
+	
+	<div class="gamejam">
+		<a href="https://itch.io/jam/cult-of-jabrils-summer-jam" target="_blank">
+			Gamejam
+		</a>
+	</div>
+</div>
+
+<div class="bottle">
+	<div class="jam">
+		<div class="bubble bubble--1"></div>
+		<div class="bubble bubble--2"></div>
+	</div>
+	
+	<div class="controller"></div>
+	
+	<div class="shine">
+		<svg width="530" height="355" viewBox="0 0 530 355" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M2.41786 253.745C1.91818 270.232 1.44039 286.958 5.27899 302.998C9.11765 319.047 17.8629 334.612 32.0233 343.105C37.5113 346.399 43.9463 348.583 50.2961 347.717C56.6419 346.86 62.7365 342.422 64.1855 336.187C66.29 327.148 58.7723 319.09 52.9737 311.84C30.9829 284.28 28.6146 246.254 29.6152 211.021C30.6934 172.79 34.6107 134.634 41.3253 96.97C44.8257 77.3563 49.0936 57.7456 49.4284 37.8325C49.6703 23.5051 43.985 -2.76836 23.6455 1.23206C8.13627 4.27969 9.37707 26.0156 8.98906 37.9145C7.46271 84.4874 6.15165 131.067 4.735 177.647C3.96534 203.015 3.19567 228.382 2.41786 253.745Z" fill="#FDFEFE"/>
+<path d="M91.6409 353.741C96.9325 354.984 103.187 354.517 106.848 350.497C107.989 349.24 108.799 347.726 109.504 346.188C116.566 330.895 101.692 315.151 85.7661 322.176C69.5977 329.305 76.9209 350.274 91.6409 353.741Z" fill="#FDFEFE"/>
+<path d="M516.88 328.005C514.277 332.882 511.043 337.58 506.548 340.798C502.054 344.016 496.103 345.588 490.848 343.859C485.594 342.129 481.521 336.604 482.451 331.158C483.538 324.755 490.174 321.158 494.687 316.476C499.551 311.438 502.146 304.651 503.985 297.898C506.566 288.406 507.881 278.574 507.893 268.734C507.902 263.388 507.529 257.948 508.819 252.759C510.108 247.559 513.457 242.499 518.555 240.851C534.145 235.828 528.279 269.803 528.048 277.803C527.549 295.045 525.087 312.591 516.88 328.005Z" fill="#FDFEFE"/>
+</svg>
+	</div>
+</div>
+
+
+<div class="ice">
+	<a href="https://ice-creme.de" target="_blank">
+		<svg width="150" height="76" viewBox="0 0 150 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0)">
+<path d="M49.3915 24.6301V37.9095H7.8151C4.19515 37.9095 1.25042 34.9312 1.25042 31.2698C1.25042 27.6085 4.19515 24.6301 7.8151 24.6301H49.3915ZM50.6419 23.3654H7.8151C3.50117 23.3654 0 26.9066 0 31.2698C0 35.6331 3.50117 39.1742 7.8151 39.1742H50.6419V23.3654Z" fill="black"/>
+<path d="M50.5909 23.3654H47.3774C47.3523 25.6419 47.3398 28.2598 47.3398 31.2698C47.3398 34.2798 47.3523 36.8978 47.3774 39.1742H50.5909V23.3654Z" fill="black"/>
+<path d="M30.5032 30.296C36.524 29.8217 42.7511 29.3348 47.7527 28.7025C48.8093 28.5697 49.7721 28.4369 50.6474 28.2978V27.5263C49.7534 27.6654 48.7593 27.8045 47.6589 27.9437C42.676 28.5697 36.4615 29.0566 30.447 29.5309C24.9201 29.9672 19.7059 30.3782 15.9734 30.8525C9.82758 31.6493 5.00097 33.2681 2.03123 34.4948C1.63735 34.6593 1.26223 34.8173 0.912109 34.9754C1.0309 35.2031 1.16219 35.4244 1.29974 35.6394C4.50081 34.2229 9.56499 32.446 16.0609 31.6176C19.7746 31.137 24.9826 30.726 30.5032 30.296Z" fill="black"/>
+<path d="M11.6231 36.297C12.1608 36.3792 12.786 36.4172 13.455 36.4172C14.0614 36.4172 14.7116 36.3855 15.3744 36.3223C17.4188 36.12 20.8449 35.437 20.7199 34.1344C20.6699 33.5779 20.0447 33.2238 18.813 33.0404C17.7939 32.8886 16.4622 32.8823 15.0618 33.0214C13.0173 33.2238 9.59118 33.9067 9.71622 35.2094C9.76624 35.7595 10.3914 36.12 11.6231 36.297ZM11.7794 34.4253C12.6797 34.1217 13.8739 33.8941 15.1305 33.7676C16.3934 33.6475 17.6064 33.6411 18.5442 33.7613C19.5445 33.8878 19.9009 34.1154 19.9634 34.1976C19.9134 34.2925 19.607 34.5833 18.6504 34.8995C17.7501 35.1967 16.556 35.4307 15.2993 35.5572C14.0364 35.6773 12.8235 35.6836 11.8857 35.5635C10.8854 35.437 10.529 35.2094 10.4665 35.1272C10.5165 35.0323 10.8228 34.7478 11.7794 34.4253Z" fill="black"/>
+<path d="M6.51505 38.4533C10.4601 38.8833 19.0317 39.1553 23.2081 37.0875C23.3769 37.0053 23.5457 36.9231 23.7145 36.8345C27.7284 34.83 32.6988 32.3511 50.6485 31.6556V30.8967C32.5175 31.5986 27.4658 34.1154 23.3832 36.1516C23.2144 36.2338 23.0456 36.3223 22.8768 36.4045C21.1074 37.2772 18.2127 37.8147 14.5052 37.9538C11.4605 38.0676 8.42194 37.8969 6.59633 37.6945C5.57724 37.5807 4.52689 37.6819 3.53906 37.8779C3.87667 38.1056 4.2393 38.3016 4.61442 38.4723C5.24588 38.4028 5.88985 38.3838 6.51505 38.4533Z" fill="black"/>
+<path d="M50.4296 37.1128L50.5797 36.3666C48.7353 35.9935 45.5592 35.5762 42.1831 35.5446C39.4509 35.5129 35.6747 35.7406 33.1864 36.9737C31.6108 37.7578 29.4038 38.5166 27.2344 39.1679H29.7352C31.1294 38.6937 32.4549 38.1815 33.5115 37.6503C37.8129 35.5256 46.7659 36.3729 50.4296 37.1128Z" fill="black"/>
+<path d="M12.2103 27.2552C15.9053 26.8758 20.4943 26.7683 25.3522 26.6608C34.2177 26.4585 44.1897 26.2308 50.6419 24.1757V23.3789C44.3148 25.472 34.2614 25.6996 25.3334 25.902C20.4568 26.0158 15.8553 26.117 12.1353 26.5027C6.35212 27.0971 2.42581 28.9563 0.143798 30.417C0.106285 30.4423 0.075025 30.4613 0.0375125 30.4866C0.0125042 30.7458 0 31.0114 0 31.277C0 31.3276 0 31.3718 0 31.4224C0.187563 31.296 0.375125 31.1695 0.581444 31.0367C2.78843 29.6266 6.59595 27.837 12.2103 27.2552Z" fill="black"/>
+<path d="M17.4628 23.3654H13.0301C8.78491 24.1559 5.48381 24.94 3.058 25.5913C2.73914 25.6798 2.42654 25.762 2.13269 25.8442C1.83884 26.1604 1.57 26.5019 1.32617 26.8623C1.93262 26.6853 2.58284 26.5019 3.29558 26.3122C6.46538 25.4585 11.1357 24.3898 17.4628 23.3654Z" fill="black"/>
+<path d="M150 31.2699C150 41.4318 145.211 50.4618 137.784 56.1719C135.327 58.2334 133.313 64.7403 128.649 63.8866C127.086 63.6021 124.754 62.4575 123.741 62.8812C122.835 63.2543 118.44 65.2968 118.44 71.2029C118.44 73.5174 116.777 75.4397 114.595 75.8128C114.338 75.8571 114.082 75.8824 113.813 75.8824C111.256 75.8824 109.187 73.7893 109.187 71.2029C109.187 62.2994 104.81 62.6978 101.559 62.5397H67.3726C66.2035 62.565 65.2156 63.1404 65.2156 64.3103C65.2156 66.0556 63.8152 67.4721 62.0896 67.4721C62.0208 67.4721 61.952 67.4721 61.8833 67.4657C60.2515 67.3582 58.9635 65.986 58.9635 64.3103C58.9635 63.1404 57.8507 62.6851 56.644 62.4828C53.1304 61.9832 51.7924 58.3535 51.2235 56.2162C50.6108 53.9207 49.9668 51.6885 49.9668 31.2699C49.9668 10.8512 50.6108 8.61897 51.2235 6.32353C51.8362 4.02809 53.3367 0 57.4755 0H119.084C136.158 0 150 14.0003 150 31.2699Z" fill="black"/>
+</g>
+<defs>
+<clipPath id="clip0">
+<rect width="150" height="75.8824" fill="white"/>
+</clipPath>
+</defs>
+</svg>
+	</a>
+</div>
+  
+  
+  
+</body>
+
+</html>

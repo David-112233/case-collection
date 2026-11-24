@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>Pure CSS Hidden Content Inside an Sci-Fi Opening Gate</title>
+
+    <link rel="canonical" href="https://codepen.io/Avoloch/pen/jENJZGy">
+  
+  
+  
+  
+<style>
+*{
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body{
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100dvh;
+            width: 100dvw;
+            margin: 0;
+            overflow: hidden;
+            --s: 200px;
+            --c1: #1d1d1d;
+            --c2: #4e4f51;
+            --c3: #3c3c3c;
+            background:
+                repeating-conic-gradient(from 30deg,#0000 0 120deg,var(--c3) 0 50%) 
+                calc(var(--s)/2) calc(var(--s)*tan(30deg)/2),
+                repeating-conic-gradient(from 30deg,var(--c1) 0 60deg,var(--c2) 0 120deg,var(--c3) 0 50%);
+            background-size: var(--s) calc(var(--s)*tan(30deg));
+            perspective: 2000px;
+        }
+        
+        .container{
+            height: 80dvh;
+            width: 50dvw;
+            background-color: #1a1a1a;
+            clip-path: polygon(
+                        0dvw 8dvh, 
+                        8dvh 0dvh, 
+                        calc(50dvw - 8dvh) 0dvh, 
+                        50dvw 8dvh, 
+                        50dvw 72dvh, 
+                        calc(50dvw - 8dvh) 80dvh, 
+                        8dvh 80dvh,
+                        0dvw 72dvh);
+            position: relative;
+            overflow-y: hidden;
+        }
+        .gate{
+            width: 50dvw;
+            position: absolute;
+            left: 0;
+            transition: all 1.3s ease;
+            background: 
+			linear-gradient(
+				  #d7d7d7, #c3c3c3, #cccccc, #c6c6c6, 
+				  #d3d3d3, #d8d8d8, #d5d5d5, #d8d8d8, 
+				  #d3d3d3, #c5c5c5, #c0c0c0, #bfbfbf, 
+				  #d0d0d0, #d9d9d9, #d1d1d1, #c5c5c5, 
+				  #c8c8c8, #d7d7d7, #d5d5d5, #cdcdcd, 
+				  #c4c4c4, #d9d9d9, #cecece, #c5c5c5, 
+				  #c5c5c5, #cdcdcd, #d8d8d8, #d9d9d9, 
+				  #d7d7d7);
+        }
+        .up{
+            height: 40dvh;
+            top: 0;
+            clip-path: polygon(
+                        0dvw 0dvh, 
+                        0dvh 0dvh, 
+                        50dvw 0dvh, 
+                        50dvw 0dvh, 
+                        50dvw 30dvh, 
+                        30dvw 30dvh, 
+                        20dvw 40dvh,
+                        0dvw 80dvh);  
+        }
+        .down{
+            height: 50dvh;
+            bottom: 0;
+            clip-path: polygon(
+                        0dvw 10dvh, 
+                        20dvw 10dvh, 
+                        30dvw 0dvh, 
+                        50dvw 0dvh, 
+                        50dvw 40dvh, 
+                        50dvw 50dvh, 
+                        0dvw 50dvh,
+                        0dvw 50dvh);
+        }
+        #onOff{
+            pointer-events: all;
+            height: 5dvw;
+            width: 5dvw;
+            opacity: 0;
+            position: absolute;
+            top: calc(50% - 2.5dvw);
+            left: calc(50% - 28dvw);
+        }
+        #onOff:checked ~ .container .down {
+            bottom: -30dvh;
+        }
+        #onOff:checked ~ .container .up {
+            top: -20dvh;
+        }
+        .menu{
+            height: 64dvh;
+            width: 5dvw;
+            background: linear-gradient(90deg, #1a1a1a 0%, #cccccc 30%, #f4f4f4 80%);
+            position: relative;
+            right: 0;
+            top: 0;
+            clip-path: polygon(0% 5%, 100% 0%, 100% 100%, 0% 95%);
+        }
+        .onOffButton{
+            height: 3dvw;
+            width: 3dvw;
+            background: linear-gradient(0deg, #580000, #df7171);
+            border-radius: 50%;
+            position: absolute;
+            cursor: pointer;
+            z-index: 10;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .onOffInner{
+            height: 2dvw;
+            width: 2dvw;
+            background: linear-gradient(180deg, #580000, #df7171);
+            border-radius: 50%;
+            position: absolute;
+            cursor: pointer;
+            z-index: 10;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            position: relative;
+        }
+        .O{
+            height: 1dvw;
+            width: 1dvw;
+            border: 2px solid white;
+            position: absolute;
+            border-radius: 50%;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .I{
+            background-color: white;
+            height: 0.6dvw;
+            width: 2px;
+            position: absolute;
+            left: 50%;
+            top: 33%;
+            transform: translate(-50%, -50%);
+        }
+
+        
+
+        .pipe{
+            position: absolute;
+            z-index: 3;
+            box-shadow: 1em 1em 1em rgba(0, 0, 0, 0.3)
+            conic-gradient(
+				  #d95641, #b14439, #b2453a, #d25645, 
+				  #d56847, #d05441, #b85137, #b2453a, 
+				  #c34f40, #df4647, #a94338, #c94943, 
+				  #c85442, #a4413c, #d9543a, #d1564e, 
+				  #ab4338, #bb4a3c, #dc5843, #b94839, 
+				  #aa4237, #c24e42, #ce523f, #ab4338, 
+				  #dd5944, #ca4d33, #ab4338, #cb503e, 
+				  #d95641);
+        }
+        .firstPipe{
+            background: linear-gradient(0deg, rgb(160, 72, 13), rgb(252, 133, 53));
+            height: 2dvh;
+            width: 20dvw;
+            border-radius: 0 0 2dvh 0;
+            left: 0;
+            bottom: 3dvh;
+        }
+        .secondPipe{
+            background: linear-gradient(90deg, rgb(160, 72, 13), rgb(252, 133, 53));
+            height: 6dvh;
+            width: 2dvh;
+            border-radius: 2dvh 0 0 0;
+            left: calc(20dvw - 2dvh);
+            bottom: 5dvh;
+        }
+        .thirdPipe{
+            background: linear-gradient(0deg, rgb(160, 72, 13), rgb(252, 133, 53));
+            height: 2dvh;
+            width: 30dvw;
+            border-radius: 0 0 0 0;
+            left: 20dvw;
+            bottom: 9dvh;
+        }
+        .blink{
+            background-color: #3d3d3d;
+            border: 2px solid black;
+            border-radius: 50%;
+            height: 1em;
+            width: 1em;
+            position: absolute;
+            top: 8vh;
+            left: calc(50% - 0.5em);
+            animation: blink 0.7s infinite ease;
+        }
+
+        @keyframes blink {
+            from{
+                background-color: #3d3d3d;
+            }
+            to{
+                background-color: #32cd32;
+            }
+        }
+
+        .bar{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1px;
+            height: 20dvh;
+            width: 70%;
+            position: absolute;
+            bottom: 3dvh;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .barItem{
+            height: 4dvh;
+            width: auto;
+            aspect-ratio: 1/1;
+            background-color: #1a1a1a;
+            animation: bar 2s infinite;
+            box-shadow: inset 0.2em 0.2em 0.2em rgba(0, 0, 0, 0.3), inset -0.2em -0.2em 0.2em rgba(255, 255, 255, 0.3);
+        }
+        @keyframes bar {
+            from{
+                background-color: #1a1a1a; 
+            }
+            to{
+                background-color: #00ff00;
+            }
+        }
+        .barItem:nth-child(1){
+            animation-delay: 1s;
+            border-radius: 0.5em 0.5em 0 0;
+        }
+        .barItem:nth-child(2){
+            animation-delay: 0.8s;
+        }
+        .barItem:nth-child(3){
+            animation-delay: 0.6s;
+        }
+        .barItem:nth-child(4){
+            animation-delay: 0.4s;
+        }
+        .barItem:nth-child(5){
+            animation-delay: 0.2s;
+            border-radius: 0 0 0.5em 0.5em;
+        }
+        .content{
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            height: 100%;
+            width: 100%;
+        }
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <div class="menu">
+        <div class="blink"></div>
+        <div class="onOffButton">
+            <div class="onOffInner">
+                <span class="O"></span>
+                <span class="I"></span>
+            </div>
+        </div>
+        <div class="bar">
+            <div class="barItem"></div>
+            <div class="barItem"></div>
+            <div class="barItem"></div>
+            <div class="barItem"></div>
+            <div class="barItem"></div>
+        </div>
+    </div>
+    <input type="checkbox" id="onOff" name="onOff">
+    <div class="container">
+        <div class="content">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis ex tempora minus repudiandae rerum, velit quod ea veritatis porro possimus, libero ullam deserunt quo, vitae repellat! Eligendi accusamus deleniti minus.</p>
+        </div>
+        <div class="gate up"></div>
+        <div class="gate down"></div>
+        <div class="pipe firstPipe"></div>
+        <div class="pipe secondPipe"></div>
+        <div class="pipe thirdPipe"></div>
+    </div>
+  
+    <script id="rendered-js" >
+//Nothing to see here
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>

@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>CSS Pendulum Waves</title>
+
+    <link rel="canonical" href="https://codepen.io/amit_sheen/pen/NWBwmmr">
+  
+  
+  
+  
+<style>
+* {
+  padding: 0;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #000;
+  color: #fff;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  font-size: 40px;
+  perspective: 50em;
+}
+body *:not(:empty) {
+  transform-style: preserve-3d;
+}
+
+input[type=checkbox] {
+  display: none;
+}
+input[type=checkbox]:checked ~ .pendulum {
+  --ry: 360deg;
+}
+input[type=checkbox]:checked ~ label {
+  --ry: 180deg;
+}
+
+label {
+  position: fixed;
+  top: calc(50% - 7em);
+  cursor: pointer;
+  transform: rotateY(var(--ry, 0));
+  transition: transform 5s;
+}
+label:hover > svg {
+  opacity: 0.5;
+}
+label svg {
+  width: 3em;
+  height: 2em;
+  fill: #fff;
+  opacity: 0.3;
+}
+
+.pendulum {
+  position: relative;
+  transform: rotateY(var(--ry, 0deg));
+  transition: transform 10s;
+}
+
+.topbar {
+  position: absolute;
+  top: -4em;
+}
+.topbar > div {
+  position: absolute;
+  width: 1em;
+  height: var(--height, 1em);
+  background-color: #420;
+  transform: translate(-50%, -50%) var(--transform);
+  box-shadow: 0 0 1em #000 inset;
+  opacity: 0.9;
+}
+.topbar > div:nth-child(1) {
+  --transform: translateZ(8em);
+}
+.topbar > div:nth-child(2) {
+  --transform: rotateY(180deg) translateZ(8em);
+}
+.topbar > div:nth-child(3) {
+  --height: 16em;
+  --transform: rotateZ(0deg) rotateX(90deg) translateZ(0.5em);
+}
+.topbar > div:nth-child(4) {
+  --height: 16em;
+  --transform: rotateZ(90deg) rotateX(90deg) translateZ(0.5em);
+}
+.topbar > div:nth-child(5) {
+  --height: 16em;
+  --transform: rotateZ(180deg) rotateX(90deg) translateZ(0.5em);
+}
+.topbar > div:nth-child(6) {
+  --height: 16em;
+  --transform: rotateZ(270deg) rotateX(90deg) translateZ(0.5em);
+}
+
+.balls {
+  position: absolute;
+  top: -3.5em;
+}
+
+.ball {
+  position: absolute;
+  animation: ballSwing var(--duration, 0s) calc(var(--duration, 0s) * -0.5) infinite ease-in-out alternate;
+}
+@keyframes ballSwing {
+  from {
+    transform: translateZ(var(--tz, 0)) rotateZ(-45deg);
+  }
+  to {
+    transform: translateZ(var(--tz, 0)) rotateZ(45deg);
+  }
+}
+.ball .string {
+  position: absolute;
+  left: -1px;
+  width: 2px;
+  height: calc(var(--ty, 0) - 0.5em);
+  background-color: hsla(var(--hue, 0), 75%, 75%, 0.1);
+  transform: rotateX(var(--rx, -3deg));
+  transform-origin: bottom;
+  transform-style: preserve-3d;
+}
+.ball .string:nth-child(2) {
+  --rx: 3deg;
+}
+.ball .string::before, .ball .string::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: rotateY(var(--ry, 120deg));
+  background-color: inherit;
+}
+.ball .string::after {
+  --ry: 240deg;
+}
+.ball .face {
+  position: absolute;
+  animation: faceSwing var(--duration, 0s) calc(var(--duration, 0s) * -0.5) infinite ease-in-out alternate-reverse;
+  transform-style: preserve-3d;
+}
+@keyframes faceSwing {
+  from {
+    transform: translateY(var(--ty, 5em)) rotateZ(-45deg);
+  }
+  to {
+    transform: translateY(var(--ty, 5em)) rotateZ(45deg);
+  }
+}
+.ball .face::after {
+  content: "";
+  position: absolute;
+  width: 1em;
+  height: 1em;
+  background-color: hsl(var(--hue, 0), 75%, 75%);
+  background-image: radial-gradient(circle at top, #0000, #000);
+  border-radius: 50%;
+  box-shadow: 0 0 1em #000;
+  transform: translate(-50%, -50%) rotateY(var(--ry, 720deg));
+  transition: transform 10s;
+}
+
+.floor {
+  position: absolute;
+  top: 7em;
+  width: 30em;
+  height: 30em;
+  background-color: #024;
+  background-image: radial-gradient(#0000, #000 15em), repeating-conic-gradient(from 20deg, #000 0 90deg, #0000 0 180deg);
+  background-size: 100% 100%, 2em 2em;
+  transform: translate(-50%, -50%) rotateX(90deg);
+}
+
+.shadow {
+  position: absolute;
+  left: 50%;
+  top: calc(50% + var(--tz, 0em));
+  width: calc(6em - var(--ty, 0) * 0.2);
+  height: calc(8em - var(--ty, 0) * 0.2);
+  border-radius: 50%;
+  background-image: radial-gradient(#000, #0000 50%);
+  animation: shadow var(--duration) calc(var(--duration, 0s) * -0.5) infinite ease-in-out alternate;
+  transform: translate(-50%, -50%);
+}
+@keyframes shadow {
+  from {
+    transform: translate(-50%, -50%) translateX(10em);
+  }
+  to {
+    transform: translate(-50%, -50%) translateX(-10em);
+  }
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.ball:nth-child(1), .shadow:nth-child(1) {
+  --tz: -7em;
+  --duration: 1s;
+  --ty: 6em;
+  --hue: 0;
+}
+.ball:nth-child(2), .shadow:nth-child(2) {
+  --tz: -6em;
+  --duration: 1.0344827586s;
+  --ty: 6.25em;
+  --hue: 24;
+}
+.ball:nth-child(3), .shadow:nth-child(3) {
+  --tz: -5em;
+  --duration: 1.0714285714s;
+  --ty: 6.5em;
+  --hue: 48;
+}
+.ball:nth-child(4), .shadow:nth-child(4) {
+  --tz: -4em;
+  --duration: 1.1111111111s;
+  --ty: 6.75em;
+  --hue: 72;
+}
+.ball:nth-child(5), .shadow:nth-child(5) {
+  --tz: -3em;
+  --duration: 1.1538461538s;
+  --ty: 7em;
+  --hue: 96;
+}
+.ball:nth-child(6), .shadow:nth-child(6) {
+  --tz: -2em;
+  --duration: 1.2s;
+  --ty: 7.25em;
+  --hue: 120;
+}
+.ball:nth-child(7), .shadow:nth-child(7) {
+  --tz: -1em;
+  --duration: 1.25s;
+  --ty: 7.5em;
+  --hue: 144;
+}
+.ball:nth-child(8), .shadow:nth-child(8) {
+  --tz: 0em;
+  --duration: 1.3043478261s;
+  --ty: 7.75em;
+  --hue: 168;
+}
+.ball:nth-child(9), .shadow:nth-child(9) {
+  --tz: 1em;
+  --duration: 1.3636363636s;
+  --ty: 8em;
+  --hue: 192;
+}
+.ball:nth-child(10), .shadow:nth-child(10) {
+  --tz: 2em;
+  --duration: 1.4285714286s;
+  --ty: 8.25em;
+  --hue: 216;
+}
+.ball:nth-child(11), .shadow:nth-child(11) {
+  --tz: 3em;
+  --duration: 1.5s;
+  --ty: 8.5em;
+  --hue: 240;
+}
+.ball:nth-child(12), .shadow:nth-child(12) {
+  --tz: 4em;
+  --duration: 1.5789473684s;
+  --ty: 8.75em;
+  --hue: 264;
+}
+.ball:nth-child(13), .shadow:nth-child(13) {
+  --tz: 5em;
+  --duration: 1.6666666667s;
+  --ty: 9em;
+  --hue: 288;
+}
+.ball:nth-child(14), .shadow:nth-child(14) {
+  --tz: 6em;
+  --duration: 1.7647058824s;
+  --ty: 9.25em;
+  --hue: 312;
+}
+.ball:nth-child(15), .shadow:nth-child(15) {
+  --tz: 7em;
+  --duration: 1.875s;
+  --ty: 9.5em;
+  --hue: 336;
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  <input type="checkbox" id="pcb">
+<div class="pendulum">
+
+  <div class="topbar">
+    <div></div><div></div><div></div><div></div><div></div><div></div>
+  </div>
+
+  <div class="balls">
+    <div class="ball">
+      <div class="string"></div>
+      <div class="string"></div>
+      <div class="face"></div>
+    </div>
+    <div class="ball">
+      <div class="string"></div>
+      <div class="string"></div>
+      <div class="face"></div>
+    </div>
+    <div class="ball">
+      <div class="string"></div>
+      <div class="string"></div>
+      <div class="face"></div>
+    </div>
+    <div class="ball">
+      <div class="string"></div>
+      <div class="string"></div>
+      <div class="face"></div>
+    </div>
+    <div class="ball">
+      <div class="string"></div>
+      <div class="string"></div>
+      <div class="face"></div>
+    </div>
+    <div class="ball">
+      <div class="string"></div>
+      <div class="string"></div>
+      <div class="face"></div>
+    </div>
+    <div class="ball">
+      <div class="string"></div>
+      <div class="string"></div>
+      <div class="face"></div>
+    </div>
+    <div class="ball">
+      <div class="string"></div>
+      <div class="string"></div>
+      <div class="face"></div>
+    </div>
+    <div class="ball">
+      <div class="string"></div>
+      <div class="string"></div>
+      <div class="face"></div>
+    </div>
+    <div class="ball">
+      <div class="string"></div>
+      <div class="string"></div>
+      <div class="face"></div>
+    </div>
+    <div class="ball">
+      <div class="string"></div>
+      <div class="string"></div>
+      <div class="face"></div>
+    </div>
+    <div class="ball">
+      <div class="string"></div>
+      <div class="string"></div>
+      <div class="face"></div>
+    </div>
+    <div class="ball">
+      <div class="string"></div>
+      <div class="string"></div>
+      <div class="face"></div>
+    </div>
+    <div class="ball">
+      <div class="string"></div>
+      <div class="string"></div>
+      <div class="face"></div>
+    </div>
+    <div class="ball">
+      <div class="string"></div>
+      <div class="string"></div>
+      <div class="face"></div>
+    </div>
+  </div>
+
+  <div class="floor">
+    <div class="shadow"></div>
+    <div class="shadow"></div>
+    <div class="shadow"></div>
+    <div class="shadow"></div>
+    <div class="shadow"></div>
+    <div class="shadow"></div>
+    <div class="shadow"></div>
+    <div class="shadow"></div>
+    <div class="shadow"></div>
+    <div class="shadow"></div>
+    <div class="shadow"></div>
+    <div class="shadow"></div>
+    <div class="shadow"></div>
+    <div class="shadow"></div>
+    <div class="shadow"></div>
+  </div>
+</div>
+
+<label for="pcb">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+    <path d="M 25 13 C 19.184825 13 13.344702 13.859292 8.8515625 15.605469 C 6.604993 16.478557 4.68813 17.572147 3.2851562 18.955078 C 1.8821826 20.338009 1 22.065021 1 24 C 1 25.765502 1.7336163 27.364275 2.9277344 28.673828 C 4.1218525 29.983381 5.7648812 31.042084 7.703125 31.912109 C 11.339472 33.544367 16.075891 34.455277 21 34.798828 L 21 41.044922 L 32.628906 32 L 21 22.955078 L 21 28.777344 C 16.699262 28.438697 13.10263 27.646111 10.683594 26.658203 C 9.3674634 26.12071 8.3719281 25.537579 7.7597656 25.021484 C 7.1476032 24.50539 7 24.096639 7 24 C 7 23.892861 7.1957082 23.405298 7.9492188 22.822266 C 8.7027293 22.239233 9.9098427 21.595327 11.490234 21.023438 C 14.651019 19.879656 19.303144 19 25 19 C 30.696856 19 35.348981 19.879656 38.509766 21.023438 C 40.090158 21.595327 41.297271 22.239233 42.050781 22.822266 C 42.804292 23.405298 43 23.892861 43 24 C 43 24.12216 42.684049 24.776886 41.615234 25.482422 C 40.546419 26.187958 38.876371 26.929655 36.728516 27.537109 L 36 27.744141 L 36 33.917969 L 37.240234 33.611328 C 40.490536 32.807479 43.346925 31.663594 45.466797 30.101562 C 47.586668 28.539531 49 26.457731 49 24 C 49 22.065021 48.117818 20.338009 46.714844 18.955078 C 45.31187 17.572147 43.395007 16.478557 41.148438 15.605469 C 36.655298 13.859292 30.815175 13 25 13 z M 25 15 C 30.614825 15 36.274467 15.85813 40.423828 17.470703 C 42.498509 18.27699 44.188911 19.273322 45.3125 20.380859 C 46.436089 21.488397 47 22.652479 47 24 C 47 25.711269 46.078379 27.166016 44.28125 28.490234 C 42.746774 29.620916 40.514291 30.536314 38 31.267578 L 38 29.154297 C 39.878459 28.560545 41.572518 27.905742 42.716797 27.150391 C 44.037732 26.278427 45 25.31184 45 24 C 45 22.884139 44.270238 22.011515 43.273438 21.240234 C 42.276636 20.468954 40.909311 19.764937 39.189453 19.142578 C 35.749737 17.89786 30.901144 17 25 17 C 19.098856 17 14.250263 17.89786 10.810547 19.142578 C 9.0906889 19.764937 7.7233644 20.468954 6.7265625 21.240234 C 5.7297606 22.011515 5 22.884139 5 24 C 5 25.016861 5.6222406 25.83547 6.4707031 26.550781 C 7.3191657 27.266093 8.4753645 27.916634 9.9277344 28.509766 C 12.832474 29.696029 16.925171 30.629986 21.945312 30.908203 L 23 30.966797 L 23 27.042969 L 29.373047 32 L 23 36.957031 L 23 32.970703 L 22.052734 32.919922 C 16.960744 32.651276 12.052997 31.673091 8.5214844 30.087891 C 6.7557282 29.295291 5.3421319 28.352525 4.40625 27.326172 C 3.4703681 26.299819 3 25.229498 3 24 C 3 22.652479 3.5639113 21.488397 4.6875 20.380859 C 5.8110887 19.273322 7.5014914 18.27699 9.5761719 17.470703 C 13.725533 15.85813 19.385175 15 25 15 z"/>
+  </svg>
+</label>
+  <script src='https://assets.codepen.io/1948355/twitterButton-2.1.0.js'></script>
+  
+  
+</body>
+
+</html>

@@ -1,0 +1,70 @@
+{
+  "source_id": "codepen:enrichr-dev/gbmzjkd",
+  "author": "Enrichr-Dev",
+  "pen_id": "gbmZjKd",
+  "url": "https://codepen.io/Enrichr-Dev/pen/gbmZjKd",
+  "acquisition": "cdpn_fullpage",
+  "acquisition_url": "https://cdpn.io/Enrichr-Dev/fullpage/gbmZjKd",
+  "retrieved_at": "2026-11-20T07:10:03+00:00",
+  "license": "未单独核验；外链资源许可另查",
+  "fetch_status": "ok",
+  "title": "3D ring carousel",
+  "canonical_url": "https://codepen.io/Enrichr-Dev/pen/gbmZjKd",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "1fb9b0e2b1e9565f05036330c7bc8af5324a136d0c8acc158f2df96cdf7955f7",
+  "source_html_sha256": "81778865ad10092bd67295bf8831b3270604b6886d233623baba7de539dec971",
+  "analysis": {
+    "js": {
+      "has_js": true,
+      "inline_js_chars": 6288,
+      "external_scripts": [
+        "https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"
+      ],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": true
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 0,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": true,
+      "clip_path": false,
+      "css_counter": false,
+      "media_query": false
+    },
+    "external_stylesheets": [
+      "https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Parkinsans:wght@400;500;600;700;800&family=Instrument+Sans:wght@400;500;600&family=Fira+Code:wght@400;500&display=swap"
+    ],
+    "css_imports": [],
+    "css_chars": 1388,
+    "element_count": 11,
+    "html_chars": 9498
+  },
+  "review": {
+    "label": "立体环形卡片轮播",
+    "status": "候选",
+    "reference_case": "213 / 227",
+    "evidence": "云端 1331×894 编辑器内预览实看：中央卡正对镜头呈完整宽矩形，左右邻卡侧转投影明显变窄；尝试点右键后见中央编号变化，但源码默认 2200ms 自动轮转，未隔离按键的独立效果。可以用一帧看环形位置与投影宽度，不把自动变换视为可保持两态。作者单独发布组件及文档；使用作评测需留意作品公开程度。",
+    "visual_verified": true,
+    "surface": "Cloud Chrome, CodePen editor result pane, 1331×894 desktop; no mobile check",
+    "formal_admission": false
+  }
+}

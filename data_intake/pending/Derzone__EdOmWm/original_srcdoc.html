@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>Building Floors Selector</title>
+
+    <link rel="canonical" href="https://codepen.io/Derzone/pen/EdOmWm">
+  
+  
+  
+  
+<style>
+body {
+  background-color: #F2F5ED;
+}
+
+.building {
+  position: relative;
+  top: 200px;
+  width: 200px;
+  margin: 0 auto 0 auto;
+}
+
+.floor {
+  position: relative;
+}
+.floor .face {
+  position: absolute;
+  height: 100px;
+  width: 100px;
+  transform-origin: 0 0;
+  transition: all 225ms ease-in-out;
+}
+.floor .face.top {
+  opacity: 1;
+  transform: rotate(210deg) skewX(-30deg) scaleY(0.864);
+  background: #D4D9C9;
+  z-index: 2;
+}
+.floor .face.left {
+  width: 30px;
+  background: #CFDBD5;
+  border-right: 1px solid #B3BEB8;
+  transform: rotate(90deg) skewX(-30deg) scaleY(0.864);
+  z-index: 1;
+}
+.floor .face.right {
+  height: 30px;
+  background: #E8EDDF;
+  border-bottom: 1px solid #CFDBD5;
+  transform: rotate(-30deg) skewX(-30deg) scaleY(0.864);
+  z-index: 1;
+}
+.floor .face.bottom {
+  top: 30px;
+  transform: rotate(210deg) skewX(-30deg) scaleY(0.864);
+  background: #f5f5f5;
+  z-index: 0;
+}
+.floor .floor-number {
+  position: absolute;
+  top: -50px;
+  left: 86px;
+  background: rgba(37, 53, 70, 0.75);
+  height: 30px;
+  width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  transition: all 225ms ease-in-out;
+}
+.floor.floor-inhabited:hover {
+  cursor: pointer;
+}
+.floor.floor-inhabited:hover .face.top {
+  opacity: 0.35;
+}
+.floor.floor-inhabited:hover .face.left, .floor.floor-inhabited:hover .face.right {
+  opacity: 0.15;
+}
+.floor.floor-inhabited:hover .face.bottom {
+  background-color: #FFC857;
+  box-shadow: 0 0 0 32px rgba(255, 200, 87, 0.35);
+}
+.floor.floor-inhabited:hover .floor-number {
+  width: 45px;
+  padding-right: 10px;
+  justify-content: flex-end;
+  background: #FFC857;
+}
+
+.floor-ground {
+  top: 60px;
+  z-index: 10;
+}
+.floor-ground .face.bottom {
+  box-shadow: 0 0 0 32px #253546;
+}
+.floor-ground .face.shadow {
+  top: 30px;
+  width: 131px;
+  transform: rotate(210deg) skewX(-30deg) scaleY(0.864);
+  background: black;
+  z-index: 2;
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <div class="building">    
+    <div class="floor floor-ground">
+        <span class="face shadow"></span>
+        <span class="face bottom"></span>
+    </div>
+</div>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+    <script id="rendered-js" >
+"use strict";
+$(document).ready(() => {
+    const $building = $('.building');
+    const $groundFloor = $('.floor.floor-ground');
+    const floorHeight = 30;
+    const floorCount = 10;
+    for (let i = 1; i <= floorCount; i++) {
+        const floorDefinition = {
+            id: 'floor-' + i,
+            class: 'floor floor-inhabited',
+            css: {
+                'z-index': 10 + (i * 10),
+                'top': (floorCount - i) * floorHeight + 'px'
+            },
+            'data-floor': i
+        };
+        const isLastFloor = i === floorCount;
+        const $floor = $('<div>', floorDefinition).prependTo($building);
+        $(document.createElement('span')).prop({ class: 'floor-number' }).html(i).prependTo($floor);
+        $(document.createElement('span')).prop({ class: 'face left' }).prependTo($floor);
+        $(document.createElement('span')).prop({ class: 'face right' }).prependTo($floor);
+        $(document.createElement('span')).prop({ class: 'face bottom' }).prependTo($floor);
+        if (isLastFloor) {
+            $(document.createElement('span')).prop({ class: 'face top' }).prependTo($floor);
+        }
+    }
+    $groundFloor.css({
+        'top': ((floorCount - 1) * floorHeight) + 'px'
+    });
+});
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>

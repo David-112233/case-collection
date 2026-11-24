@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>Peter&#39;s Blinds with CSS Scroll Linked Animations ✨</title>
+
+    <link rel="canonical" href="https://codepen.io/jh3y/pen/RwBRyzb">
+  <script>
+  if (!("container" in document.documentElement.style)) {
+    import("https://unpkg.com/container-query-polyfill@^0.2.0");
+  }
+</script>
+  
+  
+  
+<style>
+@import "https://unpkg.com/normalize.css";
+
+@font-face {
+  font-family: Impact;
+  src: url(https://assets.codepen.io/605876/impact.ttf);
+}
+
+* {
+  box-sizing: border-box;
+}
+:root {
+  --height: 300px;
+  --width: calc(0.6 * var(--height));
+  --glass: rgba(207, 229, 252, 0.5);
+  --shimmer: rgba(255, 255, 255, 0.95);
+  --w-1: #546043;
+  --w-2: #373c2f;
+  --f-1: #251b0e;
+  --f-2: #372915;
+  --f-3: #5c4424;
+  --f-4: #6e522b;
+  --i-1: #574638;
+  --b-1: #b5bea7;
+  --b-4: #bfc7b3;
+  --b-2: #6a7557;
+  --b-3: #353b2b;
+}
+h1 {
+  font-size: 100px;
+  text-align: center;
+  margin: 40px 0 0 0;
+  color: hsl(0 0% 100%);
+  letter-spacing: -1px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(100%, 0%, 110vmin);
+}
+body {
+  min-height: 200vh;
+  overflow: hidden;
+  background: rgba(255, 230, 153, 0.5);
+  font-family: "Impact", sans-serif;
+  height:100vh;
+  overflow: auto;
+  overflow-x: hidden;
+  scrollbar-color: red;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: red;
+}
+
+.cuboid {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  pointer-events: none;
+}
+.cuboid__side {
+  pointer-events: none;
+}
+.cuboid__side:nth-of-type(1) {
+  height: calc(var(--thickness) * 1px);
+  width: 100%;
+  position: absolute;
+  top: 0;
+  transform: translate(0, -50%) rotateX(90deg);
+}
+.cuboid__side:nth-of-type(2) {
+  height: 100%;
+  width: calc(var(--thickness) * 1px);
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translate(50%, -50%) rotateY(90deg);
+}
+.cuboid__side:nth-of-type(3) {
+  width: 100%;
+  height: calc(var(--thickness) * 1px);
+  position: absolute;
+  bottom: 0;
+  transform: translate(0%, 50%) rotateX(90deg);
+}
+.cuboid__side:nth-of-type(4) {
+  height: 100%;
+  width: calc(var(--thickness) * 1px);
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translate(-50%, -50%) rotateY(90deg);
+}
+.cuboid__side:nth-of-type(5) {
+  height: 100%;
+  width: 100%;
+  transform: translate3d(0, 0, calc(var(--thickness) * 0.5px));
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.cuboid__side:nth-of-type(6) {
+  height: 100%;
+  width: 100%;
+  transform: translate3d(0, 0, calc(var(--thickness) * -0.5px)) rotateY(180deg);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.scene {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 100vmin) rotateX(-24deg) rotateY(24deg);
+}
+.window {
+  height: var(--height);
+  width: var(--width);
+  position: relative;
+}
+.glass {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: linear-gradient(var(--i-1), var(--i-1)) 0 0/100% 5% no-repeat,
+    linear-gradient(var(--i-1), var(--i-1)) 0 0/5% 100% no-repeat,
+    linear-gradient(var(--i-1), var(--i-1)) 100% 0/5% 100% no-repeat,
+    linear-gradient(var(--i-1), var(--i-1)) 0 100%/100% 5% no-repeat,
+    linear-gradient(var(--i-1), var(--i-1)) 0 64%/100% 8% no-repeat,
+    linear-gradient(
+      130deg,
+      transparent 0 15%,
+      var(--shimmer) 16% 35%,
+      transparent 36% 40%,
+      var(--shimmer) 41% 44%,
+      transparent 45%
+    ),
+    var(--glass);
+}
+.frame {
+  position: absolute;
+}
+.frame--top {
+  width: 130%;
+  height: 5%;
+  bottom: 100%;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+.frame--sill {
+  width: 120%;
+  height: 5%;
+  top: 100%;
+  left: 50%;
+  background: var(--f-4);
+  transform: translate3d(-50%, 0, 12px);
+}
+.frame--left {
+  width: 10%;
+  height: 100%;
+  right: 100%;
+  top: 0;
+}
+.frame--right {
+  width: 10%;
+  height: 100%;
+  left: 100%;
+  top: 0;
+}
+.peter__container {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  overflow: hidden;
+}
+.wall {
+  position: absolute;
+  height: 200vmax;
+  width: 200vmax;
+  background: linear-gradient(
+      var(--w-1) 52%,
+      var(--f-1) 52% 53%,
+      var(--w-2) 53% 100%
+    ),
+    var(--w-1);
+}
+.wall--top {
+  bottom: calc(50% + (var(--height) * 0.5));
+  left: 50%;
+  transform: translate3d(-50%, 0, 10px);
+  background: var(--w-1);
+}
+.wall--bottom {
+  top: calc(50% + (var(--height) * 0.5));
+  left: 50%;
+  transform: translate3d(-50%, 0, 10px);
+  background: var(--w-2);
+}
+.wall--left {
+  right: calc(50% + (var(--width) * 0.5));
+  top: 50%;
+  transform: translate3d(0, -50%, 10px);
+}
+.wall--right {
+  left: calc(50% + (var(--width) * 0.5));
+  top: 50%;
+  transform: translate3d(0, -50%, 10px);
+}
+.blinds {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.container {
+  height: 100%;
+  width: 100%;
+  transform: translate3d(0, 0, 12px) scale(1);
+  position: relative;
+  transform-origin: 100% 0;
+}
+.blind {
+  width: 100%;
+  height: 2.5%;
+  background: linear-gradient(
+    var(--b-3) 0 10%,
+    var(--b-1) 10% 90%,
+    var(--b-3) 90% 100%
+  );
+  transform: translate(
+    0,
+    calc(((-95 * (var(--index, 0))) * var(--open, 0.95)) * 1%)
+  );
+}
+.peter {
+  position: absolute;
+  top: 100%;
+  height: 140px;
+  right: 0%;
+}
+.cord {
+  position: absolute;
+  top: 0;
+  right: 16px;
+  width: calc(var(--width) * 0.02);
+  transform: translate3d(50%, 0, 1vmin);
+  background: #fafafa;
+  height: 150%;
+}
+.cord--dummy {
+  background: #dbdbdb;
+  right: 12px;
+  height: calc(var(--height) * 0.84);
+}
+.cord__handle {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform-origin: 50% 100%;
+  transform: translate(-54%, 4%) scale(0.65);
+  height: 40px;
+  width: 24px;
+  clip-path: polygon(0 100%, 100% 100%, 80% 0, 20% 0);
+  -webkit-clip-path: polygon(0 100%, 100% 100%, 80% 0, 20% 0);
+  pointer-events: none;
+  background: var(--b-3);
+}
+.cord__handle:after {
+  clip-path: polygon(0 100%, 100% 100%, 80% 0, 20% 0);
+  -webkit-clip-path: polygon(0 100%, 100% 100%, 80% 0, 20% 0);
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: var(--b-2);
+  transform: scale(0.75);
+}
+
+.window-frame div {
+  background: var(--f-1);
+}
+.window-frame div:nth-of-type(1) {
+  background: var(--f-1);
+}
+.window-frame div:nth-of-type(2) {
+  background: var(--f-2);
+}
+.window-frame div:nth-of-type(3) {
+  background: var(--f-3);
+}
+.window-frame div:nth-of-type(4) {
+  background: var(--f-2);
+}
+.window-frame div:nth-of-type(5) {
+  background: var(--f-3);
+}
+.window-frame div:nth-of-type(6) {
+  background: var(--f-1);
+}
+.window-frame--top {
+  --thickness: 50;
+}
+.window-frame--right {
+  --thickness: 40;
+}
+.window-frame--left {
+  --thickness: 40;
+}
+.window-frame--bottom {
+  --thickness: 40;
+}
+.window-frame--sill {
+  --thickness: 60;
+}
+
+/* Scroll stuff */
+/* Map this to a view-timeline */
+.peter {
+  animation: 1s peek both linear;
+  animation-timeline: scroll(root);
+}
+
+@keyframes peek {
+  0% {
+    transform: translate(-10%, 0);
+  }
+  100% {
+    transform: translate(-10%, -86%);
+  }
+}
+
+.cord:not(.cord--dummy) {
+  height: 50%;
+  animation: 1s draw both linear;
+  animation-timeline: scroll(root);
+}
+
+@keyframes draw {
+  0% {
+    height: 50%
+  }
+  100% {
+    height: 96%;
+  }
+}
+
+.blind {
+  transform: translate(0, calc(((-95 * (var(--index, 0))) * 0) * 1%));
+  animation: 1s slide both linear;
+  animation-timeline: scroll(root);
+}
+
+@keyframes slide {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(0, calc(((-95 * (var(--index, 0))) * 1) * 1%));
+  }
+}
+
+/* An overlaid window element on the window frame */
+main {
+  height:100vh;
+  overflow: hidden;
+  width: 100vw;
+/*   position: fixed; */
+}
+
+.scene,
+.scene * {
+  transform-style: preserve-3d;
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <main>
+<!--   <div class="scroll-trigger">
+    <div class="scroll-trigger__content"></div>
+  </div> -->
+  <div class="scene">
+    <div class="window">
+      <div class="frame frame--top">
+        <div class="cuboid window-frame window-frame--top">
+          <div class="cuboid__side"></div>
+          <div class="cuboid__side"></div>
+          <div class="cuboid__side"></div>
+          <div class="cuboid__side"></div>
+          <div class="cuboid__side"></div>
+          <div class="cuboid__side"></div>
+        </div>
+      </div>
+      <div class="frame frame--right">
+        <div class="cuboid window-frame window-frame--right">
+          <div class="cuboid__side"></div>
+          <div class="cuboid__side"></div>
+          <div class="cuboid__side"></div>
+          <div class="cuboid__side"></div>
+          <div class="cuboid__side"></div>
+          <div class="cuboid__side"></div>
+        </div>
+      </div>
+      <div class="frame frame--left">
+        <div class="cuboid window-frame window-frame--left">
+          <div class="cuboid__side"></div>
+          <div class="cuboid__side"></div>
+          <div class="cuboid__side"></div>
+          <div class="cuboid__side"></div>
+          <div class="cuboid__side"></div>
+          <div class="cuboid__side"></div>
+        </div>
+      </div>
+      <div class="frame frame--sill">
+        <div class="cuboid window-frame window-frame--right">
+          <div class="cuboid__side"></div>
+          <div class="cuboid__side"></div>
+          <div class="cuboid__side"></div>
+          <div class="cuboid__side"></div>
+          <div class="cuboid__side"></div>
+          <div class="cuboid__side"></div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="peter__container">
+          <svg class="peter" viewBox="0 0 228 237" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <!-- <circle class="peter__backdrop" cx="114" cy="123" r="110" fill="#C4C4C4"/> -->
+            <mask id="a" mask-type="alpha" maskUnits="userSpaceOnUse" x="4" y="13" width="220" height="220">
+              <circle cx="114" cy="123" r="110" fill="#C4C4C4" />
+            </mask>
+            <g mask="url(#a)">
+              <rect width="201" height="226" transform="matrix(-1 0 0 1 210 37)" fill="url(#b)" />
+              <rect x="171" y="169.378" width="18" height="18" transform="rotate(-17.384 171 169.378)" fill="url(#c)" style="mix-blend-mode: soft-light" />
+            </g>
+            <g class="peter__shades" transform="rotate(6.523 33.947 63)">
+              <rect clip-path="url(#shadeClip)" x="33.947" y="63" width="181" height="25" fill="url(#d)" />
+            </g>
+            <defs>
+              <clipPath id="shadeClip">
+                <rect x="33.947" y="63" width="181" height="24" fill="url(#d)" />
+              </clipPath>
+              <pattern id="d" patternContentUnits="objectBoundingBox" width="1" height="1">
+                <use xlink:href="#g" transform="scale(.00286 .02)" />
+              </pattern>
+              <pattern id="b" patternContentUnits="objectBoundingBox" width="1" height="1">
+                <use xlink:href="#e" transform="scale(.0008)" />
+              </pattern>
+              <image id="g" width="350" height="50" xlink:href="https://assets.codepen.io/605876/thug-shades.png?format=auto" />
+              <image id="e" width="1243" height="1396" xlink:href="https://assets.codepen.io/605876/peter-griffin-head-optimized.png?format=auto&quality=2" />
+            </defs>
+          </svg>
+        </div>
+        <div class="glass"></div>
+        <div class="blinds">
+          <div class="blind" style="--index: 0"></div>
+          <div class="blind" style="--index: 1"></div>
+          <div class="blind" style="--index: 2"></div>
+          <div class="blind" style="--index: 3"></div>
+          <div class="blind" style="--index: 4"></div>
+          <div class="blind" style="--index: 5"></div>
+          <div class="blind" style="--index: 6"></div>
+          <div class="blind" style="--index: 7"></div>
+          <div class="blind" style="--index: 8"></div>
+          <div class="blind" style="--index: 9"></div>
+          <div class="blind" style="--index: 10"></div>
+          <div class="blind" style="--index: 11"></div>
+          <div class="blind" style="--index: 12"></div>
+          <div class="blind" style="--index: 13"></div>
+          <div class="blind" style="--index: 14"></div>
+          <div class="blind" style="--index: 15"></div>
+          <div class="blind" style="--index: 16"></div>
+          <div class="blind" style="--index: 17"></div>
+          <div class="blind" style="--index: 18"></div>
+          <div class="blind" style="--index: 19"></div>
+          <div class="blind" style="--index: 20"></div>
+          <div class="blind" style="--index: 21"></div>
+          <div class="blind" style="--index: 22"></div>
+          <div class="blind" style="--index: 23"></div>
+          <div class="blind" style="--index: 24"></div>
+          <div class="blind" style="--index: 25"></div>
+          <div class="blind" style="--index: 26"></div>
+          <div class="blind" style="--index: 27"></div>
+          <div class="blind" style="--index: 28"></div>
+          <div class="blind" style="--index: 29"></div>
+          <div class="blind" style="--index: 30"></div>
+          <div class="blind" style="--index: 31"></div>
+          <div class="blind" style="--index: 32"></div>
+          <div class="blind" style="--index: 33"></div>
+          <div class="blind" style="--index: 34"></div>
+          <div class="blind" style="--index: 35"></div>
+          <div class="blind" style="--index: 36"></div>
+          <div class="blind" style="--index: 37"></div>
+          <div class="blind" style="--index: 38"></div>
+          <div class="blind" style="--index: 39"></div>
+        </div>
+        <div class="cord cord--dummy">
+          <div class="cord__handle"></div>
+        </div>
+        <div class="cord">
+          <div class="cord__handle"></div>
+        </div>
+      </div>
+    </div>
+    <div class="wall wall--top"></div>
+    <div class="wall wall--bottom">
+      <!--     <h1>CSS</h1> -->
+    </div>
+    <div class="wall wall--right"></div>
+    <div class="wall wall--left"></div>
+  </div>
+  <h1>CSS</h1>
+</main>
+  
+  
+  
+</body>
+
+</html>

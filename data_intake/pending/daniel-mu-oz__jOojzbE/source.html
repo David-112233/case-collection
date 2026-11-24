@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>Stacked Cards</title>
+
+    <link rel="canonical" href="https://codepen.io/daniel-mu-oz/pen/jOojzbE">
+  
+  
+  
+  
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+body {
+  padding-top: 13rem;
+  padding-bottom: 20rem;
+}
+
+.game {
+  width: 100%;
+  max-width: 79.4rem;
+  margin: auto;
+}
+.game .cards-game {
+  position: relative;
+  width: 100%;
+  min-height: 430px;
+  max-width: 799px;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  display: flex;
+  flex-direction: row-reverse;
+}
+.game .card {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 32px;
+  border-radius: 1.6rem;
+  box-shadow: 0 11px 20px 10px rgba(0, 0, 0, 0.1);
+  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: 1s linear;
+}
+.game .card:nth-of-type(1) {
+  z-index: 5;
+  transform: translateY(0%) translateZ(0px);
+  background: #deffbd;
+}
+.game .card:nth-of-type(2) {
+  z-index: 4;
+  transform: translateY(3%) translateZ(-10px);
+  background: #bdffff;
+}
+.game .card:nth-of-type(3) {
+  z-index: 3;
+  transform: translateY(6%) translateZ(-20px);
+  background: #debdff;
+}
+.game .card:nth-of-type(4) {
+  z-index: 2;
+  transform: translateY(9%) translateZ(-30px);
+  background: #ffbdbd;
+}
+.game .card:nth-of-type(5) {
+  z-index: 1;
+  transform: translateY(12%) translateZ(-40px);
+  background: #deffbd;
+}
+.game .card.index-1 {
+  z-index: 0;
+  transform: translateY(0%) translateZ(0px);
+}
+.game .card.index-2 {
+  z-index: 0;
+  transform: translateY(3%) translateZ(-10px);
+}
+.game .card.index-3 {
+  z-index: 0;
+  transform: translateY(6%) translateZ(-20px);
+}
+.game .card.index-4 {
+  z-index: 0;
+  transform: translateY(9%) translateZ(-30px);
+}
+.game .card.last-animation {
+  animation: last 1s linear forwards;
+}
+.game .card.last {
+  transform: translateY(12%) translateZ(-40px);
+  z-index: 1;
+}
+.game .card.back-animation {
+  animation: back 1s linear forwards;
+}
+@keyframes last {
+  0% {
+    transform: translateY(0%) translateZ(0px);
+    z-index: 5;
+  }
+  35% {
+    transform: translateY(-100%) translateZ(0px);
+    z-index: 4;
+  }
+  75% {
+    transform: translateY(-100%) translateZ(-40px);
+    z-index: 2;
+  }
+  100% {
+    transform: translateY(12%) translateZ(-40px);
+    z-index: 1;
+  }
+}
+@keyframes back {
+  0% {
+    transform: translateY(12%) translateZ(-40px);
+    z-index: 1;
+  }
+  35% {
+    transform: translateY(-100%) translateZ(-40px);
+    z-index: 2;
+  }
+  55% {
+    transform: translateY(-100%) translateZ(20px);
+    z-index: 3;
+  }
+  65% {
+    transform: translateY(-100%) translateZ(30px);
+    z-index: 4;
+  }
+  100% {
+    transform: translateY(0%) translateZ(0px);
+    z-index: 5;
+  }
+}
+.game .questions {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+.game h2 {
+  font-size: 2rem;
+  font-family: "Roboto", "sans-serif";
+  color: #000;
+  font-weight: 700;
+  text-align: center;
+}
+.game label {
+  --border: #3C3C3C;
+  --color: #3C3C3C;
+  width: 100%;
+  min-height: 3.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  border-radius: 3rem;
+  border: 0.1px solid var(--border);
+  font-family: "Roboto", "sans-serif";
+  font-size: 1.6rem;
+  padding: 1rem 1.5rem;
+  color: var(--color);
+  cursor: pointer;
+}
+.game label input[type=radio] {
+  display: none;
+}
+.game label span {
+  --color: #000;
+}
+.game label.great {
+  --border: #6ACF50;
+  color: #6ACF50;
+}
+.game label.bad {
+  --border: #DA291C;
+  color: #DA291C;
+}
+.game .btn-box {
+  display: flex;
+  justify-content: space-between;
+}
+.game .btn-box.left-content {
+  justify-content: flex-end;
+}
+.game .btn-box button {
+  width: 100%;
+  max-width: 13.3rem;
+  height: 4.6rem;
+  border-radius: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Roboto", "sans-serif";
+  font-size: 1.6rem;
+  border: 0;
+  cursor: pointer;
+}
+.game .btn-box button.next-game {
+  background: #DA291C;
+  color: white;
+}
+.game .btn-box button.prev-game {
+  max-width: 10.3rem;
+  border: 0.1rem solid #DA291C;
+  color: #DA291C;
+}
+.game .progress {
+  --color: #000;
+  display: flex;
+  align-items: center;
+  gap: 2.4rem;
+  font-family: "Roboto", "sans-serif";
+  font-size: 1.6rem;
+  margin-top: 11rem;
+}
+.game .progress span {
+  font-weight: 700;
+  color: var(--color);
+}
+.game .progress span.progress-number {
+  --color: #DA291C;
+}
+.game .progress .progress-bar {
+  position: relative;
+  width: 100%;
+  height: 1.5rem;
+  border-radius: 2rem;
+  background: #F4F4F4;
+  overflow: hidden;
+}
+.game .progress .progress-bar:before {
+  content: "";
+  position: absolute;
+  width: 20%;
+  height: 100%;
+  background: #DA291C;
+  transition: 0.3s ease;
+}
+.game:has(.last[data-step="1"]) .progress .progress-bar:before {
+  width: 40%;
+}
+.game:has(.last[data-step="2"]) .progress .progress-bar:before {
+  width: 60%;
+}
+.game:has(.last[data-step="3"]) .progress .progress-bar:before {
+  width: 80%;
+}
+.game:has(.last[data-step="4"]) .progress .progress-bar:before {
+  width: 100%;
+}
+.game .initial-link {
+  width: 100%;
+  max-width: 22rem;
+  height: 4.6rem;
+  background: #DA291C;
+  border-radius: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Roboto", "sans-serif";
+  font-size: 1.6rem;
+  color: white;
+  text-decoration: none;
+}
+.game .modals {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  text-align: center;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+.game .modals h2 {
+  font-family: "Roboto", "sans-serif";
+  font-size: 4rem;
+  font-weight: 700;
+  color: white;
+  line-height: 4.8rem;
+}
+.game .modals h2 span {
+  display: block;
+  font-size: 2.4rem;
+}
+.game .modals p {
+  font-family: "Roboto", "sans-serif";
+  font-size: 1.6rem;
+  color: white;
+  line-height: 2.4rem;
+}
+.game .modals img {
+  margin: auto;
+}
+.game .modals .modal-content {
+  width: 100%;
+  max-width: 68.9rem;
+  padding: 4rem 3.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  border-radius: 2.4rem;
+  background: #B52217;
+  box-shadow: 0px 104px 29px 0px rgba(0, 0, 0, 0), 0px 67px 27px 0px rgba(0, 0, 0, 0.01), 0px 38px 23px 0px rgba(0, 0, 0, 0.05), 0px 17px 17px 0px rgba(0, 0, 0, 0.09), 0px 4px 9px 0px rgba(0, 0, 0, 0.1);
+}
+.game .modals .win-modal,
+.game .modals .error-modal {
+  display: none;
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  <div class="game">
+	<div class="modals">
+		<div class="modal-content win-modal">
+			<h2>
+				You really know your stuff!
+				<span>We never doubted it for a second.</span>
+			</h2>
+			<p>You answered all the general knowledge questions correctly, demonstrating your knowledge. We're evaluating the speed of your responses and ensuring you meet the requirements. If you win, we'll get in touch with you.</p>
+			<a href="https://codepen.io/daniel-mu-oz" class="initial-link">Back to Home</a>
+		</div><!-- win modal -->
+		<div class="modal-content error-modal">
+			<h2>
+				Oops, keep trying!
+				<span>You missed this one.</span>
+			</h2>
+			<p>Do we give second chances? Of course! You can participate again tomorrow for a chance to win amazing prizes.</p>
+			<a href="https://codepen.io/daniel-mu-oz" class="initial-link">Back to Home</a>
+		</div><!-- error modal -->
+	</div>
+	<div class="cards-game">
+		<div class="card" data-step="1">
+			<h2>What does CSS stand for?</h2>
+			<div class="questions" data-question="1">
+				<label>
+					<input type="radio" name="q1" value="a">
+					<span>A</span> Cascading Style Sheets
+				</label>
+				<label>
+					<input type="radio" name="q1" value="b">
+					<span>B</span> Creative Style Sheets
+				</label>
+				<label>
+					<input type="radio" name="q1" value="c">
+					<span>C</span> Computer Style Sheets
+				</label>
+				<label>
+					<input type="radio" name="q1" value="d">
+					<span>D</span> Colorful Style Sheets
+				</label>
+			</div>
+			<div class="btn-box left-content">
+				<button class="next-game">Next</button>
+			</div>
+		</div>
+		<div class="card" data-step="2">
+			<h2>Which property is used to change the text color in CSS?</h2>
+			<div class="questions" data-question="2">
+				<label>
+					<input type="radio" name="q2" value="a">
+					<span>A</span> text-color
+				</label>
+				<label>
+					<input type="radio" name="q2" value="b">
+					<span>B</span> color
+				</label>
+				<label>
+					<input type="radio" name="q2" value="c">
+					<span>C</span> text-style
+				</label>
+				<label>
+					<input type="radio" name="q2" value="d">
+					<span>D</span> font-color
+				</label>
+			</div>
+			<div class="btn-box">
+				<button class="prev-game">Back</button>
+				<button class="next-game">Next</button>
+			</div>
+		</div>
+		<div class="card" data-step="3">
+			<h2>Which keyword is used to declare variables in JavaScript?</h2>
+			<div class="questions" data-question="3">
+				<label>
+					<input type="radio" name="q3" value="a">
+					<span>A</span> let
+				</label>
+				<label>
+					<input type="radio" name="q3" value="b">
+					<span>B</span> var
+				</label>
+				<label>
+					<input type="radio" name="q3" value="c">
+					<span>C</span> const
+				</label>
+				<label>
+					<input type="radio" name="q3" value="d">
+					<span>D</span> variable
+				</label>
+			</div>
+			<div class="btn-box">
+				<button class="prev-game">Back</button>
+				<button class="next-game">Next</button>
+			</div>
+		</div>
+		<div class="card" data-step="4">
+			<h2>What does DOM stand for in the context of web development?</h2>
+			<div class="questions" data-question="4">
+				<label>
+					<input type="radio" name="q4" value="a">
+					<span>A</span> Document Object Model
+				</label>
+				<label>
+					<input type="radio" name="q4" value="b">
+					<span>B</span> Document Object Method
+				</label>
+				<label>
+					<input type="radio" name="q4" value="c">
+					<span>C</span> Data Object Model
+				</label>
+				<label>
+					<input type="radio" name="q4" value="d">
+					<span>D</span> Digital Object Model
+				</label>
+			</div>
+			<div class="btn-box">
+				<button class="prev-game">Back</button>
+				<button class="next-game">Next</button>
+			</div>
+		</div>
+		<div class="card" data-step="5">
+			<h2>Which event occurs when the user clicks on an HTML element?</h2>
+			<div class="questions" data-question="5">
+				<label>
+					<input type="radio" name="q5" value="a">
+					<span>A</span> onclick
+				</label>
+				<label>
+					<input type="radio" name="q5" value="b">
+					<span>B</span> onmouseclick
+				</label>
+				<label>
+					<input type="radio" name="q5" value="c">
+					<span>C</span> onchange
+				</label>
+				<label>
+					<input type="radio" name="q5" value="d">
+					<span>D</span> onselect
+				</label>
+			</div>
+			<div class="btn-box">
+				<button class="prev-game">Back</button>
+				<button class="next-game">Next</button>
+			</div>
+		</div>
+	</div>
+
+	<div class="progress">
+		<span class="progress-number">1</span>
+		<div class="progress-bar"></div>
+		<span class="total">5</span>
+	</div>
+</div>
+  
+    <script id="rendered-js" >
+const nextbtns = document.querySelectorAll('.next-game');
+const prevbtns = document.querySelectorAll('.prev-game');
+const progressNumber = document.querySelector('.progress-number');
+const cardsName = document.querySelector('.cards-name');
+
+const handleAnimationEnd = (card, animationClass, onEnd) => {
+  card.classList.remove(animationClass);
+  card.removeEventListener('animationend', onEnd);
+};
+
+const updateCardClasses = (cards, currentIndex, previousIndex) => {
+  const lastIndex = cards.length - 1;
+  cards[currentIndex].classList.remove('last');
+  cards[previousIndex].classList.add('last');
+  updateClasses();
+};
+
+const addAnimationListener = (card, animationClass, onEnd) => {
+  card.addEventListener('animationend', onEnd);
+  card.classList.add(animationClass);
+};
+
+nextbtns.forEach(nextbutton => {
+  nextbutton.disabled = true;
+  nextbutton.addEventListener('click', function (e) {
+    e.preventDefault();
+    const card = this.closest('.card');
+    const cardsGame = card.closest('.cards-game');
+    const cards = Array.from(cardsGame.querySelectorAll('.card'));
+    const currentIndex = cards.indexOf(card);
+    if (currentIndex < 4) {
+      const animationDuration = parseFloat(getComputedStyle(card).animationDuration) * 800;
+      const datacount = nextbutton.closest('.card').nextElementSibling.dataset.step;
+      setTimeout(() => {
+        const previousLast = document.querySelector('.card.last');
+        if (previousLast) previousLast.classList.remove('last');
+        card.classList.add('last');
+        updateClasses();
+        progressNumber.textContent = datacount;
+      }, animationDuration);
+
+      addAnimationListener(card, 'last-animation', function onAnimationEnd() {
+        handleAnimationEnd(card, 'last-animation', onAnimationEnd);
+      });
+    }
+  });
+});
+
+prevbtns.forEach(prevbutton => {
+  prevbutton.addEventListener('click', function (e) {
+    e.preventDefault();
+    const cardsGame = this.closest('.cards-game');
+    const cards = Array.from(cardsGame.querySelectorAll('.card'));
+    const lastCard = cardsGame.querySelector('.card.last');
+    const animationDuration = parseFloat(getComputedStyle(lastCard).animationDuration) * 800;
+
+    setTimeout(() => {
+      const lastIndex = cards.indexOf(lastCard);
+      const previousIndex = (lastIndex - 1 + cards.length) % cards.length;
+      updateCardClasses(cards, lastIndex, previousIndex);
+      const datacount2 = prevbutton.closest('.card').previousElementSibling.dataset.step;
+      progressNumber.textContent = datacount2;
+    }, animationDuration);
+
+    addAnimationListener(lastCard, 'back-animation', function onAnimationEnd() {
+      handleAnimationEnd(lastCard, 'back-animation', onAnimationEnd);
+    });
+  });
+});
+
+function updateClasses() {
+  const cardsGame = document.querySelector('.cards-game');
+  const lastCard = cardsGame.querySelector('.card.last');
+  if (lastCard) {
+    const cards = Array.from(cardsGame.querySelectorAll('.card'));
+    const lastIndex = cards.indexOf(lastCard);
+    cards.forEach(card => card.classList.remove('index-1', 'index-2', 'index-3', 'index-4'));
+    for (let i = 1, classIndex = 4; i <= 4; i++, classIndex--) {if (window.CP.shouldStopExecution(0)) break;
+      cards[(lastIndex - i + cards.length) % cards.length].classList.add(`index-${classIndex}`);
+    }window.CP.exitedLoop(0);
+  }
+}
+
+if (document.querySelector('.card.last')) {
+  updateClasses();
+}
+
+const correctAnswers = {
+  1: 'a',
+  2: 'b',
+  3: 'a',
+  4: 'a',
+  5: 'a' };
+
+
+document.querySelectorAll('.questions').forEach(questionDiv => {
+  const questionNumber = questionDiv.getAttribute('data-question');
+  const correctAnswer = correctAnswers[questionNumber];
+
+  questionDiv.querySelectorAll('input[type="radio"]').forEach(radio => {
+    radio.addEventListener('change', () => {
+      const selectedAnswer = radio.value;
+      const labels = questionDiv.querySelectorAll('label');
+      const lastbtn = radio.closest('.card').querySelector('.next-game');
+      const modals = document.querySelector('.modals');
+      const win = document.querySelector('.win-modal');
+      const error = document.querySelector('.error-modal');
+
+      if (radio.closest('.card').getAttribute('data-step') == 5) {
+        lastbtn.classList.add('message');
+
+        document.querySelector('.message').addEventListener('click', function () {
+          let correctCount = 0;
+          document.querySelectorAll('.questions').forEach(qDiv => {
+            const qNumber = qDiv.getAttribute('data-question');
+            const correctAns = correctAnswers[qNumber];
+            const selectedAns = qDiv.querySelector('input[type="radio"]:checked')?.value;
+
+            if (selectedAns === correctAns) {
+              correctCount++;
+            }
+          });
+          if (correctCount >= 4) {
+            modals.style.display = 'flex';
+            win.style.display = 'flex';
+          } else {
+            modals.style.display = 'flex';
+            error.style.display = 'flex';
+          }
+        });
+      }
+
+      labels.forEach(label => {
+        label.classList.remove('great', 'bad');
+        const input = label.querySelector('input');
+
+        if (input.value === selectedAnswer) {
+          label.classList.add(selectedAnswer === correctAnswer ? 'great' : 'bad');
+        }
+      });
+
+      lastbtn.disabled = false;
+    });
+  });
+});
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>

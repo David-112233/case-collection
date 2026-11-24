@@ -1,0 +1,9 @@
+key,url,decision,tier,hits,reason,js_policy,evidence,notes,decided_on
+brianacamp__gObzQOz,https://codepen.io/brianacamp/pen/gObzQOz,hold,unclassified,spatial_layers,await_user_review,preserve,桌面实见：肖像按矩形区域错位叠合、黑底三行标题压入人像左侧，时间地点导航竖排固定在右。单张可判拼贴和盖压；人像使用外链，本次有加载。,优先，对照 213/227；仅候审，未正式入库。,2026-11-19
+designerniraj__pBvjwB,https://codepen.io/designerniraj/pen/pBvjwB,hold,unclassified,spatial_layers,await_user_review,preserve,桌面实见：四个终端置于各自有厚度的平台上，外部连接环在平台处被挡断，中心麦克风支架和底座形成独立层。可固定一张判结构，未验证动画全程。,优先，对照 213/224；仅候审，未正式入库。,2026-11-19
+ghostwrk__NWQKYyb,https://codepen.io/ghostwrk/pen/NWQKYyb,hold,unclassified,spatial_layers,await_user_review,preserve,桌面实见：前屋顶遮挡高塔，亮窗内人物剪影在窗框之后，院栅与角色交错，前地面遮挡建筑底部。背景有运动，不比较精确帧位置，窗内人物应固定在可见帧。,优先，对照 224/227；仅候审，未正式入库。,2026-11-19
+rukh__jbMrmo,https://codepen.io/rukh/pen/jbMrmo,hold,unclassified,spatial_layers,await_user_review,preserve,桌面实见：三排弧盖宝箱，前排遮掉后排的一部分箱面，可判各箱顶盖与底形的空间关系；进入时会从空网格长出箱子，应在成形后截。点击前排未见稳定开盖，不做开盖主张。,优先，对照 224；仅候审，未正式入库。,2026-11-19
+eminqasimov__QoJOKY,https://codepen.io/eminqasimov/pen/QoJOKY,hold,unclassified,spatial_layers,await_user_review,preserve,桌面实见闭合外观、顶盖中央接缝与侧面运输标识；点击后短时有位移但未观察到稳定展开，当前仅建议默认箱面关系，开态需复核。,次选，对照 224/227；仅候审，未正式入库。,2026-11-19
+towc__WbQLva,https://codepen.io/towc/pen/WbQLva,hold,unclassified,spatial_layers,await_user_review,preserve,实见内外圈彩珠相互遮挡并形成中央负形孔，深浅和尺寸变化暗示深度；动态画面应固定采样时刻。,次选，对照 224；仅候审，未正式入库。,2026-11-19
+thebabydino__XWJaXRp,https://codepen.io/thebabydino/pen/XWJaXRp,hold,unclassified,spatial_layers,await_user_review,preserve,桌面实见中心文字圆板与不同斜向边饰，外缘刻意留出小孔与暗色底纹贯通，有交错缺口。首屏可看首两行，下方需滚动，无需逐个复刻图样。,次选，对照 213/227；仅候审，未正式入库。,2026-11-19
+markchitty__RwrOzrB,https://codepen.io/markchitty/pen/RwrOzrB,hold,unclassified,spatial_layers,await_user_review,preserve,桌面实见轨道线交叉中断、三角和圆心之间保留负形，图形偏右且较小；空间规则单一，优先级低。,次选，对照 213/227；仅候审，未正式入库。,2026-11-19

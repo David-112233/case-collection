@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>CSS 3D object with shading</title>
+
+    <link rel="canonical" href="https://codepen.io/dulnan/pen/QvbGYN">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  
+  
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  height: 100vh;
+  background: linear-gradient(#43b3f8, #66c2f6 60%, #bddff5 90%);
+  perspective: 780px;
+}
+
+.button {
+  font-size: 24px;
+  color: white;
+  font-weight: bold;
+  text-align: left;
+  background: rgba(255, 255, 255, 0.1);
+  border: 0;
+  cursor: pointer;
+}
+
+.background {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 1.5em;
+  height: 1.5em;
+  transform: translateX(-50%) translateY(50%) rotateX(90deg) translateZ(-0.3em);
+  transform-origin: center;
+  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/355380/grass.jpg);
+  background-size: 128px;
+  transform-style: preserve-3d;
+  transition: 2s;
+}
+.background .side {
+  background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/355380/dirt.jpg);
+  background-size: 128px;
+}
+
+@keyframes mainrotate {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
+}
+@keyframes color {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.8;
+  }
+}
+@keyframes canvasrotate {
+  0% {
+    transform: translate(-50%, -50%) rotateX(30deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotateX(-30deg);
+  }
+}
+.canvas {
+  font-size: 50vmin;
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  width: 0.785151856em;
+  height: 0.8031496063em;
+  animation: 9s canvasrotate infinite alternate;
+  transform-style: preserve-3d;
+}
+.debug .canvas {
+  transform: translate(-50%, -50%) rotateX(-15deg);
+}
+@media (min-width: 1200px) {
+  .canvas {
+    font-size: 889;
+  }
+}
+
+.container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0.785151856em;
+  height: 0.8031496063em;
+  animation: 8s mainrotate linear infinite;
+  opacity: 1;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.debug .container {
+  transform: rotateY(45deg);
+}
+
+.side {
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  width: 0.1349831271em;
+  background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/355380/stone.jpg);
+  background-size: 128px;
+  transition: 2s;
+}
+.debug .side {
+  opacity: 0.7;
+}
+
+.shader {
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  animation: 2s color linear infinite alternate;
+  background: rgba(19, 11, 5, 0.8);
+  backface-visibility: hidden;
+  background-blend-mode: hard-light;
+  will-change: opacity;
+}
+
+.full {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  clip-path: polygon(0.303712036em 0, 0.392575928em 0, 0.392575928em 0.1957255343em, 0.2868391451em 0.4926884139em, 0.4949381327em 0.4926884139em, 0.392575928em 0.1957255343em, 0.392575928em 0, 0.4848143982em 0, 0.785151856em 0.8031496063em, 0.601799775em 0.8031496063em, 0.5410573678em 0.6242969629em, 0.24071991em 0.6242969629em, 0.177727784em 0.8031496063em, 0 0.8031496063em);
+}
+
+.full.top {
+  transform: translateZ(-0.0674915636em);
+}
+.debug .full.top {
+  transform: translateZ(-0.3374578178em);
+}
+
+.full.bottom {
+  transform: translateZ(0.0674915636em);
+}
+.debug .full.bottom {
+  transform: translateZ(0.3374578178em);
+}
+
+.side-1 {
+  width: 0.1349831271em;
+  height: 100%;
+  transform: skewX(-20.7deg) rotateY(90deg) translateX(-0.0674915636em);
+  transform-origin: bottom left;
+}
+.debug .side-1 {
+  transform: skewX(-20.7deg) rotateY(90deg) translateX(-0.0674915636em) translateZ(-0.2249718785em);
+}
+
+.side-2 {
+  right: 0;
+  left: initial;
+  width: 0.1349831271em;
+  height: 100%;
+  transform: skewX(20.5deg) rotateY(90deg) translateX(0.0674915636em);
+  transform-origin: bottom right;
+}
+.debug .side-2 {
+  transform: skewX(20.5deg) rotateY(90deg) translateZ(0.2249718785em);
+}
+
+.side-3 {
+  top: initial;
+  right: 0;
+  bottom: 0;
+  left: initial;
+  width: 0.183352081em;
+  height: 0.1349831271em;
+  transform: translateZ(0.0674915636em) rotateX(90deg);
+  transform-origin: bottom right;
+}
+.debug .side-3 {
+  transform: translateZ(0.0674915636em) rotateX(90deg) translateZ(-0.0562429696em);
+}
+
+.side-4 {
+  top: initial;
+  bottom: 0;
+  width: 0.177727784em;
+  height: 0.1349831271em;
+  transform: translateZ(0.0674915636em) rotateX(90deg);
+  transform-origin: bottom right;
+}
+.debug .side-4 {
+  transform: translateZ(0.0674915636em) rotateX(90deg) translateZ(-0.0562429696em);
+}
+
+.side-5 {
+  top: initial;
+  bottom: 0;
+  left: 0.177727784em;
+  width: 0.1349831271em;
+  height: 0.1788526434em;
+  transform: skewX(-19.4deg) translateZ(0.0674915636em) rotateY(90deg);
+  transform-origin: bottom left;
+}
+.side-6 {
+  top: initial;
+  right: 0.183352081em;
+  bottom: 0;
+  left: initial;
+  width: 0.1349831271em;
+  height: 0.1788526434em;
+  transform: skewX(18.8deg) translateZ(0.0674915636em) rotateY(-90deg);
+  transform-origin: bottom right;
+}
+.side-7 {
+  top: initial;
+  bottom: 0.0438695163em;
+  left: 0.24071991em;
+  width: 0.3003374578em;
+  height: 0.1349831271em;
+  transform: translateZ(0.0674915636em) rotateX(-90deg);
+  transform-origin: top left;
+}
+.side-8 {
+  top: initial;
+  left: 0.303712036em;
+  width: 0.1811023622em;
+  height: 0.1349831271em;
+  transform: translateZ(0.0674915636em) rotateX(-90deg);
+  transform-origin: top left;
+}
+.debug .side-8 {
+  transform: translateZ(0.0674915636em) rotateX(-90deg) translateZ(-0.1124859393em);
+}
+
+.side-9 {
+  top: 0.1957255343em;
+  left: 0.392575928em;
+  width: 0.1349831271em;
+  height: 0.2969628796em;
+  transform: skewX(-19.6deg) translateZ(0.0674915636em) rotateY(90deg);
+  transform-origin: top left;
+}
+.side-10 {
+  top: 0.1957255343em;
+  left: 0.392575928em;
+  width: 0.1349831271em;
+  height: 0.2969628796em;
+  transform: skewX(19.1deg) translateZ(0.0674915636em) rotateY(90deg);
+  transform-origin: top left;
+}
+.side-11 {
+  top: 0.4926884139em;
+  left: 0.2868391451em;
+  width: 0.2080989876em;
+  height: 0.1349831271em;
+  transform: translateZ(0.0674915636em) rotateX(-90deg);
+  transform-origin: top left;
+}
+.side-12 {
+  width: 100%;
+  height: 56px;
+  transform: translateX(0%) rotateZ(90deg) rotateX(-90deg);
+  transform-origin: top left;
+}
+.debug .side-12 {
+  transform: translateX(0%) rotateZ(90deg) rotateX(-90deg) translateZ(0.2249718785em);
+}
+
+.side-13 {
+  top: initial;
+  bottom: 0;
+  width: 100%;
+  height: 56px;
+  transform: translateY(100%) rotateX(-90deg);
+  transform-origin: top;
+}
+.debug .side-13 {
+  transform: translateY(100%) rotateX(-90deg) translateZ(0.2249718785em);
+}
+
+.side-14 {
+  left: initial;
+  right: 0;
+  top: 0;
+  width: 100%;
+  height: 56px;
+  transform: translateX(0%) rotateZ(-90deg) rotateX(-90deg);
+  transform-origin: top right;
+}
+.debug .side-14 {
+  transform: translateX(0%) rotateZ(-90deg) rotateX(-90deg) translateZ(0.2249718785em);
+}
+
+.side-15 {
+  width: 100%;
+  height: 56px;
+  transform: translateY(0%) rotateZ(180deg) rotateX(270deg);
+  transform-origin: top;
+}
+.debug .side-15 {
+  transform: translateY(0%) rotateZ(180deg) rotateX(270deg) translateZ(0.2249718785em);
+}
+
+.side-16 {
+  width: 100%;
+  height: 100%;
+  background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/355380/dirt2.jpg) !important;
+  transform: translateZ(-56px) rotateX(180deg);
+  transform-origin: center;
+}
+.debug .side-16 {
+  transform: translateZ(-1.3498312711em) rotateX(180deg);
+}
+
+.full.bottom .shader,
+.side-13 .shader {
+  animation-delay: 0s;
+}
+
+.full.top .shader,
+.side-15 .shader {
+  animation-delay: 0s;
+}
+
+.side-1 .shader,
+.side-12 .shader {
+  animation-delay: -2s;
+}
+
+.side-6 .shader,
+.side-10 .shader {
+  animation-delay: -2s;
+}
+
+.side-2 .shader,
+.side-14 .shader {
+  animation-delay: -2s;
+}
+
+.side-5 .shader,
+.side-9 .shader {
+  animation-delay: -2s;
+}
+
+.side-8 .shader {
+  animation: none;
+  opacity: 0.2;
+}
+
+.side-3 .shader,
+.side-4 .shader,
+.side-16 .shader {
+  animation: none;
+  opacity: 0.7;
+}
+
+.side-11 .shader {
+  animation-delay: 0s;
+  animation-duration: 2s;
+}
+</style>
+
+  </head>
+
+<body translate="no">
+  <button class="button">💥 Explode</button>
+
+<div class="canvas">
+  <div class="container">
+    <div class="side full top"><div class="shader"></div></div>
+    <div class="side full bottom"><div class="shader"></div></div>
+    <div class="side side-1"><div class="shader"></div></div>
+    <div class="side side-2"><div class="shader"></div></div>
+    <div class="side side-3"><div class="shader"></div></div>
+    <div class="side side-4"><div class="shader"></div></div>
+    <div class="side side-5"><div class="shader"></div></div>
+    <div class="side side-6"><div class="shader"></div></div>
+    <div class="side side-7"><div class="shader"></div></div>
+    <div class="side side-8"><div class="shader"></div></div>
+    <div class="side side-9"><div class="shader"></div></div>
+    <div class="side side-10"><div class="shader"></div></div>
+    <div class="side side-11"><div class="shader"></div></div>
+    <div class="background">
+      <div class="side side-12"><div class="shader"></div></div>
+      <div class="side side-13"><div class="shader"></div></div>
+      <div class="side side-14"><div class="shader"></div></div>
+      <div class="side side-15"><div class="shader"></div></div>
+      <div class="side side-16"><div class="shader"></div></div>
+    </div>
+  </div>
+</div>
+  
+    <script id="rendered-js" >
+var button = document.querySelector('.button');
+
+button.addEventListener('click', function () {
+  document.body.classList.toggle('debug');
+});
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>

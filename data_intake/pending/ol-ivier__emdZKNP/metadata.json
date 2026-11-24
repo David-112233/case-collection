@@ -1,0 +1,70 @@
+{
+  "source_id": "codepen:ol-ivier/emdzknp",
+  "author": "ol-ivier",
+  "pen_id": "emdZKNP",
+  "url": "https://codepen.io/ol-ivier/pen/emdZKNP",
+  "acquisition": "cdpn_fullpage",
+  "acquisition_url": "https://cdpn.io/ol-ivier/fullpage/emdZKNP",
+  "retrieved_at": "2026-11-19T14:17:20+00:00",
+  "license": "未单独核验；外链资源许可另查",
+  "fetch_status": "ok",
+  "title": "Puzzle with Sliding Insertion (after() / before())",
+  "canonical_url": "https://codepen.io/ol-ivier/pen/emdZKNP",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "461962c103a1df75f2610643f910f77c97f4fabe656d42ca6c87499b5705a84f",
+  "source_html_sha256": "784c2b3e6af81e841e8756ec619d680d9fdb83fc518afef8f51baf5b515f396e",
+  "analysis": {
+    "js": {
+      "has_js": true,
+      "inline_js_chars": 14223,
+      "external_scripts": [
+        "https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"
+      ],
+      "inline_event_handlers": 15,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": true,
+      "keyframes_count": 0,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": false,
+      "clip_path": false,
+      "css_counter": false,
+      "media_query": false
+    },
+    "external_stylesheets": [
+      "https://fonts.googleapis.com/css2?family=Honk:MORF@15&amp;display=swap"
+    ],
+    "css_imports": [],
+    "css_chars": 7927,
+    "element_count": 469,
+    "html_chars": 51249
+  },
+  "review": {
+    "label": "九宫格图像重排后的边界对齐",
+    "status": "候选",
+    "reference_case": "213/227",
+    "evidence": "实点 Solve 后出现提示，关闭提示后 3×3 图块已重排，原本断开的树枝与路径能跨格对接。考二维相邻和图块重排，不是 z 轴遮挡；初态随机，不要求相同排列；未验证拖动插入、上传或其它图片。",
+    "visual_verified": true,
+    "surface": "Cloud Chrome, CodePen public preview default or stated interaction; desktop only",
+    "formal_admission": false
+  }
+}

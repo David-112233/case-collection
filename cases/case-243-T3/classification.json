@@ -1,0 +1,16 @@
+{
+  "review_id": "C029",
+  "case_id": "case-243-T3",
+  "tier": "T3",
+  "spatial_feature": "四工位办公室、隔板交错",
+  "evidence": "默认Animate未勾选；四个办公隔间围中心交错，隔板遮挡电脑与桌板，抽屉厚度、键盘和地面投影可见；CSS preserve-3d，只有平台console shim，无业务JS。",
+  "decision": "accept",
+  "confirmation": {
+    "batch": "首轮 C001–C030",
+    "value": 1,
+    "date": "2026-11-20"
+  },
+  "qualification_note": "未分配主项目正式编号、未强定档；视觉核验范围沿用采集记录。",
+  "tier_basis": "复选框状态驱动旋转（:has + :checked）并带关键帧动画（按难度模型 v2.1 的驱动方式判定；JS 驱动按等价的 CSS 驱动类比）",
+  "tier_assigned_by": "Claude，本地入库时（2026-11-24），待用户抽查"
+}

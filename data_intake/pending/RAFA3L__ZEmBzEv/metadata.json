@@ -1,0 +1,70 @@
+{
+  "source_id": "codepen:rafa3l/zembzev",
+  "author": "RAFA3L",
+  "pen_id": "ZEmBzEv",
+  "url": "https://codepen.io/RAFA3L/pen/ZEmBzEv",
+  "acquisition": "cdpn_fullpage",
+  "acquisition_url": "https://cdpn.io/RAFA3L/fullpage/ZEmBzEv",
+  "retrieved_at": "2026-11-20T03:16:38+00:00",
+  "license": "未单独核验；外链资源许可另查",
+  "fetch_status": "ok",
+  "title": "ClimaCode",
+  "canonical_url": "https://codepen.io/RAFA3L/pen/ZEmBzEv",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "8ae641f39e170e5326bd7b2e8f8ebd27ee3e951f6e2800024e82ce4164bb6015",
+  "source_html_sha256": "55503b3d8ddecb24b7362c7536324238c17c95363c2a2b36f56f5a0f460b2b63",
+  "analysis": {
+    "js": {
+      "has_js": true,
+      "inline_js_chars": 4625,
+      "external_scripts": [
+        "https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"
+      ],
+      "inline_event_handlers": 4,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 11,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": false,
+      "checked_selector": false,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": false,
+      "clip_path": false,
+      "css_counter": false,
+      "media_query": false
+    },
+    "external_stylesheets": [],
+    "css_imports": [
+      "https://fonts.cdnfonts.com/css/transponder-aoe"
+    ],
+    "css_chars": 23074,
+    "element_count": 3561,
+    "html_chars": 758295
+  },
+  "review": {
+    "label": "天气拨盘山景舷窗",
+    "status": "优先",
+    "reference_case": "224 / 213",
+    "evidence": "实测通电后拨盘切换：暖色日落（27°F，山脊遮住太阳下沿）与深蓝夜景（14°F，月亮完整位于山脊之上）；嵌套表圈框住近树、湖、山脊和天体。切换后等画面呈现；其他状态、移动端和外链资源许可未测。",
+    "visual_verified": true,
+    "surface": "Cloud Chrome, cdpn.io public preview, 1331×894 desktop including preview banner; no mobile check",
+    "formal_admission": false
+  }
+}

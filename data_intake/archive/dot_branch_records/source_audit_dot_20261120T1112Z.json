@@ -1,0 +1,28 @@
+{
+  "slot": "2026-11-20T11:12:24Z",
+  "reviewed_count": 2,
+  "candidates": [
+    {
+      "review_id": "C269",
+      "key": "josetxu__RwxzwEa",
+      "url": "https://codepen.io/josetxu/pen/RwxzwEa",
+      "visual_evidence": "闭合时六片金属叶聚在中心；指针停于中央后同一视口的稳定打开画面露出六角形星空，退开的叶片仍被厚外圈挡住一部分。相比同作者横向双扇科幻门，六瓣径向机制不同。",
+      "feature": "六瓣虹膜门、外圈遮挡、六角开孔"
+    },
+    {
+      "review_id": "C270",
+      "key": "Codewithshobhit__VwqWYXB",
+      "url": "https://codepen.io/Codewithshobhit/pen/VwqWYXB",
+      "visual_evidence": "固定构图中圆窗门框遮住滚筒和玻璃边，玻璃斜光位于猫与衣物前方，门环压在机身前面；滚筒内动效不纳入观察。",
+      "feature": "滚筒洗衣机、圆窗裁切、玻璃反光"
+    }
+  ],
+  "not_counted": {
+    "yVGeBy": "only unstyled buttons visible",
+    "PoPRQgJ": "flat face with weak depth",
+    "YzqreVp": "no room visible in checked preview",
+    "PozLRB": "stage not visibly rendered",
+    "QWXyOgv": "default view comparatively flat"
+  },
+  "no_main_write": true
+}

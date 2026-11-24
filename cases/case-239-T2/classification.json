@@ -1,0 +1,16 @@
+{
+  "review_id": "C017",
+  "case_id": "case-239-T2",
+  "tier": "T2",
+  "spatial_feature": "立体磁带、卷轴与投影",
+  "evidence": "磁带盒体侧面厚度、窗口内双卷轴、底部凸台与地面投影构成多层前后遮挡；CSS preserve-3d和多面旋转建模。保留原JS；仅验证默认视觉，未验证交互旋转。",
+  "decision": "accept",
+  "confirmation": {
+    "batch": "首轮 C001–C030",
+    "value": 1,
+    "date": "2026-11-20"
+  },
+  "qualification_note": "未分配主项目正式编号、未强定档；视觉核验范围沿用采集记录。",
+  "tier_basis": "关键帧动画与鼠标悬停改变场景，只作用于自身（按难度模型 v2.1 的驱动方式判定；JS 驱动按等价的 CSS 驱动类比）",
+  "tier_assigned_by": "Claude，本地入库时（2026-11-24），待用户抽查"
+}

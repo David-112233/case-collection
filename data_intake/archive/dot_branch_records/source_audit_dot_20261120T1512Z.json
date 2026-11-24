@@ -1,0 +1,29 @@
+{
+  "scheduled_utc": "2026-11-20T15:12:24Z",
+  "refs": [
+    {
+      "review_id": "C276",
+      "id": "Evirtual__lipstick",
+      "title": "Twist-up lipstick",
+      "feature": "口红斜切面、环口套叠、分离外盖",
+      "evidence": "约 1316×884 作者预览。闭态盖套住筒身；悬停并等待停稳后，倾斜切面可见，金边筒口压住口红柱基部，盖子停在侧面。不要按过渡时序评分。",
+      "original_url": "https://css3dlab.edgarasneverdauskas.com/models/lipstick/",
+      "upstream_ref": "88d044dd0c84baa94f27967f5991b7327fb44317"
+    },
+    {
+      "review_id": "C277",
+      "id": "Evirtual__foldphone",
+      "title": "Foldable phone",
+      "feature": "双层叠合、折叠铰链、跨屏接缝",
+      "evidence": "约 1316×884 作者预览。闭态外屏半片压在内半片之前，两层框边可辨；悬停停稳后内屏跨过折线、视角固定。不同于 C267 非铰接透明背板及 C272 循环旋转笔记本。",
+      "original_url": "https://css3dlab.edgarasneverdauskas.com/models/foldphone/",
+      "upstream_ref": "88d044dd0c84baa94f27967f5991b7327fb44317"
+    }
+  ],
+  "excluded": [
+    "HALO/02 and Turbine Explorer stayed behind their WebGL loading overlays in cloud; no scene verified.",
+    "CSS Airship vYewpy visually checked in two camera views, source too large to transfer in this run; not counted.",
+    "Office Ecosystem visually insufficient spatial interlocking.",
+    "Formwork isometric island author-linked demo returned HTTP 404."
+  ]
+}

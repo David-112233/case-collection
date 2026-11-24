@@ -1,0 +1,16 @@
+{
+  "review_id": "C022",
+  "case_id": "case-240-T1",
+  "tier": "T1",
+  "spatial_feature": "合成器面板、旋钮浮雕",
+  "evidence": "OP-1正面机壳内嵌屏幕和键盘，旋钮与按键浮于面板，投影体现厚度。主要为正视浅浮雕，交错关系弱于参考案例；默认效果完整，未验证交互。",
+  "decision": "accept",
+  "confirmation": {
+    "batch": "首轮 C001–C030",
+    "value": 1,
+    "date": "2026-11-20"
+  },
+  "qualification_note": "未分配主项目正式编号、未强定档；视觉核验范围沿用采集记录。",
+  "tier_basis": "未见动态（脚本仅为注释）（按难度模型 v2.1 的驱动方式判定；JS 驱动按等价的 CSS 驱动类比）",
+  "tier_assigned_by": "Claude，本地入库时（2026-11-24），待用户抽查"
+}

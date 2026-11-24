@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>3D ring carousel</title>
+
+    <link rel="canonical" href="https://codepen.io/Enrichr-Dev/pen/gbmZjKd">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Parkinsans:wght@400;500;600;700;800&family=Instrument+Sans:wght@400;500;600&family=Fira+Code:wght@400;500&display=swap">
+  
+  
+  
+<style>
+/* 3D ring carousel · from the Enrichr Library: https://enrichr.dev/elements/ring-carousel.html */
+html, body { margin: 0; min-height: 100%; background: #0c1e18; }
+#enrichr-root { min-height: 100vh; }
+#enrichr-root > * { min-height: 100vh; }
+
+/* Enrichr Library · https://enrichr.dev */
+.ef-ring { position: relative; outline-offset: 4px; }
+.ef-ring__stage { height: 17rem; perspective: 1200px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.ef-ring__ring { list-style: none; margin: 0; padding: 0; position: relative; width: 9rem; height: 12rem; transform-style: preserve-3d; }
+.ef-ring__card { isolation: isolate; overflow: hidden; position: absolute; inset: 0; border-radius: 0.8rem; display: flex; align-items: flex-end; padding: 0.8rem; font-size: 1.6rem; font-weight: 800; color: #fff; backface-visibility: hidden; background: linear-gradient(160deg, hsl(var(--ef-h) 70% 26%), hsl(calc(var(--ef-h) + 15) 60% 10%)); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); }
+.ef-ring__ctl { display: flex; justify-content: center; gap: 0.6rem; margin-top: 0.6rem; }
+.ef-ring__ctl button { width: 2.6rem; height: 2.6rem; border-radius: 50%; border: 1px solid currentColor; background: transparent; color: inherit; font-size: 1.4rem; line-height: 1; cursor: pointer; }
+.ef-ring__ctl button:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <div id="enrichr-root">
+<div class="ef-ring" role="group" aria-roledescription="carousel" aria-label="Rotating ring of cards" tabindex="0">
+  <div class="ef-ring__stage"><ul class="ef-ring__ring"></ul></div>
+  <div class="ef-ring__ctl">
+    <button class="ef-ring__prev" type="button" aria-label="Previous card">&#8249;</button>
+    <button class="ef-ring__next" type="button" aria-label="Next card">&#8250;</button>
+  </div>
+</div>
+</div>
+  
+    <script id="rendered-js" >
+// Enrichr Library · https://enrichr.dev
+// Ring carousel: cards sit on a 3D ring that rotates one step at a time with an eased tween.
+// mount(root, { count (3-12), radius (px), stepMs (autoplay interval), auto (1 or 0), hue (0-360) }) -> { update, next, prev, destroy }
+function mount(root, o) {
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var ring = root.querySelector(".ef-ring__ring");
+  var box = root.querySelector(".ef-ring");
+  var opts = {},idx = 0,angle = 0,target = 0,raf = 0,timer = 0,visible = true,io = null;
+
+  // Enrichr puzzle-piece artwork, inlined so the code stays portable. piece(i, accent) returns a decorative <svg> string (viewBox + one path,
+  // currentColor fill), a different piece, size, rotation and crop per index. It sits behind the card text and never takes pointer events.
+  var PIECES = [["1513.7 1453.9 322.3 322.3", "M1821 1761.2h-292.3v-111.6c0-8 6.5-14.5 14.5-14.5 4.2 0 8.2 1.9 11 5.1 7.8 8.6 19.7 13.6 32.7 11.9 16.8-2.3 30.1-16 32-32.7 2.5-22.6-15.1-41.6-37.1-41.6-11 0-20.9 4.7-27.7 12.3-2.8 3.1-6.7 4.9-10.9 4.9-8 0-14.5-6.4-14.5-14.4v-111.7h292.3v111.7c0 8-6.4 14.4-14.5 14.4-4.2 0-8.1-1.8-10.9-5-7.9-8.6-19.7-13.6-32.7-11.9-16.8 2.2-30.1 15.9-32 32.7-2.5 22.6 15.1 41.6 37.1 41.6 11 0 20.8-4.8 27.7-12.3 2.8-3.1 6.7-5 10.8-5 8.1 0 14.5 6.5 14.5 14.5z"], ["1423.36 860.8 503.07 322.3", "M1821 875.8v111.6c0 8 6.5 14.5 14.5 14.5 4.2 0 8.1-1.9 10.9-5 6.8-7.5 16.7-12.3 27.7-12.3 22 0 39.6 19 37.1 41.6-1.9 16.7-15.2 30.5-32 32.7-13 1.7-24.8-3.3-32.7-11.9-2.8-3.2-6.8-5-11-5-8 0-14.5 6.4-14.5 14.4v111.7h-111.6c-8 0-14.5-6.5-14.5-14.5 0-4.2 1.9-8.2 5-11 8.7-7.9 13.7-19.7 12-32.7-2.3-16.8-16-30.1-32.8-32-22.5-2.5-41.5 15.1-41.5 37.1 0 11 4.7 20.9 12.3 27.7 3.1 2.8 4.9 6.7 4.9 10.8v0.1c0 8-6.4 14.5-14.5 14.5h-111.6v-111.7c0-8-6.4-14.4-14.5-14.4-4.1 0-8 1.8-10.8 4.9-6.9 7.6-16.7 12.3-27.7 12.3-22 0-39.6-19-37.1-41.6 1.9-16.7 15.2-30.4 32-32.7 13-1.7 24.8 3.3 32.7 11.9 2.8 3.2 6.7 5.1 10.9 5.1 8.1 0 14.5-6.5 14.5-14.5v-111.6z"], ["1513.7 166.86 322.3 503.06", "M1528.7 564.5v-111.6c0-8 6.5-14.5 14.5-14.5 4.2 0 8.2 1.9 11 5 7.8 8.7 19.7 13.7 32.7 11.9 16.8-2.2 30.1-15.9 32-32.7 2.5-22.5-15.1-41.5-37.1-41.5-11 0-20.9 4.7-27.7 12.3-2.8 3.1-6.7 4.9-10.9 4.9-8 0-14.5-6.5-14.5-14.5v-111.6h111.6c8.1 0 14.5-6.5 14.5-14.5 0-4.1-1.8-8.1-4.9-10.9-7.6-6.8-12.3-16.6-12.3-27.6 0-22 19-39.6 41.5-37.1 16.8 1.8 30.5 15.2 32.8 32 1.7 12.9-3.3 24.8-12 32.7-3.1 2.8-5 6.7-5 10.9 0 8 6.5 14.5 14.5 14.5h111.6v111.6c0 8-6.4 14.5-14.5 14.5-4.2 0-8.1-1.9-10.9-5-7.9-8.7-19.7-13.6-32.7-11.9-16.8 2.2-30.1 15.9-32 32.7-2.5 22.5 15.1 41.6 37.1 41.6 11 0 20.8-4.8 27.7-12.3 2.8-3.1 6.7-5 10.8-5 8.1 0 14.5 6.5 14.5 14.5v111.6h-111.6c-8 0-14.5 6.5-14.5 14.5 0 4.2 1.9 8.1 5 10.9 7.5 6.8 12.3 16.7 12.3 27.7 0 22-19 39.5-41.6 37.1-16.8-1.9-30.5-15.3-32.7-32-1.7-13 3.3-24.9 11.9-32.7 3.1-2.9 5-6.8 5-11 0-8-6.4-14.5-14.5-14.5z"]];
+  var PLAY = [[38, -12, 95, 16, 0, 0.92], [-30, 28, 150, -22, "#2f7d5b", 0.95], [-8, -30, 80, 32, "#c6f26b", 0.8], [30, 34, 110, -8, "#0a6b46", 0.95], [-24, -10, 135, 12, "#fbf8f1", 0.2], [46, 20, 90, -28, 0, 0.85]];
+  function piece(i, a) {
+    var p = PIECES[(i + Math.floor(i / 3)) % 3],s = PLAY[i % 6];
+    return '<svg viewBox="' + p[0] + '" aria-hidden="true" focusable="false" style="position:absolute;z-index:-1;pointer-events:none;height:auto;left:' + s[0] + '%;top:' + s[1] + '%;width:' + s[2] + '%;transform:rotate(' + s[3] + 'deg);color:' + (s[4] || a || "#e6ff55") + ';opacity:' + s[5] + '"><path fill="currentColor" d="' + p[1] + '"/></svg>';
+  }
+
+  function step() {return 360 / opts.count;}
+  function build() {
+    ring.textContent = "";
+    for (var i = 0; i < opts.count; i++) {
+      var li = document.createElement("li");
+      li.className = "ef-ring__card";
+      li.style.setProperty("--ef-h", String(135 + (opts.hue + i * 30) % 45));
+      li.style.transform = "rotateY(" + i * step() + "deg) translateZ(" + opts.radius + "px)";
+      li.setAttribute("aria-label", i + 1 + " of " + opts.count);
+      li.textContent = String(i + 1).padStart(2, "0");
+      li.insertAdjacentHTML("afterbegin", piece(i));
+      ring.appendChild(li);
+    }
+    idx = 0;angle = 0;target = 0;
+    ring.style.transform = "translateZ(-" + opts.radius + "px) rotateY(0deg)";
+    schedule();
+  }
+  function draw() {
+    ring.style.transform = "translateZ(-" + opts.radius + "px) rotateY(" + angle.toFixed(2) + "deg)";
+  }
+  function loop() {
+    var d = target - angle;
+    if (reduce || Math.abs(d) < 0.05) {angle = target;draw();raf = 0;return;}
+    angle += d * 0.12;
+    draw();
+    raf = requestAnimationFrame(loop);
+  }
+  function go(dir) {idx += dir;target = -idx * step();if (!raf) raf = requestAnimationFrame(loop);}
+  function schedule() {
+    clearInterval(timer);
+    if (opts.auto && !reduce) timer = setInterval(function () {if (visible) go(1);}, opts.stepMs);
+  }
+  function update(next) {
+    var prevCount = opts.count,prevRadius = opts.radius,prevHue = opts.hue;
+    opts = Object.assign({ count: 6, radius: 220, stepMs: 2200, auto: 1, hue: 150 }, opts, next || {});
+    if (opts.count !== prevCount || opts.radius !== prevRadius || opts.hue !== prevHue) build();else schedule();
+  }
+  function prevBtn() {go(-1);schedule();}
+  function nextBtn() {go(1);schedule();}
+  function keys(e) {if (e.key === "ArrowLeft") {prevBtn();e.preventDefault();} else if (e.key === "ArrowRight") {nextBtn();e.preventDefault();}}
+
+  update(o);
+  root.querySelector(".ef-ring__prev").addEventListener("click", prevBtn);
+  root.querySelector(".ef-ring__next").addEventListener("click", nextBtn);
+  box.addEventListener("keydown", keys);
+  if ("IntersectionObserver" in window) {io = new IntersectionObserver(function (e) {visible = e[0].isIntersecting;});io.observe(root);}
+  return { update: update, next: nextBtn, prev: prevBtn, destroy: function () {clearInterval(timer);cancelAnimationFrame(raf);if (io) io.disconnect();box.removeEventListener("keydown", keys);} };
+}
+
+// Start it with the Library's default settings. Change any of these to taste;
+// the full list, with sliders, is on https://enrichr.dev/elements/ring-carousel.html
+var enrichr = mount(document.getElementById("enrichr-root"), {
+  "count": 6,
+  "radius": 220,
+  "stepMs": 2200,
+  "auto": 1,
+  "hue": 150 });
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>

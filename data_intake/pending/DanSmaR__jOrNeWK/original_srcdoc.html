@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+  
+
+  <title>3d-animated-house-CSS</title>
+
+    <link rel="canonical" href="https://codepen.io/DanSmaR/pen/jOrNeWK">
+  
+  
+  
+  
+<style>
+*,
+*::before,
+*::after {
+/*   box-sizing: border-box; */
+/*   border: 1px dashed rgba(0,0,0,0.5); */
+}
+
+body {
+  height: 100vh;
+  background: #efe8dd;
+}
+
+article.scene {
+   transform: translate(0, 50px);
+   perspective: 2000px;
+}
+
+.house {
+  margin: 0 auto;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateY(-45deg);
+  width: 460px;
+}
+
+.house div {
+  position: absolute;
+  transform-style: preserve-3d;
+}
+
+
+
+
+/********************************************
+              $deck  
+********************************************/
+
+.deck {
+  transform: translatey(0px);
+}
+
+.deck .covering {
+  width: 41rem;
+  height: 35rem;
+  background-color: #7a5d37;
+  transform: translate3d(8.5rem, 2rem, 21.3rem) rotateX(-90deg);
+  background: linear-gradient(#7a5d37, #7a5d37) calc(100% - 124px) no-repeat,
+    linear-gradient(#7a5d37, #7a5d37) 0 calc(188px - 100%) no-repeat;
+}
+
+.deck *:not(.covering),
+.deck *::before,
+.deck *::after {
+  border-right: 3px solid #78552c;
+  border-top: 2px solid #b5854a;
+}
+
+.deck .left {
+  width: 33.75rem;
+  height: 2.06rem;
+  background: #81693d;
+  transform: translate3d(7.4rem, 19.6rem, 38.3rem);
+}
+
+.deck .right {
+  width: 61.3rem;
+  height: 2.9rem;
+  background: #4e3b23;
+  transform: translate3d(-38.4rem, 29.1rem, -38.4rem);
+}
+
+.deck .back {
+  width: 53rem;
+  height: 2.9rem;
+  background: #4e3b23;
+  transform: translate3d(-66rem, 29.3rem, -12.8rem) rotatey(90deg);
+}
+
+.deck .front {
+  width: 25.3rem;
+  height: 2.2rem;
+  background: #9c7645;
+  transform: translate3d(32.1rem, 21.2rem, 9rem) rotateY(90deg);
+}
+
+.deck .front::before {
+  content: "";
+  position: absolute;
+  width: 11.1rem;
+  height: 3rem;
+  background: #8a693d;
+  transform: translate3d(17.2rem, 7.1rem, -25.4rem) rotatey(90deg);
+}
+
+.deck .front::after {
+  content: "";
+  position: absolute;
+  width: 14.1rem;
+  height: 2.45rem;
+  background: #8a693d;
+  transform: translate3d(-6.3rem, 2.35rem, -16.2rem);
+}
+
+
+
+
+/* *****************************************
+          walls
+******************************************* */
+
+.walls .left,
+.walls .right,
+.walls .back,
+.walls .front {
+  height: 12.5rem;
+}
+
+.walls .left {
+  width: 22rem;
+  background-color: #c3964f;
+  transform: translate3d(18.4rem, 6.2rem, 38.3rem);
+}
+
+.walls .right {
+  width: 22rem;
+  background-color: #8c682f;
+  transform: translate3d(18.1rem, 6.2rem, 9.4rem);
+}
+
+.walls .back {
+  width: 29.2rem;
+  background-color: #9f7636;
+  transform: translate3d(2.2rem, 6.3rem, 22.7rem) rotatey(90deg);
+}
+
+.walls .front {
+  width: 28.75rem;
+  background-color: #c79d5a;
+  transform: translate3d(26rem, 6.2rem, 23.9rem) rotatey(90deg);
+}
+
+
+/* WINDOWS AND DOORS */
+
+.windows {
+  width: 100%;
+  height: 100%;
+}
+
+.windows .rim {
+  width: 4.3rem;
+  height: 3.75rem;
+  top: 30px;
+  border-left: 9px solid #dac29a;
+  border-right: 9px solid #dac29a;
+  border-top: 7px solid #dac29a;
+  border-bottom: 7px solid #dac29a;
+}
+
+.windows .rim::before,
+.windows .rim::after {
+  content: "";
+  position: absolute;
+  background: linear-gradient(to left, #dac29a, #bda886);
+}
+
+.windows .rim::before {
+  width: 0.62rem;
+  height: 3.75rem;
+  left: 45%;
+}
+
+.windows .rim::after {
+  width: 4.3rem;
+  height: 0.45rem;
+  top: 45%;
+}
+
+.windows .first-rim {
+  left: 40px;
+}
+
+.windows .second-left-rim,
+.windows .second-right-rim {
+  left: 215px;
+}
+
+.windows .second-front-rim,
+.windows .second-back-rim {
+  left: 330px;
+}
+
+.windows .louvres,
+.windows .bar {
+  background: linear-gradient(to left, #dac29a, #b5a181);
+  border-top: 2px solid #7a5d37;
+}
+
+.windows .louvres {
+  width: 4.3rem;
+  height: 3.75rem;
+  z-index: -1;
+  opacity: 0.7;
+}
+
+.windows .bar {
+  width: 6rem;
+  height: 0.5rem;
+  bottom: -15px;
+  right: -15px;
+  border-radius: 20px;
+}
+
+
+/* doors */
+
+.doors {
+  width: 100%;
+  height: 100%;
+}
+
+.doors .door-open {
+  width: 5.5rem;
+  height: 7.5rem;
+  bottom: 0%;
+  left: 40%;
+  border-left: 3px solid #a58152;
+  background: linear-gradient(12deg, #7a5d37 40%, #a07c43 0 70%);
+}
+
+.doors .door-close {
+  width: 5.5rem;
+  height: 7.5rem;
+  bottom: 0%;
+  left: 40%;
+  border-left: 8px solid #dac29a;
+  border-right: 8px solid #dac29a;
+  border-top: 8px solid #dac29a;
+  background: #fff;
+  transform: rotatey(24deg);
+  transform-origin: right;
+}
+
+.doors .door-knob {
+  width: 0.5rem;
+  height: 0.5rem;
+  background: linear-gradient(to top, #dac29a, #dac29a);
+  border-radius: 50%;
+  top: 50%;
+  left: 5px;
+  border-left: 2px solid #a28658;
+}
+
+.doors .door-bars {
+  width: 7rem;
+  height: 0.5rem;
+  background: linear-gradient(to top, #dac29a, #dac29a);
+  border-radius: 20px;
+  top: -15px;
+  left: -12px;
+  border-bottom: 2px solid #7a5d37;  ;
+}
+
+
+
+
+/* ************************************
+        ROOF
+************************************* */
+.roof .front {
+  border-left: 220px solid transparent;
+  border-right: 246px solid transparent;
+  border-bottom: 110px solid #c79d5a;
+  transform: translate3d(25.6rem, -0.6rem, 23.7rem) rotatey(90deg);
+}
+
+.roof .back {
+  border-left: 203px solid transparent;
+  border-right: 203px solid transparent;
+  border-bottom: 98px solid #9f7636;
+  transform: translate3d(15.85rem, -0.6rem, 31.7rem) rotatey(90deg);
+}
+
+.roof .left {
+  width: 24.25rem;
+  height: 8.4rem;
+  background-image: repeating-linear-gradient(to left, #796f35, #a68349, 10%, #a68349, #795f35 10%);
+  border-right: 5px solid #86693b;
+  border-bottom: 3px solid #927340;
+  transform: translate3d(29.5rem, -1.8rem, 42rem) rotatex(45deg) skewx(-35deg);
+}
+
+.roof .right  {
+  width: 41.25rem;
+  height: 12.5rem;
+  background-image: repeating-linear-gradient(to left, #8e734b, #65502d, 10%, #65502d, #8e734b 10%);
+  transform: translate3d(-12.3rem, -3.1rem, -0.7rem) rotatex(131deg) skewx(-35deg);
+}
+
+/* porch */
+
+.porch *:not(.front) {
+  background: linear-gradient(to top, #795f35, #b18c50);
+  border-right: 3px solid #9a7944;
+}
+
+.porch .bottom {
+  width: 2.6rem;
+  height: 11rem;
+  transform: translate3d(52rem, .4rem, 36rem) rotatex(90deg);
+}
+
+.porch .left {
+  width: 3rem;
+  height: 6rem;
+  transform: translate3d(51.1rem, 1.6rem, 38rem) rotatex(63deg);
+}
+
+.porch .right {
+  width: 3rem;
+  height: 5.9rem;
+  transform: translate3d(51.3rem, 1.6rem, 32.8rem) rotatex(-63deg);
+}
+
+.porch .front {
+  border-left: 72px solid transparent;
+  border-right: 72px solid transparent;
+  border-bottom: 36px solid #866a3c;
+  transform: translate3d(58rem, 2.7rem, 44.35rem) rotatey(90deg);
+}
+
+.porch [class*='bar'] {
+  height: 155px;
+  width: 10px;
+  background: linear-gradient(to bottom, #795f35, #b18c50);
+  border-radius: 0 0 5px 3px;
+  border-right: 3px solid #9a7944;
+}
+
+.porch .first_bar {
+  transform: translate3d(52rem, 6rem, 37rem);
+}
+
+.porch .second_bar {
+  transform: translate3d(51.8rem, 6rem, 31.5rem);
+}
+
+
+
+
+/* ***************************************** 
+      STAIRCASE
+***************************************** */
+
+.staircase [class*='vertical'],
+.staircase [class*='vertical']::before,
+.staircase [class*='vertical']::after {
+  background-color: #7a5d37;
+  border-right: 3px solid #78552c;
+  border-top: 2px solid #b5854a;
+}
+
+.staircase .vertical-step {
+  width: 5.62rem;
+  height: 0.93rem;
+  transform: translate3d(46.8rem, 18.3rem, 33.3rem) rotatey(-4deg);
+}
+
+.staircase .vertical-step::before {
+  content: '';
+  position: absolute;
+  width: 6.2rem;
+  height: 0.93rem;
+  top: 24px;
+  left: -40px;
+}
+
+.staircase .vertical-step::after {
+  content: '';
+  position: absolute;
+  width: 6.2rem;
+  height: 1rem;
+  top: 48px;
+  left: -65px;
+}
+
+.staircase [class*='horizontal'],
+.staircase [class*='horizontal']::before,
+.staircase [class*='horizontal']::after {
+  background-color: #8a683d;
+  border-right: 4px solid #78552c;
+}
+
+.staircase .horizontal-step {
+  width: 5rem;
+  height: 1.3rem;
+  transform: translate3d(47.8rem, 17.5rem, 33.3rem) rotatex(90deg) rotatey(2deg);
+}
+
+.staircase .horizontal-step::before,
+.staircase .horizontal-step::after {
+  content: '';
+  position: absolute;
+}
+
+.staircase .horizontal-step::before {
+  width: 5rem;
+  height: 1.3rem;
+  top: 63px;
+  left: 35px;
+}
+
+.staircase .horizontal-step::after {
+  width: 5rem;
+  height: 1.3rem;
+  top: 116px;
+  left: 63px;
+}
+
+.staircase .back-cover {
+  width: 6.25rem;
+  height: 3rem;
+  transform: translate3d(40rem, 20.6rem, 25rem) rotatey(-5deg);
+}
+
+.staircase .bottom-cover {
+  width: 6.25rem;
+  height: 3.55rem;
+  transform: translate3d(39.2rem, 22.2rem, 27rem) rotatex(80deg) rotatey(1deg) skewx(-23deg);
+}
+
+.staircase .side-cover,
+.staircase .side-cover::before,
+.staircase .side-cover::after {
+  background-color: #674e2e;
+}
+
+.staircase .side-cover {
+  width: 1.25rem;
+  height: 2.53rem;
+  transform: translate3d(56.6rem, 16.68rem, 38rem) rotatey(90deg);
+}
+
+.staircase .side-cover::before,
+.staircase .side-cover::after {
+  content: '';
+  position: absolute;
+}
+
+.staircase .side-cover::before {
+  width: 1.72rem;
+  height: 1.66rem;
+  transform: translate3d(-1.7rem, 0.8rem, 0);
+}
+
+.staircase .side-cover::after {
+  width: 1.31rem;
+  height: 0.9rem;
+  transform: translate3d(-3rem, 1.6rem, 0);
+}
+
+
+
+
+/* *****************************************
+      VERANDA
+****************************************** */
+
+/* remove */
+.veranda * {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* wedges */
+.veranda [class*='wedge'] {
+  border-radius: 6px 6px 0 0;
+  border-top: 1px solid #b5854a;  
+}
+
+.veranda .wedges [class*='border-right'] {
+  border-right: 3px solid #8a683d;
+}
+
+.veranda .wedges [class*='border-left'] {
+  border-left: 3px solid #8a683d;
+}
+
+.veranda .wedge1 {
+  width: 0.6rem;
+  height: 2rem;
+  background: linear-gradient(to bottom, #7a5d37, #523e35);
+  transform: translate3d(57.8rem, 14rem, 46.3rem) rotatey(90deg);
+}
+
+.veranda .wedge2 {
+  width: 0.7rem;
+  height: 2.6rem;
+  background: linear-gradient(to bottom, #7a5d37, #523e25);
+  transform: translate3d(54rem, 13.3rem, 38rem) rotatey(90deg);
+}
+
+.veranda .wedge3 {
+  width: 0.8rem;
+  height: 2.6rem;
+  background: linear-gradient(to bottom, #8a683d, #b78548);
+  transform: translate3d(45.8rem, 15rem, 32rem) rotatey(90deg);
+}
+
+.veranda .wedge4 {
+  width: 1rem;
+  height: 2.6rem;
+  background: linear-gradient(to bottom, #8a683d, #b78549);
+  transform: translate3d(40rem, 16.5rem, 38.5rem);
+}
+
+.veranda .wedge5 {
+  width: 1.3rem;
+  height: 2.8rem;
+  background: linear-gradient(to bottom, #8a683d, #b78549);
+  transform: translate3d(10rem, 16.5rem, 38.5rem);
+}
+
+.veranda .wedge6 {
+  width: 1rem;
+  height: 2.8rem;
+  background: linear-gradient(to bottom, #7a5d37, #523e25);
+  transform: translate3d(10rem, 16.5rem, 5.5rem);
+}
+
+.veranda .wedge7 {
+  width: 1rem;
+  height: 3rem;
+  background: linear-gradient(to bottom, #7a5d37, #523e25);
+  transform: translate3d(48rem, 16.3rem, 5.5rem);
+}
+
+.veranda .wedge8 {
+  width: 0.7rem;
+  height: 2.3rem;
+  background: linear-gradient(to bottom, #8a683d, #b78549);
+  transform: translate3d(58.5rem, 13.3rem, 38rem) rotatey(90deg);
+}
+
+.veranda .wedge9 {
+  width: 0.6rem;
+  height: 1.7rem;
+  background: linear-gradient(to bottom, #8a683d, #b78549);
+  transform: translate3d(61.8rem, 14.4rem, 46.5rem) rotatey(90deg);
+}
+
+/* planks */
+
+.veranda .planks [class*='border-right'],
+.veranda .planks [class*='border-left'] {
+  border-top: 2px solid #b5854a;
+}
+
+.veranda .planks [class*='border-right'] {
+  border-right: 2px solid #78552c;
+}
+
+.veranda .planks [class*='border-left'] {
+  border-left: 3px solid #78552c;
+}
+
+.veranda .plank1 {
+  width: 4.7rem;
+  height: 0.7rem;
+  background-color: #795b36;
+  transform: translate3d(55rem, 13.6rem, 43.7rem) rotatey(90deg) rotatez(-19deg);
+}
+
+.veranda .plank2 {
+  width: 1.7rem;
+  height: 0.7rem;
+  background-color: #806139;
+  transform: translate3d(53.5rem, 13.5rem, 39.2rem);
+}
+
+.veranda .plank3 {
+  width: 8.8rem;
+  height: 0.7rem;
+  background-color: #8a683d;
+  transform: translate3d(52rem, 12.7rem, 46.7rem) rotatey(90deg);
+}
+
+.veranda .plank4 {
+  width: 30rem;
+  height: 0.9rem;
+  background-color: #8a683d;
+  transform: translate3d(12.7rem, 16.5rem, 40rem);
+}
+
+.veranda .plank5 {
+  width: 34rem;
+  height: 1rem;
+  background-color: #46341f;
+  transform: translate3d(-11rem, 17.7rem, 18.7rem) rotatey(90deg);
+}
+
+.veranda .plank6 {
+  width: 38rem;
+  height: 0.9rem;
+  background-color: #46341f;
+  transform: translate3d(10rem, 17rem, 5rem);
+}
+
+.veranda .plank7 {
+  width: 17rem;
+  height: 0.8rem;
+  background-color: #8a683d;
+  transform: translate3d(52rem, 13.2rem, 31.7rem) rotatey(90deg);
+}
+
+.veranda .plank8 {
+  width: 4.5rem;
+  height: 0.7rem;
+  background-color: #8a683d;
+  transform: translate3d(63rem, 12.5rem, 47.7rem) rotatey(90deg) rotatez(-19deg);
+}
+
+
+
+
+/* **************************************************
+        PERSON
+**************************************************** */
+
+.person .person-one figure,
+.person .person-two figure {
+  background-color: #000;
+  display: block;
+  position: absolute;
+}
+
+.person .person-one .head,
+.person .person-two .head {
+  border-radius: 22px;
+  width: 20px;
+  height: 20px;
+  left: 3px;
+  top: 0;
+}
+
+.person .person-one .body,
+.person .person-two .body {
+  border-radius: 30px 30px 0 0;
+  height: 30px;
+  top: 21px;
+  width: 26px;
+}
+
+.person .person-one .body::before,
+.person .person-one .body::after,
+.person .person-two .body::before,
+.person .person-two .body::after {
+  content: '';
+  position: absolute;
+  width: 9px;
+  height: 15px;
+  top: 30px;
+  background-color: #000;
+}
+
+.person .person-one .body::before,
+.person .person-two .body::before {
+  left: 3px;
+}
+
+.person .person-one .body::after,
+.person .person-two .body::after {
+  left: 14px;
+}
+
+.person .person-one {
+  transform: translate3d(935px, 179px, 780px) rotatey(0deg);
+}
+
+.person .person-two {
+  transform: translate3d(935px, 179px, 790px) rotatey(0deg) scale(0);
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <article class="scene">
+  
+  <section class="house">
+    <div class="deck">
+      <div class="covering"></div>
+      
+      <div class="left"></div>
+      
+      <div class="right"></div>
+      
+      <div class="back"></div>
+      
+      <div class="front"></div>
+    </div>
+      
+    <div class="walls">
+      
+      <div class="front">
+        <div class="windows">
+          <div class="rim first-rim">
+            <div class="louvres"></div>
+            <div class="bar"></div>
+          </div>
+          <div class="rim second-front-rim">
+            <div class="louvres"></div>
+            <div class="bar"></div>
+          </div>
+        </div>
+        <div class="doors">
+          <div class="door-open"></div>
+          <div class="door-close">
+            <div class="door-knob"></div>
+            <div class="door-bars"></div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="left">
+        <div class="windows">
+          <div class="rim first-rim">
+            <div class="louvres"></div>
+            <div class="bar"></div>
+          </div>
+          <div class="rim second-left-rim">
+            <div class="louvres"></div>
+            <div class="bar"></div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="right">
+        <div class="windows">
+          <div class="rim first-rim">
+            <div class="louvres"></div>
+            <div class="bar"></div>
+          </div>
+          <div class="rim second-right-rim">
+            <div class="louvres"></div>
+            <div class="bar"></div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="back">
+        <div class="windows">
+          <div class="rim first-rim">
+            <div class="louvres"></div>
+            <div class="bar"></div>
+          </div>
+          <div class="rim second-front-rim">
+            <div class="louvres"></div>
+            <div class="bar"></div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    
+    <div class="roof">
+      <div class="left"></div>
+      <div class="right"></div>
+      <div class="front"></div>
+      <div class="back"></div>
+    </div>
+    
+    <div class="porch">
+      <div class="bottom"></div>
+      <div class="left"></div>
+      <div class="right"></div>
+      <div class="front"></div>
+      <div class="first_bar bar"></div>
+      <div class="second_bar bar"></div>
+    </div>
+    
+    <div class="staircase">
+      <div class="vertical-step"></div>
+      <div class="horizontal-step"></div>
+      <div class="back-cover vertical"></div>
+      <div class="bottom-cover horizontal"></div>
+      <div class="side-cover"></div>
+    </div>
+    
+    <div class="veranda">
+      <div class="wedges">
+        <div class="wedge1 border-left"></div>
+        <div class="wedge2 border-left"></div>
+        <div class="wedge3 border-left"></div>
+        <div class="wedge4 border-right"></div>
+        <div class="wedge5 border-right"></div>
+        <div class="wedge6 border-right"></div>
+        <div class="wedge7 border-right"></div>
+        <div class="wedge8 border-left"></div>
+        <div class="wedge9 border-left"></div>
+      </div>
+      
+      <div class="planks">
+        <div class="plank1 border-right"></div>
+        <div class="plank2 border-right"></div>
+        <div class="plank3 border-left"></div>
+        <div class="plank4 border-left"></div>
+        <div class="plank5 border-left"></div>
+        <div class="plank6 border-right"></div>
+        <div class="plank7 border-left"></div>
+        <div class="plank8 border-left"></div>
+      </div>
+    </div>
+    
+    <div class="person">
+      <div class="person-one">
+        <figure class="head"></figure>
+        <figure class="body"></figure>
+      </div>
+      <div class="person-two">
+        <figure class="head"></figure>
+        <figure class="body"></figure>
+      </div>
+    </div>
+  </section>
+  
+</article>
+  
+  
+  
+</body>
+
+</html>

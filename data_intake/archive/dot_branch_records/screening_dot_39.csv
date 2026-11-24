@@ -1,0 +1,4 @@
+key,url,decision,tier,hits,reason,js_policy,evidence,notes,decided_on
+jh3y__ZEOzNbm,https://codepen.io/jh3y/pen/ZEOzNbm,hold,unclassified,spatial_layers,await_user_review,preserve,浏览器实测默认 Exploded 开、Spin 关、Scale 2；先关闭 Exploded 后封面和白色页块贴合，再打开，分离出白色页块、两条封面边和短书脊边。Rotate 改至 X/Y=89、Z=0 时仍可分离，默认 0/0/0 已完整实测两个稳定状态；切换需等过渡。不是翻页案例，未开启 Spin。,优先，对照 224/227；仅候审，未正式入库。,2026-11-20
+agathaco__eWMgmP,https://codepen.io/agathaco/pen/eWMgmP,hold,unclassified,spatial_layers,await_user_review,preserve,浏览器实测顶部和下滚约半屏；浅紫远山在雪峰后，丘陵、树木、小屋夹在雪峰与逐层加深的蓝色波浪间，下滚后帆船完整露出，在后续画面中深蓝浪头局部盖过船体。气球、浪与帆船持续运动，若入选固定滚动位置与代表帧，不把运动中任一点当稳定状态。,备选，对照 213/224；仅候审，未正式入库。,2026-11-20
+akhil_001__gQwJPJ,https://codepen.io/akhil_001/pen/gQwJPJ,hold,unclassified,spatial_layers,await_user_review,preserve,浏览器实测可见粉红艇体叠在两层深蓝海底之上；艇体上的潜望镜向左投射逐渐变淡的锥形光，两个透明感舷窗分别嵌在暗环里，黄色螺旋桨接于右端；二维侧面构图，非三维穿插。源码螺旋桨 1 秒循环，不作为实测速率或静止态。,备选，对照 213；仅候审，未正式入库。,2026-11-20

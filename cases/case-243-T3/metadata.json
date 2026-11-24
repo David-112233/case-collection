@@ -1,0 +1,90 @@
+{
+  "source_id": "codepen:alvaromontoro/zxvqodp",
+  "author": "alvaromontoro",
+  "pen_id": "zxvqodP",
+  "url": "https://codepen.io/alvaromontoro/pen/zxvqodP",
+  "acquisition": "cdpn_fullpage_cloud_browser_dom",
+  "acquisition_url": "https://cdpn.io/alvaromontoro/fullpage/zxvqodP",
+  "retrieved_at": "2026-11-18T23:13:23Z",
+  "retrieved_at_precision": "batch browser check time; no separate per-candidate timestamp in archive",
+  "fetch_status": "ok",
+  "title": "CSS: Severance Office",
+  "codepen_console_shim_removed": 1,
+  "original_srcdoc_sha256": "9e6294dc6af647e97d8ffeab7bebe5bbd20618abc9684ce33bf5601611919d8a",
+  "source_html_sha256": "00c43ac7d3ea4ff170aea6c9f9c0f69157265dd553ee2bda4d7d46795c6d70c4",
+  "analysis": {
+    "js": {
+      "has_js": false,
+      "inline_js_chars": 0,
+      "external_scripts": [],
+      "inline_event_handlers": 0,
+      "has_gsap": false,
+      "has_scroll_trigger": false,
+      "has_intersection_observer": false
+    },
+    "css": {
+      "has_animation_timeline": false,
+      "has_animation_range": false,
+      "has_view_timeline": false,
+      "has_scroll_timeline": false,
+      "has_scroll_function": false,
+      "has_view_function": false,
+      "has_sticky": false,
+      "keyframes_count": 1,
+      "scroll_snap": false,
+      "scroll_state_query": false,
+      "scroll_marker": false,
+      "container_query": false,
+      "subgrid": false,
+      "anchor_positioning": false,
+      "has_selector": true,
+      "checked_selector": true,
+      "target_selector": false,
+      "at_property": false,
+      "view_transition": false,
+      "transform_3d": true,
+      "clip_path": true,
+      "css_counter": false,
+      "media_query": false
+    },
+    "external_stylesheets": [],
+    "css_imports": [],
+    "css_chars": 13165,
+    "element_count": 158,
+    "html_chars": 18294
+  },
+  "visual_review": {
+    "viewport": [
+      1331,
+      894
+    ],
+    "default_only": true,
+    "mobile_verified": false,
+    "interactions_tested": false,
+    "evidence": "默认Animate未勾选；四个办公隔间围中心交错，隔板遮挡电脑与桌板，抽屉厚度、键盘和地面投影可见；CSS preserve-3d，只有平台console shim，无业务JS。"
+  },
+  "candidate_status": "admitted_in_collection_repo",
+  "license": "not separately verified",
+  "provenance": "Generated from already archived source; source_audit_dot_13.json records initial browser evidence and archive verification.",
+  "review_id": "C029",
+  "case_id": "case-243-T3",
+  "review": {
+    "status": "用户首轮审核选中",
+    "visual_verified": true,
+    "formal_admission": true,
+    "scope": "仅采集仓库入库交付；主项目尚未导入"
+  },
+  "source_archive": {
+    "repository": "David-112233/case-collection",
+    "pr": 9,
+    "commit": "ea45ddc4d933dcddb2f3b8f993f5df4cdae040a7",
+    "path": "data_intake/B1/raw/alvaromontoro__zxvqodP"
+  },
+  "intake_date": "2026-11-20",
+  "source_original_sha256": "00c43ac7d3ea4ff170aea6c9f9c0f69157265dd553ee2bda4d7d46795c6d70c4",
+  "source_original_note": "与原作品主体一致，已去除采集页的 CodePen console 样板；完整捕获另存 original_srcdoc.html。",
+  "js_policy": "original_preserved",
+  "js_changes": "未将原作强行改写为纯 CSS；source.html 与归档预览一致，可能包含原作脚本及外部依赖。",
+  "admitted_at": "2026-11-24",
+  "admitted_by": "admit_case.py"
+}
