@@ -2,11 +2,11 @@
 
 由 `data_intake/tools/registry.py render-index` 生成，**不要手写**。状态来源是 [registry.csv](registry.csv)。
 
-阶段分布：admitted 26，gt_ready 1
+阶段分布：admitted 26，input_draft 1
 
 | 案例 | 档位 | 来源 | 特色 | 阶段 | 处理者 | 更新 | 用户审核 | 备注 |
 |---|---|---|---|---|---|---|---|---|
-| [case-228-T3](case-228-T3/) | T3 | [RaduBratan__mdPrWmo](https://codepen.io/RaduBratan/pen/mdPrWmo) | iPod Nano、凹屏与滚轮 | gt_ready | duet | 2026-11-24 | pending | GT 已做（仅静态自检，渲染自检待本地运行 review_20261124/gt_check.py）；档位复核仍为 T3 |
+| [case-228-T3](case-228-T3/) | T3 | [RaduBratan__mdPrWmo](https://codepen.io/RaduBratan/pen/mdPrWmo) | iPod Nano、凹屏与滚轮 | input_draft | duet | 2026-11-24 | pending | GT 仅静态自检，渲染自检待本地运行 review_20261124/gt_check.py；input 外观按源码推断，待核对（见 input_problem.md）；档位复核仍为 T3 |
 | [case-229-T1](case-229-T1/) | T1 | [fossheim__VweaNYW](https://codepen.io/fossheim/pen/VweaNYW) | 卡西欧键盘、黑白键叠压 | admitted | duet | 2026-11-24 | pending |  |
 | [case-230-T1](case-230-T1/) | T1 | [glennphilp__DBLzOW](https://codepen.io/glennphilp/pen/DBLzOW) | 剪纸叠字、倾斜阴影 | admitted | duet | 2026-11-24 | pending |  |
 | [case-231-T3](case-231-T3/) | T3 | [ricardoolivaalonso__ExPpgqG](https://codepen.io/ricardoolivaalonso/pen/ExPpgqG) | 立体收音机、磁带仓与凹槽 | admitted | duet | 2026-11-24 | pending |  |

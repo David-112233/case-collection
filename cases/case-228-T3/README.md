@@ -2,7 +2,7 @@
 
 来源：<https://codepen.io/RaduBratan/pen/mdPrWmo>（作者 RaduBratan，CodePen 公开作品，默认 MIT 许可）
 
-当前阶段：`gt_ready`（入库于 2026-11-24），归属 duet。阶段以 [registry.csv](../registry.csv) 为准。
+当前阶段：`input_draft`（入库于 2026-11-24），归属 duet。阶段以 [registry.csv](../registry.csv) 为准。
 
 - 审核编号：C002；档位：T3（**暂定**，依据入库时的来源源码；`ground_truth.html` 完成后按 GT 的驱动方式重新判定，必要时用 `registry.py retier` 改名）。
 - 特色：iPod Nano、凹屏与滚轮
@@ -32,3 +32,7 @@
 - **保留的外部资源：** prefixfree、jQuery 3.5.1、Font Awesome 5.2.0 免费版 all.js、Font Awesome Pro 5.2.0 CSS。滚轮上的四个图标是脚本注册的自定义 SVG，由 all.js 渲染，按源码不依赖 Pro CSS；Pro CSS 很可能因授权加载失败，但不影响画面。**两点都未在浏览器里核实**，见 [review_20261124/static_check.md](review_20261124/static_check.md)。
 - **档位复核：** GT 仍有“点击滚轮进入并保持发光模式”这一可保持的状态切换，按难度模型 v2.1 为 T3，与入库暂定一致，不改名。
 - **自检：** 本环境无法渲染（装不了浏览器，外部脚本被代理拦截），只完成了静态检查；渲染自检脚本已备好，待本地运行。
+
+## input 草稿（2026-11-24，duet）
+
+[input.json](input.json) 由 GT 写出，等用户审核 GT 与 input。外观描述中按源码推断、尚未经渲染核对的部分，以及写与不写的取舍，见 [input_problem.md](input_problem.md)。
