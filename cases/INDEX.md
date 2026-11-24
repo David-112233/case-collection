@@ -21,7 +21,7 @@
 | [case-240-T1](case-240-T1/) | T1 | [shunyadezain__QWyVwep](https://codepen.io/shunyadezain/pen/QWyVwep) | 合成器面板、旋钮浮雕 | input_draft | duet | 2026-11-24 | pending | 等用户审核 GT 与 input；已经 raw.githack 渲染核对；待定：网格单位写法、字体名（见 input_problem.md） |
 | [case-241-T1](case-241-T1/) | T1 | [meylon__qByaYVp](https://codepen.io/meylon/pen/qByaYVp) | 圆环凹面、错落连线 | input_draft | duet | 2026-11-24 | pending | 等用户审核 GT 与 input；已经 raw.githack 渲染核对；待定：992px 以下横排是否写入、像素尺寸（见 input_problem.md） |
 | [case-242-T1](case-242-T1/) | T1 | [zenete__BaMbmqW](https://codepen.io/zenete/pen/BaMbmqW) | 房间吊顶、扇叶遮叠 | input_draft | duet | 2026-11-24 | pending | 等用户审核；云端渲染有大块白色缺口，待本地 GPU 复核（见 input_problem.md 第 1 节）；档位已由 T2 改为 T1 |
-| [case-243-T3](case-243-T3/) | T3 | [alvaromontoro__zxvqodP](https://codepen.io/alvaromontoro/pen/zxvqodP) | 四工位办公室、隔板交错 | admitted | duet | 2026-11-24 | pending |  |
+| [case-243-T3](case-243-T3/) | T3 | [alvaromontoro__zxvqodP](https://codepen.io/alvaromontoro/pen/zxvqodP) | 四工位办公室、隔板交错 | gt_ready | duet | 2026-11-24 | pending | 去掉旋转动画和 Animate 复选框，固定在来源默认画面（234°）；渲染核对进行中 |
 | [case-244-T1](case-244-T1/) | T1 | [kevinleclair1__XJgQrr](https://codepen.io/kevinleclair1/pen/XJgQrr) | 交织五环、前后交替 | input_draft | duet | 2026-11-24 | pending | 等用户审核 GT 与 input；外观已按 raw.githack 截图核对；难度偏低，是否保留待定 |
 | [case-245-T1](case-245-T1/) | T1 | [HunorMarton__BazeOpE](https://codepen.io/HunorMarton/pen/BazeOpE) | 埃舍尔方块、桥面穿插 | input_draft | duet | 2026-11-24 | pending | 等用户审核 GT 与 input；外观已按截图核对；花样只能写到类别层，是否可评测待定；删 YouTube 徽标待确认 |
 | [case-246-T1](case-246-T1/) | T1 | [ehckk__WNzGYKy](https://codepen.io/ehckk/pen/WNzGYKy) | 彩虹书架、书脊深度 | input_draft | duet | 2026-11-24 | pending | 等用户审核 GT 与 input；外观已按截图核对；地板穿过最下层是来源瑕疵，GT 未改待定 |
