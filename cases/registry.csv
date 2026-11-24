@@ -12,7 +12,7 @@ case-237-T3,dustindwayne__bGyYoar,T3,duet,gt_ready,2026-11-24,GT 去掉唱片旋
 case-238-T1,MadeByArne__bGWwRoX,T1,duet,admitted,2026-11-24,,pending
 case-239-T2,RaduBratan__MWyKrRZ,T2,duet,admitted,2026-11-24,,pending
 case-240-T1,shunyadezain__QWyVwep,T1,duet,input_draft,2026-11-24,等用户审核 GT 与 input；已经 raw.githack 渲染核对；待定：网格单位写法、字体名（见 input_problem.md）,pending
-case-241-T1,meylon__qByaYVp,T1,duet,gt_ready,2026-11-24,GT 只删 CodePen 样板；档位复核仍为 T1；渲染核对进行中,pending
+case-241-T1,meylon__qByaYVp,T1,duet,input_draft,2026-11-24,等用户审核 GT 与 input；已经 raw.githack 渲染核对；待定：992px 以下横排是否写入、像素尺寸（见 input_problem.md）,pending
 case-242-T2,zenete__BaMbmqW,T2,duet,admitted,2026-11-24,,pending
 case-243-T3,alvaromontoro__zxvqodP,T3,duet,admitted,2026-11-24,,pending
 case-244-T1,kevinleclair1__XJgQrr,T1,duet,input_draft,2026-11-24,等用户审核 GT 与 input；外观已按 raw.githack 截图核对；难度偏低，是否保留待定,pending
