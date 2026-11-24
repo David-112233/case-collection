@@ -1,0 +1,36 @@
+--- source.html	2026-11-24 09:39:01.022216643 +0000
++++ ground_truth.html	2026-11-24 10:32:32.004780462 +0000
+@@ -4,15 +4,6 @@
+ <head>
+   
+   <meta charset="UTF-8">
+-  
+-
+-    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+-
+-    <meta name="apple-mobile-web-app-title" content="CodePen">
+-
+-    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+-
+-    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+ 
+ 
+ 
+@@ -20,8 +11,6 @@
+   
+ 
+   <title>Responsive infographic banners with CSS variables</title>
+-
+-    <link rel="canonical" href="https://codepen.io/thebabydino/pen/NLWdwz">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   
+   
+@@ -136,7 +125,7 @@
+ 
+   </head>
+ 
+-<body translate="no">
++<body>
+   <article style="--c0: #d8272d; --c1: #e92526">
+   <h3 data-icon="🖱️">gingerbread</h3>
+   <p>Cake cookie lemon drops muffin sugar plum. Liquorice pudding sugar plum topping macaroon pie chocolate.</p>

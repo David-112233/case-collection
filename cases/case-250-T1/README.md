@@ -16,3 +16,16 @@
 | `classification.json` | 档位与入库依据 |
 
 下一步由 duet 按顺序做（见 [cases/README.md](../README.md)）：① 以 `source.html` 为基础改造 `ground_truth.html`（尽量尊重源码，改成准静态、无动画、只保留简单交互）并自检；② 由 GT 写出 `input.json`；③ 停下，等用户审核 GT 与 input；④ 用户通过后才写 `rules_drafts/manual_v1/`。
+
+## GT 相对来源的改动（2026-11-24，duet）
+
+`ground_truth.html` 由 `source.html` 复制后只删 CodePen 样板，样式、结构、文案一律不动。完整差异见 [review_20261124/source_to_gt.diff](review_20261124/source_to_gt.diff)。
+
+| 改动 | 原因 |
+|---|---|
+| 删除 apple-touch-icon、`apple-mobile-web-app-title`、favicon、mask-icon、canonical，`<body translate="no">` 改为 `<body>` | CodePen 样板，与作品和评分无关（用户同意删除）。来源没有脚本 |
+
+- **静止状态：** 来源本身没有动画、过渡和交互，默认画面就是静止画面，无须另选。
+- **保留不动：** 三个响应式断点（625、480、225px）；标题前的 emoji 图标（经灰度滤镜显示为灰色，具体字形取决于系统 emoji 字体）；字体栈 `trebuchet ms, verdana, sans-serif`（系统字体，不加载外部字体）。
+- **档位复核：** GT 无动态、无交互，仍为 **T1**，目录名不变。
+- **自检：** 见 [review_20261124/](review_20261124/)。渲染核对结论写在 `static_check.md`。
