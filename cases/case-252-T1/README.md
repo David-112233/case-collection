@@ -2,9 +2,9 @@
 
 来源：<https://codepen.io/thebabydino/pen/pBmMaJ>（作者 thebabydino，CodePen 公开作品，默认 MIT 许可）
 
-当前阶段：`admitted`（入库于 2026-11-24），归属 duet。阶段以 [registry.csv](../registry.csv) 为准。
+当前阶段：`input_draft`（入库于 2026-11-24），归属 duet。阶段以 [registry.csv](../registry.csv) 为准。
 
-- 审核编号：C041；档位：T1（**暂定**，依据入库时的来源源码；`ground_truth.html` 完成后按 GT 的驱动方式重新判定，必要时用 `registry.py retier` 改名）。
+- 审核编号：C041；档位：T1（入库时暂定，GT 完成后复核仍为 T1）。
 - 特色：斜切编号条、圆标压层
 
 | 文件 | 说明 |
@@ -29,3 +29,7 @@
 - **静止状态：** 来源没有任何动画、过渡或交互，默认画面即静止画面，无需另选。
 - **档位复核：** 仍为 **T1**（无任何动态、无交互），目录名不变。
 - **自检：** 截图测量脚本 [review_20261124/shot_gt.py](review_20261124/shot_gt.py)，渲染核对见 [review_20261124/static_check.md](review_20261124/static_check.md)。
+
+## input 草稿（2026-11-24，duet）
+
+[input.json](input.json) 由 GT 写出，外观经云端浏览器渲染核对（1280、500 宽），等用户审核 GT 与 input。取舍与待定问题见 [input_problem.md](input_problem.md)。
