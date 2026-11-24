@@ -1,6 +1,6 @@
-"""GT self-check for case-235-T3 (fixed-view 3D office, WebGL canvas).
+"""GT self-check for case-235-T1 (fixed-view 3D office, WebGL canvas).
 
-    python cases/case-235-T3/review_20261124/gt_check.py
+    python cases/case-235-T1/review_20261124/gt_check.py
 
 Needs Playwright chromium with WebGL (headless chromium uses SwiftShader, which is fine) and network access to
 cdnjs.cloudflare.com (three.js r124), unpkg.com (GLTFLoader 0.126), rawcdn.githack.com (11 .glb models,

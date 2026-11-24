@@ -4,7 +4,7 @@
 
 当前阶段：`gt_ready`（入库于 2026-11-24），归属 duet。阶段以 [registry.csv](../registry.csv) 为准。
 
-- 审核编号：C010；档位：T3（**暂定**，依据入库时的来源源码；`ground_truth.html` 完成后按 GT 的驱动方式重新判定，必要时用 `registry.py retier` 改名）。
+- 审核编号：C010；档位：T1（入库时按来源源码暂定为 T3，GT 完成后复核改为 T1，见下文“档位复核”）。
 - 特色：立体办公室、家具分层
 
 | 文件 | 说明 |
@@ -33,5 +33,5 @@
 - **相机参数：** 竖直视场角 15°（来源原值），相机位置为来源的 (18, 6, 18) 沿原方向缩放到长度 16，约为 (11.01, 3.67, 11.01)，看向原点 (0, 0, 0)。理由：来源 OrbitControls 的 `maxDistance = 16` 在第一次更新时就把距离夹到 16，方向角（方位 45°、俯角约 13°）都在来源允许范围内，所以这正是来源打开时的初始视角；按模型顶点投影，它与目标图的构图吻合（见 [static_check.md](review_20261124/static_check.md)）。没有另选角度。
 - **保留不动的地方：** `requestAnimationFrame` 渲染循环保留，只是每帧用同一相机渲染同一静止场景，这样模型和贴图异步加载完后会自动出现在画面上；窗口缩放时更新画布和相机宽高比的逻辑保留。加载层 `#loader`（带背景图和“Loading”字样的全屏遮罩）保留，`room.glb` 加载完就隐藏，属于来源的正常行为，最终画面里没有它；如果它一直不消失，说明模型没加载成功，正好作为自检信号。信息卡 `.message` 的 DOM、样式和 `showMessage`、`nightMode` 等函数保留但不再被调用，信息卡一直停在屏幕外，不可见。
 - **外部资源：** three.js r124（cdnjs）、GLTFLoader 0.126（unpkg）、Montserrat（Google Fonts）、加载层背景图、11 个 `.glb` 模型和日间烘焙贴图 `baked.jpg`（rawcdn.githack.com）。本环境被代理拦截，**都未在浏览器里核实能否加载**。另从 raw.githubusercontent.com 取得同一提交的 11 个模型文件只读核对了节点和尺寸，文件没有放进仓库。
-- **档位复核：** 见下文 retier 记录。
+- **档位复核：** GT 无任何动态、没有交互，按难度模型 v2.1 为 T1，已用 `registry.py retier` 由暂定 T3 改为 T1（目录名随之改为 `case-235-T1`），`classification.json` 的 `tier_status`、`tier_basis`、`tier_note` 已手动同步。
 - **自检：** 本环境不能渲染，只完成了静态检查和不需要浏览器的投影核对；渲染自检脚本 `review_20261124/gt_check.py` 已备好，待本地运行。

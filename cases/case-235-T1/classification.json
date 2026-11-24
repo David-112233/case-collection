@@ -1,7 +1,7 @@
 {
   "review_id": "C010",
-  "case_id": "case-235-T3",
-  "tier": "T3",
+  "case_id": "case-235-T1",
+  "tier": "T1",
   "spatial_feature": "立体办公室、家具分层",
   "evidence": "办公室完整空间中柜体、书本、桌椅、吊灯、墙面及地板遮挡关系丰富。ThreeJS/GLTF外部模型依赖；场景已可见但Loading字样残留，不能宣称完全加载成功。",
   "decision": "accept",
@@ -11,8 +11,8 @@
     "date": "2026-11-20"
   },
   "qualification_note": "未分配主项目正式编号、未强定档；视觉核验范围沿用采集记录。",
-  "tier_basis": "拖动/点击改变视角并保持（three.js 轨道控制）；**页面是 WebGL 画布，不是 HTML/CSS 结构，评分可行性需用户确认**（按难度模型 v2.1 的驱动方式判定；JS 驱动按等价的 CSS 驱动类比）",
+  "tier_basis": "GT 固定为来源初始视角，去掉了轨道控制（拖动、缩放、平移）、点击物体弹出信息卡、点击吊灯切换夜间模式、被点物体自转和显示器循环视频；画面无任何动态，也没有交互，按难度模型 v2.1 为 T1",
   "tier_assigned_by": "Claude，本地入库时（2026-11-24），待用户抽查",
-  "tier_status": "provisional_from_source",
-  "tier_note": "入库时按来源源码暂定；ground_truth.html（准静态）完成后按 GT 重新判定"
+  "tier_status": "reviewed_after_gt",
+  "tier_note": "2026-11-24 duet 按 GT 复核，由暂定 T3 改为 T1（用户指示固定视角、只保留静态细节、参考 case-224）。若用户决定保留“点击吊灯切换夜间模式”，GT 有可保持的点击状态，应改回 T3"
 }
