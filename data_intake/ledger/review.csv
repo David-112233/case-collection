@@ -17,7 +17,7 @@ hkkcngz__RjLrJJ,https://codepen.io/hkkcngz/pen/RjLrJJ,C015,dot,reserve,红色打
 MadeByArne__bGWwRoX,https://codepen.io/MadeByArne/pen/bGWwRoX,C016,dot,admitted,磁带窗口、带芯叠层,1,case-238-T1,cases/case-238-T1,
 RaduBratan__MWyKrRZ,https://codepen.io/RaduBratan/pen/MWyKrRZ,C017,dot,admitted,立体磁带、卷轴与投影,1,case-239-T2,cases/case-239-T2,
 inzrb__nwRxjg,https://codepen.io/inzrb/pen/nwRxjg,C018,dot,reserve,折纸文章卡、标题折角,0,,archive/dot_sources/inzrb__nwRxjg,
-annampawl__jOZmboO,https://codepen.io/annampawl/pen/jOZmboO,C019,dot,reserve,缝纫机、布片跨桌沿,0,,archive/dot_sources/annampawl__jOZmboO,
+annampawl__jOZmboO,https://codepen.io/annampawl/pen/jOZmboO,C019,dot,in_main,缝纫机、布片跨桌沿,0,case-219-T2,主仓库 case-219-T2,
 karomancer__yLNdeXE,https://codepen.io/karomancer/pen/yLNdeXE,C020,dot,reserve,剪刀布面、针线穿插,0,,archive/dot_sources/karomancer__yLNdeXE,
 khanhtranngoccva__BaYJGQa,https://codepen.io/khanhtranngoccva/pen/BaYJGQa,C021,dot,reserve,立体琴键、黑白键交错,0,,archive/dot_sources/khanhtranngoccva__BaYJGQa,
 shunyadezain__QWyVwep,https://codepen.io/shunyadezain/pen/QWyVwep,C022,dot,admitted,合成器面板、旋钮浮雕,1,case-240-T1,cases/case-240-T1,
@@ -308,13 +308,13 @@ miocene__rzmZKQ,https://codepen.io/miocene/pen/rzmZKQ,,dot,rejected,,,,archive/d
 miocene__aPwrpw,https://codepen.io/miocene/pen/aPwrpw,,dot,rejected,,,,archive/dot_sources/miocene__aPwrpw,dot 筛选记录：reject（screening_dot.csv）
 TurkAysenur__ZEpxeYm,https://codepen.io/TurkAysenur/pen/ZEpxeYm,,dot,rejected,,,,archive/dot_sources/TurkAysenur__ZEpxeYm,dot 筛选记录：reject（screening_dot.csv）
 hussard__ExgbXMP,https://codepen.io/hussard/pen/ExgbXMP,,dot,hold,,,,archive/dot_sources/hussard__ExgbXMP,dot 筛选记录：hold（screening_dot.csv）
-TurkAysenur__RwWKYMO,https://codepen.io/TurkAysenur/pen/RwWKYMO,,dot,dot_accept,,,,archive/dot_sources/TurkAysenur__RwWKYMO,dot 筛选记录：accept（screening_dot.csv）
-oliviale__BaKamvY,https://codepen.io/oliviale/pen/BaKamvY,,dot,dot_accept,,,,archive/dot_sources/oliviale__BaKamvY,dot 筛选记录：accept（screening_dot.csv）
+TurkAysenur__RwWKYMO,https://codepen.io/TurkAysenur/pen/RwWKYMO,,dot,in_main,,,case-225-T3,主仓库 case-225-T3,dot 筛选记录：accept（screening_dot.csv）
+oliviale__BaKamvY,https://codepen.io/oliviale/pen/BaKamvY,,dot,in_main,,,case-221-T1,主仓库 case-221-T1,dot 筛选记录：accept（screening_dot.csv）
 aybukeceylan__OJRNbZp,https://codepen.io/aybukeceylan/pen/OJRNbZp,,dot,hold,,,,archive/dot_sources/aybukeceylan__OJRNbZp,dot 筛选记录：hold（screening_dot.csv）
 havardob__ExvwGBr,https://codepen.io/havardob/pen/ExvwGBr,,dot,hold,,,,archive/dot_sources/havardob__ExvwGBr,dot 筛选记录：hold（screening_dot.csv）
 aybukeceylan__poEqdWZ,https://codepen.io/aybukeceylan/pen/poEqdWZ,,dot,dot_accept,,,,archive/dot_sources/aybukeceylan__poEqdWZ,dot 筛选记录：accept（screening_dot.csv）
 TurkAysenur__gOmMgpx,https://codepen.io/TurkAysenur/pen/gOmMgpx,,dot,hold,,,,archive/dot_sources/TurkAysenur__gOmMgpx,dot 筛选记录：hold（screening_dot.csv）
-oliviale__rNWyzmx,https://codepen.io/oliviale/pen/rNWyzmx,,dot,dot_accept,,,,archive/dot_sources/oliviale__rNWyzmx,dot 筛选记录：accept（screening_dot.csv）
+oliviale__rNWyzmx,https://codepen.io/oliviale/pen/rNWyzmx,,dot,in_main,,,case-222-T2,主仓库 case-222-T2,dot 筛选记录：accept（screening_dot.csv）
 gestok__YzLBVOp,https://codepen.io/gestok/pen/YzLBVOp,,dot,rejected,,,,archive/dot_sources/gestok__YzLBVOp,dot 筛选记录：reject（screening_dot.csv）
 jordestay__ZERxzgp,https://codepen.io/jordestay/pen/ZERxzgp,,dot,hold,,,,archive/dot_sources/jordestay__ZERxzgp,dot 筛选记录：hold（screening_dot.csv）
 andybarefoot__GGVLov,https://codepen.io/andybarefoot/pen/GGVLov,,dot,rejected,,,,archive/dot_sources/andybarefoot__GGVLov,dot 筛选记录：reject（screening_dot.csv）
@@ -327,7 +327,7 @@ abhndv__LgeNom,https://codepen.io/abhndv/pen/LgeNom,,dot,hold,,,,archive/dot_sou
 TurkAysenur__NWRqoyL,https://codepen.io/TurkAysenur/pen/NWRqoyL,,dot,hold,,,,archive/dot_sources/TurkAysenur__NWRqoyL,dot 筛选记录：hold（screening_dot.csv）
 TurkAysenur__LYRKpWe,https://codepen.io/TurkAysenur/pen/LYRKpWe,,dot,hold,,,,archive/dot_sources/TurkAysenur__LYRKpWe,dot 筛选记录：hold（screening_dot.csv）
 leonam-silva-de-souza__eYqyKoG,https://codepen.io/leonam-silva-de-souza/pen/eYqyKoG,,dot,hold,,,,archive/dot_sources/leonam-silva-de-souza__eYqyKoG,dot 筛选记录：hold（screening_dot.csv）
-leonam-silva-de-souza__MYgLgvV,https://codepen.io/leonam-silva-de-souza/pen/MYgLgvV,,dot,dot_accept,,,,archive/dot_sources/leonam-silva-de-souza__MYgLgvV,dot 筛选记录：accept（screening_dot.csv）
+leonam-silva-de-souza__MYgLgvV,https://codepen.io/leonam-silva-de-souza/pen/MYgLgvV,,dot,in_main,,,case-223-T6,主仓库 case-223-T6,dot 筛选记录：accept（screening_dot.csv）
 yashfalke77__zYpvOBo,https://codepen.io/yashfalke77/pen/zYpvOBo,,dot,hold,,,,archive/dot_sources/yashfalke77__zYpvOBo,dot 筛选记录：hold（screening_dot.csv）
 oliviale__GRpvNBa,https://codepen.io/oliviale/pen/GRpvNBa,,dot,hold,,,,archive/dot_sources/oliviale__GRpvNBa,dot 筛选记录：hold（screening_dot.csv）
 andybarefoot__KQWGZv,https://codepen.io/andybarefoot/pen/KQWGZv,,dot,rejected,,,,archive/dot_sources/andybarefoot__KQWGZv,dot 筛选记录：reject（screening_dot.csv）
@@ -342,8 +342,8 @@ oliviale__aPwaXm,https://codepen.io/oliviale/pen/aPwaXm,,dot,dot_accept,,,,archi
 fchaussin__PwbPEVV,https://codepen.io/fchaussin/pen/PwbPEVV,,dot,dot_accept,,,,archive/dot_sources/fchaussin__PwbPEVV,dot 筛选记录：accept（screening_dot.csv）
 ricardoolivaalonso__mdPzrpe,https://codepen.io/ricardoolivaalonso/pen/mdPzrpe,,dot,rejected,,,,archive/dot_sources/ricardoolivaalonso__mdPzrpe,dot 筛选记录：reject（screening_dot.csv）
 ricardoolivaalonso__LYzwGyW,https://codepen.io/ricardoolivaalonso/pen/LYzwGyW,,dot,rejected,,,,archive/dot_sources/ricardoolivaalonso__LYzwGyW,dot 筛选记录：reject（screening_dot.csv）
-ricardoolivaalonso__BazMqJx,https://codepen.io/ricardoolivaalonso/pen/BazMqJx,,dot,dot_accept,,,,archive/dot_sources/ricardoolivaalonso__BazMqJx,dot 筛选记录：accept（screening_dot.csv）
-ricardoolivaalonso__yLOpNdZ,https://codepen.io/ricardoolivaalonso/pen/yLOpNdZ,,dot,hold,,,,archive/dot_sources/ricardoolivaalonso__yLOpNdZ,dot 筛选记录：hold（screening_dot.csv）
+ricardoolivaalonso__BazMqJx,https://codepen.io/ricardoolivaalonso/pen/BazMqJx,,dot,in_main,,,case-224-T1,主仓库 case-224-T1,dot 筛选记录：accept（screening_dot.csv）
+ricardoolivaalonso__yLOpNdZ,https://codepen.io/ricardoolivaalonso/pen/yLOpNdZ,,dot,in_main,,,case-226-T6,主仓库 case-226-T6,dot 筛选记录：hold（screening_dot.csv）
 saawsan__brzWjV,https://codepen.io/saawsan/pen/brzWjV,,dot,hold,,,,archive/dot_sources/saawsan__brzWjV,dot 筛选记录：hold（screening_dot.csv）
 dalmasz__xpWPVm,https://codepen.io/dalmasz/pen/xpWPVm,,dot,hold,,,,archive/dot_sources/dalmasz__xpWPVm,dot 筛选记录：hold（screening_dot.csv）
 ricardoolivaalonso__poLzvYJ,https://codepen.io/ricardoolivaalonso/pen/poLzvYJ,,dot,rejected,,,,archive/dot_sources/ricardoolivaalonso__poLzvYJ,dot 筛选记录：reject（screening_dot.csv）
@@ -371,7 +371,7 @@ dandenney__vEEbLJe,https://codepen.io/dandenney/pen/vEEbLJe,,dot,rejected,,,,arc
 GemmaCroad__bNeEKKq,https://codepen.io/GemmaCroad/pen/bNeEKKq,,dot,rejected,,,,archive/dot_sources/GemmaCroad__bNeEKKq,dot 筛选记录：reject（screening_dot.csv）
 oliviale__GPXozx,https://codepen.io/oliviale/pen/GPXozx,,dot,rejected,,,,archive/dot_sources/oliviale__GPXozx,dot 筛选记录：reject（screening_dot.csv）
 chanco__zNgxQo,https://codepen.io/chanco/pen/zNgxQo,,dot,rejected,,,,archive/dot_sources/chanco__zNgxQo,dot 筛选记录：reject（screening_dot.csv）
-lynnandtonic__dyGjvLB,https://codepen.io/lynnandtonic/pen/dyGjvLB,,dot,claimed,,,,none,仅认领，无筛选记录
+lynnandtonic__dyGjvLB,https://codepen.io/lynnandtonic/pen/dyGjvLB,,dot,in_main,,,case-227-T1,主仓库 case-227-T1,仅认领，无筛选记录
 thebabydino__mQOqzR,https://codepen.io/thebabydino/pen/mQOqzR,,dot,hold,,,,none,dot 筛选记录：hold（screening_dot.csv）
 thebabydino__GwmeEL,https://codepen.io/thebabydino/pen/GwmeEL,,dot,hold,,,,none,dot 筛选记录：hold（screening_dot.csv）
 thebabydino__ZmoqpY,https://codepen.io/thebabydino/pen/ZmoqpY,,dot,hold,,,,none,dot 筛选记录：hold（screening_dot.csv）

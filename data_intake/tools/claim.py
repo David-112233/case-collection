@@ -18,7 +18,7 @@ REPO = INTAKE.parent
 CLAIMS = INTAKE / "ledger" / "claims.csv"
 REVIEW = INTAKE / "ledger" / "review.csv"
 CASES = REPO / "cases"
-JUDGED = {"selected", "reserve", "rejected", "admitted", "hold", "recheck"}
+JUDGED = {"selected", "reserve", "rejected", "admitted", "hold", "recheck", "in_main"}
 FIELDS = ["key", "url", "agent", "claimed_at", "source_file"]
 PEN_RE = re.compile(r"codepen\.io/([A-Za-z0-9_-]+)/(?:pen|full|details|debug|embed)/([A-Za-z0-9]+)", re.I)
 
