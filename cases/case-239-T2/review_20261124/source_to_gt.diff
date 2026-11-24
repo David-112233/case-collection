@@ -1,0 +1,97 @@
+--- source.html	2026-11-24 09:39:01.018518100 +0000
++++ ground_truth.html	2026-11-24 10:30:55.525278535 +0000
+@@ -4,25 +4,9 @@
+ <head>
+   
+   <meta charset="UTF-8">
+-  
+-
+-    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+-
+-    <meta name="apple-mobile-web-app-title" content="CodePen">
+-
+-    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+-
+-    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+-
+-
+-
+-  
+-    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+ 
+ 
+   <title>CSS &#39;90s 3D Audio Cassette [CHALLENGES]</title>
+-
+-    <link rel="canonical" href="https://codepen.io/RaduBratan/pen/MWyKrRZ">
+   
+   
+   
+@@ -52,7 +36,6 @@
+   width: 26vw;
+   height: 6vw;
+   transform: perspective(10000px) rotateX(80deg) rotateZ(40deg) translateZ(-8vw);
+-  transition: 0.6s ease;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+@@ -62,7 +45,6 @@
+   background-color: #000000;
+   opacity: 0.3;
+   box-shadow: 0px 0px 0px 0px black;
+-  transition: 0.6s ease;
+   position: absolute;
+   width: 26vw;
+   height: 400%;
+@@ -74,7 +56,6 @@
+   background-color: #000000;
+   opacity: 0.3;
+   box-shadow: 0px 0px 0px 0px black;
+-  transition: 0.6s ease;
+   position: absolute;
+   width: 16vw;
+   height: 20%;
+@@ -86,7 +67,6 @@
+   width: 26vw;
+   height: 1.4vw;
+   position: absolute;
+-  transition: 0.6s ease;
+   cursor: pointer;
+ }
+ .cassette-shape .case-scene {
+@@ -569,18 +549,6 @@
+   opacity: 1;
+   width: 3vw;
+   height: 1vw;
+-  animation-name: spin;
+-  animation-duration: 5s;
+-  animation-iteration-count: infinite;
+-  animation-timing-function: linear;
+-}
+-@keyframes spin {
+-  from {
+-    transform: rotatey(0deg);
+-  }
+-  to {
+-    transform: rotatey(360deg);
+-  }
+ }
+ .cassette-shape .reel-scene .cyl-2 .tp {
+   width: 3vw;
+@@ -749,7 +717,7 @@
+   
+ </head>
+ 
+-<body translate="no">
++<body>
+   <div class="shadow-scene">
+   <div class="shadow-shape1"></div>
+   <div class="shadow-shape2"></div>
+@@ -993,7 +961,7 @@
+   $(".shadow-shape2").css("box-shadow", "0px 0px 0px 0px rgba(0, 0, 0, 1)");
+   $(".shadow-shape2").css("opacity", "0.3");
+ });
+-//# sourceURL=pen.js
++
+   </script>
+ 
+   
