@@ -1,0 +1,168 @@
+--- source.html	2026-11-24 09:39:01.021335916 +0000
++++ ground_truth.html	2026-11-24 10:31:42.918651764 +0000
+@@ -4,25 +4,10 @@
+ <head>
+   
+   <meta charset="UTF-8">
+-  
+-
+-    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+-
+-    <meta name="apple-mobile-web-app-title" content="CodePen">
+-
+-    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+-
+-    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+-
+-
+-
+-  
+-    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+ 
+ 
+   <title>CSS 3D Studio Room (Mine! 😅)</title>
+ 
+-    <link rel="canonical" href="https://codepen.io/jh3y/pen/XWdQBRx">
+   
+   <link rel="stylesheet" href="https://public.codepenassets.com/css/normalize-5.0.0.min.css">
+ 
+@@ -45,7 +30,7 @@
+   --scale: calc(0.75 + (var(--zoomed) * 4));
+   --wall-thickness: 4;
+   --cm: calc((var(--plane-height) / 240));
+-  --transition: 0.2s;
++  --transition: 0s;
+   --floor-shade-one: #8f663d;
+   --floor-shade-two: #c29970;
+   --floor-shade-three: #e0ccb8;
+@@ -129,20 +114,11 @@
+ path {
+   fill: var(--icon);
+ }
+-[for='spin'] {
+-  --index: 0;
+-}
+ [for='dark'] {
+-  --index: 1;
+-}
+-[for='audio'] {
+-  --index: 2;
++  --index: 0;
+ }
+ [for='zoom'] {
+-  --index: 3;
+-}
+-#spin:checked ~ .scene__wrapper {
+-  --spin: 1;
++  --index: 1;
+ }
+ #zoom:checked ~ .scene__wrapper {
+   --zoomed: 1;
+@@ -156,21 +132,7 @@
+ }
+ #dark:checked ~ .scene__wrapper .light-cube div,
+ #dark:checked ~ .scene__wrapper .light-cube:after {
+-  animation: fade 10s calc(2 * var(--transition)) infinite linear;
+-}
+-@keyframes fade {
+-  0%, 100% {
+-    background: var(--fade-one);
+-  }
+-  25% {
+-    background: var(--fade-two);
+-  }
+-  50% {
+-    background: var(--fade-three);
+-  }
+-  75% {
+-    background: var(--fade-four);
+-  }
++  background: var(--fade-one);
+ }
+ #dark:checked ~ .scene__wrapper .light-cube:after {
+   filter: blur(var(--blur));
+@@ -180,7 +142,7 @@
+ }
+ #dark:checked ~ .scene__wrapper .wall--right-right div:nth-of-type(1):after,
+ #dark:checked ~ .scene__wrapper .shelf div:nth-of-type(5):after {
+-  animation: fade 10s calc(2 * var(--transition)) infinite linear;
++  background: var(--fade-one);
+ }
+ #dark:checked ~ .scene__wrapper .jfdi div:nth-of-type(3):after {
+   color: #ccc;
+@@ -1341,15 +1303,6 @@
+   height: 100%;
+   width: 100%;
+   position: absolute;
+-  animation-name: spin;
+-  animation-iteration-count: infinite;
+-  animation-timing-function: linear;
+-  animation-duration: calc(var(--spin, 0) * 1s);
+-}
+-@keyframes spin {
+-  to {
+-    transform: rotateZ(360deg);
+-  }
+ }
+ .chair__headrest {
+   --height: calc(20 * var(--cm));
+@@ -1412,8 +1365,7 @@
+ 
+   </head>
+ 
+-<body translate="no">
+-  <audio class="ambience" src="https://assets.codepen.io/605876/loyalty-freak-music_everyone.mp3" muted="muted" playsinline="playsinline" autoplay="autoplay" loop="loop"></audio>
++<body>
+ <input id="zoom" type="checkbox"/>
+ <label for="zoom" title="Toggle zoom">
+   <svg viewBox="0 0 24 24">
+@@ -1423,15 +1375,6 @@
+     <path d="M15.5,14H14.71L14.43,13.73C15.41,12.59 16,11.11 16,9.5A6.5,6.5 0 0,0 9.5,3A6.5,6.5 0 0,0 3,9.5A6.5,6.5 0 0,0 9.5,16C11.11,16 12.59,15.41 13.73,14.43L14,14.71V15.5L19,20.5L20.5,19L15.5,14M9.5,14C7,14 5,12 5,9.5C5,7 7,5 9.5,5C12,5 14,7 14,9.5C14,12 12,14 9.5,14M7,9H12V10H7V9Z"></path>
+   </svg>
+ </label>
+-<input id="audio" type="checkbox"/>
+-<label for="audio" title="Toggle audio">
+-  <svg viewBox="0 0 24 24">
+-    <path d="M12,4L9.91,6.09L12,8.18M4.27,3L3,4.27L7.73,9H3V15H7L12,20V13.27L16.25,17.53C15.58,18.04 14.83,18.46 14,18.7V20.77C15.38,20.45 16.63,19.82 17.68,18.96L19.73,21L21,19.73L12,10.73M19,12C19,12.94 18.8,13.82 18.46,14.64L19.97,16.15C20.62,14.91 21,13.5 21,12C21,7.72 18,4.14 14,3.23V5.29C16.89,6.15 19,8.83 19,12M16.5,12C16.5,10.23 15.5,8.71 14,7.97V10.18L16.45,12.63C16.5,12.43 16.5,12.21 16.5,12Z"></path>
+-  </svg>
+-  <svg viewBox="0 0 24 24">
+-    <path d="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.84 14,18.7V20.77C18,19.86 21,16.28 21,12C21,7.72 18,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16C15.5,15.29 16.5,13.76 16.5,12M3,9V15H7L12,20V4L7,9H3Z"></path>
+-  </svg>
+-</label>
+ <input id="dark" type="checkbox"/>
+ <label for="dark" title="Toggle light">
+   <svg viewBox="0 0 24 24">
+@@ -1441,15 +1384,6 @@
+     <path d="M3.55,18.54L4.96,19.95L6.76,18.16L5.34,16.74M11,22.45C11.32,22.45 13,22.45 13,22.45V19.5H11M12,5.5A6,6 0 0,0 6,11.5A6,6 0 0,0 12,17.5A6,6 0 0,0 18,11.5C18,8.18 15.31,5.5 12,5.5M20,12.5H23V10.5H20M17.24,18.16L19.04,19.95L20.45,18.54L18.66,16.74M20.45,4.46L19.04,3.05L17.24,4.84L18.66,6.26M13,0.55H11V3.5H13M4,10.5H1V12.5H4M6.76,4.84L4.96,3.05L3.55,4.46L5.34,6.26L6.76,4.84Z"></path>
+   </svg>
+ </label>
+-<input id="spin" type="checkbox"/>
+-<label for="spin" title="Toggle chair spin">
+-  <svg viewBox="0 0 24 24">
+-    <path d="M8,5.14V19.14L19,12.14L8,5.14Z"></path>
+-  </svg>
+-  <svg viewBox="0 0 24 24">
+-    <path d="M18,18H6V6H18V18Z"></path>
+-  </svg>
+-</label>
+ <div class="scene__wrapper">
+   <div class="scene">
+     <div class="plane">
+@@ -1931,17 +1865,6 @@
+   </div>
+ </div>
+   
+-    <script id="rendered-js" >
+-// Purely for toggling audio
+-const AUDIO_TOGGLE = document.querySelector('#audio');
+-const AUDIO = document.querySelector('.ambience');
+-AUDIO.volume = 0.5;
+-AUDIO_TOGGLE.addEventListener('input', () => {
+-  AUDIO.muted = !AUDIO.muted;
+-  AUDIO.play();
+-});
+-//# sourceURL=pen.js
+-  </script>
+ 
+   
+ </body>
