@@ -2,7 +2,7 @@
 
 由 `data_intake/tools/registry.py render-index` 生成，**不要手写**。状态来源是 [registry.csv](registry.csv)。
 
-阶段分布：admitted 1，input_draft 26
+阶段分布：gt_ready 1，input_draft 26
 
 | 案例 | 档位 | 来源 | 特色 | 阶段 | 处理者 | 更新 | 用户审核 | 备注 |
 |---|---|---|---|---|---|---|---|---|
@@ -29,7 +29,7 @@
 | [case-248-T1](case-248-T1/) | T1 | [lynnandtonic__PoZpjOr](https://codepen.io/lynnandtonic/pen/PoZpjOr) | 折痕海报、纸面光影 | input_draft | duet | 2026-11-24 | pending | 等用户审核 GT 与 input；云端浏览器 1280/500 渲染核对通过，图片与重置样式表均加载；档位复核仍为 T1 |
 | [case-249-T3](case-249-T3/) | T3 | [ricardoolivaalonso__RwBZMGB](https://codepen.io/ricardoolivaalonso/pen/RwBZMGB) | 开盖随身听、内腔层次 | input_draft | duet | 2026-11-24 | pending | 等用户审核 GT 与 input；云端渲染核对通过（默认态、播放态）；音频播放未核实；播放态结束方式待用户定；档位复核仍为 T3 |
 | [case-250-T1](case-250-T1/) | T1 | [thebabydino__NLWdwz](https://codepen.io/thebabydino/pen/NLWdwz) | 圆片信息图、编号叠盖 | input_draft | duet | 2026-11-24 | pending | 等用户审核 GT 与 input；1280/600/500/450 渲染核对通过；来源中等宽度文字被切待用户定；档位复核仍为 T1 |
-| [case-251-T1](case-251-T1/) | T1 | [thebabydino__eQvWLB](https://codepen.io/thebabydino/pen/eQvWLB) | 彩色折纸条、交替折角 | admitted | duet | 2026-11-24 | pending |  |
+| [case-251-T1](case-251-T1/) | T1 | [thebabydino__eQvWLB](https://codepen.io/thebabydino/pen/eQvWLB) | 彩色折纸条、交替折角 | gt_ready | duet | 2026-11-24 | pending | GT 只删 CodePen 样板；待渲染核对 |
 | [case-252-T1](case-252-T1/) | T1 | [thebabydino__pBmMaJ](https://codepen.io/thebabydino/pen/pBmMaJ) | 斜切编号条、圆标压层 | input_draft | duet | 2026-11-24 | pending | 等用户审核 GT 与 input；云端浏览器 1280/500 渲染核对通过；档位复核仍为 T1；窄屏版式是否写入 input 待定 |
 | [case-253-T2](case-253-T2/) | T2 | [ykadosh__bGKgxbe](https://codepen.io/ykadosh/pen/bGKgxbe) | 机械键盘、错排立体键帽 | input_draft | duet | 2026-11-24 | pending | 等用户审核 GT 与 input；云端浏览器渲染核对通过（按住状态用预览页核对）；档位复核仍为 T2（键盘按键只改键帽自身），待用户确认；音效未写入 input |
 | [case-254-T1](case-254-T1/) | T1 | [agathaco__JaGQPr](https://codepen.io/agathaco/pen/JaGQPr) | 夜景灯塔、光束与远山 | input_draft | duet | 2026-11-24 | pending | 等用户审核 GT 与 input；档位由 T2 改为 T1（GT 去掉全部动画，定格来源第 40 秒）；云端浏览器 1280/500 渲染核对通过；作品价值主要在动画，是否仍收录待用户定 |
