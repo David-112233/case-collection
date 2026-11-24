@@ -4,3 +4,9 @@ data_intake/B1/raw/fetch_log.jsonl merge=union
 *.jsonl text eol=lf
 cases/registry.csv merge=union
 *.xlsx binary
+# 哈希敏感文件按字节原样保存，禁止换行转换（Windows 克隆也不改字节）
+cases/** -text
+reference/** -text
+data_intake/B1/raw/** -text
+data_intake/pending/** -text
+data_intake/review_lists/** -text

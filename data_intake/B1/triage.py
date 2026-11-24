@@ -11,7 +11,7 @@ for path in sorted(ROOT.glob("candidates*.csv")):
         for row in csv.DictReader(path.open(encoding="utf-8-sig")):
             m = re.search(r"codepen\.io/([^/]+)/pen/([^/?#]+)", row["url"])
             if m:
-                tiers[f"{m.group(1)}__{m.group(2)}"] = row["target_tier"]
+                tiers[f"{m.group(1)}__{m.group(2)}"] = row.get("target_tier") or "?"
 
 FLAGS = ["scroll_snap", "scroll_state_query", "scroll_marker", "container_query", "subgrid", "anchor_positioning",
          "has_selector", "checked_selector", "target_selector", "at_property", "view_transition", "transform_3d",
