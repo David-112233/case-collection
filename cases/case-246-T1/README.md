@@ -2,7 +2,7 @@
 
 来源：<https://codepen.io/ehckk/pen/WNzGYKy>（作者 ehckk，CodePen 公开作品，默认 MIT 许可）
 
-当前阶段：`gt_ready`（入库于 2026-11-24），归属 duet。阶段以 [registry.csv](../registry.csv) 为准。
+当前阶段：`input_draft`（入库于 2026-11-24），归属 duet。阶段以 [registry.csv](../registry.csv) 为准。
 
 - 审核编号：C034；档位：T1（**暂定**，依据入库时的来源源码；`ground_truth.html` 完成后按 GT 的驱动方式重新判定，必要时用 `registry.py retier` 改名）。
 - 特色：彩虹书架、书脊深度
@@ -31,4 +31,17 @@
 
 - **无动画、无交互、无脚本。** 来源没有关键帧、过渡、悬停或任何脚本，GT 不需要固定静止状态。
 - **保留的外部资源：** 作者在 CodePen 设置里选的 normalize.css 5.0.0（public.codepenassets.com）。作品自己的 `*` 规则已把内外边距清零，按源码推断这份样式对画面影响很小。
-- **规模：** 一个书架（五层隔板、两侧外板、背板、底板、四条腿）、120 本书和一面墙，全部用 CSS 3D 盒子拼成，书的颜色和高度由 SCSS 编译出的逐本规则决定。
+- **规模：** 一个书架（五层、两侧外板、背板、底板、四条腿）、120 本书和一面墙，全部用 CSS 3D 盒子拼成，书的颜色和高度由 SCSS 编译出的逐本规则决定。
+- **来源自带的瑕疵：** 地板平面与书架相交，一块地板盖在最下层中部的书前面。GT 未改，待用户定，见 [input_problem.md](input_problem.md) 第 2 节。
+
+## GT 自检
+
+见 [review_20261124/static_check.md](review_20261124/static_check.md)。经 raw.githack.com 在云端浏览器打开 GT，在 1280 和 500 宽截图并放大核对，截图未入库；本地可运行 `review_20261124/shot_gt.py` 重新得到截图和测量。
+
+## 档位复核
+
+GT 无任何动态：无动画、无过渡、无悬停或点击效果，也没有脚本。按难度模型 v2.1 仍为 **T1**，与目录名一致，不需要 retier。
+
+## input
+
+[input.json](input.json) 由 GT 写出，问题与取舍见 [input_problem.md](input_problem.md)。外观已按截图核对。阶段 `input_draft`：等用户审核 GT 与 input，规则草稿和 `generation_prompt.txt` 尚未写。
