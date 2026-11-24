@@ -47,3 +47,7 @@ GT 无任何动态：无动画、无过渡、无悬停或点击效果。按难�
 ## input
 
 [input.json](input.json) 由 GT 写出，问题与取舍见 [input_problem.md](input_problem.md)。外观描述已按云端浏览器截图核对并修正。阶段 `input_draft`：等用户审核 GT 与 input，规则草稿和 `generation_prompt.txt` 尚未写。
+
+## 规则草稿
+
+[rules_drafts/manual_v1/eval_rules.json](rules_drafts/manual_v1/eval_rules.json)，人可读版 [review.md](rules_drafts/manual_v1/review.md)：8 个 Requirement / 21 条 mandatory，全部来自用户 2026-11-24 改定的 input，没有常识条目，只计 D1，桌面单视口。`check_rules.py` 通过。等用户审核；台账阶段仍为 `input_draft`，因为 `input_approved` 只能由用户设置。`generation_prompt.txt` 未写：仓库里没有 `output_prompt_v2.txt` 模板。

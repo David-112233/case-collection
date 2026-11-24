@@ -1,0 +1,680 @@
+{
+ "schema_version": "semantic-eval-rules/3.0",
+ "case_id": "case-230",
+ "tier": "T1",
+ "rule_status": "DRAFT_PENDING_USER_REVIEW",
+ "revision": "manual_v1",
+ "input_sha256": "385ac7fa94abecdd861985286152ff7b7d8161c38bacd10ce75400e8b3a0c0eb",
+ "input_source": {
+  "path": "input.json",
+  "note": "用户 2026-11-24 审核修改后的版本（提交 945c78f）；duet 未改动"
+ },
+ "output_contract_ref": "scripts/eval_rules_generation/preparation/output_contract_v2.json",
+ "scoring_policy_ref": "scripts/eval_rules_generation/preparation/evaluation_policy_v2.json#/scoring_policy",
+ "source_policy": {
+  "requirements": "input.json only; no DEC-037 common-sense condition added; business_background supplies context only",
+  "gt": "ground_truth.html = source.html minus CodePen boilerplate (favicon/canonical links, body translate attribute); GT only for binding/self-test, never a requirement source",
+  "model_outputs": "No model output read when drafting these rules"
+ },
+ "render_baseline": {
+  "status": "NOT_FROZEN",
+  "states": [
+   "desktop"
+  ],
+  "viewports": {
+   "desktop": [
+    1280,
+    900
+   ]
+  },
+  "note": "input 写明“页面面向桌面宽屏”，且无动效段；单一桌面视口、单一初始状态采证，不考察窄屏。",
+  "resources": "JS、外部字体允许。input 未指定字体名，无外部资源要求；若模型使用外部字体且加载失败影响字体类别判定，记 UNRESOLVED。"
+ },
+ "member_policy": {
+  "members": "五个字母按可见位置从左到右为 G、L、E、N1、N2；不依赖 DOM 结构、类名或实现层数。",
+  "coverage": "逐字母条件写“五个字母逐个检查”，任一字母不满足即该条不满足；不以一个代表字母宣称全组通过。",
+  "layers": "三层按画面可见层次识别（白色纸片、蓝色同形字母、灰色阴影），实现方式不限：伪元素、额外元素、text-shadow、SVG、canvas 等都可以。"
+ },
+ "granularity_policy": {
+  "members": "五个字母共享同一效果，且 input 写明“五个字母的效果完全一致”，所以每项视觉属性对五个字母合为一条，条件正文要求逐字母检查；不按字母拆成 5 条，避免同一处实现缺陷扣 5 次。",
+  "consistency": "字母间一致性单列 SR-08.C1，只判各字母都满足属性条件后程度上的差异；属性本身失败归 SR-04 至 SR-07。",
+  "same_fact": "白色层颜色归 SR-04.C1，渐变与边缘柔影归 SR-05；蓝色层存在归 SR-04.C2，露出位置与色调归 SR-06；阴影层存在与层次归 SR-04.C3，画面位置与柔和程度归 SR-07.C1。"
+ },
+ "measure_policy": {
+  "program_first": "DOM 文本、标题结构、计算字重、几何位置由程序判；程序不确定时交回 Judge，不判 FAIL。",
+  "judge": "三层叠字、渐变、柔影、翘起方向、蓝边位置与色调、阴影位置是定性视觉条件，交 Judge；规则写出最低判定标准，不预设数值阈值。",
+  "qualitative_words": "“超大号”“普通的词间距”“明显的空白”“适当翘起”“偏深的钢蓝色”“少数位置”不设数值上下限；程序只给测量值，边界情况由 Judge 判断。"
+ },
+ "quality_gate": [
+  {
+   "id": "G1",
+   "description": "HTML forms a valid evaluable DOM; parser/environment failure alone is not model fatal failure.",
+   "source": "project_output_contract"
+  },
+  {
+   "id": "G2",
+   "description": "JS is allowed by the shared v2 policy; no blanket script/event-attribute violation.",
+   "source": "project_output_contract"
+  },
+  {
+   "id": "G3",
+   "description": "External fonts, font stylesheets, images and ordinary links are allowed; resource availability is checked separately.",
+   "source": "project_output_contract"
+  },
+  {
+   "id": "G4",
+   "description": "One complete HTML; page CSS embedded in head/style or style attributes; required JS embedded.",
+   "source": "project_output_contract"
+  },
+  {
+   "id": "G5",
+   "description": "input.forbidden is empty; no case-specific prohibition is invented.",
+   "source": "input.forbidden"
+  }
+ ],
+ "static_requirements": [
+  {
+   "id": "SR-01",
+   "dimension": "static",
+   "type": "region",
+   "description": "页面背景",
+   "target": "page",
+   "source_fields": [
+    "layout_constraints"
+   ],
+   "mandatory_evidence": [
+    {
+     "id": "C1",
+     "mandatory": true,
+     "source": "input",
+     "source_fields": [
+      "layout_constraints"
+     ],
+     "source_quote": "背景为纯白色",
+     "target": "page.background",
+     "check": "页面背景（标题四周露出的整页底色）为纯白色：中性白，无可见色偏、渐变、纹理或图案。",
+     "kind": "computed_color",
+     "decider": "program+judge",
+     "viewport": "desktop",
+     "required_objects": [
+      "page"
+     ],
+     "note": "程序读取 html/body 及最外层容器的背景计算值并采样截图空白区；背景由图片或渐变绘制时交 Judge 看截图。"
+    }
+   ]
+  },
+  {
+   "id": "SR-02",
+   "dimension": "static",
+   "type": "element",
+   "description": "主标题及其文字、字号、字重与字体类型",
+   "target": "title",
+   "source_fields": [
+    "functional_requirements",
+    "layout_constraints"
+   ],
+   "mandatory_evidence": [
+    {
+     "id": "C1",
+     "mandatory": true,
+     "source": "input",
+     "source_fields": [
+      "functional_requirements"
+     ],
+     "source_quote": "页面只有一个主标题",
+     "target": "title",
+     "check": "页面恰好有一个主标题：一个 h1（或 role=heading、aria-level=1 的等效元素）承载 GLENN；页面上没有第二个一级标题。页面上其他内容不在本条检查范围。",
+     "kind": "dom_structure",
+     "decider": "program",
+     "viewport": "desktop",
+     "required_objects": [
+      "title"
+     ]
+    },
+    {
+     "id": "C2",
+     "mandatory": true,
+     "source": "input",
+     "source_fields": [
+      "functional_requirements"
+     ],
+     "source_quote": "标题文字为“GLENN”（五个大写字母）",
+     "target": "title.text",
+     "check": "主标题的文字内容为 GLENN：DOM 文本去掉空白后为 GLENN（不计伪元素 content 或装饰层重复出现的字母；用 text-transform 转成大写可接受），截图上能按顺序读出五个大写字母 G、L、E、N、N。字母错、缺、多、顺序错或显示为小写都不满足。",
+     "kind": "dom_text",
+     "decider": "program+judge",
+     "viewport": "desktop",
+     "required_objects": [
+      "title"
+     ],
+     "note": "装饰层用伪元素或额外元素重复字母是允许的，不因无障碍名称里出现重复字母判 FAIL。"
+    },
+    {
+     "id": "C3",
+     "mandatory": true,
+     "source": "input",
+     "source_fields": [
+      "layout_constraints"
+     ],
+     "source_quote": "字母为超大号的",
+     "target": "title.size",
+     "check": "标题字母是页面上的超大号字：字母高度远大于浏览器默认一级标题，属于展示性大字；不设具体像素下限，程序报告字号与字形高度，由 Judge 判断。",
+     "kind": "geometry_visual",
+     "decider": "program+judge",
+     "viewport": "desktop",
+     "required_objects": [
+      "title"
+     ]
+    },
+    {
+     "id": "C4",
+     "mandatory": true,
+     "source": "input",
+     "source_fields": [
+      "layout_constraints"
+     ],
+     "source_quote": "粗体",
+     "target": "title.weight",
+     "check": "标题字母为粗体：笔画明显粗于常规字重（计算字重不低于 bold，或渲染字形明显加粗）。",
+     "kind": "font_rendering",
+     "decider": "program+judge",
+     "viewport": "desktop",
+     "required_objects": [
+      "title"
+     ]
+    },
+    {
+     "id": "C5",
+     "mandatory": true,
+     "source": "input",
+     "source_fields": [
+      "layout_constraints"
+     ],
+     "source_quote": "无衬线字体",
+     "target": "title.family",
+     "check": "标题字母以无衬线字体渲染：按实际渲染字形判断，笔画末端没有衬线；声明了无衬线字体但回退成衬线体的算不满足，字体服务加载失败记 UNRESOLVED。",
+     "kind": "font_rendering",
+     "decider": "program+judge",
+     "viewport": "desktop",
+     "required_objects": [
+      "title"
+     ],
+     "note": "input 未指定具体字体名，只判无衬线类别。"
+    }
+   ]
+  },
+  {
+   "id": "SR-03",
+   "dimension": "static",
+   "type": "relation",
+   "description": "标题在页面中的排布：一行、水平居中、字间距、上方留白",
+   "target": "title.layout",
+   "source_fields": [
+    "layout_constraints"
+   ],
+   "mandatory_evidence": [
+    {
+     "id": "C1",
+     "mandatory": true,
+     "source": "input",
+     "source_fields": [
+      "layout_constraints"
+     ],
+     "source_quote": "标题的五个字母在一行内",
+     "target": "title.row",
+     "check": "在桌面评测视口下，五个字母排在同一行：各字母的竖向范围基本重叠，没有换行。",
+     "kind": "geometry",
+     "decider": "program",
+     "viewport": "desktop",
+     "required_objects": [
+      "title",
+      "letter.G",
+      "letter.L",
+      "letter.E",
+      "letter.N1",
+      "letter.N2"
+     ]
+    },
+    {
+     "id": "C2",
+     "mandatory": true,
+     "source": "input",
+     "source_fields": [
+      "layout_constraints"
+     ],
+     "source_quote": "水平居中排列",
+     "target": "title.center",
+     "check": "五个字母作为一组在页面宽度内水平居中：整组可见左右边界到视口两侧的距离基本相等。程序报告两侧距离；装饰层的偏移、阴影外扩造成的几个像素差异不算偏离，明显靠左或靠右的不满足。",
+     "kind": "geometry",
+     "decider": "program+judge",
+     "viewport": "desktop",
+     "required_objects": [
+      "title"
+     ]
+    },
+    {
+     "id": "C3",
+     "mandatory": true,
+     "source": "input",
+     "source_fields": [
+      "layout_constraints"
+     ],
+     "source_quote": "字母之间有普通的词间距",
+     "target": "title.gap",
+     "check": "相邻字母之间留有约一个普通空格宽度的间隙：字母不相互接触或重叠，也没有拉开到远大于空格的程度（例如字母分散到视口两端）。不设数值阈值，程序报告各间隙宽度，由 Judge 判断。",
+     "kind": "geometry_visual",
+     "decider": "program+judge",
+     "viewport": "desktop",
+     "required_objects": [
+      "letter.G",
+      "letter.L",
+      "letter.E",
+      "letter.N1",
+      "letter.N2"
+     ]
+    },
+    {
+     "id": "C4",
+     "mandatory": true,
+     "source": "input",
+     "source_fields": [
+      "layout_constraints"
+     ],
+     "source_quote": "标题上方留有明显的空白",
+     "target": "title.top_space",
+     "check": "标题上方到视口顶部之间有明显的空白：标题不贴着页面顶边，也不是垂直方向上紧挨顶部的普通页眉位置。不设数值下限，程序报告标题顶部到视口顶部的距离。",
+     "kind": "geometry",
+     "decider": "program+judge",
+     "viewport": "desktop",
+     "required_objects": [
+      "title",
+      "page"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "SR-04",
+   "dimension": "static",
+   "type": "element",
+   "description": "每个字母的三层叠字结构",
+   "target": "letters.layers",
+   "source_fields": [
+    "functional_requirements",
+    "layout_constraints"
+   ],
+   "mandatory_evidence": [
+    {
+     "id": "C1",
+     "mandatory": true,
+     "source": "input",
+     "source_fields": [
+      "functional_requirements"
+     ],
+     "source_quote": "最上层是白色纸片字母",
+     "target": "letters.paper",
+     "check": "每个字母都有一个与该字母同形的白色字母层，位于三层的最上面；颜色为白色或与白色背景几乎同色的极浅色（渐变与边缘柔影由 SR-05 判断）。五个字母逐个检查，任一字母不满足即不满足。",
+     "kind": "screenshot_visual",
+     "decider": "judge",
+     "viewport": "desktop",
+     "required_objects": [
+      "letter.G",
+      "letter.L",
+      "letter.E",
+      "letter.N1",
+      "letter.N2"
+     ],
+     "note": "只有一个普通实心字母、没有可辨认的白色同形层的，不满足。"
+    },
+    {
+     "id": "C2",
+     "mandatory": true,
+     "source": "input",
+     "source_fields": [
+      "functional_requirements"
+     ],
+     "source_quote": "其下是一个蓝色的同形字母",
+     "target": "letters.blue",
+     "check": "每个字母在白色纸片层之下都有一个同形的蓝色字母层：蓝色层与白色层是同一个字母的形状；蓝色露出的位置和色调分别由 SR-06.C1、SR-06.C2 判断。五个字母逐个检查，任一字母不满足即不满足。",
+     "kind": "screenshot_visual",
+     "decider": "judge",
+     "viewport": "desktop",
+     "required_objects": [
+      "letter.G",
+      "letter.L",
+      "letter.E",
+      "letter.N1",
+      "letter.N2"
+     ]
+    },
+    {
+     "id": "C3",
+     "mandatory": true,
+     "source": "input",
+     "source_fields": [
+      "functional_requirements"
+     ],
+     "source_quote": "最下层是一层柔和的灰色阴影",
+     "target": "letters.shadow",
+     "check": "每个字母在蓝色层之下都有一层同形的灰色阴影：灰色、半透明、边缘模糊柔和，层次上位于白色和蓝色两层之下（不盖在白色纸片上）。阴影在画面中的具体位置由 SR-07.C1 判断。五个字母逐个检查，任一字母不满足即不满足。",
+     "kind": "screenshot_visual",
+     "decider": "judge",
+     "viewport": "desktop",
+     "required_objects": [
+      "letter.G",
+      "letter.L",
+      "letter.E",
+      "letter.N1",
+      "letter.N2"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "SR-05",
+   "dimension": "static",
+   "type": "element",
+   "description": "白色纸片层的渐变、边缘柔影与翘起",
+   "target": "letters.paper",
+   "source_fields": [
+    "layout_constraints"
+   ],
+   "mandatory_evidence": [
+    {
+     "id": "C1",
+     "mandatory": true,
+     "source": "input",
+     "source_fields": [
+      "layout_constraints"
+     ],
+     "source_quote": "带极浅的从白到浅灰的横向渐变（右侧略灰）",
+     "target": "letters.paper.gradient",
+     "check": "白色纸片字母带有极浅的横向渐变：左侧为白色，向右逐渐变为浅灰，右侧可见地略灰于左侧；渐变很浅，整体仍接近白色。纯平无渐变、方向相反（左灰右白）、竖向渐变或灰得明显的都不满足。五个字母逐个检查，任一字母不满足即不满足。",
+     "kind": "screenshot_visual",
+     "decider": "program+judge",
+     "viewport": "desktop",
+     "required_objects": [
+      "letter.G",
+      "letter.L",
+      "letter.E",
+      "letter.N1",
+      "letter.N2"
+     ],
+     "note": "程序可在纸片层左右两端各取样亮度作辅助；最终由 Judge 判断。"
+    },
+    {
+     "id": "C2",
+     "mandatory": true,
+     "source": "input",
+     "source_fields": [
+      "layout_constraints"
+     ],
+     "source_quote": "边缘有一圈很淡的灰色柔影",
+     "target": "letters.paper.edge",
+     "check": "白色纸片字母的轮廓边缘带一圈很淡的灰色柔影，使白色字母在白色背景上能辨认出轮廓；没有任何边缘过渡、白色字母与背景完全融为一体的，或边缘是清晰的深色描边的，不满足。五个字母逐个检查，任一字母不满足即不满足。",
+     "kind": "screenshot_visual",
+     "decider": "judge",
+     "viewport": "desktop",
+     "required_objects": [
+      "letter.G",
+      "letter.L",
+      "letter.E",
+      "letter.N1",
+      "letter.N2"
+     ]
+    },
+    {
+     "id": "C3",
+     "mandatory": true,
+     "source": "input",
+     "source_fields": [
+      "layout_constraints"
+     ],
+     "source_quote": "它相对蓝色字母以左下角为轴向右上方适当翘起",
+     "target": "letters.paper.tilt",
+     "check": "白色纸片层相对蓝色字母呈翘起姿态：两层在字母左下角附近基本对齐，越往右，白色层相对蓝色层越高（向右上方倾转），角度适中、字母仍可读。两层完全重合、只做整体平移而没有倾转、向右下方倾转、或倾转大到字母难以辨认的，不满足。五个字母逐个检查，任一字母不满足即不满足。",
+     "kind": "screenshot_visual",
+     "decider": "judge",
+     "viewport": "desktop",
+     "required_objects": [
+      "letter.G",
+      "letter.L",
+      "letter.E",
+      "letter.N1",
+      "letter.N2"
+     ],
+     "note": "依赖 SR-04.C1、SR-04.C2 两层存在；不设角度数值。"
+    }
+   ]
+  },
+  {
+   "id": "SR-06",
+   "dimension": "static",
+   "type": "element",
+   "description": "露出的蓝边：位置与色调",
+   "target": "letters.blue_edge",
+   "source_fields": [
+    "layout_constraints"
+   ],
+   "mandatory_evidence": [
+    {
+     "id": "C1",
+     "mandatory": true,
+     "source": "input",
+     "source_fields": [
+      "layout_constraints"
+     ],
+     "source_quote": "蓝色从右边和下边露出（字母内侧的边缘也一样）",
+     "target": "letters.blue_edge.position",
+     "check": "蓝色从笔画的右侧和下侧边缘露出：每个字母外轮廓的右边和下边能看到蓝色窄边，字母内侧的边缘（如 G 的开口内侧、E 的横笔下沿、N 的斜笔右侧）同样在右侧和下侧露蓝。蓝色主要露在左侧或上侧、四周均匀一圈描边看不出方向、或只在外轮廓露出而内侧边缘不露的，不满足。五个字母逐个检查，任一字母不满足即不满足。",
+     "kind": "screenshot_visual",
+     "decider": "judge",
+     "viewport": "desktop",
+     "required_objects": [
+      "letter.G",
+      "letter.L",
+      "letter.E",
+      "letter.N1",
+      "letter.N2"
+     ]
+    },
+    {
+     "id": "C2",
+     "mandatory": true,
+     "source": "input",
+     "source_fields": [
+      "layout_constraints"
+     ],
+     "source_quote": "整体呈偏深的钢蓝色",
+     "target": "letters.blue_edge.tone",
+     "check": "露出的蓝边整体呈偏深的钢蓝色：中等偏深、略带灰的蓝，而不是整体明亮鲜艳的天蓝色、接近黑色的深蓝或其他色相。不指定色号。五个字母逐个检查，任一字母不满足即不满足。",
+     "kind": "computed_color",
+     "decider": "program+judge",
+     "viewport": "desktop",
+     "required_objects": [
+      "letter.G",
+      "letter.L",
+      "letter.E",
+      "letter.N1",
+      "letter.N2"
+     ],
+     "note": "程序可在蓝边上取样颜色作辅助；颜色来自叠加后的实际画面，不读声明色值。"
+    },
+    {
+     "id": "C3",
+     "mandatory": true,
+     "source": "input",
+     "source_fields": [
+      "layout_constraints"
+     ],
+     "source_quote": "只在靠上的少数位置较亮、接近天蓝色",
+     "target": "letters.blue_edge.highlight",
+     "check": "蓝边并非完全均匀：在靠上的少数位置（例如右侧竖边的上端）可见较亮、接近天蓝色的部分，其余大部分为偏深的钢蓝。整条蓝边完全同一色调，或大部分都是亮天蓝的，不满足。",
+     "kind": "screenshot_visual",
+     "decider": "judge",
+     "viewport": "desktop",
+     "required_objects": [
+      "letter.G",
+      "letter.L",
+      "letter.E",
+      "letter.N1",
+      "letter.N2"
+     ],
+     "note": "只要求整体上能看到这种明暗分布，不逐字母计。"
+    }
+   ]
+  },
+  {
+   "id": "SR-07",
+   "dimension": "static",
+   "type": "element",
+   "description": "灰色阴影的位置",
+   "target": "letters.shadow",
+   "source_fields": [
+    "layout_constraints"
+   ],
+   "mandatory_evidence": [
+    {
+     "id": "C1",
+     "mandatory": true,
+     "source": "input",
+     "source_fields": [
+      "layout_constraints"
+     ],
+     "source_quote": "灰色阴影在蓝边下方投出一圈柔和的模糊暗影",
+     "target": "letters.shadow.position",
+     "check": "灰色阴影在画面上表现为蓝边下方的柔和模糊暗影：每个字母的下边、蓝边之下能看到一圈渐隐的灰色暗影。阴影边缘清晰锐利（像实心描边）、颜色过深成黑块、或主要出现在字母上方或左侧的，不满足。五个字母逐个检查，任一字母不满足即不满足。",
+     "kind": "screenshot_visual",
+     "decider": "judge",
+     "viewport": "desktop",
+     "required_objects": [
+      "letter.G",
+      "letter.L",
+      "letter.E",
+      "letter.N1",
+      "letter.N2"
+     ],
+     "note": "依赖 SR-04.C3 阴影层存在。"
+    }
+   ]
+  },
+  {
+   "id": "SR-08",
+   "dimension": "static",
+   "type": "relation",
+   "description": "五个字母效果一致",
+   "target": "letters.consistency",
+   "source_fields": [
+    "layout_constraints"
+   ],
+   "mandatory_evidence": [
+    {
+     "id": "C1",
+     "mandatory": true,
+     "source": "input",
+     "source_fields": [
+      "layout_constraints"
+     ],
+     "source_quote": "五个字母的效果完全一致",
+     "target": "letters.consistency",
+     "check": "五个字母的剪纸效果一致：三层的叠放次序、白色层的翘起方向和大致幅度、蓝边露出的方位和宽窄、阴影的位置和浓淡在五个字母之间相同。只判字母之间的差异：某个字母整层缺失或某项属性本身不满足，由 SR-04 至 SR-07 对应条件负责，本条不重复扣分；各字母都满足那些条件但程度明显不同（例如只有一个字母翘得多或蓝边明显更宽）时本条不满足。",
+     "kind": "screenshot_visual",
+     "decider": "judge",
+     "viewport": "desktop",
+     "required_objects": [
+      "letter.G",
+      "letter.L",
+      "letter.E",
+      "letter.N1",
+      "letter.N2"
+     ]
+    }
+   ]
+  }
+ ],
+ "dynamic_requirements": [],
+ "dimension_policy": {
+  "D1": 1,
+  "D2": 0,
+  "reason": "input 无 motion_constraints，准静态页面；只计 D1。"
+ },
+ "dependency_policy": {
+  "version": "model-dependency-fail/1.0",
+  "rule": "已确认模型缺失前置对象并实际阻断下游条件时，上下游都判 FAIL、各自判档（DEC-029）；定位、网络或采证失败记 UNRESOLVED；不受阻的字母继续检查。",
+  "prerequisites": [
+   {
+    "upstream": "SR-02.C1",
+    "downstream": [
+     "SR-03.*"
+    ],
+    "when": "确认页面没有可定位的主标题时，标题排布条件无法成立。"
+   },
+   {
+    "upstream": "SR-04.C1",
+    "downstream": [
+     "SR-05.C1",
+     "SR-05.C2",
+     "SR-05.C3",
+     "SR-06.C1"
+    ],
+    "when": "确认某字母没有白色纸片层时，只阻断涉及该字母的纸片外观、翘起和露边条件。"
+   },
+   {
+    "upstream": "SR-04.C2",
+    "downstream": [
+     "SR-05.C3",
+     "SR-06.C1",
+     "SR-06.C2",
+     "SR-06.C3"
+    ],
+    "when": "确认某字母没有蓝色同形层时，只阻断涉及该字母的翘起与蓝边条件。"
+   },
+   {
+    "upstream": "SR-04.C3",
+    "downstream": [
+     "SR-07.C1"
+    ],
+    "when": "确认某字母没有灰色阴影层时，阻断该字母的阴影位置条件。"
+   }
+  ]
+ },
+ "scoring": {
+  "note": "Routing IDs only; formula and deductions come exclusively from the shared scoring policy.",
+  "gates": {
+   "fatal": {
+    "gate_ids": [
+     "G1"
+    ]
+   },
+   "ordinary": {
+    "gate_ids": [
+     "G2",
+     "G3",
+     "G4",
+     "G5"
+    ]
+   }
+  }
+ },
+ "draft_review": {
+  "reviewer": "duet (Claude) implementer self-review",
+  "independent_review": false,
+  "date": "2026-11-24",
+  "checked": [
+   "source quotes are exact substrings of input",
+   "member coverage per letter",
+   "same-fact ownership",
+   "check_rules.py structural check"
+  ],
+  "not_performed": [
+   "target registry / binding",
+   "GT self-test against rules",
+   "Judge run",
+   "release freeze",
+   "API calls",
+   "model scoring",
+   "user acceptance"
+  ]
+ },
+ "evidence_count": 21
+}
