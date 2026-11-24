@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+
+
+
+  
+  
+
+  <title>Paper Cut-Out Effect w/CSS</title>
+  
+  
+  
+  
+<style>
+html, body {
+  height: 100%; width: 100%;
+  margin: 0; padding: 0;
+  font: normal normal normal 100%/1.2em Arial, Helvetica, sans-serif;
+}
+.container {
+  width: 100%;
+}
+  #logo {
+				margin-top: 6em;
+				font-family: "Helvetica";
+				text-align: center;
+			}
+
+			#logo span {
+				position: relative;
+				color: #32A8E0;
+				font-size: 8rem;
+				font-weight: bold;
+				line-height: 1em;
+			}
+
+			#logo span:before,
+			#logo span:after {
+				content: attr(data-letter);
+				position: absolute;
+				left: 0;
+				color: transparent;
+			}
+			#logo span:before {
+			    -webkit-transform-style: preserve-3d;
+			    -webkit-transform: skew(0deg, 3deg);
+			    -webkit-transform-origin:0 100% ;
+  -ms-transform-style: preserve-3d;
+			    -ms-transform: skew(0deg, 3deg);
+			    -ms-transform-origin:0 100% ;
+			    transform-style:preserve-3d;
+			    transform: skew(0deg, 3deg);
+			    transform-origin:0 100% ;
+      /* Both shadows are required for browsers that don't support full spread specs and those that do support full spread specs*/
+       text-shadow: 0px 3px 5px rgba(0, 0, 0, 0.25);
+       text-shadow:0px 3px 5px 1px rgba(0,0,0,0.25);
+       
+}
+			#logo span:after {
+				color: #FFF;
+				background: 
+    -webkit-linear-gradient(left, #FFF, #EEE);
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+				-webkit-transform-style:preserve-3d;
+			    -webkit-transform: rotateY(11deg)translate3d(-4px,-2px,-20px) skew(-2deg, -6deg);
+			    -webkit-transform-origin:0 100% ;
+  -ms-linear-gradient(45deg, white, black);
+				-ms-background-clip: text;
+				-ms-text-fill-color: transparent;
+				-ms-transform-style:preserve-3d;
+			    -ms-transform: rotateY(11deg)translate3d(-4px,-2px,-20px) skew(-2deg, -6deg);
+			    -ms-transform-origin:0 100% ;
+			    transform-style:preserve-3d;
+			    transform: rotateY(11deg)translate3d(-4px,-2px,-20px) skew(-2deg, -6deg);;
+			    transform-origin:0 100% ;
+			    z-index: 100;
+			}
+</style>
+
+  </head>
+
+<body>
+  <div class="container">  
+  <h1 id="logo">
+			<span data-letter="G">G</span>
+			<span data-letter="L">L</span>
+			<span data-letter="E">E</span>
+			<span data-letter="N">N</span>
+			<span data-letter="N">N</span>
+		</h1>
+</div>
+  
+  
+  
+</body>
+
+</html>

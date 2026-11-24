@@ -1,7 +1,7 @@
 case_id,source_key,tier,owner,stage,updated,note,user_review
 case-228-T3,RaduBratan__mdPrWmo,T3,duet,input_draft,2026-11-24,GT 仅静态自检，渲染自检待本地运行 review_20261124/gt_check.py；input 外观按源码推断，待核对（见 input_problem.md）；档位复核仍为 T3,pending
 case-229-T1,fossheim__VweaNYW,T1,duet,admitted,2026-11-24,,pending
-case-230-T1,glennphilp__DBLzOW,T1,duet,admitted,2026-11-24,,pending
+case-230-T1,glennphilp__DBLzOW,T1,duet,gt_ready,2026-11-24,GT 只删 CodePen 样板；截图自检未做（云端无浏览器），脚本已备,pending
 case-231-T3,ricardoolivaalonso__ExPpgqG,T3,duet,admitted,2026-11-24,,pending
 case-232-T2,Ak-407__MYgKoME,T2,duet,admitted,2026-11-24,,pending
 case-233-T2,bofengbu__JjvYZoJ,T2,duet,admitted,2026-11-24,,pending
