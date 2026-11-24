@@ -16,6 +16,8 @@
 | `classification.json` | 档位与入库依据 |
 | `ground_truth.html` | 准静态参考页（2026-11-24，duet），改动见下 |
 | `review_20261124/` | GT 自检：静态检查记录、源码差异、本地渲染自检脚本、CSS 3D 数值投影示意 |
+| `input.json` | 由 GT 写出的题目（2026-11-24，duet），**等用户审核** |
+| `input_problem.md` | input 的推算依据、取舍和待用户定的事 |
 
 下一步由 duet 按顺序做（见 [cases/README.md](../README.md)）：① 以 `source.html` 为基础改造 `ground_truth.html`（尽量尊重源码，改成准静态、无动画、只保留简单交互）并自检；② 由 GT 写出 `input.json`；③ 停下，等用户审核 GT 与 input；④ 用户通过后才写 `rules_drafts/manual_v1/`。
 

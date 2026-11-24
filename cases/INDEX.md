@@ -2,18 +2,18 @@
 
 由 `data_intake/tools/registry.py render-index` 生成，**不要手写**。状态来源是 [registry.csv](registry.csv)。
 
-阶段分布：admitted 22，gt_ready 3，input_draft 4
+阶段分布：admitted 22，gt_ready 2，input_draft 5
 
 | 案例 | 档位 | 来源 | 特色 | 阶段 | 处理者 | 更新 | 用户审核 | 备注 |
 |---|---|---|---|---|---|---|---|---|
 | [case-228-T3](case-228-T3/) | T3 | [RaduBratan__mdPrWmo](https://codepen.io/RaduBratan/pen/mdPrWmo) | iPod Nano、凹屏与滚轮 | input_draft | duet | 2026-11-24 | pending | GT 仅静态自检，渲染自检待本地运行 review_20261124/gt_check.py；input 外观按源码推断，待核对（见 input_problem.md）；档位复核仍为 T3 |
 | [case-229-T1](case-229-T1/) | T1 | [fossheim__VweaNYW](https://codepen.io/fossheim/pen/VweaNYW) | 卡西欧键盘、黑白键叠压 | input_draft | duet | 2026-11-24 | pending | 等用户审核 GT 与 input；云端无浏览器，外观由 CSS 推算，截图待本地运行 gt_selfcheck.py |
 | [case-230-T1](case-230-T1/) | T1 | [glennphilp__DBLzOW](https://codepen.io/glennphilp/pen/DBLzOW) | 剪纸叠字、倾斜阴影 | input_draft | duet | 2026-11-24 | pending | 等用户审核 GT 与 input；外观由 CSS 推算，截图待本地运行 shot_gt.py |
-| [case-231-T3](case-231-T3/) | T3 | [ricardoolivaalonso__ExPpgqG](https://codepen.io/ricardoolivaalonso/pen/ExPpgqG) | 立体收音机、磁带仓与凹槽 | gt_ready | duet | 2026-11-24 | pending | GT 已做（仅静态自检，渲染自检待本地运行 review_20261124/gt_check.py）；档位复核仍为 T3 |
+| [case-231-T3](case-231-T3/) | T3 | [ricardoolivaalonso__ExPpgqG](https://codepen.io/ricardoolivaalonso/pen/ExPpgqG) | 立体收音机、磁带仓与凹槽 | input_draft | duet | 2026-11-24 | pending | 等用户审核 GT 与 input；云端无浏览器，外观由 CSS 推算，待本地运行 review_20261124/gt_check.py 核对（见 input_problem.md） |
 | [case-232-T2](case-232-T2/) | T2 | [Ak-407__MYgKoME](https://codepen.io/Ak-407/pen/MYgKoME) | 折叠卡片、页面折角 | input_draft | duet | 2026-11-24 | pending | input 已由 GT 写出，等用户审核；外观由 CSS 推算待本地渲染核对 |
+| [case-233-T2](case-233-T2/) | T2 | bofengbu__JjvYZoJ |  | admitted | duet | 2026-11-24 | pending |  |
 | [case-233-T3](case-233-T3/) | T3 | [bofengbu__JjvYZoJ](https://codepen.io/bofengbu/pen/JjvYZoJ) | 分层蛋糕、夹心切面 | gt_ready | duet | 2026-11-24 | pending | GT 去掉 camera.js（拖拽相机）与自动旋转，保留 How to? 面板；外部 CSS 与 camera.js 被代理拦截未核实，渲染自检待本地运行 review_20261124/gt_check.py / 档位由 T2 改为 T3（按 GT 重新判定） |
 | [case-234-T1](case-234-T1/) | T1 | [fossheim__xxboBzO](https://codepen.io/fossheim/pen/xxboBzO) | 拍立得、凹面取景器 | admitted | duet | 2026-11-24 | pending | 引用外部 script.js，内容未核验，档位按未见动态暂定 |
-| [case-233-T2](case-233-T2/) | T2 | bofengbu__JjvYZoJ |  | admitted | duet | 2026-11-24 | pending |  |
 | [case-234-T1](case-234-T1/) | T1 | [fossheim__xxboBzO](https://codepen.io/fossheim/pen/xxboBzO) | 拍立得、凹面取景器 | gt_ready | duet | 2026-11-24 | pending | GT 仅静态自检，渲染自检待本地运行 review_20261124/gt_check.py；外部 /script.js 未核验，按推断不存在已删；档位复核仍为 T1 |
 | [case-235-T3](case-235-T3/) | T3 | [ricardoolivaalonso__NWJeBPE](https://codepen.io/ricardoolivaalonso/pen/NWJeBPE) | 立体办公室、家具分层 | admitted | duet | 2026-11-24 | pending | WebGL 画布（three.js），非 HTML/CSS 结构，评分可行性待用户确认 |
 | [case-236-T3](case-236-T3/) | T3 | [ricardoolivaalonso__QWJxYXE](https://codepen.io/ricardoolivaalonso/pen/QWJxYXE) | Switch机身、按键凹凸 | admitted | duet | 2026-11-24 | pending |  |
