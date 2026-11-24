@@ -1,0 +1,154 @@
+--- source.html	2026-11-24 09:39:01.014840444 +0000
++++ ground_truth.html	2026-11-24 09:54:35.582400654 +0000
+@@ -6,23 +6,8 @@
+   <meta charset="UTF-8">
+   
+ 
+-    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+-
+-    <meta name="apple-mobile-web-app-title" content="CodePen">
+-
+-    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+-
+-    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+-
+-
+-
+-  
+-    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+-
+-
+   <title>CSS &#39;00s 3D iPod Nano [CHALLENGES]</title>
+ 
+-    <link rel="canonical" href="https://codepen.io/RaduBratan/pen/mdPrWmo">
+   
+   
+   <link rel='stylesheet' href='https://pro.fontawesome.com/releases/v5.2.0/css/all.css'>
+@@ -43,18 +28,13 @@
+   height: 100vh;
+   overflow: hidden;
+   background-color: #ff695c;
+-  transition: 0.6s ease-in-out;
+ }
+ body.animation {
+   background-color: black;
+-  transition: 0.6s ease-in-out;
+ }
+ body.animation .shadow-scene {
+   display: none;
+ }
+-body.animation .case-scene {
+-  animation: hover-ipod 1s infinite alternate;
+-}
+ body.animation .case-scene .cub-1 .face {
+   box-shadow: 0 0 5px rgba(35, 116, 198, 0.4), 0 0 10px rgba(35, 116, 198, 0.35), 0 0 15px rgba(35, 116, 198, 0.3), 0 0 20px rgba(35, 116, 198, 0.25), 0 0 40px rgba(35, 116, 198, 0.2), 0 0 60px rgba(35, 116, 198, 0.15);
+   opacity: 0.8;
+@@ -115,12 +95,10 @@
+   background-color: #ffffff;
+ }
+ body.animation .screen-scene {
+-  animation: hover-screen 1s infinite alternate;
+   opacity: 0.8;
+ }
+ body.animation .wheel-scene {
+   background-color: #ffffff;
+-  animation: hover-wheel 1s infinite alternate;
+   opacity: 0.8;
+ }
+ body.animation .wheel-scene::before {
+@@ -143,7 +121,6 @@
+   width: 10.25vw;
+   height: 22.25vw;
+   transform: perspective(1500px) rotateX(309deg) rotateY(-694deg) rotateZ(0deg);
+-  transition: 0.6s ease;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+@@ -152,7 +129,6 @@
+   background-color: #000000;
+   opacity: 0.3;
+   box-shadow: 0px 0px 0px 0px black;
+-  transition: 0.6s ease;
+   position: absolute;
+   width: 10.25vw;
+   height: 22.25vw;
+@@ -445,7 +421,6 @@
+   filter: blur(2px);
+   box-shadow: 0px 0px 35px 25px #2374c6;
+   transform-style: preserve-3d;
+-  animation: light 1s infinite alternate;
+ }
+ .ipod-scene .light-scene:after {
+   content: "";
+@@ -462,54 +437,6 @@
+   mix-blend-mode: screen;
+ }
+ 
+-@keyframes hover-ipod {
+-  from {
+-    will-change: unset;
+-    transform: translateY(0px);
+-  }
+-  to {
+-    will-change: transform;
+-    transform: translateY(-20px);
+-  }
+-}
+-@keyframes hover-screen {
+-  from {
+-    will-change: unset;
+-    transform: rotateX(90deg) translate3d(0vw, -6vw, 1vw);
+-  }
+-  to {
+-    will-change: transform;
+-    transform: rotateX(90deg) translate3d(0vw, -6vw, calc(1vw + 20px));
+-  }
+-}
+-@keyframes hover-wheel {
+-  from {
+-    will-change: unset;
+-    transform: rotateX(90deg) translate3d(0vw, 4.5vw, 1vw);
+-  }
+-  to {
+-    will-change: transform;
+-    transform: rotateX(90deg) translate3d(0vw, 4.5vw, calc(1vw + 20px));
+-  }
+-}
+-@keyframes light {
+-  from {
+-    will-change: unset;
+-    width: 22.5vw;
+-    height: 22.5vw;
+-    opacity: 0.2;
+-    filter: blur(2px);
+-    box-shadow: 0px 0px 35px 25px #2374c6;
+-  }
+-  to {
+-    will-change: transform;
+-    width: 23vw;
+-    height: 23vw;
+-    opacity: 0.12;
+-    filter: blur(2.5px);
+-    box-shadow: 0px 0px 44px 32px #2374c6;
+-  }
+-}
+ /*@keyframes start {
+   0% {
+     background-color: lighten($black, 10%);
+@@ -554,7 +481,7 @@
+   
+ </head>
+ 
+-<body translate="no">
++<body>
+   <div class="shadow-scene">
+   <div class="shadow-shape"></div>
+ </div>
+@@ -666,7 +593,6 @@
+ 
+ 
+ FontAwesome.library.add(faiMenu, faiForward, faiBackward, faiPlayPause);
+-//# sourceURL=pen.js
+   </script>
+ 
+   

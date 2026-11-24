@@ -1,5 +1,5 @@
 case_id,source_key,tier,owner,stage,updated,note,user_review
-case-228-T3,RaduBratan__mdPrWmo,T3,duet,admitted,2026-11-24,,pending
+case-228-T3,RaduBratan__mdPrWmo,T3,duet,gt_ready,2026-11-24,GT 已做（仅静态自检，渲染自检待本地运行 review_20261124/gt_check.py）；档位复核仍为 T3,pending
 case-229-T1,fossheim__VweaNYW,T1,duet,admitted,2026-11-24,,pending
 case-230-T1,glennphilp__DBLzOW,T1,duet,admitted,2026-11-24,,pending
 case-231-T3,ricardoolivaalonso__ExPpgqG,T3,duet,admitted,2026-11-24,,pending
