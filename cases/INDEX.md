@@ -2,7 +2,7 @@
 
 由 `data_intake/tools/registry.py render-index` 生成，**不要手写**。状态来源是 [registry.csv](registry.csv)。
 
-阶段分布：admitted 16，gt_ready 3，input_draft 8
+阶段分布：admitted 15，gt_ready 4，input_draft 8
 
 | 案例 | 档位 | 来源 | 特色 | 阶段 | 处理者 | 更新 | 用户审核 | 备注 |
 |---|---|---|---|---|---|---|---|---|
@@ -30,6 +30,6 @@
 | [case-249-T3](case-249-T3/) | T3 | [ricardoolivaalonso__RwBZMGB](https://codepen.io/ricardoolivaalonso/pen/RwBZMGB) | 开盖随身听、内腔层次 | admitted | duet | 2026-11-24 | pending |  |
 | [case-250-T1](case-250-T1/) | T1 | [thebabydino__NLWdwz](https://codepen.io/thebabydino/pen/NLWdwz) | 圆片信息图、编号叠盖 | admitted | duet | 2026-11-24 | pending |  |
 | [case-251-T1](case-251-T1/) | T1 | [thebabydino__eQvWLB](https://codepen.io/thebabydino/pen/eQvWLB) | 彩色折纸条、交替折角 | admitted | duet | 2026-11-24 | pending |  |
-| [case-252-T1](case-252-T1/) | T1 | [thebabydino__pBmMaJ](https://codepen.io/thebabydino/pen/pBmMaJ) | 斜切编号条、圆标压层 | admitted | duet | 2026-11-24 | pending |  |
+| [case-252-T1](case-252-T1/) | T1 | [thebabydino__pBmMaJ](https://codepen.io/thebabydino/pen/pBmMaJ) | 斜切编号条、圆标压层 | gt_ready | duet | 2026-11-24 | pending |  |
 | [case-253-T2](case-253-T2/) | T2 | [ykadosh__bGKgxbe](https://codepen.io/ykadosh/pen/bGKgxbe) | 机械键盘、错排立体键帽 | admitted | duet | 2026-11-24 | pending | 档位 T2/T3 有争议（键盘按下瞬时反馈）；React 自 esm.sh 引入 |
 | [case-254-T2](case-254-T2/) | T2 | [agathaco__JaGQPr](https://codepen.io/agathaco/pen/JaGQPr) | 夜景灯塔、光束与远山 | admitted | duet | 2026-11-24 | pending |  |
