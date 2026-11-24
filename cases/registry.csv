@@ -24,5 +24,5 @@ case-249-T3,ricardoolivaalonso__RwBZMGB,T3,duet,admitted,2026-11-24,,pending
 case-250-T1,thebabydino__NLWdwz,T1,duet,admitted,2026-11-24,,pending
 case-251-T1,thebabydino__eQvWLB,T1,duet,admitted,2026-11-24,,pending
 case-252-T1,thebabydino__pBmMaJ,T1,duet,input_draft,2026-11-24,等用户审核 GT 与 input；云端浏览器 1280/500 渲染核对通过；档位复核仍为 T1；窄屏版式是否写入 input 待定,pending
-case-253-T2,ykadosh__bGKgxbe,T2,duet,admitted,2026-11-24,档位 T2/T3 有争议（键盘按下瞬时反馈）；React 自 esm.sh 引入,pending
+case-253-T2,ykadosh__bGKgxbe,T2,duet,gt_ready,2026-11-24,档位 T2/T3 有争议（键盘按下瞬时反馈）；React 自 esm.sh 引入,pending
 case-254-T2,agathaco__JaGQPr,T2,duet,admitted,2026-11-24,,pending
